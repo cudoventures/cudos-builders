@@ -1,0 +1,151 @@
+{
+    "version": "2.0.0",
+    "tasks": [{
+            "label": "Start INIT ROOT NODE in docker",
+            "command": "cd ./docker/root-node&& docker-compose -f ./init-root-node.yml -p cudos-init-root-node up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build INIT ROOT NODE in docker",
+            "command": "cd ./docker/root-node&& docker-compose -f ./init-root-node.yml -p cudos-init-root-node up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy INIT ROOT NODE in docker",
+            "command": "cd ./docker/root-node&& docker-compose -f ./init-root-node.yml -p cudos-init-root-node down",
+            "type": "shell",
+            "group": "build"
+        },
+        
+        {
+            "label": "Start START ROOT NODE in docker",
+            "command": "cd ./docker/root-node&& docker-compose -f ./start-root-node.yml -p cudos-start-root-node up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build START ROOT NODE in docker",
+            "command": "cd ./docker/root-node&& docker-compose -f ./start-root-node.yml -p cudos-start-root-node up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy START ROOT NODE in docker",
+            "command": "cd ./docker/root-node&& docker-compose -f ./start-root-node.yml -p cudos-start-root-node down",
+            "type": "shell",
+            "group": "build"
+        },
+        
+        {
+            "label": "Start INIT SEED NODE in docker",
+            "command": "cd ./docker/seed-node&& docker-compose -f ./init-seed-node.yml -p cudos-init-seed-node up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build INIT SEED NODE in docker",
+            "command": "cd ./docker/seed-node&& docker-compose -f ./init-seed-node.yml -p cudos-init-seed-node up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy INIT SEED NODE in docker",
+            "command": "cd ./docker/seed-node&& docker-compose -f ./init-seed-node.yml -p cudos-init-seed-node down",
+            "type": "shell",
+            "group": "build"
+        },
+
+        {
+            "label": "Start START SEED NODES in docker",
+            "command": "cd ./docker/seed-node&& docker-compose -f ./start-seed-node.yml -p cudos-start-seed-node up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build START SEED NODES in docker",
+            "command": "cd ./docker/seed-node&& docker-compose -f ./start-seed-node.yml -p cudos-start-seed-node up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy START SEED NODES in docker",
+            "command": "cd ./docker/seed-node&& docker-compose -f ./start-seed-node.yml -p cudos-start-seed-node down",
+            "type": "shell",
+            "group": "build"
+        },
+
+        {
+            "label": "Start INIT SENTRY NODE in docker",
+            "command": "cd ./docker/sentry-node&& docker-compose -f ./init-sentry-node.yml -p cudos-init-sentry-node up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build INIT SENTRY NODE in docker",
+            "command": "cd ./docker/sentry-node&& docker-compose -f ./init-sentry-node.yml -p cudos-init-sentry-node up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy INIT SENTRY NODE in docker",
+            "command": "cd ./docker/sentry-node&& docker-compose -f ./init-sentry-node.yml -p cudos-init-sentry-node down",
+            "type": "shell",
+            "group": "build"
+        },
+
+        {
+            "label": "Start START SENTRY NODES in docker",
+            "command": "cd ./docker/sentry-node&& docker-compose -f ./start-sentry-node.yml -p cudos-start-sentry-node up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build START SENTRY NODES in docker",
+            "command": "cd ./docker/sentry-node&& docker-compose -f ./start-sentry-node.yml -p cudos-start-sentry-node up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy START SENTRY NODES in docker",
+            "command": "cd ./docker/sentry-node&& docker-compose -f ./start-sentry-node.yml -p cudos-start-sentry-node down",
+            "type": "shell",
+            "group": "build"
+        },
+
+
+
+        
+        {
+            "label": "Start network in docker",
+            "command": "cd ./docker&& docker-compose -f ./network.yml -p cudos-network up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build network in docker",
+            "command": "cd ./docker&& docker-compose -f ./network.yml -p cudos-network up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Destroy network in docker",
+            "command": "cd ./docker&& docker-compose -f ./network.yml -p cudos-network down",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Start big dipper locally",
+            "command": "cd ./project-explorer && meteor --settings default_settings.json",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Start utils in docker",
+            "command": "cd ./docker&& docker-compose -f ./utils.yml -p cudos-utils up",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Build utils in docker",
+            "command": "cd ./docker&& docker-compose -f ./utils.yml -p cudos-utils up --build",
+            "type": "shell",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Destroy utils in docker",
+            "command": "cd ./docker&& docker-compose -f ./utils.yml -p cudos-utils down",
+            "type": "shell",
+            "group": "build"
+        }
+    ]
+}

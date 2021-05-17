@@ -1,0 +1,12 @@
+version: '3.1'
+
+services:
+  cudos-seed-node-01:
+    image: cudos-init-seed-node-01
+    container_name: cudos-init-seed-node-01
+    build:
+      dockerfile: CudosBuilders/docker/seed-node/init-seed-node.dockerfile
+      context: ../../../
+    env_file: ./init-seed-node.env
+    volumes:
+      - '../../../CudosData/cudos-data-seed-node-01:/usr/cudos/cudos-data'

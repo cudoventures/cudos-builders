@@ -1,0 +1,18 @@
+version: '3.1'
+
+networks:
+  shared-cudos-network:
+    name: shared-cudos-network
+
+services:
+  cudos-root-node:
+    image: cudos-start-root-node
+    container_name: cudos-start-root-node
+    build:
+      dockerfile: CudosBuilders/docker/root-node/start-root-node.dockerfile
+      context: ../../../
+    restart: unless-stopped
+    volumes:
+      - '../../../CudosData/cudos-data-root-node:/usr/cudos/cudos-data'
+    networks:
+      - shared-cudos-network
