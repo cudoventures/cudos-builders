@@ -1,0 +1,18 @@
+version: '3.1'
+
+networks:
+  shared-cudos-network:
+    name: shared-cudos-network
+
+services:
+  cudos-full-node-01:
+    image: cudos-start-full-node-01
+    container_name: cudos-start-full-node-01
+    build:
+      dockerfile: CudosBuilders/docker/full-node/start-full-node.dockerfile
+      context: ../../../
+    restart: unless-stopped
+    volumes:
+      - '../../../CudosData/cudos-data-full-node-01:/usr/cudos/cudos-data'
+    networks:
+      - shared-cudos-network

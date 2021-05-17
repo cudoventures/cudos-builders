@@ -102,6 +102,40 @@
             "group": "build"
         },
 
+        {
+            "label": "Start INIT FULL NODE in docker",
+            "command": "cd ./docker/full-node&& docker-compose -f ./init-full-node.yml -p cudos-init-full-node up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build INIT FULL NODE in docker",
+            "command": "cd ./docker/full-node&& docker-compose -f ./init-full-node.yml -p cudos-init-full-node up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy INIT FULL NODE in docker",
+            "command": "cd ./docker/full-node&& docker-compose -f ./init-full-node.yml -p cudos-init-full-node down",
+            "type": "shell",
+            "group": "build"
+        },
+
+        {
+            "label": "Start START FULL NODES in docker",
+            "command": "cd ./docker/full-node&& docker-compose -f ./start-full-node.yml -p cudos-start-full-node up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build START FULL NODES in docker",
+            "command": "cd ./docker/full-node&& docker-compose -f ./start-full-node.yml -p cudos-start-full-node up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy START FULL NODES in docker",
+            "command": "cd ./docker/full-node&& docker-compose -f ./start-full-node.yml -p cudos-start-full-node down",
+            "type": "shell",
+            "group": "build"
+        },
+
 
 
         
