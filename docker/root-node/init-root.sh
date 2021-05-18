@@ -48,12 +48,12 @@ BASE="ucudos"
 DISPLAY="cudos"
 
 cudos-noded init $MONIKER --chain-id=$CHAIN_ID
-sed -i "104s/enable = false/enable = true/" "${CUDOS_HOME}/config/app.toml"
-sed -i "s/laddr = \"tcp:\/\/127.0.0.1:26657\"/laddr = \"tcp:\/\/0.0.0.0:26657\"/" "${CUDOS_HOME}/config/config.toml"
+# sed -i "104s/enable = false/enable = true/" "${CUDOS_HOME}/config/app.toml"
+# sed -i "s/laddr = \"tcp:\/\/127.0.0.1:26657\"/laddr = \"tcp:\/\/0.0.0.0:26657\"/" "${CUDOS_HOME}/config/config.toml"
 
 # enable cors origin for local testing
-sed -i "s/enabled-unsafe-cors = false/enabled-unsafe-cors = true/" ${CUDOS_HOME}/config/app.toml
-sed -i "s/cors_allowed_origins = \[\]/cors_allowed_origins = \[\"\*\"\]/" ${CUDOS_HOME}/config/config.toml
+# sed -i "s/enabled-unsafe-cors = false/enabled-unsafe-cors = true/" ${CUDOS_HOME}/config/app.toml
+# sed -i "s/cors_allowed_origins = \[\]/cors_allowed_origins = \[\"\*\"\]/" ${CUDOS_HOME}/config/config.toml
 
 # setting time after commit before proposing a new block
 sed -i "s/timeout_commit = \"5s\"/timeout_commit = \"$TIMEOUT_COMMIT\"/" "${CUDOS_HOME}/config/config.toml"

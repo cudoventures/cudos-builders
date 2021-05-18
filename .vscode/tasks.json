@@ -136,6 +136,22 @@
             "group": "build"
         },
 
+        {
+            "label": "Start FAUCET in docker",
+            "command": "cd ./docker/faucet&& docker-compose -f ./faucet.yml -p cudos-faucet up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build FAUCET in docker",
+            "command": "cd ./docker/faucet&& docker-compose -f ./faucet.yml -p cudos-faucet up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy FAUCET in docker",
+            "command": "cd ./docker/faucet&& docker-compose -f ./faucet.yml -p cudos-faucet down",
+            "type": "shell",
+            "group": "build"
+        },
 
 
 

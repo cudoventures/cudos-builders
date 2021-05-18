@@ -6,15 +6,21 @@ RUN apt update
 
 RUN apt install -y jq build-essential
 
-WORKDIR /usr/cudos-builder
+WORKDIR /usr/cudos-node-builder
 
 COPY ./CudosNode ./
 
 RUN make
 
+WORKDIR /usr/cudos-faucet-cli-builder
+
+COPY ./CudosUtils/project-faucet-cli ./
+
+RUN make
+
 FROM golang:buster
 
-WORKDIR /usr/cudos
+WORKDIR /usr/faucet-cli
 
 # RUN apk add --no-cache bash
 
@@ -22,5 +28,7 @@ COPY --from=builder /go/pkg/mod/github.com/!cosm!wasm/wasmvm@v0.14.0/api/libwasm
 
 COPY --from=builder /go/bin/cudos-noded /go/bin/cudos-noded
 
+COPY --from=builder /go/bin/faucet /go/bin/faucet
+
 # CMD ["sleep", "infinity"]
-CMD ["/bin/bash", "-c", "cudos-noded start"] 
+CMD ["faucet"]
