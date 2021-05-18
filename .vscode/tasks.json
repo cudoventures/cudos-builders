@@ -153,25 +153,19 @@
             "group": "build"
         },
 
-
-
-        
         {
-            "label": "Start utils in docker",
-            "command": "cd ./docker&& docker-compose -f ./utils.yml -p cudos-utils up",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Build utils in docker",
-            "command": "cd ./docker&& docker-compose -f ./utils.yml -p cudos-utils up --build",
+            "label": "Start EXPLORER in docker",
+            "command": "cd ./docker/explorer&& docker-compose --env-file ./explorer.arg -f ./explorer.yml -p cudos-explorer up",
             "type": "shell",
             "group": "build",
-            "problemMatcher": []
-        },
-        {
-            "label": "Destroy utils in docker",
-            "command": "cd ./docker&& docker-compose -f ./utils.yml -p cudos-utils down",
+        }, {
+            "label": "Build EXPLORER in docker",
+            "command": "cd ./docker/explorer&& docker-compose --env-file ./explorer.arg -f ./explorer.yml -p cudos-explorer up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy EXPLORER in docker",
+            "command": "cd ./docker/explorer&& docker-compose -f ./explorer.yml -p cudos-explorer down",
             "type": "shell",
             "group": "build"
         }

@@ -1,0 +1,4 @@
+GENESIS_TIME="2021-05-18T09:25:17.61028Z"
+FAUCET_URL="http://localhost:5000"
+RPC_URL="http://cudos-sentry-node-01:26657"
+API_URL="http://cudos-sentry-node-01:1317"

@@ -13,5 +13,7 @@ services:
       context: ../../../
     restart: unless-stopped
     env_file: ./faucet.env
+    ports:
+      - "5000:5000"
     networks:
       - shared-cudos-network
