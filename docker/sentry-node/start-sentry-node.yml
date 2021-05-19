@@ -12,8 +12,9 @@ services:
       dockerfile: CudosBuilders/docker/sentry-node/start-sentry-node.dockerfile
       context: ../../../
     restart: unless-stopped
+    env_file: "$ENV_FILE"
     volumes:
-      - '../../../CudosData/cudos-data-sentry-node-01:/usr/cudos/cudos-data'
+      - '../../../CudosData/cudos-data-sentry-node-01:$CUDOS_HOME'
     ports:
       - "26656-26657:26656-26657"
       - "1317:1317"

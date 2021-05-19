@@ -12,7 +12,8 @@ services:
       dockerfile: CudosBuilders/docker/full-node/start-full-node.dockerfile
       context: ../../../
     restart: unless-stopped
+    env_file: "$ENV_FILE"
     volumes:
-      - '../../../CudosData/cudos-data-full-node-01:/usr/cudos/cudos-data'
+      - '../../../CudosData/cudos-data-full-node-01:$CUDOS_HOME'
     networks:
       - shared-cudos-network

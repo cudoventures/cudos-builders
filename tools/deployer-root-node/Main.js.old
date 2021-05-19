@@ -31,10 +31,9 @@ async function main() {
         await executeCommands(args, secrets, deployFilePath, deployFilename);
     } finally {
         try {
-            // await asyncFs.access(TEMP_DIR, fs.constants.F_OK);
-            // await asyncFs.rm(TEMP_DIR, { 'recursive': true });
+            await asyncFs.access(deployFilePath, fs.constants.F_OK);
+            await asyncFs.unlink(deployFilePath);
         } catch (e) {
-            console.error(e);
         }
     }
 }
@@ -64,7 +63,7 @@ async function initTempDirectory() {
             await asyncFs.mkdir(TEMP_DIR, { 'recursive': true });
         }
 
-        const deployFilename = `cudos-src.tar.gz`;
+        const deployFilename = `cudos-src.tar`;
         const deployFilePath = path.join(TEMP_DIR, deployFilename);
         resolve({
             deployFilePath,
@@ -76,7 +75,7 @@ async function initTempDirectory() {
 async function createArchive(deployFilePath, deployFilename) {
     return new Promise(async (resolve, reject) => {
         const output = fs.createWriteStream(deployFilePath);
-        const archive = archiver('zip', {
+        const archive = archiver('tar', {
             zlib: { level: 9 }, // Sets the compression level.
         });
 
@@ -111,8 +110,7 @@ async function createArchive(deployFilePath, deployFilename) {
         archive.pipe(output);
 
         // append files from a sub-directory, putting its contents at the root of archive
-        archive.directory(path.resolve('../../CudosNode'), '/CudosNode');
-        archive.directory(path.resolve('../docker'), '/CudosBuilders/docker');
+        archive.directory(path.resolve('../project-node'), false);
 
         archive.finalize();
     });
@@ -155,53 +153,32 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
     const filePath = path.join(secrets.serverPath, deployFilename);
 
     command = [
+        `source /etc/profile`,
+        `sudo systemctl stop cudos-root-node.service`,
         `cd ${secrets.serverPath}`,
-        `sudo rm -Rf ./CudosBuilders`,
-        `sudo rm -Rf ./CudosNode`,
-        `sudo unzip -q ${filePath} -d ./`,
+        `rm -R ./src`,
+        `mkdir ./src`,
+        `tar -xf ${filePath} -C ./src`,
         `rm ${filePath}`,
-        `cd ./CudosBuilders/docker/root-node`,
-        `sudo docker-compose -f ./start-root-node.yml -p cudos-start-root-node down`,
-        args.init === '1' ? `sudo rm -rf ${secrets.serverPath}/CudosData/*` : null,
-        `sudo docker image prune -f`,
-        `sudo docker image prune -a -f`,
-        `sudo docker volume prune -f`,
-        `sudo docker builder prune -f`,
-        args.init === '1' ? `sudo docker-compose -f ./init-root-node.yml -p cudos-init-root-node up --build` : null,
-        args.init === '1' ? `sudo docker-compose -f ./init-root-node.yml -p cudos-init-root-node down` : null,
-        `sudo docker-compose -f ./start-root-node.yml -p cudos-start-root-node up --build -d`,
-        `cd ${secrets.serverPath}`,
-        `sudo rm -Rf ./CudosBuilders`,
-        `sudo rm -Rf ./CudosNode`,
-    ]
+        `cd ./src`,
+        `make`,
+    ];
 
-    // command = [
-    //     `source /etc/profile`,
-    //     `sudo systemctl stop cudos-root-node.service`,
-    //     `cd ${secrets.serverPath}`,
-    //     `rm -R ./src`,
-    //     `mkdir ./src`,
-    //     `tar -xf ${filePath} -C ./src`,
-    //     `rm ${filePath}`,
-    //     `cd ./src`,
-    //     `make`,
-    // ];
+    if (args.init === '1') {
+        command = command.concat([
+            // `rm -R $CUDOS_HOME/*`,
+            `if [ -d "$CUDOS_HOME" ]; then rm -Rf "$CUDOS_HOME/*"; fi`,
+            `chmod +x ./init-root.sh`,
+            `sed -i 's/\r$//' ./init-root.sh`,
+            `./init-root.sh`,
+        ]);
+    }
 
-    // if (args.init === '1') {
-    //     command = command.concat([
-    //         // `rm -R $CUDOS_HOME/*`,
-    //         `if [ -d "$CUDOS_HOME" ]; then rm -Rf "$CUDOS_HOME/*"; fi`,
-    //         `chmod +x ./init-root.sh`,
-    //         `sed -i 's/\r$//' ./init-root.sh`,
-    //         `./init-root.sh`,
-    //     ]);
-    // }
+    command = command.concat([
+        `sudo systemctl start cudos-root-node.service`,
+    ])
 
-    // command = command.concat([
-    //     `sudo systemctl start cudos-root-node.service`,
-    // ])
-
-    command = command.filter(c => c !== null).join(' && ');
+    command = command.join(' && ');
 
     conn.on('ready', () => {
         console.log('Client :: ready');

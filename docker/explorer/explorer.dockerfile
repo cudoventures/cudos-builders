@@ -15,18 +15,20 @@ RUN rm -R ./source/node_modules && \
 
 ARG GENESIS_TIME
 ARG FAUCET_URL
-ARG RPC_URL
-ARG API_URL
+ARG INTERNAL_RPC_URL
+ARG INTERNAL_API_URL
+ARG EXTERNAL_RPC_URL
+ARG EXTERNAL_API_URL
 
 RUN cd ./source && \
     sed -i 's/\r$//' ./run-built.sh && \
     chmod +x ./run-built.sh && \
     cat ./default_settings.json | jq --arg GENESIS_TIME "$GENESIS_TIME" '.public.genesisTime = $GENESIS_TIME' > ./default_settings.tmp && mv ./default_settings.tmp ./default_settings.json && \
     cat ./default_settings.json | jq --arg FAUCET_URL "$FAUCET_URL" '.public.faucetUrl = $FAUCET_URL' > ./default_settings.tmp && mv ./default_settings.tmp ./default_settings.json && \
-    cat ./default_settings.json | jq --arg RPC_URL "$RPC_URL" '.public.urls.rpc = $RPC_URL' > ./default_settings.tmp && mv ./default_settings.tmp ./default_settings.json && \
-    cat ./default_settings.json | jq --arg API_URL "$API_URL" '.public.urls.api = $API_URL' > ./default_settings.tmp && mv ./default_settings.tmp ./default_settings.json && \
-    cat ./default_settings.json | jq --arg RPC_URL "$RPC_URL" '.remote.rpc = $RPC_URL' > ./default_settings.tmp && mv ./default_settings.tmp ./default_settings.json && \
-    cat ./default_settings.json | jq --arg API_URL "$API_URL" '.remote.api = $API_URL' > ./default_settings.tmp && mv ./default_settings.tmp ./default_settings.json && \
+    cat ./default_settings.json | jq --arg EXTERNAL_RPC_URL "$EXTERNAL_RPC_URL" '.public.urls.rpc = $EXTERNAL_RPC_URL' > ./default_settings.tmp && mv ./default_settings.tmp ./default_settings.json && \
+    cat ./default_settings.json | jq --arg EXTERNAL_API_URL "$EXTERNAL_API_URL" '.public.urls.api = $EXTERNAL_API_URL' > ./default_settings.tmp && mv ./default_settings.tmp ./default_settings.json && \
+    cat ./default_settings.json | jq --arg INTERNAL_RPC_URL "$INTERNAL_RPC_URL" '.remote.rpc = $INTERNAL_RPC_URL' > ./default_settings.tmp && mv ./default_settings.tmp ./default_settings.json && \
+    cat ./default_settings.json | jq --arg INTERNAL_API_URL "$INTERNAL_API_URL" '.remote.api = $INTERNAL_API_URL' > ./default_settings.tmp && mv ./default_settings.tmp ./default_settings.json && \
     sed -i ':a;N;$!ba;s/\n//g' ./default_settings.json && \
     sed -i 's/ //g' ./default_settings.json && \
     cp ./default_settings.json ./settings.json && \

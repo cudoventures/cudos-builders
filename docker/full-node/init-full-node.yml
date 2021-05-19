@@ -7,6 +7,6 @@ services:
     build:
       dockerfile: CudosBuilders/docker/full-node/init-full-node.dockerfile
       context: ../../../
-    env_file: ./init-full-node.env
+    env_file: "$ENV_FILE"
     volumes:
-      - '../../../CudosData/cudos-data-full-node-01:/usr/cudos/cudos-data'
+      - '../../../CudosData/cudos-data-full-node-01:$CUDOS_HOME'

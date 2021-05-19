@@ -18,5 +18,4 @@ RUN make && \
     chmod +x ./init-seed.sh && \
     sed -i 's/\r$//' ./init-seed.sh
 
-# CMD ["sleep", "infinity"]
 CMD ["/bin/bash", "./init-seed.sh"]

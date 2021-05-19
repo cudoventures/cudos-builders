@@ -1,0 +1,2 @@
+CUDOS_HOME=/usr/cudos/cudos-data
+ENV_FILE=./sentry-node.docker.env

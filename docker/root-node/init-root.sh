@@ -2,8 +2,7 @@ if [[ -z "${CUDOS_HOME}" ]]; then
     CUDOS_HOME="./cudos-data"
 fi
 
-rm -R $CUDOS_HOME
-# rm -R ./data/.*
+WORKING_PATH=$(pwd) && cd $CUDOS_HOME && rm -Rf ./* && cd $WORKING_PATH
 
 # chain parameters
 MONIKER="cudos-root-node"
@@ -48,6 +47,7 @@ BASE="ucudos"
 DISPLAY="cudos"
 
 cudos-noded init $MONIKER --chain-id=$CHAIN_ID
+
 # sed -i "104s/enable = false/enable = true/" "${CUDOS_HOME}/config/app.toml"
 # sed -i "s/laddr = \"tcp:\/\/127.0.0.1:26657\"/laddr = \"tcp:\/\/0.0.0.0:26657\"/" "${CUDOS_HOME}/config/config.toml"
 
@@ -92,14 +92,27 @@ cat "${CUDOS_HOME}/config/genesis.json" | jq --arg DENOM_METADATA_DESC "$DENOM_M
 (echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add root-validator --keyring-backend os |& tee "${CUDOS_HOME}/validator.wallet"
 VALIDATOR_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show root-validator -a --keyring-backend os)
 
-# # create validators
+(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add validator-02 --keyring-backend os |& tee "${CUDOS_HOME}/validator.wallet"
+VALIDATOR_02_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show validator-02 -a --keyring-backend os)
+(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add validator-03 --keyring-backend os |& tee "${CUDOS_HOME}/validator.wallet"
+VALIDATOR_03_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show validator-03 -a --keyring-backend os)
+
+# create validators
 cudos-noded add-genesis-account $VALIDATOR_ADDRESS "100000000${BOND_DENOM},1cudosAdmin"
+cudos-noded add-genesis-account $VALIDATOR_02_ADDRESS "100000000${BOND_DENOM},1cudosAdmin"
+cudos-noded add-genesis-account $VALIDATOR_03_ADDRESS "100000000${BOND_DENOM},1cudosAdmin"
 (echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded gentx root-validator "100000000${BOND_DENOM}" --chain-id $CHAIN_ID --keyring-backend os
 
+# add faucet account
 ((echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add faucet --keyring-backend os) |& tee "${CUDOS_HOME}/faucet.wallet"
 FAUCET_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show faucet -a --keyring-backend os)
 cudos-noded add-genesis-account $FAUCET_ADDRESS "100000000000000000000000${BOND_DENOM}"
 
 cudos-noded collect-gentxs
+
+sed -i "s/pex = true/pex = false/" "${CUDOS_HOME}/config/config.toml"
+
+MY_OWN_PEER_ID=$(cudos-noded tendermint show-node-id)
+sed -i "s/private_peer_ids = \"\"/private_peer_ids = \"$MY_OWN_PEER_ID\"/g" "${CUDOS_HOME}/config/config.toml"
 
 cudos-noded tendermint show-node-id |& tee "${CUDOS_HOME}/validator.nodeid"

@@ -12,7 +12,7 @@ services:
       dockerfile: CudosBuilders/docker/faucet/faucet.dockerfile
       context: ../../../
     restart: unless-stopped
-    env_file: ./faucet.env
+    env_file: "$ENV_FILE"
     ports:
       - "5000:5000"
     networks:

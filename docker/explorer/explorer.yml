@@ -18,10 +18,12 @@ services:
       args:
         GENESIS_TIME: "$GENESIS_TIME"
         FAUCET_URL: "$FAUCET_URL"
-        RPC_URL: "$RPC_URL"
-        API_URL: "$API_URL"
+        INTERNAL_RPC_URL: "$INTERNAL_RPC_URL"
+        INTERNAL_API_URL: "$INTERNAL_API_URL"
+        EXTERNAL_RPC_URL: "$EXTERNAL_RPC_URL"
+        EXTERNAL_API_URL: "$EXTERNAL_API_URL"
     restart: unless-stopped
-    env_file: ./explorer.env
+    env_file: "$ENV_FILE"
     ports:
       - "3000:3000"
     networks:

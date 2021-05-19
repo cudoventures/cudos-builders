@@ -2,11 +2,11 @@ if [[ -z "${CUDOS_HOME}" ]]; then
     CUDOS_HOME="./cudos-data"
 fi
 
-rm -R ./cudos-data
+WORKING_PATH=$(pwd) && cd $CUDOS_HOME && rm -Rf ./* && cd $WORKING_PATH
 
 cudos-noded init $MONIKER
 
-cp ./external-config/genesis.json ./cudos-data/config/genesis.json
+cp ./external-config/genesis.json "${CUDOS_HOME}/config/genesis.json"
 
 # for port 1317
 sed -i "104s/enable = false/enable = true/" "${CUDOS_HOME}/config/app.toml"

@@ -7,6 +7,6 @@ services:
     build:
       dockerfile: CudosBuilders/docker/sentry-node/init-sentry-node.dockerfile
       context: ../../../
-    env_file: ./init-sentry-node.env
+    env_file: "$ENV_FILE"
     volumes:
-      - '../../../CudosData/cudos-data-sentry-node-01:/usr/cudos/cudos-data'
+      - '../../../CudosData/cudos-data-sentry-node-01:$CUDOS_HOME'
