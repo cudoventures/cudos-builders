@@ -15,5 +15,7 @@ services:
     env_file: "$ENV_FILE"
     volumes:
       - '../../../CudosData/cudos-data-root-node:$CUDOS_HOME'
+    ports:
+      - "${PORT26656}:26656"
     networks:
       - shared-cudos-network

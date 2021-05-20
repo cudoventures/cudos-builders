@@ -1,3 +1,4 @@
 CUDOS_HOME=/usr/cudos/cudos-data
 ENV_FILE=./seed-node.docker.env
 GENESIS_FILENAME=genesis.docker.json
+PORT26656=30001
