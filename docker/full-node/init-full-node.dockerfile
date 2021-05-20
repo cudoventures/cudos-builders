@@ -14,7 +14,10 @@ COPY ./CudosBuilders/docker/full-node/init-full-node.sh ./
 
 COPY ./CudosBuilders/docker/config ./external-config
 
-RUN make && \
+ARG GENESIS_FILENAME
+
+RUN mv "./external-config/${GENESIS_FILENAME}" ./external-config/genesis.json && \
+    make && \
     chmod +x ./init-full-node.sh && \
     sed -i 's/\r$//' ./init-full-node.sh
 

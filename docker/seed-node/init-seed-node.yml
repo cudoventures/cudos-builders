@@ -7,6 +7,8 @@ services:
     build:
       dockerfile: CudosBuilders/docker/seed-node/init-seed-node.dockerfile
       context: ../../../
+      args:
+        GENESIS_FILENAME: "$GENESIS_FILENAME"
     env_file: "$ENV_FILE"
     volumes:
       - '../../../CudosData/cudos-data-seed-node-01:$CUDOS_HOME'
