@@ -10,8 +10,8 @@ WORKDIR /usr/explorer
 
 COPY ./CudosUtils/project-explorer ./source
 
-RUN rm -R ./source/node_modules && \
-    rm -R ./source/.meteor/local
+RUN rm -Rf ./source/node_modules && \
+    rm -Rf ./source/.meteor/local
 
 ARG GENESIS_TIME
 ARG FAUCET_URL
