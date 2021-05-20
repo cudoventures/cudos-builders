@@ -6,8 +6,8 @@
     "private": true,
     "license": "ISC",
     "scripts": {
-        "deploy-testnet": "node ./deployer-root-node/Main.js --target=testnet --init=0",
-        "deploy-and-init-testnet": "node ./deployer-root-node/Main.js --target=testnet --init=1",
+        "deploy-root-node-testnet": "node ./deployer-root-node/Main.js --target=testnet --init=0",
+        "deploy-and-init-root-node-testnet": "node ./deployer-root-node/Main.js --target=testnet --init=1",
         "deploy-utils": "node ./deployer-utils/Main.js --target=testnet"
     },
     "engines": {

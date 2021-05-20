@@ -1,14 +1,19 @@
-# Prerequirements
+# Testnet deployment
+
+## Prerequirements for deploying
     SSH key for accessing Google Cloud Infrastructure
-    Install meteor - https://www.meteor.com/developers/install
-    NodeJs >= 12
+    npm i (in ./CudosBuilders/tools)
+    prepare secrets.json based on secrets.json.example in each module where available (deployer-root-node, deployer-utils, etc.)
 
-# Deploy testnet
-    npm run deploy-testnet
+## Deployment root node
+    npm run deploy-root-node-testnet or npm run deploy-and-init-root-node-testnet
 
-# Deploy and initialize test net
-    npm run deploy-and-init-testnet
+## Deployment seed node
+1. Copy genesis.json from root-node to ./CudosBuilders/genesis.testnet.json using SSH
+    npm run deploy-seed-node-testnet or npm run deploy-and-init-seed-node-testnet
 
+## Deployment sentry node
+    npm run deploy-sentry-node-testnet or npm run deploy-and-init-sentry-node-testnet
 
 # Deploy utils
 1. Copy genesis time to settings.json in explorer
