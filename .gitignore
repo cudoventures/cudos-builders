@@ -2,4 +2,5 @@
 node_modules
 secrets.json
 secrets.json.old
+genesis.docker.json
 /tools/deployer-utils/temp
