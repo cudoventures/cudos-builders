@@ -10,6 +10,8 @@
         "deploy-and-init-root-node-testnet": "node ./deployer-root-node/Main.js --target=root-node-testnet --init=1",
         "deploy-seed-node-01-testnet": "node ./deployer-root-node/Main.js --target=seed-node-01-testnet --init=0",
         "deploy-and-init-seed-node-01-testnet": "node ./deployer-root-node/Main.js --target=seed-node-01-testnet --init=1",
+        "deploy-sentry-node-01-testnet": "node ./deployer-root-node/Main.js --target=sentry-node-01-testnet --init=0",
+        "deploy-and-init-sentry-node-01-testnet": "node ./deployer-root-node/Main.js --target=sentry-node-01-testnet --init=1",
         "deploy-utils": "node ./deployer-utils/Main.js --target=testnet"
     },
     "engines": {

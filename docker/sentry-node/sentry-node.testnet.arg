@@ -1,0 +1,3 @@
+CUDOS_HOME=/usr/cudos/cudos-data
+ENV_FILE=./sentry-node.testnet.env
+GENESIS_FILENAME=genesis.testnet.json

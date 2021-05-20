@@ -25,6 +25,10 @@
     npm run deploy-sentry-node-testnet or npm run deploy-and-init-sentry-node-testnet
 
 # Deploy utils
+1. Download faucet.wallet from root-node
+2. Modify faucet.testnet.env using mnemonic from downloaded faucet.wallet
+3. Make sure all values in faucet.testnet.env are not empty
+
 1. Copy genesis time to settings.json in explorer
 2. Copy node id to notion
 3. Download faucet.wallet from cudos-root-node

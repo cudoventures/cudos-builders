@@ -14,8 +14,6 @@ const SecretsConfig = require('./secrets.json');
 
 const TEMP_DIR = path.join(os.tmpdir(), 'cudos-builder');
 
-const LOCAL_BUILD = true;
-
 async function main() {
     const args = getArgParser();
     const secrets = getSecrets(args.target);
@@ -28,11 +26,6 @@ async function main() {
     const { deployFilePath, deployFilename } = await initTempDirectory();
 
     try {
-        if (LOCAL_BUILD === true) {
-            console.log('Building meteor');
-            await buildMeteor();
-        }
-
         console.log('Creating archive');
         await createArchive(deployFilePath, deployFilename);
 
@@ -43,9 +36,10 @@ async function main() {
         await executeCommands(args, secrets, deployFilePath, deployFilename);
     } finally {
         try {
-            // await asyncFs.access(deployFilePath, fs.constants.F_OK);
-            await asyncFs.rm(TEMP_DIR, { 'recursive': true, 'force': true });
+            await asyncFs.access(TEMP_DIR, fs.constants.F_OK);
+            await asyncFs.rm(TEMP_DIR, { 'recursive': true });
         } catch (e) {
+            console.error(e);
         }
     }
 }
@@ -81,45 +75,6 @@ async function initTempDirectory() {
             deployFilePath,
             deployFilename,
         })
-    });
-}
-
-async function buildMeteor() {
-    const source = path.resolve('../project-explorer');
-    const target = path.join(TEMP_DIR, 'project-explorer');
-    const copyFilter = [
-        path.resolve(path.join(source, 'node_modules')),
-        path.resolve(path.join(source, '.meteor/local')),
-    ];
-
-    await fse.copy(source, target, {
-        filter: (src, desc) => {
-            for (let i = copyFilter.length; i-- > 0; ) {
-                if (src.startsWith(copyFilter[i])) {
-                    return false;
-                }
-            }
-            return true;
-        }
-    });
-
-    await new Promise((resolve, reject) => {
-        const cmd = [
-            `cd ${target}`,
-            'npm i',
-            'meteor build ../meteor-build/ --architecture os.linux.x86_64 --server-only --allow-superuser',
-            'cd ../meteor-build',
-            'tar -zxf ./project-explorer.tar.gz',
-            'cp ../project-explorer/run-testnet.sh ./bundle/run-testnet.sh',
-        ];
-
-        exec(cmd.join('&&'), (err, stdout, etderr) => {
-            if (err !== null) {
-                reject(err);
-            }
-
-            resolve();
-        });
     });
 }
 
@@ -161,44 +116,41 @@ async function createArchive(deployFilePath, deployFilename) {
         archive.pipe(output);
 
         // append files from a sub-directory, putting its contents at the root of archive
-        archive.directory(path.resolve('../project-faucet-cli'), "/project-faucet-cli");
-        if (LOCAL_BUILD === true) {
-            archive.directory(path.resolve(path.join(TEMP_DIR, 'meteor-build/bundle')), "/project-explorer");
-        }
+        archive.directory(path.resolve('../../CudosNode'), '/CudosNode');
+        archive.directory(path.resolve('../../CudosUtils/project-faucet-cli'), "/CudosUtils/project-faucet-cli");
+        archive.directory(path.resolve('../docker'), '/CudosBuilders/docker');
 
-        if (LOCAL_BUILD === false) {
-            const projectExplorerAbsPath = path.resolve('../project-explorer');
-            const pathContent = await asyncFs.readdir(projectExplorerAbsPath);
-            for (let i = 0;  i < pathContent.length; ++i) {
-                const itemAbsPath = path.join(projectExplorerAbsPath, pathContent[i]);
-                const stat = await asyncFs.stat(itemAbsPath);
+        const projectExplorerAbsPath = path.resolve('../../CudosUtils/project-explorer');
+        const pathContent = await asyncFs.readdir(projectExplorerAbsPath);
+        for (let i = 0;  i < pathContent.length; ++i) {
+            const itemAbsPath = path.join(projectExplorerAbsPath, pathContent[i]);
+            const stat = await asyncFs.stat(itemAbsPath);
 
-                switch (pathContent[i]) {
-                    case 'node_modules':
-                        break;
-                    case '.meteor':
-                        const meteorPathContent = await asyncFs.readdir(itemAbsPath);
-                        for (let j = 0;  j < meteorPathContent.length;  ++j) {
-                            if (meteorPathContent[j] === 'local') {
-                                continue;
-                            }
-                            const meteorItemAbsPath = path.join(projectExplorerAbsPath, pathContent[i], meteorPathContent[j]);
-                            const meteorStat = await asyncFs.stat(meteorItemAbsPath);
-                            if (meteorStat.isDirectory() === true) {
-                                archive.directory(meteorItemAbsPath, `/project-explorer/${pathContent[i]}/${meteorPathContent[j]}`);
-                            } else {
-                                archive.file(meteorItemAbsPath, { 'name': `/project-explorer/${pathContent[i]}/${meteorPathContent[j]}` } );
-                            }
+            switch (pathContent[i]) {
+                case 'node_modules':
+                    break;
+                case '.meteor':
+                    const meteorPathContent = await asyncFs.readdir(itemAbsPath);
+                    for (let j = 0;  j < meteorPathContent.length;  ++j) {
+                        if (meteorPathContent[j] === 'local') {
+                            continue;
                         }
-                        break;
-                    default:
-                        if (stat.isDirectory() === true) {
-                            archive.directory(itemAbsPath, `/project-explorer/${pathContent[i]}`);
+                        const meteorItemAbsPath = path.join(projectExplorerAbsPath, pathContent[i], meteorPathContent[j]);
+                        const meteorStat = await asyncFs.stat(meteorItemAbsPath);
+                        if (meteorStat.isDirectory() === true) {
+                            archive.directory(meteorItemAbsPath, `/CudosUtils//project-explorer/${pathContent[i]}/${meteorPathContent[j]}`);
                         } else {
-                            archive.file(itemAbsPath, { 'name': `/project-explorer/${pathContent[i]}` } );
+                            archive.file(meteorItemAbsPath, { 'name': `/CudosUtils//project-explorer/${pathContent[i]}/${meteorPathContent[j]}` } );
                         }
-                        break;
-                }
+                    }
+                    break;
+                default:
+                    if (stat.isDirectory() === true) {
+                        archive.directory(itemAbsPath, `/CudosUtils//project-explorer/${pathContent[i]}`);
+                    } else {
+                        archive.file(itemAbsPath, { 'name': `/CudosUtils//project-explorer/${pathContent[i]}` } );
+                    }
+                    break;
             }
         }
 
@@ -243,89 +195,33 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
     const filePath = path.join(secrets.serverPath, deployFilename);
     let command;
 
-    if (LOCAL_BUILD === false) {
-        command = [
-            `source /etc/profile`,
-            `sudo systemctl stop cudos-explorer.service`,
-            `sudo systemctl stop cudos-faucet.service`,
-            `mongo test --eval "db.dropDatabase()"`,
-            `cd ${secrets.serverPath}`,
-            `rm -R ./src`,
-            `mkdir ./src`,
-            `rm -R ./faucet`,
-            `mkdir ./faucet`,
-            `rm -Rf ./explorer`,
-            `mkdir ./explorer`,
-            // `tar -zxf ${filePath} -C ./src`,
-            `unzip -q ${filePath} -d ./src`,
-            `rm ${filePath}`,
-            `cd ./src`,
-            `cd ./project-faucet-cli`,
-            `make`,
-            `cp ./bin/cudos-noded "$GOPATH/bin"`,
-            `sudo cp ./bin/libwasmvm.so "/usr/lib"`,
-            `chmod +x "$GOPATH/bin/cudos-noded"`,
-            `chmod +x ./run-testnet.sh`,
-            `sed -i 's/\r$//' ./run-testnet.sh`,
-            `cp ./run-testnet.sh ../../faucet`,
-            `cd ../project-explorer`,
-            `npm i`,
-            `meteor build ../meteor-build/ --architecture os.linux.x86_64 --server-only`,
-            `cd ../meteor-build`,
-            `tar -zxf ./project-explorer.tar.gz`,
-            `cd ./bundle/programs/server`,
-            `npm i`,
-            `cd ../../../`,
-            `cp -r ./bundle/* ../../explorer`,
-            `cd ../../explorer`,
-            `cp ../src/project-explorer/run-testnet.sh ./`,
-            `chmod +x ./run-testnet.sh`,
-            `sed -i 's/\r$//' ./run-testnet.sh`,
-            `sudo systemctl start cudos-explorer.service`,
-            `sudo systemctl start cudos-faucet.service`,
-            `cd ${secrets.serverPath}`,
-            `rm -Rf ./src/*`
-        ];
-    } else {
-        command = [
-            `source /etc/profile`,
-            `sudo systemctl stop cudos-explorer.service`,
-            `sudo systemctl stop cudos-faucet.service`,
-            `mongo test --eval "db.dropDatabase()"`,
-            `cd ${secrets.serverPath}`,
-            `rm -R ./src`,
-            `mkdir ./src`,
-            `rm -R ./faucet`,
-            `mkdir ./faucet`,
-            `rm -Rf ./explorer`,
-            `mkdir ./explorer`,
-            `unzip -q ${filePath} -d ./src`,
-            `rm ${filePath}`,
-            `cd ./src`,
-            `cd ./project-faucet-cli`,
-            `make`,
-            `cp ./bin/cudos-noded "$GOPATH/bin"`,
-            `sudo cp ./bin/libwasmvm.so "/usr/lib"`,
-            `chmod +x "$GOPATH/bin/cudos-noded"`,
-            `chmod +x ./run-testnet.sh`,
-            `sed -i 's/\r$//' ./run-testnet.sh`,
-            `cp ./run-testnet.sh ../../faucet`,
-            `cd ../project-explorer`,
-            `cd ./programs/server`,
-            `npm i`,
-            `cd ../../`,
-            `cp -r ./* ../../explorer`,
-            `cd ../../explorer`,
-            `chmod +x ./run-testnet.sh`,
-            `sed -i 's/\r$//' ./run-testnet.sh`,
-            `sudo systemctl start cudos-explorer.service`,
-            `sudo systemctl start cudos-faucet.service`,
-            `cd ${secrets.serverPath}`,
-            `rm -Rf ./src/*`
-        ];
-    }
+    command = [
+        `cd ${secrets.serverPath}`,
+        `sudo rm -Rf ./CudosNode`,
+        `sudo rm -Rf ./CudosBuilders`,
+        `sudo rm -Rf ./CudosUtils`,
+        `sudo unzip -q ${filePath} -d ./`,
+        `rm ${filePath}`,
+        `cd ./CudosBuilders/docker/explorer`,
+        `(sudo docker-compose --env-file ./explorer.testnet.arg -f ./explorer.yml -p cudos-explorer down || true)`,
+        `cd ../faucet`,
+        `(sudo docker-compose --env-file ./faucet.testnet.arg -f ./faucet.yml -p cudos-faucet down || true)`,
+        args.init === '1' ? `sudo rm -rf ${secrets.serverPath}/CudosData/*` : null,
+        `sudo docker image prune -f`,
+        `sudo docker image prune -a -f`,
+        `sudo docker volume prune -f`,
+        `sudo docker builder prune -f`,
+        `sudo docker network prune -f`,
+        `sudo docker-compose --env-file ./faucet.testnet.arg -f ./faucet.yml -p cudos-faucet up --build -d`,
+        `cd ../explorer`,
+        `sudo docker-compose --env-file ./explorer.testnet.arg -f ./explorer.yml -p cudos-explorer up --build -d`,
+        `cd ${secrets.serverPath}`,
+        `sudo rm -Rf ./CudosNode`,
+        `sudo rm -Rf ./CudosBuilders`,
+        `sudo rm -Rf ./CudosUtils`,
+    ]
 
-    command = command.join(' && ');
+    command = command.filter(c => c !== null).join(' && ');
 
     conn.on('ready', () => {
         console.log('Client :: ready');

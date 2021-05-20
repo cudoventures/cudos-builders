@@ -13,6 +13,7 @@ const TEMP_DIR = path.join(os.tmpdir(), 'cudos-builder');
 
 const TARGET_ROOT_NODE_TESTNET = 'root-node-testnet';
 const TARGET_SEED_NODE_01_TESTNET = 'seed-node-01-testnet';
+const TARGET_SENTRY_NODE_01_TESTNET = 'sentry-node-01-testnet';
 
 async function main() {
     const args = getArgParser();
@@ -44,7 +45,7 @@ async function main() {
 
 function getArgParser() {
     const parser = new ArgumentParser({description: 'Cudos testnet root node deployer'});
-    parser.add_argument('--target', { 'required': true, 'choices': [TARGET_ROOT_NODE_TESTNET, TARGET_SEED_NODE_01_TESTNET] });
+    parser.add_argument('--target', { 'required': true, 'choices': [TARGET_ROOT_NODE_TESTNET, TARGET_SEED_NODE_01_TESTNET, TARGET_SENTRY_NODE_01_TESTNET] });
     parser.add_argument('--init', { 'required': true, 'choices': ['0', '1'] });
     return parser.parse_args();
 }
@@ -221,6 +222,8 @@ function getDockerRoot(args) {
             return 'root-node';
         case TARGET_SEED_NODE_01_TESTNET:
             return 'seed-node';
+        case TARGET_SENTRY_NODE_01_TESTNET:
+            return 'sentry-node';
         default:
             throw Error(`Unknown target ${args.target}`);
     }
@@ -232,6 +235,8 @@ function getDockerEnvFile(args) {
             return './root-node.testnet.arg';
         case TARGET_SEED_NODE_01_TESTNET:
             return './seed-node.testnet.arg';
+        case TARGET_SENTRY_NODE_01_TESTNET:
+            return './sentry-node.testnet.arg';
         default:
             throw Error(`Unknown target ${args.target}`);
     }
@@ -243,6 +248,8 @@ function getDockerComposeInitFile(args) {
             return './init-root-node.yml';
         case TARGET_SEED_NODE_01_TESTNET:
             return './init-seed-node.yml';
+        case TARGET_SENTRY_NODE_01_TESTNET:
+            return './init-sentry-node.yml';
         default:
             throw Error(`Unknown target ${args.target}`);
     }
@@ -254,6 +261,8 @@ function getDockerComposeStartFile(args) {
             return './start-root-node.yml';
         case TARGET_SEED_NODE_01_TESTNET:
             return './start-seed-node.yml';
+        case TARGET_SENTRY_NODE_01_TESTNET:
+            return './start-sentry-node.yml';
         default:
             throw Error(`Unknown target ${args.target}`);
     }
@@ -264,7 +273,9 @@ function getDockerInitProjectName(args) {
         case TARGET_ROOT_NODE_TESTNET:
             return 'cudos-init-root-node';
         case TARGET_SEED_NODE_01_TESTNET:
-            return 'cudos-start-root-node';
+            return 'cudos-init-seed-node';
+        case TARGET_SENTRY_NODE_01_TESTNET:
+            return 'cudos-init-sentry-node';
         default:
             throw Error(`Unknown target ${args.target}`);
     }
@@ -275,7 +286,9 @@ function getDockerStartProjectName(args) {
         case TARGET_ROOT_NODE_TESTNET:
             return 'cudos-start-root-node';
         case TARGET_SEED_NODE_01_TESTNET:
-            return 'cudos-start-root-node';
+            return 'cudos-start-seed-node';
+        case TARGET_SENTRY_NODE_01_TESTNET:
+            return 'cudos-start-sentry-node';
         default:
             throw Error(`Unknown target ${args.target}`);
     }
