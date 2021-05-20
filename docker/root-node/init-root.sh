@@ -89,19 +89,19 @@ cat "${CUDOS_HOME}/config/genesis.json" | jq --arg BLOCKS_PER_YEAR "$BLOCKS_PER_
 cat "${CUDOS_HOME}/config/genesis.json" | jq --arg DENOM_METADATA_DESC "$DENOM_METADATA_DESC" --arg DENOM1 "$DENOM1" --arg EXP1 "$EXP1" --arg ALIAS1 "$ALIAS1" --arg DENOM2 "$DENOM2" --arg EXP2 "$EXP2" --arg ALIAS2 "$ALIAS2" --arg DENOM3 "$DENOM3" --arg EXP3 "$EXP3" --arg BASE "$BASE" --arg DISPLAY "$DISPLAY" '.app_state.bank.denom_metadata[0].description=$DENOM_METADATA_DESC | .app_state.bank.denom_metadata[0].denom_units[0].denom=$DENOM1 | .app_state.bank.denom_metadata[0].denom_units[0].exponent=$EXP1 | .app_state.bank.denom_metadata[0].denom_units[0].aliases[0]=$ALIAS1 | .app_state.bank.denom_metadata[0].denom_units[1].denom=$DENOM2 | .app_state.bank.denom_metadata[0].denom_units[1].exponent=$EXP2 | .app_state.bank.denom_metadata[0].denom_units[1].aliases[0]=$ALIAS2 | .app_state.bank.denom_metadata[0].denom_units[2].denom=$DENOM3 | .app_state.bank.denom_metadata[0].denom_units[2].exponent=$EXP3 | .app_state.bank.denom_metadata[0].base=$BASE | .app_state.bank.denom_metadata[0].display=$DISPLAY'  > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
 
 # add a new key entry from which to make validator
-(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add root-validator --keyring-backend os |& tee "${CUDOS_HOME}/validator.wallet"
-VALIDATOR_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show root-validator -a --keyring-backend os)
+(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add root-validator-01 --keyring-backend os |& tee "${CUDOS_HOME}/root-validator-01.wallet"
+ROOT_VALIDATOR_01_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show root-validator-01 -a --keyring-backend os)
 
-(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add validator-02 --keyring-backend os |& tee "${CUDOS_HOME}/validator.wallet"
+(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add validator-02 --keyring-backend os |& tee "${CUDOS_HOME}/validator-02.wallet"
 VALIDATOR_02_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show validator-02 -a --keyring-backend os)
-(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add validator-03 --keyring-backend os |& tee "${CUDOS_HOME}/validator.wallet"
+(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add validator-03 --keyring-backend os |& tee "${CUDOS_HOME}/validator-03.wallet"
 VALIDATOR_03_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show validator-03 -a --keyring-backend os)
 
 # create validators
-cudos-noded add-genesis-account $VALIDATOR_ADDRESS "100000000${BOND_DENOM},1cudosAdmin"
+cudos-noded add-genesis-account $ROOT_VALIDATOR_01_ADDRESS "100000000${BOND_DENOM},1cudosAdmin"
 cudos-noded add-genesis-account $VALIDATOR_02_ADDRESS "100000000${BOND_DENOM},1cudosAdmin"
 cudos-noded add-genesis-account $VALIDATOR_03_ADDRESS "100000000${BOND_DENOM},1cudosAdmin"
-(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded gentx root-validator "100000000${BOND_DENOM}" --chain-id $CHAIN_ID --keyring-backend os
+(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded gentx root-validator-01 "100000000${BOND_DENOM}" --chain-id $CHAIN_ID --keyring-backend os
 
 # add faucet account
 ((echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add faucet --keyring-backend os) |& tee "${CUDOS_HOME}/faucet.wallet"
@@ -115,4 +115,6 @@ sed -i "s/pex = true/pex = false/" "${CUDOS_HOME}/config/config.toml"
 MY_OWN_PEER_ID=$(cudos-noded tendermint show-node-id)
 sed -i "s/private_peer_ids = \"\"/private_peer_ids = \"$MY_OWN_PEER_ID\"/g" "${CUDOS_HOME}/config/config.toml"
 
-cudos-noded tendermint show-node-id |& tee "${CUDOS_HOME}/validator.nodeid"
+cudos-noded tendermint show-node-id |& tee "${CUDOS_HOME}/tendermint.nodeid"
+
+chmod 755 "${CUDOS_HOME}/config"

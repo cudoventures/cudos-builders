@@ -14,4 +14,4 @@ sed -i "s/seed_mode = false/seed_mode = true/g" "${CUDOS_HOME}/config/config.tom
 
 sed -i "s/private_peer_ids = \"\"/private_peer_ids = \"$PRIVATE_PEERS\"/g" "${CUDOS_HOME}/config/config.toml"
 
-cudos-noded tendermint show-node-id |& tee "${CUDOS_HOME}/seed.nodeid"
+cudos-noded tendermint show-node-id |& tee "${CUDOS_HOME}/tendermint.nodeid"
