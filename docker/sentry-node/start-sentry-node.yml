@@ -21,3 +21,8 @@ services:
       - "${PORT1317}:1317"
     networks:
       - shared-cudos-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "128m"
+        max-file: "1"
