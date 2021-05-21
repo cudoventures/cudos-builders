@@ -1,14 +1,16 @@
 version: '3.1'
 
 services:
-  cudos-seed-node-01:
-    image: cudos-init-seed-node-01
-    container_name: cudos-init-seed-node-01
+  cudos-seed-node:
+    image: cudos-init-seed-node
+    container_name: $INIT_CONTAINER_NAME
     build:
       dockerfile: CudosBuilders/docker/seed-node/init-seed-node.dockerfile
       context: ../../../
       args:
         GENESIS_FILENAME: "$GENESIS_FILENAME"
+        SEEDS_FILENAME: "$SEEDS_FILENAME"
+        PERSISTENT_PEERS_FILENAME: "$PERSISTENT_PEERS_FILENAME"
     env_file: "$ENV_FILE"
     volumes:
-      - '../../../CudosData/cudos-data-seed-node-01:$CUDOS_HOME'
+      - '../../../CudosData/$VOLUME_NAME:$CUDOS_HOME'

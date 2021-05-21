@@ -1,0 +1,17 @@
+if [[ -z "${CUDOS_HOME}" ]]; then
+    CUDOS_HOME="./cudos-data"
+fi
+
+if [ "$SHOULD_USE_GLOBAL_PEERS" = "true" ]; then
+    PERSISTENT_PEERS=$(cat ./external-config/persistent-peers.config)
+    SEEDS=$(cat ./external-config/seeds.config)
+fi
+
+sed -i "s/persistent_peers = \".*\"/persistent_peers = \"$PERSISTENT_PEERS\"/g" "${CUDOS_HOME}/config/config.toml"
+
+MY_OWN_PEER_ID=$(cudos-noded tendermint show-node-id)
+sed -i "s/private_peer_ids = \".*\"/private_peer_ids = \"$MY_OWN_PEER_ID\"/g" "${CUDOS_HOME}/config/config.toml"
+
+sed -i "s/seeds = \".*\"/seeds = \"$SEEDS\"/g" "${CUDOS_HOME}/config/config.toml"
+
+sed -i "s/pex = true/pex = false/" "${CUDOS_HOME}/config/config.toml"

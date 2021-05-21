@@ -5,16 +5,16 @@ networks:
     name: shared-cudos-network
 
 services:
-  cudos-seed-node-01:
-    image: cudos-start-seed-node-01
-    container_name: cudos-start-seed-node-01
+  cudos-seed-node:
+    image: cudos-start-seed-node
+    container_name: $START_CONTAINER_NAME
     build:
       dockerfile: CudosBuilders/docker/seed-node/start-seed-node.dockerfile
       context: ../../../
     restart: unless-stopped
     env_file: "$ENV_FILE"
     volumes:
-      - '../../../CudosData/cudos-data-seed-node-01:$CUDOS_HOME'
+      - '../../../CudosData/$VOLUME_NAME:$CUDOS_HOME'
     ports:
       - "${PORT26656}:26656"
     networks:

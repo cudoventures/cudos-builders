@@ -1,11 +1,11 @@
 version: '3.1'
 
 services:
-  cudos-sentry-node:
-    image: cudos-init-sentry-node
-    container_name: $INIT_CONTAINER_NAME
+  cudos-full-node:
+    image: cudos-config-full-node
+    container_name: $CONFIG_CONTAINER_NAME
     build:
-      dockerfile: CudosBuilders/docker/sentry-node/init-sentry-node.dockerfile
+      dockerfile: CudosBuilders/docker/full-node/config-full-node.dockerfile
       context: ../../../
       args:
         GENESIS_FILENAME: "$GENESIS_FILENAME"

@@ -168,6 +168,179 @@
             "command": "cd ./docker/explorer&& sudo docker-compose --env-file ./explorer.docker.arg -f ./explorer.yml -p cudos-explorer down",
             "type": "shell",
             "group": "build"
-        }
+        },
+
+
+        {
+            "label": "Start INIT CLIENT SEED NODE in docker",
+            "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./seed-node.client.arg -f ./init-seed-node.yml -p cudos-init-client-seed-node up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build INIT CLIENT SEED NODE in docker",
+            "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./seed-node.client.arg -f ./init-seed-node.yml -p cudos-init-client-seed-node up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy INIT CLIENT SEED NODE in docker",
+            "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./seed-node.client.arg -f ./init-seed-node.yml -p cudos-init-client-seed-node down",
+            "type": "shell",
+            "group": "build"
+        },
+
+        {
+            "label": "Start START CLIENT SEED NODES in docker",
+            "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./seed-node.client.arg -f ./start-seed-node.yml -p cudos-start-client-seed-node up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build START CLIENT SEED NODES in docker",
+            "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./seed-node.client.arg -f ./start-seed-node.yml -p cudos-start-client-seed-node up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy START CLIENT SEED NODES in docker",
+            "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./seed-node.client.arg -f ./start-seed-node.yml -p cudos-start-client-seed-node down",
+            "type": "shell",
+            "group": "build"
+        },
+
+        {
+            "label": "Start INIT CLIENT SENTRY NODE in docker",
+            "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.client.arg -f ./init-sentry-node.yml -p cudos-init-client-sentry-node up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build INIT CLIENT SENTRY NODE in docker",
+            "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.client.arg -f ./init-sentry-node.yml -p cudos-init-client-sentry-node up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy INIT CLIENT SENTRY NODE in docker",
+            "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.client.arg -f ./init-sentry-node.yml -p cudos-init-client-sentry-node down",
+            "type": "shell",
+            "group": "build"
+        },
+
+        {
+            "label": "Start START CLIENT SENTRY NODES in docker",
+            "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.client.arg -f ./start-sentry-node.yml -p cudos-start-client-sentry-node up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build START CLIENT SENTRY NODES in docker",
+            "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.client.arg -f ./start-sentry-node.yml -p cudos-start-client-sentry-node up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy START CLIENT SENTRY NODES in docker",
+            "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.client.arg -f ./start-sentry-node.yml -p cudos-start-client-sentry-node down",
+            "type": "shell",
+            "group": "build"
+        },
+
+        {
+            "label": "Start INIT CLIENT FULL NODE in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.arg -f ./init-full-node.yml -p cudos-init-client-full-node up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build INIT CLIENT FULL NODE in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.arg -f ./init-full-node.yml -p cudos-init-client-full-node up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy INIT CLIENT FULL NODE in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.arg -f ./init-full-node.yml -p cudos-init-client-full-node down",
+            "type": "shell",
+            "group": "build"
+        },
+
+        {
+            "label": "Start CONFIG CLIENT FULL NODE in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.arg -f ./config-full-node.yml -p cudos-config-client-full-node up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build CONFIG CLIENT FULL NODE in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.arg -f ./config-full-node.yml -p cudos-config-client-full-node up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy CONFIG CLIENT FULL NODE in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.arg -f ./config-full-node.yml -p cudos-config-client-full-node down",
+            "type": "shell",
+            "group": "build"
+        },
+
+        {
+            "label": "Start START CLIENT FULL NODES in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.arg -f ./start-full-node.yml -p cudos-start-client-full-node up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build START CLIENT FULL NODES in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.arg -f ./start-full-node.yml -p cudos-start-client-full-node up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy START CLIENT FULL NODES in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.arg -f ./start-full-node.yml -p cudos-start-client-full-node down",
+            "type": "shell",
+            "group": "build"
+        },
+
+        {
+            "label": "Start INIT GLOBAL PEERS FULL NODE in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.global-peers.arg -f ./init-full-node.yml -p cudos-init-global-peers-full-node up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build INIT GLOBAL PEERS FULL NODE in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.global-peers.arg -f ./init-full-node.yml -p cudos-init-global-peers-full-node up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy INIT GLOBAL PEERS FULL NODE in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.global-peers.arg -f ./init-full-node.yml -p cudos-init-global-peers-full-node down",
+            "type": "shell",
+            "group": "build"
+        },
+
+        {
+            "label": "Start CONFIG GLOBAL PEERS FULL NODE in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.global-peers.arg -f ./config-full-node.yml -p cudos-config-global-peers-full-node up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build CONFIG GLOBAL PEERS FULL NODE in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.global-peers.arg -f ./config-full-node.yml -p cudos-config-global-peers-full-node up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy CONFIG GLOBAL PEERS FULL NODE in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.global-peers.arg -f ./config-full-node.yml -p cudos-config-global-peers-full-node down",
+            "type": "shell",
+            "group": "build"
+        },
+
+        {
+            "label": "Start START GLOBAL PEERS FULL NODES in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.global-peers.arg -f ./start-full-node.yml -p cudos-start-global-peers-full-node up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build START GLOBAL PEERS FULL NODES in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.global-peers.arg -f ./start-full-node.yml -p cudos-start-global-peers-full-node up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy START GLOBAL PEERS FULL NODES in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.global-peers.arg -f ./start-full-node.yml -p cudos-start-global-peers-full-node down",
+            "type": "shell",
+            "group": "build"
+        },
+
+        
     ]
 }

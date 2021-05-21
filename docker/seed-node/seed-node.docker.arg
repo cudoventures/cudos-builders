@@ -1,4 +1,12 @@
 CUDOS_HOME=/usr/cudos/cudos-data
 ENV_FILE=./seed-node.docker.env
 GENESIS_FILENAME=genesis.docker.json
+
+PERSISTENT_PEERS_FILENAME=persistent-peers.testnet.config
+SEEDS_FILENAME=seeds.testnet.config
+
+INIT_CONTAINER_NAME=cudos-init-seed-node
+START_CONTAINER_NAME=cudos-start-seed-node
+VOLUME_NAME=cudos-data-seed-node
+
 PORT26656=30001
