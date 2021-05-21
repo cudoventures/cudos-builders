@@ -1,21 +1,20 @@
 CUDOS_HOME=/usr/cudos/cudos-data
+
 ENV_FILE=./full-node.client.env
 GENESIS_FILENAME=genesis.client.json
-
 PERSISTENT_PEERS_FILENAME=persistent-peers.testnet.config
 SEEDS_FILENAME=seeds.testnet.config
 
-INIT_CONTAINER_NAME=cudos-init-client-full-node
-CONFIG_CONTAINER_NAME=cudos-config-client-full-node
-CONFIG_VALIDATOR_CONTAINER_NAME=cudos-config-validator-client-full-node
-START_CONTAINER_NAME=cudos-start-client-full-node
+INIT_CONTAINER_NAME=cudos-init-full-node-client
+CONFIG_CONTAINER_NAME=cudos-config-full-node-client
+CONFIG_VALIDATOR_CONTAINER_NAME=cudos-config-validator-full-node-client
+START_CONTAINER_NAME=cudos-start-full-node-client
+VOLUME_NAME=cudos-data-full-node-client
 
-VOLUME_NAME=cudos-data-client-full-node
+PORT26656=46666
 
 WALLET_NAME=valio
 WALLET_PASSWORD=123123123
 WALLET_MNEMONIC="act castle produce unusual observe minor differ tornado behave evolve tent bleak board ocean top frost valley great trap climb private skin wheat decide"
 STAKE="100000000000000000000acudos"
 NODE_NAME=valio-node
-
-PORT26656=46666
