@@ -1,4 +1,4 @@
 CUDOS_HOME=/usr/cudos/cudos-data
-ENV_FILE=./seed-node.testnet.env
+ENV_FILE=./seed-node.testnet.zone01.env
 GENESIS_FILENAME=genesis.testnet.json
 PORT26656=26656

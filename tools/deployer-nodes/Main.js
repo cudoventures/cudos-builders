@@ -11,6 +11,10 @@ const SecretsConfig = require('./secrets.json');
 
 const TEMP_DIR = path.join(os.tmpdir(), 'cudos-builder');
 
+const TARGET_ROOT_NODE_TESTNET = 'root-node-testnet';
+const TARGET_SEED_NODE_01_TESTNET = 'seed-node-01-testnet';
+const TARGET_SENTRY_NODE_01_TESTNET = 'sentry-node-01-testnet';
+
 async function main() {
     const args = getArgParser();
     const secrets = getSecrets(args.target);
@@ -31,16 +35,17 @@ async function main() {
         await executeCommands(args, secrets, deployFilePath, deployFilename);
     } finally {
         try {
-            await asyncFs.access(deployFilePath, fs.constants.F_OK);
-            await asyncFs.unlink(deployFilePath);
+            await asyncFs.access(TEMP_DIR, fs.constants.F_OK);
+            await asyncFs.rm(TEMP_DIR, { 'recursive': true });
         } catch (e) {
+            console.error(e);
         }
     }
 }
 
 function getArgParser() {
     const parser = new ArgumentParser({description: 'Cudos testnet root node deployer'});
-    parser.add_argument('--target', { 'required': true, 'choices': ['testnet'] });
+    parser.add_argument('--target', { 'required': true, 'choices': [TARGET_ROOT_NODE_TESTNET, TARGET_SEED_NODE_01_TESTNET, TARGET_SENTRY_NODE_01_TESTNET] });
     parser.add_argument('--init', { 'required': true, 'choices': ['0', '1'] });
     return parser.parse_args();
 }
@@ -63,7 +68,7 @@ async function initTempDirectory() {
             await asyncFs.mkdir(TEMP_DIR, { 'recursive': true });
         }
 
-        const deployFilename = `cudos-src.tar`;
+        const deployFilename = `cudos-src.tar.gz`;
         const deployFilePath = path.join(TEMP_DIR, deployFilename);
         resolve({
             deployFilePath,
@@ -75,7 +80,7 @@ async function initTempDirectory() {
 async function createArchive(deployFilePath, deployFilename) {
     return new Promise(async (resolve, reject) => {
         const output = fs.createWriteStream(deployFilePath);
-        const archive = archiver('tar', {
+        const archive = archiver('zip', {
             zlib: { level: 9 }, // Sets the compression level.
         });
 
@@ -110,7 +115,8 @@ async function createArchive(deployFilePath, deployFilename) {
         archive.pipe(output);
 
         // append files from a sub-directory, putting its contents at the root of archive
-        archive.directory(path.resolve('../project-node'), false);
+        archive.directory(path.resolve('../../CudosNode'), '/CudosNode');
+        archive.directory(path.resolve('../docker'), '/CudosBuilders/docker');
 
         archive.finalize();
     });
@@ -152,33 +158,35 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
     const conn = new SSH2Client();
     const filePath = path.join(secrets.serverPath, deployFilename);
 
+    const dockerRoot = getDockerRoot(args);
+    const dockerEnvFile = getDockerEnvFile(args);
+    const dockerComposeInitFile = getDockerComposeInitFile(args);
+    const dockerComposeStartFile = getDockerComposeStartFile(args);
+    const dockerInitProjectName = getDockerInitProjectName(args);
+    const dockerStartProjectName = getDockerStartProjectName(args);
+
     command = [
-        `source /etc/profile`,
-        `sudo systemctl stop cudos-root-node.service`,
         `cd ${secrets.serverPath}`,
-        `rm -R ./src`,
-        `mkdir ./src`,
-        `tar -xf ${filePath} -C ./src`,
+        `sudo rm -Rf ./CudosBuilders`,
+        `sudo rm -Rf ./CudosNode`,
+        `sudo unzip -q ${filePath} -d ./`,
         `rm ${filePath}`,
-        `cd ./src`,
-        `make`,
-    ];
+        `cd ./CudosBuilders/docker/${dockerRoot}`,
+        `(sudo docker-compose --env-file ${dockerEnvFile} -f ${dockerComposeStartFile} -p ${dockerStartProjectName} down || true)`,
+        args.init === '1' ? `sudo rm -rf ${secrets.serverPath}/CudosData/*` : null,
+        `sudo docker image prune -f`,
+        `sudo docker image prune -a -f`,
+        `sudo docker volume prune -f`,
+        `sudo docker builder prune -f`,
+        args.init === '1' ? `sudo docker-compose --env-file ${dockerEnvFile}  -f ${dockerComposeInitFile} -p ${dockerInitProjectName} up --build` : null,
+        args.init === '1' ? `(sudo docker-compose --env-file ${dockerEnvFile}  -f ${dockerComposeInitFile} -p ${dockerInitProjectName} down || true)` : null,
+        `sudo docker-compose --env-file ${dockerEnvFile} -f ${dockerComposeStartFile} -p ${dockerStartProjectName} up --build -d`,
+        `cd ${secrets.serverPath}`,
+        `sudo rm -Rf ./CudosBuilders`,
+        `sudo rm -Rf ./CudosNode`,
+    ]
 
-    if (args.init === '1') {
-        command = command.concat([
-            // `rm -R $CUDOS_HOME/*`,
-            `if [ -d "$CUDOS_HOME" ]; then rm -Rf "$CUDOS_HOME/*"; fi`,
-            `chmod +x ./init-root.sh`,
-            `sed -i 's/\r$//' ./init-root.sh`,
-            `./init-root.sh`,
-        ]);
-    }
-
-    command = command.concat([
-        `sudo systemctl start cudos-root-node.service`,
-    ])
-
-    command = command.join(' && ');
+    command = command.filter(c => c !== null).join(' && ');
 
     conn.on('ready', () => {
         console.log('Client :: ready');
@@ -206,6 +214,84 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         privateKey: (await asyncFs.readFile(secrets.privateKey)).toString(),
         path: secrets.serverPath,
     });
+}
+
+function getDockerRoot(args) {
+    switch (args.target) {
+        case TARGET_ROOT_NODE_TESTNET:
+            return 'root-node';
+        case TARGET_SEED_NODE_01_TESTNET:
+            return 'seed-node';
+        case TARGET_SENTRY_NODE_01_TESTNET:
+            return 'sentry-node';
+        default:
+            throw Error(`Unknown target ${args.target}`);
+    }
+}
+
+function getDockerEnvFile(args) {
+    switch (args.target) {
+        case TARGET_ROOT_NODE_TESTNET:
+            return './root-node.testnet.zone01.arg';
+        case TARGET_SEED_NODE_01_TESTNET:
+            return './seed-node.testnet.zone01.arg';
+        case TARGET_SENTRY_NODE_01_TESTNET:
+            return './sentry-node.testnet.zone01.arg';
+        default:
+            throw Error(`Unknown target ${args.target}`);
+    }
+}
+
+function getDockerComposeInitFile(args) {
+    switch (args.target) {
+        case TARGET_ROOT_NODE_TESTNET:
+            return './init-root-node.yml';
+        case TARGET_SEED_NODE_01_TESTNET:
+            return './init-seed-node.yml';
+        case TARGET_SENTRY_NODE_01_TESTNET:
+            return './init-sentry-node.yml';
+        default:
+            throw Error(`Unknown target ${args.target}`);
+    }
+}
+
+function getDockerComposeStartFile(args) {
+    switch (args.target) {
+        case TARGET_ROOT_NODE_TESTNET:
+            return './start-root-node.yml';
+        case TARGET_SEED_NODE_01_TESTNET:
+            return './start-seed-node.yml';
+        case TARGET_SENTRY_NODE_01_TESTNET:
+            return './start-sentry-node.yml';
+        default:
+            throw Error(`Unknown target ${args.target}`);
+    }
+}
+
+function getDockerInitProjectName(args) {
+    switch (args.target) {
+        case TARGET_ROOT_NODE_TESTNET:
+            return 'cudos-init-root-node';
+        case TARGET_SEED_NODE_01_TESTNET:
+            return 'cudos-init-seed-node';
+        case TARGET_SENTRY_NODE_01_TESTNET:
+            return 'cudos-init-sentry-node';
+        default:
+            throw Error(`Unknown target ${args.target}`);
+    }
+}
+
+function getDockerStartProjectName(args) {
+    switch (args.target) {
+        case TARGET_ROOT_NODE_TESTNET:
+            return 'cudos-start-root-node';
+        case TARGET_SEED_NODE_01_TESTNET:
+            return 'cudos-start-seed-node';
+        case TARGET_SENTRY_NODE_01_TESTNET:
+            return 'cudos-start-sentry-node';
+        default:
+            throw Error(`Unknown target ${args.target}`);
+    }
 }
 
 main();
