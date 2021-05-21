@@ -4,10 +4,6 @@ networks:
   shared-cudos-network:
     name: shared-cudos-network
 
-volumes:
-  explorer-mongodbdata:
-    driver: local
-
 services:
   cudos-explorer:
     image: cudos-explorer
@@ -39,7 +35,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: cudos-root-db-pass
     volumes:
-      - 'explorer-mongodbdata:/data/db'
+      - '../../../CudosData/explorer-mongodb:/data/db'
       - './mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro'
     networks:
       - shared-cudos-network
