@@ -1,0 +1,6 @@
+CUDOS_HOME=/usr/cudos/cudos-data
+ENV_FILE=./second-seed-node.docker.env
+GENESIS_FILENAME=genesis.docker.json
+PORT26656=30002
+INIT_CONTAINER_NAME=cudos-init-client-seed-node
+START_CONTAINER_NAME=cudos-start-client-seed-node

@@ -5,16 +5,16 @@ networks:
     name: shared-cudos-network
 
 services:
-  cudos-sentry-node-01:
-    image: cudos-start-sentry-node-01
-    container_name: cudos-start-sentry-node-01
+  cudos-sentry-node:
+    image: cudos-start-sentry-node
+    container_name: $START_CONTAINER_NAME
     build:
       dockerfile: CudosBuilders/docker/sentry-node/start-sentry-node.dockerfile
       context: ../../../
     restart: unless-stopped
     env_file: "$ENV_FILE"
     volumes:
-      - '../../../CudosData/cudos-data-sentry-node-01:$CUDOS_HOME'
+      - '../../../CudosData/$VOLUME_NAME:$CUDOS_HOME'
     ports:
       - "26656-26657:26656-26657"
       - "1317:1317"

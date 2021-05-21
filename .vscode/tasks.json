@@ -168,6 +168,111 @@
             "command": "cd ./docker/explorer&& sudo docker-compose --env-file ./explorer.docker.arg -f ./explorer.yml -p cudos-explorer down",
             "type": "shell",
             "group": "build"
-        }
+        },
+
+
+        {
+            "label": "Start INIT SECOND SEED NODE in docker",
+            "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./second-seed-node.docker.arg -f ./init-seed-node.yml -p cudos-init-second-seed-node up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build INIT SECOND SEED NODE in docker",
+            "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./second-seed-node.docker.arg -f ./init-seed-node.yml -p cudos-init-second-seed-node up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy INIT SECOND SEED NODE in docker",
+            "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./second-seed-node.docker.arg -f ./init-seed-node.yml -p cudos-init-second-seed-node down",
+            "type": "shell",
+            "group": "build"
+        },
+
+        {
+            "label": "Start START SECOND SEED NODES in docker",
+            "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./second-seed-node.docker.arg -f ./start-seed-node.yml -p cudos-start-second-seed-node up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build START SECOND SEED NODES in docker",
+            "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./second-seed-node.docker.arg -f ./start-seed-node.yml -p cudos-start-second-seed-node up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy START SECOND SEED NODES in docker",
+            "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./second-seed-node.docker.arg -f ./start-seed-node.yml -p cudos-start-second-seed-node down",
+            "type": "shell",
+            "group": "build"
+        },
+
+        {
+            "label": "Start INIT SENTRY NODE in docker",
+            "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.docker.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build INIT SENTRY NODE in docker",
+            "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.docker.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy INIT SENTRY NODE in docker",
+            "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.docker.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node down",
+            "type": "shell",
+            "group": "build"
+        },
+
+        {
+            "label": "Start START SENTRY NODES in docker",
+            "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.docker.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build START SENTRY NODES in docker",
+            "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.docker.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy START SENTRY NODES in docker",
+            "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.docker.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node down",
+            "type": "shell",
+            "group": "build"
+        },
+
+        {
+            "label": "Start INIT SECOND VALDIATOR in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./second-validator-node.docker.arg -f ./init-full-node.yml -p cudos-init-second-validator-node up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build INIT SECOND VALDIATOR in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./second-validator-node.docker.arg -f ./init-full-node.yml -p cudos-init-second-validator-node up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy INIT SECOND VALDIATOR in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./second-validator-node.docker.arg -f ./init-full-node.yml -p cudos-init-second-validator-node down",
+            "type": "shell",
+            "group": "build"
+        },
+
+        {
+            "label": "Start START SECOND VALDIATORS in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./second-validator-node.docker.arg -f ./start-full-node.yml -p cudos-start-second-validator-node up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build START SECOND VALDIATORS in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.docker.arg -f ./start-full-node.yml -p cudos-start-second-validator-node up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy START SECOND VALDIATORS in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.docker.arg -f ./start-full-node.yml -p cudos-start-second-validator-node down",
+            "type": "shell",
+            "group": "build"
+        },
+
+        
     ]
 }

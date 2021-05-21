@@ -1,3 +1,6 @@
 CUDOS_HOME=/usr/cudos/cudos-data
 ENV_FILE=./full-node.docker.env
 GENESIS_FILENAME=genesis.docker.json
+
+IMAGE_NAME=cudos-full-node-01
+CONTAINER_NAME=cudos-full-node-01

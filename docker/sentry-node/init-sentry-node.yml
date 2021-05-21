@@ -1,9 +1,9 @@
 version: '3.1'
 
 services:
-  cudos-sentry-node-01:
-    image: cudos-init-sentry-node-01
-    container_name: cudos-init-sentry-node-01
+  cudos-sentry-node:
+    image: cudos-init-sentry-node
+    container_name: $INIT_CONTAINER_NAME
     build:
       dockerfile: CudosBuilders/docker/sentry-node/init-sentry-node.dockerfile
       context: ../../../
@@ -11,4 +11,4 @@ services:
         GENESIS_FILENAME: "$GENESIS_FILENAME"
     env_file: "$ENV_FILE"
     volumes:
-      - '../../../CudosData/cudos-data-sentry-node-01:$CUDOS_HOME'
+      - '../../../CudosData/$VOLUME_NAME:$CUDOS_HOME'
