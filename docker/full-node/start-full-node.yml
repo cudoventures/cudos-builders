@@ -19,3 +19,8 @@ services:
       - shared-cudos-network
     ports:
       - "${PORT26656}:26656"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "128m"
+        max-file: "1"
