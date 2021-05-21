@@ -12,8 +12,8 @@ const SecretsConfig = require('./secrets.json');
 const TEMP_DIR = path.join(os.tmpdir(), 'cudos-builder');
 
 const TARGET_ROOT_NODE_TESTNET = 'root-node-testnet';
-const TARGET_SEED_NODE_01_TESTNET = 'seed-node-01-testnet';
-const TARGET_SENTRY_NODE_01_TESTNET = 'sentry-node-01-testnet';
+const TARGET_SEED_NODE_01_TESTNET = 'seed-node-testnet-zone01';
+const TARGET_SENTRY_NODE_01_TESTNET = 'sentry-node-testnet-zone01';
 
 async function main() {
     const args = getArgParser();
