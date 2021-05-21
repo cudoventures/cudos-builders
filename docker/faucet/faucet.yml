@@ -17,3 +17,8 @@ services:
       - "5000:5000"
     networks:
       - shared-cudos-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "128m"
+        max-file: "1"

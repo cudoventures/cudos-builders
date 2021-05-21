@@ -24,6 +24,11 @@ services:
       - "3000:3000"
     networks:
       - shared-cudos-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "128m"
+        max-file: "1"
 
   cudos-explorer-mongodb:
     image: 'mongo:latest'
@@ -39,3 +44,8 @@ services:
       - './mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro'
     networks:
       - shared-cudos-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "128m"
+        max-file: "1"
