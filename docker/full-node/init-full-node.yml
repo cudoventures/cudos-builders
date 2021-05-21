@@ -1,9 +1,9 @@
 version: '3.1'
 
 services:
-  cudos-full-node-01:
-    image: $IMAGE_NAME
-    container_name: $CONTAINER_NAME
+  cudos-full-node:
+    image: cudos-init-full-node
+    container_name: $INIT_CONTAINER_NAME
     build:
       dockerfile: CudosBuilders/docker/full-node/init-full-node.dockerfile
       context: ../../../
@@ -11,4 +11,4 @@ services:
         GENESIS_FILENAME: "$GENESIS_FILENAME"
     env_file: "$ENV_FILE"
     volumes:
-      - '../../../CudosData/$CONTAINER_NAME:$CUDOS_HOME'
+      - '../../../CudosData/$VOLUME_NAME:$CUDOS_HOME'

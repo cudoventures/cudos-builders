@@ -1,6 +1,0 @@
-CUDOS_HOME=/usr/cudos/cudos-data
-ENV_FILE=./second-validator-node.docker.env
-GENESIS_FILENAME=genesis.docker.json
-
-IMAGE_NAME=cudos-second-validator-node-01
-CONTAINER_NAME=cudos-second-validator-node-01

@@ -1,0 +1,14 @@
+CUDOS_HOME=/usr/cudos/cudos-data
+ENV_FILE=./sentry-node.client.env
+GENESIS_FILENAME=genesis.docker.json
+
+PERSISTENT_PEERS_FILENAME=persistent-peers.testnet.config
+SEEDS_FILENAME=seeds.testnet.config
+
+INIT_CONTAINER_NAME=cudos-init-client-sentry-node
+START_CONTAINER_NAME=cudos-start-client-sentry-node
+VOLUME_NAME=cudos-data-client-sentry-node
+
+PORT26656=46656
+PORT26657=46657
+PORT1317=4317

@@ -7,7 +7,7 @@ networks:
 services:
   cudos-full-node:
     image: cudos-start-full-node
-    container_name: $START_CONTAINER_NAME
+    container_name: $CONFIG_VALIDATOR_CONTAINER_NAME
     build:
       dockerfile: CudosBuilders/docker/full-node/start-full-node.dockerfile
       context: ../../../
@@ -17,5 +17,3 @@ services:
       - '../../../CudosData/$VOLUME_NAME:$CUDOS_HOME'
     networks:
       - shared-cudos-network
-    ports:
-      - "${PORT26656}:26656"

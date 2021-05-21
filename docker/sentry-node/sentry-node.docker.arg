@@ -1,6 +1,11 @@
 CUDOS_HOME=/usr/cudos/cudos-data
 ENV_FILE=./sentry-node.docker.env
 GENESIS_FILENAME=genesis.docker.json
+
 INIT_CONTAINER_NAME=cudos-init-sentry-node
 START_CONTAINER_NAME=cudos-start-sentry-node
 VOLUME_NAME=cudos-data-sentry-node
+
+PORT26656=26656
+PORT26657=26657
+PORT1317=1317
