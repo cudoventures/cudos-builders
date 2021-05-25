@@ -1,0 +1,12 @@
+CUDOS_HOME=/usr/cudos/cudos-data
+
+ENV_FILE=./seed-node.local01.env
+GENESIS_FILENAME=genesis.local.json
+PERSISTENT_PEERS_FILENAME=persistent-peers.local.config
+SEEDS_FILENAME=seeds.local.config
+
+INIT_CONTAINER_NAME=cudos-init-seed-node-01
+START_CONTAINER_NAME=cudos-start-seed-node-01
+VOLUME_NAME=cudos-data-seed-node-01 
+
+PORT26656=30001

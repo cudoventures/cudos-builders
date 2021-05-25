@@ -1,0 +1,14 @@
+CUDOS_HOME=/usr/cudos/cudos-data
+
+ENV_FILE=./sentry-node.client.local01.env
+GENESIS_FILENAME=genesis.local.json
+PERSISTENT_PEERS_FILENAME=persistent-peers.local.config
+SEEDS_FILENAME=seeds.local.config
+
+INIT_CONTAINER_NAME=cudos-init-sentry-node-client-local-01
+START_CONTAINER_NAME=cudos-start-sentry-node-client-local-01
+VOLUME_NAME=cudos-data-sentry-node-client-local-01
+
+PORT26656=46656
+PORT26657=46657
+PORT1317=4317
