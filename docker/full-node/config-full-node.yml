@@ -7,10 +7,6 @@ services:
     build:
       dockerfile: CudosBuilders/docker/full-node/config-full-node.dockerfile
       context: ../../../
-      args:
-        GENESIS_FILENAME: "$GENESIS_FILENAME"
-        SEEDS_FILENAME: "$SEEDS_FILENAME"
-        PERSISTENT_PEERS_FILENAME: "$PERSISTENT_PEERS_FILENAME"
     env_file: "$ENV_FILE"
     volumes:
       - '../../../CudosData/$VOLUME_NAME:$CUDOS_HOME'

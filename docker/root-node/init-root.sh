@@ -102,9 +102,9 @@ VALIDATOR_02_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show validator-02 -a -
 VALIDATOR_03_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show validator-03 -a --keyring-backend os)
 
 # create validators
-cudos-noded add-genesis-account $ROOT_VALIDATOR_01_ADDRESS "100000000000000000000${BOND_DENOM},1cudosAdmin"
-cudos-noded add-genesis-account $VALIDATOR_02_ADDRESS "100000000000000000000${BOND_DENOM},1cudosAdmin"
-cudos-noded add-genesis-account $VALIDATOR_03_ADDRESS "100000000000000000000${BOND_DENOM},1cudosAdmin"
+cudos-noded add-genesis-account $ROOT_VALIDATOR_01_ADDRESS "100000000000000100000${BOND_DENOM},1cudosAdmin"
+cudos-noded add-genesis-account $VALIDATOR_02_ADDRESS "100000000000000100000${BOND_DENOM},1cudosAdmin"
+cudos-noded add-genesis-account $VALIDATOR_03_ADDRESS "100000000000000100000${BOND_DENOM},1cudosAdmin"
 (echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded gentx root-validator-01 "100000000000000000000${BOND_DENOM}" --chain-id $CHAIN_ID --keyring-backend os
 
 # add faucet account

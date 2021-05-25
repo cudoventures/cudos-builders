@@ -2,6 +2,11 @@ if [[ -z "${CUDOS_HOME}" ]]; then
     CUDOS_HOME="./cudos-data"
 fi
 
+if [ "$SHOULD_USE_GLOBAL_PEERS" = "true" ]; then
+    PERSISTENT_PEERS=$(cat ./external-config/persistent-peers.config)
+    SEEDS=$(cat ./external-config/seeds.config)
+fi
+
 WORKING_PATH=$(pwd) && cd $CUDOS_HOME && rm -Rf ./* && cd $WORKING_PATH
 
 cudos-noded init $MONIKER

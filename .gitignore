@@ -3,4 +3,6 @@ node_modules
 secrets.json
 secrets.json.old
 genesis.docker.json
+persistent-peers.docker.config
+seeds.docker.config
 /tools/deployer-utils/temp
