@@ -2,29 +2,29 @@
     "version": "2.0.0",
     "tasks": [{
             "label": "Build INIT ROOT NODE in docker",
-            "command": "cd ./docker/root-node&& sudo docker-compose --env-file ./root-node.local01.arg -f ./init-root-node.yml -p cudos-init-root-node up --build",
+            "command": "cd ./docker/root-node&& sudo docker-compose --env-file ./root-node.local.arg -f ./init-root-node.yml -p cudos-init-root-node up --build",
             "type": "shell",
             "group": "build"
         }, {
             "label": "Destroy INIT ROOT NODE in docker",
-            "command": "cd ./docker/root-node&& sudo docker-compose --env-file ./root-node.local01.arg -f ./init-root-node.yml -p cudos-init-root-node down",
+            "command": "cd ./docker/root-node&& sudo docker-compose --env-file ./root-node.local.arg -f ./init-root-node.yml -p cudos-init-root-node down",
             "type": "shell",
             "group": "build"
         },
         
         {
             "label": "Start START ROOT NODE in docker",
-            "command": "cd ./docker/root-node&& sudo docker-compose --env-file ./root-node.local01.arg -f ./start-root-node.yml -p cudos-start-root-node up",
+            "command": "cd ./docker/root-node&& sudo docker-compose --env-file ./root-node.local.arg -f ./start-root-node.yml -p cudos-start-root-node up",
             "type": "shell",
             "group": "build",
         }, {
             "label": "Build START ROOT NODE in docker",
-            "command": "cd ./docker/root-node&& sudo docker-compose --env-file ./root-node.local01.arg -f ./start-root-node.yml -p cudos-start-root-node up --build",
+            "command": "cd ./docker/root-node&& sudo docker-compose --env-file ./root-node.local.arg -f ./start-root-node.yml -p cudos-start-root-node up --build",
             "type": "shell",
             "group": "build"
         }, {
             "label": "Destroy START ROOT NODE in docker",
-            "command": "cd ./docker/root-node&& sudo docker-compose --env-file ./root-node.local01.arg -f ./start-root-node.yml -p cudos-start-root-node down",
+            "command": "cd ./docker/root-node&& sudo docker-compose --env-file ./root-node.local.arg -f ./start-root-node.yml -p cudos-start-root-node down",
             "type": "shell",
             "group": "build"
         },
@@ -193,11 +193,6 @@
         },
 
         {
-            "label": "Start CONFIG FULL NODE CLIENT LOCAL in docker",
-            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.local01.arg -f ./config-full-node.yml -p cudos-config-full-node-client-local-01 up",
-            "type": "shell",
-            "group": "build",
-        }, {
             "label": "Build CONFIG FULL NODE CLIENT LOCAL in docker",
             "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.local01.arg -f ./config-full-node.yml -p cudos-config-full-node-client-local-01 up --build",
             "type": "shell",

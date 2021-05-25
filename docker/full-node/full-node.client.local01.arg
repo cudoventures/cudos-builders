@@ -1,6 +1,6 @@
 CUDOS_HOME=/usr/cudos/cudos-data
 
-ENV_FILE=./full-node.client.local.env
+ENV_FILE=./full-node.client.local01.env
 GENESIS_FILENAME=genesis.local.json
 PERSISTENT_PEERS_FILENAME=persistent-peers.local.config
 SEEDS_FILENAME=seeds.local.config
