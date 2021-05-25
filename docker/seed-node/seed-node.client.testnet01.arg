@@ -1,0 +1,12 @@
+CUDOS_HOME=/usr/cudos/cudos-data
+
+ENV_FILE=./seed-node.client.testnet01.env
+GENESIS_FILENAME=genesis.testnet.json
+PERSISTENT_PEERS_FILENAME=persistent-peers.testnet.config
+SEEDS_FILENAME=seeds.testnet.config
+
+INIT_CONTAINER_NAME=cudos-init-seed-node-client-testnet-01
+START_CONTAINER_NAME=cudos-start-seed-node-client-testnet-01
+VOLUME_NAME=cudos-data-seed-node-client-testnet-01
+
+PORT26656=60203
