@@ -102,40 +102,6 @@
             "group": "build"
         },
 
-        // {
-        //     "label": "Start INIT FULL NODE in docker",
-        //     "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.docker.arg -f ./init-full-node.yml -p cudos-init-full-node up",
-        //     "type": "shell",
-        //     "group": "build",
-        // }, {
-        //     "label": "Build INIT FULL NODE in docker",
-        //     "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.docker.arg -f ./init-full-node.yml -p cudos-init-full-node up --build",
-        //     "type": "shell",
-        //     "group": "build"
-        // }, {
-        //     "label": "Destroy INIT FULL NODE in docker",
-        //     "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.docker.arg -f ./init-full-node.yml -p cudos-init-full-node down",
-        //     "type": "shell",
-        //     "group": "build"
-        // },
-
-        // {
-        //     "label": "Start START FULL NODES in docker",
-        //     "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.docker.arg -f ./start-full-node.yml -p cudos-start-full-node up",
-        //     "type": "shell",
-        //     "group": "build",
-        // }, {
-        //     "label": "Build START FULL NODES in docker",
-        //     "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.docker.arg -f ./start-full-node.yml -p cudos-start-full-node up --build",
-        //     "type": "shell",
-        //     "group": "build"
-        // }, {
-        //     "label": "Destroy START FULL NODES in docker",
-        //     "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.docker.arg -f ./start-full-node.yml -p cudos-start-full-node down",
-        //     "type": "shell",
-        //     "group": "build"
-        // },
-
         {
             "label": "Start FAUCET in docker",
             "command": "cd ./docker/faucet&& sudo docker-compose --env-file ./faucet.docker.arg -f ./faucet.yml -p cudos-faucet up",
@@ -288,59 +254,7 @@
             "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.docker.arg -f ./start-full-node.yml -p cudos-start-full-node-client-docker down",
             "type": "shell",
             "group": "build"
-        },
-
-        // {
-        //     "label": "Start INIT GLOBAL PEERS FULL NODE in docker",
-        //     "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.global-peers.arg -f ./init-full-node.yml -p cudos-init-full-node-global-peers up",
-        //     "type": "shell",
-        //     "group": "build",
-        // }, {
-        //     "label": "Build INIT GLOBAL PEERS FULL NODE in docker",
-        //     "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.global-peers.arg -f ./init-full-node.yml -p cudos-init-full-node-global-peers up --build",
-        //     "type": "shell",
-        //     "group": "build"
-        // }, {
-        //     "label": "Destroy INIT GLOBAL PEERS FULL NODE in docker",
-        //     "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.global-peers.arg -f ./init-full-node.yml -p cudos-init-full-node-global-peers down",
-        //     "type": "shell",
-        //     "group": "build"
-        // },
-
-        // {
-        //     "label": "Start CONFIG GLOBAL PEERS FULL NODE in docker",
-        //     "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.global-peers.arg -f ./config-full-node.yml -p cudos-config-global-peers-full-node up",
-        //     "type": "shell",
-        //     "group": "build",
-        // }, {
-        //     "label": "Build CONFIG GLOBAL PEERS FULL NODE in docker",
-        //     "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.global-peers.arg -f ./config-full-node.yml -p cudos-config-global-peers-full-node up --build",
-        //     "type": "shell",
-        //     "group": "build"
-        // }, {
-        //     "label": "Destroy CONFIG GLOBAL PEERS FULL NODE in docker",
-        //     "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.global-peers.arg -f ./config-full-node.yml -p cudos-config-global-peers-full-node down",
-        //     "type": "shell",
-        //     "group": "build"
-        // },
-
-        // {
-        //     "label": "Start START GLOBAL PEERS FULL NODES in docker",
-        //     "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.global-peers.arg -f ./start-full-node.yml -p cudos-start-global-peers-full-node up",
-        //     "type": "shell",
-        //     "group": "build",
-        // }, {
-        //     "label": "Build START GLOBAL PEERS FULL NODES in docker",
-        //     "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.global-peers.arg -f ./start-full-node.yml -p cudos-start-global-peers-full-node up --build",
-        //     "type": "shell",
-        //     "group": "build"
-        // }, {
-        //     "label": "Destroy START GLOBAL PEERS FULL NODES in docker",
-        //     "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.global-peers.arg -f ./start-full-node.yml -p cudos-start-global-peers-full-node down",
-        //     "type": "shell",
-        //     "group": "build"
-        // },
-
+        }
         
     ]
 }
