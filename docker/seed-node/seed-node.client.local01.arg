@@ -9,4 +9,4 @@ INIT_CONTAINER_NAME=cudos-init-seed-node-client-local-01
 START_CONTAINER_NAME=cudos-start-seed-node-client-local-01
 VOLUME_NAME=cudos-data-seed-node-client-local-01
 
-PORT26656=30002
+PORT26656=60202

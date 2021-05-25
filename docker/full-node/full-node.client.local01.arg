@@ -10,4 +10,4 @@ CONFIG_CONTAINER_NAME=cudos-config-full-node-local-01
 START_CONTAINER_NAME=cudos-start-full-node-local-01
 VOLUME_NAME=cudos-data-full-node-client-local-01
 
-PORT26656=36656
+PORT26656=60401
