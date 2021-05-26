@@ -31,4 +31,4 @@ COPY --from=builder /go/bin/cudos-noded /go/bin/cudos-noded
 COPY --from=builder /go/bin/faucet /go/bin/faucet
 
 # CMD ["sleep", "infinity"]
-CMD ["faucet"]
+CMD ["/bin/bash", "-c", "rm -Rf ./cudos-data && faucet"]

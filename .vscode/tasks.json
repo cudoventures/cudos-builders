@@ -94,17 +94,17 @@
         // utilities
         {
             "label": "Start FAUCET in docker",
-            "command": "cd ./docker/faucet&& sudo docker-compose --env-file ./faucet.docker.arg -f ./faucet.yml -p cudos-faucet up",
+            "command": "cd ./docker/faucet&& sudo docker-compose --env-file ./faucet.local.arg -f ./faucet.yml -p cudos-faucet up",
             "type": "shell",
             "group": "build",
         }, {
             "label": "Build FAUCET in docker",
-            "command": "cd ./docker/faucet&& sudo docker-compose --env-file ./faucet.docker.arg -f ./faucet.yml -p cudos-faucet up --build",
+            "command": "cd ./docker/faucet&& sudo docker-compose --env-file ./faucet.local.arg -f ./faucet.yml -p cudos-faucet up --build",
             "type": "shell",
             "group": "build"
         }, {
             "label": "Destroy FAUCET in docker",
-            "command": "cd ./docker/faucet&& sudo docker-compose --env-file ./faucet.docker.arg -f ./faucet.yml -p cudos-faucet down",
+            "command": "cd ./docker/faucet&& sudo docker-compose --env-file ./faucet.local.arg -f ./faucet.yml -p cudos-faucet down",
             "type": "shell",
             "group": "build"
         },
