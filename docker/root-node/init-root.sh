@@ -14,6 +14,8 @@ MIN_SELF_DELEGATION="1" # minimum tokens sto stake multiplyer by 1 000 000 for v
 
 # slashing parameters
 JAIL_DURATION="600s" #600s originally
+SIGNED_BLOCKS_WINDOW="400" #100
+MIN_SIGNED_PER_WINDOW="0.1" #0.5
 
 # staking parameters
 BOND_DENOM="acudos" # stake originally
@@ -64,6 +66,8 @@ sed -i "s/timeout_commit = \"5s\"/timeout_commit = \"$TIMEOUT_COMMIT\"/" "${CUDO
 
 # setting slashing time
 cat "${CUDOS_HOME}/config/genesis.json" | jq --arg JAIL_DURATION "$JAIL_DURATION" '.app_state.slashing.params.downtime_jail_duration = $JAIL_DURATION' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
+cat "${CUDOS_HOME}/config/genesis.json" | jq --arg SIGNED_BLOCKS_WINDOW "$SIGNED_BLOCKS_WINDOW" '.app_state.slashing.params.signed_blocks_window = $SIGNED_BLOCKS_WINDOW' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
+cat "${CUDOS_HOME}/config/genesis.json" | jq --arg MIN_SIGNED_PER_WINDOW "$MIN_SIGNED_PER_WINDOW" '.app_state.slashing.params.min_signed_per_window = $MIN_SIGNED_PER_WINDOW' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
 
 # setting staking params
 cat "${CUDOS_HOME}/config/genesis.json" | jq --arg UNBONDING_TIME "$UNBONDING_TIME" '.app_state.staking.params.unbonding_time = $UNBONDING_TIME' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
