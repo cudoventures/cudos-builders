@@ -12,8 +12,11 @@ const SecretsConfig = require('./secrets.json');
 const TEMP_DIR = path.join(os.tmpdir(), 'cudos-builder');
 
 const TARGET_ROOT_NODE_TESTNET = 'root-node-testnet';
-const TARGET_SEED_NODE_01_TESTNET = 'seed-node-testnet-zone01';
-const TARGET_SENTRY_NODE_01_TESTNET = 'sentry-node-testnet-zone01';
+const TARGET_SEED_NODE_TESTNET_ZONE01 = 'seed-node-testnet-zone01';
+const TARGET_SENTRY_NODE_TESTNET_ZONE01 = 'sentry-node-testnet-zone01';
+const TARGET_VALIDATOR_NODE_TESTNET_ZONE02 = 'validator-node-testnet-zone02';
+const TARGET_SEED_NODE_TESTNET_ZONE02 = 'seed-node-testnet-zone02';
+const TARGET_SENTRY_NODE_TESTNET_ZONE02 = 'sentry-node-testnet-zone02';
 
 async function main() {
     const args = getArgParser();
@@ -44,9 +47,15 @@ async function main() {
 }
 
 function getArgParser() {
+    const targets = [
+        TARGET_ROOT_NODE_TESTNET, TARGET_SEED_NODE_TESTNET_ZONE01, TARGET_SENTRY_NODE_TESTNET_ZONE01,
+        TARGET_VALIDATOR_NODE_TESTNET_ZONE02, TARGET_SEED_NODE_TESTNET_ZONE02, TARGET_SENTRY_NODE_TESTNET_ZONE02
+    ]
     const parser = new ArgumentParser({description: 'Cudos testnet root node deployer'});
-    parser.add_argument('--target', { 'required': true, 'choices': [TARGET_ROOT_NODE_TESTNET, TARGET_SEED_NODE_01_TESTNET, TARGET_SENTRY_NODE_01_TESTNET] });
+    parser.add_argument('--target', { 'required': true, 'choices': targets });
     parser.add_argument('--init', { 'required': true, 'choices': ['0', '1'] });
+    parser.add_argument('--start', { 'required': true, 'choices': ['0', '1'] });
+    parser.add_argument('--config', { 'required': true, 'choices': ['0', '1'] });
     return parser.parse_args();
 }
 
@@ -158,7 +167,7 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
     const conn = new SSH2Client();
     const filePath = path.join(secrets.serverPath, deployFilename);
 
-    const dockerRoot = getDockerRoot(args);
+    const dockerRootPath = getDockerRootPath(args);
     const dockerEnvFile = getDockerEnvFile(args);
     const dockerComposeInitFile = getDockerComposeInitFile(args);
     const dockerComposeStartFile = getDockerComposeStartFile(args);
@@ -171,19 +180,22 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         `sudo rm -Rf ./CudosNode`,
         `sudo unzip -q ${filePath} -d ./`,
         `rm ${filePath}`,
-        `cd ./CudosBuilders/docker/${dockerRoot}`,
+        `cd ./CudosBuilders/docker/${dockerRootPath}`,
         `(sudo docker-compose --env-file ${dockerEnvFile} -f ${dockerComposeStartFile} -p ${dockerStartProjectName} down || true)`,
         args.init === '1' ? `sudo rm -rf ${secrets.serverPath}/CudosData/*` : null,
-        `sudo docker image prune -f`,
-        `sudo docker image prune -a -f`,
-        `sudo docker volume prune -f`,
-        `sudo docker builder prune -f`,
+        `sudo docker system prune -a -f`,
+        // `sudo docker image prune -f`,
+        // `sudo docker image prune -a -f`,
+        // `sudo docker volume prune -f`,
+        // `sudo docker builder prune -f`,
         args.init === '1' ? `sudo docker-compose --env-file ${dockerEnvFile}  -f ${dockerComposeInitFile} -p ${dockerInitProjectName} up --build` : null,
         args.init === '1' ? `(sudo docker-compose --env-file ${dockerEnvFile}  -f ${dockerComposeInitFile} -p ${dockerInitProjectName} down || true)` : null,
-        `sudo docker-compose --env-file ${dockerEnvFile} -f ${dockerComposeStartFile} -p ${dockerStartProjectName} up --build -d`,
-        `cd ${secrets.serverPath}`,
-        `sudo rm -Rf ./CudosBuilders`,
-        `sudo rm -Rf ./CudosNode`,
+        args.config === '1' ? `sudo docker-compose --env-file ${dockerEnvFile} -f config-full-node.yml -p cudos-config-validator-node up --build` : null, 
+        args.config === '1' ? `(sudo docker-compose --env-file ${dockerEnvFile} -f config-full-node.yml -p cudos-config-validator-node down || true)` : null, 
+        args.start === '1' ? `sudo docker-compose --env-file ${dockerEnvFile} -f ${dockerComposeStartFile} -p ${dockerStartProjectName} up --build -d` : null,
+        // `cd ${secrets.serverPath}`,
+        // `sudo rm -Rf ./CudosBuilders`,
+        // `sudo rm -Rf ./CudosNode`,
     ]
 
     command = command.filter(c => c !== null).join(' && ');
@@ -216,13 +228,19 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
     });
 }
 
-function getDockerRoot(args) {
+function getDockerRootPath(args) {
     switch (args.target) {
         case TARGET_ROOT_NODE_TESTNET:
             return 'root-node';
-        case TARGET_SEED_NODE_01_TESTNET:
+        case TARGET_SEED_NODE_TESTNET_ZONE01:
             return 'seed-node';
-        case TARGET_SENTRY_NODE_01_TESTNET:
+        case TARGET_SENTRY_NODE_TESTNET_ZONE01:
+            return 'sentry-node';
+        case TARGET_VALIDATOR_NODE_TESTNET_ZONE02:
+            return 'full-node';
+        case TARGET_SEED_NODE_TESTNET_ZONE02:
+            return 'seed-node';
+        case TARGET_SENTRY_NODE_TESTNET_ZONE02:
             return 'sentry-node';
         default:
             throw Error(`Unknown target ${args.target}`);
@@ -233,10 +251,16 @@ function getDockerEnvFile(args) {
     switch (args.target) {
         case TARGET_ROOT_NODE_TESTNET:
             return './root-node.testnet.zone01.arg';
-        case TARGET_SEED_NODE_01_TESTNET:
+        case TARGET_SEED_NODE_TESTNET_ZONE01:
             return './seed-node.testnet.zone01.arg';
-        case TARGET_SENTRY_NODE_01_TESTNET:
+        case TARGET_SENTRY_NODE_TESTNET_ZONE01:
             return './sentry-node.testnet.zone01.arg';
+        case TARGET_VALIDATOR_NODE_TESTNET_ZONE02:
+            return './full-node.testnet.zone02.arg';
+        case TARGET_SEED_NODE_TESTNET_ZONE02:
+            return './seed-node.testnet.zone02.arg';
+        case TARGET_SENTRY_NODE_TESTNET_ZONE02:
+            return './sentry-node.testnet.zone02.arg';
         default:
             throw Error(`Unknown target ${args.target}`);
     }
@@ -246,9 +270,15 @@ function getDockerComposeInitFile(args) {
     switch (args.target) {
         case TARGET_ROOT_NODE_TESTNET:
             return './init-root-node.yml';
-        case TARGET_SEED_NODE_01_TESTNET:
+        case TARGET_SEED_NODE_TESTNET_ZONE01:
             return './init-seed-node.yml';
-        case TARGET_SENTRY_NODE_01_TESTNET:
+        case TARGET_SENTRY_NODE_TESTNET_ZONE01:
+            return './init-sentry-node.yml';
+        case TARGET_VALIDATOR_NODE_TESTNET_ZONE02:
+            return './init-full-node.yml';
+        case TARGET_SEED_NODE_TESTNET_ZONE02:
+            return './init-seed-node.yml';
+        case TARGET_SENTRY_NODE_TESTNET_ZONE02:
             return './init-sentry-node.yml';
         default:
             throw Error(`Unknown target ${args.target}`);
@@ -259,9 +289,15 @@ function getDockerComposeStartFile(args) {
     switch (args.target) {
         case TARGET_ROOT_NODE_TESTNET:
             return './start-root-node.yml';
-        case TARGET_SEED_NODE_01_TESTNET:
+        case TARGET_SEED_NODE_TESTNET_ZONE01:
             return './start-seed-node.yml';
-        case TARGET_SENTRY_NODE_01_TESTNET:
+        case TARGET_SENTRY_NODE_TESTNET_ZONE01:
+            return './start-sentry-node.yml';
+        case TARGET_VALIDATOR_NODE_TESTNET_ZONE02:
+            return './start-full-node.yml';
+        case TARGET_SEED_NODE_TESTNET_ZONE02:
+            return './start-seed-node.yml';
+        case TARGET_SENTRY_NODE_TESTNET_ZONE02:
             return './start-sentry-node.yml';
         default:
             throw Error(`Unknown target ${args.target}`);
@@ -272,10 +308,16 @@ function getDockerInitProjectName(args) {
     switch (args.target) {
         case TARGET_ROOT_NODE_TESTNET:
             return 'cudos-init-root-node';
-        case TARGET_SEED_NODE_01_TESTNET:
-            return 'cudos-init-seed-node';
-        case TARGET_SENTRY_NODE_01_TESTNET:
-            return 'cudos-init-sentry-node';
+        case TARGET_SEED_NODE_TESTNET_ZONE01:
+            return 'cudos-init-seed-node-01';
+        case TARGET_SENTRY_NODE_TESTNET_ZONE01:
+            return 'cudos-init-sentry-node-01';
+        case TARGET_VALIDATOR_NODE_TESTNET_ZONE02:
+            return 'cudos-init-validator-node-02';
+        case TARGET_SEED_NODE_TESTNET_ZONE02:
+            return 'cudos-init-seed-node-02';
+        case TARGET_SENTRY_NODE_TESTNET_ZONE02:
+            return 'cudos-init-sentry-node-02';
         default:
             throw Error(`Unknown target ${args.target}`);
     }
@@ -285,10 +327,16 @@ function getDockerStartProjectName(args) {
     switch (args.target) {
         case TARGET_ROOT_NODE_TESTNET:
             return 'cudos-start-root-node';
-        case TARGET_SEED_NODE_01_TESTNET:
-            return 'cudos-start-seed-node';
-        case TARGET_SENTRY_NODE_01_TESTNET:
-            return 'cudos-start-sentry-node';
+        case TARGET_SEED_NODE_TESTNET_ZONE01:
+            return 'cudos-start-seed-node-01';
+        case TARGET_SENTRY_NODE_TESTNET_ZONE01:
+            return 'cudos-start-sentry-node-01';
+        case TARGET_VALIDATOR_NODE_TESTNET_ZONE02:
+            return 'cudos-start-validator-node-02';
+        case TARGET_SEED_NODE_TESTNET_ZONE02:
+            return 'cudos-start-seed-node-02';
+        case TARGET_SENTRY_NODE_TESTNET_ZONE02:
+            return 'cudos-start-sentry-node-02';
         default:
             throw Error(`Unknown target ${args.target}`);
     }

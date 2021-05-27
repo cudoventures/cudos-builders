@@ -18,7 +18,7 @@ sed -i "s/persistent_peers = \".*\"/persistent_peers = \"$PERSISTENT_PEERS\"/g" 
 
 sed -i "s/seeds = \".*\"/seeds = \"$SEEDS\"/g" "${CUDOS_HOME}/config/config.toml"
 
-sed -i "s/seed_mode = false/seed_mode = true/g" "${CUDOS_HOME}/config/config.toml"
+# sed -i "s/seed_mode = false/seed_mode = true/g" "${CUDOS_HOME}/config/config.toml"
 
 sed -i "s/private_peer_ids = \"\"/private_peer_ids = \"$PRIVATE_PEERS\"/g" "${CUDOS_HOME}/config/config.toml"
 

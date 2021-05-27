@@ -5,9 +5,9 @@ GENESIS_FILENAME=genesis.testnet.json
 PERSISTENT_PEERS_FILENAME=persistent-peers.testnet.config
 SEEDS_FILENAME=seeds.testnet.config
 
-INIT_CONTAINER_NAME=cudos-init-full-node-testnet-01
-CONFIG_CONTAINER_NAME=cudos-config-full-node-testnet-01
-START_CONTAINER_NAME=cudos-start-full-node-testnet-01
+INIT_CONTAINER_NAME=cudos-init-full-node-client-testnet-01
+CONFIG_CONTAINER_NAME=cudos-config-full-node-client-testnet-01
+START_CONTAINER_NAME=cudos-start-full-node-client-testnet-01
 VOLUME_NAME=cudos-data-full-node-client-testnet-01
 
 PORT26656=60402

@@ -6,13 +6,20 @@
     "private": true,
     "license": "ISC",
     "scripts": {
-        "deploy-root-node-testnet": "node ./deployer-nodes/Main.js --target=root-node-testnet --init=0",
-        "deploy-and-init-root-node-testnet": "node ./deployer-nodes/Main.js --target=root-node-testnet --init=1",
-        "deploy-seed-node-testnet-zone01": "node ./deployer-nodes/Main.js --target=seed-node-testnet-zone01 --init=0",
-        "deploy-and-init-seed-node-testnet-zone01": "node ./deployer-nodes/Main.js --target=seed-node-testnet-zone01 --init=1",
-        "deploy-sentry-node-testnet-zone01": "node ./deployer-nodes/Main.js --target=sentry-node-testnet-zone01 --init=0",
-        "deploy-and-init-sentry-node-testnet-zone01": "node ./deployer-nodes/Main.js --target=sentry-node-testnet-zone01 --init=1",
-        "deploy-utils": "node ./deployer-utils/Main.js --target=testnet"
+        "deploy--start_root-node-testnet": "node ./deployer-nodes/Main.js --target=root-node-testnet --init=0 --config=0 --start=1",
+        "deploy--init--start_root-node-testnet": "node ./deployer-nodes/Main.js --target=root-node-testnet --init=1 --config=0 --start=1",
+        "deploy--start_seed-node-testnet-zone01": "node ./deployer-nodes/Main.js --target=seed-node-testnet-zone01 --init=0 --config=0 --start=1",
+        "deploy--init--start_seed-node-testnet-zone01": "node ./deployer-nodes/Main.js --target=seed-node-testnet-zone01 --init=1 --config=0 --start=1",
+        "deploy--start_sentry-node-testnet-zone01": "node ./deployer-nodes/Main.js --target=sentry-node-testnet-zone01 --init=0 --config=0 --start=1",
+        "deploy--init--start_sentry-node-testnet-zone01": "node ./deployer-nodes/Main.js --target=sentry-node-testnet-zone01 --init=1 --config=0 --start=1",
+        "deploy-utils": "node ./deployer-utils/Main.js --target=testnet --init=1",
+        "deploy--init_validator-node-testnet-zone02": "node ./deployer-nodes/Main.js --target=validator-node-testnet-zone02 --init=1 --config=0 --start=0",
+        "deploy--start_validator-node-testnet-zone02": "node ./deployer-nodes/Main.js --target=validator-node-testnet-zone02 --init=0 --config=0 --start=1",
+        "deploy--config--start_validator-node-testnet-zone02": "node ./deployer-nodes/Main.js --target=validator-node-testnet-zone02 --init=0 --config=1 --start=1",
+        "deploy--start_seed-node-testnet-zone02": "node ./deployer-nodes/Main.js --target=seed-node-testnet-zone02 --init=0 --config=0 --start=1",
+        "deploy--init--start_seed-node-testnet-zone02": "node ./deployer-nodes/Main.js --target=seed-node-testnet-zone02 --init=1 --config=0 --start=1",
+        "deploy--start_sentry-node-testnet-zone02": "node ./deployer-nodes/Main.js --target=sentry-node-testnet-zone02 --init=0 --config=0 --start=1",
+        "deploy--init--start_sentry-node-testnet-zone02": "node ./deployer-nodes/Main.js --target=sentry-node-testnet-zone02 --init=1 --config=0 --start=1"
     },
     "engines": {
         "node": ">=12"

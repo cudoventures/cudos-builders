@@ -47,7 +47,7 @@ async function main() {
 function getArgParser() {
     const parser = new ArgumentParser({description: 'Cudos testnet root node deployer'});
     parser.add_argument('--target', { 'required': true, 'choices': ['testnet'] });
-    // parser.add_argument('--init', { 'required': true, 'choices': ['0', '1'] });
+    parser.add_argument('--init', { 'required': true, 'choices': ['0', '1'] });
     return parser.parse_args();
 }
 
@@ -207,18 +207,19 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         `cd ../faucet`,
         `(sudo docker-compose --env-file ./faucet.testnet.arg -f ./faucet.yml -p cudos-faucet down || true)`,
         args.init === '1' ? `sudo rm -rf ${secrets.serverPath}/CudosData/*` : null,
-        `sudo docker image prune -f`,
-        `sudo docker image prune -a -f`,
-        `sudo docker volume prune -f`,
-        `sudo docker builder prune -f`,
-        `sudo docker network prune -f`,
+        `sudo docker system prune -a -f`,
+        // `sudo docker image prune -f`,
+        // `sudo docker image prune -a -f`,
+        // `sudo docker volume prune -f`,
+        // `sudo docker builder prune -f`,
+        // `sudo docker network prune -f`,
         `sudo docker-compose --env-file ./faucet.testnet.arg -f ./faucet.yml -p cudos-faucet up --build -d`,
         `cd ../explorer`,
         `sudo docker-compose --env-file ./explorer.testnet.arg -f ./explorer.yml -p cudos-explorer up --build -d`,
-        `cd ${secrets.serverPath}`,
-        `sudo rm -Rf ./CudosNode`,
-        `sudo rm -Rf ./CudosBuilders`,
-        `sudo rm -Rf ./CudosUtils`,
+        // `cd ${secrets.serverPath}`,
+        // `sudo rm -Rf ./CudosNode`,
+        // `sudo rm -Rf ./CudosBuilders`,
+        // `sudo rm -Rf ./CudosUtils`,
     ]
 
     command = command.filter(c => c !== null).join(' && ');
