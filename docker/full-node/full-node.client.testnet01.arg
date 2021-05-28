@@ -10,4 +10,4 @@ CONFIG_CONTAINER_NAME=cudos-config-full-node-client-testnet-01
 START_CONTAINER_NAME=cudos-start-full-node-client-testnet-01
 VOLUME_NAME=cudos-data-full-node-client-testnet-01
 
-PORT26656=60402
+PORT26656=26656
