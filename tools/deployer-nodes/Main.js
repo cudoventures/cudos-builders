@@ -17,6 +17,9 @@ const TARGET_SENTRY_NODE_TESTNET_ZONE01 = 'sentry-node-testnet-zone01';
 const TARGET_VALIDATOR_NODE_TESTNET_ZONE02 = 'validator-node-testnet-zone02';
 const TARGET_SEED_NODE_TESTNET_ZONE02 = 'seed-node-testnet-zone02';
 const TARGET_SENTRY_NODE_TESTNET_ZONE02 = 'sentry-node-testnet-zone02';
+const TARGET_VALIDATOR_NODE_TESTNET_ZONE03 = 'validator-node-testnet-zone03';
+const TARGET_SEED_NODE_TESTNET_ZONE03 = 'seed-node-testnet-zone03';
+const TARGET_SENTRY_NODE_TESTNET_ZONE03 = 'sentry-node-testnet-zone03';
 
 async function main() {
     const args = getArgParser();
@@ -49,7 +52,8 @@ async function main() {
 function getArgParser() {
     const targets = [
         TARGET_ROOT_NODE_TESTNET, TARGET_SEED_NODE_TESTNET_ZONE01, TARGET_SENTRY_NODE_TESTNET_ZONE01,
-        TARGET_VALIDATOR_NODE_TESTNET_ZONE02, TARGET_SEED_NODE_TESTNET_ZONE02, TARGET_SENTRY_NODE_TESTNET_ZONE02
+        TARGET_VALIDATOR_NODE_TESTNET_ZONE02, TARGET_SEED_NODE_TESTNET_ZONE02, TARGET_SENTRY_NODE_TESTNET_ZONE02,
+        TARGET_VALIDATOR_NODE_TESTNET_ZONE03, TARGET_SEED_NODE_TESTNET_ZONE03, TARGET_SENTRY_NODE_TESTNET_ZONE03
     ]
     const parser = new ArgumentParser({description: 'Cudos testnet root node deployer'});
     parser.add_argument('--target', { 'required': true, 'choices': targets });
@@ -242,6 +246,12 @@ function getDockerRootPath(args) {
             return 'seed-node';
         case TARGET_SENTRY_NODE_TESTNET_ZONE02:
             return 'sentry-node';
+        case TARGET_VALIDATOR_NODE_TESTNET_ZONE03:
+            return 'full-node';
+        case TARGET_SEED_NODE_TESTNET_ZONE03:
+            return 'seed-node';
+        case TARGET_SENTRY_NODE_TESTNET_ZONE03:
+            return 'sentry-node';
         default:
             throw Error(`Unknown target ${args.target}`);
     }
@@ -261,6 +271,12 @@ function getDockerEnvFile(args) {
             return './seed-node.testnet.zone02.arg';
         case TARGET_SENTRY_NODE_TESTNET_ZONE02:
             return './sentry-node.testnet.zone02.arg';
+        case TARGET_VALIDATOR_NODE_TESTNET_ZONE03:
+            return './full-node.testnet.zone03.arg';
+        case TARGET_SEED_NODE_TESTNET_ZONE03:
+            return './seed-node.testnet.zone03.arg';
+        case TARGET_SENTRY_NODE_TESTNET_ZONE03:
+            return './sentry-node.testnet.zone03.arg';
         default:
             throw Error(`Unknown target ${args.target}`);
     }
@@ -279,6 +295,12 @@ function getDockerComposeInitFile(args) {
         case TARGET_SEED_NODE_TESTNET_ZONE02:
             return './init-seed-node.yml';
         case TARGET_SENTRY_NODE_TESTNET_ZONE02:
+            return './init-sentry-node.yml';
+        case TARGET_VALIDATOR_NODE_TESTNET_ZONE03:
+            return './init-full-node.yml';
+        case TARGET_SEED_NODE_TESTNET_ZONE03:
+            return './init-seed-node.yml';
+        case TARGET_SENTRY_NODE_TESTNET_ZONE03:
             return './init-sentry-node.yml';
         default:
             throw Error(`Unknown target ${args.target}`);
@@ -299,6 +321,12 @@ function getDockerComposeStartFile(args) {
             return './start-seed-node.yml';
         case TARGET_SENTRY_NODE_TESTNET_ZONE02:
             return './start-sentry-node.yml';
+        case TARGET_VALIDATOR_NODE_TESTNET_ZONE03:
+            return './start-full-node.yml';
+        case TARGET_SEED_NODE_TESTNET_ZONE03:
+            return './start-seed-node.yml';
+        case TARGET_SENTRY_NODE_TESTNET_ZONE03:
+            return './start-sentry-node.yml';
         default:
             throw Error(`Unknown target ${args.target}`);
     }
@@ -318,6 +346,12 @@ function getDockerInitProjectName(args) {
             return 'cudos-init-seed-node-02';
         case TARGET_SENTRY_NODE_TESTNET_ZONE02:
             return 'cudos-init-sentry-node-02';
+        case TARGET_VALIDATOR_NODE_TESTNET_ZONE03:
+            return 'cudos-init-validator-node-03';
+        case TARGET_SEED_NODE_TESTNET_ZONE03:
+            return 'cudos-init-seed-node-03';
+        case TARGET_SENTRY_NODE_TESTNET_ZONE03:
+            return 'cudos-init-sentry-node-03';
         default:
             throw Error(`Unknown target ${args.target}`);
     }
@@ -337,6 +371,12 @@ function getDockerStartProjectName(args) {
             return 'cudos-start-seed-node-02';
         case TARGET_SENTRY_NODE_TESTNET_ZONE02:
             return 'cudos-start-sentry-node-02';
+        case TARGET_VALIDATOR_NODE_TESTNET_ZONE03:
+            return 'cudos-start-validator-node-03';
+        case TARGET_SEED_NODE_TESTNET_ZONE03:
+            return 'cudos-start-seed-node-03';
+        case TARGET_SENTRY_NODE_TESTNET_ZONE03:
+            return 'cudos-start-sentry-node-03';
         default:
             throw Error(`Unknown target ${args.target}`);
     }
