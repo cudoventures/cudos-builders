@@ -33,6 +33,6 @@
 4. Copy genesis time to explorer.testnet.arg
 5. Make sure all values in explorer.testnet.env are not empty
 
-        npm run deploy-utils
+        npm run deploy-utils-testnet
 
 

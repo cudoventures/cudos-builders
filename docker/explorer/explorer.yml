@@ -18,6 +18,8 @@ services:
         INTERNAL_API_URL: "$INTERNAL_API_URL"
         EXTERNAL_RPC_URL: "$EXTERNAL_RPC_URL"
         EXTERNAL_API_URL: "$EXTERNAL_API_URL"
+        CHAIN_NAME: "$CHAIN_NAME"
+        CHAIN_ID: "$CHAIN_ID"
     restart: unless-stopped
     env_file: "$ENV_FILE"
     ports:

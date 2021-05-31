@@ -111,17 +111,17 @@
 
         {
             "label": "Start EXPLORER in docker",
-            "command": "cd ./docker/explorer&& sudo docker-compose --env-file ./explorer.docker.arg -f ./explorer.yml -p cudos-explorer up",
+            "command": "cd ./docker/explorer&& sudo docker-compose --env-file ./explorer.local.arg -f ./explorer.yml -p cudos-explorer up",
             "type": "shell",
             "group": "build",
         }, {
             "label": "Build EXPLORER in docker",
-            "command": "cd ./docker/explorer&& sudo docker-compose --env-file ./explorer.docker.arg -f ./explorer.yml -p cudos-explorer up --build",
+            "command": "cd ./docker/explorer&& sudo docker-compose --env-file ./explorer.local.arg -f ./explorer.yml -p cudos-explorer up --build",
             "type": "shell",
             "group": "build"
         }, {
             "label": "Destroy EXPLORER in docker",
-            "command": "cd ./docker/explorer&& sudo docker-compose --env-file ./explorer.docker.arg -f ./explorer.yml -p cudos-explorer down",
+            "command": "cd ./docker/explorer&& sudo docker-compose --env-file ./explorer.local.arg -f ./explorer.yml -p cudos-explorer down",
             "type": "shell",
             "group": "build"
         },

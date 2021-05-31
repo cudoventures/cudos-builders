@@ -14,6 +14,9 @@ const SecretsConfig = require('./secrets.json');
 
 const TEMP_DIR = path.join(os.tmpdir(), 'cudos-builder');
 
+const TARGET_TESTNET = 'testnet';
+const TARGET_TESTNET_PRIVATE = 'testnet-private';
+
 async function main() {
     const args = getArgParser();
     const secrets = getSecrets(args.target);
@@ -46,7 +49,7 @@ async function main() {
 
 function getArgParser() {
     const parser = new ArgumentParser({description: 'Cudos testnet root node deployer'});
-    parser.add_argument('--target', { 'required': true, 'choices': ['testnet'] });
+    parser.add_argument('--target', { 'required': true, 'choices': [TARGET_TESTNET, TARGET_TESTNET_PRIVATE] });
     parser.add_argument('--init', { 'required': true, 'choices': ['0', '1'] });
     return parser.parse_args();
 }
@@ -195,6 +198,9 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
     const filePath = path.join(secrets.serverPath, deployFilename);
     let command;
 
+    const dockerExplorerEnvFile = getDockerExplorerEnvFile(args);
+    const dockerFaucetEnvFile = getDockerFaucetEnvFile(args);
+
     command = [
         `cd ${secrets.serverPath}`,
         `sudo rm -Rf ./CudosNode`,
@@ -203,9 +209,9 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         `sudo unzip -q ${filePath} -d ./`,
         `rm ${filePath}`,
         `cd ./CudosBuilders/docker/explorer`,
-        `(sudo docker-compose --env-file ./explorer.testnet.arg -f ./explorer.yml -p cudos-explorer down || true)`,
+        `(sudo docker-compose --env-file ${dockerExplorerEnvFile} -f ./explorer.yml -p cudos-explorer down || true)`,
         `cd ../faucet`,
-        `(sudo docker-compose --env-file ./faucet.testnet.arg -f ./faucet.yml -p cudos-faucet down || true)`,
+        `(sudo docker-compose --env-file ${dockerFaucetEnvFile} -f ./faucet.yml -p cudos-faucet down || true)`,
         args.init === '1' ? `sudo rm -rf ${secrets.serverPath}/CudosData/*` : null,
         `sudo docker system prune -a -f`,
         // `sudo docker image prune -f`,
@@ -213,9 +219,9 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         // `sudo docker volume prune -f`,
         // `sudo docker builder prune -f`,
         // `sudo docker network prune -f`,
-        `sudo docker-compose --env-file ./faucet.testnet.arg -f ./faucet.yml -p cudos-faucet up --build -d`,
+        `sudo docker-compose --env-file ${dockerFaucetEnvFile} -f ./faucet.yml -p cudos-faucet up --build -d`,
         `cd ../explorer`,
-        `sudo docker-compose --env-file ./explorer.testnet.arg -f ./explorer.yml -p cudos-explorer up --build -d`,
+        `sudo docker-compose --env-file ${dockerExplorerEnvFile} -f ./explorer.yml -p cudos-explorer up --build -d`,
         // `cd ${secrets.serverPath}`,
         // `sudo rm -Rf ./CudosNode`,
         // `sudo rm -Rf ./CudosBuilders`,
@@ -250,6 +256,28 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         privateKey: (await asyncFs.readFile(secrets.privateKey)).toString(),
         path: secrets.serverPath,
     });
+}
+
+function getDockerExplorerEnvFile(args) {
+    switch (args.target) {
+        case TARGET_TESTNET:
+            return './explorer.testnet.arg';
+        case TARGET_TESTNET_PRIVATE:
+            return './explorer.testnet.private.arg';
+        default:
+            throw Error(`Unknown target ${args.target}`);
+    }
+}
+
+function getDockerFaucetEnvFile(args) {
+    switch (args.target) {
+        case TARGET_TESTNET:
+            return './faucet.testnet.arg';
+        case TARGET_TESTNET_PRIVATE:
+            return './faucet.testnet.private.arg';
+        default:
+            throw Error(`Unknown target ${args.target}`);
+    }
 }
 
 main();

@@ -1,7 +1,9 @@
-ENV_FILE=./explorer.docker.env
+ENV_FILE=./explorer.local.env
 GENESIS_TIME="2021-05-25T06:44:40.2692496Z"
 FAUCET_URL="http://localhost:5000"
 INTERNAL_RPC_URL="http://cudos-start-sentry-node-docker:26657"
 INTERNAL_API_URL="http://cudos-start-sentry-node-docker:1317"
 EXTERNAL_RPC_URL="http://localhost:26657"
 EXTERNAL_API_URL="http://localhost:1317"
+CHAIN_NAME="CudosTestnet-Local"
+CHAIN_ID="cudos-local-network"

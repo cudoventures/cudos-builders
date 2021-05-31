@@ -5,8 +5,8 @@ fi
 WORKING_PATH=$(pwd) && cd $CUDOS_HOME && rm -Rf ./* && cd $WORKING_PATH
 
 # chain parameters
-MONIKER="cudos-root-node"
-CHAIN_ID="cudos-network"
+# MONIKER="cudos-root-node"
+# CHAIN_ID="cudos-network"
 TIMEOUT_COMMIT="5s" #5s originally 
 KEYPASSWD='123123123' #at least 8 characters
 

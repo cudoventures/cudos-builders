@@ -19,10 +19,14 @@ ARG INTERNAL_RPC_URL
 ARG INTERNAL_API_URL
 ARG EXTERNAL_RPC_URL
 ARG EXTERNAL_API_URL
+ARG CHAIN_NAME
+ARG CHAIN_ID
 
 RUN cd ./source && \
     sed -i 's/\r$//' ./run-built.sh && \
     chmod +x ./run-built.sh && \
+    cat ./default_settings.json | jq --arg CHAIN_NAME "$CHAIN_NAME" '.public.chainName = $CHAIN_NAME' > ./default_settings.tmp && mv ./default_settings.tmp ./default_settings.json && \
+    cat ./default_settings.json | jq --arg CHAIN_ID "$CHAIN_ID" '.public.chainId = $CHAIN_ID' > ./default_settings.tmp && mv ./default_settings.tmp ./default_settings.json && \
     cat ./default_settings.json | jq --arg GENESIS_TIME "$GENESIS_TIME" '.public.genesisTime = $GENESIS_TIME' > ./default_settings.tmp && mv ./default_settings.tmp ./default_settings.json && \
     cat ./default_settings.json | jq --arg FAUCET_URL "$FAUCET_URL" '.public.faucetUrl = $FAUCET_URL' > ./default_settings.tmp && mv ./default_settings.tmp ./default_settings.json && \
     cat ./default_settings.json | jq --arg EXTERNAL_RPC_URL "$EXTERNAL_RPC_URL" '.public.urls.rpc = $EXTERNAL_RPC_URL' > ./default_settings.tmp && mv ./default_settings.tmp ./default_settings.json && \
