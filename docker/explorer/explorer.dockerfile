@@ -36,9 +36,12 @@ RUN cd ./source && \
     sed -i ':a;N;$!ba;s/\n//g' ./default_settings.json && \
     sed -i 's/ //g' ./default_settings.json && \
     cp ./default_settings.json ./settings.json && \
-    npm i && \
-    meteor build ../output/ --architecture os.linux.x86_64 --server-only --allow-superuser && \
-    cd ../output && \
+    npm i
+
+RUN cd ./source && \
+    meteor build ../output/ --architecture os.linux.x86_64 --server-only --allow-superuser
+
+RUN cd ./output && \
     tar -zxvf ./source.tar.gz && \
     cd ./bundle/programs/server && \
     npm i

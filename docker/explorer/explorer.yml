@@ -2,7 +2,6 @@ version: '3.1'
 
 networks:
   shared-cudos-network:
-    name: shared-cudos-network
 
 services:
   cudos-explorer:
@@ -31,6 +30,8 @@ services:
       options:
         max-size: "128m"
         max-file: "1"
+    depends_on:
+      - cudos-explorer-mongodb
 
   cudos-explorer-mongodb:
     image: 'mongo:latest'
