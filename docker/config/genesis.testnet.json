@@ -1,6 +1,6 @@
 {
-  "genesis_time": "2021-05-27T08:19:54.484600827Z",
-  "chain_id": "cudos-network",
+  "genesis_time": "2021-06-02T11:21:44.009709457Z",
+  "chain_id": "cudos-testnet",
   "initial_height": "1",
   "consensus_params": {
     "block": {
@@ -34,42 +34,3355 @@
       "accounts": [
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
-          "address": "cudos1n8tgrnjhtm7252t4m7w2kexus4c2syen9vcfyz",
+          "address": "cudos1ss2h52vy6cpy99nw69c6c8n9hgjapq2xxy8vpm",
           "pub_key": null,
           "account_number": "0",
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
-          "address": "cudos10ekfm8gfpkrqdcf93ln6m74lxd80rjx73sz32a",
+          "address": "cudos15erkpe2jvs8wp64merdvnzkmupsxyd7wpegqp7",
           "pub_key": null,
           "account_number": "0",
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
-          "address": "cudos13aw62zeetrx4ha4fhvgy49gk25z8zmv94m82kj",
+          "address": "cudos1xruekzh8vz0wj50hxmzyh26zyvcg5uz27lxw54",
           "pub_key": null,
           "account_number": "0",
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
-          "address": "cudos1un8x0wytasns5atjhnwt446qlf8dlk0ve2umkt",
+          "address": "cudos1eszt3sd427w802j98qkjgsafjgmgdv2ynrh64h",
           "pub_key": null,
           "account_number": "0",
           "sequence": "0"
+        },
+        {
+          "@type": "/cosmos.vesting.v1beta1.PeriodicVestingAccount",
+          "base_vesting_account": {
+            "base_account": {
+              "address": "cudos1prek828p4nged2tlwslsyqwduyf9enef9dhfxf",
+              "pub_key": null,
+              "account_number": "0",
+              "sequence": "0"
+            },
+            "original_vesting": [
+              {
+                "denom": "acudos",
+                "amount": "500000000000000000000000000"
+              }
+            ],
+            "delegated_free": [],
+            "delegated_vesting": [],
+            "end_time": "1654560000"
+          },
+          "start_time": "1623024000",
+          "vesting_periods": [
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986301"
+                }
+              ]
+            },
+            {
+              "length": "86400",
+              "amount": [
+                {
+                  "denom": "acudos",
+                  "amount": "1369863013698630136986436"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     "bank": {
       "params": {
-        "send_enabled": [],
+        "send_enabled": [
+          {
+            "denom": "cudosAdmin",
+            "enabled": false
+          }
+        ],
         "default_send_enabled": true
       },
       "balances": [
         {
-          "address": "cudos10ekfm8gfpkrqdcf93ln6m74lxd80rjx73sz32a",
+          "address": "cudos1xruekzh8vz0wj50hxmzyh26zyvcg5uz27lxw54",
           "coins": [
             {
               "denom": "acudos",
@@ -82,7 +3395,7 @@
           ]
         },
         {
-          "address": "cudos13aw62zeetrx4ha4fhvgy49gk25z8zmv94m82kj",
+          "address": "cudos1ss2h52vy6cpy99nw69c6c8n9hgjapq2xxy8vpm",
           "coins": [
             {
               "denom": "acudos",
@@ -95,7 +3408,7 @@
           ]
         },
         {
-          "address": "cudos1n8tgrnjhtm7252t4m7w2kexus4c2syen9vcfyz",
+          "address": "cudos15erkpe2jvs8wp64merdvnzkmupsxyd7wpegqp7",
           "coins": [
             {
               "denom": "acudos",
@@ -108,11 +3421,20 @@
           ]
         },
         {
-          "address": "cudos1un8x0wytasns5atjhnwt446qlf8dlk0ve2umkt",
+          "address": "cudos1eszt3sd427w802j98qkjgsafjgmgdv2ynrh64h",
           "coins": [
             {
               "denom": "acudos",
               "amount": "1000000000000000000000000"
+            }
+          ]
+        },
+        {
+          "address": "cudos1prek828p4nged2tlwslsyqwduyf9enef9dhfxf",
+          "coins": [
+            {
+              "denom": "stake",
+              "amount": "200"
             }
           ]
         }
@@ -175,7 +3497,6 @@
         }
       ]
     },
-    "blog": {},
     "capability": {
       "index": "1",
       "owners": []
@@ -217,7 +3538,7 @@
               {
                 "@type": "/cosmos.staking.v1beta1.MsgCreateValidator",
                 "description": {
-                  "moniker": "cudos-root-node",
+                  "moniker": "cudos-root-node-testnet",
                   "identity": "",
                   "website": "",
                   "security_contact": "",
@@ -229,11 +3550,11 @@
                   "max_change_rate": "0.010000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "cudos1n8tgrnjhtm7252t4m7w2kexus4c2syen9vcfyz",
-                "validator_address": "cudosvaloper1n8tgrnjhtm7252t4m7w2kexus4c2syenclkg9l",
+                "delegator_address": "cudos1ss2h52vy6cpy99nw69c6c8n9hgjapq2xxy8vpm",
+                "validator_address": "cudosvaloper1ss2h52vy6cpy99nw69c6c8n9hgjapq2xmhfdqx",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
-                  "key": "kcD9fCMLIArHqlGSGzUTXJeL5/hN1jL6S4rrmxzHEHA="
+                  "key": "XJ0RjmUnFsElO6wqgk7el5Dclx5BgZlwZEtyhwIWWyo="
                 },
                 "value": {
                   "denom": "acudos",
@@ -241,7 +3562,7 @@
                 }
               }
             ],
-            "memo": "847dd1729f3b7632c4e7100ed57ce249afd2aa91@172.31.0.2:26656",
+            "memo": "af6d4acceb6c39a52de94d924353105cbe8ae187@192.168.16.2:26656",
             "timeout_height": "0",
             "extension_options": [],
             "non_critical_extension_options": []
@@ -251,7 +3572,7 @@
               {
                 "public_key": {
                   "@type": "/cosmos.crypto.secp256k1.PubKey",
-                  "key": "AsQ2X5Ssm6EWtZuShSyuw0GwWtvAj8dJ6yjnHTx6afMB"
+                  "key": "AyX7lgAMemNvexVtdHbdmN0yIuA2i1h2Y4ZQG5ftF8rV"
                 },
                 "mode_info": {
                   "single": {
@@ -269,7 +3590,7 @@
             }
           },
           "signatures": [
-            "NS5hVbCf+y+jVhWjDOhu3xrZmNV16hFU0LeyVZGdzJp0VYkmoIp4BU5+DsjjiciO7jYiQhJq9APprui8GjCykA=="
+            "YMQYdwdrN6me2zIei4O21n9PjFCEXBJh8Uo+xkTcYfwdvLv/u6bV0XzNk+lABWdK8cN4+2VdjVfdFi9CQLK4Mw=="
           ]
         }
       ]
@@ -335,8 +3656,8 @@
       "params": {
         "mint_denom": "acudos",
         "inflation_rate_change": "0.0000000013",
-        "inflation_max": "0.0000000013",
-        "inflation_min": "0.0000000013",
+        "inflation_max": "0.0000000000",
+        "inflation_min": "0.0000000000",
         "goal_bonded": "0.670000000000000000",
         "blocks_per_year": "6311520"
       }
