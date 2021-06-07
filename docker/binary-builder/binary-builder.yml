@@ -1,0 +1,25 @@
+version: '3.1'
+
+networks:
+  shared-cudos-network:
+    name: shared-cudos-network
+
+services:
+  binary-builder:
+    image: binary-builder
+    container_name: binary-builder
+    build:
+      dockerfile: CudosBuilders/docker/binary-builder/binary-builder.dockerfile
+      context: ../../../
+    restart: unless-stopped
+    environment:
+      - CUDOS_HOME=$CUDOS_HOME
+    volumes:
+      - '../../../CudosData/$VOLUME_NAME:$CUDOS_HOME'
+    networks:
+      - shared-cudos-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "128m"
+        max-file: "1"

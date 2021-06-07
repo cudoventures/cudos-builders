@@ -376,6 +376,24 @@
             "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet.private01.arg -f ./start-full-node.yml -p cudos-start-full-node-client-testnet-private-01 down",
             "type": "shell",
             "group": "build"
+        },
+
+        // Binary builder
+        {
+            "label": "Start BINARY BUILDER in docker",
+            "command": "cd ./docker/binary-builder&& sudo docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build BINARY BUILDER in docker",
+            "command": "cd ./docker/binary-builder&& sudo docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy BINARY BUILDER in docker",
+            "command": "cd ./docker/binary-builder&& sudo docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder down",
+            "type": "shell",
+            "group": "build"
         }
         
     ]
