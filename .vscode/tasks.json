@@ -394,6 +394,24 @@
             "command": "cd ./docker/binary-builder&& sudo docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder down",
             "type": "shell",
             "group": "build"
+        },
+
+        // Orchestrator
+        {
+            "label": "Start ORCHESTRATOR in docker",
+            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./orchestrator.arg -f ./orchestrator.yml -p cudos-orchestrator up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build ORCHESTRATOR in docker",
+            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./orchestrator.arg -f ./orchestrator.yml -p cudos-orchestrator up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy ORCHESTRATOR in docker",
+            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./orchestrator.arg -f ./orchestrator.yml -p cudos-orchestrator down",
+            "type": "shell",
+            "group": "build"
         }
         
     ]

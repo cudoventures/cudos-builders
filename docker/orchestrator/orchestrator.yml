@@ -1,0 +1,16 @@
+version: '3.1'
+
+networks:
+  shared-cudos-network:
+    name: shared-cudos-network
+
+services:
+  cudos-orchestrator:
+    image: cudos-orchestrator
+    container_name: cudos-orchestrator
+    build:
+      dockerfile: CudosBuilders/docker/orchestrator/orchestrator.dockerfile
+      context: ../../../
+    env_file: "$ENV_FILE"
+    networks:
+      - shared-cudos-network

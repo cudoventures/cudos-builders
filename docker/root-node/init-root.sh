@@ -57,7 +57,7 @@ DISPLAY="cudos"
 
 cudos-noded init $MONIKER --chain-id=$CHAIN_ID
 
-# sed -i "104s/enable = false/enable = true/" "${CUDOS_HOME}/config/app.toml"
+sed -i "104s/enable = false/enable = true/" "${CUDOS_HOME}/config/app.toml"
 # sed -i "s/laddr = \"tcp:\/\/127.0.0.1:26657\"/laddr = \"tcp:\/\/0.0.0.0:26657\"/" "${CUDOS_HOME}/config/config.toml"
 
 # enable cors origin for local testing
