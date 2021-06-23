@@ -1,0 +1,16 @@
+version: '3.1'
+
+networks:
+  shared-cudos-network:
+    name: shared-cudos-network
+
+services:
+  cudos-contract-deployer:
+    image: cudos-contract-deployer
+    container_name: cudos-contract-deployer
+    build:
+      dockerfile: CudosBuilders/docker/orchestrator/contract-deployer.dockerfile
+      context: ../../../
+    env_file: "$ENV_FILE"
+    networks:
+      - shared-cudos-network

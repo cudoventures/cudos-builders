@@ -27,6 +27,6 @@ RUN addgroup -gid 1000 orchestrator && \
     chmod +x ./run.sh && \
     sed -i 's/\r$//' ./run.sh
 
-# CMD ["sleep", "infinity"]
+CMD ["sleep", "infinity"]
 
-CMD ["/bin/bash", "-c", "./run.sh"]
+# CMD ["/bin/bash", "-c", "./run.sh"]

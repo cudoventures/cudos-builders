@@ -413,6 +413,24 @@
             "type": "shell",
             "group": "build"
         }
+
+        // Contract deployer
+        {
+            "label": "Start CONTRACT DEPLOYER in docker",
+            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./contract-deployer.arg -f ./contract-deployer.yml -p cudos-contract-deployer up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build CONTRACT DEPLOYER in docker",
+            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./contract-deployer.arg -f ./contract-deployer.yml -p cudos-contract-deployer up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy CONTRACT DEPLOYER in docker",
+            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./contract-deployer.arg -f ./contract-deployer.yml -p cudos-contract-deployer down",
+            "type": "shell",
+            "group": "build"
+        }
         
     ]
 }
