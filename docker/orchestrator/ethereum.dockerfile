@@ -6,7 +6,7 @@ RUN apk add --no-cache curl
 
 # COPY testdata/testchain/ETHGenesis.json ETHGenesis.json
 
-ENTRYPOINT geth --rinkeby --syncmode "light" --http --http.port "8545" --http.addr "0.0.0.0" --http.corsdomain "*" --http.vhosts "*" --http.api personal,eth,net,web3
+ENTRYPOINT geth console --rinkeby --syncmode "light" --http --http.port "8545" --http.addr "0.0.0.0" --http.corsdomain "*" --http.vhosts "*" --http.api personal,eth,net,web3
 
 # RUN geth --identity "GravityTestnet" \
 #     --nodiscover \
