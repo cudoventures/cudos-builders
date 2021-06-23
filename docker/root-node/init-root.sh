@@ -110,6 +110,10 @@ ZERO_ACCOUNT_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show zero-account -a -
 (echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add root-validator-01 --keyring-backend os |& tee "${CUDOS_HOME}/root-validator-01.wallet"
 ROOT_VALIDATOR_01_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show root-validator-01 -a --keyring-backend os)
 
+(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add orch-01 --keyring-backend os |& tee "${CUDOS_HOME}/orch-01.wallet"
+ORCH_01_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show orch-01 -a --keyring-backend os)
+
+
 (echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add validator-02 --keyring-backend os |& tee "${CUDOS_HOME}/validator-02.wallet"
 VALIDATOR_02_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show validator-02 -a --keyring-backend os)
 (echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add validator-03 --keyring-backend os |& tee "${CUDOS_HOME}/validator-03.wallet"
@@ -122,7 +126,7 @@ cudos-noded add-genesis-account $ZERO_ACCOUNT_ADDRESS "1${BOND_DENOM}"
 cudos-noded add-genesis-account $ROOT_VALIDATOR_01_ADDRESS "100000000000000100000${BOND_DENOM},1cudosAdmin"
 cudos-noded add-genesis-account $VALIDATOR_02_ADDRESS "100000000000000100000${BOND_DENOM},1cudosAdmin"
 cudos-noded add-genesis-account $VALIDATOR_03_ADDRESS "100000000000000100000${BOND_DENOM},1cudosAdmin"
-(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded gentx root-validator-01 "100000000000000000000${BOND_DENOM}" --chain-id $CHAIN_ID --keyring-backend os
+(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded gentx root-validator-01 "100000000000000000000${BOND_DENOM}" ${ORCH_ETH_ADDRESS} ${ORCH_01_ADDRESS} --chain-id $CHAIN_ID --keyring-backend os
 
 # add faucet account
 ((echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add faucet --keyring-backend os) |& tee "${CUDOS_HOME}/faucet.wallet"
