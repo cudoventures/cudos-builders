@@ -1,1 +1,1 @@
-ENV_FILE=./orchestrator.env
+ENV_FILE=./contract-deployer.env

@@ -230,10 +230,6 @@
         },
 
 
-
-
-
-
         // seed node - client testnet
         {
             "label": "Build INIT SEED NODE CLIENT TESTNET in docker",
@@ -412,7 +408,7 @@
             "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./orchestrator.arg -f ./orchestrator.yml -p cudos-orchestrator down",
             "type": "shell",
             "group": "build"
-        }
+        },
 
         // Contract deployer
         {
@@ -430,6 +426,15 @@
             "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./contract-deployer.arg -f ./contract-deployer.yml -p cudos-contract-deployer down",
             "type": "shell",
             "group": "build"
+        },
+
+        // Ethereum
+
+        {
+            "label": "Start GETH NODE in docker",
+            "command": "cd ./docker/orchestrator&& sudo docker-compose -f ./ethereum.yml -p ethereum up",
+            "type": "shell",
+            "group": "build",
         }
         
     ]

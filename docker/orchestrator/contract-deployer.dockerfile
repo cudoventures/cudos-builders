@@ -19,9 +19,9 @@ RUN apk add --no-cache python3 make g++ curl git
 
 WORKDIR /usr/src
 
-RUN git clone https://github.com/cosmos/gravity-bridge.git
+RUN git clone https://github.com/althea-net/cosmos-gravity-bridge.git
 
-WORKDIR /usr/src/gravity-bridge/solidity
+WORKDIR /usr/src/cosmos-gravity-bridge/solidity
 
 RUN npm ci
 RUN chmod -R +x scripts
@@ -32,8 +32,8 @@ RUN npm run typechain
 
 CMD npx ts-node \
     contract-deployer.ts \
-    --cosmos-node="http://cudos-start-sentry-node-01:26657" \
-    --eth-node="https://rinkeby.infura.io/v3/b26d9ad356394786b08d6e227c97fda6" \
-    --eth-privkey="711531b5e21921f66b7a6f7483d755f1c23abfb24b8faf9b6770a179a9a49562" \
+    --cosmos-node="${COSMOS_NODE}" \
+    --eth-node="${ETH_NODE}" \
+    --eth-privkey="${ETH_PRIV_KEY_HEX}" \
     --contract=artifacts/contracts/Gravity.sol/Gravity.json \
     --test-mode=false
