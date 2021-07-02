@@ -3,13 +3,17 @@ FROM golang:buster
 # RUN apk add --no-cache jq make bash g++
 WORKDIR /usr/cudos
 
-COPY ./CudosNode ./
+COPY ./CudosNode ./CudosNode
+
+COPY ./CudosGravityBridge ./CudosGravityBridge
 
 COPY ./CudosBuilders/docker/full-node/config-full-node.sh ./
 
 COPY ./CudosBuilders/docker/config ./external-config
 
-RUN make && \
+RUN cd ./CudosNode && \
+    make && \
+    cd .. \
     chmod +x ./config-full-node.sh && \
     sed -i 's/\r$//' ./config-full-node.sh
 

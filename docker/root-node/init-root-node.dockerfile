@@ -7,11 +7,15 @@ RUN apt update && \
 
 WORKDIR /usr/cudos
 
-COPY ./CudosNode ./
+COPY ./CudosNode ./CudosNode
+
+COPY ./CudosGravityBridge ./CudosGravityBridge
 
 COPY ./CudosBuilders/docker/root-node/init-root.sh ./
 
-RUN make && \
+RUN cd ./CudosNode && \
+    make && \
+    cd .. \
     chmod +x ./init-root.sh && \
     sed -i 's/\r$//' ./init-root.sh
 

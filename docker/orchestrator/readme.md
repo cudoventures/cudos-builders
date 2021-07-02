@@ -16,3 +16,8 @@
 --cosmos-phrase="<cosmos mnemonic of the sender address>" \
 --eth-destination="<ethereum address to which to send the tokens>" \
 --fees="<amount_and_denomination>"
+
+
+## Local run
+
+cd /usr/src/cosmos-gravity-bridge/orchestrator && cargo build && cd /home/orchestrator/bin/ && cp /usr/src/cosmos-gravity-bridge/orchestrator/target/debug/gbt ./gbt && ./orchestrator-run.sh

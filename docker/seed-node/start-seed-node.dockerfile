@@ -8,9 +8,11 @@ RUN apt install -y jq build-essential
 
 WORKDIR /usr/cudos-builder
 
-COPY ./CudosNode ./
+COPY ./CudosNode ./CudosNode
 
-RUN make
+COPY ./CudosGravityBridge ./CudosGravityBridge
+
+RUN cd ./CudosNode && make
 
 FROM golang:buster
 

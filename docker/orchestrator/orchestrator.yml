@@ -12,5 +12,7 @@ services:
       dockerfile: CudosBuilders/docker/orchestrator/orchestrator.dockerfile
       context: ../../../
     env_file: "$ENV_FILE"
+    volumes:
+      - '../../../CudosGravityBridge:/usr/src/cosmos-gravity-bridge'
     networks:
       - shared-cudos-network

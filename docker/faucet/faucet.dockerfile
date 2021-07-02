@@ -8,9 +8,11 @@ RUN apt install -y jq build-essential
 
 WORKDIR /usr/cudos-node-builder
 
-COPY ./CudosNode ./
+COPY ./CudosNode ./CudosNode
 
-RUN make
+COPY ./CudosGravityBridge ./CudosGravityBridge
+
+RUN cd ./CudosNode && make
 
 WORKDIR /usr/cudos-faucet-cli-builder
 

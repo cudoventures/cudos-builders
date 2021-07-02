@@ -126,6 +126,7 @@ cudos-noded add-genesis-account $ZERO_ACCOUNT_ADDRESS "1${BOND_DENOM}"
 cudos-noded add-genesis-account $ROOT_VALIDATOR_01_ADDRESS "100000000000000100000${BOND_DENOM},1cudosAdmin"
 cudos-noded add-genesis-account $VALIDATOR_02_ADDRESS "100000000000000100000${BOND_DENOM},1cudosAdmin"
 cudos-noded add-genesis-account $VALIDATOR_03_ADDRESS "100000000000000100000${BOND_DENOM},1cudosAdmin"
+cudos-noded add-genesis-account $ORCH_01_ADDRESS "100000000000000100000${BOND_DENOM}"
 (echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded gentx root-validator-01 "100000000000000000000${BOND_DENOM}" ${ORCH_ETH_ADDRESS} ${ORCH_01_ADDRESS} --chain-id $CHAIN_ID --keyring-backend os
 
 # add faucet account
@@ -142,6 +143,7 @@ PRIVATE_SALE_OFFER_ACCOUNT=$(sed -e "s/SALE_OFFER_ACC/$PRIVATE_SALE_OFFER_ADDRES
 cat "${CUDOS_HOME}/config/genesis.json" | jq --argjson PRIVATE_SALE_OFFER_ACCOUNT "$PRIVATE_SALE_OFFER_ACCOUNT" '.app_state.auth.accounts += [$PRIVATE_SALE_OFFER_ACCOUNT]' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
 cat "${CUDOS_HOME}/config/genesis.json" | jq --argjson PRIVATE_SALE_OFFER_BALANCE "$PRIVATE_SALE_OFFER_BALANCE" '.app_state.bank.balances += [$PRIVATE_SALE_OFFER_BALANCE]' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
 
+cat "${CUDOS_HOME}/config/genesis.json" | jq '.app_state.gravity.erc20_to_denoms[0] |= .+ {"erc20": "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d", "denom": "acudos"}' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
 
 cudos-noded collect-gentxs
 
