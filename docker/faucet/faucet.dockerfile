@@ -14,7 +14,7 @@ RUN make
 
 WORKDIR /usr/cudos-faucet-cli-builder
 
-COPY ./CudosUtils/project-faucet-cli ./
+COPY ./CudosFaucet ./
 
 RUN make
 

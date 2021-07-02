@@ -8,7 +8,7 @@ RUN curl https://install.meteor.com/ | sh
 
 WORKDIR /usr/explorer
 
-COPY ./CudosUtils/project-explorer ./source
+COPY ./CudosExplorer ./source
 
 RUN rm -Rf ./source/node_modules && \
     rm -Rf ./source/.meteor/local

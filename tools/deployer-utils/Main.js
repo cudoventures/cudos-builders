@@ -2,9 +2,7 @@ const os = require('os');
 const fs = require('fs');
 const asyncFs = require('fs/promises');
 const path = require('path');
-const { exec } = require('child_process');
 
-const fse = require('fs-extra');
 const { ArgumentParser } = require('argparse');
 const archiver = require('archiver');
 const SCP2 = require('scp2');
@@ -120,10 +118,10 @@ async function createArchive(deployFilePath, deployFilename) {
 
         // append files from a sub-directory, putting its contents at the root of archive
         archive.directory(path.resolve('../../CudosNode'), '/CudosNode');
-        archive.directory(path.resolve('../../CudosUtils/project-faucet-cli'), "/CudosUtils/project-faucet-cli");
+        archive.directory(path.resolve('../../CudosFaucet'), "/CudosUtils/project-faucet-cli");
         archive.directory(path.resolve('../docker'), '/CudosBuilders/docker');
 
-        const projectExplorerAbsPath = path.resolve('../../CudosUtils/project-explorer');
+        const projectExplorerAbsPath = path.resolve('../../CudosExplorer');
         const pathContent = await asyncFs.readdir(projectExplorerAbsPath);
         for (let i = 0;  i < pathContent.length; ++i) {
             const itemAbsPath = path.join(projectExplorerAbsPath, pathContent[i]);
@@ -141,17 +139,17 @@ async function createArchive(deployFilePath, deployFilename) {
                         const meteorItemAbsPath = path.join(projectExplorerAbsPath, pathContent[i], meteorPathContent[j]);
                         const meteorStat = await asyncFs.stat(meteorItemAbsPath);
                         if (meteorStat.isDirectory() === true) {
-                            archive.directory(meteorItemAbsPath, `/CudosUtils//project-explorer/${pathContent[i]}/${meteorPathContent[j]}`);
+                            archive.directory(meteorItemAbsPath, `/CudosUtils/project-explorer/${pathContent[i]}/${meteorPathContent[j]}`);
                         } else {
-                            archive.file(meteorItemAbsPath, { 'name': `/CudosUtils//project-explorer/${pathContent[i]}/${meteorPathContent[j]}` } );
+                            archive.file(meteorItemAbsPath, { 'name': `/CudosUtils/project-explorer/${pathContent[i]}/${meteorPathContent[j]}` } );
                         }
                     }
                     break;
                 default:
                     if (stat.isDirectory() === true) {
-                        archive.directory(itemAbsPath, `/CudosUtils//project-explorer/${pathContent[i]}`);
+                        archive.directory(itemAbsPath, `/CudosUtils/project-explorer/${pathContent[i]}`);
                     } else {
-                        archive.file(itemAbsPath, { 'name': `/CudosUtils//project-explorer/${pathContent[i]}` } );
+                        archive.file(itemAbsPath, { 'name': `/CudosUtils/project-explorer/${pathContent[i]}` } );
                     }
                     break;
             }
