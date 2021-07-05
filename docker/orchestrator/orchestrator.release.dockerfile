@@ -5,19 +5,15 @@ RUN apt-get update
 
 WORKDIR /usr/src
 
-RUN git clone https://github.com/althea-net/cosmos-gravity-bridge.git
-
-WORKDIR /usr/src/cosmos-gravity-bridge/orchestrator
-
-# COPY ["/github projects/cosmos-gravity-bridge/orchestrator", "./"]
+COPY ./CudosGravityBridge/orchestrator ./
 
 RUN cargo build --release
 
-FROM rust:latest
+FROM debian:buster
 
 WORKDIR /home/orchestrator/bin/
 
-COPY --from=cargo-build /usr/src/cosmos-gravity-bridge/orchestrator/target/release/gbt .
+COPY --from=cargo-build /usr/src/target/release/gbt .
 
 COPY ./CudosBuilders/docker/orchestrator/orchestrator-run.sh .
 

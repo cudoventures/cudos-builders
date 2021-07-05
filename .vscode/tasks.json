@@ -392,20 +392,74 @@
             "group": "build"
         },
 
-        // Orchestrator
+        // Orchestrator - local 01 debug
         {
-            "label": "Start ORCHESTRATOR in docker",
-            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./orchestrator.arg -f ./orchestrator.yml -p cudos-orchestrator up",
+            "label": "Start ORCHESTRATOR LOCAL 01 DEBUG in docker",
+            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./orchestrator.local01.arg -f ./orchestrator.debug.yml -p cudos-orchestrator-local-01-debug up",
             "type": "shell",
             "group": "build",
         }, {
-            "label": "Build ORCHESTRATOR in docker",
-            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./orchestrator.arg -f ./orchestrator.yml -p cudos-orchestrator up --build",
+            "label": "Build ORCHESTRATOR LOCAL 01 DEBUG in docker",
+            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./orchestrator.local01.arg -f ./orchestrator.debug.yml -p cudos-orchestrator-local-01-debug up --build",
             "type": "shell",
             "group": "build"
         }, {
-            "label": "Destroy ORCHESTRATOR in docker",
-            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./orchestrator.arg -f ./orchestrator.yml -p cudos-orchestrator down",
+            "label": "Destroy ORCHESTRATOR LOCAL 01 DEBUG in docker",
+            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./orchestrator.local01.arg -f ./orchestrator.debug.yml -p cudos-orchestrator-local-01-debug down",
+            "type": "shell",
+            "group": "build"
+        },
+
+        // Orchestrator - local 01 release
+        {
+            "label": "Start ORCHESTRATOR LOCAL 01 RELEASE in docker",
+            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./orchestrator.local01.arg -f ./orchestrator.release.yml -p cudos-orchestrator-local-01-release up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build ORCHESTRATOR LOCAL 01 RELEASE in docker",
+            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./orchestrator.local01.arg -f ./orchestrator.release.yml -p cudos-orchestrator-local-01-release up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy ORCHESTRATOR LOCAL 01 RELEASE in docker",
+            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./orchestrator.local01.arg -f ./orchestrator.release.yml -p cudos-orchestrator-local-01-release down",
+            "type": "shell",
+            "group": "build"
+        },
+
+        // Orchestrator - local 02 release
+        {
+            "label": "Start ORCHESTRATOR LOCAL 02 RELEASE in docker",
+            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./orchestrator.local02.arg -f ./orchestrator.release.yml -p cudos-orchestrator-local-02-release up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build ORCHESTRATOR LOCAL 02 RELEASE in docker",
+            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./orchestrator.local02.arg -f ./orchestrator.release.yml -p cudos-orchestrator-local-02-release up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy ORCHESTRATOR LOCAL 02 RELEASE in docker",
+            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./orchestrator.local02.arg -f ./orchestrator.release.yml -p cudos-orchestrator-local-02-release down",
+            "type": "shell",
+            "group": "build"
+        },
+
+        // Orchestrator - local 03 release
+        {
+            "label": "Start ORCHESTRATOR LOCAL 03 RELEASE in docker",
+            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./orchestrator.local03.arg -f ./orchestrator.release.yml -p cudos-orchestrator-local-03-release up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build ORCHESTRATOR LOCAL 03 RELEASE in docker",
+            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./orchestrator.local03.arg -f ./orchestrator.release.yml -p cudos-orchestrator-local-03-release up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy ORCHESTRATOR LOCAL 03 RELEASE in docker",
+            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./orchestrator.local03.arg -f ./orchestrator.release.yml -p cudos-orchestrator-local-03-release down",
             "type": "shell",
             "group": "build"
         },
@@ -413,26 +467,31 @@
         // Contract deployer
         {
             "label": "Start CONTRACT DEPLOYER in docker",
-            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./contract-deployer.arg -f ./contract-deployer.yml -p cudos-contract-deployer up",
+            "command": "cd ./docker/gravity-contract-deployer&& sudo docker-compose --env-file ./gravity-contract-deployer.arg -f ./gravity-contract-deployer.yml -p cudos-gravity-contract-deployer up",
             "type": "shell",
             "group": "build",
         }, {
             "label": "Build CONTRACT DEPLOYER in docker",
-            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./contract-deployer.arg -f ./contract-deployer.yml -p cudos-contract-deployer up --build",
+            "command": "cd ./docker/gravity-contract-deployer&& sudo docker-compose --env-file ./gravity-contract-deployer.arg -f ./gravity-contract-deployer.yml -p cudos-gravity-contract-deployer up --build",
             "type": "shell",
             "group": "build"
         }, {
             "label": "Destroy CONTRACT DEPLOYER in docker",
-            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./contract-deployer.arg -f ./contract-deployer.yml -p cudos-contract-deployer down",
+            "command": "cd ./docker/gravity-contract-deployer&& sudo docker-compose --env-file ./gravity-contract-deployer.arg -f ./gravity-contract-deployer.yml -p cudos-gravity-contract-deployer down",
             "type": "shell",
             "group": "build"
         },
 
         // Ethereum
-
         {
-            "label": "Start GETH NODE in docker",
-            "command": "cd ./docker/orchestrator&& sudo docker-compose -f ./ethereum.yml -p ethereum up",
+            "label": "Build ETHEREUM NODE in docker",
+            "command": "cd ./docker/ethereum&& sudo docker-compose -f ./ethereum.yml -p ethereum up --build",
+            "type": "shell",
+            "group": "build",
+        },
+        {
+            "label": "Destroy ETHEREUM NODE in docker",
+            "command": "cd ./docker/ethereum&& sudo docker-compose -f ./ethereum.yml -p ethereum down",
             "type": "shell",
             "group": "build",
         }

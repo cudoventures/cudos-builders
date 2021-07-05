@@ -6,13 +6,13 @@ networks:
 
 services:
   cudos-orchestrator:
-    image: cudos-orchestrator
-    container_name: cudos-orchestrator
+    image: cudos-orchestrator-debug
+    container_name: "$CONTAINER_NAME-debug"
     build:
-      dockerfile: CudosBuilders/docker/orchestrator/orchestrator.dockerfile
+      dockerfile: CudosBuilders/docker/orchestrator/orchestrator.debug.dockerfile
       context: ../../../
     env_file: "$ENV_FILE"
     volumes:
-      - '../../../CudosGravityBridge:/usr/src/cosmos-gravity-bridge'
+      - '../../../CudosGravityBridge/orchestrator:/usr/src'
     networks:
       - shared-cudos-network

@@ -5,11 +5,11 @@ networks:
     name: shared-cudos-network
 
 services:
-  cudos-contract-deployer:
-    image: cudos-contract-deployer
-    container_name: cudos-contract-deployer
+  cudos-orchestrator:
+    image: cudos-orchestrator-release
+    container_name: "$CONTAINER_NAME-release"
     build:
-      dockerfile: CudosBuilders/docker/orchestrator/contract-deployer.dockerfile
+      dockerfile: CudosBuilders/docker/orchestrator/orchestrator.release.dockerfile
       context: ../../../
     env_file: "$ENV_FILE"
     networks:

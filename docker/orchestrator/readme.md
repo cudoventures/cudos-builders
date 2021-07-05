@@ -18,6 +18,6 @@
 --fees="<amount_and_denomination>"
 
 
-## Local run
+## Compile and run orchestrator in debug mode using docker instance "ORCHESTRATOR LOCAL 01 DEBUG"
 
-cd /usr/src/cosmos-gravity-bridge/orchestrator && cargo build && cd /home/orchestrator/bin/ && cp /usr/src/cosmos-gravity-bridge/orchestrator/target/debug/gbt ./gbt && ./orchestrator-run.sh
+cd /usr/src && cargo build && cd /home/orchestrator/bin/ && cp /usr/src/target/debug/gbt ./gbt && ./orchestrator-run.sh
