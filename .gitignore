@@ -6,3 +6,4 @@ genesis.local.json
 persistent-peers.local.config
 seeds.local.config
 /tools/deployer-utils/temp
+docker/.DS_Store
