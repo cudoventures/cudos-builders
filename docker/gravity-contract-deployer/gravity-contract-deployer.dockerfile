@@ -19,9 +19,9 @@ RUN apk add --no-cache python3 make g++ curl git
 
 WORKDIR /usr/src
 
-RUN git clone https://github.com/althea-net/cosmos-gravity-bridge.git
-
 WORKDIR /usr/src/cosmos-gravity-bridge/solidity
+
+COPY ./CudosGravityBridge/solidity ./
 
 RUN npm ci
 RUN chmod -R +x scripts
