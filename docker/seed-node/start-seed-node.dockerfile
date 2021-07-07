@@ -23,4 +23,4 @@ COPY --from=builder /go/pkg/mod/github.com/!cosm!wasm/wasmvm@v0.14.0/api/libwasm
 COPY --from=builder /go/bin/cudos-noded /go/bin/cudos-noded
 
 # CMD ["sleep", "infinity"]
-CMD ["/bin/bash", "-c", "cudos-noded start"] 
+CMD ["/bin/bash", "-c", "cudos-noded start  --state-sync.snapshot-interval 2000 --state-sync.snapshot-keep-recent 2"] 
