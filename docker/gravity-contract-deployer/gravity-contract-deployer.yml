@@ -9,7 +9,7 @@ services:
     image: cudos-contract-deployer
     container_name: cudos-contract-deployer
     build:
-      dockerfile: CudosBuilders/docker/orchestrator/gravity-contract-deployer.dockerfile
+      dockerfile: CudosBuilders/docker/gravity-contract-deployer/gravity-contract-deployer.dockerfile
       context: ../../../
     env_file: "$ENV_FILE"
     networks:
