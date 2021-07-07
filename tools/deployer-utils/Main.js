@@ -118,7 +118,7 @@ async function createArchive(deployFilePath, deployFilename) {
 
         // append files from a sub-directory, putting its contents at the root of archive
         archive.directory(path.resolve('../../CudosNode'), '/CudosNode');
-        archive.directory(path.resolve('../../CudosFaucet'), "/CudosUtils/project-faucet-cli");
+        archive.directory(path.resolve('../../CudosFaucet'), "/CudosFaucet");
         archive.directory(path.resolve('../docker'), '/CudosBuilders/docker');
 
         const projectExplorerAbsPath = path.resolve('../../CudosExplorer');
@@ -139,17 +139,17 @@ async function createArchive(deployFilePath, deployFilename) {
                         const meteorItemAbsPath = path.join(projectExplorerAbsPath, pathContent[i], meteorPathContent[j]);
                         const meteorStat = await asyncFs.stat(meteorItemAbsPath);
                         if (meteorStat.isDirectory() === true) {
-                            archive.directory(meteorItemAbsPath, `/CudosUtils/project-explorer/${pathContent[i]}/${meteorPathContent[j]}`);
+                            archive.directory(meteorItemAbsPath, `/CudosExplorer/${pathContent[i]}/${meteorPathContent[j]}`);
                         } else {
-                            archive.file(meteorItemAbsPath, { 'name': `/CudosUtils/project-explorer/${pathContent[i]}/${meteorPathContent[j]}` } );
+                            archive.file(meteorItemAbsPath, { 'name': `/CudosExplorer/${pathContent[i]}/${meteorPathContent[j]}` } );
                         }
                     }
                     break;
                 default:
                     if (stat.isDirectory() === true) {
-                        archive.directory(itemAbsPath, `/CudosUtils/project-explorer/${pathContent[i]}`);
+                        archive.directory(itemAbsPath, `/CudosExplorer/${pathContent[i]}`);
                     } else {
-                        archive.file(itemAbsPath, { 'name': `/CudosUtils/project-explorer/${pathContent[i]}` } );
+                        archive.file(itemAbsPath, { 'name': `/CudosExplorer/${pathContent[i]}` } );
                     }
                     break;
             }
@@ -203,7 +203,8 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         `cd ${secrets.serverPath}`,
         `sudo rm -Rf ./CudosNode`,
         `sudo rm -Rf ./CudosBuilders`,
-        `sudo rm -Rf ./CudosUtils`,
+        `sudo rm -Rf ./CudosFaucet`,
+        `sudo rm -Rf ./CudosExplorer`,
         `sudo unzip -q ${filePath} -d ./`,
         `rm ${filePath}`,
         `cd ./CudosBuilders/docker/explorer`,

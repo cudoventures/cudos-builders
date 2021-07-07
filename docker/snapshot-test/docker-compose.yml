@@ -1,0 +1,72 @@
+version: '3.1'
+
+networks:
+  shared-cudos-network:
+    name: shared-cudos-network
+
+services:
+  cudos-full-node-01:
+    container_name: cudos-full-node-01
+    build:
+      dockerfile: ./CudosBuilders/docker/snapshot-test/full-node.dockerfile
+      context: ../../../
+    restart: unless-stopped
+    env_file: "./envs/snapshot-node-01.env"
+    command: ["/bin/bash", "-c", "./start-node.sh && cudos-noded start --state-sync.snapshot-interval 100 --state-sync.snapshot-keep-recent 2"] 
+    volumes:
+      - './data/snapshot-node-01:/usr/cudos/cudos-data'
+    networks:
+      - shared-cudos-network
+    ports:
+      - "60501:26656"
+      - "60601:26657"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "128m"
+        max-file: "1"
+  
+  cudos-full-node-02:
+    container_name: cudos-full-node-02
+    build:
+      dockerfile: ./CudosBuilders/docker/snapshot-test/full-node.dockerfile
+      context: ../../../
+    restart: unless-stopped
+    env_file: "./envs/snapshot-node-02.env"
+    command: ["/bin/bash", "-c", "./start-node.sh && cudos-noded start --state-sync.snapshot-interval 100 --state-sync.snapshot-keep-recent 2"]
+    volumes:
+      - './data/snapshot-node-02:/usr/cudos/cudos-data'
+    networks:
+      - shared-cudos-network
+    ports:
+      - "60502:26656"
+      - "60602:26657"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "128m"
+        max-file: "1"
+  
+  fast-sync-node-03:
+    container_name: fast-sync-node-03
+    build:
+      dockerfile: ./CudosBuilders/docker/snapshot-test/full-node.dockerfile
+      context: ../../../
+    restart: unless-stopped
+    env_file: "./envs/fast-sync-node-03.env"
+    command: ["/bin/bash", "-c", "./start-node.sh && sleep infinity"]
+    volumes:
+      - './data/fast-sync-node-03:/usr/cudos/cudos-data'
+    networks:
+      - shared-cudos-network
+    ports:
+      - "60503:26656"
+      - "60603:26657"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "128m"
+        max-file: "1"
+    depends_on: 
+      - cudos-full-node-01
+      - cudos-full-node-02
