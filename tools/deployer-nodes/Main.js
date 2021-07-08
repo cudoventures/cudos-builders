@@ -11,15 +11,15 @@ const SecretsConfig = require('./secrets.json');
 
 const TEMP_DIR = path.join(os.tmpdir(), 'cudos-builder');
 
-const TARGET_ROOT_NODE_TESTNET = 'root-node-testnet';
-const TARGET_SEED_NODE_TESTNET_ZONE01 = 'seed-node-testnet-zone01';
-const TARGET_SENTRY_NODE_TESTNET_ZONE01 = 'sentry-node-testnet-zone01';
-const TARGET_VALIDATOR_NODE_TESTNET_ZONE02 = 'validator-node-testnet-zone02';
-const TARGET_SEED_NODE_TESTNET_ZONE02 = 'seed-node-testnet-zone02';
-const TARGET_SENTRY_NODE_TESTNET_ZONE02 = 'sentry-node-testnet-zone02';
-const TARGET_VALIDATOR_NODE_TESTNET_ZONE03 = 'validator-node-testnet-zone03';
-const TARGET_SEED_NODE_TESTNET_ZONE03 = 'seed-node-testnet-zone03';
-const TARGET_SENTRY_NODE_TESTNET_ZONE03 = 'sentry-node-testnet-zone03';
+const TARGET_ROOT_NODE_TESTNET_PUBLIC_ZONE01 = 'root-node-testnet-public-zone01';
+const TARGET_SEED_NODE_TESTNET_PUBLIC_ZONE01 = 'seed-node-testnet-public-zone01';
+const TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE01 = 'sentry-node-testnet-public-zone01';
+const TARGET_VALIDATOR_NODE_TESTNET_PUBLIC_ZONE02 = 'validator-node-testnet-public-zone02';
+const TARGET_SEED_NODE_TESTNET_PUBLIC_ZONE02 = 'seed-node-testnet-public-zone02';
+const TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE02 = 'sentry-node-testnet-public-zone02';
+const TARGET_VALIDATOR_NODE_TESTNET_PUBLIC_ZONE03 = 'validator-node-testnet-public-zone03';
+const TARGET_SEED_NODE_TESTNET_PUBLIC_ZONE03 = 'seed-node-testnet-public-zone03';
+const TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE03 = 'sentry-node-testnet-public-zone03';
 
 const TARGET_ROOT_NODE_TESTNET_PRIVATE = 'root-node-testnet-private';
 const TARGET_SEED_NODE_TESTNET_PRIVATE = 'seed-node-testnet-private';
@@ -55,9 +55,9 @@ async function main() {
 
 function getArgParser() {
     const targets = [
-        TARGET_ROOT_NODE_TESTNET, TARGET_SEED_NODE_TESTNET_ZONE01, TARGET_SENTRY_NODE_TESTNET_ZONE01,
-        TARGET_VALIDATOR_NODE_TESTNET_ZONE02, TARGET_SEED_NODE_TESTNET_ZONE02, TARGET_SENTRY_NODE_TESTNET_ZONE02,
-        TARGET_VALIDATOR_NODE_TESTNET_ZONE03, TARGET_SEED_NODE_TESTNET_ZONE03, TARGET_SENTRY_NODE_TESTNET_ZONE03,
+        TARGET_ROOT_NODE_TESTNET_PUBLIC_ZONE01, TARGET_SEED_NODE_TESTNET_PUBLIC_ZONE01, TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE01,
+        TARGET_VALIDATOR_NODE_TESTNET_PUBLIC_ZONE02, TARGET_SEED_NODE_TESTNET_PUBLIC_ZONE02, TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE02,
+        TARGET_VALIDATOR_NODE_TESTNET_PUBLIC_ZONE03, TARGET_SEED_NODE_TESTNET_PUBLIC_ZONE03, TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE03,
         TARGET_ROOT_NODE_TESTNET_PRIVATE, TARGET_SEED_NODE_TESTNET_PRIVATE, TARGET_SENTRY_NODE_TESTNET_PRIVATE
     ]
     const parser = new ArgumentParser({description: 'Cudos testnet root node deployer'});
@@ -239,23 +239,23 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
 
 function getDockerRootPath(args) {
     switch (args.target) {
-        case TARGET_ROOT_NODE_TESTNET:
+        case TARGET_ROOT_NODE_TESTNET_PUBLIC_ZONE01:
             return 'root-node';
-        case TARGET_SEED_NODE_TESTNET_ZONE01:
+        case TARGET_SEED_NODE_TESTNET_PUBLIC_ZONE01:
             return 'seed-node';
-        case TARGET_SENTRY_NODE_TESTNET_ZONE01:
+        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE01:
             return 'sentry-node';
-        case TARGET_VALIDATOR_NODE_TESTNET_ZONE02:
+        case TARGET_VALIDATOR_NODE_TESTNET_PUBLIC_ZONE02:
             return 'full-node';
-        case TARGET_SEED_NODE_TESTNET_ZONE02:
+        case TARGET_SEED_NODE_TESTNET_PUBLIC_ZONE02:
             return 'seed-node';
-        case TARGET_SENTRY_NODE_TESTNET_ZONE02:
+        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE02:
             return 'sentry-node';
-        case TARGET_VALIDATOR_NODE_TESTNET_ZONE03:
+        case TARGET_VALIDATOR_NODE_TESTNET_PUBLIC_ZONE03:
             return 'full-node';
-        case TARGET_SEED_NODE_TESTNET_ZONE03:
+        case TARGET_SEED_NODE_TESTNET_PUBLIC_ZONE03:
             return 'seed-node';
-        case TARGET_SENTRY_NODE_TESTNET_ZONE03:
+        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE03:
             return 'sentry-node';
         case TARGET_ROOT_NODE_TESTNET_PRIVATE:
             return 'root-node';
@@ -270,24 +270,24 @@ function getDockerRootPath(args) {
 
 function getDockerEnvFile(args) {
     switch (args.target) {
-        case TARGET_ROOT_NODE_TESTNET:
-            return './root-node.testnet.zone01.arg';
-        case TARGET_SEED_NODE_TESTNET_ZONE01:
-            return './seed-node.testnet.zone01.arg';
-        case TARGET_SENTRY_NODE_TESTNET_ZONE01:
-            return './sentry-node.testnet.zone01.arg';
-        case TARGET_VALIDATOR_NODE_TESTNET_ZONE02:
-            return './full-node.testnet.zone02.arg';
-        case TARGET_SEED_NODE_TESTNET_ZONE02:
-            return './seed-node.testnet.zone02.arg';
-        case TARGET_SENTRY_NODE_TESTNET_ZONE02:
-            return './sentry-node.testnet.zone02.arg';
-        case TARGET_VALIDATOR_NODE_TESTNET_ZONE03:
-            return './full-node.testnet.zone03.arg';
-        case TARGET_SEED_NODE_TESTNET_ZONE03:
-            return './seed-node.testnet.zone03.arg';
-        case TARGET_SENTRY_NODE_TESTNET_ZONE03:
-            return './sentry-node.testnet.zone03.arg';
+        case TARGET_ROOT_NODE_TESTNET_PUBLIC_ZONE01:
+            return './root-node.testnet.public.zone01.arg';
+        case TARGET_SEED_NODE_TESTNET_PUBLIC_ZONE01:
+            return './seed-node.testnet.public.zone01.arg';
+        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE01:
+            return './sentry-node.testnet.public.zone01.arg';
+        case TARGET_VALIDATOR_NODE_TESTNET_PUBLIC_ZONE02:
+            return './full-node.testnet.public.zone02.arg';
+        case TARGET_SEED_NODE_TESTNET_PUBLIC_ZONE02:
+            return './seed-node.testnet.public.zone02.arg';
+        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE02:
+            return './sentry-node.testnet.public.zone02.arg';
+        case TARGET_VALIDATOR_NODE_TESTNET_PUBLIC_ZONE03:
+            return './full-node.testnet.public.zone03.arg';
+        case TARGET_SEED_NODE_TESTNET_PUBLIC_ZONE03:
+            return './seed-node.testnet.public.zone03.arg';
+        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE03:
+            return './sentry-node.testnet.public.zone03.arg';
         case TARGET_ROOT_NODE_TESTNET_PRIVATE:
             return './root-node.testnet.private.arg';
         case TARGET_SEED_NODE_TESTNET_PRIVATE:
@@ -301,23 +301,23 @@ function getDockerEnvFile(args) {
 
 function getDockerComposeInitFile(args) {
     switch (args.target) {
-        case TARGET_ROOT_NODE_TESTNET:
+        case TARGET_ROOT_NODE_TESTNET_PUBLIC_ZONE01:
             return './init-root-node.yml';
-        case TARGET_SEED_NODE_TESTNET_ZONE01:
+        case TARGET_SEED_NODE_TESTNET_PUBLIC_ZONE01:
             return './init-seed-node.yml';
-        case TARGET_SENTRY_NODE_TESTNET_ZONE01:
+        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE01:
             return './init-sentry-node.yml';
-        case TARGET_VALIDATOR_NODE_TESTNET_ZONE02:
+        case TARGET_VALIDATOR_NODE_TESTNET_PUBLIC_ZONE02:
             return './init-full-node.yml';
-        case TARGET_SEED_NODE_TESTNET_ZONE02:
+        case TARGET_SEED_NODE_TESTNET_PUBLIC_ZONE02:
             return './init-seed-node.yml';
-        case TARGET_SENTRY_NODE_TESTNET_ZONE02:
+        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE02:
             return './init-sentry-node.yml';
-        case TARGET_VALIDATOR_NODE_TESTNET_ZONE03:
+        case TARGET_VALIDATOR_NODE_TESTNET_PUBLIC_ZONE03:
             return './init-full-node.yml';
-        case TARGET_SEED_NODE_TESTNET_ZONE03:
+        case TARGET_SEED_NODE_TESTNET_PUBLIC_ZONE03:
             return './init-seed-node.yml';
-        case TARGET_SENTRY_NODE_TESTNET_ZONE03:
+        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE03:
             return './init-sentry-node.yml';
         case TARGET_ROOT_NODE_TESTNET_PRIVATE:
             return './init-root-node.yml';
@@ -332,23 +332,23 @@ function getDockerComposeInitFile(args) {
 
 function getDockerComposeStartFile(args) {
     switch (args.target) {
-        case TARGET_ROOT_NODE_TESTNET:
+        case TARGET_ROOT_NODE_TESTNET_PUBLIC_ZONE01:
             return './start-root-node.yml';
-        case TARGET_SEED_NODE_TESTNET_ZONE01:
+        case TARGET_SEED_NODE_TESTNET_PUBLIC_ZONE01:
             return './start-seed-node.yml';
-        case TARGET_SENTRY_NODE_TESTNET_ZONE01:
+        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE01:
             return './start-sentry-node.yml';
-        case TARGET_VALIDATOR_NODE_TESTNET_ZONE02:
+        case TARGET_VALIDATOR_NODE_TESTNET_PUBLIC_ZONE02:
             return './start-full-node.yml';
-        case TARGET_SEED_NODE_TESTNET_ZONE02:
+        case TARGET_SEED_NODE_TESTNET_PUBLIC_ZONE02:
             return './start-seed-node.yml';
-        case TARGET_SENTRY_NODE_TESTNET_ZONE02:
+        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE02:
             return './start-sentry-node.yml';
-        case TARGET_VALIDATOR_NODE_TESTNET_ZONE03:
+        case TARGET_VALIDATOR_NODE_TESTNET_PUBLIC_ZONE03:
             return './start-full-node.yml';
-        case TARGET_SEED_NODE_TESTNET_ZONE03:
+        case TARGET_SEED_NODE_TESTNET_PUBLIC_ZONE03:
             return './start-seed-node.yml';
-        case TARGET_SENTRY_NODE_TESTNET_ZONE03:
+        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE03:
             return './start-sentry-node.yml';
         case TARGET_ROOT_NODE_TESTNET_PRIVATE:
             return './start-root-node.yml';
@@ -363,23 +363,23 @@ function getDockerComposeStartFile(args) {
 
 function getDockerInitProjectName(args) {
     switch (args.target) {
-        case TARGET_ROOT_NODE_TESTNET: // This is not used, because it is hardcoded in .yml file
+        case TARGET_ROOT_NODE_TESTNET_PUBLIC_ZONE01: // This is not used, because it is hardcoded in .yml file
             return 'cudos-init-root-node';
-        case TARGET_SEED_NODE_TESTNET_ZONE01:
+        case TARGET_SEED_NODE_TESTNET_PUBLIC_ZONE01:
             return 'cudos-init-seed-node-01';
-        case TARGET_SENTRY_NODE_TESTNET_ZONE01:
+        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE01:
             return 'cudos-init-sentry-node-01';
-        case TARGET_VALIDATOR_NODE_TESTNET_ZONE02:
+        case TARGET_VALIDATOR_NODE_TESTNET_PUBLIC_ZONE02:
             return 'cudos-init-validator-node-02';
-        case TARGET_SEED_NODE_TESTNET_ZONE02:
+        case TARGET_SEED_NODE_TESTNET_PUBLIC_ZONE02:
             return 'cudos-init-seed-node-02';
-        case TARGET_SENTRY_NODE_TESTNET_ZONE02:
+        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE02:
             return 'cudos-init-sentry-node-02';
-        case TARGET_VALIDATOR_NODE_TESTNET_ZONE03:
+        case TARGET_VALIDATOR_NODE_TESTNET_PUBLIC_ZONE03:
             return 'cudos-init-validator-node-03';
-        case TARGET_SEED_NODE_TESTNET_ZONE03:
+        case TARGET_SEED_NODE_TESTNET_PUBLIC_ZONE03:
             return 'cudos-init-seed-node-03';
-        case TARGET_SENTRY_NODE_TESTNET_ZONE03:
+        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE03:
             return 'cudos-init-sentry-node-03';
         case TARGET_ROOT_NODE_TESTNET_PRIVATE: // This is not used, because it is hardcoded in .yml file
             return 'cudos-init-root-node';
@@ -394,23 +394,23 @@ function getDockerInitProjectName(args) {
 
 function getDockerStartProjectName(args) {
     switch (args.target) {
-        case TARGET_ROOT_NODE_TESTNET: // This is not used, because it is hardcoded in .yml file
+        case TARGET_ROOT_NODE_TESTNET_PUBLIC_ZONE01: // This is not used, because it is hardcoded in .yml file
             return 'cudos-start-root-node';
-        case TARGET_SEED_NODE_TESTNET_ZONE01:
+        case TARGET_SEED_NODE_TESTNET_PUBLIC_ZONE01:
             return 'cudos-start-seed-node-01';
-        case TARGET_SENTRY_NODE_TESTNET_ZONE01:
+        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE01:
             return 'cudos-start-sentry-node-01';
-        case TARGET_VALIDATOR_NODE_TESTNET_ZONE02:
+        case TARGET_VALIDATOR_NODE_TESTNET_PUBLIC_ZONE02:
             return 'cudos-start-validator-node-02';
-        case TARGET_SEED_NODE_TESTNET_ZONE02:
+        case TARGET_SEED_NODE_TESTNET_PUBLIC_ZONE02:
             return 'cudos-start-seed-node-02';
-        case TARGET_SENTRY_NODE_TESTNET_ZONE02:
+        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE02:
             return 'cudos-start-sentry-node-02';
-        case TARGET_VALIDATOR_NODE_TESTNET_ZONE03:
+        case TARGET_VALIDATOR_NODE_TESTNET_PUBLIC_ZONE03:
             return 'cudos-start-validator-node-03';
-        case TARGET_SEED_NODE_TESTNET_ZONE03:
+        case TARGET_SEED_NODE_TESTNET_PUBLIC_ZONE03:
             return 'cudos-start-seed-node-03';
-        case TARGET_SENTRY_NODE_TESTNET_ZONE03:
+        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE03:
             return 'cudos-start-sentry-node-03';
         case TARGET_ROOT_NODE_TESTNET_PRIVATE: // This is not used, because it is hardcoded in .yml file
             return 'cudos-start-root-node';
