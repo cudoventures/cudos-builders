@@ -1,0 +1,16 @@
+version: '3'
+
+networks:
+  shared-cudos-network:
+    name: shared-cudos-network
+
+services:
+  ethereum2:
+    container_name: ethereum2
+    build:
+      context: .
+      dockerfile: ./ethereum.dockerfile
+    ports:
+      - "8546:8545"
+    networks:
+      - shared-cudos-network
