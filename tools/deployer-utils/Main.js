@@ -12,7 +12,7 @@ const SecretsConfig = require('./secrets.json');
 
 const TEMP_DIR = path.join(os.tmpdir(), 'cudos-builder');
 
-const TARGET_TESTNET = 'testnet';
+const TARGET_TESTNET_PUBLIC = 'testnet-public';
 const TARGET_TESTNET_PRIVATE = 'testnet-private';
 
 async function main() {
@@ -47,7 +47,7 @@ async function main() {
 
 function getArgParser() {
     const parser = new ArgumentParser({description: 'Cudos testnet root node deployer'});
-    parser.add_argument('--target', { 'required': true, 'choices': [TARGET_TESTNET, TARGET_TESTNET_PRIVATE] });
+    parser.add_argument('--target', { 'required': true, 'choices': [TARGET_TESTNET_PUBLIC, TARGET_TESTNET_PRIVATE] });
     parser.add_argument('--init', { 'required': true, 'choices': ['0', '1'] });
     return parser.parse_args();
 }
@@ -259,8 +259,8 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
 
 function getDockerExplorerEnvFile(args) {
     switch (args.target) {
-        case TARGET_TESTNET:
-            return './explorer.testnet.arg';
+        case TARGET_TESTNET_PUBLIC:
+            return './explorer.testnet.public.arg';
         case TARGET_TESTNET_PRIVATE:
             return './explorer.testnet.private.arg';
         default:
@@ -270,8 +270,8 @@ function getDockerExplorerEnvFile(args) {
 
 function getDockerFaucetEnvFile(args) {
     switch (args.target) {
-        case TARGET_TESTNET:
-            return './faucet.testnet.arg';
+        case TARGET_TESTNET_PUBLIC:
+            return './faucet.testnet.public.arg';
         case TARGET_TESTNET_PRIVATE:
             return './faucet.testnet.private.arg';
         default:

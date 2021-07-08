@@ -290,44 +290,44 @@
             "group": "build"
         },
 
-        // full node - client testnet
+        // full node - client testnet public
         {
-            "label": "Build INIT FULL NODE CLIENT TESTNET in docker",
-            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet01.arg -f ./init-full-node.yml -p cudos-init-full-node-client-testnet-01 up --build",
+            "label": "Build INIT FULL NODE CLIENT TESTNET PUBLIC in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet.public01.arg -f ./init-full-node.yml -p cudos-init-full-node-client-testnet-public-01 up --build",
             "type": "shell",
             "group": "build"
         }, {
-            "label": "Destroy INIT FULL NODE CLIENT TESTNET in docker",
-            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet01.arg -f ./init-full-node.yml -p cudos-init-full-node-client-testnet-01 down",
+            "label": "Destroy INIT FULL NODE CLIENT TESTNET PUBLIC in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet.public01.arg -f ./init-full-node.yml -p cudos-init-full-node-client-testnet-public-01 down",
             "type": "shell",
             "group": "build"
         },
 
         {
-            "label": "Build CONFIG FULL NODE CLIENT TESTNET in docker",
-            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet01.arg -f ./config-full-node.yml -p cudos-config-full-node-client-testnet-01 up --build",
+            "label": "Build CONFIG FULL NODE CLIENT TESTNET PUBLIC in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet.public01.arg -f ./config-full-node.yml -p cudos-config-full-node-client-testnet-public-01 up --build",
             "type": "shell",
             "group": "build"
         }, {
-            "label": "Destroy CONFIG FULL NODE CLIENT TESTNET in docker",
-            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet01.arg -f ./config-full-node.yml -p cudos-config-full-node-client-testnet-01 down",
+            "label": "Destroy CONFIG FULL NODE CLIENT TESTNET PUBLIC in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet.public01.arg -f ./config-full-node.yml -p cudos-config-full-node-client-testnet-public-01 down",
             "type": "shell",
             "group": "build"
         },
 
         {
-            "label": "Start START FULL NODE CLIENT TESTNET in docker",
-            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet01.arg -f ./start-full-node.yml -p cudos-start-full-node-client-testnet-01 up",
+            "label": "Start START FULL NODE CLIENT TESTNET PUBLIC in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet.public01.arg -f ./start-full-node.yml -p cudos-start-full-node-client-testnet-public-01 up",
             "type": "shell",
             "group": "build",
         }, {
-            "label": "Build START FULL NODE CLIENT TESTNET in docker",
-            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet01.arg -f ./start-full-node.yml -p cudos-start-full-node-client-testnet-01 up --build",
+            "label": "Build START FULL NODE CLIENT TESTNET PUBLIC in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet.public01.arg -f ./start-full-node.yml -p cudos-start-full-node-client-testnet-public-01 up --build",
             "type": "shell",
             "group": "build"
         }, {
-            "label": "Destroy START FULL NODE CLIENT TESTNET in docker",
-            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet01.arg -f ./start-full-node.yml -p cudos-start-full-node-client-testnet-01 down",
+            "label": "Destroy START FULL NODE CLIENT TESTNET PUBLIC in docker",
+            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet.public01.arg -f ./start-full-node.yml -p cudos-start-full-node-client-testnet-public-01 down",
             "type": "shell",
             "group": "build"
         },

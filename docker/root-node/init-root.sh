@@ -117,10 +117,10 @@ PRIVATE_SALE_OFFER_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show private-sal
 
 # create validators
 cudos-noded add-genesis-account $ZERO_ACCOUNT_ADDRESS "1${BOND_DENOM}"
-cudos-noded add-genesis-account $ROOT_VALIDATOR_01_ADDRESS "100000000000000100000${BOND_DENOM},1cudosAdmin"
-cudos-noded add-genesis-account $VALIDATOR_02_ADDRESS "100000000000000100000${BOND_DENOM},1cudosAdmin"
-cudos-noded add-genesis-account $VALIDATOR_03_ADDRESS "100000000000000100000${BOND_DENOM},1cudosAdmin"
-(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded gentx root-validator-01 "100000000000000000000${BOND_DENOM}" --chain-id $CHAIN_ID --keyring-backend os
+cudos-noded add-genesis-account $ROOT_VALIDATOR_01_ADDRESS "10001000000000000000000${BOND_DENOM},1cudosAdmin"
+cudos-noded add-genesis-account $VALIDATOR_02_ADDRESS "10001000000000000000000${BOND_DENOM},1cudosAdmin"
+cudos-noded add-genesis-account $VALIDATOR_03_ADDRESS "10001000000000000000000${BOND_DENOM},1cudosAdmin"
+(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded gentx root-validator-01 "10000000000000000000000${BOND_DENOM}" ${ORCH_ETH_ADDRESS} ${ORCH_01_ADDRESS} --chain-id $CHAIN_ID --keyring-backend os
 
 # add faucet account
 ((echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add faucet --keyring-backend os) |& tee "${CUDOS_HOME}/faucet.wallet"
