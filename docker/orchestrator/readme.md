@@ -10,7 +10,7 @@
 
 ##To send cosmos-to-eth transaction from orchestrator binary example
 
-./gbt client cosmos-to-eth \
+./gbt --address-prefix="cudos" client cosmos-to-eth \
 --amount="<amount_and_denomination>" \
 --cosmos-grpc="$GRPC" \
 --cosmos-phrase="<cosmos mnemonic of the sender address>" \
