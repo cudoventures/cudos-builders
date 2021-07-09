@@ -3,6 +3,11 @@
     "tasks": [
         // root node
         {
+            "label": "Start INIT ROOT NODE in docker",
+            "command": "cd ./docker/root-node&& sudo docker-compose --env-file ./root-node.local.arg -f ./init-root-node.yml -p cudos-init-root-node up",
+            "type": "shell",
+            "group": "build"
+        }, {
             "label": "Build INIT ROOT NODE in docker",
             "command": "cd ./docker/root-node&& sudo docker-compose --env-file ./root-node.local.arg -f ./init-root-node.yml -p cudos-init-root-node up --build",
             "type": "shell",
