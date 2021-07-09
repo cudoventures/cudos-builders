@@ -68,6 +68,11 @@
 
         // sentry node
         {
+            "label": "Start INIT SENTRY NODE in docker",
+            "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node-01 up",
+            "type": "shell",
+            "group": "build"
+        }, {
             "label": "Build INIT SENTRY NODE in docker",
             "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node-01 up --build",
             "type": "shell",
