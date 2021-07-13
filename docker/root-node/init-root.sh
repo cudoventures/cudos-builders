@@ -139,6 +139,7 @@ PRIVATE_SALE_OFFER_ACCOUNT=$(sed -e "s/SALE_OFFER_ACC/$PRIVATE_SALE_OFFER_ADDRES
 cat "${CUDOS_HOME}/config/genesis.json" | jq --argjson PRIVATE_SALE_OFFER_ACCOUNT "$PRIVATE_SALE_OFFER_ACCOUNT" '.app_state.auth.accounts += [$PRIVATE_SALE_OFFER_ACCOUNT]' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
 cat "${CUDOS_HOME}/config/genesis.json" | jq --argjson PRIVATE_SALE_OFFER_BALANCE "$PRIVATE_SALE_OFFER_BALANCE" '.app_state.bank.balances += [$PRIVATE_SALE_OFFER_BALANCE]' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
 
+cat "${CUDOS_HOME}/config/genesis.json" | jq '.app_state.gravity.params.signed_batches_window = "10"' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
 cat "${CUDOS_HOME}/config/genesis.json" | jq '.app_state.gravity.erc20_to_denoms[0] |= .+ {"erc20": "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d", "denom": "acudos"}' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
 
 cudos-noded collect-gentxs
