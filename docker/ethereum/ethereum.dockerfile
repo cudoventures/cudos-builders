@@ -1,4 +1,4 @@
-FROM ethereum/client-go:stable
+FROM ethereum/client-go:v1.10.4
 
 RUN apk add --no-cache curl
 
