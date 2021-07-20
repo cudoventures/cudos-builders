@@ -112,8 +112,12 @@ ROOT_VALIDATOR_01_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show root-validat
 ORCH_01_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show orch-01 -a --keyring-backend os)
 (echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add validator-02 --keyring-backend os |& tee "${CUDOS_HOME}/validator-02.wallet"
 VALIDATOR_02_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show validator-02 -a --keyring-backend os)
+(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add orch-02 --keyring-backend os |& tee "${CUDOS_HOME}/orch-02.wallet"
+ORCH_02_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show orch-02 -a --keyring-backend os)
 (echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add validator-03 --keyring-backend os |& tee "${CUDOS_HOME}/validator-03.wallet"
 VALIDATOR_03_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show validator-03 -a --keyring-backend os)
+(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add orch-03 --keyring-backend os |& tee "${CUDOS_HOME}/orch-03.wallet"
+ORCH_03_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show orch-03 -a --keyring-backend os)
 (echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add private-sale-offer --keyring-backend os
 PRIVATE_SALE_OFFER_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show private-sale-offer -a --keyring-backend os)
 
@@ -123,6 +127,8 @@ cudos-noded add-genesis-account $ROOT_VALIDATOR_01_ADDRESS "10001000000000000000
 cudos-noded add-genesis-account $VALIDATOR_02_ADDRESS "10001000000000000000000${BOND_DENOM},1cudosAdmin"
 cudos-noded add-genesis-account $VALIDATOR_03_ADDRESS "10001000000000000000000${BOND_DENOM},1cudosAdmin"
 cudos-noded add-genesis-account $ORCH_01_ADDRESS "10001000000000000000000${BOND_DENOM}"
+cudos-noded add-genesis-account $ORCH_02_ADDRESS "10001000000000000000000${BOND_DENOM}"
+cudos-noded add-genesis-account $ORCH_03_ADDRESS "10001000000000000000000${BOND_DENOM}"
 (echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded gentx root-validator-01 "10000000000000000000000${BOND_DENOM}" ${ORCH_ETH_ADDRESS} ${ORCH_01_ADDRESS} --chain-id $CHAIN_ID --keyring-backend os
 
 # add faucet account
