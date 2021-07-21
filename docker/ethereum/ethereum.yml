@@ -12,5 +12,7 @@ services:
       dockerfile: ./ethereum.dockerfile
     ports:
       - "8545:8545"
+    volumes:
+      - '../../../CudosData/ethereum:/root/.ethereum'
     networks:
       - shared-cudos-network

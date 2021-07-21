@@ -60,7 +60,7 @@ function getArgParser() {
         TARGET_VALIDATOR_NODE_TESTNET_PUBLIC_ZONE03, TARGET_SEED_NODE_TESTNET_PUBLIC_ZONE03, TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE03,
         TARGET_ROOT_NODE_TESTNET_PRIVATE, TARGET_SEED_NODE_TESTNET_PRIVATE, TARGET_SENTRY_NODE_TESTNET_PRIVATE
     ]
-    const parser = new ArgumentParser({description: 'Cudos testnet root node deployer'});
+    const parser = new ArgumentParser({description: 'Cudos testnet nodes deployer'});
     parser.add_argument('--target', { 'required': true, 'choices': targets });
     parser.add_argument('--init', { 'required': true, 'choices': ['0', '1'] });
     parser.add_argument('--start', { 'required': true, 'choices': ['0', '1'] });
@@ -134,7 +134,44 @@ async function createArchive(deployFilePath, deployFilename) {
 
         // append files from a sub-directory, putting its contents at the root of archive
         archive.directory(path.resolve('../../CudosNode'), '/CudosNode');
+        archive.directory(path.resolve('../../CudosGravityBridge/module'), '/CudosGravityBridge/module');
         archive.directory(path.resolve('../docker'), '/CudosBuilders/docker');
+
+        // const projectGravityBridge = path.resolve('../../CudosGravityBridge');
+        // const pathContent = await asyncFs.readdir(projectGravityBridge);
+        // for (let i = 0;  i < pathContent.length; ++i) {
+        //     const itemAbsPath = path.join(projectGravityBridge, pathContent[i]);
+        //     const stat = await asyncFs.stat(itemAbsPath);
+
+        //     switch (pathContent[i]) {
+        //         case '.git':
+        //         case '.github':
+        //         case 'target':
+        //             break;
+        //         case 'orchestrator':
+        //             const orchestratorPathContent = await asyncFs.readdir(itemAbsPath);
+        //             for (let j = 0;  j < orchestratorPathContent.length;  ++j) {
+        //                 if (orchestratorPathContent[j] === 'target') {
+        //                     continue;
+        //                 }
+        //                 const meteorItemAbsPath = path.join(projectExplorerAbsPath, pathContent[i], orchestratorPathContent[j]);
+        //                 const meteorStat = await asyncFs.stat(meteorItemAbsPath);
+        //                 if (meteorStat.isDirectory() === true) {
+        //                     archive.directory(meteorItemAbsPath, `/CudosGravityBridge/${pathContent[i]}/${orchestratorPathContent[j]}`);
+        //                 } else {
+        //                     archive.file(meteorItemAbsPath, { 'name': `/CudosGravityBridge/${pathContent[i]}/${orchestratorPathContent[j]}` } );
+        //                 }
+        //             }
+        //             break;
+        //         default:
+        //             if (stat.isDirectory() === true) {
+        //                 archive.directory(itemAbsPath, `/CudosGravityBridge/${pathContent[i]}`);
+        //             } else {
+        //                 archive.file(itemAbsPath, { 'name': `/CudosGravityBridge/${pathContent[i]}` } );
+        //             }
+        //             break;
+        //     }
+        // }
 
         archive.finalize();
     });
@@ -187,6 +224,7 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         `cd ${secrets.serverPath}`,
         `sudo rm -Rf ./CudosBuilders`,
         `sudo rm -Rf ./CudosNode`,
+        `sudo rm -Rf ./CudosGravityBridge`,
         `sudo unzip -q ${filePath} -d ./`,
         `rm ${filePath}`,
         `cd ./CudosBuilders/docker/${dockerRootPath}`,
@@ -203,6 +241,7 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         args.config === '1' ? `(sudo docker-compose --env-file ${dockerEnvFile} -f config-full-node.yml -p cudos-config-validator-node down || true)` : null, 
         args.start === '1' ? `sudo docker-compose --env-file ${dockerEnvFile} -f ${dockerComposeStartFile} -p ${dockerStartProjectName} up --build -d` : null,
         // `cd ${secrets.serverPath}`,
+        // `sudo rm -Rf ./CudosGravityBridge`,
         // `sudo rm -Rf ./CudosBuilders`,
         // `sudo rm -Rf ./CudosNode`,
     ]

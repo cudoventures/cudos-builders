@@ -12,7 +12,6 @@
         "deploy--init--start_seed-node-testnet-public-zone01": "node ./deployer-nodes/Main.js --target=seed-node-testnet-public-zone01 --init=1 --config=0 --start=1",
         "deploy--start_sentry-node-testnet-public-zone01": "node ./deployer-nodes/Main.js --target=sentry-node-testnet-public-zone01 --init=0 --config=0 --start=1",
         "deploy--init--start_sentry-node-testnet-public-zone01": "node ./deployer-nodes/Main.js --target=sentry-node-testnet-public-zone01 --init=1 --config=0 --start=1",
-        "deploy-utils-testnet-public": "node ./deployer-utils/Main.js --target=testnet-public --init=1",
         "deploy--init_validator-node-testnet-public-zone02": "node ./deployer-nodes/Main.js --target=validator-node-testnet-public-zone02 --init=1 --config=0 --start=0",
         "deploy--start_validator-node-testnet-public-zone02": "node ./deployer-nodes/Main.js --target=validator-node-testnet-public-zone02 --init=0 --config=0 --start=1",
         "deploy--config--start_validator-node-testnet-public-zone02": "node ./deployer-nodes/Main.js --target=validator-node-testnet-public-zone02 --init=0 --config=1 --start=1",
@@ -28,13 +27,23 @@
         "deploy--start_sentry-node-testnet-public-zone03": "node ./deployer-nodes/Main.js --target=sentry-node-testnet-public-zone03 --init=0 --config=0 --start=1",
         "deploy--init--start_sentry-node-testnet-public-zone03": "node ./deployer-nodes/Main.js --target=sentry-node-testnet-public-zone03 --init=1 --config=0 --start=1",
 
+        "deploy-utils-testnet-public": "node ./deployer-utils/Main.js --target=testnet-public --init=1",
+
+
+
         "deploy--start_root-node-testnet-private": "node ./deployer-nodes/Main.js --target=root-node-testnet-private --init=0 --config=0 --start=1",
         "deploy--init--start_root-node-testnet-private": "node ./deployer-nodes/Main.js --target=root-node-testnet-private --init=1 --config=0 --start=1",
         "deploy--start_seed-node-testnet-private": "node ./deployer-nodes/Main.js --target=seed-node-testnet-private --init=0 --config=0 --start=1",
         "deploy--init--start_seed-node-testnet-private": "node ./deployer-nodes/Main.js --target=seed-node-testnet-private --init=1 --config=0 --start=1",
         "deploy--start_sentry-node-testnet-private": "node ./deployer-nodes/Main.js --target=sentry-node-testnet-private --init=0 --config=0 --start=1",
         "deploy--init--start_sentry-node-testnet-private": "node ./deployer-nodes/Main.js --target=sentry-node-testnet-private --init=1 --config=0 --start=1",
-        "deploy-utils-testnet-private": "node ./deployer-utils/Main.js --target=testnet-private --init=1"
+
+        "deploy-utils-testnet-private": "node ./deployer-utils/Main.js --target=testnet-private --init=1",
+
+        "deploy--ethereum-testnet-private": "node ./deployer-ethereum/Main.js --target=sentry-node-testnet-private",
+
+        "deploy--orchestrator-testnet-private": "node ./deployer-orchestrator/Main.js --target=root-node-testnet-private"
+
     },
     "engines": {
         "node": ">=12"
