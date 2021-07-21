@@ -18,7 +18,7 @@ sed -i "s/persistent_peers = \".*\"/persistent_peers = \"$PERSISTENT_PEERS\"/g" 
 sed -i "s/seeds = \".*\"/seeds = \"$SEEDS\"/g" "${CUDOS_HOME}/config/config.toml"
 
 if [ "$SHOULD_USE_STATE_SYNC" = "true" ]; then
-    STATE_SYNC_JSON=$(curl -s http://34.102.4.198:26657/commit | jq "{height: .result.signed_header.header.height, hash: .result.signed_header.commit.block_id.hash}")
+    STATE_SYNC_JSON=$(curl -s http://35.232.27.92:26657/commit | jq "{height: .result.signed_header.header.height, hash: .result.signed_header.commit.block_id.hash}")
     STATE_SYNC_HEIGHT=$(echo $STATE_SYNC_JSON | jq ".height")
     STATE_SYNC_HASH=$(echo $STATE_SYNC_JSON | jq ".hash")
     sed -i "s/enable = false/enable = true/g" "${CUDOS_HOME}/config/config.toml"

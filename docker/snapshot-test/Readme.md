@@ -36,6 +36,12 @@ SEEDS=
 SHOULD_USE_GLOBAL_PEERS=false
 ```
 
+Log in the cudos-full-node-01 and cudos-full-node-02 and execute to get the id of the node:
+``
+cudos-noded tendermint show-node-id
+``
+
+
 4. Start snapshots-nodes and fast-sync node
 ``
 docker-compose -f ./docker-compose.yml -p cudos-snapshots-test up --build
@@ -48,6 +54,14 @@ Get sync state height:
 curl -s http://localhost:60601/commit | jq "{height: .result.signed_header.header.height, hash: .result.signed_header.commit.block_id.hash}"
 
 curl -s http://localhost:60602/commit | jq "{height: .result.signed_header.header.height, hash: .result.signed_header.commit.block_id.hash}"
+
+curl -s http://35.232.27.92:26657/block | jq -r '.result.block.header.height + "\n" + .result.block_id.hash'
+
+curl -s http://35.232.27.92:26657/commit | jq "{height: .result.signed_header.header.height, hash: .result.signed_header.commit.block_id.hash}"
+
+curl -s http://35.232.27.92:26657/block_search | jq "{height: .result.signed_header.header.height, hash: .result.signed_header.commit.block_id.hash}"
+
+block_search
 
 Example response:
 ``
