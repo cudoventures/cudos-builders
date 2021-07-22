@@ -175,6 +175,7 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         `rm ${filePath}`,
         `cd ./CudosBuilders/docker/${dockerRootPath}`,
         `(sudo docker-compose -f ${dockerComposeFile} -p ${dockerProjectName} down || true)`,
+        `sudo docker system prune -a -f`,
         `sudo rm -rf ${secrets.serverPath}/CudosData/ethereum/*`,
         `sudo docker-compose -f ${dockerComposeFile} -p ${dockerProjectName} up --build -d`,
         // `cd ${secrets.serverPath}`,

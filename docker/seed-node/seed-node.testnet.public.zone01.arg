@@ -10,3 +10,4 @@ START_CONTAINER_NAME=cudos-start-seed-node-testnet-public-zone01
 VOLUME_NAME=cudos-data-seed-node-testnet-public-zone01
 
 PORT26656=26656
+PORT26657=26657

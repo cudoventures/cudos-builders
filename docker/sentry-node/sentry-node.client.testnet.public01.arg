@@ -12,3 +12,4 @@ VOLUME_NAME=cudos-data-sentry-node-client-testnet-public-01
 PORT26656=26656
 PORT26657=26657
 PORT1317=1317
+PORT9090=9090

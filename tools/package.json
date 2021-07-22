@@ -38,11 +38,11 @@
         "deploy--start_sentry-node-testnet-private": "node ./deployer-nodes/Main.js --target=sentry-node-testnet-private --init=0 --config=0 --start=1",
         "deploy--init--start_sentry-node-testnet-private": "node ./deployer-nodes/Main.js --target=sentry-node-testnet-private --init=1 --config=0 --start=1",
 
-        "deploy-utils-testnet-private": "node ./deployer-utils/Main.js --target=testnet-private --init=1",
-
         "deploy--ethereum-testnet-private": "node ./deployer-ethereum/Main.js --target=sentry-node-testnet-private",
-
-        "deploy--orchestrator-testnet-private": "node ./deployer-orchestrator/Main.js --target=root-node-testnet-private"
+        
+        "deploy--orchestrator-testnet-private": "node ./deployer-orchestrator/Main.js --target=root-node-testnet-private",
+        
+        "deploy-utils-testnet-private": "node ./deployer-utils/Main.js --target=testnet-private --init=1"
 
     },
     "engines": {

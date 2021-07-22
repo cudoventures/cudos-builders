@@ -137,42 +137,6 @@ async function createArchive(deployFilePath, deployFilename) {
         archive.directory(path.resolve('../../CudosGravityBridge/module'), '/CudosGravityBridge/module');
         archive.directory(path.resolve('../docker'), '/CudosBuilders/docker');
 
-        // const projectGravityBridge = path.resolve('../../CudosGravityBridge');
-        // const pathContent = await asyncFs.readdir(projectGravityBridge);
-        // for (let i = 0;  i < pathContent.length; ++i) {
-        //     const itemAbsPath = path.join(projectGravityBridge, pathContent[i]);
-        //     const stat = await asyncFs.stat(itemAbsPath);
-
-        //     switch (pathContent[i]) {
-        //         case '.git':
-        //         case '.github':
-        //         case 'target':
-        //             break;
-        //         case 'orchestrator':
-        //             const orchestratorPathContent = await asyncFs.readdir(itemAbsPath);
-        //             for (let j = 0;  j < orchestratorPathContent.length;  ++j) {
-        //                 if (orchestratorPathContent[j] === 'target') {
-        //                     continue;
-        //                 }
-        //                 const meteorItemAbsPath = path.join(projectExplorerAbsPath, pathContent[i], orchestratorPathContent[j]);
-        //                 const meteorStat = await asyncFs.stat(meteorItemAbsPath);
-        //                 if (meteorStat.isDirectory() === true) {
-        //                     archive.directory(meteorItemAbsPath, `/CudosGravityBridge/${pathContent[i]}/${orchestratorPathContent[j]}`);
-        //                 } else {
-        //                     archive.file(meteorItemAbsPath, { 'name': `/CudosGravityBridge/${pathContent[i]}/${orchestratorPathContent[j]}` } );
-        //                 }
-        //             }
-        //             break;
-        //         default:
-        //             if (stat.isDirectory() === true) {
-        //                 archive.directory(itemAbsPath, `/CudosGravityBridge/${pathContent[i]}`);
-        //             } else {
-        //                 archive.file(itemAbsPath, { 'name': `/CudosGravityBridge/${pathContent[i]}` } );
-        //             }
-        //             break;
-        //     }
-        // }
-
         archive.finalize();
     });
 }

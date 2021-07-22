@@ -119,6 +119,7 @@ async function createArchive(deployFilePath, deployFilename) {
         // append files from a sub-directory, putting its contents at the root of archive
         archive.directory(path.resolve('../../CudosNode'), '/CudosNode');
         archive.directory(path.resolve('../../CudosFaucet'), "/CudosFaucet");
+        archive.directory(path.resolve('../../CudosGravityBridge/module'), '/CudosGravityBridge/module');
         archive.directory(path.resolve('../docker'), '/CudosBuilders/docker');
 
         const projectExplorerAbsPath = path.resolve('../../CudosExplorer');
@@ -205,6 +206,7 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         `sudo rm -Rf ./CudosBuilders`,
         `sudo rm -Rf ./CudosFaucet`,
         `sudo rm -Rf ./CudosExplorer`,
+        `sudo rm -Rf ./CudosGravityBridge`,
         `sudo unzip -q ${filePath} -d ./`,
         `rm ${filePath}`,
         `cd ./CudosBuilders/docker/explorer`,
@@ -225,6 +227,7 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         // `sudo rm -Rf ./CudosNode`,
         // `sudo rm -Rf ./CudosBuilders`,
         // `sudo rm -Rf ./CudosUtils`,
+        // `sudo rm -Rf ./CudosGravityBridge`,
     ]
 
     command = command.filter(c => c !== null).join(' && ');

@@ -464,6 +464,24 @@
             "group": "build"
         },
 
+        // Orchestrator - client testnet private
+        {
+            "label": "Start ORCHESTRATOR CLIENT TESTNET PRIVATE RELEASE in docker",
+            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./orchestrator.client.testnet.private01.arg -f ./orchestrator.release.yml -p cudos-orchestrator-client-testnet-private-01-release up",
+            "type": "shell",
+            "group": "build",
+        }, {
+            "label": "Build ORCHESTRATOR CLIENT TESTNET PRIVATE RELEASE in docker",
+            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./orchestrator.client.testnet.private01.arg -f ./orchestrator.release.yml -p cudos-orchestrator-client-testnet-private-01-release up --build",
+            "type": "shell",
+            "group": "build"
+        }, {
+            "label": "Destroy ORCHESTRATOR CLIENT TESTNET PRIVATE RELEASE in docker",
+            "command": "cd ./docker/orchestrator&& sudo docker-compose --env-file ./orchestrator.client.testnet.private01.arg -f ./orchestrator.release.yml -p cudos-orchestrator-client-testnet-private-01-release down",
+            "type": "shell",
+            "group": "build"
+        },
+
         // Contract deployer
         {
             "label": "Start CONTRACT DEPLOYER in docker",
