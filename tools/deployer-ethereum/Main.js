@@ -11,11 +11,7 @@ const SecretsConfig = require('./secrets.json');
 
 const TEMP_DIR = path.join(os.tmpdir(), 'cudos-builder');
 
-const TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE01 = 'sentry-node-testnet-public-zone01';
-const TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE02 = 'sentry-node-testnet-public-zone02';
-const TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE03 = 'sentry-node-testnet-public-zone03';
-
-const TARGET_SENTRY_NODE_TESTNET_PRIVATE = 'sentry-node-testnet-private';
+const ETHEREUM = 'ethereum';
 
 async function main() {
     const args = getArgParser();
@@ -47,10 +43,7 @@ async function main() {
 
 function getArgParser() {
     const targets = [
-        TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE01,
-        TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE02,
-        TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE03,
-        TARGET_SENTRY_NODE_TESTNET_PRIVATE
+        ETHEREUM
     ]
     const parser = new ArgumentParser({description: 'Cudos testnet eth light node deployer'});
     parser.add_argument('--target', { 'required': true, 'choices': targets });
@@ -164,9 +157,9 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
     const conn = new SSH2Client();
     const filePath = path.join(secrets.serverPath, deployFilename);
 
-    const dockerRootPath = getDockerRootPath(args);
-    const dockerComposeFile = getDockerComposeFile(args);
-    const dockerProjectName = getDockerProjectName(args);
+    const dockerRootPath = 'ethereum';
+    const dockerComposeFile = './ethereum.yml';
+    const dockerProjectName = 'ethereum';
 
     command = [
         `cd ${secrets.serverPath}`,
@@ -176,7 +169,7 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         `cd ./CudosBuilders/docker/${dockerRootPath}`,
         `(sudo docker-compose -f ${dockerComposeFile} -p ${dockerProjectName} down || true)`,
         `sudo docker system prune -a -f`,
-        `sudo rm -rf ${secrets.serverPath}/CudosData/ethereum/*`,
+        // `sudo rm -rf ${secrets.serverPath}/CudosData/ethereum/*`,
         `sudo docker-compose -f ${dockerComposeFile} -p ${dockerProjectName} up --build -d`,
         // `cd ${secrets.serverPath}`,
         // `sudo rm -Rf ./CudosBuilders`,
@@ -210,51 +203,6 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         privateKey: (await asyncFs.readFile(secrets.privateKey)).toString(),
         path: secrets.serverPath,
     });
-}
-
-function getDockerRootPath(args) {
-    switch (args.target) {
-        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE01:
-            return 'ethereum';
-        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE02:
-            return 'ethereum';
-        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE03:
-            return 'ethereum';
-        case TARGET_SENTRY_NODE_TESTNET_PRIVATE:
-            return 'ethereum';
-        default:
-            throw Error(`Unknown target ${args.target}`);
-    }
-}
-
-function getDockerComposeFile(args) {
-    switch (args.target) {
-        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE01:
-            return './ethereum.yml';
-        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE02:
-            return './ethereum.yml';
-        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE03:
-            return './ethereum.yml';
-        case TARGET_SENTRY_NODE_TESTNET_PRIVATE:
-            return './ethereum.yml';
-        default:
-            throw Error(`Unknown target ${args.target}`);
-    }
-}
-
-function getDockerProjectName(args) {
-    switch (args.target) {
-        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE01:
-            return 'ethereum';
-        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE02:
-            return 'ethereum';
-        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE03:
-            return 'ethereum';
-        case TARGET_SENTRY_NODE_TESTNET_PRIVATE:
-            return 'ethereum';
-        default:
-            throw Error(`Unknown target ${args.target}`);
-    }
 }
 
 main();
