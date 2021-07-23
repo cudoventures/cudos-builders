@@ -5,12 +5,12 @@ networks:
     name: shared-cudos-network
 
 services:
-  ethereum2:
-    container_name: ethereum2
+  ethereum-light:
+    container_name: ethereum-light
     build:
       context: .
-      dockerfile: ./ethereum.dockerfile
+      dockerfile: ./ethereum-light.dockerfile
     ports:
-      - "8546:8545"
+      - "8545:8545"
     networks:
       - shared-cudos-network

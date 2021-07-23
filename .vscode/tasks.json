@@ -514,14 +514,14 @@
             "group": "build",
         }
         {
-            "label": "Build ETHEREUM NODE02 in docker",
-            "command": "cd ./docker/ethereum&& sudo docker-compose -f ./ethereum2.yml -p ethereum2 up --build",
+            "label": "Build ETHEREUM LIGHT NODE in docker",
+            "command": "cd ./docker/ethereum&& sudo docker-compose -f ./ethereum-light.yml -p ethereum-light up --build",
             "type": "shell",
             "group": "build",
         },
         {
-            "label": "Destroy ETHEREUM NODE02 in docker",
-            "command": "cd ./docker/ethereum&& sudo docker-compose -f ./ethereum2.yml -p ethereum2 down",
+            "label": "Destroy ETHEREUM LIGHT NODE in docker",
+            "command": "cd ./docker/ethereum&& sudo docker-compose -f ./ethereum-light.yml -p ethereum-light down",
             "type": "shell",
             "group": "build",
         }
