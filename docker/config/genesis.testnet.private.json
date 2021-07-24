@@ -1,5 +1,5 @@
 {
-  "genesis_time": "2021-07-22T09:10:44.558079594Z",
+  "genesis_time": "2021-07-23T20:02:42.007319312Z",
   "chain_id": "cudos-testnet-private",
   "initial_height": "1",
   "consensus_params": {
@@ -34,56 +34,56 @@
       "accounts": [
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
-          "address": "cudos1v6g9mehwv7wry34w8xgcynyl0w97qr3kyuay0v",
+          "address": "cudos1a6ccugy3ruv5xyt0cmh4ptf40tv9caeu4ygtdj",
           "pub_key": null,
           "account_number": "0",
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
-          "address": "cudos1ncuxfa5t24hnepn0uupe9xxfmcl2f4y0h8fm6e",
+          "address": "cudos10ltqnr7ll8tjg4c2f4tdtqj784v29t39lq9w08",
           "pub_key": null,
           "account_number": "0",
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
-          "address": "cudos1sjlsh2fx6zsmkcewjhf7fqmqu6fwenzjxmnpaj",
+          "address": "cudos1t9rqh0739058p3gtgye77uqf3q57sxsjxf04fh",
           "pub_key": null,
           "account_number": "0",
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
-          "address": "cudos1kq3wemx7hr3xe7kvlpw7xuca8m4ehkc8pf8nmx",
+          "address": "cudos1g9c9vtls5vx92gwvqvxfavpzrk08muqmmdhwn6",
           "pub_key": null,
           "account_number": "0",
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
-          "address": "cudos1sklx34cy9jv2wrzz6sfjnd8wvynux8mgyeryd7",
+          "address": "cudos1n9xawgwk406s82957q5d8fua9pk3hm6plktd6a",
           "pub_key": null,
           "account_number": "0",
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
-          "address": "cudos1s7cn8ev9cfhdfz0ugsl5al0vjkvrf2kvhkyhls",
+          "address": "cudos1327rpz6wuaz57hrad7tmafzqfuec347j5x8xh9",
           "pub_key": null,
           "account_number": "0",
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
-          "address": "cudos174z56ktqe65rvp8hnnw2wf5kvshdqq4hrnrz4w",
+          "address": "cudos1psenlxz39wysw4qw8anulmx2f4q605rfgegazq",
           "pub_key": null,
           "account_number": "0",
           "sequence": "0"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
-          "address": "cudos1g5wqmrev97tr59nsvwe2zvczmhmkg0507gujsn",
+          "address": "cudos1ky3umqvmqlxpx5svz9fvphvfzccqxwxh0mu7y9",
           "pub_key": null,
           "account_number": "0",
           "sequence": "0"
@@ -92,7 +92,7 @@
           "@type": "/cosmos.vesting.v1beta1.PeriodicVestingAccount",
           "base_vesting_account": {
             "base_account": {
-              "address": "cudos1pq4uczlklxy5vvdy3dppk9tcc4t8kn8hvscpsn",
+              "address": "cudos1zd2peahxa3l7lr5jkuwt65tmff0xjfh8x0977w",
               "pub_key": null,
               "account_number": "0",
               "sequence": "0"
@@ -3410,7 +3410,73 @@
       },
       "balances": [
         {
-          "address": "cudos1g5wqmrev97tr59nsvwe2zvczmhmkg0507gujsn",
+          "address": "cudos1psenlxz39wysw4qw8anulmx2f4q605rfgegazq",
+          "coins": [
+            {
+              "denom": "acudos",
+              "amount": "10001000000000000000000"
+            }
+          ]
+        },
+        {
+          "address": "cudos1g9c9vtls5vx92gwvqvxfavpzrk08muqmmdhwn6",
+          "coins": [
+            {
+              "denom": "acudos",
+              "amount": "10001000000000000000000"
+            },
+            {
+              "denom": "cudosAdmin",
+              "amount": "1"
+            }
+          ]
+        },
+        {
+          "address": "cudos1t9rqh0739058p3gtgye77uqf3q57sxsjxf04fh",
+          "coins": [
+            {
+              "denom": "acudos",
+              "amount": "10001000000000000000000"
+            },
+            {
+              "denom": "cudosAdmin",
+              "amount": "1"
+            }
+          ]
+        },
+        {
+          "address": "cudos10ltqnr7ll8tjg4c2f4tdtqj784v29t39lq9w08",
+          "coins": [
+            {
+              "denom": "acudos",
+              "amount": "10001000000000000000000"
+            },
+            {
+              "denom": "cudosAdmin",
+              "amount": "1"
+            }
+          ]
+        },
+        {
+          "address": "cudos1327rpz6wuaz57hrad7tmafzqfuec347j5x8xh9",
+          "coins": [
+            {
+              "denom": "acudos",
+              "amount": "10001000000000000000000"
+            }
+          ]
+        },
+        {
+          "address": "cudos1n9xawgwk406s82957q5d8fua9pk3hm6plktd6a",
+          "coins": [
+            {
+              "denom": "acudos",
+              "amount": "10001000000000000000000"
+            }
+          ]
+        },
+        {
+          "address": "cudos1ky3umqvmqlxpx5svz9fvphvfzccqxwxh0mu7y9",
           "coins": [
             {
               "denom": "acudos",
@@ -3419,7 +3485,7 @@
           ]
         },
         {
-          "address": "cudos1v6g9mehwv7wry34w8xgcynyl0w97qr3kyuay0v",
+          "address": "cudos1a6ccugy3ruv5xyt0cmh4ptf40tv9caeu4ygtdj",
           "coins": [
             {
               "denom": "acudos",
@@ -3428,73 +3494,7 @@
           ]
         },
         {
-          "address": "cudos1sjlsh2fx6zsmkcewjhf7fqmqu6fwenzjxmnpaj",
-          "coins": [
-            {
-              "denom": "acudos",
-              "amount": "10001000000000000000000"
-            },
-            {
-              "denom": "cudosAdmin",
-              "amount": "1"
-            }
-          ]
-        },
-        {
-          "address": "cudos1sklx34cy9jv2wrzz6sfjnd8wvynux8mgyeryd7",
-          "coins": [
-            {
-              "denom": "acudos",
-              "amount": "10001000000000000000000"
-            }
-          ]
-        },
-        {
-          "address": "cudos1s7cn8ev9cfhdfz0ugsl5al0vjkvrf2kvhkyhls",
-          "coins": [
-            {
-              "denom": "acudos",
-              "amount": "10001000000000000000000"
-            }
-          ]
-        },
-        {
-          "address": "cudos1ncuxfa5t24hnepn0uupe9xxfmcl2f4y0h8fm6e",
-          "coins": [
-            {
-              "denom": "acudos",
-              "amount": "10001000000000000000000"
-            },
-            {
-              "denom": "cudosAdmin",
-              "amount": "1"
-            }
-          ]
-        },
-        {
-          "address": "cudos1kq3wemx7hr3xe7kvlpw7xuca8m4ehkc8pf8nmx",
-          "coins": [
-            {
-              "denom": "acudos",
-              "amount": "10001000000000000000000"
-            },
-            {
-              "denom": "cudosAdmin",
-              "amount": "1"
-            }
-          ]
-        },
-        {
-          "address": "cudos174z56ktqe65rvp8hnnw2wf5kvshdqq4hrnrz4w",
-          "coins": [
-            {
-              "denom": "acudos",
-              "amount": "10001000000000000000000"
-            }
-          ]
-        },
-        {
-          "address": "cudos1pq4uczlklxy5vvdy3dppk9tcc4t8kn8hvscpsn",
+          "address": "cudos1zd2peahxa3l7lr5jkuwt65tmff0xjfh8x0977w",
           "coins": [
             {
               "denom": "stake",
@@ -3622,11 +3622,11 @@
                   "max_change_rate": "0.010000000000000000"
                 },
                 "min_self_delegation": "1",
-                "delegator_address": "cudos1ncuxfa5t24hnepn0uupe9xxfmcl2f4y0h8fm6e",
-                "validator_address": "cudosvaloper1ncuxfa5t24hnepn0uupe9xxfmcl2f4y02586my",
+                "delegator_address": "cudos10ltqnr7ll8tjg4c2f4tdtqj784v29t39lq9w08",
+                "validator_address": "cudosvaloper10ltqnr7ll8tjg4c2f4tdtqj784v29t39znt0w6",
                 "pubkey": {
                   "@type": "/cosmos.crypto.ed25519.PubKey",
-                  "key": "h/tU836WDlCdh+HdQYsCfW3/C28S89Oe66RGvuDikFQ="
+                  "key": "8YV4okjoP3yXoc8Sau10ieBYvE+Um52GrwAT8h9wBH0="
                 },
                 "value": {
                   "denom": "acudos",
@@ -3635,12 +3635,12 @@
               },
               {
                 "@type": "/gravity.v1.MsgSetOrchestratorAddress",
-                "validator": "cudosvaloper1ncuxfa5t24hnepn0uupe9xxfmcl2f4y02586my",
-                "orchestrator": "cudos1sklx34cy9jv2wrzz6sfjnd8wvynux8mgyeryd7",
+                "validator": "cudosvaloper10ltqnr7ll8tjg4c2f4tdtqj784v29t39znt0w6",
+                "orchestrator": "cudos1n9xawgwk406s82957q5d8fua9pk3hm6plktd6a",
                 "eth_address": "0xCFbd81158EAa74D85e7Ad6122398A7fAacbc22aA"
               }
             ],
-            "memo": "ba7b6af0e28fbf52b88a62893b2e7e95b5227241@172.31.0.2:26656",
+            "memo": "d64da5cabeab70cb3861f870eb69c1e6c2e07d53@192.168.16.2:26656",
             "timeout_height": "0",
             "extension_options": [],
             "non_critical_extension_options": []
@@ -3650,7 +3650,7 @@
               {
                 "public_key": {
                   "@type": "/cosmos.crypto.secp256k1.PubKey",
-                  "key": "Ah6kCWdb6Ybiq7l3oHPOORsH+zK9WBZO2dFm07OqrdyR"
+                  "key": "AlJd4uWG4etBxP0SSHXtzqS+s0gMlTPlhkASVzKgkTE1"
                 },
                 "mode_info": {
                   "single": {
@@ -3668,7 +3668,7 @@
             }
           },
           "signatures": [
-            "oObpVg4nBvG+XTDbt89XiULVlXJNKG4rr0y212xTvqdivZwT16rlUEP5veFo2Vw80phi6iYlaIXPNXJtws0P/Q=="
+            "WBP57wmi2qtXAFJMs6vh8TXGoz0t9yqTFfr2PLrVuFB3IZC9WmXQFzwogjiq1N8m2ehiwKYg3GPSkQ4La4uZ0A=="
           ]
         }
       ]
