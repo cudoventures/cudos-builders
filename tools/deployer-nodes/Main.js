@@ -65,6 +65,7 @@ function getArgParser() {
     parser.add_argument('--init', { 'required': true, 'choices': ['0', '1'] });
     parser.add_argument('--start', { 'required': true, 'choices': ['0', '1'] });
     parser.add_argument('--config', { 'required': true, 'choices': ['0', '1'] });
+    parser.add_argument('--https', { 'required': false, 'choices': ['0', '1'] });
     return parser.parse_args();
 }
 
@@ -180,6 +181,8 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
     const dockerEnvFile = getDockerEnvFile(args);
     const dockerComposeInitFile = getDockerComposeInitFile(args);
     const dockerComposeStartFile = getDockerComposeStartFile(args);
+    const dockerComposeStartOverwriteFiles = getDockerComposeStartOverwriteFiles(args);
+    const dockerComposeStartOverwriteCommand = dockerComposeStartOverwriteFiles.reduce((command, configName) => command + " -f " + configName);
     const dockerInitProjectName = getDockerInitProjectName(args);
     const dockerStartProjectName = getDockerStartProjectName(args);
 
@@ -201,7 +204,7 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         args.init === '1' ? `(sudo docker-compose --env-file ${dockerEnvFile}  -f ${dockerComposeInitFile} -p ${dockerInitProjectName} down || true)` : null,
         args.config === '1' ? `sudo docker-compose --env-file ${dockerEnvFile} -f config-full-node.yml -p cudos-config-validator-node up --build` : null, 
         args.config === '1' ? `(sudo docker-compose --env-file ${dockerEnvFile} -f config-full-node.yml -p cudos-config-validator-node down || true)` : null, 
-        args.start === '1' ? `sudo docker-compose --env-file ${dockerEnvFile} -f ${dockerComposeStartFile} -p ${dockerStartProjectName} up --build -d` : null,
+        args.start === '1' ? `sudo docker-compose --env-file ${dockerEnvFile} -f ${dockerComposeStartFile} ${dockerComposeStartOverwriteCommand} -p ${dockerStartProjectName} up --build -d` : null,
         // `cd ${secrets.serverPath}`,
         // `sudo rm -Rf ./CudosBuilders`,
         // `sudo rm -Rf ./CudosNode`,
@@ -358,6 +361,21 @@ function getDockerComposeStartFile(args) {
             return './start-sentry-node.yml';
         default:
             throw Error(`Unknown target ${args.target}`);
+    }
+}
+
+function getDockerComposeStartOverwriteFiles(args) {
+    switch (args.target) {
+        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE01:
+        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE02:
+        case TARGET_SENTRY_NODE_TESTNET_PUBLIC_ZONE03:
+            if (args.https === '1') {
+                return ['start-sentry-node-tls-overwrite.yml'];
+            } else {
+                return []
+            }
+        default:
+            return [];
     }
 }
 

@@ -31,4 +31,12 @@ sed -i "s/seeds = \".*\"/seeds = \"$SEEDS\"/g" "${CUDOS_HOME}/config/config.toml
 
 sed -i "s/private_peer_ids = \".*\"/private_peer_ids = \"$PRIVATE_PEERS\"/g" "${CUDOS_HOME}/config/config.toml"
 
+# TLS cert
+if [ "${TLS_ENABLED}" = "true" ]; then
+    sed -i "s/tls_cert_file = \".*\"/tls_cert_file = \"$TLS_DOCKER_PATH/live/$TLS_DOMAIN/fullchain.pem\"/g" "${CUDOS_HOME}/config/config.toml"
+    sed -i "s/tls_key_file = \".*\"/tls_key_file = \"$TLS_DOCKER_PATH/live/$TLS_DOMAIN/privkey.pem\"/g" "${CUDOS_HOME}/config/config.toml"
+fi
+
+
+
 cudos-noded tendermint show-node-id |& tee "${CUDOS_HOME}/tendermint.nodeid"
