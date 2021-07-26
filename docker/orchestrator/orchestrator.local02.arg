@@ -1,2 +1,2 @@
 ENV_FILE=./orchestrator.local02.env
-CONTAINER_NAME=cudos-orchestrator-02
+CONTAINER_NAME=cudos-orchestrator-local-02
