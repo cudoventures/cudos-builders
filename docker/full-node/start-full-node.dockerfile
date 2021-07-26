@@ -22,5 +22,5 @@ COPY --from=builder /go/pkg/mod/github.com/!cosm!wasm/wasmvm@v0.14.0/api/libwasm
 
 COPY --from=builder /go/bin/cudos-noded /go/bin/cudos-noded
 
-CMD ["sleep", "infinity"]
-# CMD ["/bin/bash", "-c", "cudos-noded start"] 
+# CMD ["sleep", "infinity"]
+CMD ["/bin/bash", "-c", "cudos-noded start"] 
