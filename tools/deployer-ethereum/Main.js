@@ -158,7 +158,7 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
     const filePath = path.join(secrets.serverPath, deployFilename);
 
     const dockerRootPath = 'ethereum';
-    const dockerComposeFile = './ethereum.yml';
+    const dockerComposeFile = './ethereum-full.yml';
     const dockerProjectName = 'ethereum';
 
     command = [

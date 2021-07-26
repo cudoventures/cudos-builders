@@ -10,6 +10,7 @@ services:
     build:
       context: .
       dockerfile: ./ethereum-light.dockerfile
+    restart: unless-stopped
     ports:
       - "8545:8545"
     networks:

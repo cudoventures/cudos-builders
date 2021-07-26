@@ -502,18 +502,6 @@
 
         // Ethereum
         {
-            "label": "Build ETHEREUM NODE in docker",
-            "command": "cd ./docker/ethereum&& sudo docker-compose -f ./ethereum.yml -p ethereum up --build",
-            "type": "shell",
-            "group": "build",
-        },
-        {
-            "label": "Destroy ETHEREUM NODE in docker",
-            "command": "cd ./docker/ethereum&& sudo docker-compose -f ./ethereum.yml -p ethereum down",
-            "type": "shell",
-            "group": "build",
-        }
-        {
             "label": "Build ETHEREUM LIGHT NODE in docker",
             "command": "cd ./docker/ethereum&& sudo docker-compose -f ./ethereum-light.yml -p ethereum-light up --build",
             "type": "shell",
