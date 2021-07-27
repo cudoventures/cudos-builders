@@ -9,7 +9,7 @@ services:
     image: cudos-explorer
     container_name: cudos-explorer
     build:
-      dockerfile: CudosBuilders/docker/explorer/explorer.dockerfile
+      dockerfile: CudosBuilders/docker/explorer/explorer.dev.dockerfile
       context: ../../../
       args:
         GENESIS_TIME: "$GENESIS_TIME"
@@ -24,6 +24,8 @@ services:
     env_file: "$ENV_FILE"
     ports:
       - "3000:3000"
+    volumes:
+      - '../../../CudosExplorer:/usr/explorer'
     networks:
       - shared-cudos-network
     logging:

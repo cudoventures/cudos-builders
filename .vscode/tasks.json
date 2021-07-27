@@ -1,391 +1,398 @@
 {
     "version": "2.0.0",
     "tasks": [
-        // root node
         {
             "label": "Build INIT ROOT NODE in docker",
             "command": "cd ./docker/root-node&& sudo docker-compose --env-file ./root-node.local.arg -f ./init-root-node.yml -p cudos-init-root-node up --build",
             "type": "shell",
             "group": "build"
-        }, {
+        },
+        {
             "label": "Destroy INIT ROOT NODE in docker",
             "command": "cd ./docker/root-node&& sudo docker-compose --env-file ./root-node.local.arg -f ./init-root-node.yml -p cudos-init-root-node down",
             "type": "shell",
             "group": "build"
         },
-        
         {
             "label": "Start START ROOT NODE in docker",
             "command": "cd ./docker/root-node&& sudo docker-compose --env-file ./root-node.local.arg -f ./start-root-node.yml -p cudos-start-root-node up",
             "type": "shell",
-            "group": "build",
-        }, {
+            "group": "build"
+        },
+        {
             "label": "Build START ROOT NODE in docker",
             "command": "cd ./docker/root-node&& sudo docker-compose --env-file ./root-node.local.arg -f ./start-root-node.yml -p cudos-start-root-node up --build",
             "type": "shell",
             "group": "build"
-        }, {
+        },
+        {
             "label": "Destroy START ROOT NODE in docker",
             "command": "cd ./docker/root-node&& sudo docker-compose --env-file ./root-node.local.arg -f ./start-root-node.yml -p cudos-start-root-node down",
             "type": "shell",
             "group": "build"
         },
-        
-        // seed node
         {
             "label": "Build INIT SEED NODE in docker",
             "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -p cudos-init-seed-node-01 up --build",
             "type": "shell",
             "group": "build"
-        }, {
+        },
+        {
             "label": "Destroy INIT SEED NODE in docker",
             "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -p cudos-init-seed-node-01 down",
             "type": "shell",
             "group": "build"
         },
-
         {
             "label": "Start START SEED NODE in docker",
             "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./seed-node.local01.arg -f ./start-seed-node.yml -p cudos-start-seed-node-01 up",
             "type": "shell",
-            "group": "build",
-        }, {
+            "group": "build"
+        },
+        {
             "label": "Build START SEED NODE in docker",
             "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./seed-node.local01.arg -f ./start-seed-node.yml -p cudos-start-seed-node-01 up --build",
             "type": "shell",
             "group": "build"
-        }, {
+        },
+        {
             "label": "Destroy START SEED NODE in docker",
             "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./seed-node.local01.arg -f ./start-seed-node.yml -p cudos-start-seed-node-01 down",
             "type": "shell",
             "group": "build"
         },
-
-        // sentry node
         {
             "label": "Build INIT SENTRY NODE in docker",
             "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node-01 up --build",
             "type": "shell",
             "group": "build"
-        }, {
+        },
+        {
             "label": "Destroy INIT SENTRY NODE in docker",
             "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node-01 down",
             "type": "shell",
             "group": "build"
         },
-
         {
             "label": "Start START SENTRY NODE in docker",
             "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.local01.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node-01 up",
             "type": "shell",
-            "group": "build",
-        }, {
+            "group": "build"
+        },
+        {
             "label": "Build START SENTRY NODE in docker",
             "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.local01.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node-01 up --build",
             "type": "shell",
             "group": "build"
-        }, {
+        },
+        {
             "label": "Destroy START SENTRY NODE in docker",
             "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.local01.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node-01 down",
             "type": "shell",
             "group": "build"
         },
-
-        // utilities
         {
             "label": "Start FAUCET in docker",
             "command": "cd ./docker/faucet&& sudo docker-compose --env-file ./faucet.local.arg -f ./faucet.yml -p cudos-faucet up",
             "type": "shell",
-            "group": "build",
-        }, {
+            "group": "build"
+        },
+        {
             "label": "Build FAUCET in docker",
             "command": "cd ./docker/faucet&& sudo docker-compose --env-file ./faucet.local.arg -f ./faucet.yml -p cudos-faucet up --build",
             "type": "shell",
             "group": "build"
-        }, {
+        },
+        {
             "label": "Destroy FAUCET in docker",
             "command": "cd ./docker/faucet&& sudo docker-compose --env-file ./faucet.local.arg -f ./faucet.yml -p cudos-faucet down",
             "type": "shell",
             "group": "build"
         },
-
         {
             "label": "Start EXPLORER in docker",
             "command": "cd ./docker/explorer&& sudo docker-compose --env-file ./explorer.local.arg -f ./explorer.yml -p cudos-explorer up",
             "type": "shell",
-            "group": "build",
-        }, {
+            "group": "build"
+        },
+        {
             "label": "Build EXPLORER in docker",
             "command": "cd ./docker/explorer&& sudo docker-compose --env-file ./explorer.local.arg -f ./explorer.yml -p cudos-explorer up --build",
             "type": "shell",
             "group": "build"
-        }, {
+        },
+        {
+            "label": "Build EXPLORER DEV in docker",
+            "command": "cd ./docker/explorer&& sudo docker-compose --env-file ./explorer.local.arg -f ./explorer.dev.yml -p cudos-explorer up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
             "label": "Destroy EXPLORER in docker",
             "command": "cd ./docker/explorer&& sudo docker-compose --env-file ./explorer.local.arg -f ./explorer.yml -p cudos-explorer down",
             "type": "shell",
             "group": "build"
         },
-
-
-        // seed node - client local
         {
             "label": "Build INIT SEED NODE CLIENT LOCAL in docker",
             "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./seed-node.client.local01.arg -f ./init-seed-node.yml -p cudos-init-seed-node-client-local-01 up --build",
             "type": "shell",
             "group": "build"
-        }, {
+        },
+        {
             "label": "Destroy INIT SEED NODE CLIENT LOCAL in docker",
             "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./seed-node.client.local01.arg -f ./init-seed-node.yml -p cudos-init-seed-node-client-local-01 down",
             "type": "shell",
             "group": "build"
         },
-
         {
             "label": "Start START SEED NODE CLIENT LOCAL in docker",
             "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./seed-node.client.local01.arg -f ./start-seed-node.yml -p cudos-start-seed-node-client-local-01 up",
             "type": "shell",
-            "group": "build",
-        }, {
+            "group": "build"
+        },
+        {
             "label": "Build START SEED NODE CLIENT LOCAL in docker",
             "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./seed-node.client.local01.arg -f ./start-seed-node.yml -p cudos-start-seed-node-client-local-01 up --build",
             "type": "shell",
             "group": "build"
-        }, {
+        },
+        {
             "label": "Destroy START SEED NODE CLIENT LOCAL in docker",
             "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./seed-node.client.local01.arg -f ./start-seed-node.yml -p cudos-start-seed-node-client-local-01 down",
             "type": "shell",
             "group": "build"
         },
-
-        // sentry node - client local
         {
             "label": "Build INIT SENTRY NODE CLIENT LOCAL in docker",
             "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.client.local01.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node-client-local-01 up --build",
             "type": "shell",
             "group": "build"
-        }, {
+        },
+        {
             "label": "Destroy INIT SENTRY NODE CLIENT LOCAL in docker",
             "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.client.local01.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node-client-local-01 down",
             "type": "shell",
             "group": "build"
         },
-
         {
             "label": "Start START SENTRY NODE CLIENT LOCAL in docker",
             "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.client.local01.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node-client-local-01 up",
             "type": "shell",
-            "group": "build",
-        }, {
+            "group": "build"
+        },
+        {
             "label": "Build START SENTRY NODE CLIENT LOCAL in docker",
             "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.client.local01.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node-client-local-01 up --build",
             "type": "shell",
             "group": "build"
-        }, {
+        },
+        {
             "label": "Destroy START SENTRY NODE CLIENT LOCAL in docker",
             "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.client.local01.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node-client-local-01 down",
             "type": "shell",
             "group": "build"
         },
-
-        // full node - client local
         {
             "label": "Build INIT FULL NODE CLIENT LOCAL in docker",
             "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.local01.arg -f ./init-full-node.yml -p cudos-init-full-node-client-local-01 up --build",
             "type": "shell",
             "group": "build"
-        }, {
+        },
+        {
             "label": "Destroy INIT FULL NODE CLIENT LOCAL in docker",
             "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.local01.arg -f ./init-full-node.yml -p cudos-init-full-node-client-local-01 down",
             "type": "shell",
             "group": "build"
         },
-
         {
             "label": "Build CONFIG FULL NODE CLIENT LOCAL in docker",
             "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.local01.arg -f ./config-full-node.yml -p cudos-config-full-node-client-local-01 up --build",
             "type": "shell",
             "group": "build"
-        }, {
+        },
+        {
             "label": "Destroy CONFIG FULL NODE CLIENT LOCAL in docker",
             "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.local01.arg -f ./config-full-node.yml -p cudos-config-full-node-client-local-01 down",
             "type": "shell",
             "group": "build"
         },
-
         {
             "label": "Start START FULL NODE CLIENT LOCAL in docker",
             "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.local01.arg -f ./start-full-node.yml -p cudos-start-full-node-client-local-01 up",
             "type": "shell",
-            "group": "build",
-        }, {
+            "group": "build"
+        },
+        {
             "label": "Build START FULL NODE CLIENT LOCAL in docker",
             "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.local01.arg -f ./start-full-node.yml -p cudos-start-full-node-client-local-01 up --build",
             "type": "shell",
             "group": "build"
-        }, {
+        },
+        {
             "label": "Destroy START FULL NODE CLIENT LOCAL in docker",
             "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.local01.arg -f ./start-full-node.yml -p cudos-start-full-node-client-local-01 down",
             "type": "shell",
             "group": "build"
         },
-
-
-        // seed node - client testnet
         {
             "label": "Build INIT SEED NODE CLIENT TESTNET in docker",
             "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./seed-node.client.testnet01.arg -f ./init-seed-node.yml -p cudos-init-seed-node-client-testnet-01 up --build",
             "type": "shell",
             "group": "build"
-        }, {
+        },
+        {
             "label": "Destroy INIT SEED NODE CLIENT TESTNET in docker",
             "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./seed-node.client.testnet01.arg -f ./init-seed-node.yml -p cudos-init-seed-node-client-testnet-01 down",
             "type": "shell",
             "group": "build"
         },
-
         {
             "label": "Start START SEED NODE CLIENT TESTNET in docker",
             "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./seed-node.client.testnet01.arg -f ./start-seed-node.yml -p cudos-start-seed-node-client-testnet-01 up",
             "type": "shell",
-            "group": "build",
-        }, {
+            "group": "build"
+        },
+        {
             "label": "Build START SEED NODE CLIENT TESTNET in docker",
             "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./seed-node.client.testnet01.arg -f ./start-seed-node.yml -p cudos-start-seed-node-client-testnet-01 up --build",
             "type": "shell",
             "group": "build"
-        }, {
+        },
+        {
             "label": "Destroy START SEED NODE CLIENT TESTNET in docker",
             "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./seed-node.client.testnet01.arg -f ./start-seed-node.yml -p cudos-start-seed-node-client-testnet-01 down",
             "type": "shell",
             "group": "build"
         },
-
-        // sentry node - client testnet
         {
             "label": "Build INIT SENTRY NODE CLIENT TESTNET in docker",
             "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.client.testnet01.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node-client-testnet-01 up --build",
             "type": "shell",
             "group": "build"
-        }, {
+        },
+        {
             "label": "Destroy INIT SENTRY NODE CLIENT TESTNET in docker",
             "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.client.testnet01.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node-client-testnet-01 down",
             "type": "shell",
             "group": "build"
         },
-
         {
             "label": "Start START SENTRY NODE CLIENT TESTNET in docker",
             "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.client.testnet01.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node-client-testnet-01 up",
             "type": "shell",
-            "group": "build",
-        }, {
+            "group": "build"
+        },
+        {
             "label": "Build START SENTRY NODE CLIENT TESTNET in docker",
             "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.client.testnet01.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node-client-testnet-01 up --build",
             "type": "shell",
             "group": "build"
-        }, {
+        },
+        {
             "label": "Destroy START SENTRY NODE CLIENT TESTNET in docker",
             "command": "cd ./docker/sentry-node&& sudo docker-compose --env-file ./sentry-node.client.testnet01.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node-client-testnet-01 down",
             "type": "shell",
             "group": "build"
         },
-
-        // full node - client testnet public
         {
             "label": "Build INIT FULL NODE CLIENT TESTNET PUBLIC in docker",
             "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet.public01.arg -f ./init-full-node.yml -p cudos-init-full-node-client-testnet-public-01 up --build",
             "type": "shell",
-            "group": "build"
-        }, {
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
             "label": "Destroy INIT FULL NODE CLIENT TESTNET PUBLIC in docker",
             "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet.public01.arg -f ./init-full-node.yml -p cudos-init-full-node-client-testnet-public-01 down",
             "type": "shell",
             "group": "build"
         },
-
         {
             "label": "Build CONFIG FULL NODE CLIENT TESTNET PUBLIC in docker",
             "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet.public01.arg -f ./config-full-node.yml -p cudos-config-full-node-client-testnet-public-01 up --build",
             "type": "shell",
             "group": "build"
-        }, {
+        },
+        {
             "label": "Destroy CONFIG FULL NODE CLIENT TESTNET PUBLIC in docker",
             "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet.public01.arg -f ./config-full-node.yml -p cudos-config-full-node-client-testnet-public-01 down",
             "type": "shell",
             "group": "build"
         },
-
         {
             "label": "Start START FULL NODE CLIENT TESTNET PUBLIC in docker",
-            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet.public01.arg -f ./start-full-node.yml -p cudos-start-full-node-client-testnet-public-01 up",
-            "type": "shell",
-            "group": "build",
-        }, {
-            "label": "Build START FULL NODE CLIENT TESTNET PUBLIC in docker",
-            "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet.public01.arg -f ./start-full-node.yml -p cudos-start-full-node-client-testnet-public-01 up --build",
+            "command": "cd ./docker/full-node&& docker-compose --env-file ./full-node.client.testnet.public01.arg -f ./start-full-node.yml -p cudos-start-full-node-client-testnet-public-01 up",
             "type": "shell",
             "group": "build"
-        }, {
+        },
+        {
+            "label": "Build START FULL NODE CLIENT TESTNET PUBLIC in docker",
+            "command": "cd ./docker/full-node&& docker-compose --env-file ./full-node.client.testnet.public01.arg -f ./start-full-node.yml -p cudos-start-full-node-client-testnet-public-01 up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
             "label": "Destroy START FULL NODE CLIENT TESTNET PUBLIC in docker",
             "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet.public01.arg -f ./start-full-node.yml -p cudos-start-full-node-client-testnet-public-01 down",
             "type": "shell",
             "group": "build"
         },
-
-        // full node - client testnet private
         {
             "label": "Build INIT FULL NODE CLIENT TESTNET PRIVATE in docker",
             "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet.private01.arg -f ./init-full-node.yml -p cudos-init-full-node-client-testnet-private-01 up --build",
             "type": "shell",
             "group": "build"
-        }, {
+        },
+        {
             "label": "Destroy INIT FULL NODE CLIENT TESTNET PRIVATE in docker",
             "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet.private01.arg -f ./init-full-node.yml -p cudos-init-full-node-client-testnet-private-01 down",
             "type": "shell",
             "group": "build"
         },
-
         {
             "label": "Build CONFIG FULL NODE CLIENT TESTNET PRIVATE in docker",
             "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet.private01.arg -f ./config-full-node.yml -p cudos-config-full-node-client-testnet-private-01 up --build",
             "type": "shell",
             "group": "build"
-        }, {
+        },
+        {
             "label": "Destroy CONFIG FULL NODE CLIENT TESTNET PRIVATE in docker",
             "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet.private01.arg -f ./config-full-node.yml -p cudos-config-full-node-client-testnet-private-01 down",
             "type": "shell",
             "group": "build"
         },
-
         {
             "label": "Start START FULL NODE CLIENT TESTNET PRIVATE in docker",
             "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet.private01.arg -f ./start-full-node.yml -p cudos-start-full-node-client-testnet-private-01 up",
             "type": "shell",
-            "group": "build",
-        }, {
+            "group": "build"
+        },
+        {
             "label": "Build START FULL NODE CLIENT TESTNET PRIVATE in docker",
             "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet.private01.arg -f ./start-full-node.yml -p cudos-start-full-node-client-testnet-private-01 up --build",
             "type": "shell",
             "group": "build"
-        }, {
+        },
+        {
             "label": "Destroy START FULL NODE CLIENT TESTNET PRIVATE in docker",
             "command": "cd ./docker/full-node&& sudo docker-compose --env-file ./full-node.client.testnet.private01.arg -f ./start-full-node.yml -p cudos-start-full-node-client-testnet-private-01 down",
             "type": "shell",
             "group": "build"
         },
-
-        // Binary builder
         {
             "label": "Start BINARY BUILDER in docker",
             "command": "cd ./docker/binary-builder&& sudo docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder up",
             "type": "shell",
-            "group": "build",
-        }, {
+            "group": "build"
+        },
+        {
             "label": "Build BINARY BUILDER in docker",
             "command": "cd ./docker/binary-builder&& sudo docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder up --build",
             "type": "shell",
             "group": "build"
-        }, {
+        },
+        {
             "label": "Destroy BINARY BUILDER in docker",
             "command": "cd ./docker/binary-builder&& sudo docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder down",
             "type": "shell",
@@ -481,19 +488,19 @@
             "type": "shell",
             "group": "build"
         },
-
-        // Contract deployer
         {
             "label": "Start CONTRACT DEPLOYER in docker",
             "command": "cd ./docker/gravity-contract-deployer&& sudo docker-compose --env-file ./gravity-contract-deployer.arg -f ./gravity-contract-deployer.yml -p cudos-gravity-contract-deployer up",
             "type": "shell",
-            "group": "build",
-        }, {
+            "group": "build"
+        },
+        {
             "label": "Build CONTRACT DEPLOYER in docker",
             "command": "cd ./docker/gravity-contract-deployer&& sudo docker-compose --env-file ./gravity-contract-deployer.arg -f ./gravity-contract-deployer.yml -p cudos-gravity-contract-deployer up --build",
             "type": "shell",
             "group": "build"
-        }, {
+        },
+        {
             "label": "Destroy CONTRACT DEPLOYER in docker",
             "command": "cd ./docker/gravity-contract-deployer&& sudo docker-compose --env-file ./gravity-contract-deployer.arg -f ./gravity-contract-deployer.yml -p cudos-gravity-contract-deployer down",
             "type": "shell",
@@ -511,7 +518,7 @@
             "label": "Destroy ETHEREUM LIGHT NODE in docker",
             "command": "cd ./docker/ethereum&& sudo docker-compose -f ./ethereum-light.yml -p ethereum-light down",
             "type": "shell",
-            "group": "build",
+            "group": "build"
         }
     ]
 }
