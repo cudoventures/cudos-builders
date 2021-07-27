@@ -1,9 +1,9 @@
 ENV_FILE=./explorer.testnet.public.env
 GENESIS_TIME="2021-07-08T11:24:09.789216641Z"
 FAUCET_URL="https://faucet.cudos.org"
-INTERNAL_RPC_URL="http://10.128.0.6:26657"
+INTERNAL_RPC_URL="https://sentry1.gcp-uscentral1.cudos.org:26657"
 INTERNAL_API_URL="http://10.128.0.6:1317"
-EXTERNAL_RPC_URL="http://35.232.27.92:26657"
+EXTERNAL_RPC_URL="https://sentry1.gcp-uscentral1.cudos.org:26657"
 EXTERNAL_API_URL="http://35.232.27.92:1317"
 CHAIN_NAME="CudosTestnetPublic"
 CHAIN_ID="cudos-testnet-public"
