@@ -42,6 +42,8 @@
         
         "deploy-utils-testnet-private": "node ./deployer-utils/Main.js --target=testnet-private --init=1",
 
+        "deploy-gravity-bridge-ui-testnet-private": "node ./deployer-gravity-bridge-ui/Main.js --target=testnet-private",
+
 
 
         "deploy--ethereum-rinkeby": "node ./deployer-ethereum/Main.js --target=ethereum"

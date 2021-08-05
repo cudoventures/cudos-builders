@@ -519,6 +519,46 @@
             "command": "cd ./docker/ethereum&& sudo docker-compose -f ./ethereum-light.yml -p ethereum-light down",
             "type": "shell",
             "group": "build"
-        }
+        },
+
+        // Bridge UI dev
+        {
+            "label": "Start GRAVITY BRIDGE UI DEV in docker",
+            "command": "cd ./docker/gravity-bridge-ui&& sudo docker-compose --env-file ./gravity-bridge-ui.dev.arg -f ./gravity-bridge-ui.dev.yml -p cudos-gravity-bridge-ui-dev up",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Build GRAVITY BRIDGE UI DEV in docker",
+            "command": "cd ./docker/gravity-bridge-ui&& sudo docker-compose --env-file ./gravity-bridge-ui.dev.arg -f ./gravity-bridge-ui.dev.yml -p cudos-gravity-bridge-ui-dev up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Destroy GRAVITY BRIDGE UI DEV in docker",
+            "command": "cd ./docker/gravity-bridge-ui&& sudo docker-compose --env-file ./gravity-bridge-ui.dev.arg -f ./gravity-bridge-ui.dev.yml -p cudos-gravity-bridge-ui-dev down",
+            "type": "shell",
+            "group": "build"
+        },
+
+        // Bridge UI testnet private
+        {
+            "label": "Start GRAVITY BRIDGE UI TESTNET PRIVATE in docker",
+            "command": "cd ./docker/gravity-bridge-ui&& sudo docker-compose --env-file ./gravity-bridge-ui.testnet.private.arg -f ./gravity-bridge-ui.release.yml -p cudos-gravity-bridge-ui-testnet-private up",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Build GRAVITY BRIDGE UI TESTNET PRIVATE in docker",
+            "command": "cd ./docker/gravity-bridge-ui&& sudo docker-compose --env-file ./gravity-bridge-ui.testnet.private.arg -f ./gravity-bridge-ui.release.yml -p cudos-gravity-bridge-ui-testnet-private up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Destroy GRAVITY BRIDGE UI TESTNET PRIVATE in docker",
+            "command": "cd ./docker/gravity-bridge-ui&& sudo docker-compose --env-file ./gravity-bridge-ui.testnet.private.arg -f ./gravity-bridge-ui.release.yml -p cudos-gravity-bridge-ui-testnet-private down",
+            "type": "shell",
+            "group": "build"
+        },
     ]
 }

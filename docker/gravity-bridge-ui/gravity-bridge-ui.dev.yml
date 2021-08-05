@@ -1,0 +1,28 @@
+version: '3.1'
+
+networks:
+  shared-cudos-network:
+    name: shared-cudos-network
+
+services:
+  cudos-gravity-bridge-ui-dev:
+    image: cudos-gravity-bridge-ui-dev
+    container_name: cudos-gravity-bridge-ui-dev
+    build:
+      dockerfile: CudosBuilders/docker/gravity-bridge-ui/gravity-bridge-ui.dev.dockerfile
+      context: ../../../
+      args:
+        ENV_FILE: "$ENV_FILE"
+    restart: unless-stopped
+    volumes:
+      - '../../../CudosGravityBridgeUI:/usr/gravity-bridge-ui'
+      - '/usr/gravity-bridge-ui/node_modules'
+    ports:
+      - "4000:4000"
+    networks:
+      - shared-cudos-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "128m"
+        max-file: "1"
