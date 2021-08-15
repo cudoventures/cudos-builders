@@ -1,0 +1,12 @@
+version: '3.1'
+
+services:
+  cudos-root-node:
+    image: cudos-init-root-node-debug
+    container_name: cudos-init-root-node-debug
+    build:
+      dockerfile: CudosBuilders/docker/root-node/init-root-node-debug.dockerfile
+      context: ../../../
+    env_file: "$ENV_FILE"
+    volumes:
+      - '../../../CudosData/cudos-data-root-node-debug:$CUDOS_HOME'

@@ -1,0 +1,29 @@
+version: '3.1'
+
+networks:
+  shared-cudos-network:
+    name: shared-cudos-network
+
+services:
+  cudos-root-node-debug:
+    image: cudos-start-root-node-debug
+    container_name: cudos-start-root-node-debug
+    build:
+      dockerfile: CudosBuilders/docker/root-node/start-root-node-debug.dockerfile
+      context: ../../../
+    restart: unless-stopped
+    env_file: "$ENV_FILE"
+    volumes:
+      - '../../../CudosData/cudos-data-root-node-debug:$CUDOS_HOME'
+    ports:
+      - "${PORT26656}:26656"
+      - "${PORT26657}:26657"
+      - "${PORT1317}:1317"
+      - "${PORT9090}:9090"
+    networks:
+      - shared-cudos-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "128m"
+        max-file: "1"
