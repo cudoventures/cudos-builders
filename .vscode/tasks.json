@@ -32,6 +32,36 @@
             "group": "build"
         },
         {
+            "label": "Build INIT ROOT NODE DEBUG in docker",
+            "command": "cd ./docker/root-node&& sudo docker-compose --env-file ./root-node.local.arg -f ./init-root-node-debug.yml -p cudos-init-root-node-debug up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Destroy INIT ROOT NODE DEBUG in docker",
+            "command": "cd ./docker/root-node&& sudo docker-compose --env-file ./root-node.local.arg -f ./init-root-node-debug.yml -p cudos-init-root-node-debug down",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Start START ROOT NODE DEBUG in docker",
+            "command": "cd ./docker/root-node&& sudo docker-compose --env-file ./root-node.local.arg -f ./start-root-node-debug.yml -p cudos-start-root-node-debug up",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Build START ROOT NODE DEBUG in docker",
+            "command": "cd ./docker/root-node&& sudo docker-compose --env-file ./root-node.local.arg -f ./start-root-node-debug.yml -p cudos-start-root-node-debug up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Destroy START ROOT NODE DEBUG in docker",
+            "command": "cd ./docker/root-node&& sudo docker-compose --env-file ./root-node.local.arg -f ./start-root-node-debug.yml -p cudos-start-root-node-debug down",
+            "type": "shell",
+            "group": "build"
+        },
+        {
             "label": "Build INIT SEED NODE in docker",
             "command": "cd ./docker/seed-node&& sudo docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -p cudos-init-seed-node-01 up --build",
             "type": "shell",
