@@ -14,5 +14,6 @@ services:
     env_file: "$ENV_FILE"
     volumes:
       - '../../../CudosGravityBridge/orchestrator:/usr/src'
+      - '/usr/src/target'
     networks:
       - shared-cudos-network
