@@ -14,6 +14,8 @@ COPY ./CudosGravityBridge ./CudosGravityBridge
 
 RUN cd ./CudosNode && make
 
+RUN FOLDER=$(ls /go/pkg/mod/github.com/\!cosm\!wasm/ | grep wasmvm@v) && ln -s /go/pkg/mod/github.com/\!cosm\!wasm/${FOLDER} /go/pkg/mod/github.com/\!cosm\!wasm/wasmvm
+
 # CMD ["sleep", "infinity"]
 
 FROM golang:buster
@@ -22,7 +24,7 @@ WORKDIR /usr/cudos
 
 # RUN apk add --no-cache bash
 
-COPY --from=builder /go/pkg/mod/github.com/!cosm!wasm/wasmvm@v0.14.0/api/libwasmvm.so /usr/lib
+COPY --from=builder /go/pkg/mod/github.com/!cosm!wasm/wasmvm/api/libwasmvm.so /usr/lib
 
 COPY --from=builder /go/bin/cudos-noded /go/bin/cudos-noded
 
