@@ -9,10 +9,14 @@ fi
 
 
 WORKING_PATH=$(pwd) && cd $CUDOS_HOME && rm -Rf ./* && cd $WORKING_PATH
+BOND_DENOM="acudos"
 
 cudos-noded init $MONIKER
 
 cp ./external-config/genesis.json "${CUDOS_HOME}/config/genesis.json"
+
+# gas price
+sed -i "s/minimum-gas-prices = \"\"/minimum-gas-prices = \"0${BOND_DENOM}\"/" "${CUDOS_HOME}/config/app.toml"
 
 # for port 26657
 sed -i "s/laddr = \"tcp:\/\/127.0.0.1:26657\"/laddr = \"tcp:\/\/0.0.0.0:26657\"/" "${CUDOS_HOME}/config/config.toml"

@@ -8,10 +8,14 @@ if [ "$SHOULD_USE_GLOBAL_PEERS" = "true" ]; then
 fi
 
 WORKING_PATH=$(pwd) && cd $CUDOS_HOME && rm -Rf ./* && cd $WORKING_PATH
+BOND_DENOM="acudos"
 
 cudos-noded init $MONIKER
 
 cp ./external-config/genesis.json "${CUDOS_HOME}/config/genesis.json"
+
+# gas price
+sed -i "s/minimum-gas-prices = \"\"/minimum-gas-prices = \"0${BOND_DENOM}\"/" "${CUDOS_HOME}/config/app.toml"
 
 # for port 1317
 sed -i "104s/enable = false/enable = true/" "${CUDOS_HOME}/config/app.toml"

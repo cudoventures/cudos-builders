@@ -1,16 +1,19 @@
-FROM golang:buster
+# FROM golang:buster
+FROM node-builder
 
 # RUN apk add --no-cache jq make bash g++
 
-RUN apt update
+RUN apt update && apt install -y jq
 
-RUN apt install -y jq build-essential
+# RUN apt update
 
-WORKDIR /usr/cudos
+# RUN apt install -y jq build-essential
 
-COPY ./CudosNode ./CudosNode
+# WORKDIR /usr/cudos
 
-COPY ./CudosGravityBridge ./CudosGravityBridge
+# COPY ./CudosNode ./CudosNode
+
+# COPY ./CudosGravityBridge ./CudosGravityBridge
 
 COPY ./CudosBuilders/docker/seed-node/init-seed.sh ./
 
@@ -23,9 +26,9 @@ ARG PERSISTENT_PEERS_FILENAME
 RUN mv "./external-config/${PERSISTENT_PEERS_FILENAME}" ./external-config/persistent-peers.config && \
     mv "./external-config/${SEEDS_FILENAME}" ./external-config/seeds.config && \
     mv "./external-config/${GENESIS_FILENAME}" ./external-config/genesis.json && \
-    cd ./CudosNode && \
-    make && \
-    cd .. \
+    # cd ./CudosNode && \
+    # make && \
+    # cd .. \
     chmod +x ./init-seed.sh && \
     sed -i 's/\r$//' ./init-seed.sh
 

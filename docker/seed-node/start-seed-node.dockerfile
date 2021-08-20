@@ -1,28 +1,30 @@
-FROM golang:buster as builder
+# FROM golang:buster as builder
 
-# RUN apk add --no-cache jq make bash g++
+# # RUN apk add --no-cache jq make bash g++
 
-RUN apt update
+# RUN apt update
 
-RUN apt install -y jq build-essential
+# RUN apt install -y jq build-essential
 
-WORKDIR /usr/cudos-builder
+# WORKDIR /usr/cudos-builder
 
-COPY ./CudosNode ./CudosNode
+# COPY ./CudosNode ./CudosNode
 
-COPY ./CudosGravityBridge ./CudosGravityBridge
+# COPY ./CudosGravityBridge ./CudosGravityBridge
 
-RUN cd ./CudosNode && make
+# RUN cd ./CudosNode && make
 
-FROM golang:buster
+# FROM golang:buster
 
-WORKDIR /usr/cudos
+# WORKDIR /usr/cudos
 
-# RUN apk add --no-cache bash
+# # RUN apk add --no-cache bash
 
-COPY --from=builder /go/pkg/mod/github.com/!cosm!wasm/wasmvm@v0.14.0/api/libwasmvm.so /usr/lib
+# COPY --from=builder /go/pkg/mod/github.com/!cosm!wasm/wasmvm@v0.14.0/api/libwasmvm.so /usr/lib
 
-COPY --from=builder /go/bin/cudos-noded /go/bin/cudos-noded
+# COPY --from=builder /go/bin/cudos-noded /go/bin/cudos-noded
 
-# CMD ["sleep", "infinity"]
+# # CMD ["sleep", "infinity"]
+FROM node-builder
+
 CMD ["/bin/bash", "-c", "cudos-noded start  --state-sync.snapshot-interval 2000 --state-sync.snapshot-keep-recent 2"] 

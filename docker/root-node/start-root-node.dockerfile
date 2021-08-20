@@ -1,31 +1,33 @@
-FROM golang:buster as builder
+# FROM golang:buster as builder
 
-# RUN apk add --no-cache jq make bash g++
+# # RUN apk add --no-cache jq make bash g++
 
-RUN apt update
+# RUN apt update
 
-RUN apt install -y jq build-essential
+# RUN apt install -y jq build-essential
 
-WORKDIR /usr/cudos-builder
+# WORKDIR /usr/cudos-builder
 
-COPY ./CudosNode ./CudosNode
+# COPY ./CudosNode ./CudosNode
 
-COPY ./CudosGravityBridge ./CudosGravityBridge
+# COPY ./CudosGravityBridge ./CudosGravityBridge
 
-RUN cd ./CudosNode && make
+# RUN cd ./CudosNode && make
 
-RUN FOLDER=$(ls /go/pkg/mod/github.com/\!cosm\!wasm/ | grep wasmvm@v) && ln -s /go/pkg/mod/github.com/\!cosm\!wasm/${FOLDER} /go/pkg/mod/github.com/\!cosm\!wasm/wasmvm
+# RUN FOLDER=$(ls /go/pkg/mod/github.com/\!cosm\!wasm/ | grep wasmvm@v) && ln -s /go/pkg/mod/github.com/\!cosm\!wasm/${FOLDER} /go/pkg/mod/github.com/\!cosm\!wasm/wasmvm
 
-# CMD ["sleep", "infinity"]
+# # CMD ["sleep", "infinity"]
 
-FROM golang:buster
+# FROM golang:buster
 
-WORKDIR /usr/cudos
+# WORKDIR /usr/cudos
 
-# RUN apk add --no-cache bash
+# # RUN apk add --no-cache bash
 
-COPY --from=builder /go/pkg/mod/github.com/!cosm!wasm/wasmvm/api/libwasmvm.so /usr/lib
+# COPY --from=builder /go/pkg/mod/github.com/!cosm!wasm/wasmvm/api/libwasmvm.so /usr/lib
 
-COPY --from=builder /go/bin/cudos-noded /go/bin/cudos-noded
+# COPY --from=builder /go/bin/cudos-noded /go/bin/cudos-noded
+
+FROM node-builder
 
 CMD ["/bin/bash", "-c", "cudos-noded start"] 

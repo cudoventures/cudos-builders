@@ -25,5 +25,3 @@ WORKDIR /usr/cudos
 COPY --from=builder /go/pkg/mod/github.com/!cosm!wasm/wasmvm/api/libwasmvm.so /usr/lib
 
 COPY --from=builder /go/bin/cudos-noded /go/bin/cudos-noded
-
-CMD ["sleep", "infinity"]

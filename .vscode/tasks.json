@@ -411,6 +411,24 @@
             "group": "build"
         },
         {
+            "label": "Start NODE BUILDER in docker",
+            "command": "cd ./docker/node-builder&& sudo docker-compose -f ./node-builder.yml -p cudos-node-builder up",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Build NODE BUILDER in docker",
+            "command": "cd ./docker/node-builder&& sudo docker-compose -f ./node-builder.yml -p cudos-node-builder up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Destroy NODE BUILDER in docker",
+            "command": "cd ./docker/node-builder&& sudo docker-compose -f ./node-builder.yml -p cudos-node-builder down",
+            "type": "shell",
+            "group": "build"
+        },
+        {
             "label": "Start BINARY BUILDER in docker",
             "command": "cd ./docker/binary-builder&& sudo docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder up",
             "type": "shell",
