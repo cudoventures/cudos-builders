@@ -26,6 +26,6 @@
 
 # COPY --from=builder /go/bin/cudos-noded /go/bin/cudos-noded
 
-FROM node-builder
+FROM binary-builder
 
 CMD ["/bin/bash", "-c", "cudos-noded start"] 

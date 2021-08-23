@@ -25,6 +25,6 @@
 # COPY --from=builder /go/bin/cudos-noded /go/bin/cudos-noded
 
 # # CMD ["sleep", "infinity"]
-FROM node-builder
+FROM binary-builder
 
 CMD ["/bin/bash", "-c", "cudos-noded start"] 

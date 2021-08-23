@@ -1,4 +1,4 @@
-FROM node-builder
+FROM binary-builder
 
 # RUN apk add --no-cache jq make bash g++
 
