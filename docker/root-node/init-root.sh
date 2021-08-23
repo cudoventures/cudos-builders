@@ -139,7 +139,7 @@ cudos-noded add-genesis-account $ORCH_03_ADDRESS "20000000000000000000000000000$
 # add faucet account
 ((echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add faucet --keyring-backend os) |& tee "${CUDOS_HOME}/faucet.wallet"
 FAUCET_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show faucet -a --keyring-backend os)
-cudos-noded add-genesis-account $FAUCET_ADDRESS "1000000000000000000000000000${BOND_DENOM}"
+cudos-noded add-genesis-account $FAUCET_ADDRESS "1000000000000000000000000000000000${BOND_DENOM}"
 
 
 # Add private sell offer account
