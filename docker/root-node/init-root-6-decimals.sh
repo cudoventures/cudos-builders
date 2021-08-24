@@ -49,6 +49,8 @@ DENOM2="mcudos" EXP2="3" ALIAS2="millicudos"
 DENOM3="cudos" EXP3="6"
 BASE="ucudos"
 DISPLAY="cudos"
+NAME="cudos"
+SYMBOL="CUDOS"
 
 cudos-noded init $MONIKER --chain-id=$CHAIN_ID
 
@@ -96,7 +98,7 @@ cat "${CUDOS_HOME}/config/genesis.json" | jq  --argjson BANK_SEND_ENABLED "$BANK
 
 
 # setting fractions metadata
-cat "${CUDOS_HOME}/config/genesis.json" | jq --arg DENOM_METADATA_DESC "$DENOM_METADATA_DESC" --arg DENOM1 "$DENOM1" --arg EXP1 "$EXP1" --arg ALIAS1 "$ALIAS1" --arg DENOM2 "$DENOM2" --arg EXP2 "$EXP2" --arg ALIAS2 "$ALIAS2" --arg DENOM3 "$DENOM3" --arg EXP3 "$EXP3" --arg BASE "$BASE" --arg DISPLAY "$DISPLAY" '.app_state.bank.denom_metadata[0].description=$DENOM_METADATA_DESC | .app_state.bank.denom_metadata[0].denom_units[0].denom=$DENOM1 | .app_state.bank.denom_metadata[0].denom_units[0].exponent=$EXP1 | .app_state.bank.denom_metadata[0].denom_units[0].aliases[0]=$ALIAS1 | .app_state.bank.denom_metadata[0].denom_units[1].denom=$DENOM2 | .app_state.bank.denom_metadata[0].denom_units[1].exponent=$EXP2 | .app_state.bank.denom_metadata[0].denom_units[1].aliases[0]=$ALIAS2 | .app_state.bank.denom_metadata[0].denom_units[2].denom=$DENOM3 | .app_state.bank.denom_metadata[0].denom_units[2].exponent=$EXP3 | .app_state.bank.denom_metadata[0].base=$BASE | .app_state.bank.denom_metadata[0].display=$DISPLAY'  > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
+cat "${CUDOS_HOME}/config/genesis.json" | jq --arg DENOM_METADATA_DESC "$DENOM_METADATA_DESC" --arg DENOM1 "$DENOM1" --arg EXP1 "$EXP1" --arg ALIAS1 "$ALIAS1" --arg DENOM2 "$DENOM2" --arg EXP2 "$EXP2" --arg ALIAS2 "$ALIAS2" --arg DENOM3 "$DENOM3" --arg EXP3 "$EXP3" --arg BASE "$BASE" --arg DISPLAY "$DISPLAY" --arg NAME "$NAME" --arg SYMBOL "$SYMBOL" '.app_state.bank.denom_metadata[0].description=$DENOM_METADATA_DESC | .app_state.bank.denom_metadata[0].denom_units[0].denom=$DENOM1 | .app_state.bank.denom_metadata[0].denom_units[0].exponent=$EXP1 | .app_state.bank.denom_metadata[0].denom_units[0].aliases[0]=$ALIAS1 | .app_state.bank.denom_metadata[0].denom_units[1].denom=$DENOM2 | .app_state.bank.denom_metadata[0].denom_units[1].exponent=$EXP2 | .app_state.bank.denom_metadata[0].denom_units[1].aliases[0]=$ALIAS2 | .app_state.bank.denom_metadata[0].denom_units[2].denom=$DENOM3 | .app_state.bank.denom_metadata[0].denom_units[2].exponent=$EXP3 | .app_state.bank.denom_metadata[0].base=$BASE | .app_state.bank.denom_metadata[0].name=$NAME | .app_state.bank.denom_metadata[0].symbol=$SYMBOL | .app_state.bank.denom_metadata[0].display=$DISPLAY'  > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
 
 (echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add zero-account --keyring-backend os |& tee "${CUDOS_HOME}/zero-account.wallet"
 ZERO_ACCOUNT_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show zero-account -a --keyring-backend os)
