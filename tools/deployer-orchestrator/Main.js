@@ -251,11 +251,11 @@ function getDockerRootPath(args) {
 function getDockerEnvFile(args) {
     switch (args.target) {
         case TARGET_ROOT_NODE_TESTNET_PUBLIC_ZONE01:
-            return '';
+            return './orchestrator.testnet.public.zone01.arg';
         case TARGET_VALIDATOR_NODE_TESTNET_PUBLIC_ZONE02:
-            return '';
+            return './orchestrator.testnet.public.zone02.arg';
         case TARGET_VALIDATOR_NODE_TESTNET_PUBLIC_ZONE03:
-            return '';
+            return './orchestrator.testnet.public.zone03.arg';
         case TARGET_ROOT_NODE_TESTNET_PRIVATE:
             return './orchestrator.testnet.private.arg';
         default:

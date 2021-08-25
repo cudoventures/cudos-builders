@@ -1,5 +1,5 @@
 ENV_FILE=./explorer.testnet.public.env
-GENESIS_TIME="2021-07-08T11:24:09.789216641Z"
+GENESIS_TIME="2021-08-25T08:21:32.483824849Z"
 FAUCET_URL="https://faucet.cudos.org"
 INTERNAL_RPC_URL="https://sentry1.gcp-uscentral1.cudos.org:26657"
 INTERNAL_API_URL="http://10.128.0.6:1317"

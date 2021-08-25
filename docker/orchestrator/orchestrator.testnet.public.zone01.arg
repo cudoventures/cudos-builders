@@ -1,0 +1,2 @@
+ENV_FILE=./orchestrator.testnet.public.zone01.env
+CONTAINER_NAME=cudos-orchestrator-testnet-public-zone01

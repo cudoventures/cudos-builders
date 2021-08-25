@@ -1,4 +1,5 @@
-FROM golang:buster as builder
+# FROM golang:buster as builder
+FROM binary-builder as builder
 
 # RUN apk add --no-cache jq make bash g++
 
@@ -6,13 +7,13 @@ RUN apt update
 
 RUN apt install -y jq build-essential
 
-WORKDIR /usr/cudos-node-builder
+# WORKDIR /usr/cudos-node-builder
 
-COPY ./CudosNode ./CudosNode
+# COPY ./CudosNode ./CudosNode
 
-COPY ./CudosGravityBridge ./CudosGravityBridge
+# COPY ./CudosGravityBridge ./CudosGravityBridge
 
-RUN cd ./CudosNode && make
+# RUN cd ./CudosNode && make
 
 WORKDIR /usr/cudos-faucet-cli-builder
 
@@ -26,7 +27,9 @@ WORKDIR /usr/faucet-cli
 
 # RUN apk add --no-cache bash
 
-COPY --from=builder /go/pkg/mod/github.com/!cosm!wasm/wasmvm@v0.14.0/api/libwasmvm.so /usr/lib
+# COPY --from=builder /go/pkg/mod/github.com/!cosm!wasm/wasmvm@v0.14.0/api/libwasmvm.so /usr/lib
+
+COPY --from=builder /usr/lib /usr/lib
 
 COPY --from=builder /go/bin/cudos-noded /go/bin/cudos-noded
 

@@ -134,9 +134,28 @@ async function createArchive(deployFilePath, deployFilename) {
         archive.pipe(output);
 
         // append files from a sub-directory, putting its contents at the root of archive
-        archive.directory(path.resolve('../../CudosNode'), '/CudosNode');
+        // archive.directory(path.resolve('../../CudosNode'), '/CudosNode');
         archive.directory(path.resolve('../../CudosGravityBridge/module'), '/CudosGravityBridge/module');
         archive.directory(path.resolve('../docker'), '/CudosBuilders/docker');
+
+        const projectCudosNode = path.resolve('../../CudosNode');
+        const pathContent = await asyncFs.readdir(projectCudosNode);
+        for (let i = 0;  i < pathContent.length; ++i) {
+            const itemAbsPath = path.join(projectCudosNode, pathContent[i]);
+            const stat = await asyncFs.stat(itemAbsPath);
+
+            switch (pathContent[i]) {
+                case '.git':
+                    break;
+                default:
+                    if (stat.isDirectory() === true) {
+                        archive.directory(itemAbsPath, `/CudosNode/${pathContent[i]}`);
+                    } else {
+                        archive.file(itemAbsPath, { 'name': `/CudosNode/${pathContent[i]}` } );
+                    }
+                    break;
+            }
+        }
 
         archive.finalize();
     });
@@ -183,7 +202,7 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
     const dockerComposeInitFile = getDockerComposeInitFile(args);
     const dockerComposeStartFile = getDockerComposeStartFile(args);
     const dockerComposeStartOverwriteFiles = getDockerComposeStartOverwriteFiles(args);
-    const dockerComposeStartOverwriteCommand = dockerComposeStartOverwriteFiles.reduce((command, configName) => command + " -f " + configName);
+    const dockerComposeStartOverwriteCommand = dockerComposeStartOverwriteFiles.map((ymlFile) => `-f ${ymlFile}`).join(' ');
     const dockerInitProjectName = getDockerInitProjectName(args);
     const dockerStartProjectName = getDockerStartProjectName(args);
 
@@ -202,6 +221,9 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         // `sudo docker image prune -a -f`,
         // `sudo docker volume prune -f`,
         // `sudo docker builder prune -f`,
+        `cd ../binary-builder`,
+        `sudo docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder build`,
+        `cd ../${dockerRootPath}`,
         args.init === '1' ? `sudo docker-compose --env-file ${dockerEnvFile}  -f ${dockerComposeInitFile} -p ${dockerInitProjectName} up --build` : null,
         args.init === '1' ? `(sudo docker-compose --env-file ${dockerEnvFile}  -f ${dockerComposeInitFile} -p ${dockerInitProjectName} down || true)` : null,
         args.config === '1' ? `sudo docker-compose --env-file ${dockerEnvFile} -f config-full-node.yml -p cudos-config-validator-node up --build` : null, 
