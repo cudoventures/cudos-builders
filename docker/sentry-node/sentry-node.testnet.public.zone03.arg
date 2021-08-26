@@ -14,7 +14,5 @@ PORT26657=26657
 PORT1317=1317
 PORT9090=9090
 
-TLS_ENABLED=true
 TLS_HOST_PATH=/etc/letsencrypt
-TLS_DOMAIN=sentry3.gcp-euwest4.cudos.org
 TLS_DOCKER_PATH=/etc/letsencrypt

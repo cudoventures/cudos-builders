@@ -29,6 +29,7 @@
 
         "deploy--orchestrator-testnet-public-zone01": "node ./deployer-orchestrator/Main.js --target=root-node-testnet-public-zone01",
         "deploy--orchestrator-testnet-public-zone02": "node ./deployer-orchestrator/Main.js --target=validator-node-testnet-public-zone02",
+        "deploy--orchestrator-testnet-public-zone03": "node ./deployer-orchestrator/Main.js --target=validator-node-testnet-public-zone03",
 
         "deploy-utils-testnet-public": "node ./deployer-utils/Main.js --target=testnet-public --init=1",
 
