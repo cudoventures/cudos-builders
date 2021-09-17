@@ -1,5 +1,5 @@
 ENV_FILE=./explorer.local.env
-GENESIS_TIME="2021-05-25T06:44:40.2692496Z"
+GENESIS_TIME="2021-09-17T12:54:30.602457663Z"
 FAUCET_URL="http://localhost:5000"
 INTERNAL_RPC_URL="http://cudos-start-sentry-node-01:26657"
 INTERNAL_API_URL="http://cudos-start-sentry-node-01:1317"

@@ -38,4 +38,4 @@ WORKDIR /usr/explorer
 
 RUN ln -s /usr/src/settings.json /usr/explorer/settings.json
 
-CMD meteor npm install --allow-superuser && meteor --settings /usr/src/settings.json --allow-superuser 
+CMD meteor npm install --allow-superuser && meteor reset --allow-superuser && meteor --settings /usr/src/settings.json --allow-superuser 
