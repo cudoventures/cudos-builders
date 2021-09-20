@@ -30,4 +30,15 @@
 
 FROM binary-builder
 
-CMD ["/bin/bash", "-c", "cudos-noded start"] 
+ARG USER_ID
+ARG USER_NAME
+ARG GROUP_ID
+ARG GROUP_NAME
+ARG CUDOS_HOME
+
+RUN if [ $USER_NAME != 'root' ]; then \
+        addgroup -gid $GROUP_ID $GROUP_NAME; \
+        adduser --disabled-password -gecos "" -uid $USER_ID -gid $GROUP_ID $USER_NAME; \
+    fi
+
+CMD ["/bin/bash", "-c", "chown -R $USER_NAME:$GROUP_NAME $CUDOS_HOME && su $USER_NAME -c \"cudos-noded start\""] 
