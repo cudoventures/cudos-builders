@@ -12,6 +12,10 @@ services:
       dockerfile: CudosBuilders/docker/explorer/explorer.dev.dockerfile
       context: ../../../
       args:
+        USER_ID: "0"
+        USER_NAME: "root"
+        GROUP_ID: "0"
+        GROUP_NAME: "root"
         GENESIS_TIME: "$GENESIS_TIME"
         FAUCET_URL: "$FAUCET_URL"
         INTERNAL_RPC_URL: "$INTERNAL_RPC_URL"
@@ -21,11 +25,11 @@ services:
         CHAIN_NAME: "$CHAIN_NAME"
         CHAIN_ID: "$CHAIN_ID"
     restart: unless-stopped
-    # env_file: "$ENV_FILE"
     ports:
       - "3000:3000"
     volumes:
-      - '../../../CudosExplorer:/usr/explorer'
+      - '../../../CudosExplorer:/usr/local/explorer'
+      # - '/usr/local/explorer/.meteor/local'
     networks:
       - shared-cudos-network
     logging:
@@ -33,25 +37,3 @@ services:
       options:
         max-size: "128m"
         max-file: "1"
-  #   depends_on:
-  #     - cudos-explorer-mongodb
-
-  # cudos-explorer-mongodb:
-  #   image: 'mongo:latest'
-  #   container_name: cudos-explorer-mongo
-  #   restart: unless-stopped
-  #   ports:
-  #     - "27017:27017"
-  #   environment:
-  #     MONGO_INITDB_ROOT_USERNAME: root
-  #     MONGO_INITDB_ROOT_PASSWORD: cudos-root-db-pass
-  #   volumes:
-  #     - '../../../CudosData/explorer-mongodb:/data/db'
-  #     - './mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro'
-  #   networks:
-  #     - shared-cudos-network
-  #   logging:
-  #     driver: "json-file"
-  #     options:
-  #       max-size: "128m"
-  #       max-file: "1"

@@ -10,11 +10,16 @@ services:
     build:
       context: .
       dockerfile: ./ethereum-full.dockerfile
+      args:
+        USER_ID: "0"
+        USER_NAME: "root"
+        GROUP_ID: "0"
+        GROUP_NAME: "root"
     restart: unless-stopped
     ports:
       - "8545:8545"
     volumes:
-      - '../../../CudosData/ethereum:/root/.ethereum'
+      - '../../../CudosData/ethereum:/var/ethereum'
     networks:
       - shared-cudos-network
     logging:

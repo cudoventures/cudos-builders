@@ -129,7 +129,7 @@
         },
         {
             "label": "Build EXPLORER DEV in docker",
-            "command": "cd ./docker/explorer&& docker-compose --env-file ./explorer.local.arg -f ./explorer.dev.yml -p cudos-explorer up --build",
+            "command": "cd ./docker/explorer&& docker-compose --env-file ./explorer.local.arg -f ./explorer.dev.yml -f ./users-explorer.dev.override.yml -p cudos-explorer up --build",
             "type": "shell",
             "group": "build"
         },
@@ -496,6 +496,18 @@
         {
             "label": "Destroy ETHEREUM LIGHT NODE in docker",
             "command": "cd ./docker/ethereum&& docker-compose -f ./ethereum-light.yml -p ethereum-light down",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Build ETHEREUM FULL NODE in docker",
+            "command": "cd ./docker/ethereum&& docker-compose -f ./ethereum-full.yml -f ./users-ethereum-full.override.yml -p ethereum-full up --build",
+            "type": "shell",
+            "group": "build",
+        },
+        {
+            "label": "Destroy ETHEREUM FULL NODE in docker",
+            "command": "cd ./docker/ethereum&& docker-compose -f ./ethereum-full.yml -f ./users-ethereum-full.override.yml -p ethereum-full down",
             "type": "shell",
             "group": "build"
         },
