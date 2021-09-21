@@ -4,31 +4,31 @@
         // root node
         {
             "label": "Build INIT ROOT NODE in docker",
-            "command": "cd ./docker/root-node&& docker-compose --env-file ./root-node.local.arg -f ./init-root-node.yml -f ./users-root-node.yml -p cudos-init-root-node up --build",
+            "command": "cd ./docker/root-node&& docker-compose --env-file ./root-node.local.arg -f ./init-root-node.yml -f ./users-root-node.override.yml -p cudos-init-root-node up --build",
             "type": "shell",
             "group": "build"
         },
         {
             "label": "Destroy INIT ROOT NODE in docker",
-            "command": "cd ./docker/root-node&& docker-compose --env-file ./root-node.local.arg -f ./init-root-node.yml -f ./users-root-node.yml -p cudos-init-root-node down",
+            "command": "cd ./docker/root-node&& docker-compose --env-file ./root-node.local.arg -f ./init-root-node.yml -f ./users-root-node.override.yml -p cudos-init-root-node down",
             "type": "shell",
             "group": "build"
         },
         {
             "label": "Start START ROOT NODE in docker",
-            "command": "cd ./docker/root-node&& docker-compose --env-file ./root-node.local.arg -f ./start-root-node.yml -f ./users-root-node.yml -p cudos-start-root-node up",
+            "command": "cd ./docker/root-node&& docker-compose --env-file ./root-node.local.arg -f ./start-root-node.yml -f ./users-root-node.override.yml -p cudos-start-root-node up",
             "type": "shell",
             "group": "build"
         },
         {
             "label": "Build START ROOT NODE in docker",
-            "command": "cd ./docker/root-node&& docker-compose --env-file ./root-node.local.arg -f ./start-root-node.yml -f ./users-root-node.yml -p cudos-start-root-node up --build",
+            "command": "cd ./docker/root-node&& docker-compose --env-file ./root-node.local.arg -f ./start-root-node.yml -f ./users-root-node.override.yml -p cudos-start-root-node up --build",
             "type": "shell",
             "group": "build"
         },
         {
             "label": "Destroy START ROOT NODE in docker",
-            "command": "cd ./docker/root-node&& docker-compose --env-file ./root-node.local.arg -f ./start-root-node.yml -f ./users-root-node.yml -p cudos-start-root-node down",
+            "command": "cd ./docker/root-node&& docker-compose --env-file ./root-node.local.arg -f ./start-root-node.yml -f ./users-root-node.override.yml -p cudos-start-root-node down",
             "type": "shell",
             "group": "build"
         },
