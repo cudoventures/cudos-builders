@@ -11,9 +11,14 @@ services:
     build:
       dockerfile: CudosBuilders/docker/orchestrator/orchestrator.debug.dockerfile
       context: ../../../
+      args:
+        USER_ID: "0"
+        USER_NAME: "root"
+        GROUP_ID: "0"
+        GROUP_NAME: "root"
     env_file: "$ENV_FILE"
     volumes:
-      - '../../../CudosGravityBridge/orchestrator:/usr/src'
-      - '/usr/src/target'
+      - '../../../CudosGravityBridge/orchestrator:/usr/src/orchestrator'
+      - '/usr/src/orchestrator/target'
     networks:
       - shared-cudos-network

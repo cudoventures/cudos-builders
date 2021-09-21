@@ -380,17 +380,17 @@
         // Orchestrator - local 01 debug
         {
             "label": "Start ORCHESTRATOR LOCAL 01 DEBUG in docker",
-            "command": "cd ./docker/orchestrator&& docker-compose --env-file ./orchestrator.local01.arg -f ./orchestrator.debug.yml -p cudos-orchestrator-local-01-debug up",
+            "command": "cd ./docker/orchestrator&& docker-compose --env-file ./orchestrator.local01.arg -f ./orchestrator.debug.yml -f ./users-orchestrator.debug.override.yml -p cudos-orchestrator-local-01-debug up",
             "type": "shell",
             "group": "build",
         }, {
             "label": "Build ORCHESTRATOR LOCAL 01 DEBUG in docker",
-            "command": "cd ./docker/orchestrator&& docker-compose --env-file ./orchestrator.local01.arg -f ./orchestrator.debug.yml -p cudos-orchestrator-local-01-debug up --build",
+            "command": "cd ./docker/orchestrator&& docker-compose --env-file ./orchestrator.local01.arg -f ./orchestrator.debug.yml -f ./users-orchestrator.debug.override.yml -p cudos-orchestrator-local-01-debug up --build",
             "type": "shell",
             "group": "build"
         }, {
             "label": "Destroy ORCHESTRATOR LOCAL 01 DEBUG in docker",
-            "command": "cd ./docker/orchestrator&& docker-compose --env-file ./orchestrator.local01.arg -f ./orchestrator.debug.yml -p cudos-orchestrator-local-01-debug down",
+            "command": "cd ./docker/orchestrator&& docker-compose --env-file ./orchestrator.local01.arg -f ./orchestrator.debug.yml -f ./users-orchestrator.debug.override.yml -p cudos-orchestrator-local-01-debug down",
             "type": "shell",
             "group": "build"
         },
