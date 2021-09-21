@@ -67,31 +67,31 @@
         // sentry node
         {
             "label": "Build INIT SENTRY NODE in docker",
-            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node-01 up --build",
+            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -f ./users-sentry-node.override.yml -p cudos-init-sentry-node-01 up --build",
             "type": "shell",
             "group": "build"
         },
         {
             "label": "Destroy INIT SENTRY NODE in docker",
-            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node-01 down",
+            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -f ./users-sentry-node.override.yml -p cudos-init-sentry-node-01 down",
             "type": "shell",
             "group": "build"
         },
         {
             "label": "Start START SENTRY NODE in docker",
-            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.local01.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node-01 up",
+            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.local01.arg -f ./start-sentry-node.yml -f ./users-sentry-node.override.yml -p cudos-start-sentry-node-01 up",
             "type": "shell",
             "group": "build"
         },
         {
             "label": "Build START SENTRY NODE in docker",
-            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.local01.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node-01 up --build",
+            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.local01.arg -f ./start-sentry-node.yml -f ./users-sentry-node.override.yml -p cudos-start-sentry-node-01 up --build",
             "type": "shell",
             "group": "build"
         },
         {
             "label": "Destroy START SENTRY NODE in docker",
-            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.local01.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node-01 down",
+            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.local01.arg -f ./start-sentry-node.yml -f ./users-sentry-node.override.yml -p cudos-start-sentry-node-01 down",
             "type": "shell",
             "group": "build"
         },
@@ -173,31 +173,31 @@
         // sentry node client local
         {
             "label": "Build INIT SENTRY NODE CLIENT LOCAL in docker",
-            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.local01.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node-client-local-01 up --build",
+            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.local01.arg -f ./init-sentry-node.yml -f ./users-sentry-node.override.yml -p cudos-init-sentry-node-client-local-01 up --build",
             "type": "shell",
             "group": "build"
         },
         {
             "label": "Destroy INIT SENTRY NODE CLIENT LOCAL in docker",
-            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.local01.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node-client-local-01 down",
+            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.local01.arg -f ./init-sentry-node.yml -f ./users-sentry-node.override.yml -p cudos-init-sentry-node-client-local-01 down",
             "type": "shell",
             "group": "build"
         },
         {
             "label": "Start START SENTRY NODE CLIENT LOCAL in docker",
-            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.local01.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node-client-local-01 up",
+            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.local01.arg -f ./start-sentry-node.yml -f ./users-sentry-node.override.yml -p cudos-start-sentry-node-client-local-01 up",
             "type": "shell",
             "group": "build"
         },
         {
             "label": "Build START SENTRY NODE CLIENT LOCAL in docker",
-            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.local01.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node-client-local-01 up --build",
+            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.local01.arg -f ./start-sentry-node.yml -f ./users-sentry-node.override.yml -p cudos-start-sentry-node-client-local-01 up --build",
             "type": "shell",
             "group": "build"
         },
         {
             "label": "Destroy START SENTRY NODE CLIENT LOCAL in docker",
-            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.local01.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node-client-local-01 down",
+            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.local01.arg -f ./start-sentry-node.yml -f ./users-sentry-node.override.yml -p cudos-start-sentry-node-client-local-01 down",
             "type": "shell",
             "group": "build"
         },

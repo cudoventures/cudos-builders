@@ -11,6 +11,12 @@ services:
     build:
       dockerfile: CudosBuilders/docker/sentry-node/start-sentry-node.dockerfile
       context: ../../../
+      args:
+        USER_ID: '0'
+        USER_NAME: 'root'
+        GROUP_ID: '0'
+        GROUP_NAME: 'root'
+        CUDOS_HOME: "$CUDOS_HOME"
     restart: unless-stopped
     env_file: "$ENV_FILE"
     volumes:
