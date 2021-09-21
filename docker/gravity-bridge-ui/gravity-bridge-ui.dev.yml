@@ -12,11 +12,16 @@ services:
       dockerfile: CudosBuilders/docker/gravity-bridge-ui/gravity-bridge-ui.dev.dockerfile
       context: ../../../
       args:
+        args:
+        USER_ID: "0"
+        USER_NAME: "root"
+        GROUP_ID: "0"
+        GROUP_NAME: "root"
         ENV_FILE: "$ENV_FILE"
     restart: unless-stopped
     volumes:
-      - '../../../CudosGravityBridgeUI:/usr/gravity-bridge-ui'
-      - '/usr/gravity-bridge-ui/node_modules'
+      - '../../../CudosGravityBridgeUI:/usr/src/gravity-bridge-ui'
+      - '/usr/src/gravity-bridge-ui/node_modules'
     ports:
       - "4000:4000"
     networks:

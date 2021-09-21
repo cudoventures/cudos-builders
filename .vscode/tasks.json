@@ -503,19 +503,19 @@
         // Bridge UI dev
         {
             "label": "Start GRAVITY BRIDGE UI DEV in docker",
-            "command": "cd ./docker/gravity-bridge-ui&& docker-compose --env-file ./gravity-bridge-ui.dev.arg -f ./gravity-bridge-ui.dev.yml -p cudos-gravity-bridge-ui-dev up",
+            "command": "cd ./docker/gravity-bridge-ui&& docker-compose --env-file ./gravity-bridge-ui.dev.arg -f ./gravity-bridge-ui.dev.yml -f ./users-gravity-bridge-ui.dev.override.yml -p cudos-gravity-bridge-ui-dev up",
             "type": "shell",
             "group": "build"
         },
         {
             "label": "Build GRAVITY BRIDGE UI DEV in docker",
-            "command": "cd ./docker/gravity-bridge-ui&& docker-compose --env-file ./gravity-bridge-ui.dev.arg -f ./gravity-bridge-ui.dev.yml -p cudos-gravity-bridge-ui-dev up --build",
+            "command": "cd ./docker/gravity-bridge-ui&& docker-compose --env-file ./gravity-bridge-ui.dev.arg -f ./gravity-bridge-ui.dev.yml -f ./users-gravity-bridge-ui.dev.override.yml -p cudos-gravity-bridge-ui-dev up --build",
             "type": "shell",
             "group": "build"
         },
         {
             "label": "Destroy GRAVITY BRIDGE UI DEV in docker",
-            "command": "cd ./docker/gravity-bridge-ui&& docker-compose --env-file ./gravity-bridge-ui.dev.arg -f ./gravity-bridge-ui.dev.yml -p cudos-gravity-bridge-ui-dev down",
+            "command": "cd ./docker/gravity-bridge-ui&& docker-compose --env-file ./gravity-bridge-ui.dev.arg -f ./gravity-bridge-ui.dev.yml -f ./users-gravity-bridge-ui.dev.override.yml -p cudos-gravity-bridge-ui-dev down",
             "type": "shell",
             "group": "build"
         },

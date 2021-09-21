@@ -5,7 +5,6 @@ ARG USER_ID
 ARG USER_NAME
 ARG GROUP_ID
 ARG GROUP_NAME
-ARG CUDOS_HOME
 
 RUN if [ $USER_NAME != 'root' ]; then \
         addgroup -gid ${GROUP_ID} $GROUP_NAME; \
