@@ -1,7 +1,5 @@
 FROM golang:buster as builder
 
-# RUN apk add --no-cache jq make bash g++
-
 RUN apt update
 
 RUN apt install -y jq build-essential
@@ -19,8 +17,6 @@ RUN FOLDER=$(ls /go/pkg/mod/github.com/\!cosm\!wasm/ | grep wasmvm@v) && ln -s /
 FROM golang:buster
 
 WORKDIR /usr/cudos
-
-# RUN apk add --no-cache bash
 
 COPY --from=builder /go/pkg/mod/github.com/!cosm!wasm/wasmvm/api/libwasmvm.so /usr/lib
 
