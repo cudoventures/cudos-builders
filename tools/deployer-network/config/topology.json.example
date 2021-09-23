@@ -1,0 +1,34 @@
+{
+    "computers": [
+        {
+            "id": "someRandomString",
+            "ip": "1.2.3.4",
+            "user": "username",
+            "sshKey": "absolutePathToSSHKey",
+            "password": "password"
+        }
+    ],
+    "nodes": {
+        "rootValidator": {
+            "computerId": "idOfComputer"
+        },
+        "validators": [
+            {
+                "validatorId": "idOfTheValidator",
+                "computerId": "idOfComputer"
+            }
+        ],
+        "sentries": [
+            {
+                "validatorId": "idOfTheValidator",
+                "computerId": "idOfComputer"
+            }
+        ],
+        "seeds": [
+            {
+                "validatorId": "idOfTheValidator",
+                "computerId": "idOfComputer"
+            }
+        ]
+    }
+}
