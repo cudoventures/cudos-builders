@@ -94,6 +94,38 @@ Now your VS Code should reopen and start building the devcontainer. It could tak
 
 # Setup tools (tools folder)
 
+## Configuration for deployment
+
+<em>You can skip this step if you are going to use network deployer or deployer-tls.</em>
+
+Most of the folders below has a file named <code>secrecs.json.example</code> Duplicate this file and rename it to <code>secrets.json</code> In it you will find predefined instances' names. Let's call them **targets**. Do not change them, just add the corresponding parameters in the empty variables. Each instance needs a host, port, username, privateKey, keyPass (if available) and serverPath. If you are deploying to currently running testnets, lease the serverPath as it is - <code>/usr/cudos</code>
+
+## ethereum deployer
+
+To do
+
+## gravity bridge ui deployer
+
+To do
+
+## network deployer
+
+To do
+
+## nodes deployer
+
+To do
+
+## orchestrator deployer
+
+To do
+
+## tsl deployer
+
+To do
+
+## utils deployer
+
 To do
 
 # Setup docker (docker folder)
