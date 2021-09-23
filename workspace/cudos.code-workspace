@@ -1,0 +1,31 @@
+{
+	"folders": [
+		{
+			"path": "./CudosBuilders"
+		},
+		{
+			"path": "./CudosNode"
+		},
+		{
+			"path": "./CudosUtils"
+		},
+		{
+			"path": "./CudosGravityBridge"
+		},
+		{
+			"path": "./CudosGravityBridgeUI"
+		},
+		{
+			"path": "./CudosExplorer"
+		},
+		{
+			"path": "./CudosFaucet"
+		},
+		{
+			"path": "./CudosData"
+		},
+		{
+			"path": ".devcontainer"
+		}
+	]
+}

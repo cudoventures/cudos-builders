@@ -1,0 +1,10 @@
+CudosData
+CudosUtils
+CudosExplorer/.meteor
+Github-projects
+**/.github
+**/.git
+**/node_modules
+**/target
+.devcontainer
+**/.vscode

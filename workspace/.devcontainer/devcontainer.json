@@ -1,0 +1,19 @@
+{
+    "name": "cudos-workspace",
+    "service": "cudos-workspace",
+    "shutdownAction": "stopCompose",
+    "workspaceFolder": "${localWorkspaceFolder}",
+    "dockerComposeFile": "docker-compose.yml",
+    // "postCreateCommand": "mkdir -p ~/.ssh && cp /mnt/Working/Cudos/ssh/* ~/.ssh && chmod 600 ~/.ssh/gcloud-cudos-testnet-ubuntu && ssh-add ~/.ssh/gcloud-cudos-testnet-ubuntu",
+    "settings": {
+    },	
+    "extensions": [
+        "hookyqr.beautify",
+        "ms-azuretools.vscode-docker",
+        "dbaeumer.vscode-eslint",
+        "wallabyjs.quokka-vscode",
+        "golang.go",
+        "albymor.increment-selection",
+        "rust-lang.rust"
+    ],
+}
