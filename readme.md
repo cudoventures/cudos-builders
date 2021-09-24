@@ -162,26 +162,33 @@ Always copy the example .env.example file. You could leave the default values as
 ## Explorer
 
 - <code>MONGO_URL</code> - MongoDB connection string. It could be empty for dev builds.
-- <code>ROOT_URL</code> - The URL where explorer will be access from. For example ROOT_URL=http://localhost
+- <code>ROOT_URL</code> - The URL where explorer will be access from. For example ROOT_URL=http://localhost.
 
- ## Faucet
+## Faucet
 
-- <code>CREDIT_AMOUNT</code> - Default credit amount in acudos. It can safely be as MAX_CREDIT
+- <code>CREDIT_AMOUNT</code> - Default credit amount in acudos. It can safely be as MAX_CREDIT.
 - <code>MAX_CREDIT</code> - Max credit amount in acudos.
-- <code>NODE</code> - Cosmos URL. For example NODE="http://localhost:26657"
+- <code>NODE</code> - Cosmos URL. For example NODE="http://localhost:26657".
 - <code>MNEMONIC</code> - Mnemonic phrase of wallet that will be used to send tokens from.
-- <code>GOOGLE_API_KEY</code> - Google Api Key for captcha enterprise
-- <code>CAPTCHA_SITE_KEY</code> - Google Site key for captcha enterprice
-- <code>GOOGLE_PROJECT_ID</code> - gcloud project id
+- <code>GOOGLE_API_KEY</code> - Google Api Key for captcha enterprise.
+- <code>CAPTCHA_SITE_KEY</code> - Google Site key for captcha enterprice.
+- <code>GOOGLE_PROJECT_ID</code> - gcloud project id.
+
+## Full node
+
+- <code>MONIKER</code> - Name of the node.
+- <code>PERSISTENT_PEERS</code> - List of comma separated persistent_peers in format <seed_id@ip:26656>.
+- <code>SEEDS</code> - List of comma separated seeds in format <seed_id@ip:26656>.
+- <code>SHOULD_USE_GLOBAL_PEERS</code> - Indicates whether this node should use peers from <code>parentDir/CudosBuilders/config</code> or this node should use the peers defined in this file.
 
 ## Gravity bridge ui
 
-- <code>URL</code> - The URL where UI will be accessed. For example URL=http://localhost
+- <code>URL</code> - The URL where UI will be accessed. For example URL=http://localhost.
 - <code>CHAIN_ID</code> - ID of the cosmos chain.
-- <code>RPC</code> - Endpoint of cosmos chain. For example RPC=http://localhost:26657
-- <code>API</code> - Endpoint of cosmos chain api. For example API=http://localhost:1317
-- <code>ERC20_CONTRACT_ADDRESS</code> - Ethereum token contract address
-- <code>BRIDGE_CONTRACT_ADDRESS</code> - Gravity Bridge contract address
+- <code>RPC</code> - Endpoint of cosmos chain. For example RPC=http://localhost:26657.
+- <code>API</code> - Endpoint of cosmos chain api. For example API=http://localhost:1317.
+- <code>ERC20_CONTRACT_ADDRESS</code> - Ethereum token contract address.
+- <code>BRIDGE_CONTRACT_ADDRESS</code> - Gravity Bridge contract address.
 - <code>ETHEREUM_RPC</code> - Address of Ethereum full node. For example http://12.13.14.15:8545. Do not use infura node.
 
 
