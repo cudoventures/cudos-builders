@@ -98,15 +98,34 @@ Now your VS Code should reopen and start building the devcontainer. It could tak
 
 <em>You can skip this step if you are going to use network deployer or deployer-tls.</em>
 
-Most of the folders below has a file named <code>secrecs.json.example</code> Duplicate this file and rename it to <code>secrets.json</code> In it you will find predefined instances' names. Let's call them **targets**. Do not change them, just add the corresponding parameters in the empty variables. Each instance needs a host, port, username, privateKey, keyPass (if available) and serverPath. If you are deploying to currently running testnets, lease the serverPath as it is - <code>/usr/cudos</code>
+Most of the deployers below has a file named <code>secrecs.json.example</code> Duplicate this file and rename it to <code>secrets.json</code> In it you will find predefined instances' names. Let's call them **targets**. Do not change them, just add the corresponding parameters in the empty variables. Each target needs a host, port, username, privateKey, keyPass (if available) and serverPath. If you are deploying to currently running testnets, lease the serverPath as it is - <code>/usr/cudos</code>
 
-## ethereum deployer
+## Ethereum deployer
 
-To do
+### Usage:
+1. Configure <code>secrets.json</code> in this deployer as described above.
+2. Use some of the npm commands.
 
-## gravity bridge ui deployer
+### List of npm commands regarding this deployer:
 
-To do
+**<code>deploy--ethereum-rinkeby</code>** - deploys the rinkeby ethereum full node to gcloud using <code>secrets.json</code> in the deployer's folder.
+
+## Gravity bridge ui deployer
+
+### Usage:
+1. Configure <code>secrets.json</code> in this deployer as described above.
+2. Configure the ENV variables in <code>parentDir/CudosBuilders/gravity-bridge-ui</code>
+- Copy <em>gravity-bridge-ui.env.example</em> to:
+    - <em>gravity-bridge-ui.dev.env</em> (for dev builds)
+    - <em>gravity-bridge-ui.testnet.private.env</em> (for private testnet builds)
+    - <em>gravity-bridge-ui.testnet.public.env</em> (for public testnet builds)
+- Fill the required fields as described in the "ENV files fields" section.
+
+### List of npm commands regarding this deployer:
+
+**<code>deploy-gravity-bridge-ui-testnet-public</code>** - deploys gravity-bridge-ui to public testnet using <code>secrets.json</code> in the deployer's folder.
+
+**<code>deploy-gravity-bridge-ui-testnet-private</code>** - deploys gravity-bridge-ui to private testnet using <code>secrets.json</code> in the deployer's folder.
 
 ## network deployer
 
@@ -135,3 +154,17 @@ To do
 # Using predefined scripts (.vscode folder)
 
 To do
+
+# ENV files fields
+
+Always copy the example .env.example file. You could leave the default values as they are and just add the required fields as described below in this section.
+
+## Gravity bridge ui
+
+- <code>URL</code> - The URL where UI will be accessed. For example URL=http://localhost
+- <code>CHAIN_ID</code> - ID of the cosmos chain.
+- <code>RPC</code> - Endpoint of cosmos chain. For example RPC=http://localhost:26657
+- <code>API</code> - Endpoint of cosmos chain api. For example API=http://localhost:1317
+- <code>ERC20_CONTRACT_ADDRESS</code> - Ethereum token contract address
+- <code>BRIDGE_CONTRACT_ADDRESS</code> - Gravity Bridge contract address
+- <code>ETHEREUM_RPC</code> - Address of Ethereum full node. For example http://12.13.14.15:8545. Do not use infura node.
