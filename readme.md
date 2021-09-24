@@ -250,6 +250,10 @@ To do
 
 To do
 
+# Upgrade procedure
+
+To do
+
 # ENV files fields
 
 Always copy the example .env.example file. You could leave the default values as they are and just add the required fields as described below in this section.
