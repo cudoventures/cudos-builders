@@ -159,16 +159,18 @@ To do
 
 Always copy the example .env.example file. You could leave the default values as they are and just add the required fields as described below in this section.
 
+Please note the port of each endpoint. It can be used as indicator which endpoint is required.
+
 ## Explorer
 
 - <code>MONGO_URL</code> - MongoDB connection string. It could be empty for dev builds.
-- <code>ROOT_URL</code> - The URL where explorer will be access from. For example ROOT_URL=http://localhost.
+- <code>ROOT_URL</code> - The URL where explorer will be access from. For example: ROOT_URL=http://localhost.
 
 ## Faucet
 
 - <code>CREDIT_AMOUNT</code> - Default credit amount in acudos. It can safely be as MAX_CREDIT.
 - <code>MAX_CREDIT</code> - Max credit amount in acudos.
-- <code>NODE</code> - Cosmos URL. For example NODE="http://localhost:26657".
+- <code>NODE</code> - Cosmos URL. For example: NODE="http://localhost:26657".
 - <code>MNEMONIC</code> - Mnemonic phrase of wallet that will be used to send tokens from.
 - <code>GOOGLE_API_KEY</code> - Google Api Key for captcha enterprise.
 - <code>CAPTCHA_SITE_KEY</code> - Google Site key for captcha enterprice.
@@ -183,13 +185,34 @@ Always copy the example .env.example file. You could leave the default values as
 
 ## Gravity bridge ui
 
-- <code>URL</code> - The URL where UI will be accessed. For example URL=http://localhost.
+- <code>URL</code> - The URL where UI will be accessed. For example: URL=http://localhost.
 - <code>CHAIN_ID</code> - ID of the cosmos chain.
-- <code>RPC</code> - Endpoint of cosmos chain. For example RPC=http://localhost:26657.
-- <code>API</code> - Endpoint of cosmos chain api. For example API=http://localhost:1317.
+- <code>RPC</code> - Endpoint of cosmos chain. For example: RPC=http://localhost:26657.
+- <code>API</code> - Endpoint of cosmos chain api. For example: API=http://localhost:1317.
 - <code>ERC20_CONTRACT_ADDRESS</code> - Ethereum token contract address.
 - <code>BRIDGE_CONTRACT_ADDRESS</code> - Gravity Bridge contract address.
-- <code>ETHEREUM_RPC</code> - Address of Ethereum full node. For example http://12.13.14.15:8545. Do not use infura node.
+- <code>ETHEREUM_RPC</code> - Address of Ethereum full node. For example: http://12.13.14.15:8545. Do not use infura node.
+
+## Gravity contract deployer
+
+- <code>COSMOS_NODE</code> - The endpoint of cosmos chain. For example: COSMOS_NODE="http://localhost:26657"
+- <code>ETH_NODE</code> - The endpoint of eth full node. For example: ETH_NODE="http://localhost:8545"
+- <code>ETH_PRIV_KEY_HEX</code> - The private key of Ethereum wallet that will be used to sign the transaction for contract creation. It can be any Ethereum address that has enough tokens (~0.02ETH). Format is hex without leading "0x". For example: ETH_PRIV_KEY_HEX="a2b......"
+
+## Orchestrator
+
+- <code>FEES</code> - Amount of cudos that will be required by this validator in order to sign any operation. For example: FEES="1acudos"
+- <code>GRPC</code> - The endpoint of cosmos chain. For example: COSMOS_NODE="http://localhost:9090"
+- <code>ETHRPC</code> - The endpoint of eth full node. For example: ETH_NODE="http://localhost:8545"
+- <code>CONTRACT_ADDR</code> - Gravity Bridge contract address.
+- <code>COSMOS_ORCH_MNEMONIC</code> - Mnemonic phrase of orchestrator wallet.
+- <code>ETH_PRIV_KEY_HEX</code> - The private key of Ethereum wallet that will be used to sign the transactions for sending funds from cosmos -> Ethereum. This wallet has been used to register the validator. Format is hex without leading "0x". For example: ETH_PRIV_KEY_HEX="a2b......".
+
+## Root node
+
+- <code>MONIKER</code> - Name of the node.
+- <code>CHAIN_ID</code> - Random string without space.
+- <code>ORCH_ETH_ADDRESS</code> - Ethereum address of a wallet that will be used to sign the transactions for sending funds from cosmos -> Ethereum. <em>This is the same wallet which adress should be used later on in orchestrator.env.example -> ETH_PRIV_KEY_HEX</em>.
 
 
 
