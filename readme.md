@@ -221,4 +221,13 @@ Please note the port of each endpoint. It can be used as indicator which endpoin
 - <code>PRIVATE_PEERS</code> - List of comma separated private peers in format <node_id@ip:26656>. Private peers are nodes that current node do not expose to anyone.
 - <code>SHOULD_USE_GLOBAL_PEERS</code> - Indicates whether this node should use peers from <code>parentDir/CudosBuilders/config</code> or this node should use the peers defined in this file.
 
-- <code></code> - 
+## Sentry node
+
+- <code>MONIKER</code> - Name of the node.
+- <code>PERSISTENT_PEERS</code> - List of comma separated persistent_peers in format <node_id@ip:26656>. Persistent peers are nodes that current node is always connected to.
+- <code>PRIVATE_PEERS</code> - List of comma separated private peers in format <node_id@ip:26656>. Private peers are nodes that current node do not expose to anyone.
+- <code>SEEDS</code> - List of comma separated seeds in format <node_id@ip:26656>. Seeds are nodes that periodicly checks the network for active peers. When someone connects to them, they just send the list of the peers so that the recipient will connect to the returned peers.
+- <code>SHOULD_USE_GLOBAL_PEERS</code> - Indicates whether this node should use peers from <code>parentDir/CudosBuilders/config</code> or this node should use the peers defined in this file.
+- <code>TLS_ENABLED</code> - This variable is used to indicate whether the sentry node will have an HTTPs domain. For example: TLS_ENABLED=true.
+- <code>TLS_DOMAIN</code> - (Can be skipped if <code>TLS_ENABLED</code> is false). The domain of the sentry node.
+- <code>TLS_DOCKER_PATH</code> - (Can be skipped if <code>TLS_ENABLED</code> is false). Path to letsencrypt.
