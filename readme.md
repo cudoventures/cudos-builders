@@ -114,9 +114,8 @@ Most of the deployers below has a file named <code>secrecs.json.example</code> D
 
 ### Usage:
 1. Configure <code>secrets.json</code> in this deployer as described above.
-2. Configure the ENV variables in <code>parentDir/CudosBuilders/gravity-bridge-ui</code>
+2. Configure the ENV variables in <code>parentDir/CudosBuilders/docker/gravity-bridge-ui</code>
 - Copy <em>gravity-bridge-ui.env.example</em> to:
-    - <em>gravity-bridge-ui.dev.env</em> (for dev builds)
     - <em>gravity-bridge-ui.testnet.private.env</em> (for private testnet builds)
     - <em>gravity-bridge-ui.testnet.public.env</em> (for public testnet builds)
 - Fill the required fields as described in the "ENV files fields" section.
@@ -137,7 +136,25 @@ To do
 
 ## orchestrator deployer
 
-To do
+### Usage:
+1. Configure <code>secrets.json</code> in this deployer as described above.
+2. Configure the ENV variables in <code>parentDir/CudosBuilders/docker/orchestator</code>
+- Copy <em>orchestrator.env.example</em> to:
+    - <em>orchestrator.testnet.private.env</em> (for private testnet builds)
+    - <em>orchestrator.testnet.public.zone01.env</em> (for public testnet builds of the root-validator)
+    - <em>orchestrator.testnet.public.zone02.env</em> (for public testnet builds of the validator-02)
+    - <em>orchestrator.testnet.public.zone03.env</em> (for public testnet builds of the validator-03)
+- Fill the required fields as described in the "ENV files fields" section.
+
+### List of npm commands regarding this deployer:
+
+**<code>deploy--orchestrator-testnet-private</code>** - deploys the orchestrator of root-validator of the private testnet using <code>secrets.json</code> in the deployer's folder.
+
+**<code>deploy--orchestrator-testnet-public-zone01</code>** - deploys the orchestrator of root-validator of the public testnet using <code>secrets.json</code> in the deployer's folder.
+
+**<code>deploy--orchestrator-testnet-public-zone02</code>** - deploys the orchestrator of validator-02 of the public testnet using <code>secrets.json</code> in the deployer's folder.
+
+**<code>deploy--orchestrator-testnet-public-zone03</code>** - deploys the orchestrator of validator-03 of the public testnet using <code>secrets.json</code> in the deployer's folder.
 
 ## tsl deployer
 
@@ -145,7 +162,24 @@ The deployer contains only a readme file that explains how the server should be 
 
 ## utils deployer
 
-To do
+### Usage:
+1. Configure <code>secrets.json</code> in this deployer as described above.
+2. Configure the ENV variables in <code>parentDir/CudosBuilders/docker/explorer</code>
+- Copy <em>explorer.env.example</em> to:
+    - <em>explorer.testnet.private.env</em> (for private testnet builds)
+    - <em>explorer.testnet.public.env</em> (for public testnet builds)
+- Fill the required fields as described in the "ENV files fields" section.
+3. Configure the ENV variables in <code>parentDir/CudosBuilders/docker/faucet</code>
+- Copy <em>faucet.env.example</em> to:
+    - <em>faucet.testnet.private.env</em> (for private testnet builds)
+    - <em>faucet.testnet.public.env</em> (for public testnet builds)
+- Fill the required fields as described in the "ENV files fields" section.
+
+### List of npm commands regarding this deployer:
+
+**<code>deploy-utils-testnet-public</code>** - deploys utils (explorer + faucet) to public testnet using <code>secrets.json</code> in the deployer's folder.
+
+**<code>ddeploy-utils-testnet-private</code>** - deploys utils (explorer + faucet) to private testnet using <code>secrets.json</code> in the deployer's folder.
 
 # Setup docker (docker folder)
 
