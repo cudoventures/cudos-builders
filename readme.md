@@ -159,6 +159,21 @@ To do
 
 Always copy the example .env.example file. You could leave the default values as they are and just add the required fields as described below in this section.
 
+## Explorer
+
+- <code>MONGO_URL</code> - MongoDB connection string. It could be empty for dev builds.
+- <code>ROOT_URL</code> - The URL where explorer will be access from. For example ROOT_URL=http://localhost
+
+ ## Faucet
+
+- <code>CREDIT_AMOUNT</code> - Default credit amount in acudos. It can safely be as MAX_CREDIT
+- <code>MAX_CREDIT</code> - Max credit amount in acudos.
+- <code>NODE</code> - Cosmos URL. For example NODE="http://localhost:26657"
+- <code>MNEMONIC</code> - Mnemonic phrase of wallet that will be used to send tokens from.
+- <code>GOOGLE_API_KEY</code> - Google Api Key for captcha enterprise
+- <code>CAPTCHA_SITE_KEY</code> - Google Site key for captcha enterprice
+- <code>GOOGLE_PROJECT_ID</code> - gcloud project id
+
 ## Gravity bridge ui
 
 - <code>URL</code> - The URL where UI will be accessed. For example URL=http://localhost
@@ -168,3 +183,7 @@ Always copy the example .env.example file. You could leave the default values as
 - <code>ERC20_CONTRACT_ADDRESS</code> - Ethereum token contract address
 - <code>BRIDGE_CONTRACT_ADDRESS</code> - Gravity Bridge contract address
 - <code>ETHEREUM_RPC</code> - Address of Ethereum full node. For example http://12.13.14.15:8545. Do not use infura node.
+
+
+
+- <code></code> - 
