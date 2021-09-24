@@ -141,7 +141,7 @@ To do
 
 ## tsl deployer
 
-To do
+The deployer contains only a readme file that explains how the server should be configured in order to suppost the Domain and TSL of sentry nodes. Currently this is has already been done for public testnet sentry nodes.
 
 ## utils deployer
 
