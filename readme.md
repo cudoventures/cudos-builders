@@ -244,13 +244,38 @@ To do
 
 # Using predefined scripts (.vscode folder)
 
-To do
+All the scripts in this folder are VS-code only. They can be invoked by pressing Control (CMD) + Shift + B. Their purpose is to ease the local docker build procedure by speed up the docker's instance creation.
+
+Each instance has two or three commands - <em>Build</em>, <em>Start</em> and <em>Destroy</em> used respective to build, start or destroy a docker instance. Some of the instance does not have <em>Start</em> command, because these is no point to call only <em>Start</em> without <em>Build</em> command for them.
+
+Listing the entire list of commands here is useless, because of the following reasons:
+1. Their names are quite describtive
+2. They are updated frequently
+3. They are part of the <em>Local dev procedures</em> which will be described in sections later.
+
+To give a brief overview of what these commands looks like let's take the following example of creating and starting a root node (node that initializes and starts the chain):
+
+<code>Build INIT ROOT NODE in docker</code> - Builds chain binary in in order to initialize the chain's data.
+
+<code>Destroy INIT ROOT NODE in docker</code> - Destroys the above built docker container.
+
+<code>Start START ROOT NODE in docker</code> - Starts previously built, by command below, docker instance.
+
+<code>Build START ROOT NODE in docker</code> - Builds chain binary in order to starts it by using previously initialized chain's data.
+
+<code>Destroy START ROOT NODE in docker</code> - Destroys the above built docker container.
+
+More information about commands, how to use and configure them will follow in <em>Local dev procedures</em> section.
 
 # Deployment procedure
 
 To do
 
 # Upgrade procedure
+
+To do
+
+# Local dev procedure
 
 To do
 
