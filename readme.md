@@ -280,7 +280,9 @@ The folder has following build-targets:
 
 **.env** - Env variables of the running container. An .arg file could have a corresponding .env file. For example <em>full-node.client.local01.arg</em> has <em>full-node.client.local01.env</em>.
 
-Each set corresponds to a build-variant.
+Each set (.yml, .arg, .env) corresponds to a build-variant.
+
+The **.env** file for each build-variant is not part of the repository, because it contains either private data or it is local configuration. In order to create corresponding **.env** file, you have to copy the **.env.example** and rename in accordance to **.arg** file that matches the build-variant that you need. You can refer to <em>ENV files fields</em> section for more information how to fill an **.env** file.
 
 ## Build process
 
