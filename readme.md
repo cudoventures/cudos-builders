@@ -236,11 +236,61 @@ The deployer contains only a readme file that explains how the server should be 
 
 **<code>deploy-utils-testnet-public</code>** - deploys utils (explorer + faucet) to public testnet using <code>secrets.json</code> in the deployer's folder.
 
-**<code>ddeploy-utils-testnet-private</code>** - deploys utils (explorer + faucet) to private testnet using <code>secrets.json</code> in the deployer's folder.
+**<code>deploy-utils-testnet-private</code>** - deploys utils (explorer + faucet) to private testnet using <code>secrets.json</code> in the deployer's folder.
 
 # Setup docker (docker folder)
 
-To do
+This folder contains docker specific files organized by build-target. They are used in build processes in local development as well as in deployment builds. 
+
+## Build targets
+
+The folder has following build-targets:
+
+<em>**binary-builder**</em> - The cudos-node daemon used by full-node, root-node, seed-node, sentry-node and standalone-node.
+
+<em>**config**</em> - Contains genesises, peers and seeds for local dev, public and private testnets. 
+
+<em>**ethereum**</em> - Ethereum light or full node.
+
+<em>**faucet**</em> - Faucet used by local dev, public and private testnets.
+
+<em>**full-node**</em> - Cudos full node that connects to local chain, private or public testnets. It can be promoted to a validator.
+
+<em>**gravity-bridge-ui**</em> - Gravity Bridge UI used to transfer funds between the Cosmos <-> Ethereum chains.
+
+<em>**gravity-contract-deployer**</em> - Standalone build-target that has a sole purpose of deployment a new Gravity contract.
+
+<em>**orchestartor**</em> - Orchestrator binary that must run along with the validator
+
+<em>**root-node**</em> - Cudos root node that initialize a chain. It contains the root validator.
+
+<em>**seed-node**</em> - Cudos seed node that connects to local chain, private or public testnets.
+
+<em>**sentry-node**</em> - Cudos sentry node that connects to local chain, private or public testnets.
+
+<em>**standalone-node**</em> - Standalone cudos daemon containing a single root-validator node. It can be used for test purposed.
+
+## Structure
+
+<em>**config**</em> folder contains configuration files as described above. All other folders have idencical structure. The structure consists of one or more set of the following files:
+
+**.yml** - Docker compose file.
+
+**.arg** - Docker compose build parameters. Usually a single .yml file could have several .args files. Each of them is used in a specific build-variant. For example: <em>init-full-node.yml</em> has <em>full-node.client.local01.arg</em>, <em>full-node.client.testnet.private01.arg</em> and few more.
+
+**.env** - Env variables of the running container. An .arg file could have a corresponding .env file. For example <em>full-node.client.local01.arg</em> has <em>full-node.client.local01.env</em>.
+
+Each set corresponds to a build-variant.
+
+## Build process
+
+Build process of each of the variants above starts with an **.yml** file that uses a parameters defined in **.arg** file. The **.arg** file contains parameters for the docker-compose file as well as for the dockerfile itself. Even some of these arguments are passed as environmental variable to the container. **.env** file contains the environment variable of the container that are not used neither in docker-compose file nor in dockerfile.
+
+Some of the build-targers have **users-*.override.yml**. This file is used along with main **.yml** file of each build-variant in order to specify the linux user and group that each container should use.
+
+There are a lot of build-variants. In order to make the dev process easier and more efficient there is a set of predefined build-variants that are defined in .vscode folder (described below). This folder is suitable only for VSCode. If you are using different editor, you can open the <em>tasks.json</em> file in .vscode folder and see the corresponsing set of files (.yml, .arg, .env, .override.yml) that are used by the predefined build-variants. More information about the purposed of each build target will follow in <em>local dev procedure below</em>.
+
+Some of these build-variats are used by npm commands described in <em>setup tools</em> section.
 
 # Using predefined scripts (.vscode folder)
 
