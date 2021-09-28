@@ -317,6 +317,65 @@ To give a brief overview of what these commands looks like let's take the follow
 
 More information about commands, how to use and configure them will follow in <em>Local dev procedures</em> section.
 
+# Chain architecture
+
+## Architecture and node types
+
+Each chain starts with a initializator. It is so called <em>root-node</em>. This node must has a validator and this validator is created by default during the initialization of the chain. Validators are very important nodes and their IP address MUST not be disposed in a public space therefore all connections to validators MUST happen in a private network.
+
+Once we have our <em>root-node</em> we can start connecting other nodes to it. Any node that is running in the chain is called <em>full-node</em>
+
+In order to connect a node to the network we must expose at least one IP address of the chain. As said above, we must not expose our validators' IP addresses. That's why we MUST set 1 or more nodes that are connected to the validator in a private network and then we can safely expose these nodes' IP addresses. These type of nodes are called <em>sentry-node</em>. In short - <em>sentry-node</em> is a <em>full-node</em> that hide validator's existance.
+
+Each node have a configuration parameter that makes the node a <em>seed-node</em>. <em>seed-node</em> is a regular <em>full/sentry-node</em> that scrapes the chain on a regular basis and stores a list of IP addresses of active nodes. When someone connects to a seed node, it respond with a list of active peers that the sender could connect it. 
+
+## Connecting to a chain
+
+So far we defined our 4 type of nodes - root, full, sentry and seed. Now let's see how they can connect to each other.
+
+Each node has a unique pair of TENDERMINT_NODE_ID@IP:PORT. Each node's TENDERMINT_NODE_ID is printed in the console just after the node is started. Also it is saved in a file <em>tendermint.nodeid</em> in the data folder (see next section for more detail where data folder is).
+
+We can connect to a network either by using list of <em>PERSISTENT_PEERS</em> or by using list of <em>SEEDS</em>. <em>PERSISTENT_PEERS</em> is a string of comma-separeted pairs of TENDERMINT_NODE_ID/IP. The same applies for <em>SEEDS</em>. It looks like <em>c22447781b7c5898bf277f173ee553a0e11bd427@cudos-start-root-node:26656</em>
+
+If we use <em>PERSISTENT_PEERS</em> then our node will try to connect to them and as long as at least our node have connection to at least one of them then everything is fine. When our node lose a connection to all of the nodes in the <em>PERSISTENT_PEERS</em>  string then our node will not be part of the chain.
+
+If we use <em>SEEDS</em> then our node will get the actual list of peers from the <em>SEEDS</em>. Then our node will connect to these peers. If our node could not connect to these peers then it will again ask <em>SEEDS</em> in order to obtain a new list of peers that our node will try to connect to.
+
+Also each node MUST have a copy of <em>root-node</em>'s genesis.json file.
+
+### Network setup example - 2 validators (root + full), 2 sentris, 1 seed
+
+1. Init and start a <em>root-node</em>.
+2. Copy /data/config/genesis.json and <em>root-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT).
+3. Init the <em>seed-node</em>.
+4. Replace copied genesis.json with <em>seed-node</em>'s /data/config/genesis.json.
+5. Open /data/config/config.toml and set <em>root-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT) as <em>PERSISTENT_PEERS</em>.
+6. Open /data/config/config.toml and set <em>root-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT) as <em>PRIVATE_PEER_IDS</em>.
+7. Start the <em>seed-node</em>.
+8. Copy <em>seed-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT).
+9. Init the <em>sentry-node</em>.
+10. Replace copied genesis.json with <em>sentry-node</em>'s /data/config/genesis.json.
+11. Open /data/config/config.toml and set <em>seed-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT) as <em>SEEDS</em>.
+12. Start the <em>sentry-node</em>.
+13. Init the <em>full-node</em>.
+14. Replace copied genesis.json with <em>full-node</em>'s /data/config/genesis.json.
+15. Copy <em>full-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT).
+16. Init the <em>sentry-node-02</em>.
+17. Replace copied genesis.json with <em>sentry-node-02</em>'s /data/config/genesis.json.
+18. Open /data/config/config.toml and set <em>seed-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT) as <em>SEEDS</em>.
+19. Open /data/config/config.toml and set <em>full-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT) as <em>PRIVATE_PEER_IDS</em>.
+20. Start the <em>sentry-node-02</em>.
+21. Copy <em>sentry-node-02</em>'s pair (TENDERMINT_NODE_ID@IP:PORT).
+22. Open /data/config/config.toml of <em>full-node</em> and set <em>sentry-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT) as <em>PERSISTENT_PEERS</em>.
+23. Start the <em>full-node</em>.
+24. Create a validator.
+
+For more information where to set <em>SEEDS</em>, <em>PERSISTENT_PEERS</em>, <em>PRIVATE_PEER_IDS</em> see the <em>Data folder</em> section.
+
+## Data folder (how to set <em>SEEDS</em>, <em>PERSISTENT_PEERS</em>, <em>PRIVATE_PEER_IDS</em>)
+
+To do
+
 # Deployment procedure
 
 To do
@@ -327,7 +386,15 @@ To do
 
 # Local dev procedure
 
-To do
+## Stating a chain
+
+1. Deside nodes architecture. In most cases <em>root-node</em> and a <em>sentry-node</em> are enought.
+2. Init and start the <em>root-node</em> using pre-defined build-variants.
+3. Configure, init and start a node (full, sentry or seed) using pre-defined build-variants.
+
+## Using predefined build-variants
+
+To Do.
 
 # ENV files fields
 
