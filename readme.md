@@ -128,7 +128,7 @@ Most of the deployers below has a file named <code>secrecs.json.example</code> D
 
 ## network deployer
 
-To do
+To do (network deployer is under development)
 
 ## nodes deployer
 
@@ -344,6 +344,10 @@ If we use <em>PERSISTENT_PEERS</em> then our node will try to connect to them an
 If we use <em>SEEDS</em> then our node will get the actual list of peers from the <em>SEEDS</em>. Then our node will connect to these peers. If our node could not connect to these peers then it will again ask <em>SEEDS</em> in order to obtain a new list of peers that our node will try to connect to.
 
 Also each node MUST have a copy of <em>root-node</em>'s genesis.json file.
+
+### Getting the TENDERMINT_NODE_ID@IP:PORT pair.
+
+In order to establish a connection between two node you have to specify <em>PERSISTENT_PEERS</em> or <em>SEEDS</em>. In both cases you need TENDERMINT_NODE_ID@IP:PORT pair. TENDERMINT_NODE_ID can be checked in node's data dir: <em>/data/tendermint.nodeid</em>. The POST is usually 26656 unless you changed it intetionally. The IP address can be IPv4 (during testnet deployments) or a name (during local development in docker containers). This is usefull when working in a docker network where using the exact IPv4 address is not very convenient, because they are subject to change. That's why you can specify the container name as IP address. Container names are defined either in **.yml** file or in **.arg** file (as START_CONTAINER_NAME).
 
 ### Network setup example - 2 validators (root + full), 2 sentris, 1 seed
 
@@ -704,7 +708,158 @@ It should start from the the block it stopped before the upgrade without any err
 
 ## Using predefined build-variants
 
-To Do.
+### Overview
+
+Each predefiend build-variant consists of two parts - docker action and build-variant name. Docker actions are <em>Build</em>, <em>Start</em>, <em>Destroy</em>, <em>Build-only</em>, etc.. They are always at the begining of command. After that in UPPERCASE is the name of the build-variant. Each of them ends with <em>in docker</em>, because all of them are docker related.
+
+<em>Build</em> indicates that the docker-compose command ends with ...up --build. It means that the container will be built and then started.
+
+<em>Start</em> indicates that the docker-compose command ends with ...up. It means that the container will be started as it was before. If it does not exist then it will be built.
+
+<em>Destroy</em> Removes the container.
+
+<em>Build-only</em> indicates that the docker-compose command ends with ...up. It means that the container will be built but NOT started.
+
+Please refer to <em>ENV files fields</em> section for more information about how to fill the required **.env** files below. Mentioned **.env** file are missing in the repository and you must create them by copying the **.env.example** file.
+
+The "CLIENT" in the name of the build-variant indicates that it is expected this node to be like a "client" to the local chain and thus using the <em>SHOULD_USE_GLOBAL_PEERS</em> as <em>TRUE</em>.
+
+The "CONFIG" in the name indicates that this container is more like a scripts. Once it is built, it starts, execute some logic and shuts down. Such config containers are usual for full-nodes, because there is one extra step when creating a validtor.
+
+### Predefiend build-variants
+
+<code>Build/Destroy INIT ROOT NODE in docker</code>. Container for initialization of a root node. It depends on **root-node.local.env** and the corresponding **.arg** file.
+
+<code>Build/Destroy/Start START ROOT NODE in docker</code>. Container for starting the root node. The container MUST be initialized before. It depends on **root-node.local.env** and the corresponding **.arg** file.
+
+<code>Build/Destroy INIT SEED NODE in docker</code>. Container for initialization of a seed node. It depends on **seed-node.local.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.local.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.local.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.local.json</em>.
+
+<code>Build/Destroy/Start START SEED NODE in docker</code>. Container for starting of a seed node. The container MUST be initialized before. It depends on **seed-node.local.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.local.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.local.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.local.json</em>.
+
+<code>Build/Destroy INIT SENTRY NODE in docker</code>. Container for initialization of a sentry node. It depends on **sentry-node.local.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.local.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.local.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.local.json</em>.
+
+<code>Build/Destroy/Start START SENTRY NODE in docker</code>. Container for starting of a sentry node. The container MUST be initialized before. It depends on **sentry-node.local.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.local.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.local.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.local.json</em>.
+
+<code>Build/Destroy/Start FAUCET in docker</code>. Container for starting the faucet. It depends on **faucet.local.arg** and the corresponding **.arg** file.
+
+<code>Build/Destroy/Start EXPLORER in docker</code>. Container for starting the explorer in release build. It depends on **explorer.local.env** and the corresponding **.arg** file.
+
+<code>Build EXPLORER DEV in docker</code>. Container for starting the explorer in dev build. It depends on **explorer.local.env** and the corresponding **.arg** file. In this mode, a volume is mounted from host inside docker so that any change in host's files results in re-building of the explorer.
+
+<code>Build/Destroy INIT SEED NODE CLIENT LOCAL in docker</code>. Container for initialization of a seed node. It depends on **seed-node.client.local01.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.local.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.local.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.local.json</em>.
+
+<code>Build/Destroy/Start START SEED NODE CLIENT LOCAL in docker</code>. Container for starting of a seed node. The container MUST be initialized before. It depends on **seed-node.client.local01.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.local.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.local.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.local.json</em>.
+
+<code>Build/Destroy INIT SENTRY NODE CLIENT LOCAL in docker</code>. Container for initialization of a sentry node. It depends on **sentry-node.client.local01.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.local.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.local.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.local.json</em>.
+
+<code>Build/Destroy/Start START SENTRY NODE CLIENT LOCAL in docker</code>. Container for starting of a sentry node. The container MUST be initialized before. It depends on **sentry-node.client.local01.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.local.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.local.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.local.json</em>
+
+<code>Build/Destroy INIT FULL NODE CLIENT LOCAL in docker</code>. Container for initialization of a full node. It depends on **full-node.client.local01.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.local.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.local.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.local.json</em>.
+
+<code>Build/Destroy CONFIG FULL NODE CLIENT LOCAL in docker</code>. Container for configurtion of a full node. The container MUST be initialized before. It depends on **full-node.client.local01.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.local.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.local.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.local.json</em>.
+
+<code>Build/Destroy/Start START FULL NODE CLIENT LOCAL in docker</code>. Container for starting of a full node. The container MUST be initialized before. It depends on **full-node.client.local01.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.local.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.local.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.local.json</em>
+
+<code>Build/Destroy INIT FULL NODE CLIENT TESTNET PUBLIC in docker</code>. Container for initialization of a full node. It depends on **full-node.client.testnet.public01.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.testnet.public.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.testnet.public.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.testnet.public.json</em>.
+
+<code>Build/Destroy CONFIG FULL NODE CLIENT TESTNET PUBLIC in docker</code>. Container for configurtion of a full node. The container MUST be initialized before. It depends on **full-node.client.testnet.public01.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.testnet.public.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.testnet.public.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.testnet.public.json</em>.
+
+<code>Build/Destroy/Start START FULL NODE CLIENT TESTNET PUBLIC in docker</code>. Container for starting of a full node. The container MUST be initialized before. It depends on **full-node.client.testnet.public01.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.testnet.public.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.testnet.public.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.testnet.public.json</em>.
+
+<code>Build/Destroy INIT FULL NODE CLIENT TESTNET PRIVATE in docker</code>. Container for initialization of a full node. It depends on **full-node.client.testnet.private01.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.testnet.private.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.testnet.private.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.testnet.private.json</em>.
+
+<code>Build/Destroy CONFIG FULL NODE CLIENT TESTNET PRIVATE in docker</code>. Container for configurtion of a full node. The container MUST be initialized before. It depends on **full-node.client.testnet.testnet01.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.testnet.private.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.testnet.private.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.testnet.private.json</em>.
+
+<code>Build/Destroy/Start START FULL NODE CLIENT TESTNET PRIVATE in docker</code>. Container for starting of a full node. The container MUST be initialized before. It depends on **full-node.client.testnet.private01.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.testnet.private.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.testnet.private.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.testnet.private.json</em>.
+
+<code>Build/Build-only/Destroy/Start BINARY BUILDER in docker</code>. Container for building the binary of the chain. All other node related container depends on it. It does not depends on any **.env** files. Its **.arg** file is <em>binary-builder.arg</em>
+
+<code>Build/Destroy/Start STANDALONE NODE in docker</code>. Container for starting a single-node network for test purposes. It does not depends on any **.env** or **.arg** files.
+
+<code>Build/Destroy/Start ORCHESTRATOR LOCAL 01 DEBUG in docker</code>. Container for orchestrator in debug mode. It depends on **orchestrator.local01.env** and the corresponding **.arg** file. A volume is mounted from host inside docker. So any change in host's files will result in same files been changed inside the container too. A re-build should be manually triggers after any such change by openning a bash shell inside dockere container and executing the following command.
+```bash
+cd /usr/src/orchestrator && cargo build && cd /home/orchestrator/bin/ && cp /usr/src/orchestrator/target/debug/gbt ./gbt && ./orchestrator-run.sh
+```
+This command should also be executed once the container starts in order to start the orchestrator.
+
+<code>Build/Destroy/Start ORCHESTRATOR LOCAL 01 RELEASE in docker</code>. Container for orchestrator in release mode. It depends on **orchestrator.local01.env** and the corresponding **.arg** file. 
+
+<code>Build/Destroy/Start ORCHESTRATOR LOCAL 02 RELEASE in docker</code>. Container for orchestrator in release mode. It depends on **orchestrator.local02.env** and the corresponding **.arg** file. 
+
+<code>Build/Destroy/Start ORCHESTRATOR LOCAL 03 RELEASE in docker</code>. Container for orchestrator in release mode. It depends on **orchestrator.local03.env** and the corresponding **.arg** file. 
+
+<code>Build/Destroy/Start ORCHESTRATOR CLIENT TESTNET PRIVATE RELEASE in docker</code>. Container for orchestrator in release mode. It depends on **orchestrator.testnet.private01.env** and the corresponding **.arg** file. 
+
+<code>Build/Destroy/Start CONTRACT DEPLOYER in docker</code>. Container that acts like a scripts. It starts and deploys the gravity smart contract. It depends on **gravity-contract-deployer.env** and the corresponding **.arg** file. 
+
+<code>Build/Destroy ETHEREUM LIGHT NODE in docker</code>. Container for ethereum light node.
+
+<code>Build/Destroy ETHEREUM FULL NODE in docker</code>. Container for ethereum full node. <em>It could take more than 12h to sync the network</em>.
+
+<code>Build/Destroy/Start GRAVITY BRIDGE UI DEV in docker</code>. Container for Gravity bridge ui. It depends on **gravity-bridge-ui.dev.env** and the corresponding **.arg** file. In this mode, a volume in mounted from host inside docker so that any change in host's files results in re-building of the gravity bridge ui.
+
+<code>Build/Destroy/Start GRAVITY BRIDGE UI TESTNET PRIVATE</code>. Container for Gravity bridge ui. It depends on **gravity-bridge-ui.testnet.private.env** and the corresponding **.arg** file. 
+
+## Create validator
+
+The initial validator (root-validator) is created automatically when the chain starts. All other validators must be create explicitly. To create a validator you need access to <code>cudos-noded</code>. The usual way to access it is to open a bash terminal inside the docker container where you would like to create the validator. 
+
+Prepare the following before the actual creation:
+
+1. Account with at least 1 CUDOS. <em>Its name in the example below is validator</em>.
+2. $STATE env variable. It holds amount of tokens tht you are willing to stake. You must stake at least 1 CUDOS in order to activete your validator. For example: <code>export STAKE="2000000000000000000acudos"</code>
+3. $CHAIN_ID env variable. The ID of the chain, which was specified during chain initialization. You can refer to **root-node's env file** to see the exact name that you set.
+4. Check if you have $MONIKER env variable. It should be available. If not, check the **.env** file of the node.
+
+Execute the command below and your validator will be created.
+
+
+```bash
+cudos-noded tx staking create-validator --amount=$STAKE \
+    --from=validator \
+    --pubkey=$(cudos-noded tendermint show-validator) \
+    --moniker=$MONIKER \
+    --chain-id=$CHAIN_ID \
+    --commission-rate="0.10" \
+    --commission-max-rate="0.20" \
+    --commission-max-change-rate="0.01" \
+    --min-self-delegation="1" \
+    --gas="auto" \
+    --gas-prices="0.025acudos" \
+    --gas-adjustment="1.80" \
+    --keyring-backend="os" \
+    -y
+```
+
+## Register orchestrator
+
+The orchestrator of the root-validator is registered automatically but all other orchestrators must be registered explicitly. In order to do so you will need:
+
+1. Account that has enough funds to sign transactions. <em>Few CUDOS are fine</em>.
+2. $VALIDATOR_ADDRESS env variable. It should hold an address starting with "cudosvaloper1". To get this address run <code>cudos-noded q staking validators</code> and find the operator_address of your validator.
+3. $ORCH_ADDRESS env variable. It should container the public wallet address of the account in point 1. It should starts with "cudos1".
+4. $ETH_ADDRESS. Ethereum public address of a wallet that will be used to sign the transactions on ethereum side of the network. It should starts with "0x".
+
+Once you have all that you can register your orchestrator using:
+
+```bash
+cudos-noded tx gravity set-orchestrator-address $VALIDATOR_ADDRESS $ORCH_ADDRESS $ETH_ADDRESS --from validator --keyring-backend "os" --chain-id $CHAIN_ID
+```
+
+It is very import to sign the transaction with the validator's account (--from parameter) that was used while creating your validator.
+
+Usually the command for registering the orchestrator is executed on the same cudos-noded where the validator was created at. So you are supposed to have the <em>validator</em> account.
+
+## Starting a chain
+
+Let's start a chain with a root-node and a sentry-node.
+
+1. Build INIT ROOT NODE in docker.
+1. Build START ROOT NODE in docker.
+1. Copy <em>/data/config.genesis.json<em> to <em>parentDir/CudosBuilders/docker/config/genesis.local.json</em>.
+1. Open <em>/data/tendermint.nodeid</em> and copy the TENDERMINT_NODE_ID. Paste it as <em>PERSISTENT_PEERS</em> and <em>PRIVATE_PEER_IDS</em> in **sentry.local01.env**.
+1. Build INIT SENTRY NODE in docker.
+1. Build START SENTRY NODE in docker.
 
 # ENV files fields
 
