@@ -19,7 +19,7 @@ Let denote the parent directory of all projects <code>parentDir</code>. Its name
     - /parentDir/CudosFaucet
     - /parentDir/CudosData
 
-In the above directory structure, the folders' names are REQUIRED. Carefully rename everyone project to match the folder names above. Create an empty folder CudosData in <code>parentDir</code>
+In the above directory structure, the folders' names are REQUIRED. Carefully rename every project to match the folder names above. Create an empty folder CudosData in <code>parentDir</code>
 
 All commands in this guide assume that you are using Linux with bash. If you are using Windows then you are required to install WSL2 which is again Linux with bash.
 
@@ -98,7 +98,7 @@ Now your VS Code should reopen and start building the devcontainer. It could tak
 
 <em>You can skip this step if you are going to use network deployer or deployer-tls.</em>
 
-Most of the deployers below has a file named <code>secrecs.json.example</code> Duplicate this file and rename it to <code>secrets.json</code> In it you will find predefined instances' names. Let's call them **targets**. Do not change them, just add the corresponding parameters in the empty variables. Each target needs a host, port, username, privateKey, keyPass (if available) and serverPath. If you are deploying to currently running testnets, lease the serverPath as it is - <code>/usr/cudos</code>
+Most of the deployers below has a file named <code>secrecs.json.example</code> Duplicate this file and rename it to <code>secrets.json</code> In it you will find predefined instances' names. Let's call them **targets**. Do not change them, just add the corresponding parameters in the empty variables. Each target needs a host, port, username, privateKey, keyPass (if available) and serverPath. If you are deploying to currently running testnets, leave the serverPath as it is - <code>/usr/cudos</code>
 
 ## Ethereum deployer
 
@@ -169,21 +169,21 @@ This deployer is responsible of the deployments of root, seed, sentry and full n
 
 **<code>deploy--init--start_sentry-node-testnet-public-zone01</code>** - deploys, initializes and starts the 1st sentry node of the public testnet using <code>secrets.json</code> in the deployer's folder.
 
-**<code>deploy--init_validator-node-testnet-public-zone02</code>** - deploys and initializes the validator-02 of the public testnet using <code>secrets.json</code> in the deployer's folder. <em>Unlike the root-validator, the validator-02 is only initialized and NOT started, because it MUST be configured before it can be start. The configuration can be made once its seeds and sentries are up and running. More about this in Deployment procedure section</em>
+**<code>deploy--init_validator-node-testnet-public-zone02</code>** - deploys and initializes the validator-02 of the public testnet using <code>secrets.json</code> in the deployer's folder. <em>Unlike the root-validator, the validator-02 is only initialized and NOT started, because it MUST be configured before it can be started. The configuration can be made once its seeds and sentries are up and running. More about this in Deployment procedure section</em>
 
-**<code>deploy--config--start_validator-node-testnet-public-zone02</code>** - deploys, configs and starts the validator-02 of the public testnet using <code>secrets.json</code> in the deployer's folder.
+**<code>deploy--config--start_validator-node-testnet-public-zone02</code>** - deploys, configures and starts the validator-02 of the public testnet using <code>secrets.json</code> in the deployer's folder.
 
 **<code>deploy--init--start_seed-node-testnet-public-zone02</code>** - deploys, initializes and starts the 2nd seed node of the public testnet using <code>secrets.json</code> in the deployer's folder.
 
 **<code>deploy--init--start_sentry-node-testnet-public-zone02</code>** - deploys, initializes and starts the 2nd sentry node of the public testnet using <code>secrets.json</code> in the deployer's folder.
 
-**<code>deploy--init_validator-node-testnet-public-zone03</code>** - deploys and initializes the validator-03 of the public testnet using <code>secrets.json</code> in the deployer's folder. <em>Unlike the root-validator, the validator-03 is only initialized and NOT started, because it MUST be configured before it can be start. The configuration can be made once its seeds and sentries are up and running. More about this in Deployment procedure section</em>
+**<code>deploy--init_validator-node-testnet-public-zone03</code>** - deploys and initializes the validator-03 of the public testnet using <code>secrets.json</code> in the deployer's folder. <em>Unlike the root-validator, the validator-03 is only initialized and NOT started, because it MUST be configured before it can be started. The configuration can be made once its seeds and sentries are up and running. More about this in Deployment procedure section</em>
 
-**<code>deploy--config--start_validator-node-testnet-public-zone03</code>** - deploys, configs and starts the validator-03 of the public testnet using <code>secrets.json</code> in the deployer's folder.
+**<code>deploy--config--start_validator-node-testnet-public-zone03</code>** - deploys, configures and starts the validator-03 of the public testnet using <code>secrets.json</code> in the deployer's folder.
 
-**<code>deploy--init--start_seed-node-testnet-public-zone03</code>** - deploys, initializes and starts the 3nd seed node of the public testnet using <code>secrets.json</code> in the deployer's folder.
+**<code>deploy--init--start_seed-node-testnet-public-zone03</code>** - deploys, initializes and starts the 3rd seed node of the public testnet using <code>secrets.json</code> in the deployer's folder.
 
-**<code>deploy--init--start_sentry-node-testnet-public-zone03</code>** - deploys, initializes and starts the 3nd sentry node of the public testnet using <code>secrets.json</code> in the deployer's folder.
+**<code>deploy--init--start_sentry-node-testnet-public-zone03</code>** - deploys, initializes and starts the 3rd sentry node of the public testnet using <code>secrets.json</code> in the deployer's folder.
 
 **<code>deploy--init--start_root-node-testnet-private</code>** - deploys, initializes and starts the root-validator of the private testnet using <code>secrets.json</code> in the deployer's folder.
 
@@ -215,7 +215,7 @@ This deployer is responsible of the deployments of root, seed, sentry and full n
 
 ## tsl deployer
 
-The deployer contains only a readme file that explains how the server should be configured in order to suppost the Domain and TSL of sentry nodes. Currently this is has already been done for public testnet sentry nodes.
+The deployer contains only a readme file that explains how the server should be configured in order to support the Domain and TSL of sentry nodes. Currently this has already been done for public testnet sentry nodes.
 
 ## utils deployer
 
@@ -262,17 +262,17 @@ The folder has following build-targets:
 
 <em>**orchestartor**</em> - Orchestrator binary that must run along with the validator
 
-<em>**root-node**</em> - Cudos root node that initialize a chain. It contains the root validator.
+<em>**root-node**</em> - Cudos root node that initializes a chain. It contains the root validator.
 
 <em>**seed-node**</em> - Cudos seed node that connects to local chain, private or public testnets.
 
 <em>**sentry-node**</em> - Cudos sentry node that connects to local chain, private or public testnets.
 
-<em>**standalone-node**</em> - Standalone cudos daemon containing a single root-validator node. It can be used for test purposed.
+<em>**standalone-node**</em> - Standalone cudos daemon containing a single root-validator node. It can be used for test purposes.
 
 ## Structure
 
-<em>**config**</em> folder contains configuration files as described above. All other folders have idencical structure. The structure consists of one or more set of the following files:
+<em>**config**</em> folder contains configuration files as described above. All other folders have idencical structure. The structure consists of one or more sets of the following files:
 
 **.yml** - Docker compose file.
 
@@ -286,7 +286,7 @@ The **.env** file for each build-variant is not part of the repository, because 
 
 ## Build process
 
-Build process of each of the variants above starts with an **.yml** file that uses a parameters defined in **.arg** file. The **.arg** file contains parameters for the docker-compose file as well as for the dockerfile itself. Even some of these arguments are passed as environmental variable to the container. **.env** file contains the environment variable of the container that are not used neither in docker-compose file nor in dockerfile.
+Build process of each of the variants above starts with an **.yml** file that uses parameters defined in **.arg** file. The **.arg** file contains parameters for the docker-compose file as well as for the dockerfile itself. Even some of these arguments are passed as environmental variable to the container. **.env** file contains the environment variable of the container that are not used neither in docker-compose file nor in dockerfile.
 
 Some of the build-targers have **users-*.override.yml**. This file is used along with main **.yml** file of each build-variant in order to specify the linux user and group that each container should use.
 
@@ -296,24 +296,24 @@ Some of these build-variats are used by npm commands described in <em>setup tool
 
 # Using predefined scripts (.vscode folder)
 
-All the scripts in this folder are VS-code only. They can be invoked by pressing Control (CMD) + Shift + B. Their purpose is to ease the local docker build procedure by speed up the docker's instance creation.
+All the scripts in this folder are VS-code only. They can be invoked by pressing Control (CMD) + Shift + B. Their purpose is to ease the local docker build procedure by speeding up the docker's instance creation.
 
-Each instance has two or three commands - <em>Build</em>, <em>Start</em> and <em>Destroy</em> used respective to build, start or destroy a docker instance. Some of the instance does not have <em>Start</em> command, because these is no point to call only <em>Start</em> without <em>Build</em> command for them.
+Each instance has two or three commands - <em>Build</em>, <em>Start</em> and <em>Destroy</em> used respective to build, start or destroy a docker instance. Some of the instances do not have <em>Start</em> command, because these is no point to call only <em>Start</em> without <em>Build</em> command for them.
 
 Listing the entire list of commands here is useless, because of the following reasons:
-1. Their names are quite describtive
+1. Their names are quite descriptive
 1. They are updated frequently
 1. They are part of the <em>Local dev procedures</em> which will be described in sections later.
 
-To give a brief overview of what these commands looks like let's take the following example of creating and starting a root node (node that initializes and starts the chain):
+To give a brief overview of what these commands look like let's take the following examples of creating and starting a root node (node that initializes and starts the chain):
 
-<code>Build INIT ROOT NODE in docker</code> - Builds chain binary in in order to initialize the chain's data.
+<code>Build INIT ROOT NODE in docker</code> - Builds chain binary in order to initialize the chain's data.
 
 <code>Destroy INIT ROOT NODE in docker</code> - Destroys the above built docker container.
 
-<code>Start START ROOT NODE in docker</code> - Starts previously built, by command below, docker instance.
-
 <code>Build START ROOT NODE in docker</code> - Builds chain binary in order to starts it by using previously initialized chain's data.
+
+<code>Start START ROOT NODE in docker</code> - Starts previously built, by command above, docker instance.
 
 <code>Destroy START ROOT NODE in docker</code> - Destroys the above built docker container.
 
@@ -339,7 +339,7 @@ Each node has a unique pair of TENDERMINT_NODE_ID@IP:PORT. Each node's TENDERMIN
 
 We can connect to a network either by using list of <em>PERSISTENT_PEERS</em> or by using list of <em>SEEDS</em>. <em>PERSISTENT_PEERS</em> is a string of comma-separeted pairs of TENDERMINT_NODE_ID/IP. The same applies for <em>SEEDS</em>. It looks like <em>c22447781b7c5898bf277f173ee553a0e11bd427@cudos-start-root-node:26656</em>
 
-If we use <em>PERSISTENT_PEERS</em> then our node will try to connect to them and as long as at least our node have connection to at least one of them then everything is fine. When our node lose a connection to all of the nodes in the <em>PERSISTENT_PEERS</em>  string then our node will not be part of the chain.
+If we use <em>PERSISTENT_PEERS</em> then our node will try to connect to them and as long as our node has connection to at least one of them then everything is fine. When our node loses a connection to all of the nodes in the <em>PERSISTENT_PEERS</em>  string then our node will not be part of the chain.
 
 If we use <em>SEEDS</em> then our node will get the actual list of peers from the <em>SEEDS</em>. Then our node will connect to these peers. If our node could not connect to these peers then it will again ask <em>SEEDS</em> in order to obtain a new list of peers that our node will try to connect to.
 
@@ -347,7 +347,7 @@ Also each node MUST have a copy of <em>root-node</em>'s genesis.json file.
 
 ### Getting the TENDERMINT_NODE_ID@IP:PORT pair.
 
-In order to establish a connection between two node you have to specify <em>PERSISTENT_PEERS</em> or <em>SEEDS</em>. In both cases you need TENDERMINT_NODE_ID@IP:PORT pair. TENDERMINT_NODE_ID can be checked in node's data dir: <em>/data/tendermint.nodeid</em>. The POST is usually 26656 unless you changed it intetionally. The IP address can be IPv4 (during testnet deployments) or a name (during local development in docker containers). This is usefull when working in a docker network where using the exact IPv4 address is not very convenient, because they are subject to change. That's why you can specify the container name as IP address. Container names are defined either in **.yml** file or in **.arg** file (as START_CONTAINER_NAME).
+In order to establish a connection between two nodes you have to specify <em>PERSISTENT_PEERS</em> or <em>SEEDS</em>. In both cases you need TENDERMINT_NODE_ID@IP:PORT pair. TENDERMINT_NODE_ID can be checked in node's data dir: <em>/data/tendermint.nodeid</em>. The POST is usually 26656 unless you changed it intentionally. The IP address can be IPv4 (during testnet deployments) or a name (during local development in docker containers). This is usefull when working in a docker network where using the exact IPv4 address is not very convenient, because they are subject to change. That's why you can specify the container name as IP address. Container names are defined either in **.yml** file or in **.arg** file (as START_CONTAINER_NAME).
 
 ### Network setup example - 2 validators (root + full), 2 sentris, 1 seed
 
@@ -410,7 +410,7 @@ This section describes the deployment procedure of the public and private testne
 
 1. Deploy a new gravity smart contract.
 
-    The deployment of this contract is done in the same way as in local dev procedure. The only different in the the **.env** file that correspond to this build-variant. Refer to <em>Local dev procedure</em> for more information about the deployment of this contract.
+    The deployment of this contract is done in the same way as in local dev procedure. The only difference is in the the **.env** file that corresponds to this build-variant. Refer to <em>Local dev procedure</em> for more information about the deployment of this contract.
 
 1. Deploy orchestrator:
 
@@ -457,7 +457,7 @@ This section describes the deployment procedure of the public and private testne
 
 1. Deploy a new gravity smart contract.
 
-    The deployment of this contract is done in the same way as in local dev procedure. The only different in the the **.env** file that correspond to this build-variant. Refer to <em>Local dev procedure</em> for more information about the deployment of this contract.
+    The deployment of this contract is done in the same way as in local dev procedure. The only difference is in the the **.env** file that corresponds to this build-variant. Refer to <em>Local dev procedure</em> for more information about the deployment of this contract.
 
 1. Deploy orchestrator-01:
 
@@ -581,9 +581,9 @@ This section describes the deployment procedure of the public and private testne
 
 To be able to do an upgrade, first there needs to be an approved software upgrade proposal. Also there are two types of upgrade procedures. The first is being used when there are no breaking changes and the second - when there is.
 
-**The update procedure in this document describes the abstract process. Commands here cannot be used as copy-paste solution. Each of them should be applied based on the specific upgrade and based on the currently running network infrastructure. For example the commands below is highly likely to be executed inside the docker container that runs the node.**
+**The update procedure in this document describes the abstract process. Commands here cannot be used as copy-paste solution. Each of them should be applied based on the specific upgrade and based on the currently running network infrastructure. For example the commands below are highly likely to be executed inside the docker container that runs the node.**
 
-The upgrade consists of two phases - preparation and actual upgrade. During the preparation a software upgrade proposal is required in order to make the entire network to stop at specific height and then the network state could be exported. After the preparation step we must do either Soft upgrade or Hard fork which depends on the fact whethere there are breaking changes or not.
+The upgrade consists of two phases - preparation and actual upgrade. During the preparation a software upgrade proposal is required in order to make the entire network to stop at specific height and then the network state could be exported. After the preparation step we must do either Soft upgrade or Hard fork which depends on the fact whether there are breaking changes or not.
 
 **The steps below, after the preparation, should be applied by all validators simultaneously in order to avoid slashing.**
 
@@ -690,13 +690,13 @@ cudos-noded version --long
 
 ### 4. Start the network
 
-Start the network with or any other equivalent command that you used to started the network with:
+Start the network with or any other equivalent command that you used to start the network with:
 
 ```bash
 cudos-noded start
 ```
 
-It should start from the the block it stopped before the upgrade without any error and with all the state unchanged.
+It should start from the the block it stopped before the upgrade without any error and with the state unchanged.
 
 # Local dev procedure
 
@@ -710,21 +710,21 @@ It should start from the the block it stopped before the upgrade without any err
 
 ### Overview
 
-Each predefiend build-variant consists of two parts - docker action and build-variant name. Docker actions are <em>Build</em>, <em>Start</em>, <em>Destroy</em>, <em>Build-only</em>, etc.. They are always at the begining of command. After that in UPPERCASE is the name of the build-variant. Each of them ends with <em>in docker</em>, because all of them are docker related.
+Each predefiend build-variant consists of two parts - docker action and build-variant name. Docker actions are <em>Build</em>, <em>Start</em>, <em>Destroy</em>, <em>Build-only</em>, etc.. They are always at the begining of the command. After that in UPPERCASE is the name of the build-variant. Each of them ends with <em>in docker</em>, because all of them are docker related.
 
-<em>Build</em> indicates that the docker-compose command ends with ...up --build. It means that the container will be built and then started.
+<em>Build</em> Indicates that the docker-compose command ends with ...up --build. It means that the container will be built and then started.
 
-<em>Start</em> indicates that the docker-compose command ends with ...up. It means that the container will be started as it was before. If it does not exist then it will be built.
+<em>Start</em> Indicates that the docker-compose command ends with ...up. It means that the container will be started as it was before. If it does not exist then it will be built.
 
 <em>Destroy</em> Removes the container.
 
-<em>Build-only</em> indicates that the docker-compose command ends with ...up. It means that the container will be built but NOT started.
+<em>Build-only</em> Indicates that the docker-compose command ends with ...up. It means that the container will be built but NOT started.
 
 Please refer to <em>ENV files fields</em> section for more information about how to fill the required **.env** files below. Mentioned **.env** file are missing in the repository and you must create them by copying the **.env.example** file.
 
 The "CLIENT" in the name of the build-variant indicates that it is expected this node to be like a "client" to the local chain and thus using the <em>SHOULD_USE_GLOBAL_PEERS</em> as <em>TRUE</em>.
 
-The "CONFIG" in the name indicates that this container is more like a scripts. Once it is built, it starts, execute some logic and shuts down. Such config containers are usual for full-nodes, because there is one extra step when creating a validtor.
+The "CONFIG" in the name indicates that this container is more like a script. Once it is built, it starts, executes some logic and shuts down. Such config containers are usual for full-nodes, because there is one extra step when creating a validator.
 
 ### Predefiend build-variants
 
@@ -756,27 +756,27 @@ The "CONFIG" in the name indicates that this container is more like a scripts. O
 
 <code>Build/Destroy INIT FULL NODE CLIENT LOCAL in docker</code>. Container for initialization of a full node. It depends on **full-node.client.local01.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.local.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.local.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.local.json</em>.
 
-<code>Build/Destroy CONFIG FULL NODE CLIENT LOCAL in docker</code>. Container for configurtion of a full node. The container MUST be initialized before. It depends on **full-node.client.local01.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.local.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.local.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.local.json</em>.
+<code>Build/Destroy CONFIG FULL NODE CLIENT LOCAL in docker</code>. Container for configuration of a full node. The container MUST be initialized before. It depends on **full-node.client.local01.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.local.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.local.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.local.json</em>.
 
 <code>Build/Destroy/Start START FULL NODE CLIENT LOCAL in docker</code>. Container for starting of a full node. The container MUST be initialized before. It depends on **full-node.client.local01.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.local.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.local.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.local.json</em>
 
 <code>Build/Destroy INIT FULL NODE CLIENT TESTNET PUBLIC in docker</code>. Container for initialization of a full node. It depends on **full-node.client.testnet.public01.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.testnet.public.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.testnet.public.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.testnet.public.json</em>.
 
-<code>Build/Destroy CONFIG FULL NODE CLIENT TESTNET PUBLIC in docker</code>. Container for configurtion of a full node. The container MUST be initialized before. It depends on **full-node.client.testnet.public01.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.testnet.public.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.testnet.public.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.testnet.public.json</em>.
+<code>Build/Destroy CONFIG FULL NODE CLIENT TESTNET PUBLIC in docker</code>. Container for configuration of a full node. The container MUST be initialized before. It depends on **full-node.client.testnet.public01.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.testnet.public.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.testnet.public.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.testnet.public.json</em>.
 
 <code>Build/Destroy/Start START FULL NODE CLIENT TESTNET PUBLIC in docker</code>. Container for starting of a full node. The container MUST be initialized before. It depends on **full-node.client.testnet.public01.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.testnet.public.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.testnet.public.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.testnet.public.json</em>.
 
 <code>Build/Destroy INIT FULL NODE CLIENT TESTNET PRIVATE in docker</code>. Container for initialization of a full node. It depends on **full-node.client.testnet.private01.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.testnet.private.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.testnet.private.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.testnet.private.json</em>.
 
-<code>Build/Destroy CONFIG FULL NODE CLIENT TESTNET PRIVATE in docker</code>. Container for configurtion of a full node. The container MUST be initialized before. It depends on **full-node.client.testnet.testnet01.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.testnet.private.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.testnet.private.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.testnet.private.json</em>.
+<code>Build/Destroy CONFIG FULL NODE CLIENT TESTNET PRIVATE in docker</code>. Container for configuration of a full node. The container MUST be initialized before. It depends on **full-node.client.testnet.testnet01.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.testnet.private.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.testnet.private.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.testnet.private.json</em>.
 
 <code>Build/Destroy/Start START FULL NODE CLIENT TESTNET PRIVATE in docker</code>. Container for starting of a full node. The container MUST be initialized before. It depends on **full-node.client.testnet.private01.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.testnet.private.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.testnet.private.json</em> and <em>parentDir/CudosBuilders/docker/config/seeds.testnet.private.json</em>.
 
-<code>Build/Build-only/Destroy/Start BINARY BUILDER in docker</code>. Container for building the binary of the chain. All other node related container depends on it. It does not depends on any **.env** files. Its **.arg** file is <em>binary-builder.arg</em>
+<code>Build/Build-only/Destroy/Start BINARY BUILDER in docker</code>. Container for building the binary of the chain. All other node related containers depend on it. It does not depends on any **.env** files. Its **.arg** file is <em>binary-builder.arg</em>
 
-<code>Build/Destroy/Start STANDALONE NODE in docker</code>. Container for starting a single-node network for test purposes. It does not depends on any **.env** or **.arg** files.
+<code>Build/Destroy/Start STANDALONE NODE in docker</code>. Container for starting a single-node network for test purposes. It does not depend on any **.env** or **.arg** files.
 
-<code>Build/Destroy/Start ORCHESTRATOR LOCAL 01 DEBUG in docker</code>. Container for orchestrator in debug mode. It depends on **orchestrator.local01.env** and the corresponding **.arg** file. A volume is mounted from host inside docker. So any change in host's files will result in same files been changed inside the container too. A re-build should be manually triggers after any such change by openning a bash shell inside dockere container and executing the following command.
+<code>Build/Destroy/Start ORCHESTRATOR LOCAL 01 DEBUG in docker</code>. Container for orchestrator in debug mode. It depends on **orchestrator.local01.env** and the corresponding **.arg** file. A volume is mounted from host inside docker. So any change in host's files will result in same files being changed inside the container too. A re-build should be manually triggered after any such change by openning a bash shell inside docker container and executing the following command.
 ```bash
 cd /usr/src/orchestrator && cargo build && cd /home/orchestrator/bin/ && cp /usr/src/orchestrator/target/debug/gbt ./gbt && ./orchestrator-run.sh
 ```
@@ -790,24 +790,24 @@ This command should also be executed once the container starts in order to start
 
 <code>Build/Destroy/Start ORCHESTRATOR CLIENT TESTNET PRIVATE RELEASE in docker</code>. Container for orchestrator in release mode. It depends on **orchestrator.testnet.private01.env** and the corresponding **.arg** file. 
 
-<code>Build/Destroy/Start CONTRACT DEPLOYER in docker</code>. Container that acts like a scripts. It starts and deploys the gravity smart contract. It depends on **gravity-contract-deployer.env** and the corresponding **.arg** file. 
+<code>Build/Destroy/Start CONTRACT DEPLOYER in docker</code>. Container that acts like a script. It starts and deploys the gravity smart contract. It depends on **gravity-contract-deployer.env** and the corresponding **.arg** file. 
 
-<code>Build/Destroy ETHEREUM LIGHT NODE in docker</code>. Container for ethereum light node.
+<code>Build/Destroy ETHEREUM LIGHT NODE in docker</code>. Container for Ethereum light node.
 
-<code>Build/Destroy ETHEREUM FULL NODE in docker</code>. Container for ethereum full node. <em>It could take more than 12h to sync the network</em>.
+<code>Build/Destroy ETHEREUM FULL NODE in docker</code>. Container for Ethereum full node. <em>It could take more than 12h to sync the network</em>.
 
-<code>Build/Destroy/Start GRAVITY BRIDGE UI DEV in docker</code>. Container for Gravity bridge ui. It depends on **gravity-bridge-ui.dev.env** and the corresponding **.arg** file. In this mode, a volume in mounted from host inside docker so that any change in host's files results in re-building of the gravity bridge ui.
+<code>Build/Destroy/Start GRAVITY BRIDGE UI DEV in docker</code>. Container for Gravity bridge UI. It depends on **gravity-bridge-ui.dev.env** and the corresponding **.arg** file. In this mode, a volume in mounted from host inside docker so that any change in host's files results in re-building of the Gravity bridge UI.
 
-<code>Build/Destroy/Start GRAVITY BRIDGE UI TESTNET PRIVATE</code>. Container for Gravity bridge ui. It depends on **gravity-bridge-ui.testnet.private.env** and the corresponding **.arg** file. 
+<code>Build/Destroy/Start GRAVITY BRIDGE UI TESTNET PRIVATE</code>. Container for Gravity bridge UI. It depends on **gravity-bridge-ui.testnet.private.env** and the corresponding **.arg** file. 
 
 ## Create validator
 
-The initial validator (root-validator) is created automatically when the chain starts. All other validators must be create explicitly. To create a validator you need access to <code>cudos-noded</code>. The usual way to access it is to open a bash terminal inside the docker container where you would like to create the validator. 
+The initial validator (root-validator) is created automatically when the chain starts. All other validators must be created explicitly. To create a validator you need access to <code>cudos-noded</code>. The usual way to access it is to open a bash terminal inside the docker container where you would like to create the validator. 
 
 Prepare the following before the actual creation:
 
 1. Account with at least 1 CUDOS. <em>Its name in the example below is validator</em>.
-2. $STATE env variable. It holds amount of tokens tht you are willing to stake. You must stake at least 1 CUDOS in order to activete your validator. For example: <code>export STAKE="2000000000000000000acudos"</code>
+2. $STATE env variable. It holds amount of tokens that you are willing to stake. You must stake at least 1 CUDOS in order to activete your validator. For example: <code>export STAKE="2000000000000000000acudos"</code>
 3. $CHAIN_ID env variable. The ID of the chain, which was specified during chain initialization. You can refer to **root-node's env file** to see the exact name that you set.
 4. Check if you have $MONIKER env variable. It should be available. If not, check the **.env** file of the node.
 
@@ -837,7 +837,7 @@ The orchestrator of the root-validator is registered automatically but all other
 
 1. Account that has enough funds to sign transactions. <em>Few CUDOS are fine</em>.
 2. $VALIDATOR_ADDRESS env variable. It should hold an address starting with "cudosvaloper1". To get this address run <code>cudos-noded q staking validators</code> and find the operator_address of your validator.
-3. $ORCH_ADDRESS env variable. It should container the public wallet address of the account in point 1. It should starts with "cudos1".
+3. $ORCH_ADDRESS env variable. It should contain the public wallet address of the account in point 1. It should starts with "cudos1".
 4. $ETH_ADDRESS. Ethereum public address of a wallet that will be used to sign the transactions on ethereum side of the network. It should starts with "0x".
 
 Once you have all that you can register your orchestrator using:
@@ -870,7 +870,7 @@ Please note the port of each endpoint. It can be used as indicator which endpoin
 ## Explorer
 
 - <code>MONGO_URL</code> - MongoDB connection string. It could be empty for dev builds.
-- <code>ROOT_URL</code> - The URL where explorer will be access from. For example: ROOT_URL=http://localhost.
+- <code>ROOT_URL</code> - The URL where explorer will be accessed from. For example: ROOT_URL=http://localhost.
 
 ## Faucet
 
@@ -892,33 +892,33 @@ Please note the port of each endpoint. It can be used as indicator which endpoin
 ## Gravity bridge ui
 
 - <code>URL</code> - The URL where UI will be accessed. For example: URL=http://localhost.
-- <code>CHAIN_ID</code> - ID of the cosmos chain.
-- <code>RPC</code> - Endpoint of cosmos chain. For example: RPC=http://localhost:26657.
-- <code>API</code> - Endpoint of cosmos chain api. For example: API=http://localhost:1317.
+- <code>CHAIN_ID</code> - ID of the Cosmos chain.
+- <code>RPC</code> - Endpoint of Cosmos chain. For example: RPC=http://localhost:26657.
+- <code>API</code> - Endpoint of Cosmos chain api. For example: API=http://localhost:1317.
 - <code>ERC20_CONTRACT_ADDRESS</code> - Ethereum token contract address.
 - <code>BRIDGE_CONTRACT_ADDRESS</code> - Gravity Bridge contract address.
 - <code>ETHEREUM_RPC</code> - Address of Ethereum full node. For example: http://12.13.14.15:8545. Do not use infura node.
 
 ## Gravity contract deployer
 
-- <code>COSMOS_NODE</code> - The endpoint of cosmos chain. For example: COSMOS_NODE="http://localhost:26657"
+- <code>COSMOS_NODE</code> - The endpoint of Cosmos chain. For example: COSMOS_NODE="http://localhost:26657"
 - <code>ETH_NODE</code> - The endpoint of eth full node. For example: ETH_NODE="http://localhost:8545"
 - <code>ETH_PRIV_KEY_HEX</code> - The private key of Ethereum wallet that will be used to sign the transaction for contract creation. It can be any Ethereum address that has enough tokens (~0.02ETH). Format is hex without leading "0x". For example: ETH_PRIV_KEY_HEX="a2b......"
 
 ## Orchestrator
 
 - <code>FEES</code> - Amount of cudos that will be required by this validator in order to sign any operation. For example: FEES="1acudos"
-- <code>GRPC</code> - The endpoint of cosmos chain. For example: COSMOS_NODE="http://localhost:9090"
+- <code>GRPC</code> - The endpoint of Cosmos chain. For example: COSMOS_NODE="http://localhost:9090"
 - <code>ETHRPC</code> - The endpoint of eth full node. For example: ETH_NODE="http://localhost:8545"
 - <code>CONTRACT_ADDR</code> - Gravity Bridge contract address.
 - <code>COSMOS_ORCH_MNEMONIC</code> - Mnemonic phrase of orchestrator wallet.
-- <code>ETH_PRIV_KEY_HEX</code> - The private key of Ethereum wallet that will be used to sign the transactions for sending funds from cosmos -> Ethereum. This wallet has been used to register the validator. Format is hex without leading "0x". For example: ETH_PRIV_KEY_HEX="a2b......".
+- <code>ETH_PRIV_KEY_HEX</code> - The private key of Ethereum wallet that will be used to sign the transactions for sending funds from Cosmos -> Ethereum. This wallet has been used to register the validator. Format is hex without leading "0x". For example: ETH_PRIV_KEY_HEX="a2b......".
 
 ## Root node
 
 - <code>MONIKER</code> - Name of the node.
 - <code>CHAIN_ID</code> - Random string without space.
-- <code>ORCH_ETH_ADDRESS</code> - Ethereum address of a wallet that will be used to sign the transactions for sending funds from cosmos -> Ethereum. <em>This is the same wallet which adress should be used later on in orchestrator.env.example -> ETH_PRIV_KEY_HEX</em>.
+- <code>ORCH_ETH_ADDRESS</code> - Ethereum address of a wallet that will be used to sign the transactions for sending funds from Cosmos -> Ethereum. <em>This is the same wallet which adress should be used later on in orchestrator.env.example -> ETH_PRIV_KEY_HEX</em>.
 
 ## Seed node
 
