@@ -2,10 +2,10 @@
 
 This project contains a set of building scripts for CudosNetwork. It depends on 5 other projects and should be downloaded manually. Here is the list:
 1. CudosNode (https://github.com/CudoVentures/cudos-node)
-2. CudosGravityBridge (https://github.com/CudoVentures/cosmos-gravity-bridge)
-3. CudosGravityBridgeUI (https://github.com/CudoVentures/cudos-gravity-bridge-ui)
-4. CudosExplorer (https://github.com/CudoVentures/big-dipper)
-5. CudosFaucet (https://github.com/CudoVentures/faucet)
+1. CudosGravityBridge (https://github.com/CudoVentures/cosmos-gravity-bridge)
+1. CudosGravityBridgeUI (https://github.com/CudoVentures/cudos-gravity-bridge-ui)
+1. CudosExplorer (https://github.com/CudoVentures/big-dipper)
+1. CudosFaucet (https://github.com/CudoVentures/faucet)
 
 The following directory structure is required in order everything to work correctly otherwise the scripts will not be able to find their dependancies.
 Let denote the parent directory of all projects <code>parentDir</code>. Its name could be arbitrary.
@@ -302,8 +302,8 @@ Each instance has two or three commands - <em>Build</em>, <em>Start</em> and <em
 
 Listing the entire list of commands here is useless, because of the following reasons:
 1. Their names are quite describtive
-2. They are updated frequently
-3. They are part of the <em>Local dev procedures</em> which will be described in sections later.
+1. They are updated frequently
+1. They are part of the <em>Local dev procedures</em> which will be described in sections later.
 
 To give a brief overview of what these commands looks like let's take the following example of creating and starting a root node (node that initializes and starts the chain):
 
@@ -348,29 +348,29 @@ Also each node MUST have a copy of <em>root-node</em>'s genesis.json file.
 ### Network setup example - 2 validators (root + full), 2 sentris, 1 seed
 
 1. Init and start a <em>root-node</em>.
-2. Copy /data/config/genesis.json and <em>root-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT).
-3. Init the <em>seed-node</em>.
-4. Replace copied genesis.json with <em>seed-node</em>'s /data/config/genesis.json.
-5. Open /data/config/config.toml and set <em>root-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT) as <em>PERSISTENT_PEERS</em>.
-6. Open /data/config/config.toml and set <em>root-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT) as <em>PRIVATE_PEER_IDS</em>.
-7. Start the <em>seed-node</em>.
-8. Copy <em>seed-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT).
-9. Init the <em>sentry-node</em>.
-10. Replace copied genesis.json with <em>sentry-node</em>'s /data/config/genesis.json.
-11. Open /data/config/config.toml and set <em>seed-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT) as <em>SEEDS</em>.
-12. Start the <em>sentry-node</em>.
-13. Init the <em>full-node</em>.
-14. Replace copied genesis.json with <em>full-node</em>'s /data/config/genesis.json.
-15. Copy <em>full-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT).
-16. Init the <em>sentry-node-02</em>.
-17. Replace copied genesis.json with <em>sentry-node-02</em>'s /data/config/genesis.json.
-18. Open /data/config/config.toml and set <em>seed-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT) as <em>SEEDS</em>.
-19. Open /data/config/config.toml and set <em>full-node</em>'s TENDERMINT_NODE_ID as <em>PRIVATE_PEER_IDS</em>.
-20. Start the <em>sentry-node-02</em>.
-21. Copy <em>sentry-node-02</em>'s pair (TENDERMINT_NODE_ID@IP:PORT).
-22. Open /data/config/config.toml of <em>full-node</em> and set <em>sentry-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT) as <em>PERSISTENT_PEERS</em>.
-23. Start the <em>full-node</em>.
-24. Create a validator.
+1. Copy /data/config/genesis.json and <em>root-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT).
+1. Init the <em>seed-node</em>.
+1. Replace copied genesis.json with <em>seed-node</em>'s /data/config/genesis.json.
+1. Open /data/config/config.toml and set <em>root-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT) as <em>PERSISTENT_PEERS</em>.
+1. Open /data/config/config.toml and set <em>root-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT) as <em>PRIVATE_PEER_IDS</em>.
+1. Start the <em>seed-node</em>.
+1. Copy <em>seed-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT).
+1. Init the <em>sentry-node</em>.
+1. Replace copied genesis.json with <em>sentry-node</em>'s /data/config/genesis.json.
+1. Open /data/config/config.toml and set <em>seed-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT) as <em>SEEDS</em>.
+1. Start the <em>sentry-node</em>.
+1. Init the <em>full-node</em>.
+1. Replace copied genesis.json with <em>full-node</em>'s /data/config/genesis.json.
+1. Copy <em>full-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT).
+1. Init the <em>sentry-node-02</em>.
+1. Replace copied genesis.json with <em>sentry-node-02</em>'s /data/config/genesis.json.
+1. Open /data/config/config.toml and set <em>seed-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT) as <em>SEEDS</em>.
+1. Open /data/config/config.toml and set <em>full-node</em>'s TENDERMINT_NODE_ID as <em>PRIVATE_PEER_IDS</em>.
+1. Start the <em>sentry-node-02</em>.
+1. Copy <em>sentry-node-02</em>'s pair (TENDERMINT_NODE_ID@IP:PORT).
+1. Open /data/config/config.toml of <em>full-node</em> and set <em>sentry-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT) as <em>PERSISTENT_PEERS</em>.
+1. Start the <em>full-node</em>.
+1. Create a validator.
 
 For more information where to set <em>SEEDS</em>, <em>PERSISTENT_PEERS</em>, <em>PRIVATE_PEER_IDS</em> see the <em>Data folder</em> section.
 
@@ -386,7 +386,192 @@ In the <code>/parentDir/CudosData/{build-variant}/config</code> folder you can f
 
 # Deployment procedure
 
-To do
+This section describes the deployment procedure of the public and private testnets and how to use the deploy tools in <code>parentDir/CudosBuilders/tools</code>.
+
+## Assumptions
+
+1. You have access to the gcloud there all the instances are running.
+2. You ssh key to access all the instances in gcloud. The ssh key is assigned to a user with sudo permissions.
+3. You know the IP address of each instance.
+
+## Private testnet
+
+1. Deploy, init and start the root-node:
+
+    <code>deploy--init--start_root-node-testnet-private</code>*
+
+1. Download genesis.json, tendermint.nodeid, faucet.wallet and orch-01.wallet from the root-node.
+
+1. Copy the downloaded genesis.json to <code>parentDir/CudosBuilders/config/genesis.testnet.private.json</code>
+
+1. Deploy a new gravity smart contract.
+
+    The deployment of this contract is done in the same way as in local dev procedure. The only different in the the **.env** file that correspond to this build-variant. Refer to <em>Local dev procedure</em> for more information about the deployment of this contract.
+
+1. Deploy orchestrator:
+
+    <code>deploy--orchestrator-testnet-private</code>*
+
+1. Deploy, init and start the seed-node.
+
+    Set seed-node's <em>PERSISTENT_PEER</em> to be root-node<br />
+    Set seed-node's <em>PRIVATE_PEER_IDS</em> to be root-node
+
+    <code>deploy--init--start_seed-node-testnet-private</code>*
+
+1. Download tendermint.nodeid from the seed-node.
+
+1. Deploy, init and start the sentry-node.
+
+    Set sentry-node's <em>PERSISTENT_PEER</em> to be root-node<br />
+    Set sentry-node's <em>SEED</em> to be seed-node<br />
+    Set sentry-node's <em>PRIVATE_PEER_IDS</em> to be root-node
+
+    <code>deploy--init--start_sentry-node-testnet-private</code>*
+
+1. Download tendermint.nodeid from the sentry-node.
+
+1. Deploy utils (explorer + faucet).
+
+    <code>deploy-utils-testnet-private</code>*
+
+1. Deploy gravity bridge ui.
+
+    <code>deploy-gravity-bridge-ui-testnet-private</code>*
+
+1. Update <code>parentDir/CudosBuilders/config/seeds.testnet.private.config</code> with TENDERMINT_NODE_ID@IP:PORT pair of the seed-node.
+
+## Public testnet
+
+1. Deploy, init and start the root-node:
+
+    <code>deploy--init--start_root-node-testnet-public-zone01</code>*
+
+1. Download genesis.json, tendermint.nodeid, faucet.wallet, validator-02.wallet, validator-03.wallet, orch-01.wallet, orch-02.wallet and orch-03.wallet from the root-node.
+
+1. Copy the downloaded genesis.json to <code>parentDir/CudosBuilders/config/genesis.testnet.public.json</code>
+
+1. Deploy a new gravity smart contract.
+
+    The deployment of this contract is done in the same way as in local dev procedure. The only different in the the **.env** file that correspond to this build-variant. Refer to <em>Local dev procedure</em> for more information about the deployment of this contract.
+
+1. Deploy orchestrator-01:
+
+    <code>deploy--orchestrator-testnet-public-zone01</code>*
+
+1. Deploy, init and start the seed-node-01.
+
+    Set seed-node-01's <em>PERSISTENT_PEER</em> to be root-node<br />
+    Set seed-node-01's <em>PRIVATE_PEER_IDS</em> to be root-node
+
+    <code>deploy--init--start_seed-node-testnet-public-zone01</code>*
+
+1. Download tendermint.nodeid from the seed-node-01.
+
+1. Deploy, init and start the sentry-node-01.
+
+    Set sentry-node-01's <em>PERSISTENT_PEER</em> to be root-node<br />
+    Set sentry-node-01's <em>SEED</em> to be seed-node-01<br />
+    Set sentry-node-01's <em>PRIVATE_PEER_IDS</em> to be root-node
+
+    <code>deploy--init--start_sentry-node-testnet-public-zone01</code>*
+
+1. Download tendermint.nodeid from the sentry-node-01.
+
+1. Deploy and init the validator-node-02:
+
+    <code>deploy--init_validator-node-testnet-public-zone02</code>*
+
+1. Download the tendermint.nodeid from the validator-node-02.
+
+1. Deploy, init and start the seed-node-02.
+
+    Set seed-node-02's <em>PRIVATE_PEER_IDS</em> to be validator-node-02<br />
+    Set seed-node-02's <em>PERSISTENT_PEER</em> to be sentry-node-01<br />
+    Set seed-node-02's <em>SEED</em> to be seed-node-01
+
+    <code>deploy--init--start_seed-node-testnet-public-zone02</code>*
+
+1. Download tendermint.nodeid from the seed-node-02.
+
+1. Deploy, init and start the sentry-node-02.
+
+    Set sentry-node-02's <em>PRIVATE_PEER_IDS</em> to be validator-node-02<br />
+    Set sentry-node-02's <em>PERSISTENT_PEER</em> to be sentry-node-01<br />
+    Set sentry-node-02's <em>SEED</em> to be seed-node-01 and seed-node-02
+
+    <code>deploy--init--start_sentry-node-testnet-public-zone02</code>*
+
+1. Download tendermint.nodeid from the sentry-node-02.
+
+1. Deploy, configure and start the validator-node-02:
+
+    Set validator-node-02's <em>PERSISTENT_PEER</em> to be seed-node-02 and sentry-node-02<br />
+
+    <code>deploy--config--start_validator-node-testnet-public-zone02</code>
+
+1. Create a validator in validator-02. **
+
+1. Register the orchestrator in validator-02. **
+
+1. Deploy orchestrator-02:
+
+    <code>deploy--orchestrator-testnet-public-zone02</code>*
+
+1. Deploy and init the validator-node-03:
+
+    <code>deploy--init_validator-node-testnet-public-zone03</code>*
+
+1. Download the tendermint.nodeid from the validator-node-03.
+
+1. Deploy, init and start the seed-node-03.
+
+    Set seed-node-03's <em>PRIVATE_PEER_IDS</em> to be validator-node-03<br />
+    Set seed-node-03's <em>PERSISTENT_PEER</em> to be sentry-node-01<br />
+    Set seed-node-03's <em>SEED</em> to be seed-node-01
+
+    <code>deploy--init--start_seed-node-testnet-public-zone03</code>*
+
+1. Download tendermint.nodeid from the seed-node-03.
+
+1. Deploy, init and start the sentry-node-03.
+
+    Set sentry-node-03's <em>PRIVATE_PEER_IDS</em> to be validator-node-03<br />
+    Set sentry-node-03's <em>PERSISTENT_PEER</em> to be sentry-node-01<br />
+    Set sentry-node-03's <em>SEED</em> to be seed-node-01 and seed-node-03
+
+    <code>deploy--init--start_sentry-node-testnet-public-zone03</code>*
+
+1. Download tendermint.nodeid from the sentry-node-03.
+
+1. Deploy, configure and start the validator-node-03:
+
+    Set validator-node-03's <em>PERSISTENT_PEER</em> to be seed-node-03 and sentry-node-03<br />
+
+    <code>deploy--config--start_validator-node-testnet-public-zone03</code>
+
+1. Create a validator in validator-03. **
+
+1. Register the orchestrator in validator-03. **
+
+1. Deploy orchestrator-03:
+
+    <code>deploy--orchestrator-testnet-public-zone03</code>*
+
+
+1. Deploy utils (explorer + faucet).
+
+    <code>deploy-utils-testnet-public</code>*
+
+1. Deploy gravity bridge ui.
+
+    <code>deploy-gravity-bridge-ui-testnet-public</code>*
+
+1. Update <code>parentDir/CudosBuilders/config/seeds.testnet.public.config</code> with TENDERMINT_NODE_ID@IP:PORT pairs of the seed-node-01, seed-node-02, seed-node-03.
+
+<em>*</em> **You MUST configure the corresponsing .env files before using the command. Refer to <em>Setup tools (tools folder)</em> section**
+
+<em>**</em> **Refer to <em>Local dev procedure</em>  for more infromation.**
 
 # Upgrade procedure
 
@@ -449,9 +634,9 @@ In short - after the network stops we have to pull and build the new binary and 
 After the network stops we must:
 
 1. Export the current state.
-2. Pull and build the new binary.
-3. Migrate the state.
-4. Run the network.
+1. Pull and build the new binary.
+1. Migrate the state.
+1. Run the network.
 
 ### 1. Exporting the network state
 
@@ -514,8 +699,8 @@ It should start from the the block it stopped before the upgrade without any err
 ## Stating a chain
 
 1. Deside nodes architecture. In most cases <em>root-node</em> and a <em>sentry-node</em> are enough.
-2. Init and start the <em>root-node</em> using pre-defined build-variants.
-3. Configure, init and start desired nodes (full, sentry or seed) using pre-defined build-variants.
+1. Init and start the <em>root-node</em> using pre-defined build-variants.
+1. Configure, init and start desired nodes (full, sentry or seed) using pre-defined build-variants.
 
 ## Using predefined build-variants
 
