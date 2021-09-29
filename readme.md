@@ -365,7 +365,7 @@ Also each node MUST have a copy of <em>root-node</em>'s genesis.json file.
 16. Init the <em>sentry-node-02</em>.
 17. Replace copied genesis.json with <em>sentry-node-02</em>'s /data/config/genesis.json.
 18. Open /data/config/config.toml and set <em>seed-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT) as <em>SEEDS</em>.
-19. Open /data/config/config.toml and set <em>full-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT) as <em>PRIVATE_PEER_IDS</em>.
+19. Open /data/config/config.toml and set <em>full-node</em>'s TENDERMINT_NODE_ID as <em>PRIVATE_PEER_IDS</em>.
 20. Start the <em>sentry-node-02</em>.
 21. Copy <em>sentry-node-02</em>'s pair (TENDERMINT_NODE_ID@IP:PORT).
 22. Open /data/config/config.toml of <em>full-node</em> and set <em>sentry-node</em>'s pair (TENDERMINT_NODE_ID@IP:PORT) as <em>PERSISTENT_PEERS</em>.
@@ -374,9 +374,15 @@ Also each node MUST have a copy of <em>root-node</em>'s genesis.json file.
 
 For more information where to set <em>SEEDS</em>, <em>PERSISTENT_PEERS</em>, <em>PRIVATE_PEER_IDS</em> see the <em>Data folder</em> section.
 
-## Data folder (how to set <em>SEEDS</em>, <em>PERSISTENT_PEERS</em>, <em>PRIVATE_PEER_IDS</em>)
+## Data folder
 
-To do
+Each build-variant of a node has a <em>data</em> folder. All blockchain information is stored date. Deleting this folder is equivalemnt of deleting a node.
+
+As you can see in <em>Overview</em>, the location of <em>data</em> folder is <code>/parentDir/CudosData</code>. Each build-variant creates a sub-folder inside. The resulting structure is like <code>/parentDir/CudosData/{build-variant}</code>. The exact name of the build-variant's sub-folder is defined in the corresponding **.arg** file.
+
+In the <code>/parentDir/CudosData/{build-variant}</code> folder you can find tendermint.nodeid.
+
+In the <code>/parentDir/CudosData/{build-variant}/config</code> folder you can find genesis.json and config.toml. You can set <em>SEEDS</em>, <em>PERSISTENT_PEERS</em>, <em>PRIVATE_PEER_IDS</em> in config.toml. Search for <code>seeds = ""</code>, <code>persistent_peers = ""</code> and <code>private_peer_ids</code> in order to set the corresponding peers.
 
 # Deployment procedure
 
@@ -384,15 +390,132 @@ To do
 
 # Upgrade procedure
 
-To do
+To be able to do an upgrade, first there needs to be an approved software upgrade proposal. Also there are two types of upgrade procedures. The first is being used when there are no breaking changes and the second - when there is.
+
+**The update procedure in this document describes the abstract process. Commands here cannot be used as copy-paste solution. Each of them should be applied based on the specific upgrade and based on the currently running network infrastructure. For example the commands below is highly likely to be executed inside the docker container that runs the node.**
+
+The upgrade consists of two phases - preparation and actual upgrade. During the preparation a software upgrade proposal is required in order to make the entire network to stop at specific height and then the network state could be exported. After the preparation step we must do either Soft upgrade or Hard fork which depends on the fact whethere there are breaking changes or not.
+
+**The steps below, after the preparation, should be applied by all validators simultaneously in order to avoid slashing.**
+
+## Preparation
+
+A software upgrade proposal is first being submitted. After being submitted it enters into a deposit period, during which a certain amount of tokens need to be deposited into it, so the voting period can start. After the voting period starts, only validators can vote and approve it. If the proposal is passed, the network stops at a specified block height, until the upgrade is made and network is restarted.
+
+### 1. Submitting a software upgrade proposal
+
+A proposal can be submitted with the following command in a node terminal:
+
+```bash
+cudos-noded tx gov submit-proposal software-upgrade <proposal_name> --upgrade-height <block_at_which_to_stop> --from <wallet_name> --deposit <amount_to_deposit_with_denomination> --title <proposal_title> --description <proposal_description> --keyring-backend <os or file or test> --chain-id <chain_id> -y
+```
+
+### 2. Depositing to a proposal
+
+To get the ID of the proposal that we want to deposit into, enter the following command:
+
+```bash
+cudos-noded q gov proposals
+```
+
+This will return a list with all the proposals in which we can find the one we need and find the field "**proposal_id**" for it. Then to deposit funds into it, enter the following command:
+
+```bash
+cudos-noded tx gov deposit <proposal_id> <amount_with_denomination> --from <wallet_name> --keyring-backend <os or file or test> --chain-id <chain_id> -y
+```
+
+If the funds are enough, the proposal should enter in a voting status, which can again be seen with the command we used for the proposal ID.
+
+### 3. Voting a proposal
+
+To vote with yes to a proposal, use the following command:
+
+```bash
+cudos-noded tx gov vote <proposal_id> yes --from <walled_name> --keyring-backend <os or file or test> --chain-id <chain_id> -y
+```
+
+If enough votes with "yes" are sent, the proposal will be approved and the network will stop at the specified block height or time.
+
+The chain will stop at specified height. When the chain stops we need to stop the nodes as well.
+
+## Soft upgrade (without breaking changes)
+
+It is being done by "in-place migration", described [here](https://docs.cosmos.network/master/core/upgrade.html).
+
+In short - after the network stops we have to pull and build the new binary and start the chain again.
+
+## Hard fork (with breaking changes)
+
+After the network stops we must:
+
+1. Export the current state.
+2. Pull and build the new binary.
+3. Migrate the state.
+4. Run the network.
+
+### 1. Exporting the network state
+
+This is done with the following command on a **stopped** node:
+
+```bash
+cudos-noded export |& tee  <export_file_name.json>
+```
+
+Check the file to make sure it is populated with the network state.
+
+### 2. Set the new binary
+
+Pull and build the new binary based on the nodes' types that you are running.
+
+### 3. Migrating the network state file
+
+The exported file from before needs to be migrated, which basically populates it with the fields needed by the new version. This is done with the following command:
+
+```bash
+cudos-noded migrate <software_upgrade_proposal_name> <export_file_name.json> --chain-id <new_chain_id> |& tee <migrated_file_name.json>
+```
+
+All the necessary state changes are handled in the **migrate** command. However, Tendermint parameters are not handled in this command. You might need to update these parameters manually. Make sure that your genesis JSON files contains the correct values specific to your chain. If the cudos-noded migrate errors with a message saying that the genesis file cannot be parsed, these are the fields to check first.
+
+**3.1 Reset the old state**
+
+This is done with the following command:
+
+```bash
+cudos-noded unsafe-reset-all
+```
+
+**3.2 Move the new genesis.json to your daemon config directory.**
+
+Either copy it manually or run command like the following example:
+
+```bash
+cp <migrated_file_name.json> ~/.cudos-noded/config/genesis.json
+```
+
+You can run the following command to check the software version, it should state the expected on at the end:
+
+```bash
+cudos-noded version --long
+```
+
+### 4. Start the network
+
+Start the network with or any other equivalent command that you used to started the network with:
+
+```bash
+cudos-noded start
+```
+
+It should start from the the block it stopped before the upgrade without any error and with all the state unchanged.
 
 # Local dev procedure
 
 ## Stating a chain
 
-1. Deside nodes architecture. In most cases <em>root-node</em> and a <em>sentry-node</em> are enought.
+1. Deside nodes architecture. In most cases <em>root-node</em> and a <em>sentry-node</em> are enough.
 2. Init and start the <em>root-node</em> using pre-defined build-variants.
-3. Configure, init and start a node (full, sentry or seed) using pre-defined build-variants.
+3. Configure, init and start desired nodes (full, sentry or seed) using pre-defined build-variants.
 
 ## Using predefined build-variants
 
