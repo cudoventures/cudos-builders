@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  cudos-workspace:
+    image: cudos-workspace
+    container_name: cudos-workspace
+    build:
+      dockerfile: .devcontainer/dockerfile
+      context: ../
+      args:
+        MNT_PATH: "$MNT_PATH"
+        PASS: "$PASS"
+        USER_ID: "$USER_ID"
+        USER_NAME: "$USER_NAME"
+        GROUP_ID: "$GROUP_ID"
+        GROUP_NAME: "$GROUP_NAME"
+        DOCKER_GROUP_ID: "$DOCKER_GROUP_ID"
+    restart: unless-stopped
+    volumes:
+      - "../:$MNT_PATH"
+      - '/mnt/Working/Cudos/ssh:/home/$USER_NAME/ssh'
+      - /var/run/docker.sock:/var/run/docker.sock
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "128m"
+        max-file: "1"

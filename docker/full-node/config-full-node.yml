@@ -7,6 +7,12 @@ services:
     build:
       dockerfile: CudosBuilders/docker/full-node/config-full-node.dockerfile
       context: ../../../
+      args:
+        USER_ID: "0"
+        USER_NAME: "root"
+        GROUP_ID: "0"
+        GROUP_NAME: "root"
+        CUDOS_HOME: "$CUDOS_HOME"
     env_file: "$ENV_FILE"
     volumes:
       - '../../../CudosData/$VOLUME_NAME:$CUDOS_HOME'
