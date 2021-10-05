@@ -84,3 +84,25 @@ trust_period = "336h"  # 2/3 of unbonding time
 cudos-noded start
 ``
 
+----- 
+Public sentry:
+
+cddc2c56c414f480ca9458db5d07820660953dc4@35.232.27.92:26656
+69294123b040887120a8a14dd9a8256cba8d76d9@34.102.4.198:26656
+6ec3ecb36e49d02d0685592e06d6ec98c99b19a3@34.91.31.157:26656
+
+
+curl -s https://35.232.27.92:26656/commit | jq "{height: .result.signed_header.header.height, hash: .result.signed_header.commit.block_id.hash}"
+
+curl -s https://sentry1.gcp-uscentral1.cudos.org:26657/block | jq -r '.result.block.header.height + "\n" + .result.block_id.hash'
+
+curl -s http://34.102.4.198:26657/block | jq -r '.result.block.header.height + "\n" + .result.block_id.hash'
+
+curl -s https://35.232.27.92:26657/block_search | jq "{height: .result.signed_header.header.height, hash: .result.signed_header.commit.block_id.hash}"
+
+https://sentry1.gcp-uscentral1.cudos.org:26657/block
+
+sentry1.gcp-uscentral1.cudos.org 35.232.27.92
+sentry2.gcp-uswest2.cudos.org 34.102.4.198
+sentry3.gcp-euwest4.cudos.org 34.91.31.157
+
