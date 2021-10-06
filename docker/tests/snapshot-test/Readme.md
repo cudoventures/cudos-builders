@@ -55,11 +55,11 @@ curl -s http://localhost:60601/commit | jq "{height: .result.signed_header.heade
 
 curl -s http://localhost:60602/commit | jq "{height: .result.signed_header.header.height, hash: .result.signed_header.commit.block_id.hash}"
 
-curl -s http://35.232.27.92:26657/block | jq -r '.result.block.header.height + "\n" + .result.block_id.hash'
+curl -s http://34.102.4.198:26657/block | jq -r '.result.block.header.height + "\n" + .result.block_id.hash'
 
-curl -s http://35.232.27.92:26657/commit | jq "{height: .result.signed_header.header.height, hash: .result.signed_header.commit.block_id.hash}"
+curl -s http://34.102.4.198:26657/commit | jq "{height: .result.signed_header.header.height, hash: .result.signed_header.commit.block_id.hash}"
 
-curl -s http://35.232.27.92:26657/block_search | jq "{height: .result.signed_header.header.height, hash: .result.signed_header.commit.block_id.hash}"
+curl -s http://34.102.4.198:26657/block_search | jq "{height: .result.signed_header.header.height, hash: .result.signed_header.commit.block_id.hash}"
 
 block_search
 
@@ -106,3 +106,5 @@ sentry1.gcp-uscentral1.cudos.org 35.232.27.92
 sentry2.gcp-uswest2.cudos.org 34.102.4.198
 sentry3.gcp-euwest4.cudos.org 34.91.31.157
 
+
+curl -s https://sentry1.gcp-uscentral1.cudos.org:26657/commit?height=578000 | jq -r '.result.signed_header.header.height + "\n" + .result.signed_header.commit.block_id.hash'
