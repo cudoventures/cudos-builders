@@ -9,3 +9,4 @@ seeds.local.config
 .DS_Store
 docker/snapshot-test/data
 users*override.yml
+topology.json
