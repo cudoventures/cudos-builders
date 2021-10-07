@@ -1,0 +1,21 @@
+version: '3.9'
+
+volumes:
+  cudosnodedata:
+    driver: local
+
+services:
+  cudos-deployer-network-node:
+    image: cudos-deployer-network-node
+    container_name: $CONTAINER_NAME
+    build:
+      dockerfile: ./node.dockerfile
+      context: .
+    restart: unless-stopped
+    ports:
+      - "$SSH_PORT:22"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "128m"
+        max-file: "1"

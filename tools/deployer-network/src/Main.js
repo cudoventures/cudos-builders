@@ -1,18 +1,35 @@
 const { ArgumentParser } = require('argparse');
 const TopologyHelper = require('./utilities/TopologyHelper');
+const LifeCycleHelper = require('./utilities/LifeCycleHelper');
+const Log = require('./utilities/LogHelper');
+const InstancesService = require('./services/InstancesService');
 
 async function main() {
     const args = getArgParser();
-    const topologyHelper = await TopologyHelper.instanceByPath(args.topology);
-    console.log(topologyHelper);
 
-    // Ping instances
+    const lifeCycleHelper = new LifeCycleHelper();
+    const topologyHelper = await TopologyHelper.instanceByPath(args.topology);
+    const instancesService = new InstancesService(topologyHelper);
+
+    lifeCycleHelper.init();
+    lifeCycleHelper.addExitHandler(instancesService.onExit);
+
+    try {
+        await instancesService.createMissingInstances();
+        await instancesService.connectToInstances()
+        Log.main('Ready')
+    } catch (ex) {
+        console.log(ex);
+        process.kill(process.pid, 'SIGINT');
+    }
 
     // Connect to instances and validate/install software requirements
 
     // Start the ssh-signaling system
 
     // Start the nodes
+
+    setInterval(() => {}, 1 << 30);
 }
 
 function getArgParser() {

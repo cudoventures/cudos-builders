@@ -3,9 +3,14 @@ class ComputerModel {
     constructor() {
         this.id = "";
         this.ip = "";
+        this.port = 22;
         this.user = "";
         this.sshKey = "";
         this.pass = "";
+    }
+
+    isAuto() {
+        return this.ip === 'auto';
     }
 
     static fromJson(json) {
@@ -17,6 +22,7 @@ class ComputerModel {
 
         model.id = json.id ?? model.id;
         model.ip = json.ip ?? model.ip;
+        model.port = json.port ?? model.port;
         model.user = json.user ?? model.user;
         model.sshKey = json.sshKey ?? model.sshKey;
         model.pass = json.pass ?? model.pass;

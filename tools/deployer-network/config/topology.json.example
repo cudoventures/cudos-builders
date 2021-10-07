@@ -3,6 +3,7 @@
         {
             "id": "someRandomString",
             "ip": "1.2.3.4",
+            "port": 22,
             "user": "username",
             "sshKey": "absolutePathToSSHKey",
             "password": "password"

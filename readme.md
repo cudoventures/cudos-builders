@@ -130,6 +130,9 @@ Most of the deployers below has a file named <code>secrecs.json.example</code> D
 
 To do (network deployer is under development)
 
+1. Make sure you can execute docker/docker-compose commands without sudo
+2. https://www.cyberciti.biz/faq/linux-unix-running-sudo-command-without-a-password/
+
 ## nodes deployer
 
 This deployer is responsible of the deployments of root, seed, sentry and full nodes.
