@@ -9,7 +9,7 @@ class BashHelper {
 
     execute(cmd) {
         return new Promise((resolve, reject) => {
-            if (!(cmd instanceof String)) {
+            if (Array.isArray(cmd)) {
                 cmd = cmd.join(' && ');
             }
 

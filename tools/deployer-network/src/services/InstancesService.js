@@ -1,6 +1,7 @@
 const path = require('path');
 const BashHelper = require('../utilities/BashHelper');
 const Log = require('../utilities/LogHelper');
+const SoftwareHelper = require('../utilities/SoftwareHelper');
 const SshHelper = require('../utilities/SshHelper');
 
 class InstancesService {
@@ -47,6 +48,15 @@ class InstancesService {
             const sshHelper = new SshHelper(computer);
             this.sshHelpersMap.set(computer.id, sshHelper);
             await sshHelper.connect();
+        }
+    }
+
+    async validateSoftwareRequirements() {
+        for (let i = 0;  i < this.topologyHelper.computers.length;  ++i) {
+            const computer = this.topologyHelper.computers[i];
+            const sshHelper = this.sshHelpersMap.get(computer.id);
+            const softwareHelper = new SoftwareHelper(sshHelper);
+            await softwareHelper.validateSoftwareRequirements();
         }
     }
 

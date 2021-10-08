@@ -24,9 +24,6 @@ RUN adduser --disabled-password -gecos "" ${USER_NAME}; \
     echo "root:$PASS" | chpasswd && \
     echo "${USER_NAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-RUN mkdir -p /mnt/cudos-node-data && \
-    chown -R ${USER_NAME}:${GROUP_NAME} /mnt/cudos-node-data
-
 USER cudos:cudos
 
 CMD ["/bin/bash", "-c", "sudo service ssh start && sleep infinity"]

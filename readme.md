@@ -132,6 +132,7 @@ To do (network deployer is under development)
 
 1. Make sure you can execute docker/docker-compose commands without sudo
 2. https://www.cyberciti.biz/faq/linux-unix-running-sudo-command-without-a-password/
+3. node ./src/Main.js --topology ./config/topology.json
 
 ## nodes deployer
 

@@ -16,16 +16,13 @@ async function main() {
 
     try {
         await instancesService.createMissingInstances();
-        await instancesService.connectToInstances()
-        Log.main('Ready')
+        await instancesService.connectToInstances();
+        await instancesService.validateSoftwareRequirements();
+        Log.main('Ready');
     } catch (ex) {
         console.log(ex);
         process.kill(process.pid, 'SIGINT');
     }
-
-    // Connect to instances and validate/install software requirements
-
-    // Start the ssh-signaling system
 
     // Start the nodes
 

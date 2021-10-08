@@ -13,6 +13,10 @@ class ComputerModel {
         return this.ip === 'auto';
     }
 
+    hasSshKey() {
+        return this.sshKey !== '';
+    }
+
     static fromJson(json) {
         if (json === null) {
             return null;
