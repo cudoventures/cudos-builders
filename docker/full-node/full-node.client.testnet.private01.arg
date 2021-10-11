@@ -1,5 +1,9 @@
 CUDOS_HOME=/usr/cudos/cudos-data
 
+SHOULD_USE_STATE_SYNC=true
+STATE_SYNC_PEER=34.123.153.6:26657
+STATE_SYNC_RPC_SERVERS=35.224.105.243:26657,34.123.153.6:26657
+
 ENV_FILE=./full-node.client.testnet.private01.env
 GENESIS_FILENAME=genesis.testnet.private.json
 PERSISTENT_PEERS_FILENAME=persistent-peers.testnet.private.config
