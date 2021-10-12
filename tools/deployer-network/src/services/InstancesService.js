@@ -93,6 +93,14 @@ class InstancesService {
         }
     }
 
+    getSshHelper(computerId) {
+        const sshHelper = this.sshHelpersMap.get(computerId);
+        if (sshHelper === undefined) {
+            throw new Error(`Computer id (${computerId}) not found`);
+        }
+        return sshHelper;
+    }
+
 }
 
 module.exports = InstancesService;

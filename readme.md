@@ -130,9 +130,19 @@ Most of the deployers below has a file named <code>secrecs.json.example</code> D
 
 To do (network deployer is under development)
 
-1. Make sure you can execute docker/docker-compose commands without sudo
-2. https://www.cyberciti.biz/faq/linux-unix-running-sudo-command-without-a-password/
-3. node ./src/Main.js --topology ./config/topology.json
+This deployer is capable is starting an entire blockchain. To do so you must specify the network's topology and nodes' role in a file.
+
+### Topology and roles
+
+The best way to define the topology and the roles is to duplicate the <code>parentDir/CudosBuilders/tools/deployer-network/config/topology.json.example</code> and rename it to <code>topology.json</code>.
+
+### Node requirements
+
+Each "computer" defined in the <code>topology.json</code> is accessed by a username. This user should be able to execute **sudo** commands without asking for a password, e.g. it should be in <em>sudoer</em> group. More information can be found <a href="https://www.cyberciti.biz/faq/linux-unix-running-sudo-command-without-a-password/">here</a>
+
+### Run network deployer
+
+node ./src/Main.js --topology ./config/topology.json
 
 ## nodes deployer
 

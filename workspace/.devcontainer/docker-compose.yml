@@ -16,6 +16,8 @@ services:
         GROUP_NAME: "$GROUP_NAME"
         DOCKER_GROUP_ID: "$DOCKER_GROUP_ID"
     restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
     volumes:
       - "../:$MNT_PATH"
       - '/mnt/Working/Cudos/ssh:/home/$USER_NAME/ssh'
