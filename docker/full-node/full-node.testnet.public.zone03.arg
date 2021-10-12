@@ -4,6 +4,7 @@ ENV_FILE=./full-node.testnet.public.zone03.env
 GENESIS_FILENAME=genesis.testnet.public.json
 PERSISTENT_PEERS_FILENAME=persistent-peers.testnet.public.config
 SEEDS_FILENAME=seeds.testnet.public.config
+STATE_SYNC_RPC_SERVERS_FILENAME=state-sync-rpc-servers.testnet.public.config
 
 INIT_CONTAINER_NAME=cudos-init-full-node-testnet-public-zone03
 CONFIG_CONTAINER_NAME=cudos-config-full-node-testnet-public-zone03

@@ -1,5 +1,7 @@
 version: '3.1'
-
+networks:
+  shared-cudos-network:
+    name: shared-cudos-network
 services:
   cudos-sentry-node:
     image: cudos-init-sentry-node
@@ -16,6 +18,9 @@ services:
         GENESIS_FILENAME: "$GENESIS_FILENAME"
         SEEDS_FILENAME: "$SEEDS_FILENAME"
         PERSISTENT_PEERS_FILENAME: "$PERSISTENT_PEERS_FILENAME"
+        STATE_SYNC_RPC_SERVERS_FILENAME: "$STATE_SYNC_RPC_SERVERS_FILENAME"
     env_file: "$ENV_FILE"
     volumes:
       - '../../../CudosData/$VOLUME_NAME:$CUDOS_HOME'
+    networks:
+      - shared-cudos-network
