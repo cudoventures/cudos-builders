@@ -170,6 +170,70 @@
             "type": "shell",
             "group": "build"
         },
+        // seed node client testnet private
+        {
+            "label": "Build INIT SEED NODE CLIENT TESTNET PRIVATE in docker",
+            "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.client.testnet.private01.arg -f ./init-seed-node.yml -f ./users-seed-node.override.yml -p cudos-init-seed-node-client-testnet-private-01 up --build",
+            "type": "shell",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Destroy INIT SEED NODE CLIENT TESTNET PRIVATE in docker",
+            "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.client.testnet.private01.arg -f ./init-seed-node.yml -f ./users-seed-node.override.yml -p cudos-init-seed-node-client-testnet-private-01 down",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Start START SEED NODE CLIENT TESTNET PRIVATE in docker",
+            "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.client.testnet.private01.arg -f ./start-seed-node.yml -f ./users-seed-node.override.yml -p cudos-start-seed-node-client-testnet-private-01 up",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Build START SEED NODE CLIENT TESTNET PRIVATE in docker",
+            "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.client.testnet.private01.arg -f ./start-seed-node.yml -f ./users-seed-node.override.yml -p cudos-start-seed-node-client-testnet-private-01 up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Destroy START SEED NODE CLIENT TESTNET PRIVATE in docker",
+            "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.client.testnet.private01.arg -f ./start-seed-node.yml -f ./users-seed-node.override.yml -p cudos-start-seed-node-client-testnet-private-01 down",
+            "type": "shell",
+            "group": "build"
+        },
+        // seed node client testnet public
+        {
+            "label": "Build INIT SEED NODE CLIENT TESTNET PUBLIC in docker",
+            "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.client.testnet.public01.arg -f ./init-seed-node.yml -f ./users-seed-node.override.yml -p cudos-init-seed-node-client-testnet-public-01 up --build",
+            "type": "shell",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Destroy INIT SEED NODE CLIENT TESTNET PUBLIC in docker",
+            "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.client.testnet.public01.arg -f ./init-seed-node.yml -f ./users-seed-node.override.yml -p cudos-init-seed-node-client-testnet-public-01 down",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Start START SEED NODE CLIENT TESTNET PUBLIC in docker",
+            "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.client.testnet.public01.arg -f ./start-seed-node.yml -f ./users-seed-node.override.yml -p cudos-start-seed-node-client-testnet-public-01 up",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Build START SEED NODE CLIENT TESTNET PUBLIC in docker",
+            "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.client.testnet.public01.arg -f ./start-seed-node.yml -f ./users-seed-node.override.yml -p cudos-start-seed-node-client-testnet-public-01 up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Destroy START SEED NODE CLIENT TESTNET PUBLIC in docker",
+            "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.client.testnet.public01.arg -f ./start-seed-node.yml -f ./users-seed-node.override.yml -p cudos-start-seed-node-client-testnet-public-01 down",
+            "type": "shell",
+            "group": "build"
+        },
         // sentry node client local
         {
             "label": "Build INIT SENTRY NODE CLIENT LOCAL in docker",
@@ -198,6 +262,70 @@
         {
             "label": "Destroy START SENTRY NODE CLIENT LOCAL in docker",
             "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.local01.arg -f ./start-sentry-node.yml -f ./users-sentry-node.override.yml -p cudos-start-sentry-node-client-local-01 down",
+            "type": "shell",
+            "group": "build"
+        },
+        // sentry node client testnet private
+        {
+            "label": "Build INIT SENTRY NODE CLIENT TESTNET PRIVATE in docker",
+            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.testnet.private01.arg -f ./init-sentry-node.yml -f ./users-sentry-node.override.yml -p cudos-init-sentry-node-client-testnet-private-01 up --build",
+            "type": "shell",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Destroy INIT SENTRY NODE CLIENT TESTNET PRIVATE in docker",
+            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.testnet.private01.arg -f ./init-sentry-node.yml -f ./users-sentry-node.override.yml -p cudos-init-sentry-node-client-testnet-private-01 down",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Start START SENTRY NODE CLIENT TESTNET PRIVATE in docker",
+            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.testnet.private01.arg -f ./start-sentry-node.yml -f ./users-sentry-node.override.yml -p cudos-start-sentry-node-client-testnet-private-01 up",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Build START SENTRY NODE CLIENT TESTNET PRIVATE in docker",
+            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.testnet.private01.arg -f ./start-sentry-node.yml -f ./users-sentry-node.override.yml -p cudos-start-sentry-node-client-testnet-private-01 up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Destroy START SENTRY NODE CLIENT TESTNET PRIVATE in docker",
+            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.testnet.private01.arg -f ./start-sentry-node.yml -f ./users-sentry-node.override.yml -p cudos-start-sentry-node-client-testnet-private-01 down",
+            "type": "shell",
+            "group": "build"
+        },
+        // sentry node client testnet public
+        {
+            "label": "Build INIT SENTRY NODE CLIENT TESTNET PUBLIC in docker",
+            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.testnet.public01.arg -f ./init-sentry-node.yml -f ./users-sentry-node.override.yml -p cudos-init-sentry-node-client-testnet-public-01 up --build",
+            "type": "shell",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Destroy INIT SENTRY NODE CLIENT TESTNET PUBLIC in docker",
+            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.testnet.public01.arg -f ./init-sentry-node.yml -f ./users-sentry-node.override.yml -p cudos-init-sentry-node-client-testnet-public-01 down",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Start START SENTRY NODE CLIENT TESTNET PUBLIC in docker",
+            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.testnet.public01.arg -f ./start-sentry-node.yml -f ./users-sentry-node.override.yml -p cudos-start-sentry-node-client-testnet-public-01 up",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Build START SENTRY NODE CLIENT TESTNET PUBLIC in docker",
+            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.testnet.public01.arg -f ./start-sentry-node.yml -f ./users-sentry-node.override.yml -p cudos-start-sentry-node-client-testnet-public-01 up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Destroy START SENTRY NODE CLIENT TESTNET PUBLIC in docker",
+            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.testnet.public01.arg -f ./start-sentry-node.yml -f ./users-sentry-node.override.yml -p cudos-start-sentry-node-client-testnet-public-01 down",
             "type": "shell",
             "group": "build"
         },

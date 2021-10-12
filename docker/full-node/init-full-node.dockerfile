@@ -31,7 +31,5 @@ RUN mv "./external-config/${GENESIS_FILENAME}" ./external-config/genesis.json &&
 ENV USER_NAME=${USER_NAME}
 ENV GROUP_NAME=${GROUP_NAME}
 ENV CUDOS_HOME=${CUDOS_HOME}
-ENV STATE_SYNC_RPC_SERVERS=${STATE_SYNC_RPC_SERVERS}
-ENV STATE_SYNC_PEER=${STATE_SYNC_PEER}
 
 CMD ["/bin/bash", "-c", "chown -R ${USER_NAME}:${GROUP_NAME} ${CUDOS_HOME} && su ${USER_NAME} -c ./init-full-node.sh"]

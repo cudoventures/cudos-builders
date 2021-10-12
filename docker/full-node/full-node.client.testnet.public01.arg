@@ -1,7 +1,5 @@
 CUDOS_HOME=/usr/cudos/cudos-data
 
-SHOULD_USE_STATE_SYNC=true
-
 ENV_FILE=./full-node.client.testnet.public01.env
 GENESIS_FILENAME=genesis.testnet.public.json
 PERSISTENT_PEERS_FILENAME=persistent-peers.testnet.public.config

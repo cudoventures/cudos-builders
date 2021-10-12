@@ -4,7 +4,7 @@ ENV_FILE=./sentry-node.client.testnet.public01.env
 GENESIS_FILENAME=genesis.testnet.public.json
 PERSISTENT_PEERS_FILENAME=persistent-peers.testnet.public.config
 SEEDS_FILENAME=seeds.testnet.public.config
-STATE_SYNC_RPC_SERVERS_FILENAME=state-sync-rpc-servers.public.config
+STATE_SYNC_RPC_SERVERS_FILENAME=state-sync-rpc-servers.testnet.public.config
 
 INIT_CONTAINER_NAME=cudos-init-sentry-node-client-testnet-public-01
 START_CONTAINER_NAME=cudos-start-sentry-node-client-testnet-public-01
