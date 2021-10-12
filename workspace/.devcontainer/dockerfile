@@ -60,6 +60,6 @@ RUN curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-c
 
 WORKDIR $MNT_PATH
 
-USER $USER_NAME:$GROUP_NAME
+USER $USER_NAME
 
 CMD ["sleep", "infinity"]
