@@ -7,5 +7,5 @@ persistent-peers.local.config
 seeds.local.config
 /tools/deployer-utils/temp
 .DS_Store
-docker/snapshot-test/data
 users*override.yml
+docker/tests/**/data
