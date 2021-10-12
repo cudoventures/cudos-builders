@@ -41,6 +41,34 @@ if [ "${TLS_ENABLED}" = "true" ]; then
     sed -i "s|tls_key_file = \".*\"|tls_key_file = \"$TLS_DOCKER_PATH/live/$TLS_DOMAIN/privkey.pem\"|g" "${CUDOS_HOME}/config/config.toml"
 fi
 
+# STATE SYNC
+if [ "$SHOULD_USE_STATE_SYNC" = "true" ]; then
+    STATE_SYNC_RPC_SERVERS=$(cat ./external-config/state-sync-rpc-servers.config)
+    IFS=', ' read -r -a STATE_SYNC_RPC_SERVERS_ARRAY <<< ${STATE_SYNC_RPC_SERVERS}
+    
+    TEMP_STATE_HEIGHT=$(curl -s ${STATE_SYNC_RPC_SERVERS_ARRAY[0]}/commit | jq -r ".result.signed_header.header.height")
+    STATE_SYNC_HEIGHT=$(((($TEMP_STATE_HEIGHT/2000)-1)*2000))
+    STATE_SYNC_HASH=$(curl -s ${STATE_SYNC_RPC_SERVERS_ARRAY[0]}/commit?height=${STATE_SYNC_HEIGHT} | jq '.result.signed_header.commit.block_id.hash')
+
+    HASHES_MATCH=true
+    for SERVER in "${STATE_SYNC_RPC_SERVERS_ARRAY[0]}"
+    do
+        TEMP_HASH=$(curl -s ${SERVER}/commit?height=${STATE_SYNC_HEIGHT} | jq '.result.signed_header.commit.block_id.hash')
+        if [ "$STATE_SYNC_HASH" != "$TEMP_HASH" ]; then
+            HASHES_MATCH=false
+            break
+        fi
+    done
+
+    if [ "$HASHES_MATCH" = "true" ]; then
+        sed -i "s/enable = false/enable = true/g" "${CUDOS_HOME}/config/config.toml"
+        sed -i "s~rpc_servers = \".*\"~rpc_servers = \"${STATE_SYNC_RPC_SERVERS}\"~g" "${CUDOS_HOME}/config/config.toml"
+        sed -i "s/trust_height = 0/trust_height = ${STATE_SYNC_HEIGHT}/g" "${CUDOS_HOME}/config/config.toml"
+        sed -i "s/trust_hash = \".*\"/trust_hash = ${STATE_SYNC_HASH}/g" "${CUDOS_HOME}/config/config.toml"
+    else
+        echo "Hashed from different peers don't match. State sync is OFF"
+    fi
+fi
 
 
 cudos-noded tendermint show-node-id |& tee "${CUDOS_HOME}/tendermint.nodeid"

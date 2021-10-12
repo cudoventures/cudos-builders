@@ -4,6 +4,7 @@ ENV_FILE=./full-node.client.testnet.private01.env
 GENESIS_FILENAME=genesis.testnet.private.json
 PERSISTENT_PEERS_FILENAME=persistent-peers.testnet.private.config
 SEEDS_FILENAME=seeds.testnet.private.config
+STATE_SYNC_RPC_SERVERS_FILENAME=state-sync-rpc-servers.testnet.private.config
 
 INIT_CONTAINER_NAME=cudos-init-full-node-client-testnet-private-01
 CONFIG_CONTAINER_NAME=cudos-config-full-node-client-testnet-private-01

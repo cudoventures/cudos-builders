@@ -5,6 +5,7 @@ secrets.json.old
 genesis.local.json
 persistent-peers.local.config
 seeds.local.config
+state-sync-rpc-servers.local.config
 /tools/deployer-utils/temp
 .DS_Store
 users*override.yml
