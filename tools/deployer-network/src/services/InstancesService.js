@@ -30,6 +30,7 @@ class InstancesService {
             await bashHelper.execute([
                 `export CONTAINER_NAME="${containerName}"`,
                 `export SSH_PORT="${sshPort}"`,
+                `export DOCKER_GROUP_ID=$(getent group docker | awk -F: '{printf "%d", $3}')`,
                 `cd ${path.join(__dirname, '..', '..', 'config')}`,
                 'docker-compose -f ./node.yml -p cudos-deployer-network-node-01 up --build -d'
             ]);
