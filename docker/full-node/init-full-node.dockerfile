@@ -8,9 +8,7 @@ ARG CUDOS_HOME
 ARG GENESIS_FILENAME
 ARG SEEDS_FILENAME
 ARG PERSISTENT_PEERS_FILENAME
-ARG SHOULD_USE_STATE_SYNC
-ARG STATE_SYNC_RPC_SERVERS
-ARG STATE_SYNC_PEER
+ARG STATE_SYNC_RPC_SERVERS_FILENAME
 
 RUN if [ $USER_NAME != 'root' ]; then \
         addgroup -gid ${GROUP_ID} $GROUP_NAME; \
@@ -26,13 +24,13 @@ COPY ./CudosBuilders/docker/config ./external-config
 RUN mv "./external-config/${GENESIS_FILENAME}" ./external-config/genesis.json && \
     mv "./external-config/${SEEDS_FILENAME}" ./external-config/seeds.config && \
     mv "./external-config/${PERSISTENT_PEERS_FILENAME}" ./external-config/persistent-peers.config && \
+    mv "./external-config/${STATE_SYNC_RPC_SERVERS_FILENAME}" ./external-config/state-sync-rpc-servers.config && \
     chmod +x ./init-full-node.sh && \
     sed -i 's/\r$//' ./init-full-node.sh
 
 ENV USER_NAME=${USER_NAME}
 ENV GROUP_NAME=${GROUP_NAME}
 ENV CUDOS_HOME=${CUDOS_HOME}
-ENV SHOULD_USE_STATE_SYNC=${SHOULD_USE_STATE_SYNC}
 ENV STATE_SYNC_RPC_SERVERS=${STATE_SYNC_RPC_SERVERS}
 ENV STATE_SYNC_PEER=${STATE_SYNC_PEER}
 

@@ -1,13 +1,12 @@
 CUDOS_HOME=/usr/cudos/cudos-data
 
 SHOULD_USE_STATE_SYNC=true
-STATE_SYNC_PEER=34.67.137.129:26657
-STATE_SYNC_RPC_SERVERS=34.67.137.129:26657,35.232.27.92:26657,34.102.114.30:26657,34.102.4.198:26657,34.141.129.16:26657,34.91.31.157:26657
 
 ENV_FILE=./full-node.client.testnet.public01.env
 GENESIS_FILENAME=genesis.testnet.public.json
 PERSISTENT_PEERS_FILENAME=persistent-peers.testnet.public.config
 SEEDS_FILENAME=seeds.testnet.public.config
+STATE_SYNC_RPC_SERVERS_FILENAME=state-sync-rpc-servers.testnet.public.config
 
 INIT_CONTAINER_NAME=cudos-init-full-node-client-testnet-public-01
 CONFIG_CONTAINER_NAME=cudos-config-full-node-client-testnet-public-01
