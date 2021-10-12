@@ -4,6 +4,7 @@ ENV_FILE=./sentry-node.client.testnet.private01.env
 GENESIS_FILENAME=genesis.testnet.private.json
 PERSISTENT_PEERS_FILENAME=persistent-peers.testnet.private.config
 SEEDS_FILENAME=seeds.testnet.private.config
+STATE_SYNC_RPC_SERVERS_FILENAME=state-sync-rpc-servers.private.config
 
 INIT_CONTAINER_NAME=cudos-init-sentry-node-client-testnet-private-01
 START_CONTAINER_NAME=cudos-start-sentry-node-client-testnet-private-01

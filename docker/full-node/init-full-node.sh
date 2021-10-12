@@ -7,8 +7,6 @@ if [ "$SHOULD_USE_GLOBAL_PEERS" = "true" ]; then
     SEEDS=$(cat ./external-config/seeds.config)
 fi
 
-STATE_SYNC_RPC_SERVERS=$(cat ./external-config/state-sync-rpc-servers.config)
-
 WORKING_PATH=$(pwd) && cd $CUDOS_HOME && rm -Rf ./* && cd $WORKING_PATH
 BOND_DENOM="acudos"
 
@@ -24,7 +22,9 @@ sed -i "s/persistent_peers = \".*\"/persistent_peers = \"$PERSISTENT_PEERS\"/g" 
 sed -i "s/seeds = \".*\"/seeds = \"$SEEDS\"/g" "${CUDOS_HOME}/config/config.toml"
 
 if [ "$SHOULD_USE_STATE_SYNC" = "true" ]; then
+    STATE_SYNC_RPC_SERVERS=$(cat ./external-config/state-sync-rpc-servers.config)
     IFS=', ' read -r -a STATE_SYNC_RPC_SERVERS_ARRAY <<< ${STATE_SYNC_RPC_SERVERS}
+    
     TEMP_STATE_HEIGHT=$(curl -s ${STATE_SYNC_RPC_SERVERS_ARRAY[0]}/commit | jq -r ".result.signed_header.header.height")
     STATE_SYNC_HEIGHT=$(((($TEMP_STATE_HEIGHT/2000)-1)*2000))
     STATE_SYNC_HASH=$(curl -s ${STATE_SYNC_RPC_SERVERS_ARRAY[0]}/commit?height=${STATE_SYNC_HEIGHT} | jq '.result.signed_header.commit.block_id.hash')
