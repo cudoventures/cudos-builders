@@ -14,8 +14,8 @@ async function main() {
     const nodesService = new NodesService(topologyHelper, instancesService);
 
     lifeCycleHelper.init();
-    lifeCycleHelper.addExitHandler(instancesService.onExit);
-    lifeCycleHelper.addExitHandler(nodesService.onExit);
+    lifeCycleHelper.addExitHandler(instancesService.onExit, 0);
+    lifeCycleHelper.addExitHandler(nodesService.onExit, 1);
 
     try {
         await instancesService.createMissingInstances();

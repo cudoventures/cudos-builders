@@ -7,6 +7,7 @@ class ComputerModel {
         this.user = "";
         this.sshKey = "";
         this.pass = "";
+        this.isLocalDocker = false;
     }
 
     isAuto() {
@@ -30,6 +31,7 @@ class ComputerModel {
         model.user = json.user ?? model.user;
         model.sshKey = json.sshKey ?? model.sshKey;
         model.pass = json.pass ?? model.pass;
+        model.isLocalDocker = model.isAuto();
         
         return model;
     }

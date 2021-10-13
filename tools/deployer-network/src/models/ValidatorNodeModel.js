@@ -5,6 +5,7 @@ class ValidatorNodeModel extends AbsNodeModel {
     constructor() {
         super();
         this.validatorId = "";
+        this.orchEthAddress = "";
     }
 
     static fromJson(json) {
@@ -15,6 +16,7 @@ class ValidatorNodeModel extends AbsNodeModel {
         const model = AbsNodeModel.fromJson(json, new ValidatorNodeModel());
 
         model.validatorId = json.validatorId ?? model.validatorId;
+        model.orchEthAddress = json.orchEthAddress ?? model.orchEthAddress;
 
         return model;
     }

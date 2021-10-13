@@ -19,11 +19,12 @@ class InstancesService {
 
         for (let i = 0;  i < this.topologyHelper.computers.length;  ++i) {
             const computer = this.topologyHelper.computers[i];
-            if (computer.isAuto() === false) {
+            if (computer.isLocalDocker === false) {
                 continue;
             }
 
             const containerName = `cudos-deployer-network-node-${i + 1}`;
+            const projectName = containerName;
             const sshPort = 65000 + i;
 
             Log.main(`Create ${containerName} for ${computer.id}`);
@@ -32,7 +33,7 @@ class InstancesService {
                 `export SSH_PORT="${sshPort}"`,
                 `export DOCKER_GROUP_ID=$(getent group docker | awk -F: '{printf "%d", $3}')`,
                 `cd ${path.join(__dirname, '..', '..', 'config')}`,
-                'docker-compose -f ./node.yml -p cudos-deployer-network-node-01 up --build -d'
+                `docker-compose -f ./node.yml -p ${projectName} up --build -d`
             ]);
 
             this.createdInstancesMap.set(computer.id, containerName);
@@ -90,7 +91,10 @@ class InstancesService {
         for (let i = 0;  i < this.topologyHelper.computers.length;  ++i) {
             const computer = this.topologyHelper.computers[i];
             const sshHelper = this.sshHelpersMap.get(computer.id);
-            await sshHelper.disconnect();
+            try {
+                await sshHelper.disconnect();
+            } catch (ex) {
+            }
         }
     }
 

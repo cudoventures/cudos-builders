@@ -2,6 +2,7 @@ class AbsNodeModel {
 
     constructor() {
         this.computerId = "";
+        this.nodeId = 0;
     }
 
     static fromJson(json, model = null) {

@@ -24,16 +24,8 @@ RUN groupmod -g ${DOCKER_GROUP_ID} docker && \
     usermod -a -G sudo ${USER_NAME} && \
     echo "$USER_NAME:$PASS" | chpasswd && \
     echo "root:$PASS" | chpasswd && \
-    echo "${USER_NAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
-    mkdir -p /usr/cudos && \
-    chown ${USER_NAME}:${GROUP_NAME} /usr/cudos
+    echo "${USER_NAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 USER cudos
-
-WORKDIR /usr/cudos
-
-RUN git clone --depth 1 --branch v0.2 https://github.com/CudoVentures/cudos-node.git CudosNode && \
-    git clone --depth 1 --branch v0.3 https://github.com/CudoVentures/cudos-builders.git CudosBuilders && \
-    git clone --depth 1 --branch v0.2 https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge
 
 CMD ["/bin/bash", "-c", "sudo service ssh start && sleep infinity"]

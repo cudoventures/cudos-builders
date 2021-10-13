@@ -9,7 +9,7 @@ class LogHelper {
     }
 
     static ssh() {
-        console.log('\x1b[36m[SOFTWARE] %s\x1b[0m', ...arguments);
+        console.log('\x1b[36m[SSH] %s\x1b[0m', ...arguments);
     }
 
 }

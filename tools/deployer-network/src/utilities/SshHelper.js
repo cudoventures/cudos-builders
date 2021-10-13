@@ -44,15 +44,17 @@ class SshHelper {
         try {
             await this.ssh.exec(cmd, [], {
                 onStdout: (chunk) => {
-                    res.push(chunk.toString('utf8'));
+                    const log = chunk.toString('utf8').trim();
+                    res.push(log);
                     if (stdLog === true) {
-                        Log.ssh(chunk.toString('utf8'))
+                        Log.ssh(log);
                     }
                 },
                 onStderr: (chunk) => {
-                    res.push(chunk.toString('utf8'));
+                    const log = chunk.toString('utf8').trim();
+                    res.push(log);
                     if (stdLog === true) {
-                        Log.ssh(chunk.toString('utf8'))
+                        Log.ssh(log);
                     }
                 },
             });
@@ -60,6 +62,48 @@ class SshHelper {
         }
 
         return res.join('\n');
+    }
+
+    async cloneRepos() {
+        await this.exec([
+            'cd /usr/cudos',
+            'rm -rf ./CudosNode',
+            'rm -rf ./CudosBuilders',
+            'rm -rf ./CudosGravityBridge',
+            'git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/cudos-node.git CudosNode',
+            'git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/cudos-builders.git CudosBuilders',
+            'git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge'
+        ]);
+    }
+
+    async prepareBinaryBuilder() {
+        const imageId = await this.exec('docker images -q binary-builder', false);
+        if (imageId !== '') {
+            return;
+        }
+
+        await this.exec([
+            'cd /usr/cudos/CudosBuilders/docker/binary-builder',
+            'docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder build',
+        ]);
+    }
+
+    awaitForNode(dockerContainerName) {
+        return new Promise((resolve, reject) => {
+            const runnable = async () => {
+                const statusString = await this.exec(`docker container exec ${dockerContainerName} /bin/bash -c "cudos-noded status"`, false);
+                try {
+                    const status = JSON.parse(statusString);
+                    if (status.SyncInfo.catching_up === false) {
+                        clearInterval(intervalHandler);
+                        resolve();
+                    }
+                } catch (ex) {
+                }
+            };
+            
+            const intervalHandler = setInterval(runnable, 1000);
+        });
     }
 
 }
