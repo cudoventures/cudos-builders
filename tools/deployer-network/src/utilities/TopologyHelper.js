@@ -49,6 +49,8 @@ class TopologyHelper {
             return model;
         });
 
+        helper.validate();
+
         return helper;
     }
 
@@ -74,6 +76,31 @@ class TopologyHelper {
     getSentries(validatorId) {
         return this.sentries.filter((sentryNodeModel) => {
             return sentryNodeModel.validatorId === validatorId;
+        });
+    }
+
+    validate() {
+        this.nodesMap.forEach((nodeModel) => {
+            const computerModel = this.getComputerModel(nodeModel.computerId);
+            if (computerModel === undefined) {
+                throw new Error(`Node with id (${nodeModel.nodeId}) does not have a computer instance`);
+            }
+        });
+
+        const validateValidator = (validatorId) => {
+            const seedNodeModels = this.getSeeds(validatorId);
+            if (seedNodeModels.length === 0) {
+                throw new Error(`Validator with id (${validatorId}) does not have seeds`);
+            }
+            const sentriesNodeModels = this.getSentries(validatorId);
+            if (sentriesNodeModels.length === 0) {
+                throw new Error(`Validator with id (${validatorId}) does not have sentries`);
+            }
+        }
+
+        validateValidator(this.rootValidator.validatorId);
+        this.validators.forEach((validatorNodeModel) => {
+            validateValidator(validatorNodeModel.validatorId);
         });
     }
 

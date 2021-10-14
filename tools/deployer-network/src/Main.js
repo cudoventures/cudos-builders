@@ -8,16 +8,16 @@ const NodesService = require('./services/NodesService');
 async function main() {
     const args = getArgParser();
 
-    const lifeCycleHelper = new LifeCycleHelper();
-    const topologyHelper = await TopologyHelper.instanceByPath(args.topology);
-    const instancesService = new InstancesService(topologyHelper);
-    const nodesService = new NodesService(topologyHelper, instancesService);
-
-    lifeCycleHelper.init();
-    lifeCycleHelper.addExitHandler(instancesService.onExit, 0);
-    lifeCycleHelper.addExitHandler(nodesService.onExit, 1);
-
     try {
+        const lifeCycleHelper = new LifeCycleHelper();
+        const topologyHelper = await TopologyHelper.instanceByPath(args.topology);
+        const instancesService = new InstancesService(topologyHelper);
+        const nodesService = new NodesService(topologyHelper, instancesService);
+
+        lifeCycleHelper.init();
+        lifeCycleHelper.addExitHandler(instancesService.onExit, 0);
+        lifeCycleHelper.addExitHandler(nodesService.onExit, 1);
+
         await instancesService.createMissingInstances();
         await instancesService.connectToInstances();
         await instancesService.validateSoftwareRequirements();

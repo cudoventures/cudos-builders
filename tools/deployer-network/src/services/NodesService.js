@@ -1,3 +1,4 @@
+const ValidatorNodeModel = require('../models/ValidatorNodeModel');
 const Log = require('../utilities/LogHelper');
 const NodesHelper = require('../utilities/NodesHelper');
 const PathHelper = require('../utilities/PathHelper');
@@ -46,17 +47,17 @@ class NodesService {
             ...NodesHelper.getUserEnv(),
             `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/root-node`,
             'cp ./root-node.env.example ./root-node.local.env',
-            'sed -i "s/MONIKER=/MONIKER=\"deployer-network-root-validagtor\"/g" ./root-node.local.env',
+            'sed -i "s/MONIKER=/MONIKER=\"deployer-network-root-validator\"/g" ./root-node.local.env',
             `sed -i "s/CHAIN_ID=/CHAIN_ID=\"${CHAIN_ID}"/g" ./root-node.local.env`,
             `sed -i "s/ORCH_ETH_ADDRESS=/ORCH_ETH_ADDRESS=\"${validatorNodeModel.orchEthAddress}\"/g" ./root-node.local.env`,
             `sed -i "s/PORT26656=60101/PORT26656=\"${port26656}\"/g" ./root-node.local.arg`,
             ...NodesHelper.getUserOverrideYml('root-node'),
             'docker-compose --env-file ./root-node.local.arg -f ./init-root-node.yml -f ./users-root-node.override.yml -p cudos-init-root-node up --build',
             'docker-compose --env-file ./root-node.local.arg -f ./init-root-node.yml -f ./users-root-node.override.yml -p cudos-init-root-node down',
-            'docker-compose --env-file ./root-node.local.arg -f ./start-root-node.yml -f ./users-root-node.override.yml -p cudos-start-root-node up --build -d'
+            `docker-compose --env-file ./root-node.local.arg -f ./start-root-node.yml -f ./users-root-node.override.yml -p ${ValidatorNodeModel.getRootValidatorDockerContainerStartName()} up --build -d`
         ]);
 
-        const dockerContainerStartName = 'cudos-start-root-node';
+        const dockerContainerStartName = ValidatorNodeModel.getRootValidatorDockerContainerStartName();
         this.nodeIdToNodeInstanceContainerNamesMap.set(validatorNodeModel.nodeId, dockerContainerStartName);
 
         await validatorSshHelper.awaitForNode(dockerContainerStartName);
@@ -83,8 +84,8 @@ class NodesService {
             const seedComputerModel = this.topologyHelper.getComputerModel(seedNodeModel.computerId);
             const seedSshHelper = this.instancesService.getSshHelper(seedNodeModel.computerId);
 
-            const dockerContainerInitName = `cudos-init-seed-node-${validatorNodeModel.validatorId}-${i + 1}`;
-            const dockerContainerStartName = `cudos-start-seed-node-${validatorNodeModel.validatorId}-${i + 1}`;
+            const dockerContainerInitName = seedNodeModel.getDockerContainerInitName(validatorNodeModel, i); //`cudos-init-seed-node-${validatorNodeModel.validatorId}-${i + 1}`;
+            const dockerContainerStartName = seedNodeModel.getDockerContainerStartName(validatorNodeModel, i); //`cudos-start-seed-node-${validatorNodeModel.validatorId}-${i + 1}`;
             const volumeName = `cudos-data-seed-node-${validatorNodeModel.validatorId}-${i + 1}`;
             const port26656 = seedComputerModel.isLocalDocker === true ? ++this.genPorts : 26656;
             const port26657 = seedComputerModel.isLocalDocker === true ? ++this.genPorts : 26657;
@@ -139,8 +140,8 @@ class NodesService {
             const sentryComputerModel = this.topologyHelper.getComputerModel(sentryNodeModel.computerId);
             const sentrySshHelper = this.instancesService.getSshHelper(sentryNodeModel.computerId);
 
-            const dockerContainerInitName = `cudos-init-sentry-node-${validatorNodeModel.validatorId}-${i + 1}`;
-            const dockerContainerStartName = `cudos-start-sentry-node-${validatorNodeModel.validatorId}-${i + 1}`;
+            const dockerContainerInitName = sentryNodeModel.getDockerContainerInitName(validatorNodeModel, i); // `cudos-init-sentry-node-${validatorNodeModel.validatorId}-${i + 1}`;
+            const dockerContainerStartName = sentryNodeModel.getDockerContainerStartName(validatorNodeModel, i); //`cudos-start-sentry-node-${validatorNodeModel.validatorId}-${i + 1}`;
             const volumeName = `cudos-data-sentry-node-${validatorNodeModel.validatorId}-${i + 1}`;
             const port26656 = sentryComputerModel.isLocalDocker === true ? ++this.genPorts : 26656;
             const port26657 = sentryComputerModel.isLocalDocker === true ? ++this.genPorts : 26657;
@@ -193,9 +194,9 @@ class NodesService {
             const validatorComputerModel = this.topologyHelper.getComputerModel(validatorNodeModel.computerId);
             const validatorSshHelper = this.instancesService.getSshHelper(validatorNodeModel.computerId);
 
-            const dockerContainerInitName = `cudos-init-full-node-${validatorNodeModel.validatorId}-${i + 1}`;
-            const dockerContainerConfigName = `cudos-config-full-node-${validatorNodeModel.validatorId}-${i + 1}`;
-            const dockerContainerStartName = `cudos-start-full-node-${validatorNodeModel.validatorId}-${i + 1}`;
+            const dockerContainerInitName = validatorNodeModel.getDockerContainerInitName(i); // `cudos-init-full-node-${validatorNodeModel.validatorId}-${i + 1}`;
+            const dockerContainerConfigName = validatorNodeModel.getDockerContainerConfigName(i); // `cudos-config-full-node-${validatorNodeModel.validatorId}-${i + 1}`;
+            const dockerContainerStartName = validatorNodeModel.getDockerContainerStartName(i); // `cudos-start-full-node-${validatorNodeModel.validatorId}-${i + 1}`;
             const volumeName = `cudos-data-full-node-${validatorNodeModel.validatorId}-${i + 1}`;
             const port26656 = validatorComputerModel.isLocalDocker === true ? ++this.genPorts : 26656;
 
@@ -246,8 +247,8 @@ class NodesService {
                 const seedComputerModel = this.topologyHelper.getComputerModel(seedNodeModel.computerId);
                 const seedSshHelper = this.instancesService.getSshHelper(seedNodeModel.computerId);
 
-                const dockerContainerInitName = `cudos-init-seed-node-${validatorNodeModel.validatorId}-${i + 1}`;
-                const dockerContainerStartName = `cudos-start-seed-node-${validatorNodeModel.validatorId}-${i + 1}`;
+                const dockerContainerInitName = seedNodeModel.getDockerContainerInitName(validatorNodeModel, i); // `cudos-init-seed-node-${validatorNodeModel.validatorId}-${i + 1}`;
+                const dockerContainerStartName = seedNodeModel.getDockerContainerStartName(validatorNodeModel, i); // `cudos-start-seed-node-${validatorNodeModel.validatorId}-${i + 1}`;
                 const volumeName = `cudos-data-seed-node-${validatorNodeModel.validatorId}-${i + 1}`;
                 const port26656 = seedComputerModel.isLocalDocker === true ? ++this.genPorts : 26656;
                 const port26657 = seedComputerModel.isLocalDocker === true ? ++this.genPorts : 26657;
@@ -303,8 +304,8 @@ class NodesService {
                 const sentryComputerModel = this.topologyHelper.getComputerModel(sentryNodeModel.computerId);
                 const sentrySshHelper = this.instancesService.getSshHelper(sentryNodeModel.computerId);
     
-                const dockerContainerInitName = `cudos-init-sentry-node-${validatorNodeModel.validatorId}-${i + 1}`;
-                const dockerContainerStartName = `cudos-start-sentry-node-${validatorNodeModel.validatorId}-${i + 1}`;
+                const dockerContainerInitName = sentryNodeModel.getDockerContainerInitName(validatorNodeModel, i); // `cudos-init-sentry-node-${validatorNodeModel.validatorId}-${i + 1}`;
+                const dockerContainerStartName = sentryNodeModel.getDockerContainerStartName(validatorNodeModel, i); //`cudos-start-sentry-node-${validatorNodeModel.validatorId}-${i + 1}`;
                 const volumeName = `cudos-data-sentry-node-${validatorNodeModel.validatorId}-${i + 1}`;
                 const port26656 = sentryComputerModel.isLocalDocker === true ? ++this.genPorts : 26656;
                 const port26657 = sentryComputerModel.isLocalDocker === true ? ++this.genPorts : 26657;
@@ -356,8 +357,8 @@ class NodesService {
             const validatorNodeModel = validatorNodeModels[i];
             const validatorSshHelper = this.instancesService.getSshHelper(validatorNodeModel.computerId);
 
-            const dockerContainerConfigName = `cudos-config-full-node-${validatorNodeModel.validatorId}-${i + 1}`;
-            const dockerContainerStartName = `cudos-start-full-node-${validatorNodeModel.validatorId}-${i + 1}`;
+            const dockerContainerConfigName = validatorNodeModel.getDockerContainerConfigName(i); // `cudos-config-full-node-${validatorNodeModel.validatorId}-${i + 1}`;
+            const dockerContainerStartName = validatorNodeModel.getDockerContainerStartName(i); // `cudos-start-full-node-${validatorNodeModel.validatorId}-${i + 1}`;
 
             const seeds = this.getSeedsByValidatorId(validatorNodeModel.validatorId);
             const sentries = this.getSentriesByValidatorId(validatorNodeModel.validatorId);
@@ -379,37 +380,21 @@ class NodesService {
             await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded keys add validator --keyring-backend test"`, false);
             const validatorWalletAddress = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded keys show validator -a --keyring-backend test"`, false);
             await this.fundFromFaucet(validatorWalletAddress, '1000001000000000000000000acudos');
-            const tendermintValidatorAddress = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded tendermint show-validator"`)
-            console.log(`docker container exec ${dockerContainerStartName} /bin/bash -c 'cudos-noded tx staking create-validator --amount=1000000000000000000000000acudos \\
-            --from=validator \\
-            --pubkey=\\'${tendermintValidatorAddress}\\' \\
-            --moniker=$MONIKER \\
-            --chain-id=${CHAIN_ID} \\
-            --commission-rate="0.10" \\
-            --commission-max-rate="0.20" \\
-            --commission-max-change-rate="0.01" \\
-            --min-self-delegation="1" \\
-            --gas="auto" \\
-            --gas-prices="0.025acudos" \\
-            --gas-adjustment="1.80" \\
-            --keyring-backend="test" \\
-            -y'`);
-            await validatorSshHelper.exec([
-                `docker container exec ${dockerContainerStartName} /bin/bash -c 'cudos-noded tx staking create-validator --amount=1000000000000000000000000acudos \\
-                    --from=validator \\
-                    --pubkey=\\'${tendermintValidatorAddress}\\' \\
-                    --moniker=$MONIKER \\
-                    --chain-id=${CHAIN_ID} \\
-                    --commission-rate="0.10" \\
-                    --commission-max-rate="0.20" \\
-                    --commission-max-change-rate="0.01" \\
-                    --min-self-delegation="1" \\
-                    --gas="auto" \\
-                    --gas-prices="0.025acudos" \\
-                    --gas-adjustment="1.80" \\
-                    --keyring-backend="test" \\
-                    -y'`
-            ]);
+            const tendermintValidatorAddress = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded tendermint show-validator"`, false);
+            await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c 'cudos-noded tx staking create-validator --amount=1000000000000000000000000acudos \\
+                                                --from=validator \\
+                                                --pubkey="${tendermintValidatorAddress.replace(/"/g, '\\"')}" \\
+                                                --moniker=$MONIKER \\
+                                                --chain-id=${CHAIN_ID} \\
+                                                --commission-rate="0.10" \\
+                                                --commission-max-rate="0.20" \\
+                                                --commission-max-change-rate="0.01" \\
+                                                --min-self-delegation="1" \\
+                                                --gas="auto" \\
+                                                --gas-prices="0.025acudos" \\
+                                                --gas-adjustment="1.80" \\
+                                                --keyring-backend="test" \\
+                                                -y'`, false);
         }
     }
 
@@ -435,7 +420,7 @@ class NodesService {
 
     async fundFromFaucet(recipientWalletAddress, amount) {
         const rootValidatorSshHelper = this.instancesService.getSshHelper(this.topologyHelper.rootValidator.computerId);
-        await rootValidatorSshHelper.exec(`docker container exec cudos-start-root-node /bin/bash -c "echo 123123123 | cudos-noded tx bank send ${this.faucetAddress} ${recipientWalletAddress} ${amount} --from faucet --keyring-backend os --chain-id ${CHAIN_ID} -y"`, false)
+        await rootValidatorSshHelper.exec(`docker container exec ${ValidatorNodeModel.getRootValidatorDockerContainerStartName()} /bin/bash -c "echo 123123123 | cudos-noded tx bank send ${this.faucetAddress} ${recipientWalletAddress} ${amount} --from faucet --keyring-backend os --chain-id ${CHAIN_ID} -y"`, false)
     }
 
     onExit = async () => {

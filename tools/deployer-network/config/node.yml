@@ -1,5 +1,9 @@
 version: '3.9'
 
+networks:
+  shared-cudos-deployer-network:
+    name: shared-cudos-deployer-network
+
 volumes:
   cudosnodedata:
     driver: local
@@ -23,6 +27,8 @@ services:
       - "$SSH_PORT:22"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - shared-cudos-deployer-network
     logging:
       driver: "json-file"
       options:

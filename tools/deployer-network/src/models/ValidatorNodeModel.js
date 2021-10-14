@@ -8,6 +8,22 @@ class ValidatorNodeModel extends AbsNodeModel {
         this.orchEthAddress = "";
     }
 
+    getDockerContainerInitName(i) {
+        return `cudos-init-full-node-${this.validatorId}-${i + 1}`;
+    }
+
+    getDockerContainerConfigName(i) {
+        return `cudos-config-full-node-${this.validatorId}-${i + 1}`;
+    }
+
+    getDockerContainerStartName(i) {
+        return `cudos-start-full-node-${this.validatorId}-${i + 1}`;
+    }
+
+    static getRootValidatorDockerContainerStartName() {
+        return 'cudos-start-root-node';
+    }
+
     static fromJson(json) {
         if (json === null) {
             return null;

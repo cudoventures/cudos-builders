@@ -7,6 +7,14 @@ class SentryNodeModel extends AbsNodeModel {
         this.validatorId = "";
     }
 
+    getDockerContainerInitName(validatorNodeModel, i) {
+        return `cudos-init-sentry-node-${validatorNodeModel.validatorId}-${i + 1}`;
+    }
+
+    getDockerContainerStartName(validatorNodeModel, i) {
+        return `cudos-start-sentry-node-${validatorNodeModel.validatorId}-${i + 1}`;
+    }
+
     static fromJson(json) {
         if (json === null) {
             return null;
