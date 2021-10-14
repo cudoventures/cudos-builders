@@ -1,4 +1,5 @@
 const ValidatorNodeModel = require('../models/ValidatorNodeModel');
+const WalletModel = require('../models/WalletModel');
 const Log = require('../utilities/LogHelper');
 const NodesHelper = require('../utilities/NodesHelper');
 const PathHelper = require('../utilities/PathHelper');
@@ -14,6 +15,7 @@ class NodesService {
         this.genPorts = 60000;
 
         this.nodeIdToNodeInstanceContainerNamesMap = new Map();
+        this.validatorIdToOrchWalletModel = new Map();
 
         this.genesisJson = '';
         this.faucetAddress = '';
@@ -28,6 +30,7 @@ class NodesService {
         await this.initAndStartValidatorsSeedNode();
         await this.initAndStartValidatorsSentryNode();
         await this.configAndStartValidators();
+        await this.startOrchestrators();
     }
 
     async initAndStartRootValidator() {
@@ -67,6 +70,10 @@ class NodesService {
 
         this.faucetAddress = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "echo 123123123 | cudos-noded keys show faucet -a --keyring-backend os"`, false);
         this.genesisJson = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cat /usr/cudos/cudos-data/config/genesis.json"`, false);
+
+        const rootOrchWalletString = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cat /usr/cudos/cudos-data/orch-01.wallet"`, false);
+        console.log(rootOrchWalletString);
+        this.validatorIdToOrchWalletModel.set(validatorNodeModel.validatorId, WalletModel.instanceByString(rootOrchWalletString));
     }
 
     async initAndStartRootValidatorSeedNodes() {
@@ -377,25 +384,51 @@ class NodesService {
             const tendermintNodeId = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded tendermint show-node-id"`, false);
             this.nodeIdTotendermintNodeId.set(validatorNodeModel.nodeId, tendermintNodeId);
 
+            // create validator
             await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded keys add validator --keyring-backend test"`, false);
             const validatorWalletAddress = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded keys show validator -a --keyring-backend test"`, false);
             await this.fundFromFaucet(validatorWalletAddress, '1000001000000000000000000acudos');
-            const tendermintValidatorAddress = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded tendermint show-validator"`, false);
-            await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c 'cudos-noded tx staking create-validator --amount=1000000000000000000000000acudos \\
-                                                --from=validator \\
-                                                --pubkey="${tendermintValidatorAddress.replace(/"/g, '\\"')}" \\
-                                                --moniker=$MONIKER \\
-                                                --chain-id=${CHAIN_ID} \\
-                                                --commission-rate="0.10" \\
-                                                --commission-max-rate="0.20" \\
-                                                --commission-max-change-rate="0.01" \\
-                                                --min-self-delegation="1" \\
-                                                --gas="auto" \\
-                                                --gas-prices="0.025acudos" \\
-                                                --gas-adjustment="1.80" \\
-                                                --keyring-backend="test" \\
-                                                -y'`, false);
+            const tendermintValidatorPubKey = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded tendermint show-validator"`, false);
+            await validatorSshHelper.exec([
+                `docker container exec ${dockerContainerStartName} /bin/bash -c 'cudos-noded tx staking create-validator --amount=1000000000000000000000000acudos \\
+                    --from=validator \\
+                    --pubkey="${tendermintValidatorPubKey.replace(/"/g, '\\"')}" \\
+                    --moniker=$MONIKER \\
+                    --chain-id=${CHAIN_ID} \\
+                    --commission-rate="0.10" \\
+                    --commission-max-rate="0.20" \\
+                    --commission-max-change-rate="0.01" \\
+                    --min-self-delegation="1" \\
+                    --gas="auto" \\
+                    --gas-prices="0.025acudos" \\
+                    --gas-adjustment="1.80" \\
+                    --keyring-backend="test" \\
+                    -y'`
+            ]);
+
+            // setTimeout(async () => {
+
+            
+
+            // // create orchestrator
+            // const validatorOperatorData = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded keys show validator --bech val --keyring-backend test"`, false);
+            // const validatorOperatorDataLines = validatorOperatorData.split('\n');
+            // const validatorOperatorDataLineAddress = validatorOperatorDataLines.find((validatorOperatorDataLine) => validatorOperatorDataLine.indexOf('address:') !== -1);
+            // const validatorOperatorAddress = validatorOperatorDataLineAddress.substring(validatorOperatorDataLineAddress.indexOf(': ') + 2);
+
+            // const validatorOrchWalletString = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded keys add orchestrator --keyring-backend test"`, false);
+            // const validatorOrchWallet = WalletModel.instanceByString(validatorOrchWalletString);
+            // this.validatorIdToOrchWalletModel.set(validatorNodeModel.validatorId, validatorOrchWallet);
+
+            // await this.fundFromFaucet(validatorOrchWallet.address, "1000000000000000000000acudos");
+
+            // await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded tx gravity set-orchestrator-address ${validatorOperatorAddress} ${validatorOrchWallet.address} ${validatorNodeModel.orchEthAddress} --from validator --keyring-backend test --chain-id ${CHAIN_ID} -y"`);
+            // }, 10000);
         }
+    }
+
+    async startOrchestrators() {
+        console.log(this.validatorIdToOrchWalletModel);
     }
 
     getSeedsByValidatorId(validatorId) {
