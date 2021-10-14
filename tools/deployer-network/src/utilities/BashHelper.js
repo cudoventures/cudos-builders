@@ -7,11 +7,13 @@ class BashHelper {
         this.stdLog = stdLog;
     }
 
-    execute(cmd) {
+    execute(cmd, stdLog) {
         return new Promise((resolve, reject) => {
             if (Array.isArray(cmd)) {
                 cmd = cmd.join(' && ');
             }
+
+            stdLog = stdLog ?? this.stdLog;
 
             const childProcess = ChildProcess.exec(cmd, (err, stdout, stderr) => {
                 if (err) {
@@ -19,17 +21,17 @@ class BashHelper {
                     return;
                 }
 
-                resolve(stdout);
+                resolve(stdout.trim());
             });
 
             childProcess.stdout.on('data', (data) => {
-                if (this.stdLog === true) {
+                if (stdLog === true) {
                     Log.bash(data);
                 }
             });
 
             childProcess.stderr.on('data', (data) => {
-                if (this.stdLog === true) {
+                if (stdLog === true) {
                     Log.bash(data);
                 }
             });

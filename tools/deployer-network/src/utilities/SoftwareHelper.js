@@ -1,4 +1,5 @@
 const Log = require('./LogHelper');
+const PathHelper = require('./PathHelper');
 
 class SoftwareHelper {
 
@@ -16,7 +17,7 @@ class SoftwareHelper {
     async validateDocker() {
         const response = await this.sshHelper.exec('docker -v', false);
         if (response.indexOf('Docker version') === 0) {
-            Log.main(`${this.sshHelper.computer.ip} has docker`);
+            Log.main(`${this.sshHelper.computer.ip}:${this.sshHelper.computer.port} has docker`);
             return;
         }
 
@@ -35,7 +36,7 @@ class SoftwareHelper {
     async validateDockerCompose() {
         const response = await this.sshHelper.exec('docker-compose -v', false);
         if (response.indexOf('docker-compose') === 0) {
-            Log.main(`${this.sshHelper.computer.ip} has docker-compose`);
+            Log.main(`${this.sshHelper.computer.ip}:${this.sshHelper.computer.port} has docker-compose`);
             return;
         }
 
@@ -47,14 +48,11 @@ class SoftwareHelper {
     }
 
     async prepareDataDir() {
-        Log.main(`${this.sshHelper.computer.ip} check folder structure`);
+        Log.main(`${this.sshHelper.computer.ip}:${this.sshHelper.computer.port} check folder structure`);
         const user = this.sshHelper.computer.user;
         await this.sshHelper.exec([
-            'sudo mkdir -p /mnt/cudos-node-data',
-            `sudo chown ${user}:${user} /mnt/cudos-node-data`,
-            'sudo mkdir -p /usr/cudos',
-            `sudo chown ${user}:${user} /usr/cudos`,
-            'ln -s -f /mnt/cudos-node-data /usr/cudos/CudosData'
+            `sudo mkdir -p ${PathHelper.WORKING_DIR}/CudosData`,
+            `sudo chown -R ${user}:${user} ${PathHelper.WORKING_DIR}`,
         ]);
     }
 

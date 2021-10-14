@@ -1,6 +1,7 @@
 const path = require('path');
 const BashHelper = require('../utilities/BashHelper');
 const Log = require('../utilities/LogHelper');
+const PathHelper = require('../utilities/PathHelper');
 const SoftwareHelper = require('../utilities/SoftwareHelper');
 const SshHelper = require('../utilities/SshHelper');
 
@@ -28,16 +29,22 @@ class InstancesService {
             const sshPort = 65000 + i;
 
             Log.main(`Create ${containerName} for ${computer.id}`);
+            const userName = await bashHelper.execute('id -u -n', false);
             await bashHelper.execute([
                 `export CONTAINER_NAME="${containerName}"`,
                 `export SSH_PORT="${sshPort}"`,
+                `export USER_NAME=$(id -u -n)`,
+                `export USER_ID=$(id -u)`,
+                `export GROUP_NAME=$(id -g -n)`,
+                `export GROUP_ID=$(id -g)`,
                 `export DOCKER_GROUP_ID=$(getent group docker | awk -F: '{printf "%d", $3}')`,
+                `export WORKDIR="${PathHelper.WORKING_DIR}"`,
                 `cd ${path.join(__dirname, '..', '..', 'config')}`,
                 `docker-compose -f ./node.yml -p ${projectName} up --build -d`
             ]);
 
             this.createdInstancesMap.set(computer.id, containerName);
-            computer.user = 'cudos';
+            computer.user = userName;
             computer.pass = 'cudos';
             computer.ip = 'host.docker.internal'
             computer.port = sshPort;
@@ -81,7 +88,8 @@ class InstancesService {
 
             Log.main(`Stop ${containerName} for ${computer.id}`);
             await bashHelper.execute([
-                `docker stop ${containerName}`
+                `docker stop ${containerName}`,
+                `docker container rm ${containerName}`,
             ]); 
         }
     }

@@ -1,5 +1,6 @@
 const { NodeSSH } = require('node-ssh');
 const Log = require('./LogHelper');
+const PathHelper = require('./PathHelper');
 
 class SshHelper {
 
@@ -66,7 +67,7 @@ class SshHelper {
 
     async cloneRepos() {
         await this.exec([
-            'cd /usr/cudos',
+            `cd ${PathHelper.WORKING_DIR}`,
             'rm -rf ./CudosNode',
             'rm -rf ./CudosBuilders',
             'rm -rf ./CudosGravityBridge',
@@ -83,7 +84,7 @@ class SshHelper {
         }
 
         await this.exec([
-            'cd /usr/cudos/CudosBuilders/docker/binary-builder',
+            `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/binary-builder`,
             'docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder build',
         ]);
     }

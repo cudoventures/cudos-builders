@@ -12,7 +12,12 @@ services:
       dockerfile: ./node.dockerfile
       context: .
       args:
+        USER_NAME: "$USER_NAME"
+        USER_ID: "$USER_ID"
+        GROUP_NAME: "$GROUP_NAME"
+        GROUP_ID: "$GROUP_ID"
         DOCKER_GROUP_ID: "$DOCKER_GROUP_ID"
+        WORKDIR: "$WORKDIR"
     restart: unless-stopped
     ports:
       - "$SSH_PORT:22"
