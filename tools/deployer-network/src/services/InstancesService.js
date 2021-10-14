@@ -79,6 +79,7 @@ class InstancesService {
 
         const bashHelper = new BashHelper(false);
 
+        const tasks = [];
         for (let i = 0;  i < this.topologyHelper.computers.length;  ++i) {
             const computer = this.topologyHelper.computers[i];
             const containerName = this.createdInstancesMap.get(computer.id);
@@ -86,12 +87,15 @@ class InstancesService {
                 continue;
             }
 
+            
             Log.main(`Stop ${containerName} for ${computer.id}`);
-            await bashHelper.execute([
+            tasks.push(bashHelper.execute([
                 `docker stop ${containerName}`,
                 `docker container rm ${containerName}`,
-            ]); 
+            ]));
         }
+
+        await Promise.all(tasks);
     }
 
     async disconnectFromInstances() {
