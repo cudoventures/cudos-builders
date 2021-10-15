@@ -4,9 +4,9 @@ ARG USER_NAME
 ARG USER_ID
 ARG GROUP_NAME
 ARG GROUP_ID
-ARG PASS="cudos"
 ARG DOCKER_GROUP_ID
 ARG WORKDIR
+ARG PASS="cudos"
 
 RUN apt-get update && \
     apt-get install apt-transport-https ca-certificates curl gnupg lsb-release sudo openssh-server -y && \

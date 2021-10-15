@@ -6,6 +6,10 @@ const PathHelper = require('../utilities/PathHelper');
 
 const CHAIN_ID = 'cudos-local-network';
 
+const GRAVITY_BRIDGE_UI_CONTAINER_NAME = 'cudos-gravity-bridge-ui';
+const EXPLORER_CONTAINER_NAME = 'cudos-explorer';
+const FAUCET_CONTAINER_NAME = 'cudos-faucet';
+
 class NodesService {
 
     constructor(topologyHelper, instancesService) {
@@ -18,23 +22,27 @@ class NodesService {
         this.nodeIdToOrchestratorInstanceContainerNamesMap = new Map();
         this.validatorIdToOrchWalletModelMap = new Map();
 
+        this.nodeIdTotendermintNodeId = new Map();
         this.genesisJson = '';
         this.faucetAddress = '';
         this.gravityContractAddress = '';
-        this.nodeIdTotendermintNodeId = new Map();
+        this.sentryNodePort26656 = 0;
+        this.sentryNodePort26657 = 0;
+        this.sentryNodePort1317 = 0;
+        this.sentryNodePort9090 = 0;
     }
 
     async start(gravity) {
-        // await this.initAndStartRootValidator();
-        // await this.initAndStartRootValidatorSeedNodes();
-        // await this.initAndStartRootValidatorSentryNodes();
-        // await this.initValidators();
-        // await this.initAndStartValidatorsSeedNode();
-        // await this.initAndStartValidatorsSentryNode();
-        // await this.configAndStartValidators();
+        await this.initAndStartRootValidator();
+        await this.initAndStartRootValidatorSeedNodes();
+        await this.initAndStartRootValidatorSentryNodes();
+        await this.initValidators();
+        await this.initAndStartValidatorsSeedNode();
+        await this.initAndStartValidatorsSentryNode();
+        await this.configAndStartValidators();
         if (gravity === '1') {
-            // await this.deployGravitySmartContract();
-            // await this.startOrchestrators();
+            await this.deployGravitySmartContract();
+            await this.startOrchestrators();
             await this.startGravityBridgeUi();
         }
     }
@@ -159,6 +167,19 @@ class NodesService {
             const port26657 = sentryComputerModel.isLocalDocker === true ? ++this.genPorts : 26657;
             const port1317 = sentryComputerModel.isLocalDocker === true ? ++this.genPorts : 1317;
             const port9090 = sentryComputerModel.isLocalDocker === true ? ++this.genPorts : 9090;
+
+            if (this.sentryNodePort26656 === 0 && port26656 !== 26656) {
+                this.sentryNodePort26656 = port26656;
+            }
+            if (this.sentryNodePort26657 === 0 && port26657 !== 26657) {
+                this.sentryNodePort26657 = port26657;
+            }
+            if (this.sentryNodePort1317 === 0 && port1317 !== 1317) {
+                this.sentryNodePort1317 = port1317;
+            }
+            if (this.sentryNodePort9090 === 0 && port9090 !== 9090) {
+                this.sentryNodePort9090 = port9090;
+            }
 
             if (sentryComputerModel.isLocalDocker === false) {
                 await validatorSshHelper.cloneNodeRepos();
@@ -486,7 +507,7 @@ class NodesService {
                 `docker-compose --env-file ./orchestrator.local01.arg -f ./orchestrator.release.yml -p ${dockerContainerOrchestratorName} up --build -d`
             ]);
 
-            this.nodeIdToOrchestratorInstanceContainerNamesMap.set(validatorNodeModel.nodeId, dockerContainerOrchestratorName);
+            this.nodeIdToOrchestratorInstanceContainerNamesMap.set(validatorNodeModel.nodeId, `${dockerContainerOrchestratorName}-release`);
         }
     }
 
@@ -494,24 +515,30 @@ class NodesService {
         Log.main('Start gravity bridge ui');
 
         const gravityBridgeUiModel = this.topologyHelper.gravityBridgeUiModel;
-        // const gravityBridgeUiComputerModel = this.topologyHelper.getComputerModel(gravityBridgeUiModel.computerId);
+        const gravityBridgeUiComputerModel = this.topologyHelper.getComputerModel(gravityBridgeUiModel.computerId);
         const gravityBridgeUiSshHelper = this.instancesService.getSshHelper(gravityBridgeUiModel.computerId);
+
+        const host = gravityBridgeUiComputerModel.isLocalDocker === true ? 'localhost' : gravityBridgeUiComputerModel.ip;
+        const port26657 = gravityBridgeUiComputerModel.isLocalDocker === true ? this.sentryNodePort26657 : 26657;
+        const port1317 = gravityBridgeUiComputerModel.isLocalDocker === true ? this.sentryNodePort1317 : 1317;
 
         await gravityBridgeUiSshHelper.cloneGravityBridgeUiRepo();
         await gravityBridgeUiSshHelper.exec([
             `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/gravity-bridge-ui`,
             'cp ./gravity-bridge-ui.env.example ./gravity-bridge-ui.env',
-            `sed -i "s~URL=~URL=http://localhost~g" ./gravity-bridge-ui.env`,
+            `sed -i "s~URL=~URL=http://${host}~g" ./gravity-bridge-ui.env`,
+            `sed -i "s~ETHEREUM_RPC=~ETHEREUM_RPC=${this.topologyHelper.params.gravity.ethrpc}~g" ./gravity-bridge-ui.env`,
             `sed -i "s/CHAIN_NAME=/CHAIN_NAME=CudosTestnet-Deployer/g" ./gravity-bridge-ui.env`,
             `sed -i "s/CHAIN_ID=/CHAIN_ID=${CHAIN_ID}/g" ./gravity-bridge-ui.env`,
-            `sed -i "s/RPC=/_/g" ./gravity-bridge-ui.env`,
-            `sed -i "s/API=/_/g" ./gravity-bridge-ui.env`,
-            `sed -i "s/ERC20_CONTRACT_ADDRESS=/_/g" ./gravity-bridge-ui.env`,
+            `sed -i "19s~RPC=~RPC=http://${host}:${port26657}~g" ./gravity-bridge-ui.env`,
+            `sed -i "s~API=~API=http://${host}:${port1317}~g" ./gravity-bridge-ui.env`,
+            `sed -i "s~STAKING=~STAKING=http://${host}:3000/validators~g" ./gravity-bridge-ui.env`,
+            `sed -i "s/ERC20_CONTRACT_ADDRESS=/ERC20_CONTRACT_ADDRESS=${gravityBridgeUiModel.ethTokenContract}/g" ./gravity-bridge-ui.env`,
             `sed -i "s/BRIDGE_CONTRACT_ADDRESS=/BRIDGE_CONTRACT_ADDRESS=${this.gravityContractAddress}/g" ./gravity-bridge-ui.env`,
-            `sed -i "s~ETHEREUM_RPC=~ETHEREUM_RPC=${this.topologyHelper.params.gravity.ethrpc}~g" ./gravity-bridge-ui.env`,
             'cp ./gravity-bridge-ui.dev.arg ./gravity-bridge-ui.arg',
             'sed -i "s/ENV_FILE=gravity-bridge-ui.dev.env/ENV_FILE=gravity-bridge-ui.env/g" ./gravity-bridge-ui.arg',
-            // `docker-compose --env-file ./gravity-bridge-ui.arg -f ./gravity-bridge-ui.release.yml -p cudos-gravity-bridge-ui-testnet-private up --build -d`
+            `sed -i "s/container_name: cudos-gravity-bridge-ui-testnet-private/container_name: ${GRAVITY_BRIDGE_UI_CONTAINER_NAME}/g" ./gravity-bridge-ui.arg`,
+            `docker-compose --env-file ./gravity-bridge-ui.arg -f ./gravity-bridge-ui.release.yml -p ${GRAVITY_BRIDGE_UI_CONTAINER_NAME} up --build -d`
         ]);
     }
 
@@ -544,7 +571,8 @@ class NodesService {
 
     onExit = async () => {
         await this.stopNodesInstances();   
-        await this.stopOrchestratorInstances();     
+        await this.stopOrchestratorInstances();
+        await this.stopUtils();
     }
 
     async stopNodesInstances() {
@@ -593,6 +621,21 @@ class NodesService {
                 `docker container rm ${containerName}`
             ], false));
         }
+
+        await Promise.all(tasks);
+    }
+
+    async stopUtils() {
+        Log.main('Stop utils\' instances');
+
+        const tasks = [];
+
+        const gravityBridgeUiModel = this.topologyHelper.gravityBridgeUiModel;
+        const gravityBridgeUiSshHelper = this.instancesService.getSshHelper(gravityBridgeUiModel.computerId);
+        tasks.push(gravityBridgeUiSshHelper.exec([
+            `docker stop ${GRAVITY_BRIDGE_UI_CONTAINER_NAME}`,
+            `docker container rm ${GRAVITY_BRIDGE_UI_CONTAINER_NAME}`
+        ], false));
 
         await Promise.all(tasks);
     }
