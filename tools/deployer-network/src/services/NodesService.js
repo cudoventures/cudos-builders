@@ -15,22 +15,28 @@ class NodesService {
         this.genPorts = 60000;
 
         this.nodeIdToNodeInstanceContainerNamesMap = new Map();
-        this.validatorIdToOrchWalletModel = new Map();
+        this.nodeIdToOrchestratorInstanceContainerNamesMap = new Map();
+        this.validatorIdToOrchWalletModelMap = new Map();
 
         this.genesisJson = '';
         this.faucetAddress = '';
+        this.gravityContractAddress = '';
         this.nodeIdTotendermintNodeId = new Map();
     }
 
-    async start() {
-        await this.initAndStartRootValidator();
-        await this.initAndStartRootValidatorSeedNodes();
-        await this.initAndStartRootValidatorSentryNodes();
-        await this.initValidators();
-        await this.initAndStartValidatorsSeedNode();
-        await this.initAndStartValidatorsSentryNode();
-        await this.configAndStartValidators();
-        await this.startOrchestrators();
+    async start(gravity) {
+        // await this.initAndStartRootValidator();
+        // await this.initAndStartRootValidatorSeedNodes();
+        // await this.initAndStartRootValidatorSentryNodes();
+        // await this.initValidators();
+        // await this.initAndStartValidatorsSeedNode();
+        // await this.initAndStartValidatorsSentryNode();
+        // await this.configAndStartValidators();
+        if (gravity === '1') {
+            // await this.deployGravitySmartContract();
+            // await this.startOrchestrators();
+            await this.startGravityBridgeUi();
+        }
     }
 
     async initAndStartRootValidator() {
@@ -43,7 +49,7 @@ class NodesService {
         const port26656 = validatorComputerModel.isLocalDocker === true ? ++this.genPorts : 26656;
 
         if (validatorComputerModel.isLocalDocker === false) {
-            await validatorSshHelper.cloneRepos();
+            await validatorSshHelper.cloneNodeRepos();
         }
         await validatorSshHelper.prepareBinaryBuilder();
         await validatorSshHelper.exec([
@@ -72,8 +78,7 @@ class NodesService {
         this.genesisJson = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cat /usr/cudos/cudos-data/config/genesis.json"`, false);
 
         const rootOrchWalletString = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cat /usr/cudos/cudos-data/orch-01.wallet"`, false);
-        console.log(rootOrchWalletString);
-        this.validatorIdToOrchWalletModel.set(validatorNodeModel.validatorId, WalletModel.instanceByString(rootOrchWalletString));
+        this.validatorIdToOrchWalletModelMap.set(validatorNodeModel.validatorId, WalletModel.instanceByString(rootOrchWalletString));
     }
 
     async initAndStartRootValidatorSeedNodes() {
@@ -98,7 +103,7 @@ class NodesService {
             const port26657 = seedComputerModel.isLocalDocker === true ? ++this.genPorts : 26657;
 
             if (seedComputerModel.isLocalDocker === false) {
-                await validatorSshHelper.cloneRepos();
+                await validatorSshHelper.cloneNodeRepos();
             }
             await seedSshHelper.prepareBinaryBuilder();
             await seedSshHelper.exec([
@@ -156,7 +161,7 @@ class NodesService {
             const port9090 = sentryComputerModel.isLocalDocker === true ? ++this.genPorts : 9090;
 
             if (sentryComputerModel.isLocalDocker === false) {
-                await validatorSshHelper.cloneRepos();
+                await validatorSshHelper.cloneNodeRepos();
             }
             await sentrySshHelper.prepareBinaryBuilder();
             await sentrySshHelper.exec([
@@ -208,7 +213,7 @@ class NodesService {
             const port26656 = validatorComputerModel.isLocalDocker === true ? ++this.genPorts : 26656;
 
             if (validatorComputerModel.isLocalDocker === false) {
-                await validatorSshHelper.cloneRepos();
+                await validatorSshHelper.cloneNodeRepos();
             }
             await validatorSshHelper.prepareBinaryBuilder();
             await validatorSshHelper.exec([
@@ -261,7 +266,7 @@ class NodesService {
                 const port26657 = seedComputerModel.isLocalDocker === true ? ++this.genPorts : 26657;
 
                 if (seedComputerModel.isLocalDocker === false) {
-                    await validatorSshHelper.cloneRepos();
+                    await validatorSshHelper.cloneNodeRepos();
                 }
                 await seedSshHelper.prepareBinaryBuilder();
                 await seedSshHelper.exec([
@@ -320,7 +325,7 @@ class NodesService {
                 const port9090 = sentryComputerModel.isLocalDocker === true ? ++this.genPorts : 9090;
     
                 if (sentryComputerModel.isLocalDocker === false) {
-                    await validatorSshHelper.cloneRepos();
+                    await validatorSshHelper.cloneNodeRepos();
                 }
                 await sentrySshHelper.prepareBinaryBuilder();
                 await sentrySshHelper.exec([
@@ -389,46 +394,125 @@ class NodesService {
             const validatorWalletAddress = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded keys show validator -a --keyring-backend test"`, false);
             await this.fundFromFaucet(validatorWalletAddress, '1000001000000000000000000acudos');
             const tendermintValidatorPubKey = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded tendermint show-validator"`, false);
-            await validatorSshHelper.exec([
-                `docker container exec ${dockerContainerStartName} /bin/bash -c 'cudos-noded tx staking create-validator --amount=1000000000000000000000000acudos \\
-                    --from=validator \\
-                    --pubkey="${tendermintValidatorPubKey.replace(/"/g, '\\"')}" \\
-                    --moniker=$MONIKER \\
-                    --chain-id=${CHAIN_ID} \\
-                    --commission-rate="0.10" \\
-                    --commission-max-rate="0.20" \\
-                    --commission-max-change-rate="0.01" \\
-                    --min-self-delegation="1" \\
-                    --gas="auto" \\
-                    --gas-prices="0.025acudos" \\
-                    --gas-adjustment="1.80" \\
-                    --keyring-backend="test" \\
-                    -y'`
-            ]);
+            await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c 'cudos-noded tx staking create-validator --amount=1000000000000000000000000acudos \\
+                                                --from=validator \\
+                                                --pubkey="${tendermintValidatorPubKey.replace(/"/g, '\\"')}" \\
+                                                --moniker=$MONIKER \\
+                                                --chain-id=${CHAIN_ID} \\
+                                                --commission-rate="0.10" \\
+                                                --commission-max-rate="0.20" \\
+                                                --commission-max-change-rate="0.01" \\
+                                                --min-self-delegation="1" \\
+                                                --gas="auto" \\
+                                                --gas-prices="0.025acudos" \\
+                                                --gas-adjustment="1.80" \\
+                                                --keyring-backend="test" \\
+                                                -y'`, false);
 
-            // setTimeout(async () => {
+            // create orchestrator
+            const validatorOperatorData = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded keys show validator --bech val --keyring-backend test"`, false);
+            const validatorOperatorDataLines = validatorOperatorData.split('\n');
+            const validatorOperatorDataLineAddress = validatorOperatorDataLines.find((validatorOperatorDataLine) => validatorOperatorDataLine.indexOf('address:') !== -1);
+            const validatorOperatorAddress = validatorOperatorDataLineAddress.substring(validatorOperatorDataLineAddress.indexOf(': ') + 2);
 
-            
+            const validatorOrchWalletString = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded keys add orchestrator --keyring-backend test"`, false);
+            const validatorOrchWallet = WalletModel.instanceByString(validatorOrchWalletString);
+            this.validatorIdToOrchWalletModelMap.set(validatorNodeModel.validatorId, validatorOrchWallet);
 
-            // // create orchestrator
-            // const validatorOperatorData = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded keys show validator --bech val --keyring-backend test"`, false);
-            // const validatorOperatorDataLines = validatorOperatorData.split('\n');
-            // const validatorOperatorDataLineAddress = validatorOperatorDataLines.find((validatorOperatorDataLine) => validatorOperatorDataLine.indexOf('address:') !== -1);
-            // const validatorOperatorAddress = validatorOperatorDataLineAddress.substring(validatorOperatorDataLineAddress.indexOf(': ') + 2);
+            await this.fundFromFaucet(validatorOrchWallet.address, "1000000000000000000000acudos");
 
-            // const validatorOrchWalletString = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded keys add orchestrator --keyring-backend test"`, false);
-            // const validatorOrchWallet = WalletModel.instanceByString(validatorOrchWalletString);
-            // this.validatorIdToOrchWalletModel.set(validatorNodeModel.validatorId, validatorOrchWallet);
-
-            // await this.fundFromFaucet(validatorOrchWallet.address, "1000000000000000000000acudos");
-
-            // await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded tx gravity set-orchestrator-address ${validatorOperatorAddress} ${validatorOrchWallet.address} ${validatorNodeModel.orchEthAddress} --from validator --keyring-backend test --chain-id ${CHAIN_ID} -y"`);
-            // }, 10000);
+            await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded tx gravity set-orchestrator-address ${validatorOperatorAddress} ${validatorOrchWallet.address} ${validatorNodeModel.orchEthAddress} --from validator --keyring-backend test --chain-id ${CHAIN_ID} -y"`, false);
         }
     }
 
+    async deployGravitySmartContract() {
+        Log.main('Deploy gravity smart contract');
+
+        const sentryNodeModel = this.topologyHelper.sentries[0];
+        const sentrySshHelper = this.instancesService.getSshHelper(sentryNodeModel.computerId);
+
+        await sentrySshHelper.exec([
+            `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/gravity-contract-deployer`,
+            'cp ./gravity-contract-deployer.env.example ./gravity-contract-deployer.env',
+            `sed -i "s~COSMOS_NODE=\\"\\"~COSMOS_NODE=\\"http://${sentryNodeModel.getDockerContainerStartName()}:26657\\"~g" ./gravity-contract-deployer.env`,
+            `sed -i "s~ETH_NODE=\\"\\"~ETH_NODE=\\"${this.topologyHelper.params.gravity.ethrpc}\\"~g" ./gravity-contract-deployer.env`,
+            `sed -i "s/ETH_PRIV_KEY_HEX=\\"\\"/ETH_PRIV_KEY_HEX=\\"${this.topologyHelper.params.gravity.contractDeploerEthPrivKey}\\"/g" ./gravity-contract-deployer.env`,
+        ], false);
+
+        const contractDeployerResult = await sentrySshHelper.exec([
+            `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/gravity-contract-deployer`,
+            `docker-compose --env-file ./gravity-contract-deployer.arg -f ./gravity-contract-deployer.yml -p cudos-gravity-contract-deployer up --build`
+        ]);
+        const searchForString = "Gravity deployed at Address";
+        const startIndex = contractDeployerResult.indexOf(searchForString);
+        for (let i = startIndex + searchForString.length;  i < contractDeployerResult.length;  ++i) {
+            if (contractDeployerResult[i] === '0') {
+                this.gravityContractAddress = contractDeployerResult.substr(i, 42);
+                break;
+            }
+        }
+
+        await sentrySshHelper.exec([
+            `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/gravity-contract-deployer`,
+            `docker-compose --env-file ./gravity-contract-deployer.arg -f ./gravity-contract-deployer.yml -p cudos-gravity-contract-deployer down`
+        ]);
+    }
+
     async startOrchestrators() {
-        console.log(this.validatorIdToOrchWalletModel);
+        Log.main('Start orchestrators');
+
+        const validatorNodeModels = this.topologyHelper.validators.concat([
+            this.topologyHelper.rootValidator
+        ]);
+
+        for (let i = 0;  i < validatorNodeModels.length;  ++i) {
+            const validatorNodeModel = validatorNodeModels[i];
+            const validatorSshHelper = this.instancesService.getSshHelper(validatorNodeModel.computerId);
+
+            const grpc = this.nodeIdToNodeInstanceContainerNamesMap.get(validatorNodeModel.nodeId);
+            const cosmosOrchWallet = this.validatorIdToOrchWalletModelMap.get(validatorNodeModel.validatorId);
+            const dockerContainerOrchestratorName = validatorNodeModel.getDockerContainerOrchestratorName();
+
+            await validatorSshHelper.exec([
+                `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/orchestrator`,
+                'cp ./orchestrator.env.example ./orchestrator.local01.env',
+                `sed -i "s/FEES=\\"\\"/FEES=\\"0acudos\\"/g" ./orchestrator.local01.env`,
+                `sed -i "s~GRPC=\\"\\"~GRPC=\\"http://${grpc}:9090\\"~g" ./orchestrator.local01.env`,
+                `sed -i "s~ETHRPC=\\"\\"~ETHRPC=\\"${this.topologyHelper.params.gravity.ethrpc}\\"~g" ./orchestrator.local01.env`,
+                `sed -i "s/CONTRACT_ADDR=\\"\\"/CONTRACT_ADDR=\\"${this.gravityContractAddress}\\"/g" ./orchestrator.local01.env`,
+                `sed -i "s/COSMOS_ORCH_MNEMONIC=\\"\\"/COSMOS_ORCH_MNEMONIC=\\"${cosmosOrchWallet.mnemonic}\\"/g" ./orchestrator.local01.env`,
+                `sed -i "s/ETH_PRIV_KEY_HEX=\\"\\"/ETH_PRIV_KEY_HEX=\\"${validatorNodeModel.ethPrivKey}\\"/g" ./orchestrator.local01.env`,
+                `sed -i "s/CONTAINER_NAME=cudos-orchestrator-local-01/CONTAINER_NAME=${dockerContainerOrchestratorName}/g" ./orchestrator.local01.arg`,
+                `docker-compose --env-file ./orchestrator.local01.arg -f ./orchestrator.release.yml -p ${dockerContainerOrchestratorName} up --build -d`
+            ]);
+
+            this.nodeIdToOrchestratorInstanceContainerNamesMap.set(validatorNodeModel.nodeId, dockerContainerOrchestratorName);
+        }
+    }
+
+    async startGravityBridgeUi() {
+        Log.main('Start gravity bridge ui');
+
+        const gravityBridgeUiModel = this.topologyHelper.gravityBridgeUiModel;
+        // const gravityBridgeUiComputerModel = this.topologyHelper.getComputerModel(gravityBridgeUiModel.computerId);
+        const gravityBridgeUiSshHelper = this.instancesService.getSshHelper(gravityBridgeUiModel.computerId);
+
+        await gravityBridgeUiSshHelper.cloneGravityBridgeUiRepo();
+        await gravityBridgeUiSshHelper.exec([
+            `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/gravity-bridge-ui`,
+            'cp ./gravity-bridge-ui.env.example ./gravity-bridge-ui.env',
+            `sed -i "s~URL=~URL=http://localhost~g" ./gravity-bridge-ui.env`,
+            `sed -i "s/CHAIN_NAME=/CHAIN_NAME=CudosTestnet-Deployer/g" ./gravity-bridge-ui.env`,
+            `sed -i "s/CHAIN_ID=/CHAIN_ID=${CHAIN_ID}/g" ./gravity-bridge-ui.env`,
+            `sed -i "s/RPC=/_/g" ./gravity-bridge-ui.env`,
+            `sed -i "s/API=/_/g" ./gravity-bridge-ui.env`,
+            `sed -i "s/ERC20_CONTRACT_ADDRESS=/_/g" ./gravity-bridge-ui.env`,
+            `sed -i "s/BRIDGE_CONTRACT_ADDRESS=/BRIDGE_CONTRACT_ADDRESS=${this.gravityContractAddress}/g" ./gravity-bridge-ui.env`,
+            `sed -i "s~ETHEREUM_RPC=~ETHEREUM_RPC=${this.topologyHelper.params.gravity.ethrpc}~g" ./gravity-bridge-ui.env`,
+            'cp ./gravity-bridge-ui.dev.arg ./gravity-bridge-ui.arg',
+            'sed -i "s/ENV_FILE=gravity-bridge-ui.dev.env/ENV_FILE=gravity-bridge-ui.env/g" ./gravity-bridge-ui.arg',
+            // `docker-compose --env-file ./gravity-bridge-ui.arg -f ./gravity-bridge-ui.release.yml -p cudos-gravity-bridge-ui-testnet-private up --build -d`
+        ]);
     }
 
     getSeedsByValidatorId(validatorId) {
@@ -452,12 +536,15 @@ class NodesService {
     }
 
     async fundFromFaucet(recipientWalletAddress, amount) {
-        const rootValidatorSshHelper = this.instancesService.getSshHelper(this.topologyHelper.rootValidator.computerId);
-        await rootValidatorSshHelper.exec(`docker container exec ${ValidatorNodeModel.getRootValidatorDockerContainerStartName()} /bin/bash -c "echo 123123123 | cudos-noded tx bank send ${this.faucetAddress} ${recipientWalletAddress} ${amount} --from faucet --keyring-backend os --chain-id ${CHAIN_ID} -y"`, false)
+        const rootValidatorNodeModel = this.topologyHelper.rootValidator;
+        const rootValidatorSshHelper = this.instancesService.getSshHelper(rootValidatorNodeModel.computerId);
+        const txResultString = await rootValidatorSshHelper.exec(`docker container exec ${ValidatorNodeModel.getRootValidatorDockerContainerStartName()} /bin/bash -c "echo 123123123 | cudos-noded tx bank send ${this.faucetAddress} ${recipientWalletAddress} ${amount} --from faucet --keyring-backend os --chain-id ${CHAIN_ID} -y"`, false);
+        await rootValidatorSshHelper.awaitForTx(ValidatorNodeModel.getRootValidatorDockerContainerStartName(), txResultString);
     }
 
     onExit = async () => {
-        await this.stopNodesInstances();        
+        await this.stopNodesInstances();   
+        await this.stopOrchestratorInstances();     
     }
 
     async stopNodesInstances() {
@@ -465,6 +552,31 @@ class NodesService {
 
         const tasks = [];
         const entries = this.nodeIdToNodeInstanceContainerNamesMap.entries();
+        for (;;) {
+            let entry = entries.next();
+            if (entry.done === true) {
+                break;
+            }
+
+            const nodeId = entry.value[0];
+            const containerName = entry.value[1];
+            const computerId = this.topologyHelper.getNodeModel(nodeId).computerId;
+            const sshHelper = this.instancesService.getSshHelper(computerId);
+            Log.main(`Stop ${containerName} for ${computerId}`);
+            tasks.push(sshHelper.exec([
+                `docker stop ${containerName}`,
+                `docker container rm ${containerName}`
+            ], false));
+        }
+
+        await Promise.all(tasks);
+    }
+
+    async stopOrchestratorInstances() {
+        Log.main('Stop orchestrator\' instances');
+
+        const tasks = [];
+        const entries = this.nodeIdToOrchestratorInstanceContainerNamesMap.entries();
         for (;;) {
             let entry = entries.next();
             if (entry.done === true) {

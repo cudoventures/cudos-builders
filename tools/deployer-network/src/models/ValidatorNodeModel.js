@@ -6,18 +6,23 @@ class ValidatorNodeModel extends AbsNodeModel {
         super();
         this.validatorId = "";
         this.orchEthAddress = "";
+        this.ethPrivKey = "";
     }
 
-    getDockerContainerInitName(i) {
-        return `cudos-init-full-node-${this.validatorId}-${i + 1}`;
+    getDockerContainerInitName() {
+        return `cudos-init-full-node-${this.nodeId}`;
     }
 
-    getDockerContainerConfigName(i) {
-        return `cudos-config-full-node-${this.validatorId}-${i + 1}`;
+    getDockerContainerConfigName() {
+        return `cudos-config-full-node-${this.nodeId}`;
     }
 
-    getDockerContainerStartName(i) {
-        return `cudos-start-full-node-${this.validatorId}-${i + 1}`;
+    getDockerContainerStartName() {
+        return `cudos-start-full-node-${this.nodeId}`;
+    }
+
+    getDockerContainerOrchestratorName() {
+        return `cudos-start-orchestrator-${this.nodeId}`;
     }
 
     static getRootValidatorDockerContainerStartName() {
@@ -33,6 +38,7 @@ class ValidatorNodeModel extends AbsNodeModel {
 
         model.validatorId = json.validatorId ?? model.validatorId;
         model.orchEthAddress = json.orchEthAddress ?? model.orchEthAddress;
+        model.ethPrivKey = json.ethPrivKey ?? model.ethPrivKey;
 
         return model;
     }

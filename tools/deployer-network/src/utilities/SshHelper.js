@@ -65,7 +65,7 @@ class SshHelper {
         return res.join('\n');
     }
 
-    async cloneRepos() {
+    async cloneNodeRepos() {
         await this.exec([
             `cd ${PathHelper.WORKING_DIR}`,
             'rm -rf ./CudosNode',
@@ -74,6 +74,14 @@ class SshHelper {
             'git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/cudos-node.git CudosNode',
             'git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/cudos-builders.git CudosBuilders',
             'git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge'
+        ]);
+    }
+
+    async cloneGravityBridgeUiRepo() {
+        await this.exec([
+            `cd ${PathHelper.WORKING_DIR}`,
+            'rm -rf ./CudosGravityBridgeUI',
+            'git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/cudos-gravity-bridge-ui CudosGravityBridgeUI',
         ]);
     }
 
@@ -104,6 +112,28 @@ class SshHelper {
             };
             
             const intervalHandler = setInterval(runnable, 1000);
+        });
+    }
+
+    awaitForTx(dockerContainerName, txResultString) {
+        return new Promise((resolve, reject) => {
+            const txResult = JSON.parse(txResultString);
+            const blockHeight = parseInt(txResult.height) + 1;
+
+            const runnable = async () => {
+                const statusString = await this.exec(`docker container exec ${dockerContainerName} /bin/bash -c "cudos-noded status"`, false);
+                try {
+                    const status = JSON.parse(statusString);
+                    if (parseInt(status.SyncInfo.latest_block_height) >= blockHeight) {
+                        clearInterval(intervalHandler);
+                        resolve();
+                    }
+                } catch (ex) {
+                    console.log('error waiting for block', ex);
+                }
+            };
+            
+            const intervalHandler = setInterval(runnable, 5000);
         });
     }
 

@@ -7,12 +7,12 @@ class SeedNodeModel extends AbsNodeModel {
         this.validatorId = "";
     }
 
-    getDockerContainerInitName(validatorNodeModel, i) {
-        return `cudos-init-seed-node-${validatorNodeModel.validatorId}-${i + 1}`;
+    getDockerContainerInitName() {
+        return `cudos-init-seed-node-${this.nodeId}`;
     }
 
-    getDockerContainerStartName(validatorNodeModel, i) {
-        return `cudos-start-seed-node-${validatorNodeModel.validatorId}-${i + 1}`;
+    getDockerContainerStartName() {
+        return `cudos-start-seed-node-${this.nodeId}`;
     }
 
     static fromJson(json) {

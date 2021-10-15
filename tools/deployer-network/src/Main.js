@@ -21,7 +21,7 @@ async function main() {
         await instancesService.createMissingInstances();
         await instancesService.connectToInstances();
         await instancesService.validateSoftwareRequirements();
-        await nodesService.start();
+        await nodesService.start(args.gravity);
         Log.main('Ready');
     } catch (ex) {
         console.log(ex);
@@ -34,6 +34,7 @@ async function main() {
 function getArgParser() {
     const parser = new ArgumentParser({description: 'Cudos Network StartUp Script'});
     parser.add_argument('--topology', { 'required': true });
+    parser.add_argument('--gravity', { 'required': false, 'default': '1', 'choices': ['0', '1'] });
     return parser.parse_args();
 }
 

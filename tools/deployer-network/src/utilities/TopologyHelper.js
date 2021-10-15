@@ -4,6 +4,7 @@ const ComputerModel = require('../models/ComputerModel');
 const ValidatorNodeModel = require('../models/ValidatorNodeModel');
 const SeedNodeModel = require('../models/SeedNodeModel');
 const SentryNodeModel = require('../models/SentryNodeModel');
+const ParamsModel = require('../models/ParamsModel');
 
 class TopologyHelper {
 
@@ -13,6 +14,8 @@ class TopologyHelper {
         this.validators = [];
         this.sentries = [];
         this.seeds = [];
+        this.gravityBridgeUiModel = null;
+        this.params = null;
 
         this.genNodeIds = 0;
 
@@ -48,6 +51,8 @@ class TopologyHelper {
             helper.addNodeModel(model);
             return model;
         });
+        helper.gravityBridgeUiModel = jsonData.nodes.gravityBridgeUi;
+        helper.params = ParamsModel.fromJson(jsonData.params);
 
         helper.validate();
 
