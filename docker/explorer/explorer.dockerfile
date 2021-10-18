@@ -32,7 +32,7 @@ RUN cd ./source && \
     cat ./default_settings.json | jq --arg FAUCET_URL "$FAUCET_URL" '.public.faucetUrl = $FAUCET_URL' > ./default_settings.tmp && mv ./default_settings.tmp ./default_settings.json && \
     cat ./default_settings.json | jq --arg EXTERNAL_RPC_URL "$EXTERNAL_RPC_URL" '.public.urls.rpc = $EXTERNAL_RPC_URL' > ./default_settings.tmp && mv ./default_settings.tmp ./default_settings.json && \
     cat ./default_settings.json | jq --arg EXTERNAL_API_URL "$EXTERNAL_API_URL" '.public.urls.api = $EXTERNAL_API_URL' > ./default_settings.tmp && mv ./default_settings.tmp ./default_settings.json && \
-    cat ./default_settings.json | jq --arg ARG EXTERNAL_STAKING_URL "$ARG EXTERNAL_STAKING_URL" '.public.urls.staking = $ARG EXTERNAL_STAKING_URL' > ./default_settings.tmp && mv ./default_settings.tmp ./default_settings.json && \
+    cat ./default_settings.json | jq --arg EXTERNAL_STAKING_URL "$EXTERNAL_STAKING_URL" '.public.urls.staking = $EXTERNAL_STAKING_URL' > ./default_settings.tmp && mv ./default_settings.tmp ./default_settings.json && \
     cat ./default_settings.json | jq --arg INTERNAL_RPC_URL "$INTERNAL_RPC_URL" '.remote.rpc = $INTERNAL_RPC_URL' > ./default_settings.tmp && mv ./default_settings.tmp ./default_settings.json && \
     cat ./default_settings.json | jq --arg INTERNAL_API_URL "$INTERNAL_API_URL" '.remote.api = $INTERNAL_API_URL' > ./default_settings.tmp && mv ./default_settings.tmp ./default_settings.json && \
     sed -i ':a;N;$!ba;s/\n//g' ./default_settings.json && \
