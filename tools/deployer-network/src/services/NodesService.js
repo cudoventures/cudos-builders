@@ -4,11 +4,12 @@ const Log = require('../utilities/LogHelper');
 const NodesHelper = require('../utilities/NodesHelper');
 const PathHelper = require('../utilities/PathHelper');
 
-const CHAIN_ID = 'cudos-local-network';
+const CHAIN_ID = 'cudos-deployer-network';
+const CHAIN_NAME = 'CudosTestnet-DeployerNetwork';
 
-const GRAVITY_BRIDGE_UI_CONTAINER_NAME = 'cudos-gravity-bridge-ui';
-const EXPLORER_CONTAINER_NAME = 'cudos-explorer';
-const FAUCET_CONTAINER_NAME = 'cudos-faucet';
+const GRAVITY_BRIDGE_UI_CONTAINER_NAME = 'cudos-deployer-network-gravity-bridge-ui';
+const EXPLORER_CONTAINER_NAME = 'cudos-deployer-network-explorer';
+const FAUCET_CONTAINER_NAME = 'cudos-deployer-network-faucet';
 
 class NodesService {
 
@@ -20,19 +21,29 @@ class NodesService {
 
         this.nodeIdToNodeInstanceContainerNamesMap = new Map();
         this.nodeIdToOrchestratorInstanceContainerNamesMap = new Map();
-        this.validatorIdToOrchWalletModelMap = new Map();
 
+        this.validatorIdToOrchWalletModelMap = new Map();
         this.nodeIdTotendermintNodeId = new Map();
+
         this.genesisJson = '';
         this.faucetAddress = '';
+        this.faucetMnemonic = '';
         this.gravityContractAddress = '';
-        this.sentryNodePort26656 = 0;
-        this.sentryNodePort26657 = 0;
-        this.sentryNodePort1317 = 0;
-        this.sentryNodePort9090 = 0;
+        this.firstSentryNodeInternalAddress = '';
+        this.firstSentryNodeExternalAddress = '';
+        this.firstSentryNodePort26656 = 0;
+        this.firstSentryNodePort26657 = 0;
+        this.firstSentryNodePort1317 = 0;
+        this.firstSentryNodePort9090 = 0;
+
+        this.gravity = "1";
+        this.utils = "1";
     }
 
-    async start(gravity) {
+    async start(gravity, utils) {
+        this.gravity = gravity;
+        this.utls = utils;
+
         await this.initAndStartRootValidator();
         await this.initAndStartRootValidatorSeedNodes();
         await this.initAndStartRootValidatorSentryNodes();
@@ -45,6 +56,10 @@ class NodesService {
             await this.startOrchestrators();
             await this.startGravityBridgeUi();
         }
+        if (utils === '1') {
+            await this.startFaucet();
+            await this.startExplorer();
+        }
     }
 
     async initAndStartRootValidator() {
@@ -53,11 +68,12 @@ class NodesService {
         const validatorNodeModel = this.topologyHelper.rootValidator;
         const validatorComputerModel = this.topologyHelper.getComputerModel(validatorNodeModel.computerId);
         const validatorSshHelper = this.instancesService.getSshHelper(validatorNodeModel.computerId);
-        
+
+        const dockerContainerStartName = ValidatorNodeModel.getRootValidatorDockerContainerStartName();        
         const port26656 = validatorComputerModel.isLocalDocker === true ? ++this.genPorts : 26656;
 
         if (validatorComputerModel.isLocalDocker === false) {
-            await validatorSshHelper.cloneNodeRepos();
+            await validatorSshHelper.cloneRepos();
         }
         await validatorSshHelper.prepareBinaryBuilder();
         await validatorSshHelper.exec([
@@ -68,13 +84,13 @@ class NodesService {
             `sed -i "s/CHAIN_ID=/CHAIN_ID=\"${CHAIN_ID}"/g" ./root-node.local.env`,
             `sed -i "s/ORCH_ETH_ADDRESS=/ORCH_ETH_ADDRESS=\"${validatorNodeModel.orchEthAddress}\"/g" ./root-node.local.env`,
             `sed -i "s/PORT26656=60101/PORT26656=\"${port26656}\"/g" ./root-node.local.arg`,
+            `sed -i "s/container_name: cudos-start-root-node/container_name: ${dockerContainerStartName}/g" ./start-root-node.yml`,
             ...NodesHelper.getUserOverrideYml('root-node'),
             'docker-compose --env-file ./root-node.local.arg -f ./init-root-node.yml -f ./users-root-node.override.yml -p cudos-init-root-node up --build',
             'docker-compose --env-file ./root-node.local.arg -f ./init-root-node.yml -f ./users-root-node.override.yml -p cudos-init-root-node down',
             `docker-compose --env-file ./root-node.local.arg -f ./start-root-node.yml -f ./users-root-node.override.yml -p ${ValidatorNodeModel.getRootValidatorDockerContainerStartName()} up --build -d`
         ]);
 
-        const dockerContainerStartName = ValidatorNodeModel.getRootValidatorDockerContainerStartName();
         this.nodeIdToNodeInstanceContainerNamesMap.set(validatorNodeModel.nodeId, dockerContainerStartName);
 
         await validatorSshHelper.awaitForNode(dockerContainerStartName);
@@ -84,6 +100,10 @@ class NodesService {
 
         this.faucetAddress = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "echo 123123123 | cudos-noded keys show faucet -a --keyring-backend os"`, false);
         this.genesisJson = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cat /usr/cudos/cudos-data/config/genesis.json"`, false);
+
+        const faucetWalletString = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cat /usr/cudos/cudos-data/faucet.wallet"`, false);
+        const faucetWallet = WalletModel.instanceByString(faucetWalletString);
+        this.faucetMnemonic = faucetWallet.mnemonic;
 
         const rootOrchWalletString = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cat /usr/cudos/cudos-data/orch-01.wallet"`, false);
         this.validatorIdToOrchWalletModelMap.set(validatorNodeModel.validatorId, WalletModel.instanceByString(rootOrchWalletString));
@@ -111,7 +131,7 @@ class NodesService {
             const port26657 = seedComputerModel.isLocalDocker === true ? ++this.genPorts : 26657;
 
             if (seedComputerModel.isLocalDocker === false) {
-                await validatorSshHelper.cloneNodeRepos();
+                await validatorSshHelper.cloneRepos();
             }
             await seedSshHelper.prepareBinaryBuilder();
             await seedSshHelper.exec([
@@ -168,21 +188,8 @@ class NodesService {
             const port1317 = sentryComputerModel.isLocalDocker === true ? ++this.genPorts : 1317;
             const port9090 = sentryComputerModel.isLocalDocker === true ? ++this.genPorts : 9090;
 
-            if (this.sentryNodePort26656 === 0 && port26656 !== 26656) {
-                this.sentryNodePort26656 = port26656;
-            }
-            if (this.sentryNodePort26657 === 0 && port26657 !== 26657) {
-                this.sentryNodePort26657 = port26657;
-            }
-            if (this.sentryNodePort1317 === 0 && port1317 !== 1317) {
-                this.sentryNodePort1317 = port1317;
-            }
-            if (this.sentryNodePort9090 === 0 && port9090 !== 9090) {
-                this.sentryNodePort9090 = port9090;
-            }
-
             if (sentryComputerModel.isLocalDocker === false) {
-                await validatorSshHelper.cloneNodeRepos();
+                await validatorSshHelper.cloneRepos();
             }
             await sentrySshHelper.prepareBinaryBuilder();
             await sentrySshHelper.exec([
@@ -214,6 +221,15 @@ class NodesService {
 
             const tendermintNodeId = await sentrySshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded tendermint show-node-id"`, false);
             this.nodeIdTotendermintNodeId.set(sentryNodeModel.nodeId, tendermintNodeId);
+
+            if (i === 0) {
+                this.firstSentryNodeInternalAddress = sentryComputerModel.ip;
+                this.firstSentryNodeExternalAddress = sentryComputerModel.isLocalDocker === true ? 'localhost' : sentryComputerModel.ip;
+                this.firstSentryNodePort26656 = port26656;
+                this.firstSentryNodePort26657 = port26657;
+                this.firstSentryNodePort1317 = port1317;
+                this.firstSentryNodePort9090 = port9090;
+            }
         }
     }
 
@@ -234,7 +250,7 @@ class NodesService {
             const port26656 = validatorComputerModel.isLocalDocker === true ? ++this.genPorts : 26656;
 
             if (validatorComputerModel.isLocalDocker === false) {
-                await validatorSshHelper.cloneNodeRepos();
+                await validatorSshHelper.cloneRepos();
             }
             await validatorSshHelper.prepareBinaryBuilder();
             await validatorSshHelper.exec([
@@ -287,7 +303,7 @@ class NodesService {
                 const port26657 = seedComputerModel.isLocalDocker === true ? ++this.genPorts : 26657;
 
                 if (seedComputerModel.isLocalDocker === false) {
-                    await validatorSshHelper.cloneNodeRepos();
+                    await validatorSshHelper.cloneRepos();
                 }
                 await seedSshHelper.prepareBinaryBuilder();
                 await seedSshHelper.exec([
@@ -346,7 +362,7 @@ class NodesService {
                 const port9090 = sentryComputerModel.isLocalDocker === true ? ++this.genPorts : 9090;
     
                 if (sentryComputerModel.isLocalDocker === false) {
-                    await validatorSshHelper.cloneNodeRepos();
+                    await validatorSshHelper.cloneRepos();
                 }
                 await sentrySshHelper.prepareBinaryBuilder();
                 await sentrySshHelper.exec([
@@ -519,27 +535,89 @@ class NodesService {
         const gravityBridgeUiSshHelper = this.instancesService.getSshHelper(gravityBridgeUiModel.computerId);
 
         const host = gravityBridgeUiComputerModel.isLocalDocker === true ? 'localhost' : gravityBridgeUiComputerModel.ip;
-        const port26657 = gravityBridgeUiComputerModel.isLocalDocker === true ? this.sentryNodePort26657 : 26657;
-        const port1317 = gravityBridgeUiComputerModel.isLocalDocker === true ? this.sentryNodePort1317 : 1317;
 
-        await gravityBridgeUiSshHelper.cloneGravityBridgeUiRepo();
+        if (gravityBridgeUiComputerModel.isLocalDocker === false) {
+            await gravityBridgeUiSshHelper.cloneRepos();
+        }
         await gravityBridgeUiSshHelper.exec([
             `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/gravity-bridge-ui`,
             'cp ./gravity-bridge-ui.env.example ./gravity-bridge-ui.env',
             `sed -i "s~URL=~URL=http://${host}~g" ./gravity-bridge-ui.env`,
             `sed -i "s~ETHEREUM_RPC=~ETHEREUM_RPC=${this.topologyHelper.params.gravity.ethrpc}~g" ./gravity-bridge-ui.env`,
-            `sed -i "s/CHAIN_NAME=/CHAIN_NAME=CudosTestnet-Deployer/g" ./gravity-bridge-ui.env`,
+            `sed -i "s/CHAIN_NAME=/CHAIN_NAME=${CHAIN_NAME}/g" ./gravity-bridge-ui.env`,
             `sed -i "s/CHAIN_ID=/CHAIN_ID=${CHAIN_ID}/g" ./gravity-bridge-ui.env`,
-            `sed -i "19s~RPC=~RPC=http://${host}:${port26657}~g" ./gravity-bridge-ui.env`,
-            `sed -i "s~API=~API=http://${host}:${port1317}~g" ./gravity-bridge-ui.env`,
+            `sed -i "19s~RPC=~RPC=http://${this.firstSentryNodeExternalAddress}:${this.firstSentryNodePort26657}~g" ./gravity-bridge-ui.env`,
+            `sed -i "s~API=~API=http://${this.firstSentryNodeExternalAddress}:${this.firstSentryNodePort1317}~g" ./gravity-bridge-ui.env`,
             `sed -i "s~STAKING=~STAKING=http://${host}:3000/validators~g" ./gravity-bridge-ui.env`,
             `sed -i "s/ERC20_CONTRACT_ADDRESS=/ERC20_CONTRACT_ADDRESS=${gravityBridgeUiModel.ethTokenContract}/g" ./gravity-bridge-ui.env`,
             `sed -i "s/BRIDGE_CONTRACT_ADDRESS=/BRIDGE_CONTRACT_ADDRESS=${this.gravityContractAddress}/g" ./gravity-bridge-ui.env`,
             'cp ./gravity-bridge-ui.dev.arg ./gravity-bridge-ui.arg',
             'sed -i "s/ENV_FILE=gravity-bridge-ui.dev.env/ENV_FILE=gravity-bridge-ui.env/g" ./gravity-bridge-ui.arg',
-            `sed -i "s/container_name: cudos-gravity-bridge-ui-testnet-private/container_name: ${GRAVITY_BRIDGE_UI_CONTAINER_NAME}/g" ./gravity-bridge-ui.arg`,
+            `sed -i "s/container_name: cudos-gravity-bridge-ui-testnet-private/container_name: ${GRAVITY_BRIDGE_UI_CONTAINER_NAME}/g" ./gravity-bridge-ui.release.yml`,
             `docker-compose --env-file ./gravity-bridge-ui.arg -f ./gravity-bridge-ui.release.yml -p ${GRAVITY_BRIDGE_UI_CONTAINER_NAME} up --build -d`
         ]);
+    }
+    
+    async startFaucet() {
+        Log.main('Start faucet');
+        
+        const utilsModel = this.topologyHelper.utilsModel;
+        const utilsComputerModel = this.topologyHelper.getComputerModel(utilsModel.computerId);
+        const utilsSshHelper = this.instancesService.getSshHelper(utilsModel.computerId);
+        
+        if (utilsComputerModel.isLocalDocker === false) {
+            await utilsSshHelper.cloneRepos();
+        }
+        await utilsSshHelper.exec([
+            `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/faucet`,
+            'cp ./faucet.env.example ./faucet.local.env',
+            `sed -i "s/CREDIT_AMOUNT=\\"1000000\\"/CREDIT_AMOUNT=\\"10000000000000000000\\"/g" ./faucet.local.env`,
+            `sed -i "s/MAX_CREDIT=\\"10000000\\"/MAX_CREDIT=\\"10000000000000000000\\"/g" ./faucet.local.env`,
+            `sed -i "s~NODE=\\"\\"~NODE=\\"http://${this.firstSentryNodeInternalAddress}:${this.firstSentryNodePort26657}\\"~g" ./faucet.local.env`,
+            `sed -i "s/MNEMONIC=\\"\\"/MNEMONIC=\\"${this.faucetMnemonic}\\"/g" ./faucet.local.env`,
+            `sed -i "s/GOOGLE_API_KEY=\\"\\"/GOOGLE_API_KEY=\\"${utilsModel.googleApiKey}\\"/g" ./faucet.local.env`,
+            `sed -i "s/CAPTCHA_SITE_KEY=\\"\\"/CAPTCHA_SITE_KEY=\\"${utilsModel.captchaSiteKey}\\"/g" ./faucet.local.env`,
+            `sed -i "s/GOOGLE_PROJECT_ID=\\"\\"/GOOGLE_PROJECT_ID=\\"${utilsModel.googleProjectId}\\"/g" ./faucet.local.env`,
+            `sed -i "s/container_name: cudos-faucet-cli/container_name: ${FAUCET_CONTAINER_NAME}/g" ./faucet.yml`,
+            `echo '\r\n    extra_hosts:' >> ./faucet.yml`,
+            `echo '      - "host.docker.internal:host-gateway"' >> ./faucet.yml`,
+            `docker-compose --env-file ./faucet.local.arg -f ./faucet.yml -p ${FAUCET_CONTAINER_NAME} up --build -d`
+        ]);
+    }
+
+    async startExplorer() {
+        Log.main('Start explorer');
+
+        const utilsModel = this.topologyHelper.utilsModel;
+        const utilsComputerModel = this.topologyHelper.getComputerModel(utilsModel.computerId);
+        const utilsSshHelper = this.instancesService.getSshHelper(utilsModel.computerId);
+
+        const host = utilsComputerModel.isLocalDocker === true ? 'localhost' : utilsComputerModel.ip;
+
+        if (utilsComputerModel.isLocalDocker === false) {
+            await utilsSshHelper.cloneRepos();
+        }
+        await utilsSshHelper.exec([
+            ...NodesHelper.getUserEnv(),
+            `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/explorer`,
+            'cp ./explorer.env.example ./explorer.local.env',
+            `sed -i "s~MONGO_URL=~MONGO_URL=mongodb://root:cudos-root-db-pass@cudos-explorer-mongodb:27017~g" ./explorer.local.env`,
+            `sed -i "s~ROOT_URL=~ROOT_URL=http://${host}~g" ./explorer.local.env`,
+            `sed -i "s~FAUCET_URL=\\"http://localhost:5000\\"~FAUCET_URL=\\"http://${host}:5000\\"~g" ./explorer.local.arg`,
+            `sed -i "s~INTERNAL_RPC_URL=\\"http://cudos-start-sentry-node-01:26657\\"~INTERNAL_RPC_URL=\\"http://${this.firstSentryNodeInternalAddress}:${this.firstSentryNodePort26657}\\"~g" ./explorer.local.arg`,
+            `sed -i "s~INTERNAL_API_URL=\\"http://cudos-start-sentry-node-01:1317\\"~INTERNAL_API_URL=\\"http://${this.firstSentryNodeInternalAddress}:${this.firstSentryNodePort1317}\\"~g" ./explorer.local.arg`,
+            `sed -i "s~EXTERNAL_RPC_URL=\\"http://localhost:26657\\"~EXTERNAL_RPC_URL=\\"http://${this.firstSentryNodeExternalAddress}:${this.firstSentryNodePort26657}\\"~g" ./explorer.local.arg`,
+            `sed -i "s~EXTERNAL_API_URL=\\"http://localhost:1317\\"~EXTERNAL_API_URL=\\"http://${this.firstSentryNodeExternalAddress}:${this.firstSentryNodePort1317}\\"~g" ./explorer.local.arg`,
+            `sed -i "s~EXTERNAL_STAKING_URL=\\"http://localhost:3000/validators\\"~EXTERNAL_STAKING_URL=\\"http://${host}:3000/validators\\"~g" ./explorer.local.arg`,
+            `sed -i "s/CHAIN_NAME=\\"CudosTestnet-Local\\"/CHAIN_NAME=\\"${CHAIN_NAME}\\"/g" ./explorer.local.arg`,
+            `sed -i "s/CHAIN_ID=\\"cudos-local-network\\"/CHAIN_ID=\\"${CHAIN_ID}\\"/g" ./explorer.local.arg`,
+            `echo '\r\n    extra_hosts:' >> ./explorer.dev.yml`,
+            `echo '      - "host.docker.internal:host-gateway"' >> ./explorer.dev.yml`,
+            `sed -i "s/container_name: cudos-explorer/container_name: ${EXPLORER_CONTAINER_NAME}/g" ./explorer.dev.yml`,
+            ...NodesHelper.getUserOverrideYml('explorer.dev'),
+            `docker-compose --env-file ./explorer.local.arg -f ./explorer.dev.yml -f ./users-explorer.dev.override.yml -p ${EXPLORER_CONTAINER_NAME} up --build -d`
+        ]);
+        // docker-compose --env-file ./explorer.local.arg -f ./explorer.dev.yml -f ./users-explorer.dev.override.yml -p cudos-explorer up --build -d
     }
 
     getSeedsByValidatorId(validatorId) {
@@ -570,9 +648,13 @@ class NodesService {
     }
 
     onExit = async () => {
-        await this.stopNodesInstances();   
-        await this.stopOrchestratorInstances();
-        await this.stopUtils();
+        await this.stopNodesInstances();
+        if (this.gravity === "1") {
+            await this.stopOrchestratorInstances();
+        }
+        if (this.utils === "1") {
+            await this.stopUtilsInstances();
+        }
     }
 
     async stopNodesInstances() {
@@ -625,8 +707,8 @@ class NodesService {
         await Promise.all(tasks);
     }
 
-    async stopUtils() {
-        Log.main('Stop utils\' instances');
+    async stopGravityBridgeUiInstance() {
+        Log.main('Stop Gravity bridge ui\'s instance');
 
         const tasks = [];
 
@@ -635,6 +717,23 @@ class NodesService {
         tasks.push(gravityBridgeUiSshHelper.exec([
             `docker stop ${GRAVITY_BRIDGE_UI_CONTAINER_NAME}`,
             `docker container rm ${GRAVITY_BRIDGE_UI_CONTAINER_NAME}`
+        ], false));
+
+        await Promise.all(tasks);
+    }
+
+    async stopUtilsInstances() {
+        Log.main('Stop Utils\' instances');
+
+        const tasks = [];
+
+        const gravityBridgeUiModel = this.topologyHelper.gravityBridgeUiModel;
+        const gravityBridgeUiSshHelper = this.instancesService.getSshHelper(gravityBridgeUiModel.computerId);
+        tasks.push(gravityBridgeUiSshHelper.exec([
+            `docker stop ${FAUCET_CONTAINER_NAME}`,
+            `docker container rm ${FAUCET_CONTAINER_NAME}`,
+            `docker stop ${EXPLORER_CONTAINER_NAME}`,
+            `docker container rm ${EXPLORER_CONTAINER_NAME}`
         ], false));
 
         await Promise.all(tasks);

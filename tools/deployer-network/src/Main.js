@@ -14,6 +14,8 @@ async function main() {
         const instancesService = new InstancesService(topologyHelper);
         const nodesService = new NodesService(topologyHelper, instancesService);
 
+        topologyHelper.validate(args.gravity, args.utils);
+
         lifeCycleHelper.init();
         lifeCycleHelper.addExitHandler(instancesService.onExit, 0);
         lifeCycleHelper.addExitHandler(nodesService.onExit, 1);
@@ -21,7 +23,7 @@ async function main() {
         await instancesService.createMissingInstances();
         await instancesService.connectToInstances();
         await instancesService.validateSoftwareRequirements();
-        await nodesService.start(args.gravity);
+        await nodesService.start(args.gravity, args.utils);
         Log.main('Ready');
     } catch (ex) {
         console.log(ex);
@@ -35,6 +37,7 @@ function getArgParser() {
     const parser = new ArgumentParser({description: 'Cudos Network StartUp Script'});
     parser.add_argument('--topology', { 'required': true });
     parser.add_argument('--gravity', { 'required': false, 'default': '1', 'choices': ['0', '1'] });
+    parser.add_argument('--utils', { 'required': false, 'default': '1', 'choices': ['0', '1'] });
     return parser.parse_args();
 }
 

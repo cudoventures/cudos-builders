@@ -8,11 +8,11 @@ class SeedNodeModel extends AbsNodeModel {
     }
 
     getDockerContainerInitName() {
-        return `cudos-init-seed-node-${this.nodeId}`;
+        return `cudos-deployer-network-init-seed-node-${this.nodeId}`;
     }
 
     getDockerContainerStartName() {
-        return `cudos-start-seed-node-${this.nodeId}`;
+        return `cudos-deployer-network-start-seed-node-${this.nodeId}`;
     }
 
     static fromJson(json) {

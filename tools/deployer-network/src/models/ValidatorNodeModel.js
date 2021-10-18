@@ -10,23 +10,23 @@ class ValidatorNodeModel extends AbsNodeModel {
     }
 
     getDockerContainerInitName() {
-        return `cudos-init-full-node-${this.nodeId}`;
+        return `cudos-deployer-network-init-full-node-${this.nodeId}`;
     }
 
     getDockerContainerConfigName() {
-        return `cudos-config-full-node-${this.nodeId}`;
+        return `cudos-deployer-network-config-full-node-${this.nodeId}`;
     }
 
     getDockerContainerStartName() {
-        return `cudos-start-full-node-${this.nodeId}`;
+        return `cudos-deployer-network-start-full-node-${this.nodeId}`;
     }
 
     getDockerContainerOrchestratorName() {
-        return `cudos-start-orchestrator-${this.nodeId}`;
+        return `cudos-deployer-network-start-orchestrator-${this.nodeId}`;
     }
 
     static getRootValidatorDockerContainerStartName() {
-        return 'cudos-start-root-node';
+        return 'cudos-deployer-network-start-root-node';
     }
 
     static fromJson(json) {

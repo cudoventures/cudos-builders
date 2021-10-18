@@ -37,6 +37,9 @@ WORKDIR $WORKDIR
 
 RUN git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/cudos-node.git CudosNode && \
     git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/cudos-builders.git CudosBuilders && \
-    git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge
+    git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge && \
+    git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/cudos-gravity-bridge-ui CudosGravityBridgeUI && \
+    git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/big-dipper.git CudosExplorer && \
+    git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/faucet.git CudosFaucet
 
 CMD ["/bin/bash", "-c", "sudo service ssh start && sleep infinity"]

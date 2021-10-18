@@ -4,6 +4,8 @@ const ComputerModel = require('../models/ComputerModel');
 const ValidatorNodeModel = require('../models/ValidatorNodeModel');
 const SeedNodeModel = require('../models/SeedNodeModel');
 const SentryNodeModel = require('../models/SentryNodeModel');
+const GravityBridgeUiModel = require('../models/GravityBridgeUiModel');
+const UtilsModel = require('../models/UtilsModel');
 const ParamsModel = require('../models/ParamsModel');
 
 class TopologyHelper {
@@ -15,6 +17,7 @@ class TopologyHelper {
         this.sentries = [];
         this.seeds = [];
         this.gravityBridgeUiModel = null;
+        this.utilsModel = null;
         this.params = null;
 
         this.genNodeIds = 0;
@@ -51,10 +54,9 @@ class TopologyHelper {
             helper.addNodeModel(model);
             return model;
         });
-        helper.gravityBridgeUiModel = jsonData.nodes.gravityBridgeUi;
+        helper.gravityBridgeUiModel = GravityBridgeUiModel.fromJson(jsonData.nodes.gravityBridgeUi);
+        helper.utilsModel = UtilsModel.fromJson(jsonData.nodes.utils);
         helper.params = ParamsModel.fromJson(jsonData.params);
-
-        helper.validate();
 
         return helper;
     }
@@ -84,7 +86,7 @@ class TopologyHelper {
         });
     }
 
-    validate() {
+    validate(gravity, utils) {
         this.nodesMap.forEach((nodeModel) => {
             const computerModel = this.getComputerModel(nodeModel.computerId);
             if (computerModel === undefined) {
@@ -107,6 +109,18 @@ class TopologyHelper {
         this.validators.forEach((validatorNodeModel) => {
             validateValidator(validatorNodeModel.validatorId);
         });
+
+        if (gravity === '1') {
+            if (this.getComputerModel(this.gravityBridgeUiModel.computerId) === undefined) {
+                throw new Error(`GravityBridgeUi does not have a computer instance`);
+            }
+        }
+
+        if (utils === '1') {
+            if (this.getComputerModel(this.utilsModel.computerId) === undefined) {
+                throw new Error(`Utils does not have a computer instance`);
+            }
+        }
     }
 
 }

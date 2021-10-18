@@ -8,11 +8,11 @@ class SentryNodeModel extends AbsNodeModel {
     }
 
     getDockerContainerInitName() {
-        return `cudos-init-sentry-node-${this.nodeId}`;
+        return `cudos-deployer-network-init-sentry-node-${this.nodeId}`;
     }
 
     getDockerContainerStartName() {
-        return `cudos-start-sentry-node-${this.nodeId}`;
+        return `cudos-deployer-network-start-sentry-node-${this.nodeId}`;
     }
 
     static fromJson(json) {

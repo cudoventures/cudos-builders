@@ -65,23 +65,21 @@ class SshHelper {
         return res.join('\n');
     }
 
-    async cloneNodeRepos() {
+    async cloneRepos() {
         await this.exec([
             `cd ${PathHelper.WORKING_DIR}`,
             'rm -rf ./CudosNode',
             'rm -rf ./CudosBuilders',
             'rm -rf ./CudosGravityBridge',
+            'rm -rf ./CudosGravityBridgeUI',
+            'rm -rf ./CudosExplorer',
+            'rm -rf ./CudosFaucet',
             'git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/cudos-node.git CudosNode',
             'git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/cudos-builders.git CudosBuilders',
-            'git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge'
-        ]);
-    }
-
-    async cloneGravityBridgeUiRepo() {
-        await this.exec([
-            `cd ${PathHelper.WORKING_DIR}`,
-            'rm -rf ./CudosGravityBridgeUI',
+            'git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge',
             'git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/cudos-gravity-bridge-ui CudosGravityBridgeUI',
+            'git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/big-dipper.git CudosExplorer',
+            'git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/faucet.git CudosFaucet'
         ]);
     }
 
