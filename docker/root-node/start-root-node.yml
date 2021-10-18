@@ -23,6 +23,7 @@ services:
       - '../../../CudosData/cudos-data-root-node:$CUDOS_HOME'
     ports:
       - "${PORT26656}:26656"
+      - "${PORT26660}:26660"
     networks:
       - shared-cudos-network
     logging:

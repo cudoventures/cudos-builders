@@ -12,3 +12,5 @@ START_CONTAINER_NAME=cudos-start-full-node-client-local-01
 VOLUME_NAME=cudos-data-full-node-client-local-01
 
 PORT26656=60401
+PORT26657=60501
+PORT26660=60601

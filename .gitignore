@@ -10,3 +10,4 @@ state-sync-rpc-servers.local.config
 .DS_Store
 users*override.yml
 docker/tests/**/data
+docker/monitoring/config/prometheus.tesnet.public.yml

@@ -41,6 +41,11 @@ if [ "${TLS_ENABLED}" = "true" ]; then
     sed -i "s|tls_key_file = \".*\"|tls_key_file = \"$TLS_DOCKER_PATH/live/$TLS_DOMAIN/privkey.pem\"|g" "${CUDOS_HOME}/config/config.toml"
 fi
 
+# Monitoring enabled
+if [ "${MONITORING_ENABLED}" = "true" ]; then
+    sed -i "s/prometheus = \".*\"/prometheus = true/g" "${CUDOS_HOME}/config/config.toml"
+fi
+
 # STATE SYNC
 if [ "$SHOULD_USE_STATE_SYNC" = "true" ]; then
     STATE_SYNC_RPC_SERVERS=$(cat ./external-config/state-sync-rpc-servers.config)

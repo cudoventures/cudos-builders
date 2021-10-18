@@ -25,6 +25,8 @@ services:
       - shared-cudos-network
     ports:
       - "${PORT26656}:26656"
+      - "${PORT26657}:26657"
+      - "${PORT26660}=26660"
     logging:
       driver: "json-file"
       options:
