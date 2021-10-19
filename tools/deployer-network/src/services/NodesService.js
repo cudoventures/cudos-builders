@@ -41,8 +41,8 @@ class NodesService {
         this.utls = utils;
 
         await this.initAndStartRootValidator();
-        await this.initAndStartRootValidatorSeedNodes();
-        await this.initAndStartRootValidatorSentryNodes();
+        // await this.initAndStartRootValidatorSeedNodes();
+        // await this.initAndStartRootValidatorSentryNodes();
         // await this.initValidators();
         // await this.initAndStartValidatorsSeedNode();
         // await this.initAndStartValidatorsSentryNode();

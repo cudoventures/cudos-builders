@@ -61,15 +61,17 @@ class InstancesService {
     }
 
     async validateSoftwareRequirements() {
-        const tasks = [];
         for (let i = 0;  i < this.topologyHelper.computers.length;  ++i) {
             const computer = this.topologyHelper.computers[i];
             const sshHelper = this.sshHelpersMap.get(computer.id);
             const softwareHelper = new SoftwareHelper(sshHelper);
-            tasks.push(softwareHelper.validateSoftwareRequirements());
+            await softwareHelper.validateSoftwareRequirements(computer.isLocalDocker === false);
         }
+    }
 
-        Promise.all(tasks);
+    async reconnectToInstances() {
+        await this.disconnectFromInstances();
+        await this.connectToInstances();
     }
 
     onExit = async () => {

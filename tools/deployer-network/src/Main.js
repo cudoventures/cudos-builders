@@ -23,6 +23,7 @@ async function main() {
         await instancesService.createMissingInstances();
         await instancesService.connectToInstances();
         await instancesService.validateSoftwareRequirements();
+        await instancesService.reconnectToInstances(); // in order to apply latest user details like gruops
         await nodesService.start(args.gravity, args.utils);
         Log.main('Ready');
     } catch (ex) {

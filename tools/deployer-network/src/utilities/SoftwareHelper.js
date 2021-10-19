@@ -7,11 +7,14 @@ class SoftwareHelper {
         this.sshHelper = sshHelper;
     }
 
-    async validateSoftwareRequirements() {
+    async validateSoftwareRequirements(shouldAddUserToDockerGroup) {
         Log.main(`Validate software requirements for ${this.sshHelper.computer.ip}`);
         await this.validateDocker();
         await this.validateDockerCompose();
         await this.prepareDataDir();
+        if (shouldAddUserToDockerGroup === true) {
+            await this.addUserToDockerGroup();
+        }
     }
 
     async validateDocker() {
@@ -54,6 +57,11 @@ class SoftwareHelper {
             `sudo mkdir -p ${PathHelper.WORKING_DIR}/CudosData`,
             `sudo chown -R ${user}:${user} ${PathHelper.WORKING_DIR}`,
         ]);
+    }
+
+    async addUserToDockerGroup() {
+        const user = this.sshHelper.computer.user;
+        await this.sshHelper.exec(`sudo /sbin/usermod -a -G docker ${user}`);
     }
 
 }
