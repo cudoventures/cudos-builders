@@ -9,6 +9,7 @@ const CHAIN_NAME = 'CudosTestnet-DeployerNetwork';
 
 const GRAVITY_BRIDGE_UI_CONTAINER_NAME = 'cudos-deployer-network-gravity-bridge-ui';
 const EXPLORER_CONTAINER_NAME = 'cudos-deployer-network-explorer';
+const EXPLORER_MONGO_CONTAINER_NAME = 'cudos-deployer-network-explorer-mongo';
 const FAUCET_CONTAINER_NAME = 'cudos-deployer-network-faucet';
 
 class NodesService {
@@ -25,7 +26,8 @@ class NodesService {
         this.validatorIdToOrchWalletModelMap = new Map();
         this.nodeIdTotendermintNodeId = new Map();
 
-        this.genesisJson = '';
+        this.genesisJsonString = '';
+        this.genesisTime = '';
         this.faucetAddress = '';
         this.faucetMnemonic = '';
         this.gravityContractAddress = '';
@@ -99,7 +101,10 @@ class NodesService {
         this.nodeIdTotendermintNodeId.set(validatorNodeModel.nodeId, tendermintNodeId);
 
         this.faucetAddress = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "echo 123123123 | cudos-noded keys show faucet -a --keyring-backend os"`, false);
-        this.genesisJson = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cat /usr/cudos/cudos-data/config/genesis.json"`, false);
+        this.genesisJsonString = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cat /usr/cudos/cudos-data/config/genesis.json"`, false);
+
+        const genesisJson = JSON.parse(`${this.genesisJsonString.replace(/(\r\n|\n|\r)/gm, "")}`);
+        this.genesisTime = genesisJson.genesis_time;
 
         const faucetWalletString = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cat /usr/cudos/cudos-data/faucet.wallet"`, false);
         const faucetWallet = WalletModel.instanceByString(faucetWalletString);
@@ -147,7 +152,7 @@ class NodesService {
                 `sed -i "s/VOLUME_NAME=cudos-data-seed-node-01/VOLUME_NAME=\"${volumeName}\"/g" ./seed-node.local01.arg`,
                 `sed -i "s/PORT26656=60201/PORT26656=\"${port26656}\"/g" ./seed-node.local01.arg`,
                 `sed -i "s/PORT26657=60202/PORT26657=\"${port26657}\"/g" ./seed-node.local01.arg`,
-                ...NodesHelper.getDockerConfig(this.genesisJson),
+                ...NodesHelper.getDockerConfig(this.genesisJsonString),
                 ...NodesHelper.getUserOverrideYml('seed-node'),
                 `docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -f ./users-seed-node.override.yml -p ${dockerContainerInitName} up --build`,
                 `docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -f ./users-seed-node.override.yml -p ${dockerContainerInitName} down`,
@@ -208,7 +213,7 @@ class NodesService {
                 `sed -i "s/PORT26657=26657/PORT26657=\"${port26657}\"/g" ./sentry-node.local01.arg`,
                 `sed -i "s/PORT1317=1317/PORT1317=\"${port1317}\"/g" ./sentry-node.local01.arg`,
                 `sed -i "s/PORT9090=9090/PORT9090=\"${port9090}\"/g" ./sentry-node.local01.arg`,
-                ...NodesHelper.getDockerConfig(this.genesisJson),
+                ...NodesHelper.getDockerConfig(this.genesisJsonString),
                 ...NodesHelper.getUserOverrideYml('sentry-node'),
                 `docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -f ./users-sentry-node.override.yml -p ${dockerContainerInitName} up --build`,
                 `docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -f ./users-sentry-node.override.yml -p ${dockerContainerInitName} down`,
@@ -264,7 +269,7 @@ class NodesService {
                 `sed -i "s/VOLUME_NAME=cudos-data-full-node-client-local-01/VOLUME_NAME=\"${volumeName}\"/g" ./full-node.client.local01.arg`,
                 `sed -i "s/PORT26656=60401/PORT26656=\"${port26656}\"/g" ./full-node.client.local01.arg`,
                 `sed -i "s/init-full-node.sh\\"]/init-full-node.sh \\&\\& sleep infinity\\"]/g" ./init-full-node.dockerfile`,
-                ...NodesHelper.getDockerConfig(this.genesisJson),
+                ...NodesHelper.getDockerConfig(this.genesisJsonString),
                 ...NodesHelper.getUserOverrideYml('full-node'),
                 `docker-compose --env-file ./full-node.client.local01.arg -f ./init-full-node.yml -f ./users-full-node.override.yml -p ${dockerContainerInitName} up --build -d`,
             ]);
@@ -319,7 +324,7 @@ class NodesService {
                     `sed -i "s/VOLUME_NAME=cudos-data-seed-node-01/VOLUME_NAME=\"${volumeName}\"/g" ./seed-node.local01.arg`,
                     `sed -i "s/PORT26656=60201/PORT26656=\"${port26656}\"/g" ./seed-node.local01.arg`,
                     `sed -i "s/PORT26657=60202/PORT26657=\"${port26657}\"/g" ./seed-node.local01.arg`,
-                    ...NodesHelper.getDockerConfig(this.genesisJson),
+                    ...NodesHelper.getDockerConfig(this.genesisJsonString),
                     ...NodesHelper.getUserOverrideYml('seed-node'),
                     `docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -f ./users-seed-node.override.yml -p ${dockerContainerInitName} up --build`,
                     `docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -f ./users-seed-node.override.yml -p ${dockerContainerInitName} down`,
@@ -380,7 +385,7 @@ class NodesService {
                     `sed -i "s/PORT26657=26657/PORT26657=\"${port26657}\"/g" ./sentry-node.local01.arg`,
                     `sed -i "s/PORT1317=1317/PORT1317=\"${port1317}\"/g" ./sentry-node.local01.arg`,
                     `sed -i "s/PORT9090=9090/PORT9090=\"${port9090}\"/g" ./sentry-node.local01.arg`,
-                    ...NodesHelper.getDockerConfig(this.genesisJson),
+                    ...NodesHelper.getDockerConfig(this.genesisJsonString),
                     ...NodesHelper.getUserOverrideYml('sentry-node'),
                     `docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -f ./users-sentry-node.override.yml -p ${dockerContainerInitName} up --build`,
                     `docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -f ./users-sentry-node.override.yml -p ${dockerContainerInitName} down`,
@@ -598,11 +603,11 @@ class NodesService {
             await utilsSshHelper.cloneRepos();
         }
         await utilsSshHelper.exec([
-            ...NodesHelper.getUserEnv(),
             `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/explorer`,
             'cp ./explorer.env.example ./explorer.local.env',
             `sed -i "s~MONGO_URL=~MONGO_URL=mongodb://root:cudos-root-db-pass@cudos-explorer-mongodb:27017~g" ./explorer.local.env`,
             `sed -i "s~ROOT_URL=~ROOT_URL=http://${host}~g" ./explorer.local.env`,
+            `sed -i "s~GENESIS_TIME=\\"2021-09-17T12:54:30.602457663Z\\"~GENESIS_TIME=\\"${this.genesisTime}\\"~g" ./explorer.local.arg`,
             `sed -i "s~FAUCET_URL=\\"http://localhost:5000\\"~FAUCET_URL=\\"http://${host}:5000\\"~g" ./explorer.local.arg`,
             `sed -i "s~INTERNAL_RPC_URL=\\"http://cudos-start-sentry-node-01:26657\\"~INTERNAL_RPC_URL=\\"http://${this.firstSentryNodeInternalAddress}:${this.firstSentryNodePort26657}\\"~g" ./explorer.local.arg`,
             `sed -i "s~INTERNAL_API_URL=\\"http://cudos-start-sentry-node-01:1317\\"~INTERNAL_API_URL=\\"http://${this.firstSentryNodeInternalAddress}:${this.firstSentryNodePort1317}\\"~g" ./explorer.local.arg`,
@@ -611,13 +616,11 @@ class NodesService {
             `sed -i "s~EXTERNAL_STAKING_URL=\\"http://localhost:3000/validators\\"~EXTERNAL_STAKING_URL=\\"http://${host}:3000/validators\\"~g" ./explorer.local.arg`,
             `sed -i "s/CHAIN_NAME=\\"CudosTestnet-Local\\"/CHAIN_NAME=\\"${CHAIN_NAME}\\"/g" ./explorer.local.arg`,
             `sed -i "s/CHAIN_ID=\\"cudos-local-network\\"/CHAIN_ID=\\"${CHAIN_ID}\\"/g" ./explorer.local.arg`,
-            `echo '\r\n    extra_hosts:' >> ./explorer.dev.yml`,
-            `echo '      - "host.docker.internal:host-gateway"' >> ./explorer.dev.yml`,
-            `sed -i "s/container_name: cudos-explorer/container_name: ${EXPLORER_CONTAINER_NAME}/g" ./explorer.dev.yml`,
-            ...NodesHelper.getUserOverrideYml('explorer.dev'),
-            `docker-compose --env-file ./explorer.local.arg -f ./explorer.dev.yml -f ./users-explorer.dev.override.yml -p ${EXPLORER_CONTAINER_NAME} up --build -d`
+            `sed -i "s/container_name: cudos-explorer/container_name: ${EXPLORER_CONTAINER_NAME}/g" ./explorer.yml`,
+            `sed -i "s/container_name: cudos-explorer-mongo/container_name: ${EXPLORER_MONGO_CONTAINER_NAME}/g" ./explorer.yml`,
+            `sed -i "s/- cudos-explorer-mongodb/- cudos-explorer-mongodb\\r\\n    extra_hosts:\\r\\n      - \\"host.docker.internal:host-gateway\\"/g" ./explorer.yml`,
+            `docker-compose --env-file ./explorer.local.arg -f ./explorer.yml -p ${EXPLORER_CONTAINER_NAME} up --build -d`
         ]);
-        // docker-compose --env-file ./explorer.local.arg -f ./explorer.dev.yml -f ./users-explorer.dev.override.yml -p cudos-explorer up --build -d
     }
 
     getSeedsByValidatorId(validatorId) {
@@ -734,6 +737,9 @@ class NodesService {
             `docker container rm ${FAUCET_CONTAINER_NAME}`,
             `docker stop ${EXPLORER_CONTAINER_NAME}`,
             `docker container rm ${EXPLORER_CONTAINER_NAME}`
+            `docker stop ${EXPLORER_MONGO_CONTAINER_NAME}`,
+            `docker container rm ${EXPLORER_MONGO_CONTAINER_NAME}`,
+            `docker volume rm ${EXPLORER_MONGO_CONTAINER_NAME}_cudosexplorermongodbdata`
         ], false));
 
         await Promise.all(tasks);

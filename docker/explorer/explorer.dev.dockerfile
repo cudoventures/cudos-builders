@@ -45,13 +45,15 @@ RUN cd /usr/src/explorer && \
     sed -i ':a;N;$!ba;s/\n//g' ./default_settings.json && \
     sed -i 's/ //g' ./default_settings.json && \
     cp ./default_settings.json ./settings.json && \
-    chown ${USER_NAME}:${GROUP_NAME} ./settings.json
+    chown ${USER_NAME}:${GROUP_NAME} ./settings.json && \
+    mkdir -p /usr/local/explorer/.meteor/local && \
+    chown ${USER_NAME}:${GROUP_NAME} /usr/local/explorer/.meteor/local
 
 
 WORKDIR /usr/local/explorer
 
-USER ${USER_NAME}:${GROUP_NAME}
+USER ${USER_NAME}
 
 RUN curl https://install.meteor.com/ | sh
 
-CMD ["/bin/bash", "-c", "source ~/.bashrc && meteor npm install && meteor reset && meteor --settings /usr/src/explorer/settings.json"]
+CMD ["/bin/bash", "-c", "source ~/.bashrc && meteor npm install && rm -rf ./.meteor/local/* && meteor --settings /usr/src/explorer/settings.json"]
