@@ -1,0 +1,9 @@
+
+{
+  "chain-id": "cudos-local-network-2",
+  "rpc-addr": "http://cudos-start-root-node-2:26657",
+  "account-prefix": "cudos",
+  "gas-adjustment": 1.5,
+  "gas-prices": "10000acudos",
+  "trusting-period": "10m"
+}

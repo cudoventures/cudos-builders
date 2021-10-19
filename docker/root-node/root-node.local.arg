@@ -1,4 +1,9 @@
 CUDOS_HOME=/usr/cudos/cudos-data
 ENV_FILE=./root-node.local.env
+
+IMAGE_NAME=1
+CONTAINER_NAME=1
+DATA_FOLDER=1
+
 PORT26656=60101
 PORT26660=60102
