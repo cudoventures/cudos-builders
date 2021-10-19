@@ -7,6 +7,8 @@ class ValidatorNodeModel extends AbsNodeModel {
         this.validatorId = "";
         this.orchEthAddress = "";
         this.ethPrivKey = "";
+
+        this.port26656 = 0;
     }
 
     getDockerContainerInitName() {

@@ -86,6 +86,10 @@ class TopologyHelper {
         });
     }
 
+    getFirstSentry() {
+        return this.sentries[0];
+    }
+
     validate(gravity, utils) {
         this.nodesMap.forEach((nodeModel) => {
             const computerModel = this.getComputerModel(nodeModel.computerId);

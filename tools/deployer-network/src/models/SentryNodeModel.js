@@ -5,6 +5,11 @@ class SentryNodeModel extends AbsNodeModel {
     constructor() {
         super();
         this.validatorId = "";
+
+        this.port26656 = 0;
+        this.port26657 = 0;
+        this.port1317 = 0;
+        this.port9090 = 0;
     }
 
     getDockerContainerInitName() {

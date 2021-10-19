@@ -29,6 +29,13 @@ class NodesHelper {
         ]
     }
 
+    static getDockerExtraHosts(ymlName) {
+        return [
+            `echo '\r\n    extra_hosts:' >> ./${ymlName}.yml`,
+            `echo '      - "host.docker.internal:host-gateway"' >> ./${ymlName}.yml`,
+        ]
+    }
+
 }
 
 module.exports = NodesHelper;

@@ -61,12 +61,15 @@ class InstancesService {
     }
 
     async validateSoftwareRequirements() {
+        const tasks = [];
         for (let i = 0;  i < this.topologyHelper.computers.length;  ++i) {
             const computer = this.topologyHelper.computers[i];
             const sshHelper = this.sshHelpersMap.get(computer.id);
             const softwareHelper = new SoftwareHelper(sshHelper);
-            await softwareHelper.validateSoftwareRequirements();
+            tasks.push(softwareHelper.validateSoftwareRequirements());
         }
+
+        Promise.all(tasks);
     }
 
     onExit = async () => {
