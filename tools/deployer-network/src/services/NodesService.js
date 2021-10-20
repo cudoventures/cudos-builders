@@ -36,26 +36,28 @@ class NodesService {
         this.utils = "1";
     }
 
-    async start(gravity, utils) {
+    async start(gravity, explorer, faucet) {
         this.gravity = gravity;
         this.utls = utils;
 
         await this.initAndStartRootValidator();
-        // await this.initAndStartRootValidatorSeedNodes();
-        // await this.initAndStartRootValidatorSentryNodes();
-        // await this.initValidators();
-        // await this.initAndStartValidatorsSeedNode();
-        // await this.initAndStartValidatorsSentryNode();
-        // await this.configAndStartValidators();
-        // if (gravity === '1') {
-        //     await this.deployGravitySmartContract();
-        //     await this.startOrchestrators();
-        //     await this.startGravityBridgeUi();
-        // }
-        // if (utils === '1') {
-        //     await this.startFaucet();
-        //     await this.startExplorer();
-        // }
+        await this.initAndStartRootValidatorSeedNodes();
+        await this.initAndStartRootValidatorSentryNodes();
+        await this.initValidators();
+        await this.initAndStartValidatorsSeedNode();
+        await this.initAndStartValidatorsSentryNode();
+        await this.configAndStartValidators();
+        if (gravity === '1') {
+            await this.deployGravitySmartContract();
+            await this.startOrchestrators();
+            await this.startGravityBridgeUi();
+        }
+        if (faucet === '1') {
+            await this.startFaucet();
+        }
+        if (explorer === '1') {
+            await this.startExplorer();
+        }
     }
 
     async initAndStartRootValidator() {

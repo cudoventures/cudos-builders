@@ -21,7 +21,7 @@ class SentryNodeModel extends AbsNodeModel {
     }
 
     static fromJson(json) {
-        if (json === null) {
+        if (json === null || json === undefined) {
             return null;
         }
 

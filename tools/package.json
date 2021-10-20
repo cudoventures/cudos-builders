@@ -40,7 +40,10 @@
 
 
 
-        "deploy--ethereum-rinkeby": "node ./deployer-ethereum/Main.js --target=ethereum"
+        "deploy--ethereum-rinkeby": "node ./deployer-ethereum/Main.js --target=ethereum",
+
+
+        "network": "node ./deployer-network/src/Main.js"
 
     },
     "engines": {

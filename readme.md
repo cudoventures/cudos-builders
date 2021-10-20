@@ -96,11 +96,15 @@ Now your VS Code should reopen and start building the devcontainer. It could tak
 
 ## Configuration for deployment
 
-<em>You can skip this step if you are going to use network deployer or deployer-tls.</em>
+<em>You can skip this step if you are going to use network-deployer or deployer-tls.</em>
 
 Most of the deployers below has a file named <code>secrecs.json.example</code> Duplicate this file and rename it to <code>secrets.json</code> In it you will find predefined instances' names. Let's call them **targets**. Do not change them, just add the corresponding parameters in the empty variables. Each target needs a host, port, username, privateKey, keyPass (if available) and serverPath. If you are deploying to currently running testnets, leave the serverPath as it is - <code>/usr/cudos</code>
 
-## Ethereum deployer
+## NPM
+
+All of the NPM commands below are available once you navigate to <code>parentDir/CudosBuilders/tools</code> directory.
+
+## ethereum deployer
 
 ### Usage:
 1. Configure <code>secrets.json</code> in this deployer as described above.
@@ -110,7 +114,7 @@ Most of the deployers below has a file named <code>secrecs.json.example</code> D
 
 **<code>deploy--ethereum-rinkeby</code>** - deploys the rinkeby ethereum full node to gcloud using <code>secrets.json</code> in the deployer's folder.
 
-## Gravity bridge ui deployer
+## gravity bridge ui deployer
 
 ### Usage:
 1. Configure <code>secrets.json</code> in this deployer as described above.
@@ -128,21 +132,132 @@ Most of the deployers below has a file named <code>secrecs.json.example</code> D
 
 ## network deployer
 
-To do (network deployer is under development)
-
 This deployer is capable is starting an entire blockchain. To do so you must specify the network's topology and nodes' role in a file.
 
 ### Topology and roles
 
 The best way to define the topology and the roles is to duplicate the <code>parentDir/CudosBuilders/tools/deployer-network/config/topology.json.example</code> and rename it to <code>topology.json</code>.
 
-### Node requirements
+**<code>topology.json</code> is a json file has the following structure:**
 
-Each "computer" defined in the <code>topology.json</code> is accessed by a username. This user should be able to execute **sudo** commands without asking for a password, e.g. it should be in <em>sudoer</em> group. More information can be found <a href="https://www.cyberciti.biz/faq/linux-unix-running-sudo-command-without-a-password/">here</a>
+```json
+{
+    "computers": Computer[], // Defines each computer where a node will be deployed.
+    "nodes": Node[], // Defines the topology of the network.
+    "params": Params, // Global params used by nodes.
+}
+```
 
-### Run network deployer
+**Computer** object:
 
-node ./src/Main.js --topology ./config/topology.json
+Each **computer** defined in the <code>topology.json</code> is accessed by a username. This user should be able to execute **sudo** commands without asking for a password, e.g. it should be in <em>sudoer</em> group. More information can be found <a href="https://www.cyberciti.biz/faq/linux-unix-running-sudo-command-without-a-password/">here</a>
+
+```json
+{
+    "id": string, // The id of the computer. It is used as a unique identifier of the machine.
+    "ip": string, // The IP of the computer or "auto". If set to "auto" then a local docker instance will be created.
+    "port": number, // The SSH service port. Usually it is 22.
+    "user": string, // The SSH service user. It is optional if "ip" is "auto".
+    "sshKey": string, // Optional - Absolute path of the sshKey if available
+    "pass": string // The password of the sshKey or user. It can be empty string.
+}
+```
+
+**Node** object:
+```json
+{
+    "rootValidator": Validator, // Defines the root validator, e.g. the one that starts the network.
+    "validators": Validator[], // Defines the validatora other than the root one.
+    "seeds": Seed[], // Defines the seed nodes and how they are attached to validators.
+    "sentries": Sentry[], // Defines the sentry nodes and how they are attached to validators.
+    "gravityBridgeUi": GravityBridgeUi, // Defines the gravity bridge UI.
+    "utils": Utils, // Defines the faucet and the explorer.
+}
+```
+
+**Validator** object:
+```json
+{
+    "computerId": string, // The id of the computer where this node will run.
+    "validatorId": string, // The id of the current validator. It is used as a unique identifier of the validator.
+    "orchEthAddress": string, // The address of a ethereum wallet starting with 0x. (1)
+    "ethPrivKey": string // The private key of the "orchEthAddress". (1)
+}
+```
+
+**Seed** object:
+```json
+{
+    "computerId": string, // The id of the computer where this node will run.
+    "validatorId": string, // The id of the current validator where this seed will be attached to.
+}
+```
+
+**Sentry** object:
+```json
+{
+    "computerId": string, // The id of the computer where this node will run.
+    "validatorId": string, // The id of the current validator where this sentry will be attached to.
+}
+```
+
+**GravityBridgeUi** object:
+```json
+{
+    "computerId": string, // The id of the computer where this node will run. (1)
+    "ethTokenContract": string, // Address of the token contract starting with 0x (1)
+}
+```
+
+**Utils** object:
+```json
+{
+    "computerId": string, // The id of the computer where this node will run. (3)
+    "googleApiKey": string, // Google api key used by faucet's recaptcha (2)
+    "captchaSiteKey": string, // Google captcha's site key used by faucet's recaptcha (2)
+    "googleProjectId": string, // Google cloud project id used by faucet's recaptcha (2)
+}
+```
+
+**Params** object:
+```json
+{
+    "gravity": ParamsGravity // Defines gravity parameters
+}
+```
+
+**ParamsGravity** object:
+```json
+{
+    "ethrpc": string, // Ethereum full node endpoint. (1)
+    "contractDeploerEthPrivKey": string // Hex-formated private key of a ethereum wallet. It will be used for the gravity contract deployment. (1)
+}
+```
+
+(1) It can be empty if the chain is started without **gravity** module.
+
+(2) It can be empty if the chain is started without **faucet** module.
+
+(2) It can be empty if the chain is started without **explorer** and **faucet** modules.
+
+**<em>Remarks:</em>**
+- Each **computer** instance can be used only by a single node.
+- The network should have at least **rootValidator**.
+- Each **validator** must have at least one **seed** and one **sentry**.
+- In order **faucet** to work it must be installed on a computer with "ip" set to "auto".
+
+### List of npm commands regarding this deployer:
+
+**<code>network</code>** - starts the network using the topology defined in <code>parentDir/CudosBuilders/tools/deployer-network/config/topology.json</code>. It has 4 parameters:
+
+- topology: A relative path to topology.json based on **tools** folder.
+- gravity: 0 (disables the module) or 1 (enabled the module)
+- explorer: 0 (disables the module) or 1 (enabled the module)
+- faucet: 0 (disables the module) or 1 (enabled the module)
+
+The parameters are passed in the following way:
+
+<code>npm run network -- --topology ./deployer-network/config/topology.json --gravity 1 --explorer 1 --faucet 1</code>
 
 ## nodes deployer
 

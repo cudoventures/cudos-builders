@@ -6,7 +6,7 @@ class AbsNodeModel {
     }
 
     static fromJson(json, model = null) {
-        if (json === null) {
+        if (json === null || json === undefined) {
             return null;
         }
 

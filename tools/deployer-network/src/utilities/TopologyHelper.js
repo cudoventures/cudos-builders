@@ -90,8 +90,14 @@ class TopologyHelper {
         return this.sentries[0];
     }
 
-    validate(gravity, utils) {
+    validate(gravity, explorer, faucet) {
+        const usedComputerIds = new Set();
         this.nodesMap.forEach((nodeModel) => {
+            if (usedComputerIds.has(nodeModel.computerId) === true) {
+                throw new Error(`Computer with id (${nodeModel.computerId}) has been used by more than a single node`);
+            }
+            usedComputerIds.add(nodeModel.computerId);
+
             const computerModel = this.getComputerModel(nodeModel.computerId);
             if (computerModel === undefined) {
                 throw new Error(`Node with id (${nodeModel.nodeId}) does not have a computer instance`);
@@ -109,20 +115,60 @@ class TopologyHelper {
             }
         }
 
+        if (this.rootValidator === null) {
+            throw new Error(`You must define a root validator`);
+        }
+
         validateValidator(this.rootValidator.validatorId);
         this.validators.forEach((validatorNodeModel) => {
             validateValidator(validatorNodeModel.validatorId);
         });
 
         if (gravity === '1') {
+            if (usedComputerIds.has(this.gravityBridgeUiModel.computerId) === true) {
+                throw new Error(`Computer with id (${this.gravityBridgeUiModel.computerId}) has been used by more than a single node`);
+            }
+            usedComputerIds.add(this.gravityBridgeUiModel.computerId);
+
             if (this.getComputerModel(this.gravityBridgeUiModel.computerId) === undefined) {
                 throw new Error(`GravityBridgeUi does not have a computer instance`);
             }
+
+            if (this.gravityBridgeUiModel.ethTokenContract === '') {
+                throw new Error(`Gravity does not have a token coontract`);
+            }
+
+            if (this.params.gravity.ethrpc === '') {
+                throw new Error(`Gravity does not have a ethereum full node`);
+            }
+
+            if (this.params.gravity.contractDeploerEthPrivKey === '') {
+                throw new Error(`Gravity does not have a contract deployer private key`);
+            }
         }
 
-        if (utils === '1') {
+        if (explorer === '1' ||  faucet === '1') {
+            if (usedComputerIds.has(this.utilsModel.computerId) === true) {
+                throw new Error(`Computer with id (${this.utilsModel.computerId}) has been used by more than a single node`);
+            }
+            usedComputerIds.add(this.utilsModel.computerId);
+
             if (this.getComputerModel(this.utilsModel.computerId) === undefined) {
                 throw new Error(`Utils does not have a computer instance`);
+            }
+
+            if (faucet === '1') {
+                if (this.utilsModel.googleApiKey === '') {
+                    throw new Error(`Utils does not have a google api key`);
+                }
+
+                if (this.utilsModel.captchaSiteKey === '') {
+                    throw new Error(`Utils does not have a google captcha site key`);
+                }
+
+                if (this.utilsModel.googleProjectId === '') {
+                    throw new Error(`Utils does not have a google project id`);
+                }
             }
         }
     }
