@@ -12,3 +12,4 @@ docker/snapshot-test/data
 topology.json
 users*override.yml
 docker/tests/**/data
+docker/monitoring/config/prometheus.tesnet.public.yml

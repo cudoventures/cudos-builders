@@ -12,3 +12,4 @@ VOLUME_NAME=cudos-data-seed-node-client-local-01
 
 PORT26656=60203
 PORT26657=60204
+PORT26660=60205

@@ -26,6 +26,7 @@ services:
       - "${PORT26657}:26657"
       - "${PORT1317}:1317"
       - "${PORT9090}:9090"
+      - "${PORT26660}:26660"
     networks:
       - shared-cudos-network
     logging:

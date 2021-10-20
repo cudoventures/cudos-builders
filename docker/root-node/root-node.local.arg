@@ -1,3 +1,4 @@
 CUDOS_HOME=/usr/cudos/cudos-data
 ENV_FILE=./root-node.local.env
 PORT26656=60101
+PORT26660=60102

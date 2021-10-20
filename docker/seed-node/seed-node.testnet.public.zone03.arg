@@ -12,3 +12,4 @@ VOLUME_NAME=cudos-data-seed-node-testnet-public-zone03
 
 PORT26656=26656
 PORT26657=26657
+PORT26660=26660

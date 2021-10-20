@@ -18,8 +18,8 @@ ARG CHAIN_ID
 RUN if [ $USER_NAME != 'root' ]; then \
         groupmod -g 2000 node; \
         usermod -u 2000 -g 2000 node; \
-        addgroup -gid ${GROUP_ID} $GROUP_NAME; \
-        adduser --disabled-password -gecos "" -uid ${USER_ID} -gid ${GROUP_ID} ${USER_NAME}; \
+        groupadd --gid ${GROUP_ID} ${GROUP_NAME}; \
+        useradd --no-log-init --create-home --shell /bin/bash --uid ${USER_ID} --gid ${GROUP_ID} ${USER_NAME}; \
         echo "export PATH=\$PATH:/home/${USER_NAME}/.meteor" > /home/${USER_NAME}/.bashrc; \
     else \
         echo "export PATH=\$PATH:/root/.meteor\nexport METEOR_ALLOW_SUPERUSER=true" > /root/.bashrc; \

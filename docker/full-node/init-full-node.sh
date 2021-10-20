@@ -21,6 +21,11 @@ sed -i "s/persistent_peers = \".*\"/persistent_peers = \"$PERSISTENT_PEERS\"/g" 
 
 sed -i "s/seeds = \".*\"/seeds = \"$SEEDS\"/g" "${CUDOS_HOME}/config/config.toml"
 
+# Monitoring enabled
+if [ "${MONITORING_ENABLED}" = "true" ]; then
+    sed -i "s/prometheus = \".*\"/prometheus = true/g" "${CUDOS_HOME}/config/config.toml"
+fi
+
 # STATE SYNC
 if [ "$SHOULD_USE_STATE_SYNC" = "true" ]; then
     STATE_SYNC_RPC_SERVERS=$(cat ./external-config/state-sync-rpc-servers.config)
