@@ -11,8 +11,8 @@ ARG DOCKER_GROUP_ID
 
 RUN addgroup -gid $DOCKER_GROUP_ID docker && \
     if [ $USER_NAME != 'root' ]; then \
-        addgroup -gid $GROUP_ID $GROUP_NAME; \
-        adduser --disabled-password -gecos "" -uid $USER_ID -gid $GROUP_ID $USER_NAME; \
+        groupadd --gid ${GROUP_ID} ${GROUP_NAME}; \
+        useradd --no-log-init --create-home --shell /bin/bash --uid ${USER_ID} --gid ${GROUP_ID} ${USER_NAME}; \
     fi && \
     usermod -a -G docker $USER_NAME && \
     usermod -a -G sudo $USER_NAME && \

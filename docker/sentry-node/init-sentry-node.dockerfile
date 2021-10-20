@@ -11,8 +11,8 @@ ARG PERSISTENT_PEERS_FILENAME
 ARG STATE_SYNC_RPC_SERVERS_FILENAME
 
 RUN if [ $USER_NAME != 'root' ]; then \
-        addgroup -gid ${GROUP_ID} $GROUP_NAME; \
-        adduser --disabled-password -gecos "" -uid ${USER_ID} -gid ${GROUP_ID} ${USER_NAME}; \
+        groupadd --gid ${GROUP_ID} ${GROUP_NAME}; \
+        useradd --no-log-init --create-home --shell /bin/bash --uid ${USER_ID} --gid ${GROUP_ID} ${USER_NAME}; \
     fi
 
 RUN apt update && apt install -y jq
