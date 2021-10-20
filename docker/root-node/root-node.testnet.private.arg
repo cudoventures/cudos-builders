@@ -1,3 +1,4 @@
 CUDOS_HOME=/usr/cudos/cudos-data
 ENV_FILE=./root-node.testnet.private.env
 PORT26656=26656
+PORT26660=26660

@@ -1,0 +1,31 @@
+version: '3.1'
+
+networks:
+  shared-cudos-network:
+    name: shared-cudos-network
+
+services:
+  prometeus:
+    image: prometeus-monitoring
+    build:
+      dockerfile: ./prometeus.dockerfile
+      context: ./
+    restart: unless-stopped
+    env_file: "$ENV_FILE"
+    volumes:
+      - '${PROMETHEUS_DATA_PATH}:/etc/prometheus'
+      - '${PROMETHEUS_CONFIG_PATH_LOCAL}:/etc/prometheus/prometheus.yml'
+    networks:
+      - shared-cudos-network
+    ports:
+      - "${PROMETHEUS_PORT}:9090"  
+  grafana:
+    image: grafana-monitoring
+    build:
+      dockerfile: ./grafana.dockerfile
+      context: ./
+    restart: unless-stopped
+    networks:
+      - shared-cudos-network
+    ports:
+      - "${GRAFANA_PORT}:3000"

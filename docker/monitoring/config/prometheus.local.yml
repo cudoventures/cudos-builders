@@ -1,0 +1,15 @@
+# my global config
+global:
+  scrape_interval: 15s
+  evaluation_interval: 30s
+
+scrape_configs:
+  - job_name: cudosnetwork
+    static_configs:
+      - targets: ['cudos-start-sentry-node-01:26660']
+        labels:
+          instance: sentry-1
+      - targets: ['cudos-start-root-node:26660']
+        labels:
+          instance: validator
+ 

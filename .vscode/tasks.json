@@ -679,5 +679,20 @@
             "type": "shell",
             "group": "build"
         },
+
+        // Monitoring 
+        {
+            "label": "Start Monitoring local network in docker",
+            "command": "cd ./docker/monitoring&& docker-compose --env-file ./monitoring.local.arg -f ./monitoring.yml -p cudos-monitoring-local up",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Start Monitoring public network in docker",
+            "command": "cd ./docker/monitoring&& docker-compose --env-file ./monitoring.local.arg -f ./monitoring.yml -p cudos-monitoring-local up",
+            "type": "shell",
+            "group": "build"
+        },
+
     ]
 }
