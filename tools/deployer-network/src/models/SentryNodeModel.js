@@ -10,6 +10,7 @@ class SentryNodeModel extends AbsNodeModel {
         this.port26657 = 0;
         this.port1317 = 0;
         this.port9090 = 0;
+        this.port26660 = 0;
     }
 
     getDockerContainerInitName() {

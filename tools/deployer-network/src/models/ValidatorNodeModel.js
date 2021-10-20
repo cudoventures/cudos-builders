@@ -9,6 +9,7 @@ class ValidatorNodeModel extends AbsNodeModel {
         this.ethPrivKey = "";
 
         this.port26656 = 0;
+        this.port26660 = 0;
     }
 
     getDockerContainerInitName() {

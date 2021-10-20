@@ -7,7 +7,8 @@ class SeedNodeModel extends AbsNodeModel {
         this.validatorId = "";
 
         this.port26656 = 0;
-        this.prot26657 = 0;
+        this.port26657 = 0;
+        this.port26660 = 0;
     }
 
     getDockerContainerInitName() {

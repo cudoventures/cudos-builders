@@ -72,6 +72,7 @@ class NodesService {
         const dockerContainerStartName = ValidatorNodeModel.getRootValidatorDockerContainerStartName();        
 
         validatorNodeModel.port26656 = validatorComputerModel.isLocalDocker === true ? ++this.genPorts : 26656;
+        validatorNodeModel.port26660 = validatorComputerModel.isLocalDocker === true ? ++this.genPorts : 26660;
 
         if (validatorComputerModel.isLocalDocker === false) {
             await validatorSshHelper.cloneRepos();
@@ -85,6 +86,7 @@ class NodesService {
             `sed -i "s/CHAIN_ID=/CHAIN_ID=\"${CHAIN_ID}"/g" ./root-node.local.env`,
             `sed -i "s/ORCH_ETH_ADDRESS=/ORCH_ETH_ADDRESS=\"${validatorNodeModel.orchEthAddress}\"/g" ./root-node.local.env`,
             `sed -i "s/PORT26656=60101/PORT26656=\"${validatorNodeModel.port26656}\"/g" ./root-node.local.arg`,
+            `sed -i "s/PORT26660=60102/PORT26660=\"${validatorNodeModel.port26660}\"/g" ./root-node.local.arg`,
             `sed -i "s/container_name: cudos-start-root-node/container_name: ${dockerContainerStartName}/g" ./start-root-node.yml`,
             ...NodesHelper.getDockerExtraHosts('start-root-node'),
             ...NodesHelper.getUserOverrideYml('root-node'),
@@ -134,6 +136,7 @@ class NodesService {
 
             seedNodeModel.port26656 = seedComputerModel.isLocalDocker === true ? ++this.genPorts : 26656;
             seedNodeModel.port26657 = seedComputerModel.isLocalDocker === true ? ++this.genPorts : 26657;
+            seedNodeModel.port26660 = seedComputerModel.isLocalDocker === true ? ++this.genPorts : 26660;
 
             if (seedComputerModel.isLocalDocker === false) {
                 await validatorSshHelper.cloneRepos();
@@ -152,6 +155,7 @@ class NodesService {
                 `sed -i "s/VOLUME_NAME=cudos-data-seed-node-01/VOLUME_NAME=\"${volumeName}\"/g" ./seed-node.local01.arg`,
                 `sed -i "s/PORT26656=60201/PORT26656=\"${seedNodeModel.port26656}\"/g" ./seed-node.local01.arg`,
                 `sed -i "s/PORT26657=60202/PORT26657=\"${seedNodeModel.port26657}\"/g" ./seed-node.local01.arg`,
+                `sed -i "s/PORT26660=60203/PORT26660=\"${seedNodeModel.port26660}\"/g" ./seed-node.local01.arg`,
                 ...NodesHelper.getDockerExtraHosts('start-seed-node'),
                 ...NodesHelper.getDockerConfig(this.genesisJsonString),
                 ...NodesHelper.getUserOverrideYml('seed-node'),
@@ -193,6 +197,7 @@ class NodesService {
             sentryNodeModel.port26657 = sentryComputerModel.isLocalDocker === true ? ++this.genPorts : 26657;
             sentryNodeModel.port1317 = sentryComputerModel.isLocalDocker === true ? ++this.genPorts : 1317;
             sentryNodeModel.port9090 = sentryComputerModel.isLocalDocker === true ? ++this.genPorts : 9090;
+            sentryNodeModel.port26660 = sentryComputerModel.isLocalDocker === true ? ++this.genPorts : 26660;
 
             if (sentryComputerModel.isLocalDocker === false) {
                 await validatorSshHelper.cloneRepos();
@@ -214,6 +219,7 @@ class NodesService {
                 `sed -i "s/PORT26657=26657/PORT26657=\"${sentryNodeModel.port26657}\"/g" ./sentry-node.local01.arg`,
                 `sed -i "s/PORT1317=1317/PORT1317=\"${sentryNodeModel.port1317}\"/g" ./sentry-node.local01.arg`,
                 `sed -i "s/PORT9090=9090/PORT9090=\"${sentryNodeModel.port9090}\"/g" ./sentry-node.local01.arg`,
+                `sed -i "s/PORT26660=26660/PORT26660=\"${sentryNodeModel.port26660}\"/g" ./sentry-node.local01.arg`,
                 ...NodesHelper.getDockerExtraHosts('start-sentry-node'),
                 ...NodesHelper.getDockerConfig(this.genesisJsonString),
                 ...NodesHelper.getUserOverrideYml('sentry-node'),
@@ -247,6 +253,7 @@ class NodesService {
             const volumeName = `cudos-data-full-node-${validatorNodeModel.validatorId}-${i + 1}`;
 
             validatorNodeModel.port26656 = validatorComputerModel.isLocalDocker === true ? ++this.genPorts : 26656;
+            validatorNodeModel.port26660 = validatorComputerModel.isLocalDocker === true ? ++this.genPorts : 26660;
 
             if (validatorComputerModel.isLocalDocker === false) {
                 await validatorSshHelper.cloneRepos();
@@ -262,6 +269,7 @@ class NodesService {
                 `sed -i "s/START_CONTAINER_NAME=cudos-start-full-node-client-local-01/START_CONTAINER_NAME=\"${dockerContainerStartName}\"/g" ./full-node.client.local01.arg`,
                 `sed -i "s/VOLUME_NAME=cudos-data-full-node-client-local-01/VOLUME_NAME=\"${volumeName}\"/g" ./full-node.client.local01.arg`,
                 `sed -i "s/PORT26656=60401/PORT26656=\"${validatorNodeModel.port26656}\"/g" ./full-node.client.local01.arg`,
+                `sed -i "s/PORT26660=60601/PORT26656=\"${validatorNodeModel.port26660}\"/g" ./full-node.client.local01.arg`,
                 `sed -i "s/init-full-node.sh\\"]/init-full-node.sh \\&\\& sleep infinity\\"]/g" ./init-full-node.dockerfile`,
                 ...NodesHelper.getDockerConfig(this.genesisJsonString),
                 ...NodesHelper.getUserOverrideYml('full-node'),
@@ -301,6 +309,7 @@ class NodesService {
 
                 seedNodeModel.port26656 = seedComputerModel.isLocalDocker === true ? ++this.genPorts : 26656;
                 seedNodeModel.port26657 = seedComputerModel.isLocalDocker === true ? ++this.genPorts : 26657;
+                seedNodeModel.port26660 = seedComputerModel.isLocalDocker === true ? ++this.genPorts : 26660;
 
                 if (seedComputerModel.isLocalDocker === false) {
                     await validatorSshHelper.cloneRepos();
@@ -319,6 +328,7 @@ class NodesService {
                     `sed -i "s/VOLUME_NAME=cudos-data-seed-node-01/VOLUME_NAME=\"${volumeName}\"/g" ./seed-node.local01.arg`,
                     `sed -i "s/PORT26656=60201/PORT26656=\"${seedNodeModel.port26656}\"/g" ./seed-node.local01.arg`,
                     `sed -i "s/PORT26657=60202/PORT26657=\"${seedNodeModel.port26657}\"/g" ./seed-node.local01.arg`,
+                    `sed -i "s/PORT26660=60203/PORT26660=\"${seedNodeModel.port26660}\"/g" ./seed-node.local01.arg`,
                     ...NodesHelper.getDockerExtraHosts('start-seed-node'),
                     ...NodesHelper.getDockerConfig(this.genesisJsonString),
                     ...NodesHelper.getUserOverrideYml('seed-node'),
@@ -362,6 +372,7 @@ class NodesService {
                 sentryNodeModel.port26657 = sentryComputerModel.isLocalDocker === true ? ++this.genPorts : 26657;
                 sentryNodeModel.port1317 = sentryComputerModel.isLocalDocker === true ? ++this.genPorts : 1317;
                 sentryNodeModel.port9090 = sentryComputerModel.isLocalDocker === true ? ++this.genPorts : 9090;
+                sentryNodeModel.port26660 = sentryComputerModel.isLocalDocker === true ? ++this.genPorts : 26660;
     
                 if (sentryComputerModel.isLocalDocker === false) {
                     await validatorSshHelper.cloneRepos();
@@ -382,6 +393,7 @@ class NodesService {
                     `sed -i "s/PORT26657=26657/PORT26657=\"${sentryNodeModel.port26657}\"/g" ./sentry-node.local01.arg`,
                     `sed -i "s/PORT1317=1317/PORT1317=\"${sentryNodeModel.port1317}\"/g" ./sentry-node.local01.arg`,
                     `sed -i "s/PORT9090=9090/PORT9090=\"${sentryNodeModel.port9090}\"/g" ./sentry-node.local01.arg`,
+                    `sed -i "s/PORT26660=26660/PORT26660=\"${sentryNodeModel.port26660}\"/g" ./sentry-node.local01.arg`,
                     ...NodesHelper.getDockerExtraHosts('start-sentry-node'),
                     ...NodesHelper.getDockerConfig(this.genesisJsonString),
                     ...NodesHelper.getUserOverrideYml('sentry-node'),
