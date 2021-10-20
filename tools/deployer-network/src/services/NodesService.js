@@ -33,12 +33,14 @@ class NodesService {
         this.gravityContractAddress = '';
 
         this.gravity = "1";
-        this.utils = "1";
+        this.explorer = "1";
+        this.faucet = "1";
     }
 
     async start(gravity, explorer, faucet) {
         this.gravity = gravity;
-        this.utls = utils;
+        this.explorer = explorer;
+        this.faucet = faucet;
 
         await this.initAndStartRootValidator();
         await this.initAndStartRootValidatorSeedNodes();
@@ -663,11 +665,14 @@ class NodesService {
 
     onExit = async () => {
         await this.stopNodesInstances();
-        if (this.gravity === "1") {
+        if (this.gravity === '1') {
             await this.stopOrchestratorInstances();
         }
-        if (this.utils === "1") {
-            await this.stopUtilsInstances();
+        if (this.faucet === '1') {
+            await this.stopFaucetInstance();
+        }
+        if (this.explorer === '1') {
+            await this.stopExplorerInstances();
         }
     }
 
@@ -736,7 +741,7 @@ class NodesService {
         await Promise.all(tasks);
     }
 
-    async stopUtilsInstances() {
+    async stopFaucetInstance() {
         Log.main('Stop Utils\' instances');
 
         const tasks = [];
@@ -746,6 +751,19 @@ class NodesService {
         tasks.push(gravityBridgeUiSshHelper.exec([
             `docker stop ${FAUCET_CONTAINER_NAME}`,
             `docker container rm ${FAUCET_CONTAINER_NAME}`,
+        ], false));
+
+        await Promise.all(tasks);
+    }
+
+    async stopExplorerInstances() {
+        Log.main('Stop Utils\' instances');
+
+        const tasks = [];
+
+        const gravityBridgeUiModel = this.topologyHelper.gravityBridgeUiModel;
+        const gravityBridgeUiSshHelper = this.instancesService.getSshHelper(gravityBridgeUiModel.computerId);
+        tasks.push(gravityBridgeUiSshHelper.exec([
             `docker stop ${EXPLORER_CONTAINER_NAME}`,
             `docker container rm ${EXPLORER_CONTAINER_NAME}`,
             `docker stop ${EXPLORER_MONGO_CONTAINER_NAME}`,

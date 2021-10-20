@@ -132,7 +132,7 @@ All of the NPM commands below are available once you navigate to <code>parentDir
 
 ## network deployer
 
-This deployer is capable is starting an entire blockchain. To do so you must specify the network's topology and nodes' role in a file.
+This deployer is capable is starting an entire blockchain. To do so you must specify the network's topology and nodes' role in a file. Please pay attension to the **Remarks** at the end of next section.
 
 ### Topology and roles
 
@@ -245,6 +245,8 @@ Each **computer** defined in the <code>topology.json</code> is accessed by a use
 - The network should have at least **rootValidator**.
 - Each **validator** must have at least one **seed** and one **sentry**.
 - In order **faucet** to work it must be installed on a computer with "ip" set to "auto".
+- You must either only local docker instances (with "ip": "auto") or only remote machines (with "ip": "<some ip address>").
+- Each **computer** has a user and its ID must be <= 1 000 000, because of docker specifics.
 
 ### List of npm commands regarding this deployer:
 

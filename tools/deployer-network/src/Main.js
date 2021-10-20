@@ -24,7 +24,7 @@ async function main() {
         await instancesService.connectToInstances();
         await instancesService.validateSoftwareRequirements();
         await instancesService.reconnectToInstances(); // in order to apply latest user details like gruops
-        await nodesService.start(args.gravity, args.explorer, arg.faucet);
+        await nodesService.start(args.gravity, args.explorer, args.faucet);
         Log.main('Ready');
     } catch (ex) {
         console.log(ex);

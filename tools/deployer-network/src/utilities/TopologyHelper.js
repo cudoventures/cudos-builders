@@ -91,6 +91,16 @@ class TopologyHelper {
     }
 
     validate(gravity, explorer, faucet) {
+        let hasLocal = false, hasRemote = false;
+        this.computers.forEach((computerModel) => {
+            hasLocal = hasLocal || computerModel.isLocalDocker === true;
+            hasRemote = hasRemote || computerModel.isLocalDocker === false;
+        });
+        
+        if (hasLocal === true && hasRemote === true) {
+            throw new Error('You must either only local docker instances or only remote machines');
+        }
+
         const usedComputerIds = new Set();
         this.nodesMap.forEach((nodeModel) => {
             if (usedComputerIds.has(nodeModel.computerId) === true) {

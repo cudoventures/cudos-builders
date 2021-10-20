@@ -15,6 +15,7 @@ class SoftwareHelper {
         if (shouldAddUserToDockerGroup === true) {
             await this.addUserToDockerGroup();
         }
+        await this.validateUser();
     }
 
     async validateDocker() {
@@ -60,8 +61,17 @@ class SoftwareHelper {
     }
 
     async addUserToDockerGroup() {
+        Log.main(`${this.sshHelper.computer.ip}:${this.sshHelper.computer.port} create docker group`);
         const user = this.sshHelper.computer.user;
         await this.sshHelper.exec(`sudo /sbin/usermod -a -G docker ${user}`);
+    }
+
+    async validateUser() {
+        Log.main(`${this.sshHelper.computer.ip}:${this.sshHelper.computer.port} check user id`);
+        const userId = await this.sshHelper.exec('id -u', false);
+        if (parseInt(userId) > 1000000) {
+            throw new Error(`The id of user (${this.sshHelper.computer.user}) is greater than 1 000 000`);
+        }
     }
 
 }
