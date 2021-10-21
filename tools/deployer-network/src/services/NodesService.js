@@ -432,6 +432,7 @@ class NodesService {
                 `sed -i "s/PERSISTENT_PEERS=/PERSISTENT_PEERS=\"${seeds},${sentries}\"/g" ./full-node.client.local01.env`,
                 ...NodesHelper.getDockerExtraHosts('start-full-node'),
                 `docker-compose --env-file ./full-node.client.local01.arg -f ./config-full-node.yml -f ./users-full-node.override.yml -p ${dockerContainerConfigName} up --build`,
+                `docker-compose --env-file ./full-node.client.local01.arg -f ./config-full-node.yml -f ./users-full-node.override.yml -p ${dockerContainerConfigName} down`,
                 `docker-compose --env-file ./full-node.client.local01.arg -f ./start-full-node.yml -f ./users-full-node.override.yml -p ${dockerContainerStartName} up --build -d`
             ]);
 
@@ -663,7 +664,6 @@ class NodesService {
     }
 
     getExternalHostByComputerId(computerId) {
-        console.log('computer id', computerId);
         const computerModel = this.topologyHelper.getComputerModel(computerId);
         return computerModel.isLocalDocker === true ? 'localhost' : computerModel.ip;
     }
@@ -679,6 +679,7 @@ class NodesService {
         await this.stopNodesInstances();
         if (this.gravity === '1') {
             await this.stopOrchestratorInstances();
+            await this.stopGravityBridgeUiInstance();
         }
         if (this.faucet === '1') {
             await this.stopFaucetInstance();
