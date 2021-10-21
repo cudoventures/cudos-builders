@@ -514,6 +514,8 @@ Each build-variant of a node has a <em>data</em> folder. All blockchain informat
 
 As you can see in <em>Overview</em>, the location of <em>data</em> folder is <code>/parentDir/CudosData</code>. Each build-variant creates a sub-folder inside. The resulting structure is like <code>/parentDir/CudosData/{build-variant}</code>. The exact name of the build-variant's sub-folder is defined in the corresponding **.arg** file.
 
+The data folder could potencially grow in size. So if you are running a build-variant in a cloud or similar environment, where main disk storage is usually limited, make you have a symbolic link from <code>/parentDir/CudosData/{build-variant}</code> to a mounted volume that has >= 500GB.
+
 In the <code>/parentDir/CudosData/{build-variant}</code> folder you can find tendermint.nodeid.
 
 In the <code>/parentDir/CudosData/{build-variant}/config</code> folder you can find genesis.json and config.toml. You can set <em>SEEDS</em>, <em>PERSISTENT_PEERS</em>, <em>PRIVATE_PEER_IDS</em> in config.toml. Search for <code>seeds = ""</code>, <code>persistent_peers = ""</code> and <code>private_peer_ids</code> in order to set the corresponding peers.
