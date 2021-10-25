@@ -160,7 +160,7 @@ class NodesService {
                 ...NodesHelper.getDockerConfig(this.genesisJsonString),
                 ...NodesHelper.getUserOverrideYml('seed-node'),
                 `docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -f ./users-seed-node.override.yml -p ${dockerContainerInitName} up --build`,
-                `docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -f ./users-seed-node.override.yml -p ${dockerContainerInitName} down`,
+                `(docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -f ./users-seed-node.override.yml -p ${dockerContainerInitName} down || true)`,
                 `docker-compose --env-file ./seed-node.local01.arg -f ./start-seed-node.yml -f ./users-seed-node.override.yml -p ${dockerContainerStartName} up --build -d`
             ]);
 
@@ -224,7 +224,7 @@ class NodesService {
                 ...NodesHelper.getDockerConfig(this.genesisJsonString),
                 ...NodesHelper.getUserOverrideYml('sentry-node'),
                 `docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -f ./users-sentry-node.override.yml -p ${dockerContainerInitName} up --build`,
-                `docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -f ./users-sentry-node.override.yml -p ${dockerContainerInitName} down`,
+                `(docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -f ./users-sentry-node.override.yml -p ${dockerContainerInitName} down || true)`,
                 `docker-compose --env-file ./sentry-node.local01.arg -f ./start-sentry-node.yml -f ./users-sentry-node.override.yml -p ${dockerContainerStartName} up --build -d`
             ]);
 
@@ -269,7 +269,7 @@ class NodesService {
                 `sed -i "s/START_CONTAINER_NAME=cudos-start-full-node-client-local-01/START_CONTAINER_NAME=\"${dockerContainerStartName}\"/g" ./full-node.client.local01.arg`,
                 `sed -i "s/VOLUME_NAME=cudos-data-full-node-client-local-01/VOLUME_NAME=\"${volumeName}\"/g" ./full-node.client.local01.arg`,
                 `sed -i "s/PORT26656=60401/PORT26656=\"${validatorNodeModel.port26656}\"/g" ./full-node.client.local01.arg`,
-                `sed -i "s/PORT26660=60601/PORT26656=\"${validatorNodeModel.port26660}\"/g" ./full-node.client.local01.arg`,
+                `sed -i "s/PORT26660=60601/PORT26660=\"${validatorNodeModel.port26660}\"/g" ./full-node.client.local01.arg`,
                 `sed -i "s/init-full-node.sh\\"]/init-full-node.sh \\&\\& sleep infinity\\"]/g" ./init-full-node.dockerfile`,
                 ...NodesHelper.getDockerConfig(this.genesisJsonString),
                 ...NodesHelper.getUserOverrideYml('full-node'),
@@ -281,7 +281,7 @@ class NodesService {
 
             await validatorSshHelper.exec([
                 `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/full-node`,
-                `docker-compose --env-file ./full-node.client.local01.arg -f ./init-full-node.yml -f ./users-full-node.override.yml -p ${dockerContainerInitName} down`,
+                `(docker-compose --env-file ./full-node.client.local01.arg -f ./init-full-node.yml -f ./users-full-node.override.yml -p ${dockerContainerInitName} down || true)`,
             ]);
         }
     }
@@ -333,7 +333,7 @@ class NodesService {
                     ...NodesHelper.getDockerConfig(this.genesisJsonString),
                     ...NodesHelper.getUserOverrideYml('seed-node'),
                     `docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -f ./users-seed-node.override.yml -p ${dockerContainerInitName} up --build`,
-                    `docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -f ./users-seed-node.override.yml -p ${dockerContainerInitName} down`,
+                    `(docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -f ./users-seed-node.override.yml -p ${dockerContainerInitName} down || true)`,
                     `docker-compose --env-file ./seed-node.local01.arg -f ./start-seed-node.yml -f ./users-seed-node.override.yml -p ${dockerContainerStartName} up --build -d`
                 ]);
 
@@ -398,7 +398,7 @@ class NodesService {
                     ...NodesHelper.getDockerConfig(this.genesisJsonString),
                     ...NodesHelper.getUserOverrideYml('sentry-node'),
                     `docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -f ./users-sentry-node.override.yml -p ${dockerContainerInitName} up --build`,
-                    `docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -f ./users-sentry-node.override.yml -p ${dockerContainerInitName} down`,
+                    `(docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -f ./users-sentry-node.override.yml -p ${dockerContainerInitName} down || true)`,
                     `docker-compose --env-file ./sentry-node.local01.arg -f ./start-sentry-node.yml -f ./users-sentry-node.override.yml -p ${dockerContainerStartName} up --build -d`
                 ]);
     
@@ -432,7 +432,7 @@ class NodesService {
                 `sed -i "s/PERSISTENT_PEERS=/PERSISTENT_PEERS=\"${seeds},${sentries}\"/g" ./full-node.client.local01.env`,
                 ...NodesHelper.getDockerExtraHosts('start-full-node'),
                 `docker-compose --env-file ./full-node.client.local01.arg -f ./config-full-node.yml -f ./users-full-node.override.yml -p ${dockerContainerConfigName} up --build`,
-                `docker-compose --env-file ./full-node.client.local01.arg -f ./config-full-node.yml -f ./users-full-node.override.yml -p ${dockerContainerConfigName} down`,
+                `(docker-compose --env-file ./full-node.client.local01.arg -f ./config-full-node.yml -f ./users-full-node.override.yml -p ${dockerContainerConfigName} down || true)`,
                 `docker-compose --env-file ./full-node.client.local01.arg -f ./start-full-node.yml -f ./users-full-node.override.yml -p ${dockerContainerStartName} up --build -d`
             ]);
 
@@ -508,7 +508,7 @@ class NodesService {
 
         await sentrySshHelper.exec([
             `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/gravity-contract-deployer`,
-            `docker-compose --env-file ./gravity-contract-deployer.arg -f ./gravity-contract-deployer.yml -p cudos-gravity-contract-deployer down`
+            `(docker-compose --env-file ./gravity-contract-deployer.arg -f ./gravity-contract-deployer.yml -p cudos-gravity-contract-deployer down || true)`
         ]);
     }
 
@@ -755,7 +755,7 @@ class NodesService {
     }
 
     async stopFaucetInstance() {
-        Log.main('Stop Utils\' instances');
+        Log.main('Stop faucet instances');
 
         const tasks = [];
 
@@ -770,7 +770,7 @@ class NodesService {
     }
 
     async stopExplorerInstances() {
-        Log.main('Stop Utils\' instances');
+        Log.main('Stop explorer instances');
 
         const tasks = [];
 
@@ -781,7 +781,7 @@ class NodesService {
             `docker container rm ${EXPLORER_CONTAINER_NAME}`,
             `docker stop ${EXPLORER_MONGO_CONTAINER_NAME}`,
             `docker container rm ${EXPLORER_MONGO_CONTAINER_NAME}`,
-            `docker volume rm ${EXPLORER_MONGO_CONTAINER_NAME}_cudosexplorermongodbdata`
+            `docker volume rm ${EXPLORER_CONTAINER_NAME}_cudosexplorermongodbdata`
         ], false));
 
         await Promise.all(tasks);

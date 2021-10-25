@@ -26,6 +26,7 @@ class NodesHelper {
             `echo \'${genesisJson.replace(/(\r\n|\n|\r)/gm, "")}\' > ${PathHelper.WORKING_DIR}/CudosBuilders/docker/config/genesis.local.json`,
             `echo "" > ${PathHelper.WORKING_DIR}/CudosBuilders/docker/config/persistent-peers.local.config`,
             `echo "" > ${PathHelper.WORKING_DIR}/CudosBuilders/docker/config/seeds.local.config`,
+            `echo "" > ${PathHelper.WORKING_DIR}/CudosBuilders/docker/config/state-sync-rpc-servers.local.config`,
         ]
     }
 
