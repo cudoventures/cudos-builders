@@ -1,6 +1,19 @@
 {
     "version": "2.0.0",
     "tasks": [
+        //ibc-relayer
+        {
+            "label": "Build IBC-RELAYER LOCAL in docker",
+            "command": "cd ./docker/ibc-relayer && docker-compose --env-file ./ibc-relayer.local.arg -f ./ibc-relayer.yml -p ibc-relayer up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Destroy IBC-RELAYER LOCAL in docker",
+            "command": "cd ./docker/ibc-relayer && docker-compose --env-file ./ibc-relayer.local.arg -f ./ibc-relayer.yml -p ibc-relayer down",
+            "type": "shell",
+            "group": "build"
+        },
         // root node
         {
             "label": "Build INIT ROOT NODE in docker",
@@ -33,6 +46,36 @@
             "group": "build"
         },
 
+        // root node 2
+        {
+            "label": "Build INIT ROOT NODE SECOND NETWORK in docker",
+            "command": "cd ./docker/root-node && docker-compose --env-file ./root-node.local02.arg -f ./init-root-node.yml -f ./users-root-node.override.yml -p cudos-init-root-node-2 up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Destroy INIT ROOT NODE SECOND NETWORK in docker",
+            "command": "cd ./docker/root-node && docker-compose --env-file ./root-node.local02.arg -f ./init-root-node.yml -f ./users-root-node.override.yml -p cudos-init-root-node-2 down",
+            "type": "shell",
+            "group": "build"
+        {
+            "label": "Start START ROOT NODE SECOND NETWORK in docker",
+            "command": "cd ./docker/root-node && docker-compose --env-file ./root-node.local02.arg -f ./start-root-node.yml -f ./users-root-node.override.yml -p cudos-start-root-node-2 up",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Build START ROOT NODE SECOND NETWORK in docker",
+            "command": "cd ./docker/root-node && docker-compose --env-file ./root-node.local02.arg -f ./start-root-node.yml -f ./users-root-node.override.yml -p cudos-start-root-node-2 up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Destroy START ROOT SECOND NETWORK NODE in docker",
+            "command": "cd ./docker/root-node && docker-compose --env-file ./root-node.local02.arg -f ./start-root-node.yml -f ./users-root-node.override.yml -p cudos-start-root-node-2 down",
+            "type": "shell",
+            "group": "build"
+        },
         // seed node
         {
             "label": "Build INIT SEED NODE in docker",
