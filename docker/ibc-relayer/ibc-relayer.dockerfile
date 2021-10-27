@@ -28,11 +28,14 @@ RUN chmod +x ./ibc-relayer-run.sh && \
     chown -R ${USER_NAME}:${GROUP_NAME} ./ && \
     sed -i 's/\r$//' ./ibc-relayer-run.sh
 
-USER ${USER_NAME}:${GROUP_NAME}
-
+ENV USER_NAME=${USER_NAME}
+ENV GROUP_NAME=${GROUP_NAME}
 ENV CUDOS_HOME=${CUDOS_HOME}
 
+# CMD ["sleep", "infinity"]
 
-CMD ["sleep", "infinity"]
+# CMD ["/bin/bash", "-c", "chown -R ${USER_NAME}:${GROUP_NAME} ${CUDOS_HOME} && su ${USER_NAME} -c ./init-root.sh"]
+
+CMD ["/bin/bash", "-c", "chown -R ${USER_NAME}:${GROUP_NAME} ${CUDOS_HOME} && sleep infinity"]
 
 # CMD ["/bin/bash", "-c", "./ibc-relayer-run.sh"]

@@ -4,13 +4,13 @@
         //ibc-relayer
         {
             "label": "Build IBC-RELAYER LOCAL in docker",
-            "command": "cd ./docker/ibc-relayer && docker-compose --env-file ./ibc-relayer.local.arg -f ./ibc-relayer.yml -p ibc-relayer up --build",
+            "command": "cd ./docker/ibc-relayer && docker-compose --env-file ./ibc-relayer.local.arg -f ./ibc-relayer.yml -f ./users-ibc-relayer.override.yml -p ibc-relayer up --build",
             "type": "shell",
             "group": "build"
         },
         {
             "label": "Destroy IBC-RELAYER LOCAL in docker",
-            "command": "cd ./docker/ibc-relayer && docker-compose --env-file ./ibc-relayer.local.arg -f ./ibc-relayer.yml -p ibc-relayer down",
+            "command": "cd ./docker/ibc-relayer && docker-compose --env-file ./ibc-relayer.local.arg -f ./ibc-relayer.yml -f ./users-ibc-relayer.override.yml -p ibc-relayer down",
             "type": "shell",
             "group": "build"
         },

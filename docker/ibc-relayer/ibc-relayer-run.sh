@@ -15,14 +15,14 @@ echo "Adding chain keys to config"
 rly chains edit ${CHAIN_ID_1} key relayer-chain-1
 rly chains edit ${CHAIN_ID_2} key relayer-chain-2
 
-echo "Initializing cnains"
+echo "Initializing chains"
 rly light init ${CHAIN_ID_1} -f
 rly light init ${CHAIN_ID_2} -f
 
-# echo "Generating paths"
+echo "Generating paths"
 rly paths generate ${CHAIN_ID_1} ${CHAIN_ID_2} transfer --port=transfer
 rly paths show transfer --yaml |& tee "${CUDOS_HOME}/transfer.json"
 
 
-# echo "Starting relayer"
+echo "Starting relayer"
 rly start transfer

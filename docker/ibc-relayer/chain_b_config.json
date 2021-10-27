@@ -1,4 +1,3 @@
-
 {
   "chain-id": "cudos-local-network-2",
   "rpc-addr": "http://cudos-start-root-node-2:26657",
