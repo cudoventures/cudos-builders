@@ -11,8 +11,12 @@ Production
  
 cd /home/cudos
 
-cp ./config/prometheus.tesnet.public.yml /mnt/disks/prometheus-data/prometheus.yml
+// Create folder for data 
 
+- /mnt/disks/prometheus-data/grafana
+- /mnt/disks/prometheus-data/prometheus
+
+// Run the command
 docker run --rm \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v "$PWD:$PWD" \

@@ -13,7 +13,7 @@ services:
     restart: unless-stopped
     env_file: "$ENV_FILE"
     volumes:
-      - '${PROMETHEUS_DATA_PATH}:/etc/prometheus'
+      - '${PROMETHEUS_DATA_PATH}:/prometheus'
       - '${PROMETHEUS_CONFIG_PATH_LOCAL}:/etc/prometheus/prometheus.yml'
     networks:
       - shared-cudos-network
@@ -25,7 +25,20 @@ services:
       dockerfile: ./grafana.dockerfile
       context: ./
     restart: unless-stopped
+    volumes:
+      - '${GRAFANA_DATA_PATH}:/var/lib/grafana'
     networks:
       - shared-cudos-network
     ports:
       - "${GRAFANA_PORT}:3000"
+  exporter:
+    image: exporter-monitoring
+    build:
+      dockerfile: ./exporter.dockerfile
+      context: ./
+    restart: unless-stopped
+    env_file: "$ENV_FILE"
+    networks:
+      - shared-cudos-network
+    ports:
+      - "${EXPORTER_PORT}:9300"
