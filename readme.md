@@ -1,11 +1,12 @@
 # Overview
 
-This project contains a set of building scripts for CudosNetwork. It depends on 5 other projects and should be downloaded manually. Here is the list:
+This project contains a set of building scripts for CudosNetwork. It depends on 6 other projects and should be downloaded manually. Here is the list:
 1. CudosNode (https://github.com/CudoVentures/cudos-node)
 1. CudosGravityBridge (https://github.com/CudoVentures/cosmos-gravity-bridge)
 1. CudosGravityBridgeUI (https://github.com/CudoVentures/cudos-gravity-bridge-ui)
 1. CudosExplorer (https://github.com/CudoVentures/big-dipper)
 1. CudosFaucet (https://github.com/CudoVentures/faucet)
+1. CudosExporter (https://github.com/CudoVentures/cosmos-exporter)
 
 The following directory structure is required in order everything to work correctly otherwise the scripts will not be able to find their dependancies.
 Let denote the parent directory of all projects <code>parentDir</code>. Its name could be arbitrary.
@@ -18,6 +19,7 @@ Let denote the parent directory of all projects <code>parentDir</code>. Its name
     - /parentDir/CudosExplorer
     - /parentDir/CudosFaucet
     - /parentDir/CudosData
+    - /parentDir/CudosExporter
 
 In the above directory structure, the folders' names are REQUIRED. Carefully rename every project to match the folder names above. Create an empty folder CudosData in <code>parentDir</code>
 
@@ -238,6 +240,14 @@ The deployer contains only a readme file that explains how the server should be 
 
 **<code>deploy-utils-testnet-private</code>** - deploys utils (explorer + faucet) to private testnet using <code>secrets.json</code> in the deployer's folder.
 
+## monitoring deployer
+
+The setup uses prometheus, grafana and cosmos-exporter to set up monitoring of the nodes of the network and to all the validators liveness in the network
+
+### List of npm commands regarding this deployer:
+
+**<code>deploy--monitoring-testnet-public</code>** - deploys the monitoring to the public testnet using <code>secrets.json</code> in the deployer's folder.
+
 # Setup docker (docker folder)
 
 This folder contains docker specific files organized by build-target. They are used in build processes in local development as well as in deployment builds. 
@@ -269,6 +279,8 @@ The folder has following build-targets:
 <em>**sentry-node**</em> - Cudos sentry node that connects to local chain, private or public testnets.
 
 <em>**standalone-node**</em> - Standalone cudos daemon containing a single root-validator node. It can be used for test purposes.
+
+<em>**monitoring**</em> - Monitoring containing prometheus, grafana and exporter. It can be used for moniting nodes of the network.
 
 ## Structure
 
