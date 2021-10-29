@@ -5,6 +5,4 @@ services:
     build:
       args:
         USER_ID: '0'
-        USER_NAME: 'root'
         GROUP_ID: '0'
-        GROUP_NAME: 'root'
