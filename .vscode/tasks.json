@@ -123,7 +123,7 @@
         },
         {
             "label": "Build EXPLORER in docker",
-            "command": "cd ./docker/explorer&& docker-compose --env-file ./explorer.local.arg -f ./explorer.yml -p cudos-explorer up --build",
+            "command": "cd ./docker/explorer&& docker-compose --env-file ./explorer.local.arg -f ./explorer.yml -f ./users-explorer.override.yml -p cudos-explorer up --build",
             "type": "shell",
             "group": "build"
         },
