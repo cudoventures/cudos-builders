@@ -1,0 +1,34 @@
+# my global config
+global:
+  scrape_interval: 15s
+  evaluation_interval: 30s
+  # scrape_timeout is set to the global default (10s).
+
+scrape_configs:
+  - job_name: cudoshub
+    static_configs:
+      - targets: ['ip_node_1:26660']
+        labels:
+          instance: cudos-root-node
+      - targets: ['ip_sentry_1:26660']
+        labels:
+          instance: cudos-sentry-node-01
+      - targets: ['ip_node_2:26660']
+        labels:
+          instance: cudos-validator-node-02
+      - targets: ['ip_sentry_2:26660']
+        labels:
+          instance: cudos-sentry-node-02
+      - targets: ['ip_node_3:26660']
+        labels:
+          instance: cudos-validator-node-03
+      - targets: ['ip_sentry_3:26660']
+        labels:
+          instance: cudos-sentry-node-03
+  - job_name: 'validators'
+    scrape_interval: 15s
+    metrics_path: /metrics/validators
+    static_configs:
+      - targets:
+        - cudos-monitoring_exporter_1:9300
+ 

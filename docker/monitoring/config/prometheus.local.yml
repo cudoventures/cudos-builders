@@ -12,4 +12,9 @@ scrape_configs:
       - targets: ['cudos-start-root-node:26660']
         labels:
           instance: validator
- 
+  - job_name: 'validators'
+    scrape_interval: 15s
+    metrics_path: /metrics/validators
+    static_configs:
+      - targets:
+        - cudos-monitoring_exporter_1:9300

@@ -43,9 +43,9 @@
         "deploy--ethereum-rinkeby": "node ./deployer-ethereum/Main.js --target=ethereum",
 
 
+        "deploy--monitoring-testnet-public": "node ./deployer-monitoring/Main.js --target=monitoring"
         
         "network": "node ./deployer-network/src/Main.js"
-
     },
     "engines": {
         "node": ">=12"

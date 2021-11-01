@@ -1,5 +1,8 @@
 PROMETHEUS_CONFIG_PATH_LOCAL=./config/prometheus.local.yml
+PROMETHEUS_DATA_PATH=../../../CudosData/monitoring/prometheus
+GRAFANA_DATA_PATH=../../../CudosData/monitoring/grafana
 PROMETHEUS_PORT=9091
 GRAFANA_PORT=3000
+EXPORTER_PORT=9300
 
 ENV_FILE=./monitoring.local.env
