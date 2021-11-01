@@ -1,7 +1,7 @@
 version: '3.1'
 
 services:
-  cudos-explorer:
+  cudos-explorer-mongodb:
     build:
       args:
         USER_ID: '0'
