@@ -26,6 +26,8 @@
 
         "deploy-gravity-bridge-ui-testnet-public": "node ./deployer-gravity-bridge-ui/Main.js --target=testnet-public",
 
+        "deploy--monitoring-testnet-public": "node ./deployer-monitoring/Main.js --target=monitoring",
+
 
 
         "deploy--init--start_root-node-testnet-private": "node ./deployer-nodes/Main.js --target=root-node-testnet-private --init=1 --config=0 --start=1",
@@ -41,9 +43,6 @@
 
 
         "deploy--ethereum-rinkeby": "node ./deployer-ethereum/Main.js --target=ethereum",
-
-
-        "deploy--monitoring-testnet-public": "node ./deployer-monitoring/Main.js --target=monitoring"
         
         "network": "node ./deployer-network/src/Main.js"
     },
