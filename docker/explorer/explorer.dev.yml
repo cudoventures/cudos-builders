@@ -4,6 +4,10 @@ networks:
   shared-cudos-network:
     name: shared-cudos-network
 
+volumes:
+  cudosexplorermeteorlocal:
+    driver: local
+
 services:
   cudos-explorer:
     image: cudos-explorer
@@ -30,7 +34,7 @@ services:
       - "3000:3000"
     volumes:
       - '../../../CudosExplorer:/usr/local/explorer'
-      # - '/usr/local/explorer/.meteor/local'
+      - 'cudosexplorermeteorlocal:/usr/local/explorer/.meteor/local'
     networks:
       - shared-cudos-network
     logging:

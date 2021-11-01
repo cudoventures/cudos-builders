@@ -1,34 +1,114 @@
 {
     "computers": [
         {
-            "id": "someRandomString",
-            "ip": "1.2.3.4",
-            "user": "username",
-            "sshKey": "absolutePathToSSHKey",
-            "password": "password"
+            "id": "node001",
+            "ip": "auto",
+            "port": 22,
+            "user": "",
+            "sshKey": "",
+            "pass": ""
+        },
+        {
+            "id": "node002",
+            "ip": "auto",
+            "port": 22,
+            "user": "",
+            "sshKey": "",
+            "pass": ""
+        },
+        {
+            "id": "node100",
+            "ip": "auto",
+            "port": 22,
+            "user": "",
+            "sshKey": ""
+        },
+        {
+            "id": "node101",
+            "ip": "auto",
+            "port": 22,
+            "user": "",
+            "sshKey": ""
+        },
+        {
+            "id": "node200",
+            "ip": "auto",
+            "port": 22,
+            "user": "",
+            "sshKey": ""
+        },
+        {
+            "id": "node201",
+            "ip": "auto",
+            "port": 22,
+            "user": "",
+            "sshKey": ""
+        },
+        {
+            "id": "node400",
+            "ip": "auto",
+            "port": 22,
+            "user": "",
+            "sshKey": ""
+        },
+        {
+            "id": "node401",
+            "ip": "auto",
+            "port": 22,
+            "user": "",
+            "sshKey": ""
         }
     ],
     "nodes": {
         "rootValidator": {
-            "computerId": "idOfComputer"
+            "computerId": "node001",
+            "validatorId": "validator01",
+            "orchEthAddress": "0x....",
+            "ethPrivKey": ""
         },
         "validators": [
             {
-                "validatorId": "idOfTheValidator",
-                "computerId": "idOfComputer"
-            }
-        ],
-        "sentries": [
-            {
-                "validatorId": "idOfTheValidator",
-                "computerId": "idOfComputer"
+                "validatorId": "validator02",
+                "computerId": "node002",
+                "orchEthAddress": "0x",
+                "ethPrivKey": ""
             }
         ],
         "seeds": [
             {
-                "validatorId": "idOfTheValidator",
-                "computerId": "idOfComputer"
+                "validatorId": "validator01",
+                "computerId": "node100"
+            },
+            {
+                "validatorId": "validator02",
+                "computerId": "node101"
             }
-        ]
+        ],
+        "sentries": [
+            {
+                "validatorId": "validator01",
+                "computerId": "node200"
+            },
+            {
+                "validatorId": "validator02",
+                "computerId": "node201"
+            }
+        ],
+        "gravityBridgeUi": {
+            "computerId": "node400",
+            "ethTokenContract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d"
+        },
+        "utils": {
+            "computerId": "node401",
+            "googleApiKey": "",
+            "captchaSiteKey": "",
+            "googleProjectId": ""
+        }
+    },
+    "params": {
+        "gravity": {
+            "ethrpc": "",
+            "contractDeploerEthPrivKey": ""
+        }
     }
 }
