@@ -619,6 +619,7 @@ class NodesService {
             await utilsSshHelper.cloneRepos();
         }
         await utilsSshHelper.exec([
+            ...NodesHelper.getUserEnv(),
             `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/explorer`,
             'cp ./explorer.env.example ./explorer.local.env',
             `sed -i "s~MONGO_URL=~MONGO_URL=mongodb://root:cudos-root-db-pass@cudos-explorer-mongodb:27017~g" ./explorer.local.env`,
@@ -632,10 +633,11 @@ class NodesService {
             `sed -i "s~EXTERNAL_STAKING_URL=\\"http://localhost:3000/validators\\"~EXTERNAL_STAKING_URL=\\"http://${host}:3000/validators\\"~g" ./explorer.local.arg`,
             `sed -i "s/CHAIN_NAME=\\"CudosTestnet-Local\\"/CHAIN_NAME=\\"${CHAIN_NAME}\\"/g" ./explorer.local.arg`,
             `sed -i "s/CHAIN_ID=\\"cudos-local-network\\"/CHAIN_ID=\\"${CHAIN_ID}\\"/g" ./explorer.local.arg`,
+            `sed -i "s/container_name: cudos-explorer-mongodb/container_name: ${EXPLORER_MONGO_CONTAINER_NAME}/g" ./explorer.yml`,
             `sed -i "s/container_name: cudos-explorer/container_name: ${EXPLORER_CONTAINER_NAME}/g" ./explorer.yml`,
-            `sed -i "s/container_name: cudos-explorer-mongo/container_name: ${EXPLORER_MONGO_CONTAINER_NAME}/g" ./explorer.yml`,
             `sed -i "s/- cudos-explorer-mongodb/- cudos-explorer-mongodb\\r\\n    extra_hosts:\\r\\n      - \\"host.docker.internal:host-gateway\\"/g" ./explorer.yml`,
-            `docker-compose --env-file ./explorer.local.arg -f ./explorer.yml -p ${EXPLORER_CONTAINER_NAME} up --build -d`
+            ...NodesHelper.getUserOverrideYml('explorer'),
+            `docker-compose --env-file ./explorer.local.arg -f ./explorer.yml -f ./users-explorer.override.yml -p ${EXPLORER_CONTAINER_NAME} up --build -d`
         ]);
     }
 
@@ -780,8 +782,7 @@ class NodesService {
             `docker stop ${EXPLORER_CONTAINER_NAME}`,
             `docker container rm ${EXPLORER_CONTAINER_NAME}`,
             `docker stop ${EXPLORER_MONGO_CONTAINER_NAME}`,
-            `docker container rm ${EXPLORER_MONGO_CONTAINER_NAME}`,
-            `docker volume rm ${EXPLORER_CONTAINER_NAME}_cudosexplorermongodbdata`
+            `docker container rm ${EXPLORER_MONGO_CONTAINER_NAME}`
         ], false));
 
         await Promise.all(tasks);
