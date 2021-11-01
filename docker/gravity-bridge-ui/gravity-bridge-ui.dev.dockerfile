@@ -1,5 +1,5 @@
 
-FROM nikolaik/python-nodejs:python3.9-nodejs16-alpine
+FROM node:15.14-buster
 
 ARG USER_ID
 ARG USER_NAME
@@ -8,13 +8,15 @@ ARG GROUP_NAME
 ARG ENV_FILE
 
 RUN if [ $USER_NAME != 'root' ]; then \
-        addgroup -g ${GROUP_ID} $GROUP_NAME; \
-        adduser -D -g "" -u ${USER_ID} -G ${GROUP_NAME} ${USER_NAME}; \
+        groupmod -g 2000 node; \
+        usermod -u 2000 -g 2000 node; \
+        groupadd --gid ${GROUP_ID} ${GROUP_NAME}; \
+        useradd --no-log-init --create-home --shell /bin/bash --uid ${USER_ID} --gid ${GROUP_ID} ${USER_NAME}; \
     fi
 
 COPY ./CudosBuilders/docker/gravity-bridge-ui/$ENV_FILE /tmp/.env
 
-RUN apk add --update alpine-sdk
+# RUN apk add --update alpine-sdk
 
 RUN chown ${USER_NAME}:${GROUP_NAME} /tmp/.env && \
     mkdir -p /usr/src/gravity-bridge-ui/node_modules && \
@@ -22,6 +24,6 @@ RUN chown ${USER_NAME}:${GROUP_NAME} /tmp/.env && \
 
 WORKDIR /usr/src/gravity-bridge-ui
 
-USER ${USER_NAME}:${GROUP_NAME}
+USER ${USER_NAME}
 
-ENTRYPOINT mv /tmp/.env ./config/.env && npm i && npm run dev
+CMD ["/bin/bash", "-c", "mv /tmp/.env ./config/.env && npm i && npm run dev"] 
