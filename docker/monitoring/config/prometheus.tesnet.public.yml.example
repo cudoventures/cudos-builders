@@ -30,5 +30,5 @@ scrape_configs:
     metrics_path: /metrics/validators
     static_configs:
       - targets:
-        - cudos-monitoring_exporter_1:9300
+        - cudos-monitoring-exporter:9300
  

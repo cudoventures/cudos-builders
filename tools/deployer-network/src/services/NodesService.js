@@ -35,30 +35,35 @@ class NodesService {
         this.gravity = "1";
         this.explorer = "1";
         this.faucet = "1";
+        this.monitoring = "1";
     }
 
-    async start(gravity, explorer, faucet) {
+    async start(gravity, explorer, faucet, monitoring) {
         this.gravity = gravity;
         this.explorer = explorer;
         this.faucet = faucet;
+        this.monitoring = monitoring;
 
-        await this.initAndStartRootValidator();
-        await this.initAndStartRootValidatorSeedNodes();
-        await this.initAndStartRootValidatorSentryNodes();
-        await this.initValidators();
-        await this.initAndStartValidatorsSeedNode();
-        await this.initAndStartValidatorsSentryNode();
-        await this.configAndStartValidators();
-        if (gravity === '1') {
-            await this.deployGravitySmartContract();
-            await this.startOrchestrators();
-            await this.startGravityBridgeUi();
-        }
-        if (faucet === '1') {
-            await this.startFaucet();
-        }
-        if (explorer === '1') {
-            await this.startExplorer();
+        // await this.initAndStartRootValidator();
+        // await this.initAndStartRootValidatorSeedNodes();
+        // await this.initAndStartRootValidatorSentryNodes();
+        // await this.initValidators();
+        // await this.initAndStartValidatorsSeedNode();
+        // await this.initAndStartValidatorsSentryNode();
+        // await this.configAndStartValidators();
+        // if (gravity === '1') {
+        //     await this.deployGravitySmartContract();
+        //     await this.startOrchestrators();
+        //     await this.startGravityBridgeUi();
+        // }
+        // if (faucet === '1') {
+        //     await this.startFaucet();
+        // }
+        // if (explorer === '1') {
+        //     await this.startExplorer();
+        // }
+        if (monitoring === '1') {
+            await this.startMonitoring();
         }
     }
 
@@ -482,7 +487,7 @@ class NodesService {
     async deployGravitySmartContract() {
         Log.main('Deploy gravity smart contract');
 
-        const sentryNodeModel = this.topologyHelper.sentries[0];
+        const sentryNodeModel = this.topologyHelper.getFirstSentry();
         const sentrySshHelper = this.instancesService.getSshHelper(sentryNodeModel.computerId);
 
         await sentrySshHelper.exec([
@@ -638,6 +643,26 @@ class NodesService {
             `sed -i "s/- cudos-explorer-mongodb/- cudos-explorer-mongodb\\r\\n    extra_hosts:\\r\\n      - \\"host.docker.internal:host-gateway\\"/g" ./explorer.yml`,
             ...NodesHelper.getUserOverrideYml('explorer'),
             `docker-compose --env-file ./explorer.local.arg -f ./explorer.yml -f ./users-explorer.override.yml -p ${EXPLORER_CONTAINER_NAME} up --build -d`
+        ]);
+    }
+
+    async startMonitoring() {
+        Log.main('Start monitoring');
+
+        const monitoringModel = this.topologyHelper.monitoringModel;
+        const monitoringComputerModel = this.topologyHelper.getComputerModel(monitoringModel.computerId);
+        const monitoringSshHelper = this.instancesService.getSshHelper(monitoringModel.computerId);
+
+        const sentryNodeModel = this.topologyHelper.getFirstSentry();
+
+        if (monitoringComputerModel.isLocalDocker === false) {
+            await monitoringSshHelper.cloneRepos();
+        }
+        await monitoringSshHelper.exec([
+            `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/monitoring`,
+            'cp ./monitoring.env.example ./monitoring.local.env',
+            `sed -i "s~NODE_ADDR=ip_or_address_of_node:9090~NODE_ADDR=${this.getDockerInternalHostByNodeId(sentryNodeModel.nodeId)}:9090~g" ./monitoring.local.env`,
+            `sed -i "s~TENDERMINT_ADDR=https://ip_or_address_of_node:26657~NODE_ADDR=http://${this.getDockerInternalHostByNodeId(sentryNodeModel.nodeId)}:26657~g" ./monitoring.local.env`,
         ]);
     }
 

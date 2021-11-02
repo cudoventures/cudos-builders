@@ -6,11 +6,13 @@ networks:
 
 services:
   prometeus:
-    image: prometeus-monitoring
+    image: cudos-monitoring-prometeus
+    container_name: cudos-monitoring-prometeus
     build:
       dockerfile: ./prometeus.dockerfile
       context: ./
     restart: unless-stopped
+    user: '0:0'
     env_file: "$ENV_FILE"
     volumes:
       - '${PROMETHEUS_DATA_PATH}:/prometheus'
@@ -18,21 +20,26 @@ services:
     networks:
       - shared-cudos-network
     ports:
-      - "${PROMETHEUS_PORT}:9090"  
+      - "${PROMETHEUS_PORT}:9090"
+
   grafana:
-    image: grafana-monitoring
+    image: cudos-monitoring-graphana
+    container_name: cudos-monitoring-graphana
     build:
       dockerfile: ./grafana.dockerfile
       context: ./
     restart: unless-stopped
+    user: '0:0'
     volumes:
       - '${GRAFANA_DATA_PATH}:/var/lib/grafana'
     networks:
       - shared-cudos-network
     ports:
       - "${GRAFANA_PORT}:3000"
+
   exporter:
-    image: exporter-monitoring
+    image: cudos-monitoring-exporter
+    container_name: cudos-monitoring-exporter
     build:
       dockerfile: ./exporter.dockerfile
       context: ./

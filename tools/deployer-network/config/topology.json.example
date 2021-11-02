@@ -57,6 +57,13 @@
             "port": 22,
             "user": "",
             "sshKey": ""
+        },
+        {
+            "id": "node402",
+            "ip": "auto",
+            "port": 22,
+            "user": "",
+            "sshKey": ""
         }
     ],
     "nodes": {
@@ -64,34 +71,40 @@
             "computerId": "node001",
             "validatorId": "validator01",
             "orchEthAddress": "0x....",
-            "ethPrivKey": ""
+            "ethPrivKey": "",
+            "monitoring": false
         },
         "validators": [
             {
                 "validatorId": "validator02",
                 "computerId": "node002",
                 "orchEthAddress": "0x",
-                "ethPrivKey": ""
+                "ethPrivKey": "",
+                "monitoring": false
             }
         ],
         "seeds": [
             {
                 "validatorId": "validator01",
-                "computerId": "node100"
+                "computerId": "node100",
+                "monitoring": false
             },
             {
                 "validatorId": "validator02",
-                "computerId": "node101"
+                "computerId": "node101",
+                "monitoring": false
             }
         ],
         "sentries": [
             {
                 "validatorId": "validator01",
-                "computerId": "node200"
+                "computerId": "node200",
+                "monitoring": false
             },
             {
                 "validatorId": "validator02",
-                "computerId": "node201"
+                "computerId": "node201",
+                "monitoring": false
             }
         ],
         "gravityBridgeUi": {
@@ -103,6 +116,9 @@
             "googleApiKey": "",
             "captchaSiteKey": "",
             "googleProjectId": ""
+        },
+        "monitoring": {
+            "computerId": "node402"
         }
     },
     "params": {
