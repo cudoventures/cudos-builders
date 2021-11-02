@@ -44,9 +44,9 @@ class NodesService {
         this.faucet = faucet;
         this.monitoring = monitoring;
 
-        // await this.initAndStartRootValidator();
-        // await this.initAndStartRootValidatorSeedNodes();
-        // await this.initAndStartRootValidatorSentryNodes();
+        await this.initAndStartRootValidator();
+        await this.initAndStartRootValidatorSeedNodes();
+        await this.initAndStartRootValidatorSentryNodes();
         // await this.initValidators();
         // await this.initAndStartValidatorsSeedNode();
         // await this.initAndStartValidatorsSentryNode();
@@ -655,14 +655,44 @@ class NodesService {
 
         const sentryNodeModel = this.topologyHelper.getFirstSentry();
 
+        const nodeModelsEchos = [];
+        this.topologyHelper.nodesMap.forEach((nodeModel) => {
+            if (nodeModel.hasMonitoring() === false) {
+                return;
+            }
+
+            const host = this.getDockerInternalHostByNodeId(nodeModel.nodeId);
+            nodeModelsEchos.push(`echo "      - targets: ['${host}:26660']" >> ./config/prometheus.local.yml`);
+            nodeModelsEchos.push(`echo "        labels:" >> ./config/prometheus.local.yml`);
+            nodeModelsEchos.push(`echo "          instance: ${host}" >> ./config/prometheus.local.yml`);
+        });
+
         if (monitoringComputerModel.isLocalDocker === false) {
             await monitoringSshHelper.cloneRepos();
         }
         await monitoringSshHelper.exec([
+            ...NodesHelper.getUserEnv(),
             `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/monitoring`,
             'cp ./monitoring.env.example ./monitoring.local.env',
             `sed -i "s~NODE_ADDR=ip_or_address_of_node:9090~NODE_ADDR=${this.getDockerInternalHostByNodeId(sentryNodeModel.nodeId)}:9090~g" ./monitoring.local.env`,
             `sed -i "s~TENDERMINT_ADDR=https://ip_or_address_of_node:26657~NODE_ADDR=http://${this.getDockerInternalHostByNodeId(sentryNodeModel.nodeId)}:26657~g" ./monitoring.local.env`,
+            `echo "global:" > ./config/prometheus.local.yml`,
+            `echo "  scrape_interval: 15s" >> ./config/prometheus.local.yml`,
+            `echo "  evaluation_interval: 30s" >> ./config/prometheus.local.yml`,
+            `echo "" >> ./config/prometheus.local.yml`,
+            `echo "scrape_configs:" >> ./config/prometheus.local.yml`,
+            `echo "  - job_name: cudosnetwork" >> ./config/prometheus.local.yml`,
+            `echo "    static_configs:" >> ./config/prometheus.local.yml`,
+            ...nodeModelsEchos,
+            `echo "  - job_name: validators" >> ./config/prometheus.local.yml`,
+            `echo "    scrape_interval: 15s" >> ./config/prometheus.local.yml`,
+            `echo "    metrics_path: /metrics/validators" >> ./config/prometheus.local.yml`,
+            `echo "    static_configs:" >> ./config/prometheus.local.yml`,
+            `echo "      - targets:" >> ./config/prometheus.local.yml`,
+            `echo "        - cudos-monitoring-exporter:9300" >> ./config/prometheus.local.yml`,
+            `cp ./users-monitoring.override.yml.example ./users-monitoring.override.yml`,
+            `sed -i "s/user: 'USER_ID:GROUP_ID'/user: '$USER_ID:$GROUP_ID'/g" ./users-monitoring.override.yml`,
+            `docker-compose --env-file ./monitoring.local.arg -f ./monitoring.yml -f ./users-monitoring.override.yml -p cudos-monitoring-local up --build -d`
         ]);
     }
 
@@ -713,6 +743,9 @@ class NodesService {
         }
         if (this.explorer === '1') {
             await this.stopExplorerInstances();
+        }
+        if (this.monitoring === '1') {
+            await this.stopMonitoring();
         }
     }
 
@@ -808,6 +841,25 @@ class NodesService {
             `docker container rm ${EXPLORER_CONTAINER_NAME}`,
             `docker stop ${EXPLORER_MONGO_CONTAINER_NAME}`,
             `docker container rm ${EXPLORER_MONGO_CONTAINER_NAME}`
+        ], false));
+
+        await Promise.all(tasks);
+    }
+
+    async stopMonitoring() {
+        Log.main('Stop monitoring instances');
+
+        const tasks = [];
+
+        const monitoringModel = this.topologyHelper.monitoringModel;
+        const monitoringSshHelper = this.instancesService.getSshHelper(monitoringModel.computerId);
+        tasks.push(monitoringSshHelper.exec([
+            `docker stop cudos-monitoring-prometeus`,
+            `docker container rm cudos-monitoring-prometeus`,
+            `docker stop cudos-monitoring-graphana`,
+            `docker container rm cudos-monitoring-graphana`,
+            `docker stop cudos-monitoring-exporter`,
+            `docker container rm cudos-monitoring-exporter`,
         ], false));
 
         await Promise.all(tasks);

@@ -682,17 +682,23 @@
 
         // Monitoring 
         {
-            "label": "Start Monitoring local network in docker",
+            "label": "Start MONITORING LOCAL in docker",
             "command": "cd ./docker/monitoring&& docker-compose --env-file ./monitoring.local.arg -f ./monitoring.yml -f ./users-monitoring.override.yml -p cudos-monitoring-local up",
             "type": "shell",
             "group": "build"
         },
         {
-            "label": "Start Monitoring public network in docker",
-            "command": "cd ./docker/monitoring&& docker-compose --env-file ./monitoring.local.arg -f ./monitoring.yml -f ./users-monitoring.override.yml -p cudos-monitoring-local up",
+            "label": "Build MONITORING LOCAL in docker",
+            "command": "cd ./docker/monitoring&& docker-compose --env-file ./monitoring.local.arg -f ./monitoring.yml -f ./users-monitoring.override.yml -p cudos-monitoring-local up --build",
             "type": "shell",
             "group": "build"
         },
+        {
+            "label": "Destroy MONITORING LOCAL in docker",
+            "command": "cd ./docker/monitoring&& docker-compose --env-file ./monitoring.local.arg -f ./monitoring.yml -f ./users-monitoring.override.yml -p cudos-monitoring-local down",
+            "type": "shell",
+            "group": "build"
+        }
 
     ]
 }
