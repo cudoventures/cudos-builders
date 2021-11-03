@@ -41,9 +41,6 @@ services:
     build:
       dockerfile: CudosBuilders/docker/explorer/explorer-mongodb.dockerfile
       context: ../../../
-      args:
-        USER_ID: "0"
-        GROUP_ID: "0"
     restart: unless-stopped
     ports:
       - "27017:27017"

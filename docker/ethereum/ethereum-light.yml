@@ -13,5 +13,7 @@ services:
     restart: unless-stopped
     ports:
       - "8545:8545"
+    volumes:
+      - '../../../CudosData/ethereum-light:/var/ethereum-light'
     networks:
       - shared-cudos-network

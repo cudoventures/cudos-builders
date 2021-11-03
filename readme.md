@@ -991,6 +991,29 @@ cudos-noded tx staking create-validator --amount=$STAKE \
     -y
 ```
 
+## Edit validator
+
+Some of the validator parameters can be editted after the validator was created. There is example below.
+
+```bash
+cudos-noded tx staking edit-validator \
+    --from=validator \
+    --moniker=$MONIKER \
+    --chain-id=$CHAIN_ID \
+    --commission-rate="0.10" \
+    --min-self-delegation="1" \
+    --gas="auto" \
+    --gas-prices="0.025acudos" \
+    --gas-adjustment="1.80" \
+    --keyring-backend="os" \
+    -y
+```
+
+Have in mind that there are some restrictions though:
+1. You cannot change <em>commission-max-rate</em>, <em>commission-max-change-rate</em> and <em>chain-id</em>.
+2. <em>min-self-delegation</em> can only be increased
+3. <em>--from</em> must be the same account that was used during the creation of the validator
+
 ## Register orchestrator
 
 The orchestrator of the root-validator is registered automatically but all other orchestrators must be registered explicitly. In order to do so you will need:

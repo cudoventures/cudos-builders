@@ -47,21 +47,21 @@ class NodesService {
         await this.initAndStartRootValidator();
         await this.initAndStartRootValidatorSeedNodes();
         await this.initAndStartRootValidatorSentryNodes();
-        // await this.initValidators();
-        // await this.initAndStartValidatorsSeedNode();
-        // await this.initAndStartValidatorsSentryNode();
-        // await this.configAndStartValidators();
-        // if (gravity === '1') {
-        //     await this.deployGravitySmartContract();
-        //     await this.startOrchestrators();
-        //     await this.startGravityBridgeUi();
-        // }
-        // if (faucet === '1') {
-        //     await this.startFaucet();
-        // }
-        // if (explorer === '1') {
-        //     await this.startExplorer();
-        // }
+        await this.initValidators();
+        await this.initAndStartValidatorsSeedNode();
+        await this.initAndStartValidatorsSentryNode();
+        await this.configAndStartValidators();
+        if (gravity === '1') {
+            await this.deployGravitySmartContract();
+            await this.startOrchestrators();
+            await this.startGravityBridgeUi();
+        }
+        if (faucet === '1') {
+            await this.startFaucet();
+        }
+        if (explorer === '1') {
+            await this.startExplorer();
+        }
         if (monitoring === '1') {
             await this.startMonitoring();
         }
@@ -84,7 +84,6 @@ class NodesService {
         }
         await validatorSshHelper.prepareBinaryBuilder();
         await validatorSshHelper.exec([
-            ...NodesHelper.getUserEnv(),
             `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/root-node`,
             'cp ./root-node.env.example ./root-node.local.env',
             'sed -i "s/MONIKER=/MONIKER=\"deployer-network-root-validator\"/g" ./root-node.local.env',
@@ -94,10 +93,9 @@ class NodesService {
             `sed -i "s/PORT26660=60102/PORT26660=\"${validatorNodeModel.port26660}\"/g" ./root-node.local.arg`,
             `sed -i "s/container_name: cudos-start-root-node/container_name: ${dockerContainerStartName}/g" ./start-root-node.yml`,
             ...NodesHelper.getDockerExtraHosts('start-root-node'),
-            ...NodesHelper.getUserOverrideYml('root-node'),
-            'docker-compose --env-file ./root-node.local.arg -f ./init-root-node.yml -f ./users-root-node.override.yml -p cudos-init-root-node up --build',
-            'docker-compose --env-file ./root-node.local.arg -f ./init-root-node.yml -f ./users-root-node.override.yml -p cudos-init-root-node down',
-            `docker-compose --env-file ./root-node.local.arg -f ./start-root-node.yml -f ./users-root-node.override.yml -p ${ValidatorNodeModel.getRootValidatorDockerContainerStartName()} up --build -d`
+            'docker-compose --env-file ./root-node.local.arg -f ./init-root-node.yml -p cudos-init-root-node up --build',
+            'docker-compose --env-file ./root-node.local.arg -f ./init-root-node.yml -p cudos-init-root-node down',
+            `docker-compose --env-file ./root-node.local.arg -f ./start-root-node.yml -p ${ValidatorNodeModel.getRootValidatorDockerContainerStartName()} up --build -d`
         ]);
 
         this.nodeIdToNodeInstanceContainerNamesMap.set(validatorNodeModel.nodeId, dockerContainerStartName);
@@ -148,7 +146,6 @@ class NodesService {
             }
             await seedSshHelper.prepareBinaryBuilder();
             await seedSshHelper.exec([
-                ...NodesHelper.getUserEnv(),
                 `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/seed-node`,
                 'cp ./seed-node.env.example ./seed-node.local01.env',
                 `sed -i "s/MONIKER=<TYPE DOWN NODE NAME>/MONIKER=\"deployer-network-seed-node-${seedNodeModel.nodeId}\"/g" ./seed-node.local01.env`,
@@ -163,10 +160,9 @@ class NodesService {
                 `sed -i "s/PORT26660=60203/PORT26660=\"${seedNodeModel.port26660}\"/g" ./seed-node.local01.arg`,
                 ...NodesHelper.getDockerExtraHosts('start-seed-node'),
                 ...NodesHelper.getDockerConfig(this.genesisJsonString),
-                ...NodesHelper.getUserOverrideYml('seed-node'),
-                `docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -f ./users-seed-node.override.yml -p ${dockerContainerInitName} up --build`,
-                `(docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -f ./users-seed-node.override.yml -p ${dockerContainerInitName} down || true)`,
-                `docker-compose --env-file ./seed-node.local01.arg -f ./start-seed-node.yml -f ./users-seed-node.override.yml -p ${dockerContainerStartName} up --build -d`
+                `docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -p ${dockerContainerInitName} up --build`,
+                `(docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -p ${dockerContainerInitName} down || true)`,
+                `docker-compose --env-file ./seed-node.local01.arg -f ./start-seed-node.yml -p ${dockerContainerStartName} up --build -d`
             ]);
 
             this.nodeIdToNodeInstanceContainerNamesMap.set(seedNodeModel.nodeId, dockerContainerStartName);
@@ -209,7 +205,6 @@ class NodesService {
             }
             await sentrySshHelper.prepareBinaryBuilder();
             await sentrySshHelper.exec([
-                ...NodesHelper.getUserEnv(),
                 `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/sentry-node`,
                 'cp ./sentry-node.env.example ./sentry-node.local01.env',
                 `sed -i "s/MONIKER=<TYPE DOWN NODE NAME>/MONIKER=\"deployer-network-sentry-node-${sentryNodeModel.nodeId}\"/g" ./sentry-node.local01.env`,
@@ -227,10 +222,9 @@ class NodesService {
                 `sed -i "s/PORT26660=26660/PORT26660=\"${sentryNodeModel.port26660}\"/g" ./sentry-node.local01.arg`,
                 ...NodesHelper.getDockerExtraHosts('start-sentry-node'),
                 ...NodesHelper.getDockerConfig(this.genesisJsonString),
-                ...NodesHelper.getUserOverrideYml('sentry-node'),
-                `docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -f ./users-sentry-node.override.yml -p ${dockerContainerInitName} up --build`,
-                `(docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -f ./users-sentry-node.override.yml -p ${dockerContainerInitName} down || true)`,
-                `docker-compose --env-file ./sentry-node.local01.arg -f ./start-sentry-node.yml -f ./users-sentry-node.override.yml -p ${dockerContainerStartName} up --build -d`
+                `docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -p ${dockerContainerInitName} up --build`,
+                `(docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -p ${dockerContainerInitName} down || true)`,
+                `docker-compose --env-file ./sentry-node.local01.arg -f ./start-sentry-node.yml -p ${dockerContainerStartName} up --build -d`
             ]);
 
             this.nodeIdToNodeInstanceContainerNamesMap.set(sentryNodeModel.nodeId, dockerContainerStartName);
@@ -265,7 +259,6 @@ class NodesService {
             }
             await validatorSshHelper.prepareBinaryBuilder();
             await validatorSshHelper.exec([
-                ...NodesHelper.getUserEnv(),
                 `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/full-node`,
                 'cp ./full-node.env.example ./full-node.client.local01.env',
                 `sed -i "s/MONIKER=<TYPE DOWN NODE NAME>/MONIKER=\"deployer-network-full-node-${validatorNodeModel.nodeId}\"/g" ./full-node.client.local01.env`,
@@ -277,8 +270,7 @@ class NodesService {
                 `sed -i "s/PORT26660=60601/PORT26660=\"${validatorNodeModel.port26660}\"/g" ./full-node.client.local01.arg`,
                 `sed -i "s/init-full-node.sh\\"]/init-full-node.sh \\&\\& sleep infinity\\"]/g" ./init-full-node.dockerfile`,
                 ...NodesHelper.getDockerConfig(this.genesisJsonString),
-                ...NodesHelper.getUserOverrideYml('full-node'),
-                `docker-compose --env-file ./full-node.client.local01.arg -f ./init-full-node.yml -f ./users-full-node.override.yml -p ${dockerContainerInitName} up --build -d`,
+                `docker-compose --env-file ./full-node.client.local01.arg -f ./init-full-node.yml -p ${dockerContainerInitName} up --build -d`,
             ]);
 
             const tendermintNodeId = await validatorSshHelper.exec(`docker container exec ${dockerContainerInitName} /bin/bash -c "cudos-noded tendermint show-node-id"`, false);
@@ -286,7 +278,7 @@ class NodesService {
 
             await validatorSshHelper.exec([
                 `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/full-node`,
-                `(docker-compose --env-file ./full-node.client.local01.arg -f ./init-full-node.yml -f ./users-full-node.override.yml -p ${dockerContainerInitName} down || true)`,
+                `(docker-compose --env-file ./full-node.client.local01.arg -f ./init-full-node.yml -p ${dockerContainerInitName} down || true)`,
             ]);
         }
     }
@@ -321,7 +313,6 @@ class NodesService {
                 }
                 await seedSshHelper.prepareBinaryBuilder();
                 await seedSshHelper.exec([
-                    ...NodesHelper.getUserEnv(),
                     `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/seed-node`,
                     'cp ./seed-node.env.example ./seed-node.local01.env',
                     `sed -i "s/MONIKER=<TYPE DOWN NODE NAME>/MONIKER=\"deployer-network-seed-node-${seedNodeModel.nodeId}\"/g" ./seed-node.local01.env`,
@@ -336,10 +327,9 @@ class NodesService {
                     `sed -i "s/PORT26660=60203/PORT26660=\"${seedNodeModel.port26660}\"/g" ./seed-node.local01.arg`,
                     ...NodesHelper.getDockerExtraHosts('start-seed-node'),
                     ...NodesHelper.getDockerConfig(this.genesisJsonString),
-                    ...NodesHelper.getUserOverrideYml('seed-node'),
-                    `docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -f ./users-seed-node.override.yml -p ${dockerContainerInitName} up --build`,
-                    `(docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -f ./users-seed-node.override.yml -p ${dockerContainerInitName} down || true)`,
-                    `docker-compose --env-file ./seed-node.local01.arg -f ./start-seed-node.yml -f ./users-seed-node.override.yml -p ${dockerContainerStartName} up --build -d`
+                    `docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -p ${dockerContainerInitName} up --build`,
+                    `(docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -p ${dockerContainerInitName} down || true)`,
+                    `docker-compose --env-file ./seed-node.local01.arg -f ./start-seed-node.yml -p ${dockerContainerStartName} up --build -d`
                 ]);
 
                 this.nodeIdToNodeInstanceContainerNamesMap.set(seedNodeModel.nodeId, dockerContainerStartName);
@@ -384,7 +374,6 @@ class NodesService {
                 }
                 await sentrySshHelper.prepareBinaryBuilder();
                 await sentrySshHelper.exec([
-                    ...NodesHelper.getUserEnv(),
                     `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/sentry-node`,
                     'cp ./sentry-node.env.example ./sentry-node.local01.env',
                     `sed -i "s/MONIKER=<TYPE DOWN NODE NAME>/MONIKER=\"deployer-network-sentry-node-${sentryNodeModel.nodeId}\"/g" ./sentry-node.local01.env`,
@@ -401,10 +390,9 @@ class NodesService {
                     `sed -i "s/PORT26660=26660/PORT26660=\"${sentryNodeModel.port26660}\"/g" ./sentry-node.local01.arg`,
                     ...NodesHelper.getDockerExtraHosts('start-sentry-node'),
                     ...NodesHelper.getDockerConfig(this.genesisJsonString),
-                    ...NodesHelper.getUserOverrideYml('sentry-node'),
-                    `docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -f ./users-sentry-node.override.yml -p ${dockerContainerInitName} up --build`,
-                    `(docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -f ./users-sentry-node.override.yml -p ${dockerContainerInitName} down || true)`,
-                    `docker-compose --env-file ./sentry-node.local01.arg -f ./start-sentry-node.yml -f ./users-sentry-node.override.yml -p ${dockerContainerStartName} up --build -d`
+                    `docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -p ${dockerContainerInitName} up --build`,
+                    `(docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -p ${dockerContainerInitName} down || true)`,
+                    `docker-compose --env-file ./sentry-node.local01.arg -f ./start-sentry-node.yml -p ${dockerContainerStartName} up --build -d`
                 ]);
     
                 this.nodeIdToNodeInstanceContainerNamesMap.set(sentryNodeModel.nodeId, dockerContainerStartName);
@@ -436,9 +424,9 @@ class NodesService {
                 `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/full-node`,
                 `sed -i "s/PERSISTENT_PEERS=/PERSISTENT_PEERS=\"${seeds},${sentries}\"/g" ./full-node.client.local01.env`,
                 ...NodesHelper.getDockerExtraHosts('start-full-node'),
-                `docker-compose --env-file ./full-node.client.local01.arg -f ./config-full-node.yml -f ./users-full-node.override.yml -p ${dockerContainerConfigName} up --build`,
-                `(docker-compose --env-file ./full-node.client.local01.arg -f ./config-full-node.yml -f ./users-full-node.override.yml -p ${dockerContainerConfigName} down || true)`,
-                `docker-compose --env-file ./full-node.client.local01.arg -f ./start-full-node.yml -f ./users-full-node.override.yml -p ${dockerContainerStartName} up --build -d`
+                `docker-compose --env-file ./full-node.client.local01.arg -f ./config-full-node.yml -p ${dockerContainerConfigName} up --build`,
+                `(docker-compose --env-file ./full-node.client.local01.arg -f ./config-full-node.yml -p ${dockerContainerConfigName} down || true)`,
+                `docker-compose --env-file ./full-node.client.local01.arg -f ./start-full-node.yml -p ${dockerContainerStartName} up --build -d`
             ]);
 
             this.nodeIdToNodeInstanceContainerNamesMap.set(validatorNodeModel.nodeId, dockerContainerStartName);
@@ -624,7 +612,6 @@ class NodesService {
             await utilsSshHelper.cloneRepos();
         }
         await utilsSshHelper.exec([
-            ...NodesHelper.getUserEnv(),
             `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/explorer`,
             'cp ./explorer.env.example ./explorer.local.env',
             `sed -i "s~MONGO_URL=~MONGO_URL=mongodb://root:cudos-root-db-pass@cudos-explorer-mongodb:27017~g" ./explorer.local.env`,
@@ -641,8 +628,7 @@ class NodesService {
             `sed -i "s/container_name: cudos-explorer-mongodb/container_name: ${EXPLORER_MONGO_CONTAINER_NAME}/g" ./explorer.yml`,
             `sed -i "s/container_name: cudos-explorer/container_name: ${EXPLORER_CONTAINER_NAME}/g" ./explorer.yml`,
             `sed -i "s/- cudos-explorer-mongodb/- cudos-explorer-mongodb\\r\\n    extra_hosts:\\r\\n      - \\"host.docker.internal:host-gateway\\"/g" ./explorer.yml`,
-            ...NodesHelper.getUserOverrideYml('explorer'),
-            `docker-compose --env-file ./explorer.local.arg -f ./explorer.yml -f ./users-explorer.override.yml -p ${EXPLORER_CONTAINER_NAME} up --build -d`
+            `docker-compose --env-file ./explorer.local.arg -f ./explorer.yml -p ${EXPLORER_CONTAINER_NAME} up --build -d`
         ]);
     }
 
@@ -690,9 +676,7 @@ class NodesService {
             `echo "    static_configs:" >> ./config/prometheus.local.yml`,
             `echo "      - targets:" >> ./config/prometheus.local.yml`,
             `echo "        - cudos-monitoring-exporter:9300" >> ./config/prometheus.local.yml`,
-            `cp ./users-monitoring.override.yml.example ./users-monitoring.override.yml`,
-            `sed -i "s/user: 'USER_ID:GROUP_ID'/user: '$USER_ID:$GROUP_ID'/g" ./users-monitoring.override.yml`,
-            `docker-compose --env-file ./monitoring.local.arg -f ./monitoring.yml -f ./users-monitoring.override.yml -p cudos-monitoring-local up --build -d`
+            `docker-compose --env-file ./monitoring.local.arg -f ./monitoring.yml -p cudos-monitoring-local up --build -d`
         ]);
     }
 

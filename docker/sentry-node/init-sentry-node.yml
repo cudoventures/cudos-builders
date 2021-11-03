@@ -10,11 +10,6 @@ services:
       dockerfile: CudosBuilders/docker/sentry-node/init-sentry-node.dockerfile
       context: ../../../
       args:
-        USER_ID: "0"
-        USER_NAME: "root"
-        GROUP_ID: "0"
-        GROUP_NAME: "root"
-        CUDOS_HOME: "$CUDOS_HOME"
         GENESIS_FILENAME: "$GENESIS_FILENAME"
         SEEDS_FILENAME: "$SEEDS_FILENAME"
         PERSISTENT_PEERS_FILENAME: "$PERSISTENT_PEERS_FILENAME"

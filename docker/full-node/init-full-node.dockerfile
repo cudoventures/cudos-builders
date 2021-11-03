@@ -1,19 +1,9 @@
 FROM binary-builder
 
-ARG USER_ID
-ARG USER_NAME
-ARG GROUP_ID
-ARG GROUP_NAME
-ARG CUDOS_HOME
 ARG GENESIS_FILENAME
 ARG SEEDS_FILENAME
 ARG PERSISTENT_PEERS_FILENAME
 ARG STATE_SYNC_RPC_SERVERS_FILENAME
-
-RUN if [ $USER_NAME != 'root' ]; then \
-        groupadd --gid ${GROUP_ID} ${GROUP_NAME}; \
-        useradd --no-log-init --create-home --shell /bin/bash --uid ${USER_ID} --gid ${GROUP_ID} ${USER_NAME}; \
-    fi
 
 RUN apt update && apt install -y jq
 
@@ -28,8 +18,4 @@ RUN mv "./external-config/${GENESIS_FILENAME}" ./external-config/genesis.json &&
     chmod +x ./init-full-node.sh && \
     sed -i 's/\r$//' ./init-full-node.sh
 
-ENV USER_NAME=${USER_NAME}
-ENV GROUP_NAME=${GROUP_NAME}
-ENV CUDOS_HOME=${CUDOS_HOME}
-
-CMD ["/bin/bash", "-c", "chown -R ${USER_NAME}:${GROUP_NAME} ${CUDOS_HOME} && su ${USER_NAME} -c ./init-full-node.sh"]
+CMD ["/bin/bash", "-c", "./init-full-node.sh"]

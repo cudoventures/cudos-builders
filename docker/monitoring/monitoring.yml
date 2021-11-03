@@ -11,12 +11,8 @@ services:
     build:
       dockerfile: ./prometeus.dockerfile
       context: ./
-      args:
-        USER_ID: "0"
-        USER_NAME: "root"
-        GROUP_ID: "0"
-        GROUP_NAME: "root"
     restart: unless-stopped
+    user: '0:0'
     env_file: "$ENV_FILE"
     volumes:
       - '${PROMETHEUS_DATA_PATH}:/prometheus'
@@ -32,9 +28,8 @@ services:
     build:
       dockerfile: ./grafana.dockerfile
       context: ./
-      args:
-        USER_ID: "0"
     restart: unless-stopped
+    user: '0:0'
     volumes:
       - '${GRAFANA_DATA_PATH}:/var/lib/grafana'
     networks:
