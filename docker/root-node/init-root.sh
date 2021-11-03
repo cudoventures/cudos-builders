@@ -163,3 +163,8 @@ sed -i "s/private_peer_ids = \"\"/private_peer_ids = \"$MY_OWN_PEER_ID\"/g" "${C
 cudos-noded tendermint show-node-id |& tee "${CUDOS_HOME}/tendermint.nodeid"
 
 chmod 755 "${CUDOS_HOME}/config"
+
+# Monitoring enabled
+if [ "${MONITORING_ENABLED}" = "true" ]; then
+    sed -i "s/prometheus = .*/prometheus = true/g" "${CUDOS_HOME}/config/config.toml"
+fi

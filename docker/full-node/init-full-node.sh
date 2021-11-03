@@ -23,7 +23,7 @@ sed -i "s/seeds = \".*\"/seeds = \"$SEEDS\"/g" "${CUDOS_HOME}/config/config.toml
 
 # Monitoring enabled
 if [ "${MONITORING_ENABLED}" = "true" ]; then
-    sed -i "s/prometheus = \".*\"/prometheus = true/g" "${CUDOS_HOME}/config/config.toml"
+    sed -i "s/prometheus = .*/prometheus = true/g" "${CUDOS_HOME}/config/config.toml"
 fi
 
 # STATE SYNC
