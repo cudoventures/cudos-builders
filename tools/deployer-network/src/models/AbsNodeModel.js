@@ -3,11 +3,6 @@ class AbsNodeModel {
     constructor() {
         this.computerId = "";
         this.nodeId = 0;
-        this.monitoring = 1;
-    }
-
-    hasMonitoring() {
-        return this.monitoring === 1;
     }
 
     static fromJson(json, model = null) {
@@ -20,7 +15,6 @@ class AbsNodeModel {
         }
 
         model.computerId = json.computerId ?? model.computerId;
-        model.monitoring = parseInt(json.monitoring ?? model.monitoring);
 
         return model;
     }

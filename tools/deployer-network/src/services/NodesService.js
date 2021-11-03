@@ -643,10 +643,6 @@ class NodesService {
 
         const nodeModelsEchos = [];
         this.topologyHelper.nodesMap.forEach((nodeModel) => {
-            if (nodeModel.hasMonitoring() === false) {
-                return;
-            }
-
             const host = this.getDockerInternalHostByNodeId(nodeModel.nodeId);
             nodeModelsEchos.push(`echo "      - targets: ['${host}:26660']" >> ./config/prometheus.local.yml`);
             nodeModelsEchos.push(`echo "        labels:" >> ./config/prometheus.local.yml`);
@@ -661,7 +657,7 @@ class NodesService {
             `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/monitoring`,
             'cp ./monitoring.env.example ./monitoring.local.env',
             `sed -i "s~NODE_ADDR=ip_or_address_of_node:9090~NODE_ADDR=${this.getDockerInternalHostByNodeId(sentryNodeModel.nodeId)}:9090~g" ./monitoring.local.env`,
-            `sed -i "s~TENDERMINT_ADDR=https://ip_or_address_of_node:26657~NODE_ADDR=http://${this.getDockerInternalHostByNodeId(sentryNodeModel.nodeId)}:26657~g" ./monitoring.local.env`,
+            `sed -i "s~TENDERMINT_ADDR=https://ip_or_address_of_node:26657~TENDERMINT_ADDR=http://${this.getDockerInternalHostByNodeId(sentryNodeModel.nodeId)}:26657~g" ./monitoring.local.env`,
             `echo "global:" > ./config/prometheus.local.yml`,
             `echo "  scrape_interval: 15s" >> ./config/prometheus.local.yml`,
             `echo "  evaluation_interval: 30s" >> ./config/prometheus.local.yml`,

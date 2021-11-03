@@ -11,12 +11,13 @@ services:
     build:
       dockerfile: ./prometeus.dockerfile
       context: ./
+      args:
+          PROMETHEUS_CONFIG_PATH_LOCAL: "$PROMETHEUS_CONFIG_PATH_LOCAL"
     restart: unless-stopped
     user: '0:0'
     env_file: "$ENV_FILE"
     volumes:
       - '${PROMETHEUS_DATA_PATH}:/prometheus'
-      - '${PROMETHEUS_CONFIG_PATH_LOCAL}:/etc/prometheus/prometheus.yml'
     networks:
       - shared-cudos-network
     ports:

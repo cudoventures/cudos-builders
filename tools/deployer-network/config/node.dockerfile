@@ -36,7 +36,7 @@ USER ${USER_NAME}
 WORKDIR $WORKDIR
 
 RUN git clone --depth 1 --branch cudos-dev https://github.com/CudoVentures/cudos-node.git CudosNode && \
-    git clone --depth 2 --branch cudos-dev-monitoring-script https://github.com/CudoVentures/cudos-builders.git CudosBuilders && \
+    git clone --depth 3 --branch cudos-dev-monitoring-script https://github.com/CudoVentures/cudos-builders.git CudosBuilders && \
     git clone --depth 1 --branch cudos-dev https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge && \
     git clone --depth 1 --branch cudos-dev https://github.com/CudoVentures/cudos-gravity-bridge-ui CudosGravityBridgeUI && \
     git clone --depth 1 --branch cudos-dev https://github.com/CudoVentures/big-dipper.git CudosExplorer && \

@@ -71,40 +71,34 @@
             "computerId": "node001",
             "validatorId": "validator01",
             "orchEthAddress": "0x....",
-            "ethPrivKey": "",
-            "monitoring": false
+            "ethPrivKey": ""
         },
         "validators": [
             {
                 "validatorId": "validator02",
                 "computerId": "node002",
                 "orchEthAddress": "0x",
-                "ethPrivKey": "",
-                "monitoring": false
+                "ethPrivKey": ""
             }
         ],
         "seeds": [
             {
                 "validatorId": "validator01",
-                "computerId": "node100",
-                "monitoring": false
+                "computerId": "node100"
             },
             {
                 "validatorId": "validator02",
-                "computerId": "node101",
-                "monitoring": false
+                "computerId": "node101"
             }
         ],
         "sentries": [
             {
                 "validatorId": "validator01",
-                "computerId": "node200",
-                "monitoring": false
+                "computerId": "node200"
             },
             {
                 "validatorId": "validator02",
-                "computerId": "node201",
-                "monitoring": false
+                "computerId": "node201"
             }
         ],
         "gravityBridgeUi": {

@@ -174,6 +174,7 @@ Each **computer** defined in the <code>topology.json</code> is accessed by a use
     "sentries": Sentry[], // Defines the sentry nodes and how they are attached to validators.
     "gravityBridgeUi": GravityBridgeUi, // Defines the gravity bridge UI.
     "utils": Utils, // Defines the faucet and the explorer.
+    "monitoring": Monitoring, // Defines the monitoring (grafana and prometheus).
 }
 ```
 
@@ -221,6 +222,13 @@ Each **computer** defined in the <code>topology.json</code> is accessed by a use
 }
 ```
 
+**Monitoring** object:
+```json
+{
+    "computerId": string, // The id of the computer where this node will run. (4)
+}
+```
+
 **Params** object:
 ```json
 {
@@ -240,7 +248,9 @@ Each **computer** defined in the <code>topology.json</code> is accessed by a use
 
 (2) It can be empty if the chain is started without **faucet** module.
 
-(2) It can be empty if the chain is started without **explorer** and **faucet** modules.
+(3) It can be empty if the chain is started without **explorer** and **faucet** modules.
+
+(4) It can be empty if the chain is started without **monitoring**.
 
 **<em>Remarks:</em>**
 - Each **computer** instance can be used only by a single node.
@@ -257,10 +267,11 @@ Each **computer** defined in the <code>topology.json</code> is accessed by a use
 - gravity: 0 (disables the module) or 1 (enabled the module)
 - explorer: 0 (disables the module) or 1 (enabled the module)
 - faucet: 0 (disables the module) or 1 (enabled the module)
+- monitoring: 0 (disables the module) or 1 (enabled the module)
 
 The parameters are passed in the following way:
 
-<code>npm run network -- --topology ./deployer-network/config/topology.json --gravity 1 --explorer 1 --faucet 1</code>
+<code>npm run network -- --topology ./deployer-network/config/topology.json --gravity 1 --explorer 1 --faucet 1 --monitoring 1</code>
 
 ## nodes deployer
 
