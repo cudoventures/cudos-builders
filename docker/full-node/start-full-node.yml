@@ -11,6 +11,8 @@ services:
     build:
       dockerfile: CudosBuilders/docker/full-node/start-full-node.dockerfile
       context: ../../../
+      args:
+        CUDOS_HOME: "$CUDOS_HOME"
     restart: unless-stopped
     env_file: "$ENV_FILE"
     volumes:

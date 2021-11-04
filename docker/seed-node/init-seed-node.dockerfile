@@ -19,4 +19,6 @@ RUN mv "./external-config/${PERSISTENT_PEERS_FILENAME}" ./external-config/persis
     chmod +x ./init-seed.sh && \
     sed -i 's/\r$//' ./init-seed.sh
 
+ENV CUDOS_HOME=${CUDOS_HOME}
+
 CMD ["/bin/bash", "-c", "./init-seed.sh"]

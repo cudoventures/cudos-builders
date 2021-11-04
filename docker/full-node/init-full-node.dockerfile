@@ -1,5 +1,6 @@
 FROM binary-builder
 
+ARG CUDOS_HOME
 ARG GENESIS_FILENAME
 ARG SEEDS_FILENAME
 ARG PERSISTENT_PEERS_FILENAME
@@ -17,5 +18,7 @@ RUN mv "./external-config/${GENESIS_FILENAME}" ./external-config/genesis.json &&
     mv "./external-config/${STATE_SYNC_RPC_SERVERS_FILENAME}" ./external-config/state-sync-rpc-servers.config && \
     chmod +x ./init-full-node.sh && \
     sed -i 's/\r$//' ./init-full-node.sh
+
+ENV CUDOS_HOME=${CUDOS_HOME}
 
 CMD ["/bin/bash", "-c", "./init-full-node.sh"]

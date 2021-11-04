@@ -8,6 +8,7 @@ services:
       dockerfile: CudosBuilders/docker/seed-node/init-seed-node.dockerfile
       context: ../../../
       args:
+        CUDOS_HOME: "$CUDOS_HOME"
         GENESIS_FILENAME: "$GENESIS_FILENAME"
         SEEDS_FILENAME: "$SEEDS_FILENAME"
         PERSISTENT_PEERS_FILENAME: "$PERSISTENT_PEERS_FILENAME"
