@@ -466,6 +466,7 @@
             "type": "shell",
             "group": "build"
         },
+        
         // binary builder
         {
             "label": "Start BINARY BUILDER in docker",
