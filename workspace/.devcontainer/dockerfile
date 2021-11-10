@@ -58,6 +58,33 @@ RUN apt-get install \
 RUN curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
     chmod +x /usr/local/bin/docker-compose
 
+#install protoc plugins
+RUN /usr/local/go/bin/go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway@latest && \
+    /usr/local/go/bin/go install google.golang.org/protobuf/cmd/protoc-gen-go@latest && \
+    /usr/local/go/bin/go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+    # github.com/grpc-ecosystem/grpc-gateway/protoc-gen-openapiv2@latest \
+
+#install go plugins
+RUN /usr/local/go/bin/go install github.com/mdempsky/gocode@latest && \
+    /usr/local/go/bin/go install github.com/uudashr/gopkgs/v2/cmd/gopkgs@latest && \
+    /usr/local/go/bin/go install github.com/ramya-rao-a/go-outline@latest && \
+    /usr/local/go/bin/go install github.com/acroca/go-symbols@latest && \
+    /usr/local/go/bin/go install golang.org/x/tools/cmd/guru@latest && \
+    /usr/local/go/bin/go install golang.org/x/tools/cmd/gorename@latest && \
+    /usr/local/go/bin/go install github.com/cweill/gotests/gotests@latest && \
+    /usr/local/go/bin/go install github.com/fatih/gomodifytags@latest && \
+    /usr/local/go/bin/go install github.com/josharian/impl@latest && \
+    /usr/local/go/bin/go install github.com/davidrjenni/reftools/cmd/fillstruct@latest && \
+    /usr/local/go/bin/go install github.com/haya14busa/goplay/cmd/goplay@latest && \
+    /usr/local/go/bin/go install github.com/godoctor/godoctor@latest && \
+    /usr/local/go/bin/go install github.com/go-delve/delve/cmd/dlv@latest && \
+    /usr/local/go/bin/go install github.com/go-delve/delve/cmd/dlv@master && \
+    /usr/local/go/bin/go install github.com/stamblerre/gocode@latest && \
+    /usr/local/go/bin/go install github.com/rogpeppe/godef@latest && \
+    /usr/local/go/bin/go install golang.org/x/tools/cmd/goimports@latest && \
+    /usr/local/go/bin/go install honnef.co/go/tools/cmd/staticcheck@latest && \
+    /usr/local/go/bin/go install golang.org/x/tools/gopls@latest
+
 WORKDIR $MNT_PATH
 
 USER $USER_NAME
