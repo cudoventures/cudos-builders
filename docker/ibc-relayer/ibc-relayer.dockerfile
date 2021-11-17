@@ -14,28 +14,25 @@ RUN if [ $USER_NAME != 'root' ]; then \
 RUN apt-get update
 RUN apt-get install jq -y
 
-# WORKDIR /usr/src/IbcRelayer
+WORKDIR /usr/src/IbcRelayer
 
-# RUN make install
+COPY ../IbcRelayer /usr/src/IbcRelayer/
+
+RUN make install
 
 WORKDIR /home/IbcRelayer
 
-COPY ./CudosBuilders/docker/ibc-relayer/chain_a_config.json .
-COPY ./CudosBuilders/docker/ibc-relayer/chain_b_config.json .
-COPY ./CudosBuilders/docker/ibc-relayer/ibc-relayer-run.sh .
+COPY ./CudosBuilders/docker/ibc-relayer/chains ./chains
+COPY ./CudosBuilders/docker/ibc-relayer/paths ./paths
+COPY ./CudosBuilders/docker/ibc-relayer/scripts ./scripts
 
-RUN chmod +x ./ibc-relayer-run.sh && \
+RUN chmod +x ./scripts/* && \
     chown -R ${USER_NAME}:${GROUP_NAME} ./ && \
-    sed -i 's/\r$//' ./ibc-relayer-run.sh
+    sed -i 's/\r$//' ./scripts/ibc-relayer-run.sh
 
 ENV USER_NAME=${USER_NAME}
 ENV GROUP_NAME=${GROUP_NAME}
 ENV CUDOS_HOME=${CUDOS_HOME}
 
-# CMD ["sleep", "infinity"]
 
-# CMD ["/bin/bash", "-c", "chown -R ${USER_NAME}:${GROUP_NAME} ${CUDOS_HOME} && su ${USER_NAME} -c ./init-root.sh"]
-
-CMD ["/bin/bash", "-c", "chown -R ${USER_NAME}:${GROUP_NAME} ${CUDOS_HOME} && sleep infinity"]
-
-# CMD ["/bin/bash", "-c", "./ibc-relayer-run.sh"]
+CMD ["/bin/bash", "-c", "chown -R ${USER_NAME}:${GROUP_NAME} ${CUDOS_HOME} && cd ./scripts && ibc-relayer-run.sh"] 

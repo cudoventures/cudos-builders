@@ -1,1 +1,2 @@
 CUDOS_HOME=/usr/cudos/cudos-data
+ENV_FILE=./ibc-relayer.local.env

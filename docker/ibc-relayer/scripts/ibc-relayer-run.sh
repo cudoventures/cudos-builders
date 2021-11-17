@@ -1,3 +1,5 @@
+#!/bin/bash
+
 CHAIN_ID_1=($(jq -r '."chain-id"' chain_a_config.json))
 CHAIN_ID_2=($(jq -r '."chain-id"' chain_b_config.json))
 
@@ -16,8 +18,10 @@ rly chains edit ${CHAIN_ID_1} key relayer-chain-1
 rly chains edit ${CHAIN_ID_2} key relayer-chain-2
 
 echo "Initializing chains"
-rly light init ${CHAIN_ID_1} -f
-rly light init ${CHAIN_ID_2} -f
+# rly light init ${CHAIN_ID_1} -f
+# rly light init ${CHAIN_ID_2} -f
+rly q balance ${CHAIN_ID_1}
+rly q balance ${CHAIN_ID_2}
 
 echo "Generating paths"
 rly paths generate ${CHAIN_ID_1} ${CHAIN_ID_2} transfer --port=transfer
