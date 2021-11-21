@@ -1,0 +1,2 @@
+CUDOS_HOME=/usr/cudos/cudos-data
+ENV_FILE=./hermes-ibc-relayer.local.env

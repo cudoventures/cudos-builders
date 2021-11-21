@@ -14,6 +14,19 @@
             "type": "shell",
             "group": "build"
         },
+        //hermes-ibc-relayer
+        {
+            "label": "Build HERMES-IBC-RELAYER LOCAL in docker",
+            "command": "cd ./docker/hermes-ibc-relayer && docker-compose --env-file ./hermes-ibc-relayer.local.arg -f ./hermes-ibc-relayer.yml -p hermes-ibc-relayer up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Destroy HERMES-IBC-RELAYER LOCAL in docker",
+            "command": "cd ./docker/hermes-ibc-relayer && docker-compose --env-file ./hermes-ibc-relayer.local.arg -f ./hermes-ibc-relayer.yml -p hermes-ibc-relayer down",
+            "type": "shell",
+            "group": "build"
+        },
         // root node
         {
             "label": "Build INIT ROOT NODE in docker",
