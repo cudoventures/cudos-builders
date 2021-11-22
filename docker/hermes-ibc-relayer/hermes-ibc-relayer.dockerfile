@@ -12,7 +12,7 @@ RUN if [ $USER_NAME != 'root' ]; then \
     fi
 
 RUN apt-get update
-# RUN apt-get install jq -y
+
 RUN apt-get install cargo -y
 
 RUN cargo install ibc-relayer-cli --bin hermes --locked
@@ -33,6 +33,6 @@ COPY ./CudosBuilders/docker/hermes-ibc-relayer/scripts/hermes-ibc-relayer-run.sh
 
 # ENV CUDOS_HOME=${CUDOS_HOME}
 
-CMD ["sleep", "infinity"]
+# CMD ["sleep", "infinity"]
 
-# CMD ["/bin/bash", "-c", "./hermes-ibc-relayer-run.sh"]
+CMD ["/bin/bash", "-c", "./hermes-ibc-relayer-run.sh"]
