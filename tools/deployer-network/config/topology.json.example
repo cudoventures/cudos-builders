@@ -57,6 +57,13 @@
             "port": 22,
             "user": "",
             "sshKey": ""
+        },
+        {
+            "id": "node402",
+            "ip": "auto",
+            "port": 22,
+            "user": "",
+            "sshKey": ""
         }
     ],
     "nodes": {
@@ -103,6 +110,9 @@
             "googleApiKey": "",
             "captchaSiteKey": "",
             "googleProjectId": ""
+        },
+        "monitoring": {
+            "computerId": "node402"
         }
     },
     "params": {

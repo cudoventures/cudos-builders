@@ -21,7 +21,7 @@ RUN chmod +x ./orchestrator-run.sh && \
     chown -R ${USER_NAME}:${GROUP_NAME} ./ && \
     sed -i 's/\r$//' ./orchestrator-run.sh
 
-USER ${USER_NAME}:${GROUP_NAME}
+USER ${USER_NAME}
 
 CMD ["sleep", "infinity"]
 

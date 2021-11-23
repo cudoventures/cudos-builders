@@ -24,8 +24,8 @@ ARG CHAIN_NAME
 ARG CHAIN_ID
 
 RUN cd ./source && \
-    sed -i 's/\r$//' ./run-built.sh && \
-    chmod +x ./run-built.sh && \
+    sed -i 's/\r$//' ./run-build.sh && \
+    chmod +x ./run-build.sh && \
     cat ./default_settings.json | jq --arg CHAIN_NAME "$CHAIN_NAME" '.public.chainName = $CHAIN_NAME' > ./default_settings.tmp && mv ./default_settings.tmp ./default_settings.json && \
     cat ./default_settings.json | jq --arg CHAIN_ID "$CHAIN_ID" '.public.chainId = $CHAIN_ID' > ./default_settings.tmp && mv ./default_settings.tmp ./default_settings.json && \
     cat ./default_settings.json | jq --arg GENESIS_TIME "$GENESIS_TIME" '.public.genesisTime = $GENESIS_TIME' > ./default_settings.tmp && mv ./default_settings.tmp ./default_settings.json && \
@@ -56,6 +56,6 @@ COPY --from=builder /usr/explorer/output/bundle ./
 
 COPY --from=builder /usr/explorer/source/default_settings.json ./
 
-COPY --from=builder /usr/explorer/source/run-built.sh ./
+COPY --from=builder /usr/explorer/source/run-build.sh ./
 
-CMD ["/bin/bash", "./run-built.sh"]
+CMD ["/bin/bash", "./run-build.sh"]

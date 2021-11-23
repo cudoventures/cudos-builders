@@ -35,12 +35,16 @@ class NodesService {
         this.gravity = "1";
         this.explorer = "1";
         this.faucet = "1";
+        this.monitoring = "1";
     }
 
-    async start(gravity, explorer, faucet) {
+    async start(gravity, explorer, faucet, monitoring) {
         this.gravity = gravity;
         this.explorer = explorer;
         this.faucet = faucet;
+        this.monitoring = monitoring;
+
+        await this.prepareVolumes();
 
         await this.initAndStartRootValidator();
         await this.initAndStartRootValidatorSeedNodes();
@@ -60,6 +64,33 @@ class NodesService {
         if (explorer === '1') {
             await this.startExplorer();
         }
+        if (monitoring === '1') {
+            await this.startMonitoring();
+        }
+    }
+
+    async prepareVolumes() {
+        Log.main('Prepare volumes');
+
+        const utilsModel = this.topologyHelper.utilsModel;
+        const utilsSshHelper = this.instancesService.getSshHelper(utilsModel.computerId);
+
+        await utilsSshHelper.exec([
+            `docker run -v "${PathHelper.WORKING_DIR}/CudosData/cudos-data-explorer-release-mongodb:/vol" debian rm -rf /vol`,
+        ], false);
+
+        const monitoringModel = this.topologyHelper.monitoringModel;
+        const monitoringSshHelper = this.instancesService.getSshHelper(monitoringModel.computerId);
+
+        await monitoringSshHelper.exec([
+            `docker run -v "${PathHelper.WORKING_DIR}/CudosData/grafana:/vol" debian rm -rf /vol`,
+        ], false);
+
+        await monitoringSshHelper.exec([
+            `docker run -v "${PathHelper.WORKING_DIR}/CudosData/prometheus:/vol" debian rm -rf /vol`,
+        ], false);
+
+        // all node volumes are deleted during initialization
     }
 
     async initAndStartRootValidator() {
@@ -79,20 +110,19 @@ class NodesService {
         }
         await validatorSshHelper.prepareBinaryBuilder();
         await validatorSshHelper.exec([
-            ...NodesHelper.getUserEnv(),
             `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/root-node`,
             'cp ./root-node.env.example ./root-node.local.env',
             'sed -i "s/MONIKER=/MONIKER=\"deployer-network-root-validator\"/g" ./root-node.local.env',
             `sed -i "s/CHAIN_ID=/CHAIN_ID=\"${CHAIN_ID}"/g" ./root-node.local.env`,
             `sed -i "s/ORCH_ETH_ADDRESS=/ORCH_ETH_ADDRESS=\"${validatorNodeModel.orchEthAddress}\"/g" ./root-node.local.env`,
+            `sed -i "s/MONITORING_ENABLED=false/MONITORING_ENABLED=\"true\"/g" ./root-node.local.env`,
             `sed -i "s/PORT26656=60101/PORT26656=\"${validatorNodeModel.port26656}\"/g" ./root-node.local.arg`,
             `sed -i "s/PORT26660=60102/PORT26660=\"${validatorNodeModel.port26660}\"/g" ./root-node.local.arg`,
             `sed -i "s/container_name: cudos-start-root-node/container_name: ${dockerContainerStartName}/g" ./start-root-node.yml`,
             ...NodesHelper.getDockerExtraHosts('start-root-node'),
-            ...NodesHelper.getUserOverrideYml('root-node'),
-            'docker-compose --env-file ./root-node.local.arg -f ./init-root-node.yml -f ./users-root-node.override.yml -p cudos-init-root-node up --build',
-            'docker-compose --env-file ./root-node.local.arg -f ./init-root-node.yml -f ./users-root-node.override.yml -p cudos-init-root-node down',
-            `docker-compose --env-file ./root-node.local.arg -f ./start-root-node.yml -f ./users-root-node.override.yml -p ${ValidatorNodeModel.getRootValidatorDockerContainerStartName()} up --build -d`
+            'docker-compose --env-file ./root-node.local.arg -f ./init-root-node.yml -p cudos-init-root-node up --build',
+            'docker-compose --env-file ./root-node.local.arg -f ./init-root-node.yml -p cudos-init-root-node down',
+            `docker-compose --env-file ./root-node.local.arg -f ./start-root-node.yml -p ${ValidatorNodeModel.getRootValidatorDockerContainerStartName()} up --build -d`
         ]);
 
         this.nodeIdToNodeInstanceContainerNamesMap.set(validatorNodeModel.nodeId, dockerContainerStartName);
@@ -123,15 +153,15 @@ class NodesService {
         const seedNodeModels = this.topologyHelper.getSeeds(validatorNodeModel.validatorId);
 
         const validatorTendermintId = this.nodeIdTotendermintNodeId.get(validatorNodeModel.nodeId);
-        const validatorDockerInternalHost = this.getDockerInternalHostByNodeId(validatorNodeModel.nodeId); // validatorComputerModel.isLocalDocker === true ? this.nodeIdToNodeInstanceContainerNamesMap.get(validatorNodeModel.nodeId) : validatorComputerModel.ip;
+        const validatorDockerInternalHost = this.getDockerInternalHostByNodeId(validatorNodeModel.nodeId); 
 
         for (let i = 0;  i < seedNodeModels.length;  ++i) {
             const seedNodeModel = seedNodeModels[i];
             const seedComputerModel = this.topologyHelper.getComputerModel(seedNodeModel.computerId);
             const seedSshHelper = this.instancesService.getSshHelper(seedNodeModel.computerId);
 
-            const dockerContainerInitName = seedNodeModel.getDockerContainerInitName(validatorNodeModel, i); //`cudos-init-seed-node-${validatorNodeModel.validatorId}-${i + 1}`;
-            const dockerContainerStartName = seedNodeModel.getDockerContainerStartName(validatorNodeModel, i); //`cudos-start-seed-node-${validatorNodeModel.validatorId}-${i + 1}`;
+            const dockerContainerInitName = seedNodeModel.getDockerContainerInitName(validatorNodeModel, i); 
+            const dockerContainerStartName = seedNodeModel.getDockerContainerStartName(validatorNodeModel, i); 
             const volumeName = `cudos-data-seed-node-${validatorNodeModel.validatorId}-${i + 1}`;
 
             seedNodeModel.port26656 = seedComputerModel.isLocalDocker === true ? ++this.genPorts : 26656;
@@ -143,13 +173,13 @@ class NodesService {
             }
             await seedSshHelper.prepareBinaryBuilder();
             await seedSshHelper.exec([
-                ...NodesHelper.getUserEnv(),
                 `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/seed-node`,
                 'cp ./seed-node.env.example ./seed-node.local01.env',
                 `sed -i "s/MONIKER=<TYPE DOWN NODE NAME>/MONIKER=\"deployer-network-seed-node-${seedNodeModel.nodeId}\"/g" ./seed-node.local01.env`,
                 `sed -i "s/PERSISTENT_PEERS=/PERSISTENT_PEERS=\"${validatorTendermintId}@${validatorDockerInternalHost}:26656\"/g" ./seed-node.local01.env`,
                 `sed -i "s/PRIVATE_PEERS=/PRIVATE_PEERS=\"${validatorTendermintId}\"/g" ./seed-node.local01.env`,
                 `sed -i "s/SHOULD_USE_GLOBAL_PEERS=true/SHOULD_USE_GLOBAL_PEERS=\"false\"/g" ./seed-node.local01.env`,
+                `sed -i "s/MONITORING_ENABLED=false/MONITORING_ENABLED=\"true\"/g" ./seed-node.local01.env`,
                 `sed -i "s/INIT_CONTAINER_NAME=cudos-init-seed-node-01/INIT_CONTAINER_NAME=\"${dockerContainerInitName}\"/g" ./seed-node.local01.arg`,
                 `sed -i "s/START_CONTAINER_NAME=cudos-start-seed-node-01/START_CONTAINER_NAME=\"${dockerContainerStartName}\"/g" ./seed-node.local01.arg`,
                 `sed -i "s/VOLUME_NAME=cudos-data-seed-node-01/VOLUME_NAME=\"${volumeName}\"/g" ./seed-node.local01.arg`,
@@ -158,10 +188,9 @@ class NodesService {
                 `sed -i "s/PORT26660=60203/PORT26660=\"${seedNodeModel.port26660}\"/g" ./seed-node.local01.arg`,
                 ...NodesHelper.getDockerExtraHosts('start-seed-node'),
                 ...NodesHelper.getDockerConfig(this.genesisJsonString),
-                ...NodesHelper.getUserOverrideYml('seed-node'),
-                `docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -f ./users-seed-node.override.yml -p ${dockerContainerInitName} up --build`,
-                `(docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -f ./users-seed-node.override.yml -p ${dockerContainerInitName} down || true)`,
-                `docker-compose --env-file ./seed-node.local01.arg -f ./start-seed-node.yml -f ./users-seed-node.override.yml -p ${dockerContainerStartName} up --build -d`
+                `docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -p ${dockerContainerInitName} up --build`,
+                `(docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -p ${dockerContainerInitName} down || true)`,
+                `docker-compose --env-file ./seed-node.local01.arg -f ./start-seed-node.yml -p ${dockerContainerStartName} up --build -d`
             ]);
 
             this.nodeIdToNodeInstanceContainerNamesMap.set(seedNodeModel.nodeId, dockerContainerStartName);
@@ -180,7 +209,7 @@ class NodesService {
         const sentryNodeModels = this.topologyHelper.getSentries(validatorNodeModel.validatorId);
 
         const validatorTendermintId = this.nodeIdTotendermintNodeId.get(validatorNodeModel.nodeId);
-        const validatorDockerInternalHost = this.getDockerInternalHostByNodeId(validatorNodeModel.nodeId); // validatorComputerModel.isLocalDocker === true ? this.nodeIdToNodeInstanceContainerNamesMap.get(validatorNodeModel.nodeId) : validatorComputerModel.ip;
+        const validatorDockerInternalHost = this.getDockerInternalHostByNodeId(validatorNodeModel.nodeId); 
 
         const seeds = this.getSeedsByValidatorId(validatorNodeModel.validatorId);
 
@@ -189,8 +218,8 @@ class NodesService {
             const sentryComputerModel = this.topologyHelper.getComputerModel(sentryNodeModel.computerId);
             const sentrySshHelper = this.instancesService.getSshHelper(sentryNodeModel.computerId);
 
-            const dockerContainerInitName = sentryNodeModel.getDockerContainerInitName(validatorNodeModel, i); // `cudos-init-sentry-node-${validatorNodeModel.validatorId}-${i + 1}`;
-            const dockerContainerStartName = sentryNodeModel.getDockerContainerStartName(validatorNodeModel, i); //`cudos-start-sentry-node-${validatorNodeModel.validatorId}-${i + 1}`;
+            const dockerContainerInitName = sentryNodeModel.getDockerContainerInitName(validatorNodeModel, i); 
+            const dockerContainerStartName = sentryNodeModel.getDockerContainerStartName(validatorNodeModel, i); 
             const volumeName = `cudos-data-sentry-node-${validatorNodeModel.validatorId}-${i + 1}`;
 
             sentryNodeModel.port26656 = sentryComputerModel.isLocalDocker === true ? ++this.genPorts : 26656;
@@ -204,7 +233,6 @@ class NodesService {
             }
             await sentrySshHelper.prepareBinaryBuilder();
             await sentrySshHelper.exec([
-                ...NodesHelper.getUserEnv(),
                 `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/sentry-node`,
                 'cp ./sentry-node.env.example ./sentry-node.local01.env',
                 `sed -i "s/MONIKER=<TYPE DOWN NODE NAME>/MONIKER=\"deployer-network-sentry-node-${sentryNodeModel.nodeId}\"/g" ./sentry-node.local01.env`,
@@ -212,6 +240,7 @@ class NodesService {
                 `sed -i "s/SEEDS=/SEEDS=\"${seeds}\"/g" ./sentry-node.local01.env`,
                 `sed -i "s/PRIVATE_PEERS=/PRIVATE_PEERS=\"${validatorTendermintId}\"/g" ./sentry-node.local01.env`,
                 `sed -i "s/SHOULD_USE_GLOBAL_PEERS=true/SHOULD_USE_GLOBAL_PEERS=\"false\"/g" ./sentry-node.local01.env`,
+                `sed -i "s/MONITORING_ENABLED=false/MONITORING_ENABLED=\"true\"/g" ./sentry-node.local01.env`,
                 `sed -i "s/INIT_CONTAINER_NAME=cudos-init-sentry-node-01/INIT_CONTAINER_NAME=\"${dockerContainerInitName}\"/g" ./sentry-node.local01.arg`,
                 `sed -i "s/START_CONTAINER_NAME=cudos-start-sentry-node-01/START_CONTAINER_NAME=\"${dockerContainerStartName}\"/g" ./sentry-node.local01.arg`,
                 `sed -i "s/VOLUME_NAME=cudos-data-sentry-node-01/VOLUME_NAME=\"${volumeName}\"/g" ./sentry-node.local01.arg`,
@@ -222,10 +251,9 @@ class NodesService {
                 `sed -i "s/PORT26660=26660/PORT26660=\"${sentryNodeModel.port26660}\"/g" ./sentry-node.local01.arg`,
                 ...NodesHelper.getDockerExtraHosts('start-sentry-node'),
                 ...NodesHelper.getDockerConfig(this.genesisJsonString),
-                ...NodesHelper.getUserOverrideYml('sentry-node'),
-                `docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -f ./users-sentry-node.override.yml -p ${dockerContainerInitName} up --build`,
-                `(docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -f ./users-sentry-node.override.yml -p ${dockerContainerInitName} down || true)`,
-                `docker-compose --env-file ./sentry-node.local01.arg -f ./start-sentry-node.yml -f ./users-sentry-node.override.yml -p ${dockerContainerStartName} up --build -d`
+                `docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -p ${dockerContainerInitName} up --build`,
+                `(docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -p ${dockerContainerInitName} down || true)`,
+                `docker-compose --env-file ./sentry-node.local01.arg -f ./start-sentry-node.yml -p ${dockerContainerStartName} up --build -d`
             ]);
 
             this.nodeIdToNodeInstanceContainerNamesMap.set(sentryNodeModel.nodeId, dockerContainerStartName);
@@ -247,9 +275,9 @@ class NodesService {
             const validatorComputerModel = this.topologyHelper.getComputerModel(validatorNodeModel.computerId);
             const validatorSshHelper = this.instancesService.getSshHelper(validatorNodeModel.computerId);
 
-            const dockerContainerInitName = validatorNodeModel.getDockerContainerInitName(i); // `cudos-init-full-node-${validatorNodeModel.validatorId}-${i + 1}`;
-            const dockerContainerConfigName = validatorNodeModel.getDockerContainerConfigName(i); // `cudos-config-full-node-${validatorNodeModel.validatorId}-${i + 1}`;
-            const dockerContainerStartName = validatorNodeModel.getDockerContainerStartName(i); // `cudos-start-full-node-${validatorNodeModel.validatorId}-${i + 1}`;
+            const dockerContainerInitName = validatorNodeModel.getDockerContainerInitName(i); 
+            const dockerContainerConfigName = validatorNodeModel.getDockerContainerConfigName(i); 
+            const dockerContainerStartName = validatorNodeModel.getDockerContainerStartName(i); 
             const volumeName = `cudos-data-full-node-${validatorNodeModel.validatorId}-${i + 1}`;
 
             validatorNodeModel.port26656 = validatorComputerModel.isLocalDocker === true ? ++this.genPorts : 26656;
@@ -260,10 +288,10 @@ class NodesService {
             }
             await validatorSshHelper.prepareBinaryBuilder();
             await validatorSshHelper.exec([
-                ...NodesHelper.getUserEnv(),
                 `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/full-node`,
                 'cp ./full-node.env.example ./full-node.client.local01.env',
                 `sed -i "s/MONIKER=<TYPE DOWN NODE NAME>/MONIKER=\"deployer-network-full-node-${validatorNodeModel.nodeId}\"/g" ./full-node.client.local01.env`,
+                `sed -i "s/MONITORING_ENABLED=false/MONITORING_ENABLED=\"true\"/g" ./full-node.client.local01.env`,
                 `sed -i "s/INIT_CONTAINER_NAME=cudos-init-full-node-client-local-01/INIT_CONTAINER_NAME=\"${dockerContainerInitName}\"/g" ./full-node.client.local01.arg`,
                 `sed -i "s/CONFIG_CONTAINER_NAME=cudos-config-full-node-client-local-01/CONFIG_CONTAINER_NAME=\"${dockerContainerConfigName}\"/g" ./full-node.client.local01.arg`,
                 `sed -i "s/START_CONTAINER_NAME=cudos-start-full-node-client-local-01/START_CONTAINER_NAME=\"${dockerContainerStartName}\"/g" ./full-node.client.local01.arg`,
@@ -272,8 +300,7 @@ class NodesService {
                 `sed -i "s/PORT26660=60601/PORT26660=\"${validatorNodeModel.port26660}\"/g" ./full-node.client.local01.arg`,
                 `sed -i "s/init-full-node.sh\\"]/init-full-node.sh \\&\\& sleep infinity\\"]/g" ./init-full-node.dockerfile`,
                 ...NodesHelper.getDockerConfig(this.genesisJsonString),
-                ...NodesHelper.getUserOverrideYml('full-node'),
-                `docker-compose --env-file ./full-node.client.local01.arg -f ./init-full-node.yml -f ./users-full-node.override.yml -p ${dockerContainerInitName} up --build -d`,
+                `docker-compose --env-file ./full-node.client.local01.arg -f ./init-full-node.yml -p ${dockerContainerInitName} up --build -d`,
             ]);
 
             const tendermintNodeId = await validatorSshHelper.exec(`docker container exec ${dockerContainerInitName} /bin/bash -c "cudos-noded tendermint show-node-id"`, false);
@@ -281,7 +308,7 @@ class NodesService {
 
             await validatorSshHelper.exec([
                 `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/full-node`,
-                `(docker-compose --env-file ./full-node.client.local01.arg -f ./init-full-node.yml -f ./users-full-node.override.yml -p ${dockerContainerInitName} down || true)`,
+                `(docker-compose --env-file ./full-node.client.local01.arg -f ./init-full-node.yml -p ${dockerContainerInitName} down || true)`,
             ]);
         }
     }
@@ -303,8 +330,8 @@ class NodesService {
                 const seedComputerModel = this.topologyHelper.getComputerModel(seedNodeModel.computerId);
                 const seedSshHelper = this.instancesService.getSshHelper(seedNodeModel.computerId);
 
-                const dockerContainerInitName = seedNodeModel.getDockerContainerInitName(validatorNodeModel, i); // `cudos-init-seed-node-${validatorNodeModel.validatorId}-${i + 1}`;
-                const dockerContainerStartName = seedNodeModel.getDockerContainerStartName(validatorNodeModel, i); // `cudos-start-seed-node-${validatorNodeModel.validatorId}-${i + 1}`;
+                const dockerContainerInitName = seedNodeModel.getDockerContainerInitName(validatorNodeModel, i); 
+                const dockerContainerStartName = seedNodeModel.getDockerContainerStartName(validatorNodeModel, i); 
                 const volumeName = `cudos-data-seed-node-${validatorNodeModel.validatorId}-${i + 1}`;
 
                 seedNodeModel.port26656 = seedComputerModel.isLocalDocker === true ? ++this.genPorts : 26656;
@@ -316,13 +343,13 @@ class NodesService {
                 }
                 await seedSshHelper.prepareBinaryBuilder();
                 await seedSshHelper.exec([
-                    ...NodesHelper.getUserEnv(),
                     `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/seed-node`,
                     'cp ./seed-node.env.example ./seed-node.local01.env',
                     `sed -i "s/MONIKER=<TYPE DOWN NODE NAME>/MONIKER=\"deployer-network-seed-node-${seedNodeModel.nodeId}\"/g" ./seed-node.local01.env`,
                     `sed -i "s/PERSISTENT_PEERS=/PERSISTENT_PEERS=\"${sentries}\"/g" ./seed-node.local01.env`,
                     `sed -i "s/PRIVATE_PEERS=/PRIVATE_PEERS=\"${validatorTendermintId}\"/g" ./seed-node.local01.env`,
                     `sed -i "s/SHOULD_USE_GLOBAL_PEERS=true/SHOULD_USE_GLOBAL_PEERS=\"false\"/g" ./seed-node.local01.env`,
+                    `sed -i "s/MONITORING_ENABLED=false/MONITORING_ENABLED=\"true\"/g" ./seed-node.local01.env`,
                     `sed -i "s/INIT_CONTAINER_NAME=cudos-init-seed-node-01/INIT_CONTAINER_NAME=\"${dockerContainerInitName}\"/g" ./seed-node.local01.arg`,
                     `sed -i "s/START_CONTAINER_NAME=cudos-start-seed-node-01/START_CONTAINER_NAME=\"${dockerContainerStartName}\"/g" ./seed-node.local01.arg`,
                     `sed -i "s/VOLUME_NAME=cudos-data-seed-node-01/VOLUME_NAME=\"${volumeName}\"/g" ./seed-node.local01.arg`,
@@ -331,10 +358,9 @@ class NodesService {
                     `sed -i "s/PORT26660=60203/PORT26660=\"${seedNodeModel.port26660}\"/g" ./seed-node.local01.arg`,
                     ...NodesHelper.getDockerExtraHosts('start-seed-node'),
                     ...NodesHelper.getDockerConfig(this.genesisJsonString),
-                    ...NodesHelper.getUserOverrideYml('seed-node'),
-                    `docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -f ./users-seed-node.override.yml -p ${dockerContainerInitName} up --build`,
-                    `(docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -f ./users-seed-node.override.yml -p ${dockerContainerInitName} down || true)`,
-                    `docker-compose --env-file ./seed-node.local01.arg -f ./start-seed-node.yml -f ./users-seed-node.override.yml -p ${dockerContainerStartName} up --build -d`
+                    `docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -p ${dockerContainerInitName} up --build`,
+                    `(docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -p ${dockerContainerInitName} down || true)`,
+                    `docker-compose --env-file ./seed-node.local01.arg -f ./start-seed-node.yml -p ${dockerContainerStartName} up --build -d`
                 ]);
 
                 this.nodeIdToNodeInstanceContainerNamesMap.set(seedNodeModel.nodeId, dockerContainerStartName);
@@ -364,8 +390,8 @@ class NodesService {
                 const sentryComputerModel = this.topologyHelper.getComputerModel(sentryNodeModel.computerId);
                 const sentrySshHelper = this.instancesService.getSshHelper(sentryNodeModel.computerId);
     
-                const dockerContainerInitName = sentryNodeModel.getDockerContainerInitName(validatorNodeModel, i); // `cudos-init-sentry-node-${validatorNodeModel.validatorId}-${i + 1}`;
-                const dockerContainerStartName = sentryNodeModel.getDockerContainerStartName(validatorNodeModel, i); //`cudos-start-sentry-node-${validatorNodeModel.validatorId}-${i + 1}`;
+                const dockerContainerInitName = sentryNodeModel.getDockerContainerInitName(validatorNodeModel, i); 
+                const dockerContainerStartName = sentryNodeModel.getDockerContainerStartName(validatorNodeModel, i); 
                 const volumeName = `cudos-data-sentry-node-${validatorNodeModel.validatorId}-${i + 1}`;
 
                 sentryNodeModel.port26656 = sentryComputerModel.isLocalDocker === true ? ++this.genPorts : 26656;
@@ -379,13 +405,13 @@ class NodesService {
                 }
                 await sentrySshHelper.prepareBinaryBuilder();
                 await sentrySshHelper.exec([
-                    ...NodesHelper.getUserEnv(),
                     `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/sentry-node`,
                     'cp ./sentry-node.env.example ./sentry-node.local01.env',
                     `sed -i "s/MONIKER=<TYPE DOWN NODE NAME>/MONIKER=\"deployer-network-sentry-node-${sentryNodeModel.nodeId}\"/g" ./sentry-node.local01.env`,
                     `sed -i "s/SEEDS=/SEEDS=\"${seeds}\"/g" ./sentry-node.local01.env`,
                     `sed -i "s/PRIVATE_PEERS=/PRIVATE_PEERS=\"${validatorTendermintId}\"/g" ./sentry-node.local01.env`,
                     `sed -i "s/SHOULD_USE_GLOBAL_PEERS=true/SHOULD_USE_GLOBAL_PEERS=\"false\"/g" ./sentry-node.local01.env`,
+                    `sed -i "s/MONITORING_ENABLED=false/MONITORING_ENABLED=\"true\"/g" ./sentry-node.local01.env`,
                     `sed -i "s/INIT_CONTAINER_NAME=cudos-init-sentry-node-01/INIT_CONTAINER_NAME=\"${dockerContainerInitName}\"/g" ./sentry-node.local01.arg`,
                     `sed -i "s/START_CONTAINER_NAME=cudos-start-sentry-node-01/START_CONTAINER_NAME=\"${dockerContainerStartName}\"/g" ./sentry-node.local01.arg`,
                     `sed -i "s/VOLUME_NAME=cudos-data-sentry-node-01/VOLUME_NAME=\"${volumeName}\"/g" ./sentry-node.local01.arg`,
@@ -396,10 +422,9 @@ class NodesService {
                     `sed -i "s/PORT26660=26660/PORT26660=\"${sentryNodeModel.port26660}\"/g" ./sentry-node.local01.arg`,
                     ...NodesHelper.getDockerExtraHosts('start-sentry-node'),
                     ...NodesHelper.getDockerConfig(this.genesisJsonString),
-                    ...NodesHelper.getUserOverrideYml('sentry-node'),
-                    `docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -f ./users-sentry-node.override.yml -p ${dockerContainerInitName} up --build`,
-                    `(docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -f ./users-sentry-node.override.yml -p ${dockerContainerInitName} down || true)`,
-                    `docker-compose --env-file ./sentry-node.local01.arg -f ./start-sentry-node.yml -f ./users-sentry-node.override.yml -p ${dockerContainerStartName} up --build -d`
+                    `docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -p ${dockerContainerInitName} up --build`,
+                    `(docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -p ${dockerContainerInitName} down || true)`,
+                    `docker-compose --env-file ./sentry-node.local01.arg -f ./start-sentry-node.yml -p ${dockerContainerStartName} up --build -d`
                 ]);
     
                 this.nodeIdToNodeInstanceContainerNamesMap.set(sentryNodeModel.nodeId, dockerContainerStartName);
@@ -421,8 +446,8 @@ class NodesService {
             const validatorNodeModel = validatorNodeModels[i];
             const validatorSshHelper = this.instancesService.getSshHelper(validatorNodeModel.computerId);
 
-            const dockerContainerConfigName = validatorNodeModel.getDockerContainerConfigName(i); // `cudos-config-full-node-${validatorNodeModel.validatorId}-${i + 1}`;
-            const dockerContainerStartName = validatorNodeModel.getDockerContainerStartName(i); // `cudos-start-full-node-${validatorNodeModel.validatorId}-${i + 1}`;
+            const dockerContainerConfigName = validatorNodeModel.getDockerContainerConfigName(i); 
+            const dockerContainerStartName = validatorNodeModel.getDockerContainerStartName(i); 
 
             const seeds = this.getSeedsByValidatorId(validatorNodeModel.validatorId);
             const sentries = this.getSentriesByValidatorId(validatorNodeModel.validatorId);
@@ -431,9 +456,9 @@ class NodesService {
                 `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/full-node`,
                 `sed -i "s/PERSISTENT_PEERS=/PERSISTENT_PEERS=\"${seeds},${sentries}\"/g" ./full-node.client.local01.env`,
                 ...NodesHelper.getDockerExtraHosts('start-full-node'),
-                `docker-compose --env-file ./full-node.client.local01.arg -f ./config-full-node.yml -f ./users-full-node.override.yml -p ${dockerContainerConfigName} up --build`,
-                `(docker-compose --env-file ./full-node.client.local01.arg -f ./config-full-node.yml -f ./users-full-node.override.yml -p ${dockerContainerConfigName} down || true)`,
-                `docker-compose --env-file ./full-node.client.local01.arg -f ./start-full-node.yml -f ./users-full-node.override.yml -p ${dockerContainerStartName} up --build -d`
+                `docker-compose --env-file ./full-node.client.local01.arg -f ./config-full-node.yml -p ${dockerContainerConfigName} up --build`,
+                `(docker-compose --env-file ./full-node.client.local01.arg -f ./config-full-node.yml -p ${dockerContainerConfigName} down || true)`,
+                `docker-compose --env-file ./full-node.client.local01.arg -f ./start-full-node.yml -p ${dockerContainerStartName} up --build -d`
             ]);
 
             this.nodeIdToNodeInstanceContainerNamesMap.set(validatorNodeModel.nodeId, dockerContainerStartName);
@@ -444,7 +469,7 @@ class NodesService {
             this.nodeIdTotendermintNodeId.set(validatorNodeModel.nodeId, tendermintNodeId);
 
             // create validator
-            await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded keys add validator --keyring-backend test"`, false);
+            await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded keys add validator --keyring-backend test |& tee \\"\\$CUDOS_HOME/validator.wallet\\""`, false);
             const validatorWalletAddress = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded keys show validator -a --keyring-backend test"`, false);
             await this.fundFromFaucet(validatorWalletAddress, '1000001000000000000000000acudos');
             const tendermintValidatorPubKey = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded tendermint show-validator"`, false);
@@ -464,25 +489,27 @@ class NodesService {
                                                 -y'`, false);
 
             // create orchestrator
-            const validatorOperatorData = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded keys show validator --bech val --keyring-backend test"`, false);
-            const validatorOperatorDataLines = validatorOperatorData.split('\n');
-            const validatorOperatorDataLineAddress = validatorOperatorDataLines.find((validatorOperatorDataLine) => validatorOperatorDataLine.indexOf('address:') !== -1);
-            const validatorOperatorAddress = validatorOperatorDataLineAddress.substring(validatorOperatorDataLineAddress.indexOf(': ') + 2);
+            if (this.gravity === '1') {
+                const validatorOperatorData = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded keys show validator --bech val --keyring-backend test"`, false);
+                const validatorOperatorDataLines = validatorOperatorData.split('\n');
+                const validatorOperatorDataLineAddress = validatorOperatorDataLines.find((validatorOperatorDataLine) => validatorOperatorDataLine.indexOf('address:') !== -1);
+                const validatorOperatorAddress = validatorOperatorDataLineAddress.substring(validatorOperatorDataLineAddress.indexOf(': ') + 2);
 
-            const validatorOrchWalletString = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded keys add orchestrator --keyring-backend test"`, false);
-            const validatorOrchWallet = WalletModel.instanceByString(validatorOrchWalletString);
-            this.validatorIdToOrchWalletModelMap.set(validatorNodeModel.validatorId, validatorOrchWallet);
+                const validatorOrchWalletString = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded keys add orchestrator --keyring-backend test |& tee \\"\\$CUDOS_HOME/zero-account.wallet\\""`, false);
+                const validatorOrchWallet = WalletModel.instanceByString(validatorOrchWalletString);
+                this.validatorIdToOrchWalletModelMap.set(validatorNodeModel.validatorId, validatorOrchWallet);
 
-            await this.fundFromFaucet(validatorOrchWallet.address, "1000000000000000000000acudos");
+                await this.fundFromFaucet(validatorOrchWallet.address, "1000000000000000000000acudos");
 
-            await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded tx gravity set-orchestrator-address ${validatorOperatorAddress} ${validatorOrchWallet.address} ${validatorNodeModel.orchEthAddress} --from validator --keyring-backend test --chain-id ${CHAIN_ID} -y"`, false);
+                await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded tx gravity set-orchestrator-address ${validatorOperatorAddress} ${validatorOrchWallet.address} ${validatorNodeModel.orchEthAddress} --from validator --keyring-backend test --chain-id ${CHAIN_ID} -y"`, false);
+            }
         }
     }
 
     async deployGravitySmartContract() {
         Log.main('Deploy gravity smart contract');
 
-        const sentryNodeModel = this.topologyHelper.sentries[0];
+        const sentryNodeModel = this.topologyHelper.getFirstSentry();
         const sentrySshHelper = this.instancesService.getSshHelper(sentryNodeModel.computerId);
 
         await sentrySshHelper.exec([
@@ -552,7 +579,6 @@ class NodesService {
         const gravityBridgeUiSshHelper = this.instancesService.getSshHelper(gravityBridgeUiModel.computerId);
         const sentryNodeModel = this.topologyHelper.getFirstSentry();
 
-        // const host = gravityBridgeUiComputerModel.isLocalDocker === true ? 'localhost' : gravityBridgeUiComputerModel.ip;
         const host = this.getExternalHostByComputerId(gravityBridgeUiModel.computerId);
 
         if (gravityBridgeUiComputerModel.isLocalDocker === false) {
@@ -613,7 +639,7 @@ class NodesService {
         const utilsSshHelper = this.instancesService.getSshHelper(utilsModel.computerId);
         const sentryNodeModel = this.topologyHelper.getFirstSentry();
 
-        const host = this.getExternalHostByComputerId(utilsModel.computerId); //utilsComputerModel.isLocalDocker === true ? 'localhost' : utilsComputerModel.ip;
+        const host = this.getExternalHostByComputerId(utilsModel.computerId);
 
         if (utilsComputerModel.isLocalDocker === false) {
             await utilsSshHelper.cloneRepos();
@@ -632,10 +658,54 @@ class NodesService {
             `sed -i "s~EXTERNAL_STAKING_URL=\\"http://localhost:3000/validators\\"~EXTERNAL_STAKING_URL=\\"http://${host}:3000/validators\\"~g" ./explorer.local.arg`,
             `sed -i "s/CHAIN_NAME=\\"CudosTestnet-Local\\"/CHAIN_NAME=\\"${CHAIN_NAME}\\"/g" ./explorer.local.arg`,
             `sed -i "s/CHAIN_ID=\\"cudos-local-network\\"/CHAIN_ID=\\"${CHAIN_ID}\\"/g" ./explorer.local.arg`,
+            `sed -i "s/container_name: cudos-explorer-mongodb/container_name: ${EXPLORER_MONGO_CONTAINER_NAME}/g" ./explorer.yml`,
             `sed -i "s/container_name: cudos-explorer/container_name: ${EXPLORER_CONTAINER_NAME}/g" ./explorer.yml`,
-            `sed -i "s/container_name: cudos-explorer-mongo/container_name: ${EXPLORER_MONGO_CONTAINER_NAME}/g" ./explorer.yml`,
             `sed -i "s/- cudos-explorer-mongodb/- cudos-explorer-mongodb\\r\\n    extra_hosts:\\r\\n      - \\"host.docker.internal:host-gateway\\"/g" ./explorer.yml`,
             `docker-compose --env-file ./explorer.local.arg -f ./explorer.yml -p ${EXPLORER_CONTAINER_NAME} up --build -d`
+        ]);
+    }
+
+    async startMonitoring() {
+        Log.main('Start monitoring');
+
+        const monitoringModel = this.topologyHelper.monitoringModel;
+        const monitoringComputerModel = this.topologyHelper.getComputerModel(monitoringModel.computerId);
+        const monitoringSshHelper = this.instancesService.getSshHelper(monitoringModel.computerId);
+
+        const sentryNodeModel = this.topologyHelper.getFirstSentry();
+
+        const nodeModelsEchos = [];
+        this.topologyHelper.nodesMap.forEach((nodeModel) => {
+            const host = this.getDockerInternalHostByNodeId(nodeModel.nodeId);
+            nodeModelsEchos.push(`echo "      - targets: ['${host}:26660']" >> ./config/prometheus.local.yml`);
+            nodeModelsEchos.push(`echo "        labels:" >> ./config/prometheus.local.yml`);
+            nodeModelsEchos.push(`echo "          instance: ${host}" >> ./config/prometheus.local.yml`);
+        });
+
+        if (monitoringComputerModel.isLocalDocker === false) {
+            await monitoringSshHelper.cloneRepos();
+        }
+        await monitoringSshHelper.exec([
+            ...NodesHelper.getUserEnv(),
+            `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/monitoring`,
+            'cp ./monitoring.env.example ./monitoring.local.env',
+            `sed -i "s~NODE_ADDR=ip_or_address_of_node:9090~NODE_ADDR=${this.getDockerInternalHostByNodeId(sentryNodeModel.nodeId)}:9090~g" ./monitoring.local.env`,
+            `sed -i "s~TENDERMINT_ADDR=https://ip_or_address_of_node:26657~TENDERMINT_ADDR=http://${this.getDockerInternalHostByNodeId(sentryNodeModel.nodeId)}:26657~g" ./monitoring.local.env`,
+            `echo "global:" > ./config/prometheus.local.yml`,
+            `echo "  scrape_interval: 15s" >> ./config/prometheus.local.yml`,
+            `echo "  evaluation_interval: 30s" >> ./config/prometheus.local.yml`,
+            `echo "" >> ./config/prometheus.local.yml`,
+            `echo "scrape_configs:" >> ./config/prometheus.local.yml`,
+            `echo "  - job_name: cudosnetwork" >> ./config/prometheus.local.yml`,
+            `echo "    static_configs:" >> ./config/prometheus.local.yml`,
+            ...nodeModelsEchos,
+            `echo "  - job_name: validators" >> ./config/prometheus.local.yml`,
+            `echo "    scrape_interval: 15s" >> ./config/prometheus.local.yml`,
+            `echo "    metrics_path: /metrics/validators" >> ./config/prometheus.local.yml`,
+            `echo "    static_configs:" >> ./config/prometheus.local.yml`,
+            `echo "      - targets:" >> ./config/prometheus.local.yml`,
+            `echo "        - cudos-monitoring-exporter:9300" >> ./config/prometheus.local.yml`,
+            `docker-compose --env-file ./monitoring.local.arg -f ./monitoring.yml -p cudos-monitoring-local up --build -d`
         ]);
     }
 
@@ -643,7 +713,7 @@ class NodesService {
         const seedNodeModels = this.topologyHelper.getSeeds(validatorId);
         return seedNodeModels.map((seedNodeModel) => {
             const seedTendermintNodeId = this.nodeIdTotendermintNodeId.get(seedNodeModel.nodeId);
-            const seedHost = this.getDockerInternalHostByNodeId(seedNodeModel.nodeId); //seedComputerModel.isLocalDocker === true ? this.nodeIdToNodeInstanceContainerNamesMap.get(seedNodeModel.nodeId) : seedComputerModel.ip;
+            const seedHost = this.getDockerInternalHostByNodeId(seedNodeModel.nodeId);
             return `${seedTendermintNodeId}@${seedHost}:26656`;
         }).join(',');
     }
@@ -652,7 +722,7 @@ class NodesService {
         const sentryNodeModels = this.topologyHelper.getSentries(validatorId);
         return sentryNodeModels.map((sentryNodeModel) => {
             const sentryTendermintNodeId = this.nodeIdTotendermintNodeId.get(sentryNodeModel.nodeId);
-            const sentryHost = this.getDockerInternalHostByNodeId(sentryNodeModel.nodeId); //sentryComputerModel.isLocalDocker === true ? this.nodeIdToNodeInstanceContainerNamesMap.get(sentryNodeModel.nodeId) : sentryComputerModel.ip;
+            const sentryHost = this.getDockerInternalHostByNodeId(sentryNodeModel.nodeId);
             return `${sentryTendermintNodeId}@${sentryHost}:26656`;
         }).join(',');
     }
@@ -686,6 +756,9 @@ class NodesService {
         }
         if (this.explorer === '1') {
             await this.stopExplorerInstances();
+        }
+        if (this.monitoring === '1') {
+            await this.stopMonitoring();
         }
     }
 
@@ -740,7 +813,7 @@ class NodesService {
     }
 
     async stopGravityBridgeUiInstance() {
-        Log.main('Stop Gravity bridge ui\'s instance');
+        Log.main('Stop gravity bridge ui\'s instance');
 
         const tasks = [];
 
@@ -780,8 +853,26 @@ class NodesService {
             `docker stop ${EXPLORER_CONTAINER_NAME}`,
             `docker container rm ${EXPLORER_CONTAINER_NAME}`,
             `docker stop ${EXPLORER_MONGO_CONTAINER_NAME}`,
-            `docker container rm ${EXPLORER_MONGO_CONTAINER_NAME}`,
-            `docker volume rm ${EXPLORER_CONTAINER_NAME}_cudosexplorermongodbdata`
+            `docker container rm ${EXPLORER_MONGO_CONTAINER_NAME}`
+        ], false));
+
+        await Promise.all(tasks);
+    }
+
+    async stopMonitoring() {
+        Log.main('Stop monitoring instances');
+
+        const tasks = [];
+
+        const monitoringModel = this.topologyHelper.monitoringModel;
+        const monitoringSshHelper = this.instancesService.getSshHelper(monitoringModel.computerId);
+        tasks.push(monitoringSshHelper.exec([
+            `docker stop cudos-monitoring-prometeus`,
+            `docker container rm cudos-monitoring-prometeus`,
+            `docker stop cudos-monitoring-graphana`,
+            `docker container rm cudos-monitoring-graphana`,
+            `docker stop cudos-monitoring-exporter`,
+            `docker container rm cudos-monitoring-exporter`,
         ], false));
 
         await Promise.all(tasks);

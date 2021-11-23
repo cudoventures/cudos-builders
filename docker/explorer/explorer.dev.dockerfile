@@ -28,6 +28,17 @@ RUN if [ $USER_NAME != 'root' ]; then \
 RUN apt update && \
     apt install jq build-essential libudev-dev zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev wget python3 -y
 
+RUN mkdir -p /usr/local/explorer/.meteor/local && \
+    chown ${USER_NAME}:${GROUP_NAME} /usr/local/explorer/.meteor/local
+
+WORKDIR /usr/local/explorer
+
+USER ${USER_NAME}
+
+RUN curl https://install.meteor.com/ | sh
+
+USER root
+
 WORKDIR /usr/src/explorer
 
 COPY ./CudosExplorer/default_settings.json /usr/src/explorer/default_settings.json
@@ -45,15 +56,11 @@ RUN cd /usr/src/explorer && \
     sed -i ':a;N;$!ba;s/\n//g' ./default_settings.json && \
     sed -i 's/ //g' ./default_settings.json && \
     cp ./default_settings.json ./settings.json && \
-    chown ${USER_NAME}:${GROUP_NAME} ./settings.json && \
-    mkdir -p /usr/local/explorer/.meteor/local && \
-    chown ${USER_NAME}:${GROUP_NAME} /usr/local/explorer/.meteor/local
+    chown ${USER_NAME}:${GROUP_NAME} ./settings.json
 
 
 WORKDIR /usr/local/explorer
 
 USER ${USER_NAME}
-
-RUN curl https://install.meteor.com/ | sh
 
 CMD ["/bin/bash", "-c", "source ~/.bashrc && meteor npm install && rm -rf ./.meteor/local/* && meteor --settings /usr/src/explorer/settings.json"]

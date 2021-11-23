@@ -1,6 +1,8 @@
 PROMETHEUS_CONFIG_PATH_LOCAL=./config/prometheus.tesnet.public.yml
-PROMETHEUS_DATA_PATH=/mnt
+PROMETHEUS_DATA_PATH=/mnt/disks/prometheus-data/prometheus
+GRAFANA_DATA_PATH=/mnt/disks/prometheus-data/grafana
 PROMETHEUS_PORT=9090
 GRAFANA_PORT=3000
+EXPORTER_PORT=9300
 
 ENV_FILE=./monitoring.tesnet.public.env

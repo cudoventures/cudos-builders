@@ -20,5 +20,11 @@ services:
     volumes:
       - '../../../CudosGravityBridge/orchestrator:/usr/src/orchestrator'
       - '/usr/src/orchestrator/target'
+      - '/usr/src/orchestrator/cosmos_gravity/target'
+      - '/usr/src/orchestrator/ethereum_gravity/target'
+      - '/usr/src/orchestrator/gbt/target'
+      - '/usr/src/orchestrator/gravity_utils/target'
+      - '/usr/src/orchestrator/orchestrator/target'
+      - '/usr/src/orchestrator/relayer/target'
     networks:
       - shared-cudos-network

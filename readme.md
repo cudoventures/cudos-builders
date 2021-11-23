@@ -1,11 +1,12 @@
 # Overview
 
-This project contains a set of building scripts for CudosNetwork. It depends on 5 other projects and should be downloaded manually. Here is the list:
+This project contains a set of building scripts for CudosNetwork. It depends on 6 other projects and should be downloaded manually. Here is the list:
 1. CudosNode (https://github.com/CudoVentures/cudos-node)
 1. CudosGravityBridge (https://github.com/CudoVentures/cosmos-gravity-bridge)
 1. CudosGravityBridgeUI (https://github.com/CudoVentures/cudos-gravity-bridge-ui)
 1. CudosExplorer (https://github.com/CudoVentures/big-dipper)
 1. CudosFaucet (https://github.com/CudoVentures/faucet)
+1. CudosExporter (https://github.com/CudoVentures/cosmos-exporter)
 
 The following directory structure is required in order everything to work correctly otherwise the scripts will not be able to find their dependancies.
 Let denote the parent directory of all projects <code>parentDir</code>. Its name could be arbitrary.
@@ -18,6 +19,7 @@ Let denote the parent directory of all projects <code>parentDir</code>. Its name
     - /parentDir/CudosExplorer
     - /parentDir/CudosFaucet
     - /parentDir/CudosData
+    - /parentDir/CudosExporter
 
 In the above directory structure, the folders' names are REQUIRED. Carefully rename every project to match the folder names above. Create an empty folder CudosData in <code>parentDir</code>
 
@@ -172,6 +174,7 @@ Each **computer** defined in the <code>topology.json</code> is accessed by a use
     "sentries": Sentry[], // Defines the sentry nodes and how they are attached to validators.
     "gravityBridgeUi": GravityBridgeUi, // Defines the gravity bridge UI.
     "utils": Utils, // Defines the faucet and the explorer.
+    "monitoring": Monitoring, // Defines the monitoring (grafana and prometheus).
 }
 ```
 
@@ -219,6 +222,13 @@ Each **computer** defined in the <code>topology.json</code> is accessed by a use
 }
 ```
 
+**Monitoring** object:
+```json
+{
+    "computerId": string, // The id of the computer where this node will run. (4)
+}
+```
+
 **Params** object:
 ```json
 {
@@ -238,7 +248,9 @@ Each **computer** defined in the <code>topology.json</code> is accessed by a use
 
 (2) It can be empty if the chain is started without **faucet** module.
 
-(2) It can be empty if the chain is started without **explorer** and **faucet** modules.
+(3) It can be empty if the chain is started without **explorer** and **faucet** modules.
+
+(4) It can be empty if the chain is started without **monitoring**.
 
 **<em>Remarks:</em>**
 - Each **computer** instance can be used only by a single node.
@@ -255,10 +267,11 @@ Each **computer** defined in the <code>topology.json</code> is accessed by a use
 - gravity: 0 (disables the module) or 1 (enabled the module)
 - explorer: 0 (disables the module) or 1 (enabled the module)
 - faucet: 0 (disables the module) or 1 (enabled the module)
+- monitoring: 0 (disables the module) or 1 (enabled the module)
 
 The parameters are passed in the following way:
 
-<code>npm run network -- --topology ./deployer-network/config/topology.json --gravity 1 --explorer 1 --faucet 1</code>
+<code>npm run network -- --topology ./deployer-network/config/topology.json --gravity 1 --explorer 1 --faucet 1 --monitoring 1</code>
 
 ## nodes deployer
 
@@ -368,6 +381,14 @@ The deployer contains only a readme file that explains how the server should be 
 
 **<code>deploy-utils-testnet-private</code>** - deploys utils (explorer + faucet) to private testnet using <code>secrets.json</code> in the deployer's folder.
 
+## monitoring deployer
+
+The setup uses prometheus, grafana and cosmos-exporter to set up monitoring of the nodes of the network and to all the validators liveness in the network
+
+### List of npm commands regarding this deployer:
+
+**<code>deploy--monitoring-testnet-public</code>** - deploys the monitoring to the public testnet using <code>secrets.json</code> in the deployer's folder.
+
 # Setup docker (docker folder)
 
 This folder contains docker specific files organized by build-target. They are used in build processes in local development as well as in deployment builds. 
@@ -399,6 +420,8 @@ The folder has following build-targets:
 <em>**sentry-node**</em> - Cudos sentry node that connects to local chain, private or public testnets.
 
 <em>**standalone-node**</em> - Standalone cudos daemon containing a single root-validator node. It can be used for test purposes.
+
+<em>**monitoring**</em> - Monitoring containing prometheus, grafana and exporter. It can be used for moniting nodes of the network.
 
 ## Structure
 
@@ -978,6 +1001,29 @@ cudos-noded tx staking create-validator --amount=$STAKE \
     --keyring-backend="os" \
     -y
 ```
+
+## Edit validator
+
+Some of the validator parameters can be editted after the validator was created. There is example below.
+
+```bash
+cudos-noded tx staking edit-validator \
+    --from=validator \
+    --moniker=$MONIKER \
+    --chain-id=$CHAIN_ID \
+    --commission-rate="0.10" \
+    --min-self-delegation="1" \
+    --gas="auto" \
+    --gas-prices="0.025acudos" \
+    --gas-adjustment="1.80" \
+    --keyring-backend="os" \
+    -y
+```
+
+Have in mind that there are some restrictions though:
+1. You cannot change <em>commission-max-rate</em>, <em>commission-max-change-rate</em> and <em>chain-id</em>.
+2. <em>min-self-delegation</em> can only be increased
+3. <em>--from</em> must be the same account that was used during the creation of the validator
 
 ## Register orchestrator
 

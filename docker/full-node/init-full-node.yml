@@ -8,10 +8,6 @@ services:
       dockerfile: CudosBuilders/docker/full-node/init-full-node.dockerfile
       context: ../../../
       args:
-        USER_ID: "0"
-        USER_NAME: "root"
-        GROUP_ID: "0"
-        GROUP_NAME: "root"
         CUDOS_HOME: "$CUDOS_HOME"
         GENESIS_FILENAME: "$GENESIS_FILENAME"
         SEEDS_FILENAME: "$SEEDS_FILENAME"

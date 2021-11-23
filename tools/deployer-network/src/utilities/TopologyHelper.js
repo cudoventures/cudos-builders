@@ -6,6 +6,7 @@ const SeedNodeModel = require('../models/SeedNodeModel');
 const SentryNodeModel = require('../models/SentryNodeModel');
 const GravityBridgeUiModel = require('../models/GravityBridgeUiModel');
 const UtilsModel = require('../models/UtilsModel');
+const MonitoringModel = require('../models/MonitoringModel');
 const ParamsModel = require('../models/ParamsModel');
 
 class TopologyHelper {
@@ -18,6 +19,7 @@ class TopologyHelper {
         this.seeds = [];
         this.gravityBridgeUiModel = null;
         this.utilsModel = null;
+        this.monitoringModel = null;
         this.params = null;
 
         this.genNodeIds = 0;
@@ -56,6 +58,7 @@ class TopologyHelper {
         });
         helper.gravityBridgeUiModel = GravityBridgeUiModel.fromJson(jsonData.nodes.gravityBridgeUi);
         helper.utilsModel = UtilsModel.fromJson(jsonData.nodes.utils);
+        helper.monitoringModel = MonitoringModel.fromJson(jsonData.nodes.monitoring);
         helper.params = ParamsModel.fromJson(jsonData.params);
 
         return helper;
@@ -90,7 +93,7 @@ class TopologyHelper {
         return this.sentries[0];
     }
 
-    validate(gravity, explorer, faucet) {
+    validate(gravity, explorer, faucet, monitoring) {
         let hasLocal = false, hasRemote = false;
         this.computers.forEach((computerModel) => {
             hasLocal = hasLocal || computerModel.isLocalDocker === true;
@@ -181,6 +184,14 @@ class TopologyHelper {
                 }
             }
         }
+
+        if (monitoring === '1') {
+            if (usedComputerIds.has(this.monitoringModel.computerId) === true) {
+                throw new Error(`Computer with id (${this.monitoringModel.computerId}) has been used by more than a single node`);
+            }
+            usedComputerIds.add(this.monitoringModel.computerId);
+        }
+
     }
 
 }
