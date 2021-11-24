@@ -21,10 +21,6 @@ RUN addgroup -gid $DOCKER_GROUP_ID docker && \
 
 WORKDIR /tmp
 
-# update
-# RUN apt update && \
-#     apt upgrade
-
 # install sudo
 RUN apt-get update && apt-get -y install sudo
 
@@ -34,7 +30,12 @@ RUN wget https://golang.org/dl/go1.17.linux-amd64.tar.gz && \
     tar -C /usr/local -xzf go1.17.linux-amd64.tar.gz && \
     echo "export PATH=\$PATH:/usr/local/go/bin" > /etc/profile.d/user-custom.sh && \
     /usr/local/go/bin/go get -v golang.org/x/tools/gopls && \
-    echo "export PATH=\$PATH:/root/go/bin" > /etc/profile.d/go.sh
+    if [ $USER_NAME == 'root' ]; then \
+        echo "export PATH=\$PATH:/root/go/bin" >> /etc/profile.d/user-custom.sh; \
+    fi && \
+    if [ $USER_NAME != 'root' ]; then \
+        echo "export PATH=\$PATH:/home/${USER_NAME}/go/bin" >> /etc/profile.d/user-custom.sh; \
+    fi
 
 # install node
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \
@@ -58,15 +59,17 @@ RUN apt-get install \
 RUN curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
     chmod +x /usr/local/bin/docker-compose
 
+RUN apt install -y protobuf-compiler
+
+WORKDIR $MNT_PATH
+
+USER $USER_NAME
+
 #install protoc plugins
 RUN /usr/local/go/bin/go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway@latest && \
     /usr/local/go/bin/go install google.golang.org/protobuf/cmd/protoc-gen-go@latest && \
     /usr/local/go/bin/go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
     # github.com/grpc-ecosystem/grpc-gateway/protoc-gen-openapiv2@latest \
-
-WORKDIR $MNT_PATH
-
-USER $USER_NAME
 
 #install go plugins
 RUN /usr/local/go/bin/go install github.com/mdempsky/gocode@latest && \
@@ -88,5 +91,7 @@ RUN /usr/local/go/bin/go install github.com/mdempsky/gocode@latest && \
     /usr/local/go/bin/go install golang.org/x/tools/cmd/goimports@latest && \
     /usr/local/go/bin/go install honnef.co/go/tools/cmd/staticcheck@latest && \
     /usr/local/go/bin/go install golang.org/x/tools/gopls@latest
+
+RUN git config --global pull.rebase false
 
 CMD ["sleep", "infinity"]
