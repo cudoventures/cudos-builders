@@ -18,11 +18,11 @@ Steps to start a relayer between a local network and a running cosmos testnet.
 ```
 $ cudos-noded tx ibc-transfer transfer transfer channel-0 cudos15hkd2zzyug7v2cv30kq55h5zquegjwm348vg33 1000acudos --chain-id cudos-local-network --from faucet --keyring-backend os
 ```
-## Calculations 
+## Fees 
 
-When channels are created it takes from both accounts.
+When channels are created, transaction fees are taken from both accounts that are registered with the relayer.
 
-When a token transaction is created it takes only from the account on the netwrok FROM which the tokens are sent.
+When a token transaction is created, transaction fees are taken only from the relayer account on the netwrok FROM which the tokens are sent.
 
 ## Transfering tokens
 The most used feature of IBC is to send tokens from one blockchain to another. When sending a token to another blockchain, a token voucher is generated on the other (target) blockchain.
