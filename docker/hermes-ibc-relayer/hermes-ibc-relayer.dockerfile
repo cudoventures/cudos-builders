@@ -19,15 +19,15 @@ RUN cargo install ibc-relayer-cli --bin hermes --locked
 
 WORKDIR /root/.hermes/
 
-COPY ./CudosBuilders/docker/hermes-ibc-relayer/config.toml .
+COPY ./CudosBuilders/docker/hermes-ibc-relayer/config/config.toml .
 
 WORKDIR /usr/src/IbcRelayer
 
 COPY ./CudosBuilders/docker/hermes-ibc-relayer/scripts/hermes-ibc-relayer-run.sh .
 
-# RUN chmod +x ./ibc-relayer-run.sh && \
+# RUN chmod +x ./hermes-ibc-relayer-run.sh && \
 #     chown -R ${USER_NAME}:${GROUP_NAME} ./ && \
-#     sed -i 's/\r$//' ./ibc-relayer-run.sh
+#     sed -i 's/\r$//' ./hermes-ibc-relayer-run.sh
 
 # USER ${USER_NAME}:${GROUP_NAME}
 

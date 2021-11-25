@@ -1,0 +1,45 @@
+[global]
+log_level = 'info'
+
+[rest]
+enabled = 
+host = ''
+port = 
+
+[telemetry]
+enabled = 
+host = ''
+port = 
+
+[[chains]]
+id = ''
+rpc_addr = ''
+grpc_addr = ''
+websocket_addr = ''
+rpc_timeout = '10s'
+account_prefix = ''
+key_name = ''
+store_prefix = 'ibc'
+max_gas = 2000000
+gas_price = { price = , denom = '' }
+gas_adjustment = 0.1
+clock_drift = '5s'
+trusting_period = '14days'
+trust_threshold = { numerator = '1', denominator = '3' }
+
+[[chains]]
+id = ''
+rpc_addr = ''
+grpc_addr = ''
+websocket_addr = ''
+rpc_timeout = '15s'
+account_prefix = ''
+key_name = ''
+store_prefix = 'ibc'
+max_gas = 10000000
+max_msg_num = 10
+gas_price = { price = , denom = '' }
+gas_adjustment = 1
+clock_drift = '15s'
+trusting_period = '9days'
+trust_threshold = { numerator = '1', denominator = '3' }
