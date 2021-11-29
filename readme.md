@@ -484,6 +484,24 @@ In order to connect a node to the network we must expose at least one IP address
 
 Each node have a configuration parameter that makes the node a <em>seed-node</em>. <em>seed-node</em> is a regular <em>full/sentry-node</em> that scrapes the chain on a regular basis and stores a list of IP addresses of active nodes. When someone connects to a seed node, it respond with a list of active peers that the sender could connect it. 
 
+## Ports
+
+A node is using several ports in order to function propertly.
+
+<em>You are not supposed to specify these ports anywhere. They are configured in the dockerfiles. You could only need to open the ports if you are trying to run a network on a multiple machines. In this case you must open the corresponding ports on the host machines.</em>
+
+Here is a list of ports and their descriptions:
+
+- **1317:** API port
+- **9090:** gRPC port
+- **26656:** P2P port used by transfering internal data between nodes.
+- **26657:** Tendermint RPC server. Reference: <a href="https://docs.tendermint.com/master/rpc/">https://docs.tendermint.com/master/rpc/</a>
+- **26660:** Port for prometheus monitoring
+
+Full/Seed nodes use the following points: **26656, 26657, 26660**
+
+Sentry nodes use the following ports: **1317, 9090, 26656, 26657, 26660**
+
 ## Connecting to a chain
 
 So far we defined our 4 type of nodes - root, full, sentry and seed. Now let's see how they can connect to each other.
@@ -971,6 +989,8 @@ This command should also be executed once the container starts in order to start
 
 <code>Build/Destroy/Start GRAVITY BRIDGE UI TESTNET PRIVATE</code>. Container for Gravity bridge UI. It depends on **gravity-bridge-ui.testnet.private.env** and the corresponding **.arg** file. 
 
+<code>Build/Destroy/Start MONITORING LOCAL in docker</code>. Container for monitoring. It depends on **monitoring.local.env** and the corresponding **.arg** file. 
+
 ## Create validator
 
 The initial validator (root-validator) is created automatically when the chain starts. All other validators must be created explicitly. To create a validator you need access to <code>cudos-noded</code>. The usual way to access it is to open a bash terminal inside the docker container where you would like to create the validator. 
@@ -1096,14 +1116,14 @@ Please note the port of each endpoint. It can be used as indicator which endpoin
 
 ## Gravity contract deployer
 
-- <code>COSMOS_NODE</code> - The endpoint of Cosmos chain. For example: COSMOS_NODE="http://localhost:26657"
+- <code>COSMOS_NODE</code> - The endpoint of a Cosmos chain. For example: COSMOS_NODE="http://localhost:26657"
 - <code>ETH_NODE</code> - The endpoint of eth full node. For example: ETH_NODE="http://localhost:8545"
 - <code>ETH_PRIV_KEY_HEX</code> - The private key of Ethereum wallet that will be used to sign the transaction for contract creation. It can be any Ethereum address that has enough tokens (~0.02ETH). Format is hex without leading "0x". For example: ETH_PRIV_KEY_HEX="a2b......"
 
 ## Orchestrator
 
 - <code>FEES</code> - Amount of cudos that will be required by this validator in order to sign any operation. For example: FEES="1acudos"
-- <code>GRPC</code> - The endpoint of Cosmos chain. For example: COSMOS_NODE="http://localhost:9090"
+- <code>GRPC</code> - The endpoint of a Cosmos chain. For example: COSMOS_NODE="http://localhost:9090"
 - <code>ETHRPC</code> - The endpoint of eth full node. For example: ETH_NODE="http://localhost:8545"
 - <code>CONTRACT_ADDR</code> - Gravity Bridge contract address.
 - <code>COSMOS_ORCH_MNEMONIC</code> - Mnemonic phrase of orchestrator wallet.
@@ -1133,4 +1153,9 @@ Please note the port of each endpoint. It can be used as indicator which endpoin
 - <code>SHOULD_USE_STATE_SYNC</code> - Indicates whether this node should use statesync in order to sync the chain. Using this method the node will download blockchain's state from a trusted peer thus syncing will be almost instant.
 - <code>TLS_ENABLED</code> - This variable is used to indicate whether the sentry node will have an HTTPs domain. For example: TLS_ENABLED=true.
 - <code>TLS_DOMAIN</code> - (Can be skipped if <code>TLS_ENABLED</code> is false). The domain of the sentry node.
-- <code>TLS_DOCKER_PATH</code> - (Can be skipped if <code>TLS_ENABLED</code> is false). Path to letsencrypt.
+- <code>TLS_DOCKER_PATH</code> - (Can be skipped if <code>TLS_ENABLED</code> is false). Path to lets encrypt.
+
+## Monitoring
+
+- <code>NODE</code> - The gRPC endpoint of a Cosmos chain. For example: NODE_ADDR="cudos-start-sentry-node-01:9090"
+- <code>TENDERMINT_ADDR</code> - The tendermint endpoint of a Cosmos chain. For example: TENDERMINT_ADDR="http://cudos-start-sentry-node-01:26657"
