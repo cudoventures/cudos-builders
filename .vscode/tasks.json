@@ -27,6 +27,19 @@
             "type": "shell",
             "group": "build"
         },
+        //osmosis-testnet-node
+        {
+            "label": "Build OSMOSIS TESTNET NODE in docker",
+            "command": "cd ./docker/osmosis-testnet-node && docker-compose --env-file ./osmosis-testnet-node.local.arg -f ./osmosis-testnet-node.yml -p osmosis-testnet-node up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Destroy OSMOSIS TESTNET NODE in docker",
+            "command": "cd ./docker/osmosis-testnet-node && docker-compose --env-file ./osmosis-testnet-node.local.arg -f ./osmosis-testnet-node.yml -p osmosis-testnet-node down",
+            "type": "shell",
+            "group": "build"
+        },
         //
         {
             "label": "Copy local genesis",
