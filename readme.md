@@ -401,6 +401,8 @@ The folder has following build-targets:
 
 <em>**config**</em> - Contains genesises, peers and seeds for local dev, public and private testnets. 
 
+<em>**debug-node**</em> - Cudos node that uses local source files resulting in easy debug capabilities
+
 <em>**ethereum**</em> - Ethereum light or full node.
 
 <em>**faucet**</em> - Faucet used by local dev, public and private testnets.
@@ -912,6 +914,8 @@ The "CONFIG" in the name indicates that this container is more like a script. On
 <code>Build/Destroy INIT SENTRY NODE in docker</code>. Container for initialization of a sentry node. It depends on **sentry-node.local.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.local.json</em>. If <em>SHOULD_USE_GLOBAL_PEERS</em> is set to <em>TRUE</em> then the node connects to peers specified in <em>parentDir/CudosBuilders/docker/config/persistent-peers.local.config</em> and <em>parentDir/CudosBuilders/docker/config/seeds.local.config</em>. If <em>SHOULD_USE_STATE_SYNC</em> is set to <em>TRUE</em> then the node downloads the latest available state from trusted peers defined in <em>parentDir/CudosBuilders/docker/config/state-sync-rpc-servers.local.config</em>.
 
 <code>Build/Destroy/Start START SENTRY NODE in docker</code>. Container for starting of a sentry node. The container MUST be initialized before. It depends on **sentry-node.local.env** and the corresponding **.arg** file. Its genesis file is in <em>parentDir/CudosBuilders/docker/config/genesis.local.json</em>.
+
+<code>Build/Destroy START DEBUG NODE in docker</code>. Container for starting the debug node. The container MUST NOT be initialized before. The container mounts ./CudosNode and ./CudosGravityBridge to its working directory. It also contain a init.sh for initialization the node.
 
 <code>Build/Destroy/Start FAUCET in docker</code>. Container for starting the faucet. It depends on **faucet.local.arg** and the corresponding **.arg** file.
 

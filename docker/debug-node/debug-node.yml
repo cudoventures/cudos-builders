@@ -1,0 +1,37 @@
+version: '3.9'
+
+networks:
+  shared-cudos-network:
+    name: shared-cudos-network
+
+services:
+  debug-node:
+    image: debug-node
+    container_name: debug-node
+    build:
+      dockerfile: CudosBuilders/docker/debug-node/debug-node.dockerfile
+      context: ../../../
+      args:
+        USER_ID: "0"
+        USER_NAME: "root"
+        GROUP_ID: "0"
+        GROUP_NAME: "root"
+    restart: unless-stopped
+    environment:
+      - CUDOS_HOME=$CUDOS_HOME
+    volumes:
+      - '../../../CudosNode:/usr/cudos/CudosNode'
+      - '../../../CudosGravityBridge:/usr/cudos/CudosGravityBridge'
+    networks:
+      - shared-cudos-network
+    ports:
+      - "${PORT26656}:26656"
+      - "${PORT26657}:26657"
+      - "${PORT1317}:1317"
+      - "${PORT9090}:9090"
+      - "${PORT26660}:26660"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "128m"
+        max-file: "1"
