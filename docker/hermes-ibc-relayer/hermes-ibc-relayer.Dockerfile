@@ -5,6 +5,7 @@ ARG USER_NAME
 ARG GROUP_ID
 ARG GROUP_NAME
 ARG CUDOS_HOME
+ARG INIT
 
 RUN if [ $USER_NAME != 'root' ]; then \
         addgroup -gid ${GROUP_ID} $GROUP_NAME; \
@@ -31,7 +32,8 @@ COPY ./CudosBuilders/docker/hermes-ibc-relayer/scripts/hermes-ibc-relayer-run.sh
 
 # USER ${USER_NAME}:${GROUP_NAME}
 
-# ENV CUDOS_HOME=${CUDOS_HOME}
+ENV CUDOS_HOME=${CUDOS_HOME}
+ENV INIT = ${INIT}
 
 CMD ["sleep", "infinity"]
 
