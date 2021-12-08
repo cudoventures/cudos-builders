@@ -126,18 +126,18 @@ PRIVATE_SALE_OFFER_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show private-sal
 
 # create validators
 cudos-noded add-genesis-account $ZERO_ACCOUNT_ADDRESS "1${BOND_DENOM}"
-cudos-noded add-genesis-account $ROOT_VALIDATOR_01_ADDRESS "1000001000000000000000000${BOND_DENOM},1cudosAdmin"
-cudos-noded add-genesis-account $VALIDATOR_02_ADDRESS "1000001000000000000000000${BOND_DENOM},1cudosAdmin"
-cudos-noded add-genesis-account $VALIDATOR_03_ADDRESS "1000001000000000000000000${BOND_DENOM},1cudosAdmin"
-cudos-noded add-genesis-account $ORCH_01_ADDRESS "1000000000000000000000000${BOND_DENOM}"
-cudos-noded add-genesis-account $ORCH_02_ADDRESS "1000000000000000000000000${BOND_DENOM}"
-cudos-noded add-genesis-account $ORCH_03_ADDRESS "1000000000000000000000000${BOND_DENOM}"
-(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded gentx root-validator-01 "1000000000000000000000000${BOND_DENOM}" ${ORCH_ETH_ADDRESS} ${ORCH_01_ADDRESS} --chain-id $CHAIN_ID --keyring-backend os
+cudos-noded add-genesis-account $ROOT_VALIDATOR_01_ADDRESS "2000001000000000000000000${BOND_DENOM},1cudosAdmin"
+cudos-noded add-genesis-account $VALIDATOR_02_ADDRESS "2000001000000000000000000${BOND_DENOM},1cudosAdmin"
+cudos-noded add-genesis-account $VALIDATOR_03_ADDRESS "2000001000000000000000000${BOND_DENOM},1cudosAdmin"
+cudos-noded add-genesis-account $ORCH_01_ADDRESS "2000000000000000000000000${BOND_DENOM}"
+cudos-noded add-genesis-account $ORCH_02_ADDRESS "2000000000000000000000000${BOND_DENOM}"
+cudos-noded add-genesis-account $ORCH_03_ADDRESS "2000000000000000000000000${BOND_DENOM}"
+(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded gentx root-validator-01 "2000000000000000000000000${BOND_DENOM}" ${ORCH_ETH_ADDRESS} ${ORCH_01_ADDRESS} --chain-id $CHAIN_ID --keyring-backend os
 
 # add faucet account
 ((echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add faucet --keyring-backend os) |& tee "${CUDOS_HOME}/faucet.wallet"
 FAUCET_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show faucet -a --keyring-backend os)
-cudos-noded add-genesis-account $FAUCET_ADDRESS "10000000000000000000000000000${BOND_DENOM}"
+cudos-noded add-genesis-account $FAUCET_ADDRESS "20000000000000000000000000000${BOND_DENOM}"
 
 
 # Add private sell offer account
