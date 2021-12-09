@@ -20,7 +20,7 @@ rpc_timeout = '10s'
 account_prefix = ''
 key_name = ''
 store_prefix = 'ibc'
-max_gas = 2000000
+max_gas = 20000000
 gas_price = { price = , denom = '' }
 gas_adjustment = 0.1
 clock_drift = '5s'
@@ -36,7 +36,7 @@ rpc_timeout = '15s'
 account_prefix = ''
 key_name = ''
 store_prefix = 'ibc'
-max_gas = 10000000
+max_gas = 20000000
 max_msg_num = 10
 gas_price = { price = , denom = '' }
 gas_adjustment = 1

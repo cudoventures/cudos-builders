@@ -31,6 +31,7 @@ COPY ./CudosBuilders/docker/osmosis-testnet-node/scripts/osmosis-testnet-node-ru
 # USER ${USER_NAME}:${GROUP_NAME}
 
 ENV OSMOSIS_HOME=${OSMOSIS_HOME}
+ENV SNAPSHOT_URL=${SNAPSHOT_URL}
 
 CMD ["sleep", "infinity"]
 

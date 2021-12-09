@@ -37,11 +37,13 @@ osmosisd version
 
 osmosisd unsafe-reset-all
 
+cp -r /mnt/snapshot/data-new ${OSMOSIS_HOME}/data
+
 DAEMON_NAME=osmosisd
-DAEMON_HOME=${OSMOSIS_HOME}/.osmosisd
+DAEMON_HOME=${OSMOSIS_HOME}
 DAEMON_RESTART_AFTER_UPGRADE=true
 DAEMON_ALLOW_DOWNLOAD_BINARIES=false
 DAEMON_LOG_BUFFER_SIZE=512
 User=$USER
 
-cosmovisor start --home OSMOSIS_HOME
+cosmovisor start --home ${OSMOSIS_HOME}
