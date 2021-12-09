@@ -13,7 +13,7 @@ services:
     image: cudos-explorer
     container_name: cudos-explorer
     build:
-      dockerfile: CudosBuilders/docker/explorer/explorer.dev.dockerfile
+      dockerfile: CudosBuilders/docker/explorer/explorer.dev.Dockerfile
       context: ../../../
       args:
         USER_ID: "0"
