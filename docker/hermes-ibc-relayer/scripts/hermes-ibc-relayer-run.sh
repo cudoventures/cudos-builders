@@ -37,11 +37,11 @@ echo "Setting up wallets for each chain"
 hermes keys restore ${CHAIN_ID_0} -m "${SEED_0}"
 hermes keys restore ${CHAIN_ID_1} -m "${SEED_1}"
 
-# init
-
-echo "Creating channel"
-hermes create channel ${CHAIN_ID_0} ${CHAIN_ID_1} --port-a transfer --port-b transfer
-
+#init
+if [ "$INIT" = true ] ; then
+    echo "Creating channel"
+    hermes create channel ${CHAIN_ID_0} ${CHAIN_ID_1} --port-a transfer --port-b transfer
+fi
 echo "Starting relayer"
-# RUST_BACKTRACE=full hermes start 
-hermes start 
+RUST_BACKTRACE=full hermes start 
+# hermes start 

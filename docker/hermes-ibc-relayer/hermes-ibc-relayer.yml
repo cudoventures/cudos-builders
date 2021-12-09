@@ -16,9 +16,9 @@ services:
         USER_NAME: "root"
         GROUP_ID: "0"
         GROUP_NAME: "root"
-        CUDOS_HOME: "$CUDOS_HOME"
+        HERMES_HOME: "$HERMES_HOME"
     env_file: "$ENV_FILE"
     volumes:
-      - '../../../CudosData/cudos-data-hermes-ibc-relayer:$CUDOS_HOME'
+      - '../../../CudosData/cudos-data-hermes-ibc-relayer:$HERMES_HOME'
     networks:
       - shared-cudos-network
