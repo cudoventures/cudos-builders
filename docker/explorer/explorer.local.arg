@@ -1,7 +1,6 @@
 ENV_FILE=./explorer.local.env
 GENESIS_TIME="2021-11-04T12:54:30.602457663Z"
 FAUCET_URL="http://localhost:5000"
-<<<<<<< HEAD
 INTERNAL_RPC_URL="http://cudos-start-sentry-node-client-testnet-public-01:26657"
 INTERNAL_API_URL="http://cudos-start-sentry-node-client-testnet-public-01:1317"
 EXTERNAL_RPC_URL="http://localhost:60007"
@@ -9,12 +8,3 @@ EXTERNAL_API_URL="http://localhost:60008"
 EXTERNAL_STAKING_URL="http://localhost:3000/validators"
 CHAIN_NAME="CudosTestnet-Public"
 CHAIN_ID="cudos-testnet-public"
-=======
-INTERNAL_RPC_URL="http://cudos-start-sentry-node:26657"
-INTERNAL_API_URL="http://cudos-start-sentry-node:1317"
-EXTERNAL_RPC_URL="http://localhost:26657"
-EXTERNAL_API_URL="http://localhost:1317"
-EXTERNAL_STAKING_URL="http://localhost:3000/validators"
-CHAIN_NAME="cudos-local-network"
-CHAIN_ID="cudos-local-network"
->>>>>>> 30f882265503ef29e754f34abe8dbf51e7bb93fa
