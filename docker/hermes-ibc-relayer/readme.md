@@ -105,6 +105,8 @@ hermes upgrade clients <chain_id_upgraded_network>
 ```
 When the transactions on the upgrade pass, it is time to do all the normal operations after an upgrade, like the installment of the new binary, exporting the genesis, reseting the data, migrating the genesis and replacing the old one with the migrated one.
 
+Then change the chain-id in the config.toml file for the upgraded chain, if needed.
+
 When all of that is done, you can start the Hermes relayer and it should connect to both networks and pass the health checks without any errors.
 
 ## Definitions

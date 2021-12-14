@@ -19,7 +19,7 @@ RUN apt-get install cargo -y
 
 RUN cargo install ibc-relayer-cli --bin hermes --locked
 
-COPY ./CudosBuilders/docker/hermes-ibc-relayer/config/config.toml .
+COPY ./CudosBuilders/docker/hermes-ibc-relayer/config/config.toml /root/.hermes/config.toml
 
 COPY ./CudosBuilders/docker/hermes-ibc-relayer/scripts/hermes-ibc-relayer-run.sh .
 
