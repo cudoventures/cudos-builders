@@ -10,6 +10,7 @@ state-sync-rpc-servers.local.config
 .DS_Store
 docker/snapshot-test/data
 topology.json
+topology.*.json
 users*override.yml
 docker/tests/**/data
 docker/monitoring/config/prometheus.tesnet.public.yml

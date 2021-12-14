@@ -69,26 +69,30 @@ class NodesService {
         }
     }
 
-    async prepareVolumes() {
+    async prepareVolumes(explorer, monitoring) {
         Log.main('Prepare volumes');
 
-        const utilsModel = this.topologyHelper.utilsModel;
-        const utilsSshHelper = this.instancesService.getSshHelper(utilsModel.computerId);
+        if (explorer === '1') {
+            const utilsModel = this.topologyHelper.utilsModel;
+            const utilsSshHelper = this.instancesService.getSshHelper(utilsModel.computerId);
 
-        await utilsSshHelper.exec([
-            `docker run -v "${PathHelper.WORKING_DIR}/CudosData/cudos-data-explorer-release-mongodb:/vol" debian rm -rf /vol`,
-        ], false);
+            await utilsSshHelper.exec([
+                `docker run -v "${PathHelper.WORKING_DIR}/CudosData/cudos-data-explorer-release-mongodb:/vol" debian rm -rf /vol`,
+            ], false);
+        }
 
-        const monitoringModel = this.topologyHelper.monitoringModel;
-        const monitoringSshHelper = this.instancesService.getSshHelper(monitoringModel.computerId);
+        if (monitoring === '1') {
+            const monitoringModel = this.topologyHelper.monitoringModel;
+            const monitoringSshHelper = this.instancesService.getSshHelper(monitoringModel.computerId);
 
-        await monitoringSshHelper.exec([
-            `docker run -v "${PathHelper.WORKING_DIR}/CudosData/grafana:/vol" debian rm -rf /vol`,
-        ], false);
+            await monitoringSshHelper.exec([
+                `docker run -v "${PathHelper.WORKING_DIR}/CudosData/grafana:/vol" debian rm -rf /vol`,
+            ], false);
 
-        await monitoringSshHelper.exec([
-            `docker run -v "${PathHelper.WORKING_DIR}/CudosData/prometheus:/vol" debian rm -rf /vol`,
-        ], false);
+            await monitoringSshHelper.exec([
+                `docker run -v "${PathHelper.WORKING_DIR}/CudosData/prometheus:/vol" debian rm -rf /vol`,
+            ], false);
+        }
 
         // all node volumes are deleted during initialization
     }
@@ -281,6 +285,7 @@ class NodesService {
             const volumeName = `cudos-data-full-node-${validatorNodeModel.validatorId}-${i + 1}`;
 
             validatorNodeModel.port26656 = validatorComputerModel.isLocalDocker === true ? ++this.genPorts : 26656;
+            validatorNodeModel.port26657 = validatorComputerModel.isLocalDocker === true ? ++this.genPorts : 26657;
             validatorNodeModel.port26660 = validatorComputerModel.isLocalDocker === true ? ++this.genPorts : 26660;
 
             if (validatorComputerModel.isLocalDocker === false) {
@@ -297,6 +302,7 @@ class NodesService {
                 `sed -i "s/START_CONTAINER_NAME=cudos-start-full-node-client-local-01/START_CONTAINER_NAME=\"${dockerContainerStartName}\"/g" ./full-node.client.local01.arg`,
                 `sed -i "s/VOLUME_NAME=cudos-data-full-node-client-local-01/VOLUME_NAME=\"${volumeName}\"/g" ./full-node.client.local01.arg`,
                 `sed -i "s/PORT26656=60401/PORT26656=\"${validatorNodeModel.port26656}\"/g" ./full-node.client.local01.arg`,
+                `sed -i "s/PORT26657=60501/PORT26657=\"${validatorNodeModel.port26657}\"/g" ./full-node.client.local01.arg`,
                 `sed -i "s/PORT26660=60601/PORT26660=\"${validatorNodeModel.port26660}\"/g" ./full-node.client.local01.arg`,
                 `sed -i "s/init-full-node.sh\\"]/init-full-node.sh \\&\\& sleep infinity\\"]/g" ./init-full-node.dockerfile`,
                 ...NodesHelper.getDockerConfig(this.genesisJsonString),
@@ -471,9 +477,9 @@ class NodesService {
             // create validator
             await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded keys add validator --keyring-backend test |& tee \\"\\$CUDOS_HOME/validator.wallet\\""`, false);
             const validatorWalletAddress = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded keys show validator -a --keyring-backend test"`, false);
-            await this.fundFromFaucet(validatorWalletAddress, '1000001000000000000000000acudos');
+            await this.fundFromFaucet(validatorWalletAddress, '200000001000000000000000000acudos');
             const tendermintValidatorPubKey = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded tendermint show-validator"`, false);
-            await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c 'cudos-noded tx staking create-validator --amount=1000000000000000000000000acudos \\
+            await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c 'cudos-noded tx staking create-validator --amount=200000000000000000000000000acudos \\
                                                 --from=validator \\
                                                 --pubkey="${tendermintValidatorPubKey.replace(/"/g, '\\"')}" \\
                                                 --moniker=$MONIKER \\
@@ -481,15 +487,27 @@ class NodesService {
                                                 --commission-rate="0.10" \\
                                                 --commission-max-rate="0.20" \\
                                                 --commission-max-change-rate="0.01" \\
-                                                --min-self-delegation="1" \\
                                                 --gas="auto" \\
                                                 --gas-prices="0.025acudos" \\
                                                 --gas-adjustment="1.80" \\
                                                 --keyring-backend="test" \\
                                                 -y'`, false);
+            // console.log(`docker container exec ${dockerContainerStartName} /bin/bash -c 'cudos-noded tx staking create-validator --amount=200000000000000000000000000acudos \\
+            // --from=validator \\
+            // --pubkey="${tendermintValidatorPubKey.replace(/"/g, '\\"')}" \\
+            // --moniker=$MONIKER \\
+            // --chain-id=${CHAIN_ID} \\
+            // --commission-rate="0.10" \\
+            // --commission-max-rate="0.20" \\
+            // --commission-max-change-rate="0.01" \\
+            // --gas="auto" \\
+            // --gas-prices="0.025acudos" \\
+            // --gas-adjustment="1.80" \\
+            // --keyring-backend="test" \\
+            // -y'`);
 
             // create orchestrator
-            if (this.gravity === '1') {
+            if (this.gravity === '1' && validatorNodeModel.orchEthAddress !== '') {
                 const validatorOperatorData = await validatorSshHelper.exec(`docker container exec ${dockerContainerStartName} /bin/bash -c "cudos-noded keys show validator --bech val --keyring-backend test"`, false);
                 const validatorOperatorDataLines = validatorOperatorData.split('\n');
                 const validatorOperatorDataLineAddress = validatorOperatorDataLines.find((validatorOperatorDataLine) => validatorOperatorDataLine.indexOf('address:') !== -1);
@@ -553,21 +571,28 @@ class NodesService {
             const cosmosOrchWallet = this.validatorIdToOrchWalletModelMap.get(validatorNodeModel.validatorId);
             const dockerContainerOrchestratorName = validatorNodeModel.getDockerContainerOrchestratorName();
 
-            await validatorSshHelper.exec([
-                `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/orchestrator`,
-                'cp ./orchestrator.env.example ./orchestrator.local01.env',
-                `sed -i "s/FEES=\\"\\"/FEES=\\"0acudos\\"/g" ./orchestrator.local01.env`,
-                `sed -i "s~GRPC=\\"\\"~GRPC=\\"http://${this.getDockerInternalHostByNodeId(validatorNodeModel.nodeId)}:9090\\"~g" ./orchestrator.local01.env`,
-                `sed -i "s~ETHRPC=\\"\\"~ETHRPC=\\"${this.topologyHelper.params.gravity.ethrpc}\\"~g" ./orchestrator.local01.env`,
-                `sed -i "s/CONTRACT_ADDR=\\"\\"/CONTRACT_ADDR=\\"${this.gravityContractAddress}\\"/g" ./orchestrator.local01.env`,
-                `sed -i "s/COSMOS_ORCH_MNEMONIC=\\"\\"/COSMOS_ORCH_MNEMONIC=\\"${cosmosOrchWallet.mnemonic}\\"/g" ./orchestrator.local01.env`,
-                `sed -i "s/ETH_PRIV_KEY_HEX=\\"\\"/ETH_PRIV_KEY_HEX=\\"${validatorNodeModel.ethPrivKey}\\"/g" ./orchestrator.local01.env`,
-                `sed -i "s/CONTAINER_NAME=cudos-orchestrator-local-01/CONTAINER_NAME=${dockerContainerOrchestratorName}/g" ./orchestrator.local01.arg`,
-                ...NodesHelper.getDockerExtraHosts('orchestrator.release'),
-                `docker-compose --env-file ./orchestrator.local01.arg -f ./orchestrator.release.yml -p ${dockerContainerOrchestratorName} up --build -d`
-            ]);
+            if (cosmosOrchWallet === undefined) {
+                continue;
+            }
 
-            this.nodeIdToOrchestratorInstanceContainerNamesMap.set(validatorNodeModel.nodeId, `${dockerContainerOrchestratorName}-release`);
+            if (validatorNodeModel.ethPrivKey !== '') {
+                await validatorSshHelper.exec([
+                    `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/orchestrator`,
+                    'cp ./orchestrator.env.example ./orchestrator.local01.env',
+                    `sed -i "s/FEES=\\"\\"/FEES=\\"0acudos\\"/g" ./orchestrator.local01.env`,
+                    `sed -i "s~GRPC=\\"\\"~GRPC=\\"http://${this.getDockerInternalHostByNodeId(validatorNodeModel.nodeId)}:9090\\"~g" ./orchestrator.local01.env`,
+                    `sed -i "s~ETHRPC=\\"\\"~ETHRPC=\\"${this.topologyHelper.params.gravity.ethrpc}\\"~g" ./orchestrator.local01.env`,
+                    `sed -i "s/CONTRACT_ADDR=\\"\\"/CONTRACT_ADDR=\\"${this.gravityContractAddress}\\"/g" ./orchestrator.local01.env`,
+                    `sed -i "s/COSMOS_ORCH_MNEMONIC=\\"\\"/COSMOS_ORCH_MNEMONIC=\\"${cosmosOrchWallet.mnemonic}\\"/g" ./orchestrator.local01.env`,
+                    `sed -i "s/ETH_PRIV_KEY_HEX=\\"\\"/ETH_PRIV_KEY_HEX=\\"${validatorNodeModel.ethPrivKey}\\"/g" ./orchestrator.local01.env`,
+                    `sed -i "s/CONTAINER_NAME=cudos-orchestrator-local-01/CONTAINER_NAME=${dockerContainerOrchestratorName}/g" ./orchestrator.local01.arg`,
+                    ...NodesHelper.getDockerExtraHosts('orchestrator.release'),
+                    `docker-compose --env-file ./orchestrator.local01.arg -f ./orchestrator.release.yml -p ${dockerContainerOrchestratorName} up --build -d`
+                ]);
+                
+                this.nodeIdToOrchestratorInstanceContainerNamesMap.set(validatorNodeModel.nodeId, `${dockerContainerOrchestratorName}-release`);
+            }
+
         }
     }
 

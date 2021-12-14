@@ -13,8 +13,10 @@ services:
     image: cudos-deployer-network-node
     container_name: $CONTAINER_NAME
     build:
-      dockerfile: ./node.dockerfile
-      context: .
+      # dockerfile: ./node.dockerfile
+      # context: .
+      dockerfile: CudosBuilders/tools/deployer-network/config/node.dockerfile
+      context: ../../../../
       args:
         USER_NAME: "$USER_NAME"
         USER_ID: "$USER_ID"
@@ -22,6 +24,7 @@ services:
         GROUP_ID: "$GROUP_ID"
         DOCKER_GROUP_ID: "$DOCKER_GROUP_ID"
         WORKDIR: "$WORKDIR"
+        LOCAL_DOCKER_SOURCE: "$LOCAL_DOCKER_SOURCE"
     restart: unless-stopped
     ports:
       - "$SSH_PORT:22"

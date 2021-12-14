@@ -7,6 +7,7 @@ ARG GROUP_ID
 ARG DOCKER_GROUP_ID
 ARG WORKDIR
 ARG PASS="cudos"
+ARG LOCAL_DOCKER_SOURCE
 
 RUN apt-get update && \
     apt-get install apt-transport-https ca-certificates curl gnupg lsb-release sudo openssh-server -y && \
@@ -31,15 +32,34 @@ RUN groupmod -g ${DOCKER_GROUP_ID} docker && \
     mkdir -p ${WORKDIR}/CudosData && \
     chown -R ${USER_NAME}:${GROUP_NAME} ${WORKDIR}
 
-USER ${USER_NAME}
-
 WORKDIR $WORKDIR
 
-RUN git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/cudos-node.git CudosNode && \
-    git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/cudos-builders.git CudosBuilders && \
-    git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge && \
-    git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/cudos-gravity-bridge-ui CudosGravityBridgeUI && \
-    git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/big-dipper.git CudosExplorer && \
-    git clone --depth 1 --branch cudos-master https://github.com/CudoVentures/faucet.git CudosFaucet
+COPY ./CudosNode ./CudosBuilders/readme.md ./source/CudosNode/
+COPY ./CudosBuilders ./CudosBuilders/readme.md ./source/CudosBuilders/
+COPY ./CudosGravityBridge ./CudosBuilders/readme.md ./source/CudosGravityBridge/
+COPY ./CudosGravityBridgeUI ./CudosBuilders/readme.md ./source/CudosGravityBridgeUI/
+COPY ./CudosExplorer ./CudosBuilders/readme.md ./source/CudosExplorer/
+COPY ./CudosFaucet ./CudosBuilders/readme.md ./source/CudosFaucet/
+
+RUN chown -R ${USER_NAME}:${GROUP_NAME} ./source
+
+USER ${USER_NAME}
+
+RUN if [ $LOCAL_DOCKER_SOURCE = "remote" ]; then \
+        git clone --depth 1 --branch cudos-dev https://github.com/CudoVentures/cudos-node.git ./CudosNode; \
+        git clone --depth 1 --branch cudos-dev https://github.com/CudoVentures/cudos-builders.git ./CudosBuilders; \
+        git clone --depth 1 --branch cudos-dev-merge-althea https://github.com/CudoVentures/cosmos-gravity-bridge.git ./CudosGravityBridge; \
+        git clone --depth 1 --branch cudos-dev https://github.com/CudoVentures/cudos-gravity-bridge-ui ./CudosGravityBridgeUI; \
+        git clone --depth 1 --branch cudos-dev https://github.com/CudoVentures/big-dipper.git ./CudosExplorer; \
+        git clone --depth 1 --branch cudos-dev https://github.com/CudoVentures/faucet.git ./CudosFaucet; \
+    else \
+        mv ./source/CudosNode ./CudosNode; \
+        mv ./source/CudosBuilders ./CudosBuilders; \
+        mv ./source/CudosGravityBridge ./CudosGravityBridge; \
+        mv ./source/CudosGravityBridgeUI ./CudosGravityBridgeUI; \
+        mv ./source/CudosExplorer ./CudosExplorer; \
+        mv ./source/CudosFaucet ./CudosFaucet; \
+    fi && \
+    rm -rf ./source
 
 CMD ["/bin/bash", "-c", "sudo service ssh start && sleep infinity"]

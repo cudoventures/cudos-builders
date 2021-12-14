@@ -156,6 +156,10 @@ cat "${CUDOS_HOME}/config/genesis.json" | jq --argjson PRIVATE_SALE_OFFER_BALANC
 # cat "${CUDOS_HOME}/config/genesis.json" | jq '.app_state.gravity.params.signed_batches_window = "100"' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
 cat "${CUDOS_HOME}/config/genesis.json" | jq '.app_state.gravity.erc20_to_denoms[0] |= .+ {"erc20": "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d", "denom": "acudos"}' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
 
+cat "${CUDOS_HOME}/config/genesis.json" | jq --arg ROOT_VALIDATOR_01_ADDRESS "$ROOT_VALIDATOR_01_ADDRESS" '.app_state.gravity.static_val_cosmos_addrs += [$ROOT_VALIDATOR_01_ADDRESS]' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
+cat "${CUDOS_HOME}/config/genesis.json" | jq --arg VALIDATOR_02_ADDRESS "$VALIDATOR_02_ADDRESS" '.app_state.gravity.static_val_cosmos_addrs += [$VALIDATOR_02_ADDRESS]' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
+cat "${CUDOS_HOME}/config/genesis.json" | jq --arg VALIDATOR_03_ADDRESS "$VALIDATOR_03_ADDRESS" '.app_state.gravity.static_val_cosmos_addrs += [$VALIDATOR_03_ADDRESS]' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
+
 cudos-noded collect-gentxs
 
 # sed -i "s/pex = true/pex = false/" "${CUDOS_HOME}/config/config.toml"

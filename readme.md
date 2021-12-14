@@ -268,6 +268,7 @@ Each **computer** defined in the <code>topology.json</code> is accessed by a use
 - explorer: 0 (disables the module) or 1 (enabled the module)
 - faucet: 0 (disables the module) or 1 (enabled the module)
 - monitoring: 0 (disables the module) or 1 (enabled the module)
+- local-docker-source: remote (downloads the source code from the github) or local (uses local version of the source code)
 
 The parameters are passed in the following way:
 
