@@ -37,7 +37,10 @@ osmosisd version
 
 osmosisd unsafe-reset-all
 
-cp -r /mnt/snapshot/data-new ${OSMOSIS_HOME}/data
+cd $OSMOSIS_HOME
+wget -O - $SNAPSHOT | xz -d -v | tar xf - |
+
+# cp -r /mnt/snapshot/data-new ${OSMOSIS_HOME}/data
 
 DAEMON_NAME=osmosisd
 DAEMON_HOME=${OSMOSIS_HOME}
