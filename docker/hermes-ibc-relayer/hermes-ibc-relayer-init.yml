@@ -6,19 +6,18 @@ networks:
 
 services:
   cudos-hermes-ibc-relayer:
-    image: hermes-ibc-relayer
-    container_name: hermes-ibc-relayer-cudos
+    image: hermes-ibc-relayer-init
+    container_name: hermes-ibc-relayer-cudos-init
     build:
-      dockerfile: CudosBuilders/docker/hermes-ibc-relayer/hermes-ibc-relayer.Dockerfile
+      dockerfile: CudosBuilders/docker/hermes-ibc-relayer/hermes-ibc-relayer-init.Dockerfile
       context: ../../../
       args:
         USER_ID: "0"
         USER_NAME: "root"
         GROUP_ID: "0"
         GROUP_NAME: "root"
-        HERMES_HOME: "$HERMES_HOME"
     env_file: "$ENV_FILE"
     volumes:
-      - '../../../CudosData/cudos-data-hermes-ibc-relayer:$HERMES_HOME'
+      - '../../../CudosData/cudos-data-hermes-ibc-relayer:/root/.hermes'
     networks:
       - shared-cudos-network

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "Setting up config.toml"
+cp /usr/hermes/config.toml /root/.hermes/config.toml
 
 # relayer REST settings
 sed -zi "s/\nenabled = [^\n]*\n/\nenabled = ${REST_ENABLED}\n/1" "/root/.hermes/config.toml"
@@ -38,10 +39,7 @@ hermes keys restore ${CHAIN_ID_0} -m "${SEED_0}"
 hermes keys restore ${CHAIN_ID_1} -m "${SEED_1}"
 
 #init
-if [ "$INIT" = true ] ; then
+if [ "$CREATE_CHANNEL" = true ] ; then
     echo "Creating channel"
     hermes create channel ${CHAIN_ID_0} ${CHAIN_ID_1} --port-a transfer --port-b transfer
 fi
-echo "Starting relayer"
-RUST_BACKTRACE=full hermes start 
-# hermes start 
