@@ -1,3 +1,2 @@
 OSMOSIS_HOME=/usr/osmosis
 ENV_FILE=./osmosis-testnet-node.local.env
-SNAPSHOT_URL=/mnt/RazorLabs/RazorLabs/Cudos/OsmosisData/
