@@ -1,7 +1,9 @@
-./gbt --address-prefix="$ADDRESS_PREFIX" orchestrator \
-    --fees="$FEES" \
-    --cosmos-grpc="$GRPC" \
-    --ethereum-rpc="$ETHRPC" \
-    --gravity-contract-address="$CONTRACT_ADDR" \
-    --ethereum-key="${ETH_PRIV_KEY_HEX}" \
-    --cosmos-phrase="$COSMOS_ORCH_MNEMONIC"
+export GRAVITY_ADDRESS_PREFIX=$ADDRESS_PREFIX
+export GRAVITY_FEES=$FEES
+export GRAVITY_GRPC=$GRPC
+export GRAVITY_ETHRPC=$ETHRPC
+export GRAVITY_CONTRACT_ADDR=$CONTRACT_ADDR
+export GRAVITY_ETH_PRIV_KEY_HEX=$ETH_PRIV_KEY_HEX
+export GRAVITY_COSMOS_ORCH_MNEMONIC=$COSMOS_ORCH_MNEMONIC
+
+./gbt orchestrator
