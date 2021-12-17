@@ -9,7 +9,7 @@ services:
     image: hermes-ibc-relayer-binary-builder
     container_name: hermes-ibc-relayer-cudos-binary-builder
     build:
-      dockerfile: CudosBuilders/docker/hermes-ibc-relayer/hermes-ibc-relayer-binary-builder.Dockerfile
+      dockerfile: CudosBuilders/docker/hermes-ibc-relayer/hermes-ibc-relayer-binary-builder.dockerfile
       context: ../../../
       args:
         USER_ID: "0"

@@ -9,7 +9,7 @@ services:
     image: hermes-ibc-relayer-init
     container_name: hermes-ibc-relayer-cudos-init
     build:
-      dockerfile: CudosBuilders/docker/hermes-ibc-relayer/hermes-ibc-relayer-init.Dockerfile
+      dockerfile: CudosBuilders/docker/hermes-ibc-relayer/hermes-ibc-relayer-init.dockerfile
       context: ../../../
       args:
         USER_ID: "0"
