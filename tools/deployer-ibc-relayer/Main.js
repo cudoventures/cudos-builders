@@ -11,7 +11,7 @@ const SecretsConfig = require('./secrets.json');
 
 const TEMP_DIR = path.join(os.tmpdir(), 'cudos-builder');
 
-const OSMOSIS = 'osmosis';
+const OSMOSIS = 'hermes-relayer-private-testnet';
 
 async function main() {
     const args = getArgParser();
@@ -46,10 +46,8 @@ function getArgParser() {
     const targets = [
         OSMOSIS
     ]
-    const parser = new ArgumentParser({description: 'Osmosis testnet node deployer'});
+    const parser = new ArgumentParser({description: 'Hermes relayer private testnet deployer'});
     parser.add_argument('--target', { 'required': true, 'choices': targets });
-    parser.add_argument('--init', { 'required': true, 'choices': ['0', '1'] });
-    parser.add_argument('--rebuild', { 'required': true, 'choices': ['0', '1'] });
     return parser.parse_args();
 }
 
@@ -161,25 +159,22 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
     const filePath = path.join(secrets.serverPath, deployFilename);
 
     const dockerRootPath = 'osmosis-testnet-node';
-    const dockerBinaryBuild = 'osmosis-testnet-node-binary-builder';
-    const dockerInit = 'osmosis-testnet-node-init';
-    const dockerStart = 'osmosis-testnet-node-start';
+    const dockerComposeFile = './osmosis-testnet-node.yml';
     const dockerComposeArgFile = './osmosis-testnet-node.local.arg';
+    const dockerProjectName = 'osmosis-testnet-node';
 
     command = [
         `cd ${secrets.serverPath}`,
-        `echo "OsmosisData" > .dockerignore`,
         `sudo rm -Rf ./CudosBuilders`,
         `sudo unzip -q ${filePath} -d ./`,
         `rm ${filePath}`,
         `cd ./CudosBuilders/docker/${dockerRootPath}`,
-        args.rebuild === '1' ? `(sudo docker-compose -f ./${dockerBinaryBuild}.yml -p ${dockerBinaryBuild} --env-file ${dockerComposeArgFile} down || true)` : null,
-        args.init === '1' ? `(sudo docker-compose -f ./${dockerInit}.yml -p ${dockerInit} --env-file ${dockerComposeArgFile} down || true)` : null,
-        `(sudo docker-compose -f ./${dockerStart}.yml -p ${dockerStart} --env-file ${dockerComposeArgFile} down || true)`,
-        `sudo docker system prune -a -f`,
-        args.rebuild === '1' ? `sudo docker-compose -f ./${dockerBinaryBuild}.yml -p ${dockerBinaryBuild} --env-file ${dockerComposeArgFile} up --build -d` : null,
-        args.init === '1' ? `sudo docker-compose -f ./${dockerInit}.yml -p ${dockerInit} --env-file ${dockerComposeArgFile} up --build -d` : null,
-        `sudo docker-compose -f ./${dockerStart}.yml -p ${dockerStart} --env-file ${dockerComposeArgFile} up --build -d`,
+        `(sudo docker-compose -f ${dockerComposeFile} -p ${dockerProjectName} --env-file ${dockerComposeArgFile} down || true)`,
+        // `sudo docker system prune -a -f`,
+        // `sudo rm -rf ${secrets.serverPath}/CudosData/ethereum/*`,
+        `sudo docker-compose -f ${dockerComposeFile} -p ${dockerProjectName} --env-file ${dockerComposeArgFile} up --build -d`,
+        // `cd ${secrets.serverPath}`,
+        // `sudo rm -Rf ./CudosBuilders`,
     ]
 
     command = command.filter(c => c !== null).join(' && ');

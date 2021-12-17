@@ -1,19 +1,6 @@
 {
     "version": "2.0.0",
     "tasks": [
-        //ibc-relayer
-        {
-            "label": "Build IBC-RELAYER LOCAL in docker",
-            "command": "cd ./docker/ibc-relayer && docker-compose --env-file ./ibc-relayer.local.arg -f ./ibc-relayer.yml -f ./users-ibc-relayer.override.yml -p ibc-relayer up --build",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Destroy IBC-RELAYER LOCAL in docker",
-            "command": "cd ./docker/ibc-relayer && docker-compose --env-file ./ibc-relayer.local.arg -f ./ibc-relayer.yml -f ./users-ibc-relayer.override.yml -p ibc-relayer down",
-            "type": "shell",
-            "group": "build"
-        },
         //hermes-ibc-relayer
         {
             "label": "Build HERMES-IBC-RELAYER LOCAL in docker",
@@ -30,7 +17,7 @@
         //osmosis-testnet-node
         {
             "label": "Build OSMOSIS TESTNET NODE in docker",
-            "command": "cd ./docker/osmosis-testnet-node && docker-compose --env-file ./osmosis-testnet-node.local.arg -f ./osmosis-testnet-node.yml -p osmosis-testnet-node up --build",
+            "command": "cd ./docker/osmosis-testnet-node && sudo docker-compose --env-file ./osmosis-testnet-node.local.arg -f ./osmosis-testnet-node.yml -p osmosis-testnet-node up --build",
             "type": "shell",
             "group": "build"
         },
