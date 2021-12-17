@@ -3,14 +3,26 @@
     "tasks": [
         //hermes-ibc-relayer
         {
-            "label": "Build HERMES-IBC-RELAYER LOCAL in docker",
-            "command": "cd ./docker/hermes-ibc-relayer && docker-compose --env-file ./hermes-ibc-relayer.local.arg -f ./hermes-ibc-relayer.yml -p hermes-ibc-relayer up --build",
+            "label": "Build HERMES-IBC-RELAYER BINARY BUILDER in docker",
+            "command": "cd ./docker/hermes-ibc-relayer && docker-compose --env-file ./hermes-ibc-relayer.local.arg -f ./hermes-ibc-relayer-binary-builder.yml -p hermes-ibc-relayer-binary-builder up --build",
             "type": "shell",
             "group": "build"
         },
         {
-            "label": "Destroy HERMES-IBC-RELAYER LOCAL in docker",
-            "command": "cd ./docker/hermes-ibc-relayer && docker-compose --env-file ./hermes-ibc-relayer.local.arg -f ./hermes-ibc-relayer.yml -p hermes-ibc-relayer down",
+            "label": "Build HERMES-IBC-RELAYER LOCAL INIT in docker",
+            "command": "cd ./docker/hermes-ibc-relayer && docker-compose --env-file ./hermes-ibc-relayer.local.arg -f ./hermes-ibc-relayer-init.yml -p hermes-ibc-relayer-init up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Build HERMES-IBC-RELAYER LOCAL START in docker",
+            "command": "cd ./docker/hermes-ibc-relayer && docker-compose --env-file ./hermes-ibc-relayer.local.arg -f ./hermes-ibc-relayer-start.yml -p hermes-ibc-relayer-start up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Destroy HERMES-IBC-RELAYER LOCAL INIT in docker",
+            "command": "cd ./docker/hermes-ibc-relayer && docker-compose --env-file ./hermes-ibc-relayer.local.arg -f ./hermes-ibc-relayer-init.yml -p hermes-ibc-relayer-init down",
             "type": "shell",
             "group": "build"
         },
