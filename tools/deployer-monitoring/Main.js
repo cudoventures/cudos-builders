@@ -167,6 +167,7 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         `sudo rm -Rf ./monitoring`,
         `sudo tar -xzf ${filePath}`,
         `rm ${filePath}`,
+        `chmod -R g-rwx,o-rwx ./monitoring`,
         `cd ${dockerRootPath}`,
         `sudo docker run --rm \
         -v /var/run/docker.sock:/var/run/docker.sock \

@@ -186,6 +186,8 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         `sudo rm -Rf ./CudosGravityBridgeUI`,
         `sudo unzip -q ${filePath} -d ./`,
         `rm ${filePath}`,
+        `chmod -R g-rwx,o-rwx ./CudosBuilders`,
+        `chmod -R g-rwx,o-rwx ./CudosGravityBridgeUI`,
         `cd ./CudosBuilders/docker/gravity-bridge-ui`,
         `(sudo docker-compose --env-file ${dockerEnvFile} -f ./gravity-bridge-ui.release.yml -p cudos-gravity-bridge-ui down || true)`,
         `sudo docker system prune -a -f`,

@@ -166,6 +166,7 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         `sudo rm -Rf ./CudosBuilders`,
         `sudo unzip -q ${filePath} -d ./`,
         `rm ${filePath}`,
+        `chmod -R g-rwx,o-rwx ./CudosBuilders`,
         `cd ./CudosBuilders/docker/${dockerRootPath}`,
         `(sudo docker-compose -f ${dockerComposeFile} -p ${dockerProjectName} down || true)`,
         `sudo docker system prune -a -f`,

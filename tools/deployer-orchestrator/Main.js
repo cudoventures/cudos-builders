@@ -195,6 +195,8 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         `sudo rm -Rf ./CudosGravityBridge/orchestrator`,
         `sudo unzip -q ${filePath} -d ./`,
         `rm ${filePath}`,
+        `chmod -R g-rwx,o-rwx ./CudosBuilders`,
+        `chmod -R g-rwx,o-rwx ./CudosGravityBridge/orchestrator`,
         `cd ./CudosBuilders/docker/${dockerRootPath}`,
         `(sudo docker-compose --env-file ${dockerEnvFile} -f ${dockerComposeFile} -p ${dockerProjectName} down || true)`,
         `sudo docker system prune -a -f`,
