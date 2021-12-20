@@ -22,13 +22,16 @@ RUN curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-c
     chmod +x /usr/local/bin/docker-compose
 
 RUN groupmod -g ${DOCKER_GROUP_ID} docker && \
-    addgroup -gid ${GROUP_ID} ${GROUP_NAME} && \
-    adduser --disabled-password -gecos "" -uid $USER_ID -gid ${GROUP_ID} ${USER_NAME} && \
-    usermod -a -G docker ${USER_NAME} && \
-    usermod -a -G sudo ${USER_NAME} && \
-    echo "$USER_NAME:$PASS" | chpasswd && \
+    if [ $USER_NAME != 'root' ]; then \
+        addgroup -gid ${GROUP_ID} ${GROUP_NAME}; \
+        adduser --disabled-password -gecos "" -uid $USER_ID -gid ${GROUP_ID} ${USER_NAME}; \
+        usermod -a -G docker ${USER_NAME}; \
+        usermod -a -G sudo ${USER_NAME}; \
+        echo "$USER_NAME:$PASS" | chpasswd; \
+    fi && \
+    echo "PermitRootLogin yes" >> /etc/ssh/sshd_config && \
     echo "root:$PASS" | chpasswd && \
-    echo "${USER_NAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
+    echo "${USER_NAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers; \
     mkdir -p ${WORKDIR}/CudosData && \
     chown -R ${USER_NAME}:${GROUP_NAME} ${WORKDIR}
 
