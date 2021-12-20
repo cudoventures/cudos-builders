@@ -17,9 +17,9 @@ ENV OSMOSIS_HOME=${OSMOSIS_HOME}
 ENV DAEMON_NAME=osmosisd
 ENV DAEMON_HOME=${OSMOSIS_HOME}
 ENV DAEMON_RESTART_AFTER_UPGRADE=true
-ENV DAEMON_ALLOW_DOWNLOAD_BINARIES=false
+ENV DAEMON_ALLOW_DOWNLOAD_BINARIES=true
 ENV DAEMON_LOG_BUFFER_SIZE=512
 ENV User=$USER
 
-# CMD ["sleep", "infinity"]
-CMD ["/bin/bash", "-c", "cosmovisor start --home ${OSMOSIS_HOME}"]
+CMD ["sleep", "infinity"]
+# CMD ["/bin/bash", "-c", "cosmovisor start --home ${OSMOSIS_HOME}"]

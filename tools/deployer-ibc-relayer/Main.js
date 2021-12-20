@@ -7,11 +7,14 @@ const archiver = require('archiver');
 const SCP2 = require('scp2');
 const SSH2Client = require('ssh2').Client;
 
+
+
+const RELAYER_PUBLIC = 'public-testnet';
+const RELAYER_PRIVATE = 'private-testnet';
+
 const SecretsConfig = require('./secrets.json');
 
-const TEMP_DIR = path.join(os.tmpdir(), 'cudos-builder');
-
-const OSMOSIS = 'hermes-relayer-private-testnet';
+const TEMP_DIR = path.join(os.tmpdir(), 'ibc-relayer-builder');
 
 async function main() {
     const args = getArgParser();
@@ -44,10 +47,13 @@ async function main() {
 
 function getArgParser() {
     const targets = [
-        OSMOSIS
+        RELAYER_PUBLIC,
+        RELAYER_PRIVATE
     ]
-    const parser = new ArgumentParser({description: 'Hermes relayer private testnet deployer'});
+    const parser = new ArgumentParser({description: 'Hermes relayer deployer'});
     parser.add_argument('--target', { 'required': true, 'choices': targets });
+    parser.add_argument('--init', { 'required': true, 'choices': ['0', '1'] });
+    parser.add_argument('--rebuild', { 'required': true, 'choices': ['0', '1'] });
     return parser.parse_args();
 }
 
@@ -69,7 +75,7 @@ async function initTempDirectory() {
             await asyncFs.mkdir(TEMP_DIR, { 'recursive': true });
         }
 
-        const deployFilename = `osmosis-src.tar.gz`;
+        const deployFilename = `ibc_relayer-src.tar.gz`;
         const deployFilePath = path.join(TEMP_DIR, deployFilename);
         resolve({
             deployFilePath,
@@ -158,23 +164,30 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
     const conn = new SSH2Client();
     const filePath = path.join(secrets.serverPath, deployFilename);
 
-    const dockerRootPath = 'osmosis-testnet-node';
-    const dockerComposeFile = './osmosis-testnet-node.yml';
-    const dockerComposeArgFile = './osmosis-testnet-node.local.arg';
-    const dockerProjectName = 'osmosis-testnet-node';
+    const dockerRootPath = 'hermes-ibc-relayer';
+
+    const dockerBinaryBuild = 'hermes-ibc-relayer-binary-builder';
+    const dockerInit = 'hermes-ibc-relayer-init';
+    const dockerStart = 'hermes-ibc-relayer-start';
+
+    const dockerComposeArgFile = [];
+    dockerComposeArgFile[RELAYER_PUBLIC] = './hermes-ibc-relayer.public.arg';
+    dockerComposeArgFile[RELAYER_PRIVATE] = './hermes-ibc-relayer.private.arg';
 
     command = [
         `cd ${secrets.serverPath}`,
+        `echo "OsmosisData" > .dockerignore`,
         `sudo rm -Rf ./CudosBuilders`,
         `sudo unzip -q ${filePath} -d ./`,
         `rm ${filePath}`,
         `cd ./CudosBuilders/docker/${dockerRootPath}`,
-        `(sudo docker-compose -f ${dockerComposeFile} -p ${dockerProjectName} --env-file ${dockerComposeArgFile} down || true)`,
-        // `sudo docker system prune -a -f`,
-        // `sudo rm -rf ${secrets.serverPath}/CudosData/ethereum/*`,
-        `sudo docker-compose -f ${dockerComposeFile} -p ${dockerProjectName} --env-file ${dockerComposeArgFile} up --build -d`,
-        // `cd ${secrets.serverPath}`,
-        // `sudo rm -Rf ./CudosBuilders`,
+        args.rebuild === '1' ? `(sudo docker-compose -f ./${dockerBinaryBuild}.yml -p ${dockerBinaryBuild} --env-file ${dockerComposeArgFile[args.target]} down || true)` : null,
+        args.init === '1' ? `(sudo docker-compose -f ./${dockerInit}.yml -p ${dockerInit} --env-file ${dockerComposeArgFile[args.target]} down || true)` : null,
+        `(sudo docker-compose -f ./${dockerStart}.yml -p ${dockerStart} --env-file ${dockerComposeArgFile[args.target]} down || true)`,
+        `sudo docker system prune -a -f`,
+        args.rebuild === '1' ? `sudo docker-compose -f ./${dockerBinaryBuild}.yml -p ${dockerBinaryBuild} --env-file ${dockerComposeArgFile[args.target]} up --build -d` : null,
+        args.init === '1' ? `sudo docker-compose -f ./${dockerInit}.yml -p ${dockerInit} --env-file ${dockerComposeArgFile[args.target]} up --build -d` : null,
+        `sudo docker-compose -f ./${dockerStart}.yml -p ${dockerStart} --env-file ${dockerComposeArgFile[args.target]} up --build -d`,
     ]
 
     command = command.filter(c => c !== null).join(' && ');

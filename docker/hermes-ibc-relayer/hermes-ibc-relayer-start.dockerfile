@@ -12,4 +12,5 @@ RUN if [ $USER_NAME != 'root' ]; then \
 
 USER ${USER_NAME}:${GROUP_NAME}
 
+# CMD ["sleep", "infinity"]
 CMD ["/bin/bash", "-c", "hermes start"]
