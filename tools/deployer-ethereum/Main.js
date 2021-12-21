@@ -87,7 +87,6 @@ async function createArchive(deployFilePath, deployFilename) {
         output.on('close', () => {
             console.log(`${archive.pointer()} total bytes`);
             console.log('archiver has been finalized and the output file descriptor has closed.');
-            console.log(deployFilePath);
             resolve({
                 deployFilePath,
                 deployFilename,

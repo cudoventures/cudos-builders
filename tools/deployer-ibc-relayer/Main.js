@@ -7,8 +7,6 @@ const archiver = require('archiver');
 const SCP2 = require('scp2');
 const SSH2Client = require('ssh2').Client;
 
-
-
 const RELAYER_PUBLIC = 'public-testnet';
 const RELAYER_PRIVATE = 'private-testnet';
 
@@ -37,8 +35,7 @@ async function main() {
     } finally {
         try {
             await asyncFs.access(TEMP_DIR, fs.constants.F_OK);
-        
-            // await asyncFs.rm(TEMP_DIR, { 'recursive': true });
+            await asyncFs.rm(TEMP_DIR, { 'recursive': true });
         } catch (e) {
             console.error(e);
         }
@@ -180,6 +177,7 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         `sudo rm -Rf ./CudosBuilders`,
         `sudo unzip -q ${filePath} -d ./`,
         `rm ${filePath}`,
+        `chmod -R g-rwx,o-rwx ./CudosBuilders`,
         `cd ./CudosBuilders/docker/${dockerRootPath}`,
         args.rebuild === '1' ? `(sudo docker-compose -f ./${dockerBinaryBuild}.yml -p ${dockerBinaryBuild} --env-file ${dockerComposeArgFile[args.target]} down || true)` : null,
         args.init === '1' ? `(sudo docker-compose -f ./${dockerInit}.yml -p ${dockerInit} --env-file ${dockerComposeArgFile[args.target]} down || true)` : null,
