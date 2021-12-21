@@ -1,0 +1,21 @@
+version: '3.1'
+
+networks:
+  shared-cudos-network:
+    name: shared-cudos-network
+
+services:
+  cudos-hermes-ibc-relayer:
+    image: hermes-ibc-relayer-binary-builder
+    container_name: hermes-ibc-relayer-cudos-binary-builder
+    build:
+      dockerfile: CudosBuilders/docker/hermes-ibc-relayer/hermes-ibc-relayer-binary-builder.dockerfile
+      context: ../../../
+      args:
+        USER_ID: "0"
+        USER_NAME: "root"
+        GROUP_ID: "0"
+        GROUP_NAME: "root"
+    env_file: "$ENV_FILE"
+    networks:
+      - shared-cudos-network

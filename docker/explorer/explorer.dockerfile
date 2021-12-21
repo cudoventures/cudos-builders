@@ -38,6 +38,7 @@ RUN cd ./source && \
     sed -i ':a;N;$!ba;s/\n//g' ./default_settings.json && \
     sed -i 's/ //g' ./default_settings.json && \
     cp ./default_settings.json ./settings.json && \
+    chown ${USER_NAME}:${GROUP_NAME} ./settings.json && \
     npm i
 
 RUN cd ./source && \

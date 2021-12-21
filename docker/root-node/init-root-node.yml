@@ -3,7 +3,7 @@ version: '3.1'
 services:
   cudos-root-node:
     image: cudos-init-root-node
-    container_name: cudos-init-root-node
+    container_name: $INIT_CONTAINER_NAME
     build:
       dockerfile: CudosBuilders/docker/root-node/init-root-node.dockerfile
       context: ../../../
@@ -11,4 +11,4 @@ services:
         CUDOS_HOME: "$CUDOS_HOME"
     env_file: "$ENV_FILE"
     volumes:
-      - '../../../CudosData/cudos-data-root-node:$CUDOS_HOME'
+      - '../../../CudosData/$VOLUME_NAME:$CUDOS_HOME'

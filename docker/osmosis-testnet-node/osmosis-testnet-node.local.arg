@@ -1,0 +1,2 @@
+OSMOSIS_HOME=/usr/osmosis/OsmosisData
+ENV_FILE=./osmosis-testnet-node.local.env

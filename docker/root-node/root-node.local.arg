@@ -1,4 +1,9 @@
 CUDOS_HOME=/usr/cudos/cudos-data
 ENV_FILE=./root-node.local.env
+
+INIT_CONTAINER_NAME=cudos-init-root-node
+START_CONTAINER_NAME=cudos-start-root-node
+VOLUME_NAME=cudos-data-root-node
+
 PORT26656=60101
 PORT26660=60102

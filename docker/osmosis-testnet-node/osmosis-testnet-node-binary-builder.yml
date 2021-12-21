@@ -1,0 +1,29 @@
+version: '3.1'
+
+networks:
+  shared-cudos-network:
+    name: shared-cudos-network
+
+services:
+  osmosis-testnet-node:
+    image: osmosis-testnet-node-binary-builder
+    container_name: osmosis-testnet-node-binary-builder
+    build:
+      dockerfile: CudosBuilders/docker/osmosis-testnet-node/osmosis-testnet-node-binary-builder.dockerfile
+      context: ../../../
+      args:
+        USER_ID: "0"
+        USER_NAME: "root"
+        GROUP_ID: "0"
+        GROUP_NAME: "root"
+        OSMOSIS_HOME: "$OSMOSIS_HOME"
+    env_file: "$ENV_FILE"
+    volumes:
+      - '../../../CudosData/osmosis-testnet-node:$OSMOSIS_HOME'
+    networks:
+      - shared-cudos-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "128m"
+        max-file: "1"

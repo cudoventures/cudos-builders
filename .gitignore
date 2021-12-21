@@ -1,4 +1,5 @@
 *.env
+*.key
 node_modules
 secrets.json
 secrets.json.old
