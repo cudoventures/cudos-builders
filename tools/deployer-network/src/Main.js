@@ -20,7 +20,7 @@ async function main() {
         lifeCycleHelper.addExitHandler(instancesService.onExit, 0);
         lifeCycleHelper.addExitHandler(nodesService.onExit, 1);
 
-        await instancesService.createMissingInstances(args.local_docker_source);
+        await instancesService.createMissingInstances(args.docker_source);
         await instancesService.connectToInstances();
         await instancesService.validateSoftwareRequirements();
         await instancesService.reconnectToInstances(); // in order to apply latest user details like gruops
@@ -41,7 +41,7 @@ function getArgParser() {
     parser.add_argument('--faucet', { 'required': false, 'default': '1', 'choices': ['0', '1'] });
     parser.add_argument('--explorer', { 'required': false, 'default': '1', 'choices': ['0', '1'] });
     parser.add_argument('--monitoring', { 'required': false, 'default': '1', 'choices': ['0', '1'] });
-    parser.add_argument('--local-docker-source', { 'required': false, 'default': 'remote', 'choices': ['remote', 'local'] });
+    parser.add_argument('--docker-source', { 'required': false, 'default': 'remote', 'choices': ['remote', 'local'] });
     return parser.parse_args();
 }
 

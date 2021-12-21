@@ -13,7 +13,7 @@ class InstancesService {
         this.sshHelpersMap = new Map();
     }
 
-    async createMissingInstances(local_docker_source) {
+    async createMissingInstances(docker_source) {
         Log.main('Create missing instances');
 
         const bashHelper = new BashHelper();
@@ -39,7 +39,7 @@ class InstancesService {
                 `export GROUP_ID=$(id -g)`,
                 `export DOCKER_GROUP_ID=$(getent group docker | awk -F: '{printf "%d", $3}')`,
                 `export WORKDIR="${PathHelper.WORKING_DIR}"`,
-                `export LOCAL_DOCKER_SOURCE="${local_docker_source}"`,
+                `export DOCKER_SOURCE="${docker_source}"`,
                 `cd ${path.join(__dirname, '..', '..', 'config')}`,
                 `docker-compose -f ./node.yml -p ${projectName} up --build -d`
             ]);

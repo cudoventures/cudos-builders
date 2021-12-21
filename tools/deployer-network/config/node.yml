@@ -24,7 +24,7 @@ services:
         GROUP_ID: "$GROUP_ID"
         DOCKER_GROUP_ID: "$DOCKER_GROUP_ID"
         WORKDIR: "$WORKDIR"
-        LOCAL_DOCKER_SOURCE: "$LOCAL_DOCKER_SOURCE"
+        DOCKER_SOURCE: "$DOCKER_SOURCE"
     restart: unless-stopped
     ports:
       - "$SSH_PORT:22"

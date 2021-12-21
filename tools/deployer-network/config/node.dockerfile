@@ -7,7 +7,7 @@ ARG GROUP_ID
 ARG DOCKER_GROUP_ID
 ARG WORKDIR
 ARG PASS="cudos"
-ARG LOCAL_DOCKER_SOURCE
+ARG DOCKER_SOURCE
 
 RUN apt-get update && \
     apt-get install apt-transport-https ca-certificates curl gnupg lsb-release sudo openssh-server -y && \
@@ -48,7 +48,7 @@ RUN chown -R ${USER_NAME}:${GROUP_NAME} ./source
 
 USER ${USER_NAME}
 
-RUN if [ $LOCAL_DOCKER_SOURCE = "remote" ]; then \
+RUN if [ $DOCKER_SOURCE = "remote" ]; then \
         git clone --depth 1 --branch cudos-dev https://github.com/CudoVentures/cudos-node.git ./CudosNode; \
         git clone --depth 1 --branch cudos-dev https://github.com/CudoVentures/cudos-builders.git ./CudosBuilders; \
         git clone --depth 1 --branch cudos-dev-merge-althea https://github.com/CudoVentures/cosmos-gravity-bridge.git ./CudosGravityBridge; \

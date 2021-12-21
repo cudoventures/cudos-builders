@@ -122,7 +122,7 @@ class NodesService {
             `sed -i "s/MONITORING_ENABLED=false/MONITORING_ENABLED=\"true\"/g" ./root-node.local.env`,
             `sed -i "s/PORT26656=60101/PORT26656=\"${validatorNodeModel.port26656}\"/g" ./root-node.local.arg`,
             `sed -i "s/PORT26660=60102/PORT26660=\"${validatorNodeModel.port26660}\"/g" ./root-node.local.arg`,
-            `sed -i "s/container_name: cudos-start-root-node/container_name: ${dockerContainerStartName}/g" ./start-root-node.yml`,
+            `sed -i "s/START_CONTAINER_NAME=cudos-start-root-node/START_CONTAINER_NAME=${dockerContainerStartName}/g" ./root-node.local.arg`,
             ...NodesHelper.getDockerExtraHosts('start-root-node'),
             'docker-compose --env-file ./root-node.local.arg -f ./init-root-node.yml -p cudos-init-root-node up --build',
             'docker-compose --env-file ./root-node.local.arg -f ./init-root-node.yml -p cudos-init-root-node down',
