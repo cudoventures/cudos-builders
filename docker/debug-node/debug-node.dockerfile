@@ -20,6 +20,8 @@ WORKDIR /usr/cudos
 
 COPY ./CudosBuilders/docker/debug-node/init.sh ./
 
+RUN chown ${USER_NAME}:${GROUP_NAME} ./init.sh
+
 USER ${USER_NAME}
 
 CMD ["sleep", "infinity"]
