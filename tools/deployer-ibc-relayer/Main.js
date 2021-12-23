@@ -177,7 +177,7 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         `sudo rm -Rf ./CudosBuilders`,
         `sudo unzip -q ${filePath} -d ./`,
         `rm ${filePath}`,
-        `chmod -R g-rwx,o-rwx ./CudosBuilders`,
+        `sudo chmod -R g-rwx,o-rwx ./CudosBuilders`,
         `cd ./CudosBuilders/docker/${dockerRootPath}`,
         args.rebuild === '1' ? `(sudo docker-compose -f ./${dockerBinaryBuild}.yml -p ${dockerBinaryBuild} --env-file ${dockerComposeArgFile[args.target]} down || true)` : null,
         args.init === '1' ? `(sudo docker-compose -f ./${dockerInit}.yml -p ${dockerInit} --env-file ${dockerComposeArgFile[args.target]} down || true)` : null,
