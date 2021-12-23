@@ -19,7 +19,7 @@ WORKDIR ${OSMOSIS_HOME}
 
 RUN git clone https://github.com/osmosis-labs/osmosis && \
     cd osmosis && \
-    git checkout v6.0.0 && \
+    git checkout v5.0.0 && \
     make install
 
 RUN git clone https://github.com/cosmos/cosmos-sdk && \

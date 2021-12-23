@@ -169,7 +169,7 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         `cd ${secrets.serverPath}`,
         `echo "OsmosisData" > .dockerignore`,
         `sudo rm -Rf ./CudosBuilders`,
-        `sudo unzip -q ${filePath} -d ./`,
+        `unzip -q ${filePath} -d ./`,
         `rm ${filePath}`,
         `chmod -R g-rwx,o-rwx ./CudosBuilders`,
         `cd ./CudosBuilders/docker/${dockerRootPath}`,
