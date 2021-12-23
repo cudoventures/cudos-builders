@@ -14,11 +14,13 @@ echo "Setting up config.toml"
 sed -i "s/seeds = \".*\"/seeds = \"$SEEDS\"/g" "${OSMOSIS_HOME}/config/config.toml"
 
 cp cosmovisor/cosmovisor $GOPATH/bin/cosmovisor
+cd ${OSMOSIS_HOME}/config
 
 wget https://github.com/osmosis-labs/networks/raw/unity/v4/osmosis-1/upgrades/v4/testnet/genesis.tar.bz2 && \
     tar -xjf genesis.tar.bz2
 
 cp $GOPATH/bin/osmosisd $OSMOSIS_HOME/cosmovisor/genesis/bin
 
-osmosisd unsafe-reset-all
+osmosisd unsafe-reset-all --home $OSMOSIS_HOME
+
 wget -O - $SNAPSHOT_URL | xz -d -v | tar xf -
