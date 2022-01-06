@@ -195,14 +195,15 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         `sudo rm -Rf ./CudosGravityBridge/orchestrator`,
         `sudo unzip -q ${filePath} -d ./`,
         `rm ${filePath}`,
-        `sudo chmod -R g-rwx,o-rwx ./CudosBuilders`,
-        `sudo chmod -R g-rwx,o-rwx ./CudosGravityBridge/orchestrator`,
         `cd ./CudosBuilders/docker/${dockerRootPath}`,
         `(sudo docker-compose --env-file ${dockerEnvFile} -f ${dockerComposeFile} -p ${dockerProjectName} down || true)`,
         `sudo docker system prune -a -f`,
         `sudo docker-compose --env-file ${dockerEnvFile} -f ${dockerComposeFile} -p ${dockerProjectName} up --build -d`,
         // `cd ${secrets.serverPath}`,
         // `sudo rm -Rf ./CudosGravityBridge/orchestrator`,
+        `cd ${secrets.serverPath}`,
+        `sudo chmod -R g-rwx,o-rwx ./CudosBuilders`,
+        `sudo chmod -R g-rwx,o-rwx ./CudosGravityBridge/orchestrator`,
     ]
 
     command = command.filter(c => c !== null).join(' && ');

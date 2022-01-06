@@ -213,9 +213,6 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         `sudo rm -Rf ./CudosGravityBridge`,
         `sudo unzip -q ${filePath} -d ./`,
         `rm ${filePath}`,
-        `sudo chmod -R g-rwx,o-rwx ./CudosBuilders`,
-        `sudo chmod -R g-rwx,o-rwx ./CudosNode`,
-        `sudo chmod -R g-rwx,o-rwx ./CudosGravityBridge`,
         `cd ./CudosBuilders/docker/${dockerRootPath}`,
         `(sudo docker-compose --env-file ${dockerEnvFile} -f ${dockerComposeStartFile} -p ${dockerStartProjectName} down || true)`,
         args.init === '1' ? `sudo rm -rf ${secrets.serverPath}/CudosData/*` : null,
@@ -236,6 +233,10 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         // `sudo rm -Rf ./CudosGravityBridge`,
         // `sudo rm -Rf ./CudosBuilders`,
         // `sudo rm -Rf ./CudosNode`,
+        `cd ${secrets.serverPath}`,
+        `sudo chmod -R g-rwx,o-rwx ./CudosBuilders`,
+        `sudo chmod -R g-rwx,o-rwx ./CudosNode`,
+        `sudo chmod -R g-rwx,o-rwx ./CudosGravityBridge`,
     ]
 
     command = command.filter(c => c !== null).join(' && ');

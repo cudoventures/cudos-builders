@@ -3330,6 +3330,16 @@
           "sequence": "4"
         },
         {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "account_number": "31",
+          "address": "cudos1y907v5x8kjy0sgxf47crqqx5qqkz0ch2l2j6vg",
+          "pub_key": {
+            "@type": "/cosmos.crypto.secp256k1.PubKey",
+            "key": "AgLh92OdyREignqLDw2F/htB1MD/Cf2hBBoZxl5BnJfY"
+          },
+          "sequence": "2"
+        },
+        {
           "@type": "/cosmos.auth.v1beta1.ModuleAccount",
           "base_account": {
             "account_number": "15",
@@ -3372,6 +3382,16 @@
           "sequence": "0"
         },
         {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "account_number": "29",
+          "address": "cudos1246c50v9fphngte5m4vksdk4u6wlgmx3rz4wec",
+          "pub_key": {
+            "@type": "/cosmos.crypto.secp256k1.PubKey",
+            "key": "A4ENyoagf9M2hEIVGgJq2xkcFqFMyXE9qos737d2Bnhj"
+          },
+          "sequence": "12"
+        },
+        {
           "@type": "/cosmos.auth.v1beta1.ModuleAccount",
           "base_account": {
             "account_number": "12",
@@ -3389,8 +3409,11 @@
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "2",
           "address": "cudos1t9rqh0739058p3gtgye77uqf3q57sxsjxf04fh",
-          "pub_key": null,
-          "sequence": "0"
+          "pub_key": {
+            "@type": "/cosmos.crypto.secp256k1.PubKey",
+            "key": "AuTAkrbqquxH+sAmiQXIrRLf1h13oDADo6iv8IFHr1qc"
+          },
+          "sequence": "3"
         },
         {
           "@type": "/cosmos.auth.v1beta1.ModuleAccount",
@@ -3426,7 +3449,7 @@
             "@type": "/cosmos.crypto.secp256k1.PubKey",
             "key": "AlJd4uWG4etBxP0SSHXtzqS+s0gMlTPlhkASVzKgkTE1"
           },
-          "sequence": "5"
+          "sequence": "8"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
@@ -3442,8 +3465,11 @@
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "5",
           "address": "cudos1327rpz6wuaz57hrad7tmafzqfuec347j5x8xh9",
-          "pub_key": null,
-          "sequence": "0"
+          "pub_key": {
+            "@type": "/cosmos.crypto.secp256k1.PubKey",
+            "key": "AxJc/0WcjCquClkFXGa88VdOXiLmJWf+KFA3LfDSBsW4"
+          },
+          "sequence": "5"
         },
         {
           "@type": "/cosmos.auth.v1beta1.ModuleAccount",
@@ -3464,14 +3490,17 @@
             "@type": "/cosmos.crypto.secp256k1.PubKey",
             "key": "AsR2LVZi/+PoK0C6R5f0A0NQD90Fp6oMQxT6xL/Ofidt"
           },
-          "sequence": "73"
+          "sequence": "86"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
           "account_number": "25",
           "address": "cudos1nj49l56x7sss5hqyvfmctxr3mq64whg273g3x5",
-          "pub_key": null,
-          "sequence": "0"
+          "pub_key": {
+            "@type": "/cosmos.crypto.secp256k1.PubKey",
+            "key": "A6szWI/x986wEoId0R43aJlE5nM5/F4AItgciCNW51U1"
+          },
+          "sequence": "3"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
@@ -3495,7 +3524,7 @@
             "@type": "/cosmos.crypto.secp256k1.PubKey",
             "key": "An5CH+1qkQnXLkBSLavpz+OPIbR93vR0t6915Hdd4YeX"
           },
-          "sequence": "43"
+          "sequence": "48"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
@@ -3546,7 +3575,17 @@
             "@type": "/cosmos.crypto.secp256k1.PubKey",
             "key": "AltjswycAwxr3cnFkIJIKvj+Vg8bc7l7+Gg4lLvqrdAV"
           },
-          "sequence": "7"
+          "sequence": "11"
+        },
+        {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "account_number": "28",
+          "address": "cudos1udazljl2zse75vkjpx38qyd34z53wez3q5q9kg",
+          "pub_key": {
+            "@type": "/cosmos.crypto.secp256k1.PubKey",
+            "key": "Atl6rFLwx7/rRDBgx1/p+JSoqLoASaV3xppioY7qe2j9"
+          },
+          "sequence": "1"
         },
         {
           "@type": "/cosmos.auth.v1beta1.BaseAccount",
@@ -3575,6 +3614,16 @@
           },
           "name": "fee_collector",
           "permissions": []
+        },
+        {
+          "@type": "/cosmos.auth.v1beta1.BaseAccount",
+          "account_number": "30",
+          "address": "cudos1lm48cr8utdezzkg3phx25d3jycfnegzra93g96",
+          "pub_key": {
+            "@type": "/cosmos.crypto.secp256k1.PubKey",
+            "key": "ApIcF5XARvgu18guTGOizH25ItPyxvKAc6Jbmx0NpuCe"
+          },
+          "sequence": "2"
         }
       ],
       "params": {
@@ -3615,6 +3664,15 @@
           ]
         },
         {
+          "address": "cudos1y907v5x8kjy0sgxf47crqqx5qqkz0ch2l2j6vg",
+          "coins": [
+            {
+              "amount": "1999999999999999100",
+              "denom": "acudos"
+            }
+          ]
+        },
+        {
           "address": "cudos1g9c9vtls5vx92gwvqvxfavpzrk08muqmmdhwn6",
           "coins": [
             {
@@ -3631,7 +3689,7 @@
           "address": "cudos1fl48vsnmsdzcv85q5d2q4z5ajdha8yu352qs8z",
           "coins": [
             {
-              "amount": "10000000000000000000000",
+              "amount": "10027000000000000000000",
               "denom": "acudos"
             }
           ]
@@ -3646,10 +3704,19 @@
           ]
         },
         {
+          "address": "cudos1246c50v9fphngte5m4vksdk4u6wlgmx3rz4wec",
+          "coins": [
+            {
+              "amount": "9999999999999999980",
+              "denom": "acudos"
+            }
+          ]
+        },
+        {
           "address": "cudos1t9rqh0739058p3gtgye77uqf3q57sxsjxf04fh",
           "coins": [
             {
-              "amount": "10001000000000000000000",
+              "amount": "10106181622535550636285",
               "denom": "acudos"
             },
             {
@@ -3684,7 +3751,7 @@
           "address": "cudos1327rpz6wuaz57hrad7tmafzqfuec347j5x8xh9",
           "coins": [
             {
-              "amount": "10001000000000000000000",
+              "amount": "10000999999999999999500",
               "denom": "acudos"
             }
           ]
@@ -3693,7 +3760,7 @@
           "address": "cudos1jv65s3grqf6v6jl3dp4t6c9t9rk99cd8xwdrh2",
           "coins": [
             {
-              "amount": "122495395117279412166262797",
+              "amount": "170685411519990954984632832",
               "denom": "acudos"
             }
           ]
@@ -3702,7 +3769,7 @@
           "address": "cudos1n9xawgwk406s82957q5d8fua9pk3hm6plktd6a",
           "coins": [
             {
-              "amount": "10000999999999999992678",
+              "amount": "10000999999999999991378",
               "denom": "acudos"
             }
           ]
@@ -3738,7 +3805,7 @@
           "address": "cudos1ky3umqvmqlxpx5svz9fvphvfzccqxwxh0mu7y9",
           "coins": [
             {
-              "amount": "999999980289999999999997472",
+              "amount": "999999939289999999999997472",
               "denom": "acudos"
             }
           ]
@@ -3756,7 +3823,7 @@
           "address": "cudos1e2xpmv8ltn68genq78lr8lzgh9zfdllpprj6cw",
           "coins": [
             {
-              "amount": "10020",
+              "amount": "10030",
               "denom": "acudos"
             }
           ]
@@ -3765,7 +3832,7 @@
           "address": "cudos16n3lc7cywa68mg50qhp847034w88pntq8823tx",
           "coins": [
             {
-              "amount": "990156519829029749203",
+              "amount": "990051924859129748743",
               "denom": "acudos"
             }
           ]
@@ -3774,7 +3841,16 @@
           "address": "cudos1ufa58j4jvj88nqgzwcm5f6788m9mhr8s8f4w5j",
           "coins": [
             {
-              "amount": "111399999999999550",
+              "amount": "1115994969899998200",
+              "denom": "acudos"
+            }
+          ]
+        },
+        {
+          "address": "cudos1udazljl2zse75vkjpx38qyd34z53wez3q5q9kg",
+          "coins": [
+            {
+              "amount": "4999999999999999550",
               "denom": "acudos"
             }
           ]
@@ -3792,7 +3868,7 @@
           "address": "cudos1a7ywfz0hcyv4aj877r4au90404g8gskxd8ysyr",
           "coins": [
             {
-              "amount": "12999999999949996830",
+              "amount": "13099999999949996830",
               "denom": "acudos"
             }
           ]
@@ -3801,7 +3877,16 @@
           "address": "cudos17xpfvakm2amg962yls6f84z3kell8c5l3g2l4g",
           "coins": [
             {
-              "amount": "64577844942150000000",
+              "amount": "63173543954221000000",
+              "denom": "acudos"
+            }
+          ]
+        },
+        {
+          "address": "cudos1lm48cr8utdezzkg3phx25d3jycfnegzra93g96",
+          "coins": [
+            {
+              "amount": "6999999999999998650",
               "denom": "acudos"
             }
           ]
@@ -3876,7 +3961,7 @@
       },
       "supply": [
         {
-          "amount": "1122556465695844067295000001",
+          "amount": "1170746596875877157735000001",
           "denom": "acudos"
         },
         {
@@ -3890,7 +3975,7 @@
       ]
     },
     "capability": {
-      "index": "4",
+      "index": "5",
       "owners": [
         {
           "index": "1",
@@ -3936,6 +4021,21 @@
               }
             ]
           }
+        },
+        {
+          "index": "4",
+          "index_owners": {
+            "owners": [
+              {
+                "module": "ibc",
+                "name": "ports/transfer"
+              },
+              {
+                "module": "transfer",
+                "name": "ports/transfer"
+              }
+            ]
+          }
         }
       ]
     },
@@ -3948,7 +4048,7 @@
     "cudoMint": {
       "minter": {
         "mint_remainder": "0.000000000000000000",
-        "norm_time_passed": "0.351224785497463380"
+        "norm_time_passed": "0.494686891493872380"
       },
       "params": {
         "blocks_per_day": "14400"
@@ -3957,11 +4057,47 @@
     "distribution": {
       "delegator_starting_infos": [
         {
+          "delegator_address": "cudos1y907v5x8kjy0sgxf47crqqx5qqkz0ch2l2j6vg",
+          "starting_info": {
+            "height": "2564117",
+            "previous_period": "2",
+            "stake": "8000000000000000000.000000000000000000"
+          },
+          "validator_address": "cudosvaloper1t9rqh0739058p3gtgye77uqf3q57sxsjm6p5g2"
+        },
+        {
+          "delegator_address": "cudos1t9rqh0739058p3gtgye77uqf3q57sxsjxf04fh",
+          "starting_info": {
+            "height": "2585006",
+            "previous_period": "3",
+            "stake": "11000000000000000000.000000000000000000"
+          },
+          "validator_address": "cudosvaloper1t9rqh0739058p3gtgye77uqf3q57sxsjm6p5g2"
+        },
+        {
           "delegator_address": "cudos10ltqnr7ll8tjg4c2f4tdtqj784v29t39lq9w08",
           "starting_info": {
             "height": "0",
             "previous_period": "1",
             "stake": "10000000000000000000000.000000000000000000"
+          },
+          "validator_address": "cudosvaloper10ltqnr7ll8tjg4c2f4tdtqj784v29t39znt0w6"
+        },
+        {
+          "delegator_address": "cudos1udazljl2zse75vkjpx38qyd34z53wez3q5q9kg",
+          "starting_info": {
+            "height": "1878785",
+            "previous_period": "6",
+            "stake": "5000000000000000000.000000000000000000"
+          },
+          "validator_address": "cudosvaloper10ltqnr7ll8tjg4c2f4tdtqj784v29t39znt0w6"
+        },
+        {
+          "delegator_address": "cudos1lm48cr8utdezzkg3phx25d3jycfnegzra93g96",
+          "starting_info": {
+            "height": "2431578",
+            "previous_period": "7",
+            "stake": "3000000000000000000.000000000000000000"
           },
           "validator_address": "cudosvaloper10ltqnr7ll8tjg4c2f4tdtqj784v29t39znt0w6"
         }
@@ -3970,7 +4106,7 @@
       "fee_pool": {
         "community_pool": [
           {
-            "amount": "2450036370898359337220444.210200000000000000",
+            "amount": "3413902308873084213799801.768967858072408014",
             "denom": "acudos"
           }
         ]
@@ -3979,7 +4115,16 @@
         {
           "outstanding_rewards": [
             {
-              "amount": "120045358746381052829042352.789800000000000000",
+              "amount": "2978705651383798886401.695347981815757766",
+              "denom": "acudos"
+            }
+          ],
+          "validator_address": "cudosvaloper1t9rqh0739058p3gtgye77uqf3q57sxsjm6p5g2"
+        },
+        {
+          "outstanding_rewards": [
+            {
+              "amount": "167268530505466486971946628.535684160111834220",
               "denom": "acudos"
             }
           ],
@@ -3998,7 +4143,18 @@
           "accumulated": {
             "commission": [
               {
-                "amount": "12004535874710076580780173.346000000000000000",
+                "amount": "309488727391934952948.469534798181575774",
+                "denom": "acudos"
+              }
+            ]
+          },
+          "validator_address": "cudosvaloper1t9rqh0739058p3gtgye77uqf3q57sxsjm6p5g2"
+        },
+        {
+          "accumulated": {
+            "commission": [
+              {
+                "amount": "16726853050618619995070600.920588416011183424",
                 "denom": "acudos"
               }
             ]
@@ -4009,10 +4165,22 @@
       "validator_current_rewards": [
         {
           "rewards": {
-            "period": "6",
+            "period": "4",
             "rewards": [
               {
-                "amount": "21443371687369148265131424.300000000000000000",
+                "amount": "1740948604502464127101.864519887663518077",
+                "denom": "acudos"
+              }
+            ]
+          },
+          "validator_address": "cudosvaloper1t9rqh0739058p3gtgye77uqf3q57sxsjm6p5g2"
+        },
+        {
+          "rewards": {
+            "period": "8",
+            "rewards": [
+              {
+                "amount": "9488653842627635464746964.031295744100650796",
                 "denom": "acudos"
               }
             ]
@@ -4022,6 +4190,32 @@
       ],
       "validator_historical_rewards": [
         {
+          "period": "2",
+          "rewards": {
+            "cumulative_reward_ratio": [
+              {
+                "amount": "0.148082599375667290",
+                "denom": "acudos"
+              }
+            ],
+            "reference_count": 1
+          },
+          "validator_address": "cudosvaloper1t9rqh0739058p3gtgye77uqf3q57sxsjm6p5g2"
+        },
+        {
+          "period": "3",
+          "rewards": {
+            "cumulative_reward_ratio": [
+              {
+                "amount": "116.181622535550643083",
+                "denom": "acudos"
+              }
+            ],
+            "reference_count": 2
+          },
+          "validator_address": "cudosvaloper1t9rqh0739058p3gtgye77uqf3q57sxsjm6p5g2"
+        },
+        {
           "period": "1",
           "rewards": {
             "cumulative_reward_ratio": [],
@@ -4030,15 +4224,28 @@
           "validator_address": "cudosvaloper10ltqnr7ll8tjg4c2f4tdtqj784v29t39znt0w6"
         },
         {
-          "period": "5",
+          "period": "6",
           "rewards": {
             "cumulative_reward_ratio": [
               {
-                "amount": "8659.745118430182798311",
+                "amount": "10984.754343565112646791",
                 "denom": "acudos"
               }
             ],
             "reference_count": 1
+          },
+          "validator_address": "cudosvaloper10ltqnr7ll8tjg4c2f4tdtqj784v29t39znt0w6"
+        },
+        {
+          "period": "7",
+          "rewards": {
+            "cumulative_reward_ratio": [
+              {
+                "amount": "14103.742866960325544761",
+                "denom": "acudos"
+              }
+            ],
+            "reference_count": 2
           },
           "validator_address": "cudosvaloper10ltqnr7ll8tjg4c2f4tdtqj784v29t39znt0w6"
         }
@@ -4056,7 +4263,7 @@
     },
     "gov": {
       "deposit_params": {
-        "max_deposit_period": "600s",
+        "max_deposit_period": "86400s",
         "min_deposit": [
           {
             "amount": "10000000",
@@ -4161,9 +4368,41 @@
           ],
           "voting_end_time": "2021-11-09T12:37:57.178255716Z",
           "voting_start_time": "2021-11-09T12:27:57.178255716Z"
+        },
+        {
+          "content": {
+            "@type": "/cosmos.upgrade.v1beta1.SoftwareUpgradeProposal",
+            "description": "upgrade23122021",
+            "plan": {
+              "height": "2601500",
+              "info": "",
+              "name": "upgrade23122021",
+              "time": "0001-01-01T00:00:00Z",
+              "upgraded_client_state": null
+            },
+            "title": "upgrade23122021"
+          },
+          "deposit_end_time": "2021-12-22T09:41:42.711186034Z",
+          "final_tally_result": {
+            "abstain": "0",
+            "no": "0",
+            "no_with_veto": "0",
+            "yes": "10008000000000000000000"
+          },
+          "proposal_id": "4",
+          "status": "PROPOSAL_STATUS_PASSED",
+          "submit_time": "2021-12-22T09:31:42.711186034Z",
+          "total_deposit": [
+            {
+              "amount": "20000000",
+              "denom": "acudos"
+            }
+          ],
+          "voting_end_time": "2021-12-22T09:41:42.711186034Z",
+          "voting_start_time": "2021-12-22T09:31:42.711186034Z"
         }
       ],
-      "starting_proposal_id": "4",
+      "starting_proposal_id": "6",
       "tally_params": {
         "quorum": "0.334000000000000000",
         "threshold": "0.500000000000000000",
@@ -4171,7 +4410,7 @@
       },
       "votes": [],
       "voting_params": {
-        "voting_period": "600s"
+        "voting_period": "86400s"
       }
     },
     "gravity": {
@@ -4179,360 +4418,28 @@
         {
           "claim": {
             "@type": "/gravity.v1.MsgBatchSendToEthClaim",
-            "batch_nonce": "19",
-            "block_height": "9606086",
-            "event_nonce": "38",
+            "batch_nonce": "24",
+            "block_height": "9853611",
+            "event_nonce": "45",
             "orchestrator": "cudos1n9xawgwk406s82957q5d8fua9pk3hm6plktd6a",
             "token_contract": "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d"
           },
-          "height": "1829327",
+          "height": "2570487",
           "observed": true,
           "votes": [
-            "cudosvaloper10ltqnr7ll8tjg4c2f4tdtqj784v29t39znt0w6"
+            "cudosvaloper10ltqnr7ll8tjg4c2f4tdtqj784v29t39znt0w6",
+            "cudosvaloper1t9rqh0739058p3gtgye77uqf3q57sxsjm6p5g2"
           ]
         }
       ],
-      "batch_confirms": [
-        {
-          "eth_signer": "0xCFbd81158EAa74D85e7Ad6122398A7fAacbc22aA",
-          "nonce": "17",
-          "orchestrator": "cudos1n9xawgwk406s82957q5d8fua9pk3hm6plktd6a",
-          "signature": "0b3923ce198efd3a38ce2b17ee57350b097cc98c1aee2cdcadf9f4a5c3d90572345eecc0c608874a0bf158bb28d80b3e3e28b93b3718b7629e96d3e19253e49a1c",
-          "token_contract": "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d"
-        },
-        {
-          "eth_signer": "0xCFbd81158EAa74D85e7Ad6122398A7fAacbc22aA",
-          "nonce": "16",
-          "orchestrator": "cudos1n9xawgwk406s82957q5d8fua9pk3hm6plktd6a",
-          "signature": "c52116db62cb564de9f69ce72a51b589a4850c0e1f618d1ae16b0d5352b238975bb5853cfb3891ed5121f213340fc3d9000bb6faa529ac065574b8bce94b95821c",
-          "token_contract": "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d"
-        },
-        {
-          "eth_signer": "0xCFbd81158EAa74D85e7Ad6122398A7fAacbc22aA",
-          "nonce": "15",
-          "orchestrator": "cudos1n9xawgwk406s82957q5d8fua9pk3hm6plktd6a",
-          "signature": "b376919479335ee20b31568511bfe780d4d175600d16672bd3ce0f50062434a90750eea736ff2f54aaea1a1ad021d64e4b9aebf71f823aa5af26c4952bb26c391c",
-          "token_contract": "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d"
-        },
-        {
-          "eth_signer": "0xCFbd81158EAa74D85e7Ad6122398A7fAacbc22aA",
-          "nonce": "14",
-          "orchestrator": "cudos1n9xawgwk406s82957q5d8fua9pk3hm6plktd6a",
-          "signature": "2f1732c253cd42f1b0612da0502e6ac3e06d6863b8a06d3d8d56d09c71ad58772b9e2f1ee8ac99abea7d9238e5c9365446f0da92fff3817d449234520f743c321b",
-          "token_contract": "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d"
-        },
-        {
-          "eth_signer": "0xCFbd81158EAa74D85e7Ad6122398A7fAacbc22aA",
-          "nonce": "13",
-          "orchestrator": "cudos1n9xawgwk406s82957q5d8fua9pk3hm6plktd6a",
-          "signature": "e2e7e6fecf452c0f9dd2566a50135472037f37ba744b96fea52b9ca20fc2cd6a38f5aea3769486aa84355cb17919c5e95643cb7aeb80e370bc398dc6b7947bb51b",
-          "token_contract": "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d"
-        },
-        {
-          "eth_signer": "0xCFbd81158EAa74D85e7Ad6122398A7fAacbc22aA",
-          "nonce": "12",
-          "orchestrator": "cudos1n9xawgwk406s82957q5d8fua9pk3hm6plktd6a",
-          "signature": "1b06fd8af460d259e4d4068b0c658e7e5da2ad65322e290e26b973d325a48f5839cddf0513c820f52e63ff22b5112753ec8a1f156e68737582f60cde20fe54cb1b",
-          "token_contract": "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d"
-        },
-        {
-          "eth_signer": "0xCFbd81158EAa74D85e7Ad6122398A7fAacbc22aA",
-          "nonce": "11",
-          "orchestrator": "cudos1n9xawgwk406s82957q5d8fua9pk3hm6plktd6a",
-          "signature": "635bb535b96fe83c045d7e1375323010e984d9fd345327a07b0e4e1e28dffdd73dc689b10f0938a20e21b293a9a1ff9b08e6ce401efd0e014c9e5c2aa0cb15001b",
-          "token_contract": "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d"
-        },
-        {
-          "eth_signer": "0xCFbd81158EAa74D85e7Ad6122398A7fAacbc22aA",
-          "nonce": "10",
-          "orchestrator": "cudos1n9xawgwk406s82957q5d8fua9pk3hm6plktd6a",
-          "signature": "4db89646202ed08b5e5d37aa34ac08df76c96c247f6d0b4f5b8a971c34e6ad5d4969dfb7528b09a8f1edf25e74a77d3a126db3bae249a6bd2172cf20e95b9bb21c",
-          "token_contract": "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d"
-        },
-        {
-          "eth_signer": "0xCFbd81158EAa74D85e7Ad6122398A7fAacbc22aA",
-          "nonce": "9",
-          "orchestrator": "cudos1n9xawgwk406s82957q5d8fua9pk3hm6plktd6a",
-          "signature": "fd65adce3fb25db4f5f7c05ba743529121e84097fc9fd3048eba1b5957f87fc7329bdbeee6e10a82c2745e9596e41dc5dd8e0dbc2c35c2830f2807c87084fc421b",
-          "token_contract": "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d"
-        },
-        {
-          "eth_signer": "0xCFbd81158EAa74D85e7Ad6122398A7fAacbc22aA",
-          "nonce": "8",
-          "orchestrator": "cudos1n9xawgwk406s82957q5d8fua9pk3hm6plktd6a",
-          "signature": "b54849706e7a1f79989770c1b509dec1198431bab93a00af2f590d3bed9a29fd402b9a863e468067fc52629a92bb7759fb8f371798d5b827b54fdf1d0a5959251c",
-          "token_contract": "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d"
-        },
-        {
-          "eth_signer": "0xCFbd81158EAa74D85e7Ad6122398A7fAacbc22aA",
-          "nonce": "7",
-          "orchestrator": "cudos1n9xawgwk406s82957q5d8fua9pk3hm6plktd6a",
-          "signature": "0e0f2620df01ca2be29660d94779193eb6fb88d9217231911ef01816b6f3325308dadc5b7e75dce729caa736347f59fb33ccd44918e9532355f8ab910a2e4c0e1b",
-          "token_contract": "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d"
-        },
-        {
-          "eth_signer": "0xCFbd81158EAa74D85e7Ad6122398A7fAacbc22aA",
-          "nonce": "6",
-          "orchestrator": "cudos1n9xawgwk406s82957q5d8fua9pk3hm6plktd6a",
-          "signature": "fe1ea90eef5af4550facd43f5d2a2fb5f8a5e7119522d9e7094e3c8021ed5bea778a3efdb852d62f0110c8e3de1dabdad08104f76442b4ea826dc258948c75bd1c",
-          "token_contract": "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d"
-        }
-      ],
-      "batches": [
-        {
-          "batch_nonce": "17",
-          "batch_timeout": "9610340",
-          "block": "1829232",
-          "token_contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d",
-          "transactions": [
-            {
-              "dest_address": "0xB6902Fc9E1ae1eb7C700529bCeBf6A7d3D3d06Aa",
-              "erc20_fee": {
-                "amount": "0",
-                "contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d"
-              },
-              "erc20_token": {
-                "amount": "17",
-                "contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d"
-              },
-              "id": "17",
-              "sender": "cudos1ky3umqvmqlxpx5svz9fvphvfzccqxwxh0mu7y9"
-            }
-          ]
-        },
-        {
-          "batch_nonce": "16",
-          "batch_timeout": "9610334",
-          "block": "1829214",
-          "token_contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d",
-          "transactions": [
-            {
-              "dest_address": "0xB6902Fc9E1ae1eb7C700529bCeBf6A7d3D3d06Aa",
-              "erc20_fee": {
-                "amount": "0",
-                "contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d"
-              },
-              "erc20_token": {
-                "amount": "13",
-                "contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d"
-              },
-              "id": "16",
-              "sender": "cudos1ky3umqvmqlxpx5svz9fvphvfzccqxwxh0mu7y9"
-            }
-          ]
-        },
-        {
-          "batch_nonce": "15",
-          "batch_timeout": "9610334",
-          "block": "1829212",
-          "token_contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d",
-          "transactions": [
-            {
-              "dest_address": "0xB6902Fc9E1ae1eb7C700529bCeBf6A7d3D3d06Aa",
-              "erc20_fee": {
-                "amount": "0",
-                "contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d"
-              },
-              "erc20_token": {
-                "amount": "13",
-                "contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d"
-              },
-              "id": "15",
-              "sender": "cudos1ky3umqvmqlxpx5svz9fvphvfzccqxwxh0mu7y9"
-            }
-          ]
-        },
-        {
-          "batch_nonce": "14",
-          "batch_timeout": "9610333",
-          "block": "1829210",
-          "token_contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d",
-          "transactions": [
-            {
-              "dest_address": "0xB6902Fc9E1ae1eb7C700529bCeBf6A7d3D3d06Aa",
-              "erc20_fee": {
-                "amount": "0",
-                "contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d"
-              },
-              "erc20_token": {
-                "amount": "13",
-                "contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d"
-              },
-              "id": "14",
-              "sender": "cudos1ky3umqvmqlxpx5svz9fvphvfzccqxwxh0mu7y9"
-            }
-          ]
-        },
-        {
-          "batch_nonce": "13",
-          "batch_timeout": "9610332",
-          "block": "1829208",
-          "token_contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d",
-          "transactions": [
-            {
-              "dest_address": "0xB6902Fc9E1ae1eb7C700529bCeBf6A7d3D3d06Aa",
-              "erc20_fee": {
-                "amount": "0",
-                "contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d"
-              },
-              "erc20_token": {
-                "amount": "13",
-                "contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d"
-              },
-              "id": "13",
-              "sender": "cudos1ky3umqvmqlxpx5svz9fvphvfzccqxwxh0mu7y9"
-            }
-          ]
-        },
-        {
-          "batch_nonce": "12",
-          "batch_timeout": "9610332",
-          "block": "1829206",
-          "token_contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d",
-          "transactions": [
-            {
-              "dest_address": "0xB6902Fc9E1ae1eb7C700529bCeBf6A7d3D3d06Aa",
-              "erc20_fee": {
-                "amount": "0",
-                "contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d"
-              },
-              "erc20_token": {
-                "amount": "13",
-                "contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d"
-              },
-              "id": "12",
-              "sender": "cudos1ky3umqvmqlxpx5svz9fvphvfzccqxwxh0mu7y9"
-            }
-          ]
-        },
-        {
-          "batch_nonce": "11",
-          "batch_timeout": "9610331",
-          "block": "1829204",
-          "token_contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d",
-          "transactions": [
-            {
-              "dest_address": "0xB6902Fc9E1ae1eb7C700529bCeBf6A7d3D3d06Aa",
-              "erc20_fee": {
-                "amount": "0",
-                "contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d"
-              },
-              "erc20_token": {
-                "amount": "13",
-                "contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d"
-              },
-              "id": "11",
-              "sender": "cudos1ky3umqvmqlxpx5svz9fvphvfzccqxwxh0mu7y9"
-            }
-          ]
-        },
-        {
-          "batch_nonce": "10",
-          "batch_timeout": "9610329",
-          "block": "1829198",
-          "token_contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d",
-          "transactions": [
-            {
-              "dest_address": "0xB6902Fc9E1ae1eb7C700529bCeBf6A7d3D3d06Aa",
-              "erc20_fee": {
-                "amount": "0",
-                "contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d"
-              },
-              "erc20_token": {
-                "amount": "13",
-                "contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d"
-              },
-              "id": "10",
-              "sender": "cudos1ky3umqvmqlxpx5svz9fvphvfzccqxwxh0mu7y9"
-            }
-          ]
-        },
-        {
-          "batch_nonce": "9",
-          "batch_timeout": "9610328",
-          "block": "1829196",
-          "token_contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d",
-          "transactions": [
-            {
-              "dest_address": "0xB6902Fc9E1ae1eb7C700529bCeBf6A7d3D3d06Aa",
-              "erc20_fee": {
-                "amount": "0",
-                "contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d"
-              },
-              "erc20_token": {
-                "amount": "13",
-                "contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d"
-              },
-              "id": "9",
-              "sender": "cudos1ky3umqvmqlxpx5svz9fvphvfzccqxwxh0mu7y9"
-            }
-          ]
-        },
-        {
-          "batch_nonce": "8",
-          "batch_timeout": "9610328",
-          "block": "1829194",
-          "token_contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d",
-          "transactions": [
-            {
-              "dest_address": "0xB6902Fc9E1ae1eb7C700529bCeBf6A7d3D3d06Aa",
-              "erc20_fee": {
-                "amount": "0",
-                "contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d"
-              },
-              "erc20_token": {
-                "amount": "13",
-                "contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d"
-              },
-              "id": "8",
-              "sender": "cudos1ky3umqvmqlxpx5svz9fvphvfzccqxwxh0mu7y9"
-            }
-          ]
-        },
-        {
-          "batch_nonce": "7",
-          "batch_timeout": "9610325",
-          "block": "1829185",
-          "token_contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d",
-          "transactions": [
-            {
-              "dest_address": "0xB6902Fc9E1ae1eb7C700529bCeBf6A7d3D3d06Aa",
-              "erc20_fee": {
-                "amount": "0",
-                "contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d"
-              },
-              "erc20_token": {
-                "amount": "13",
-                "contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d"
-              },
-              "id": "7",
-              "sender": "cudos1ky3umqvmqlxpx5svz9fvphvfzccqxwxh0mu7y9"
-            }
-          ]
-        },
-        {
-          "batch_nonce": "6",
-          "batch_timeout": "9610206",
-          "block": "1828830",
-          "token_contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d",
-          "transactions": [
-            {
-              "dest_address": "0xB6902Fc9E1ae1eb7C700529bCeBf6A7d3D3d06Aa",
-              "erc20_fee": {
-                "amount": "0",
-                "contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d"
-              },
-              "erc20_token": {
-                "amount": "13",
-                "contract": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d"
-              },
-              "id": "6",
-              "sender": "cudos1ky3umqvmqlxpx5svz9fvphvfzccqxwxh0mu7y9"
-            }
-          ]
-        }
-      ],
+      "batch_confirms": [],
+      "batches": [],
       "delegate_keys": [
+        {
+          "eth_address": "0xCC4dD9C14b965EAD8E854B822564cEbc74b1aa59",
+          "orchestrator": "cudos1327rpz6wuaz57hrad7tmafzqfuec347j5x8xh9",
+          "validator": "cudosvaloper1t9rqh0739058p3gtgye77uqf3q57sxsjm6p5g2"
+        },
         {
           "eth_address": "0xCFbd81158EAa74D85e7Ad6122398A7fAacbc22aA",
           "orchestrator": "cudos1n9xawgwk406s82957q5d8fua9pk3hm6plktd6a",
@@ -4545,7 +4452,14 @@
           "erc20": "0x28ea52f3ee46cac5a72f72e8b3a387c0291d586d"
         }
       ],
-      "last_observed_nonce": "38",
+      "last_latest_valset_nonce": "1",
+      "last_observed_nonce": "45",
+      "last_outgoing_batch_id": "25",
+      "last_slashed_batched_block": "1829232",
+      "last_slashed_logic_call_block": "0",
+      "last_slashed_valset_nonce": "1",
+      "last_tx_pool_id": "6",
+      "last_un_bonding_block_height": "0",
       "logic_call_confirms": [],
       "logic_calls": [],
       "params": {
@@ -4572,6 +4486,12 @@
       "unbatched_transfers": [],
       "valset_confirms": [
         {
+          "eth_address": "0xCC4dD9C14b965EAD8E854B822564cEbc74b1aa59",
+          "nonce": "1",
+          "orchestrator": "cudos1327rpz6wuaz57hrad7tmafzqfuec347j5x8xh9",
+          "signature": "7f55573db96b92c4fb776e1914aad955fa4311f5c33bb607a2c5e2a9b6c0325e4af8f9afdd21842ea068f66147fea14221f74e6024360ed815872f42f37c61f91c"
+        },
+        {
           "eth_address": "0xCFbd81158EAa74D85e7Ad6122398A7fAacbc22aA",
           "nonce": "1",
           "orchestrator": "cudos1n9xawgwk406s82957q5d8fua9pk3hm6plktd6a",
@@ -4592,8 +4512,11 @@
           "reward_token": "0x0000000000000000000000000000000000000000"
         }
       ],
-      "last_tx_pool_id": "1",
-      "last_outgoing_batch_id": "19"
+      "static_val_cosmos_addrs": [
+        "cudos10ltqnr7ll8tjg4c2f4tdtqj784v29t39lq9w08",
+        "cudos1t9rqh0739058p3gtgye77uqf3q57sxsjxf04fh",
+        "cudos1g9c9vtls5vx92gwvqvxfavpzrk08muqmmdhwn6"
+      ]
     },
     "ibc": {
       "channel_genesis": {
@@ -4643,7 +4566,63 @@
       }
     },
     "nft": {
-      "collections": []
+      "collections": [
+        {
+          "denom": {
+            "creator": "cudos1246c50v9fphngte5m4vksdk4u6wlgmx3rz4wec",
+            "id": "joantest",
+            "name": "joantest",
+            "schema": "",
+            "symbol": "symjoantest"
+          },
+          "nfts": [
+            {
+              "approvedAddresses": {},
+              "data": "",
+              "id": "2",
+              "name": "",
+              "owner": "cudos1246c50v9fphngte5m4vksdk4u6wlgmx3rz4wec",
+              "uri": "this is a zero fee test"
+            },
+            {
+              "approvedAddresses": {},
+              "data": "",
+              "id": "3",
+              "name": "",
+              "owner": "cudos1nj49l56x7sss5hqyvfmctxr3mq64whg273g3x5",
+              "uri": "hello this is a non-zero fee test"
+            },
+            {
+              "approvedAddresses": {},
+              "data": "",
+              "id": "4",
+              "name": "",
+              "owner": "cudos1nj49l56x7sss5hqyvfmctxr3mq64whg273g3x5",
+              "uri": "another nft with fees"
+            }
+          ]
+        },
+        {
+          "denom": {
+            "creator": "cudos1nj49l56x7sss5hqyvfmctxr3mq64whg273g3x5",
+            "id": "joantest2",
+            "name": "joantest2",
+            "schema": "",
+            "symbol": "symjoantest2"
+          },
+          "nfts": []
+        },
+        {
+          "denom": {
+            "creator": "cudos1nj49l56x7sss5hqyvfmctxr3mq64whg273g3x5",
+            "id": "joantesto",
+            "name": "joansproperdenom",
+            "schema": "",
+            "symbol": "symjoansproperdenom"
+          },
+          "nfts": []
+        }
+      ]
     },
     "params": null,
     "slashing": {
@@ -4651,6 +4630,19 @@
         {
           "address": "cudosvalcons1ctmqnz735z3h2apyusjd0qjlhsnu9u6xa6znhq",
           "missed_blocks": []
+        },
+        {
+          "address": "cudosvalcons1uc9rpxp2xsth55e3mwnngr7kjahtnfesewhr80",
+          "missed_blocks": [
+            {
+              "index": "188",
+              "missed": false
+            },
+            {
+              "index": "189",
+              "missed": false
+            }
+          ]
         }
       ],
       "params": {
@@ -4665,10 +4657,21 @@
           "address": "cudosvalcons1ctmqnz735z3h2apyusjd0qjlhsnu9u6xa6znhq",
           "validator_signing_info": {
             "address": "cudosvalcons1ctmqnz735z3h2apyusjd0qjlhsnu9u6xa6znhq",
-            "index_offset": "1847046",
+            "index_offset": "2601495",
             "jailed_until": "1970-01-01T00:00:00Z",
             "missed_blocks_counter": "0",
             "start_height": "0",
+            "tombstoned": false
+          }
+        },
+        {
+          "address": "cudosvalcons1uc9rpxp2xsth55e3mwnngr7kjahtnfesewhr80",
+          "validator_signing_info": {
+            "address": "cudosvalcons1uc9rpxp2xsth55e3mwnngr7kjahtnfesewhr80",
+            "index_offset": "37410",
+            "jailed_until": "1970-01-01T00:00:00Z",
+            "missed_blocks_counter": "0",
+            "start_height": "2564087",
             "tombstoned": false
           }
         }
@@ -4677,17 +4680,41 @@
     "staking": {
       "delegations": [
         {
+          "delegator_address": "cudos1y907v5x8kjy0sgxf47crqqx5qqkz0ch2l2j6vg",
+          "shares": "8000000000000000000.000000000000000000",
+          "validator_address": "cudosvaloper1t9rqh0739058p3gtgye77uqf3q57sxsjm6p5g2"
+        },
+        {
+          "delegator_address": "cudos1t9rqh0739058p3gtgye77uqf3q57sxsjxf04fh",
+          "shares": "11000000000000000000.000000000000000000",
+          "validator_address": "cudosvaloper1t9rqh0739058p3gtgye77uqf3q57sxsjm6p5g2"
+        },
+        {
           "delegator_address": "cudos10ltqnr7ll8tjg4c2f4tdtqj784v29t39lq9w08",
           "shares": "10000000000000000000000.000000000000000000",
+          "validator_address": "cudosvaloper10ltqnr7ll8tjg4c2f4tdtqj784v29t39znt0w6"
+        },
+        {
+          "delegator_address": "cudos1udazljl2zse75vkjpx38qyd34z53wez3q5q9kg",
+          "shares": "5000000000000000000.000000000000000000",
+          "validator_address": "cudosvaloper10ltqnr7ll8tjg4c2f4tdtqj784v29t39znt0w6"
+        },
+        {
+          "delegator_address": "cudos1lm48cr8utdezzkg3phx25d3jycfnegzra93g96",
+          "shares": "3000000000000000000.000000000000000000",
           "validator_address": "cudosvaloper10ltqnr7ll8tjg4c2f4tdtqj784v29t39znt0w6"
         }
       ],
       "exported": true,
-      "last_total_power": "10000",
+      "last_total_power": "10027",
       "last_validator_powers": [
         {
+          "address": "cudosvaloper1t9rqh0739058p3gtgye77uqf3q57sxsjm6p5g2",
+          "power": "19"
+        },
+        {
           "address": "cudosvaloper10ltqnr7ll8tjg4c2f4tdtqj784v29t39znt0w6",
-          "power": "10000"
+          "power": "10008"
         }
       ],
       "params": {
@@ -4707,13 +4734,42 @@
               "max_rate": "0.200000000000000000",
               "rate": "0.100000000000000000"
             },
+            "update_time": "2021-12-21T06:09:14.894996630Z"
+          },
+          "consensus_pubkey": {
+            "@type": "/cosmos.crypto.ed25519.PubKey",
+            "key": "ZDsitM976reIYvpW1uW+VNDC0h25f9GGhRyhKBJaPhw="
+          },
+          "delegator_shares": "19000000000000000000.000000000000000000",
+          "description": {
+            "details": "",
+            "identity": "",
+            "moniker": "cudos-validator-02",
+            "security_contact": "",
+            "website": ""
+          },
+          "jailed": false,
+          "min_self_delegation": "1",
+          "operator_address": "cudosvaloper1t9rqh0739058p3gtgye77uqf3q57sxsjm6p5g2",
+          "status": "BOND_STATUS_BONDED",
+          "tokens": "19000000000000000000",
+          "unbonding_height": "0",
+          "unbonding_time": "1970-01-01T00:00:00Z"
+        },
+        {
+          "commission": {
+            "commission_rates": {
+              "max_change_rate": "0.010000000000000000",
+              "max_rate": "0.200000000000000000",
+              "rate": "0.100000000000000000"
+            },
             "update_time": "2021-07-23T20:02:42.007319312Z"
           },
           "consensus_pubkey": {
             "@type": "/cosmos.crypto.ed25519.PubKey",
             "key": "8YV4okjoP3yXoc8Sau10ieBYvE+Um52GrwAT8h9wBH0="
           },
-          "delegator_shares": "10000000000000000000000.000000000000000000",
+          "delegator_shares": "10008000000000000000000.000000000000000000",
           "description": {
             "details": "",
             "identity": "",
@@ -4725,7 +4781,7 @@
           "min_self_delegation": "1",
           "operator_address": "cudosvaloper10ltqnr7ll8tjg4c2f4tdtqj784v29t39znt0w6",
           "status": "BOND_STATUS_BONDED",
-          "tokens": "10000000000000000000000",
+          "tokens": "10008000000000000000000",
           "unbonding_height": "0",
           "unbonding_time": "1970-01-01T00:00:00Z"
         }
@@ -4785,12 +4841,21 @@
     "version": {}
   },
   "genesis_time": "2021-07-23T20:02:42.007319312Z",
-  "initial_height": "1847050",
+  "initial_height": "2601500",
   "validators": [
+    {
+      "address": "E60A30982A34177A5331DBA7340FD6976EB9A730",
+      "name": "cudos-validator-02",
+      "power": "19",
+      "pub_key": {
+        "type": "tendermint/PubKeyEd25519",
+        "value": "ZDsitM976reIYvpW1uW+VNDC0h25f9GGhRyhKBJaPhw="
+      }
+    },
     {
       "address": "C2F6098BD1A0A3757424E424D7825FBC27C2F346",
       "name": "cudos-root-node-testnet-private",
-      "power": "10000",
+      "power": "10008",
       "pub_key": {
         "type": "tendermint/PubKeyEd25519",
         "value": "8YV4okjoP3yXoc8Sau10ieBYvE+Um52GrwAT8h9wBH0="

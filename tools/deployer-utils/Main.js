@@ -209,11 +209,6 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         `sudo rm -Rf ./CudosGravityBridge`,
         `sudo unzip -q ${filePath} -d ./`,
         `rm ${filePath}`,
-        `sudo chmod -R g-rwx,o-rwx ./CudosNode`,
-        `sudo chmod -R g-rwx,o-rwx ./CudosBuilders`,
-        `sudo chmod -R g-rwx,o-rwx ./CudosFaucet`,
-        `sudo chmod -R g-rwx,o-rwx ./CudosExplorer`,
-        `sudo chmod -R g-rwx,o-rwx ./CudosGravityBridge`,
         `cd ./CudosBuilders/docker/explorer`,
         `(sudo docker-compose --env-file ${dockerExplorerEnvFile} -f ./explorer.yml -p cudos-explorer down || true)`,
         `cd ../faucet`,
@@ -236,6 +231,12 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         // `sudo rm -Rf ./CudosBuilders`,
         // `sudo rm -Rf ./CudosUtils`,
         // `sudo rm -Rf ./CudosGravityBridge`,
+        `cd ${secrets.serverPath}`,
+        `sudo chmod -R g-rwx,o-rwx ./CudosNode`,
+        `sudo chmod -R g-rwx,o-rwx ./CudosBuilders`,
+        `sudo chmod -R g-rwx,o-rwx ./CudosFaucet`,
+        `sudo chmod -R g-rwx,o-rwx ./CudosExplorer`,
+        `sudo chmod -R g-rwx,o-rwx ./CudosGravityBridge`,
     ]
 
     command = command.filter(c => c !== null).join(' && ');

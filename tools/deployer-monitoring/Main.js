@@ -167,7 +167,6 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         `sudo rm -Rf ./monitoring`,
         `sudo tar -xzf ${filePath}`,
         `rm ${filePath}`,
-        `sudo chmod -R g-rwx,o-rwx ./monitoring`,
         `cd ${dockerRootPath}`,
         `sudo docker run --rm \
         -v /var/run/docker.sock:/var/run/docker.sock \
@@ -180,6 +179,8 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         -v "$PWD:$PWD" \
         -w="$PWD" \
         docker/compose:1.29.0 -f ${dockerComposeFile} -p ${dockerProjectName} --env-file ${dockerEnvFile} up --build -d`,
+        `cd ${secrets.serverPath}`,
+        `sudo chmod -R g-rwx,o-rwx ./monitoring`,
     ]
 
     command = command.filter(c => c !== null).join(' && ');

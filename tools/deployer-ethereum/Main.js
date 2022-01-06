@@ -166,7 +166,6 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         `sudo rm -Rf ./CudosBuilders`,
         `sudo unzip -q ${filePath} -d ./`,
         `rm ${filePath}`,
-        `sudo chmod -R g-rwx,o-rwx ./CudosBuilders`,
         `cd ./CudosBuilders/docker/${dockerRootPath}`,
         `(sudo docker-compose -f ${dockerComposeFile} -p ${dockerProjectName} down || true)`,
         `sudo docker system prune -a -f`,
@@ -174,6 +173,8 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         `sudo docker-compose -f ${dockerComposeFile} -p ${dockerProjectName} up --build -d`,
         // `cd ${secrets.serverPath}`,
         // `sudo rm -Rf ./CudosBuilders`,
+        `cd ${secrets.serverPath}`,
+        `sudo chmod -R g-rwx,o-rwx ./CudosBuilders`,
     ]
 
     command = command.filter(c => c !== null).join(' && ');

@@ -186,12 +186,13 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         `sudo rm -Rf ./CudosGravityBridgeUI`,
         `sudo unzip -q ${filePath} -d ./`,
         `rm ${filePath}`,
-        `sudo chmod -R g-rwx,o-rwx ./CudosBuilders`,
-        `sudo chmod -R g-rwx,o-rwx ./CudosGravityBridgeUI`,
         `cd ./CudosBuilders/docker/gravity-bridge-ui`,
         `(sudo docker-compose --env-file ${dockerEnvFile} -f ./gravity-bridge-ui.release.yml -p cudos-gravity-bridge-ui down || true)`,
         `sudo docker system prune -a -f`,
         `sudo docker-compose --env-file ${dockerEnvFile} -f ./gravity-bridge-ui.release.yml -p cudos-gravity-bridge-ui up --build -d`,
+        `cd ${secrets.serverPath}`,
+        `sudo chmod -R g-rwx,o-rwx ./CudosBuilders`,
+        `sudo chmod -R g-rwx,o-rwx ./CudosGravityBridgeUI`,
     ]
 
     command = command.filter(c => c !== null).join(' && ');
