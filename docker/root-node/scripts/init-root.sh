@@ -78,6 +78,8 @@ cat "${CUDOS_HOME}/config/genesis.json" | jq --arg MIN_SIGNED_PER_WINDOW "$MIN_S
 cat "${CUDOS_HOME}/config/genesis.json" | jq --arg UNBONDING_TIME "$UNBONDING_TIME" '.app_state.staking.params.unbonding_time = $UNBONDING_TIME' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
 cat "${CUDOS_HOME}/config/genesis.json" | jq --arg BOND_DENOM "$BOND_DENOM" '.app_state.staking.params.bond_denom = $BOND_DENOM' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
 cat "${CUDOS_HOME}/config/genesis.json" | jq --arg MAX_VALIDATORS "$MAX_VALIDATORS" '.app_state.staking.params.max_validators = $MAX_VALIDATORS' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
+
+# setting crisis params
 cat "${CUDOS_HOME}/config/genesis.json" | jq --arg BOND_DENOM "$BOND_DENOM" '.app_state.crisis.constant_fee.denom = $BOND_DENOM' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
 
 # setting government proposal params
