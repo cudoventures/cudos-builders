@@ -26,6 +26,14 @@ if [ "${MONITORING_ENABLED}" = "true" ]; then
     sed -i "s/prometheus = .*/prometheus = true/g" "${CUDOS_HOME}/config/config.toml"
 fi
 
+if [ "${EXTERNAL_ADDRESS}" != "" ]; then
+    sed -i "s/external_address = \"\"/external_address = \"${EXTERNAL_ADDRESS}\"/g" "${CUDOS_HOME}/config/config.toml"
+fi
+
+if [ "${ADDR_BOOK_STRICT}" = "false" ]; then
+    sed -i "s/addr_book_strict = true/addr_book_strict = false/g" "${CUDOS_HOME}/config/config.toml"
+fi
+
 # STATE SYNC
 if [ "$SHOULD_USE_STATE_SYNC" = "true" ]; then
     STATE_SYNC_RPC_SERVERS=$(cat ./external-config/state-sync-rpc-servers.config)

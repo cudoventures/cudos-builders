@@ -177,3 +177,7 @@ chmod 755 "${CUDOS_HOME}/config"
 if [ "${MONITORING_ENABLED}" = "true" ]; then
     sed -i "s/prometheus = .*/prometheus = true/g" "${CUDOS_HOME}/config/config.toml"
 fi
+
+if [ "${ADDR_BOOK_STRICT}" = "false" ]; then
+    sed -i "s/addr_book_strict = true/addr_book_strict = false/g" "${CUDOS_HOME}/config/config.toml"
+fi
