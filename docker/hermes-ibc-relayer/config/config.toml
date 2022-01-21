@@ -190,7 +190,7 @@ max_block_time = '10s'
 # It should be significantly less than the unbonding period
 # (e.g. unbonding period = 3 weeks, trusting period = 2 weeks).
 # Default: 2/3 of the `unbonding period` for Cosmos SDK chains
-trusting_period = '14days'
+trusting_period = '13days'
 
 # Specify the trust threshold for the light client, ie. the maximum fraction of validators
 # which have changed between two blocks.
@@ -229,19 +229,19 @@ id = ''
 rpc_addr = ''
 grpc_addr = ''
 websocket_addr = ''
-rpc_timeout = '10s'
+rpc_timeout = '15s'
 account_prefix = ''
 key_name = 'testkey'
 store_prefix = 'ibc'
 default_gas = 300000
-max_gas = 3000000
+max_gas = 10000000
 gas_price = { price = , denom = '' }
 gas_adjustment = 0.1
-max_msg_num = 30
+max_msg_num = 10
 max_tx_size = 2097152
-clock_drift = '5s'
+clock_drift = '15s'
 max_block_time = '10s'
-trusting_period = '14days'
+trusting_period = '9days'
 trust_threshold = { numerator = '1', denominator = '3' }
 address_type = { derivation = 'cosmos' }
 
