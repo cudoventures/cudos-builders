@@ -15,3 +15,6 @@ topology.*.json
 users*override.yml
 docker/tests/**/data
 docker/monitoring/config/prometheus.tesnet.public.yml
+bdjuno
+.env-bdjuno
+.env-big-dipper-2
