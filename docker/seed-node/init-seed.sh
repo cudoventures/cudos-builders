@@ -25,13 +25,21 @@ sed -i "s/persistent_peers = \".*\"/persistent_peers = \"$PERSISTENT_PEERS\"/g" 
 
 sed -i "s/seeds = \".*\"/seeds = \"$SEEDS\"/g" "${CUDOS_HOME}/config/config.toml"
 
-# sed -i "s/seed_mode = false/seed_mode = true/g" "${CUDOS_HOME}/config/config.toml"
+sed -i "s/seed_mode = false/seed_mode = true/g" "${CUDOS_HOME}/config/config.toml"
 
 sed -i "s/private_peer_ids = \"\"/private_peer_ids = \"$PRIVATE_PEERS\"/g" "${CUDOS_HOME}/config/config.toml"
 
 # Monitoring enabled
 if [ "${MONITORING_ENABLED}" = "true" ]; then
     sed -i "s/prometheus = .*/prometheus = true/g" "${CUDOS_HOME}/config/config.toml"
+fi
+
+if [ "${EXTERNAL_ADDRESS}" != "" ]; then
+    sed -i "s/external_address = \"\"/external_address = \"${EXTERNAL_ADDRESS}\"/g" "${CUDOS_HOME}/config/config.toml"
+fi
+
+if [ "${ADDR_BOOK_STRICT}" = "false" ]; then
+    sed -i "s/addr_book_strict = true/addr_book_strict = false/g" "${CUDOS_HOME}/config/config.toml"
 fi
 
 # STATE SYNC
