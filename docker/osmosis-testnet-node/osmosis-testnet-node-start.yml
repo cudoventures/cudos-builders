@@ -19,7 +19,7 @@ services:
         OSMOSIS_HOME: "$OSMOSIS_HOME"
     env_file: "$ENV_FILE"
     volumes:
-      - '../../../CudosData/osmosis-testnet-node:$OSMOSIS_HOME'
+      - '../../../OsmosisData/osmosis-testnet-node:$OSMOSIS_HOME'
     ports:
       - "${PORT26656}:26656"
       - "${PORT26657}:26657"
@@ -33,3 +33,4 @@ services:
       options:
         max-size: "128m"
         max-file: "1"
+    restart: unless-stopped
