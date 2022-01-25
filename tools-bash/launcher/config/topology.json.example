@@ -1,0 +1,105 @@
+{
+    "computers": [
+        {
+            "id": "node001",
+            "ip": "auto",
+            "port": 22,
+            "user": "",
+            "sshKey": "",
+            "pass": ""
+        },
+        {
+            "id": "node002",
+            "ip": "auto",
+            "port": 22,
+            "user": "",
+            "sshKey": "",
+            "pass": ""
+        },
+        {
+            "id": "node100",
+            "ip": "auto",
+            "port": 22,
+            "user": "",
+            "sshKey": ""
+        },
+        {
+            "id": "node101",
+            "ip": "auto",
+            "port": 22,
+            "user": "",
+            "sshKey": ""
+        },
+        {
+            "id": "node200",
+            "ip": "auto",
+            "port": 22,
+            "user": "",
+            "sshKey": ""
+        },
+        {
+            "id": "node201",
+            "ip": "auto",
+            "port": 22,
+            "user": "",
+            "sshKey": ""
+        },
+        {
+            "id": "node400",
+            "ip": "auto",
+            "port": 22,
+            "user": "",
+            "sshKey": ""
+        },
+        {
+            "id": "node401",
+            "ip": "auto",
+            "port": 22,
+            "user": "",
+            "sshKey": ""
+        },
+        {
+            "id": "node402",
+            "ip": "auto",
+            "port": 22,
+            "user": "",
+            "sshKey": ""
+        }
+    ],
+    "nodes": {
+        "validators": [
+            {
+                "computerId": "node001",
+                "validatorId": "validator01",
+                "orchEthAddress": "0x....",
+                "ethPrivKey": ""
+            },
+            {
+                "validatorId": "validator02",
+                "computerId": "node002",
+                "orchEthAddress": "0x",
+                "ethPrivKey": ""
+            }
+        ],
+        "seeds": [
+            {
+                "validatorId": "validator01",
+                "computerId": "node100"
+            },
+            {
+                "validatorId": "validator02",
+                "computerId": "node101"
+            }
+        ],
+        "sentries": [
+            {
+                "validatorId": "validator01",
+                "computerId": "node200"
+            },
+            {
+                "validatorId": "validator02",
+                "computerId": "node201"
+            }
+        ]
+    }
+}
