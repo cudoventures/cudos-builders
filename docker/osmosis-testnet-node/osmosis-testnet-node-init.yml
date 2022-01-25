@@ -19,7 +19,7 @@ services:
         OSMOSIS_HOME: "$OSMOSIS_HOME"
     env_file: "$ENV_FILE"
     volumes:
-      - '../../../CudosData/osmosis-testnet-node:$OSMOSIS_HOME'
+      - '../../../OsmosisData/osmosis-testnet-node:$OSMOSIS_HOME'
     networks:
       - shared-cudos-network
     logging:

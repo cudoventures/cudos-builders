@@ -156,7 +156,7 @@ default_gas = 100000
 
 # Specify the maximum amount of gas to be used as the gas limit for a transaction.
 # Default: 300 000
-max_gas = 300000
+max_gas = 10000000
 
 # Specify the price per gas used of the fee to submit a transaction and
 # the denomination of the fee. Required
