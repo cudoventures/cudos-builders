@@ -20,6 +20,7 @@ NOTE: Requires a running cudos-node instance !
     - RAM has to be >= 8 GB   
     - Tag your instance, for example : private-testnet-explorer-v2-vm
     - In dentity and API access tab / Access Scopes / choose "Set access for each API" and from the dropdown for "Cloud SQL" choose enable. 
+6. [Create a static IP address for your GCE Instance](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address)
 6. White list the GCE VM IP to gcloud SQL Instance ( this is so because hasura is making requests directly to the IP and cannot go over sql auth proxy)
     - GSQL Instance => Connections => Networking => Authorized Networks => Add the public IP of the GCE instance
     - In the Connectivity Test tab try to make a test from the VM to GSQL on port 5432, should be reachable
@@ -50,9 +51,7 @@ NOTE: Requires a running cudos-node instance !
    - This will pull, build and deploy the latest code for both cudos-bdjuno and big-dipper-2 and deploy it via docker to the specified instance using the configs you provided
 14. Delete the newly created folder that you transfered to the server
 
-TODO: Create STATIC IP for both SQL and 
 ## Additional:
-
 ### More info about gcloud sql proxy: 
 Note: This is not needed as the auth proxy is running in docker
 1.  Setup [gcloud sql auth proxy](https://cloud.google.com/sql/docs/postgres/connect-admin-proxy) on the remote GCE instance (so the BDJuno can have secure SSL connection to gcloud SQL)
@@ -84,3 +83,11 @@ Note: This is not needed as the auth proxy is running in docker
         - ``` sudo systemctl enable cloud-sql-proxy.service ```
     - Reboot your Compute Engine instance and verify that the service is running after restart:
         - ```sudo systemctl status cloud-sql-proxy.service```
+
+### Configuration explanation:
+1. There are 3 configs that have to be set up: 
+    - Inside the BDJuno folder you have:
+        - config.yaml - this is the config for the BDJuno - https://docs.bigdipper.live/cosmos-based/parser/config/config
+        - genesis.json - this is the genesis file that is going to be parsed before BDJuno starts. It gets by the docker BDJuno docker file
+    - .env-bdjuno - this is the env variables for the BDJuno docker 
+    - .env-big-dipper-2 - this is the env variables 

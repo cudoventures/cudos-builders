@@ -27,15 +27,15 @@ parsing:
     listen_new_blocks: true
     parse_old_blocks: true
     parse_genesis: true
-    start_height: 1
+    start_height: 2601500
     fast_sync: false # when fast sync is set to true, ignores all previous block
     genesis_file_path: /usr/local/bdjuno/bdjuno/genesis.json
 database:
     name: private-testnet-explorer-v2
     host: host.docker.internal # uses gcloud sql auth proxy on localhost to connecto gcloud sql db
-    port: 3306
+    port: 5432
     user: postgres
-    password: enter_password_here
+    password: xC4rhIHvtmD5v9bb
     schema: public
     max_open_connections: 10
     max_idle_connections: 10
