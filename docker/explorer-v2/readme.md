@@ -7,7 +7,7 @@ NOTE: Requires a running cudos-node instance !
          - Inside this folder replace the genesis.example.json with your local node genesis.json (located in cudos-data/config)
        - Copy and Rename .env-bdjuno.sample to .env-bdjuno
        - Copy Rename .env-big-dipper-2.sample to .env-big-dipper-2
-2. Call the script with  ``` ./deploy.sh dev http://localhost:8080 myadminsecret```
+2. Call the script with  ``` ./deploy.sh dev http://localhost:8080 myadminsecret``` and  ```./big-dipper-2-ui-deploy.sh dev```
 
 ## Testnet/Mainnet deployment guide
 1. Provision new SQL instance in gcloud SQL
