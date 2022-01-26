@@ -1,0 +1,17 @@
+CUDOS_HOME=/usr/cudos/cudos-data
+
+ENV_FILE=./sentry-node.client.mainnet.env
+GENESIS_FILENAME=genesis.mainnet.json
+PERSISTENT_PEERS_FILENAME=persistent-peers.mainnet.config
+SEEDS_FILENAME=seeds.mainnet.config
+STATE_SYNC_RPC_SERVERS_FILENAME=state-sync-rpc-servers.mainnet.config
+
+INIT_CONTAINER_NAME=cudos-init-sentry-node-client-mainnet
+START_CONTAINER_NAME=cudos-start-sentry-node-client-mainnet
+VOLUME_NAME=cudos-data-sentry-node-client-mainnet
+
+PORT26656=26656
+PORT26657=26657
+PORT1317=1317
+PORT9090=9090
+PORT26660=26660
