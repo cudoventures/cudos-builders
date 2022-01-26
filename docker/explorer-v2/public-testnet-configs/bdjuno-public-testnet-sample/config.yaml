@@ -17,10 +17,10 @@ node:
     config:
         rpc:
             client_name: cudos-network
-            address: http://10.128.0.12:26657
+            address: http://10.128.0.6:26657
             max_connections: 20
         grpc:
-            address: http://10.128.0.12:9090
+            address: http://10.128.0.6:9090
             insecure: true
 parsing:
     workers: 4
