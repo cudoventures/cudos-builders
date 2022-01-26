@@ -10,8 +10,8 @@ chain:
         - mint
         - slashing 
         - staking
-        - pricefeed
         - distribution
+        - pricefeed
 node:
     type: remote
     config:
@@ -35,7 +35,7 @@ database:
     host: host.docker.internal # uses gcloud sql auth proxy on localhost to connecto gcloud sql db
     port: 5432
     user: postgres
-    password: xC4rhIHvtmD5v9bb
+    password: password_here
     schema: public
     max_open_connections: 10
     max_idle_connections: 10

@@ -21,10 +21,11 @@ NOTE: Requires a running cudos-node instance !
     - Tag your instance, for example : private-testnet-explorer-v2-vm
     - In dentity and API access tab / Access Scopes / choose "Set access for each API" and from the dropdown for "Cloud SQL" choose enable. 
 6. [Create a static IP address for your GCE Instance](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address)
-6. White list the GCE VM IP to gcloud SQL Instance ( this is so because hasura is making requests directly to the IP and cannot go over sql auth proxy)
-    - GSQL Instance => Connections => Networking => Authorized Networks => Add the public IP of the GCE instance
+
+7. White list the GCE VM IP to gcloud SQL Instance ( this is so because hasura is making requests directly to the IP and cannot go over sql auth proxy)
+    - GSQL Instance => Connections => Networking => Authorized Networks => Add the public ( static one ) IP of the GCE instance
     - In the Connectivity Test tab try to make a test from the VM to GSQL on port 5432, should be reachable
-7. Expose PORT 3000,5000,8080 for the outside world:
+8. Expose PORT 3000,5000,8080 for the outside world:
       - Go to cloud.google.com
       - Go to my Console
       - Choose your Project
@@ -35,18 +36,19 @@ NOTE: Requires a running cudos-node instance !
       - Set Source IP ranges to allow traffic from all IPs: 0.0.0.0/0
       - To allow incoming TCP connections to port 3000,5000,8080, in "Protocols and Ports", check "tcp" and enter 3000,5000,8080
       - Click Create (or click “Equivalent Command Line” to show the gcloud command to create the same rule)
-8.  Create a new folder and inside it place the relevant configs(depending in the where you are deploying)
+9.  Create a new folder and inside it place the relevant configs(depending in the where you are deploying)
     - From the relevant folder(private/public) to the new folder:
       - Copy and Rename bdjuno-sample to bdjuno
-        - Rename genesis file without .example
+        - Rename genesis file to genesis.json
       - Copy and Rename .env-bdjuno.sample to .env-bdjuno
       - Copy and Rename .env-big-dipper-2.sample to .env-big-dipper-2
-9. Go over the configs and check if the parameters are right (IP of the node, Hasura URL, Db names, etc)
+10. Go over the configs and check if the parameters are right (IP of the node, Hasura URL, Db names, etc)
        - Please note that HASURA_GRAPHQL_DATABASE_URL requires the real IP address:port of the SQL DB
-10.  Copy the deploy.sh script from explorer-v2 to the new folder
-11.  Copy the new folder to the [VM via SSH](https://cloud.google.com/sdk/gcloud/reference/compute/scp) 
-12. [Install Docker on the VM](https://docs.docker.com/engine/install/) and [Install docker-compose](https://docs.docker.com/compose/install/)
-13. Inside the VM place to the newly copied folder and call them like ``` ./deploy.sh prod HASURA_URL HASURA_SECRET_KEY```
+11.  Copy the bdjuno-deploy.sh script from explorer-v2 to the new folder
+12.  Copy the big-dipper-2-ui-deploy.sh script from explorer-v2 to the new folder
+13.  Copy the new folder to the [VM via SSH](https://cloud.google.com/sdk/gcloud/reference/compute/scp) 
+14. [Install Docker on the VM](https://docs.docker.com/engine/install/) and [Install docker-compose](https://docs.docker.com/compose/install/)
+15. Inside the VM place to the newly copied folder and call them like ``` ./bdjuno-deploy.sh prod HASURA_URL HASURA_SECRET_KEY``` and ```./big-dipper-2-ui-deploy.sh prod```
    - Hasura URL and Secret Key should be the same as the ones defined in .env-bdjuno : HASURA_GRAPHQL_ADMIN_SECRET and HASURA_GRAPHQL_ENDPOINT_URL
    - This will pull, build and deploy the latest code for both cudos-bdjuno and big-dipper-2 and deploy it via docker to the specified instance using the configs you provided
 14. Delete the newly created folder that you transfered to the server
@@ -88,6 +90,9 @@ Note: This is not needed as the auth proxy is running in docker
 1. There are 3 configs that have to be set up: 
     - Inside the BDJuno folder you have:
         - config.yaml - this is the config for the BDJuno - https://docs.bigdipper.live/cosmos-based/parser/config/config
+          - ip address of node, db name and password are set here
         - genesis.json - this is the genesis file that is going to be parsed before BDJuno starts. It gets by the docker BDJuno docker file
     - .env-bdjuno - this is the env variables for the BDJuno docker 
+      - set db connection string / password here 
+      - set hasura console password here  
     - .env-big-dipper-2 - this is the env variables 

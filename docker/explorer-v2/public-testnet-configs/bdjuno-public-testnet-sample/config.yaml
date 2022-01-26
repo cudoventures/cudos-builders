@@ -10,30 +10,32 @@ chain:
         - mint
         - slashing 
         - staking
+        - distribution
+        - pricefeed
 node:
     type: remote
     config:
         rpc:
             client_name: cudos-network
-            address: http://10.128.0.6:26657
+            address: http://10.128.0.12:26657
             max_connections: 20
         grpc:
-            address: http://10.128.0.6:9090
+            address: http://10.128.0.12:9090
             insecure: true
 parsing:
     workers: 4
     listen_new_blocks: true
     parse_old_blocks: true
     parse_genesis: true
-    start_height: 1995900
+    start_height: 2601500
     fast_sync: false # when fast sync is set to true, ignores all previous block
     genesis_file_path: /usr/local/bdjuno/bdjuno/genesis.json
 database:
     name: public-testnet-explorer-v2
-    host: host.docker.internal # uses google sql auth proxy running on localhost
-    port: 3306
+    host: host.docker.internal # uses gcloud sql auth proxy on localhost to connecto gcloud sql db
+    port: 5432
     user: postgres
-    password: enter_db_password_here
+    password: password_here
     schema: public
     max_open_connections: 10
     max_idle_connections: 10
@@ -49,3 +51,5 @@ pricefeed:
             - denom: cudos
               exponent: 0
               price_id: cudos
+distribution:
+    rewards_frequency: 10000
