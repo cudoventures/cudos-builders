@@ -35,3 +35,5 @@ source "$WORKING_SRC_DIR/modules/export-gentx.sh"
 if [ "$?" != 0 ]; then
     exit $?;
 fi;
+
+echo "You MUST NOT delete the constructor script nor the destination folder where node's data is. They will be used later on for starting the nodes.";

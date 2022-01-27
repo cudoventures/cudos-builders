@@ -11,7 +11,7 @@ echo -e "${COLOR_GREEN}OK${COLOR_DEFAULT}";
 
 echo -ne "Preparing the $NODE_NAME...";
 cd "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME"
-dockerResult=$(docker-compose --env-file ./full-node.client.mainnet.arg -f ./init-full-node.yml -p cudos-init-full-node-client-mainnet up --build 2> /dev/null)
+dockerResult=$(docker-compose --env-file ./$NODE_NAME.client.mainnet.arg -f ./init-$NODE_NAME.yml -p cudos-init-$NODE_NAME-client-mainnet up --build 2> /dev/null)
 if [ "$?" != 0 ]; then
     echo -e "${COLOR_RED}Error:${COLOR_DEFAULT} There was an error building the container $?: ${dockerResult}";
     exit 1;
