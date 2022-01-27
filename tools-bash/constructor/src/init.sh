@@ -11,7 +11,7 @@ if [ "$?" != 0 ]; then
     exit $?;
 fi;
 
-source "./src/incs/var.sh"
+source "./src/incs/var.sh" "init"
 if [ "$?" != 0 ]; then
     exit $?;
 fi;
@@ -36,4 +36,6 @@ if [ "$?" != 0 ]; then
     exit $?;
 fi;
 
-echo "You MUST NOT delete the constructor script nor the destination folder where node's data is. They will be used later on for starting the nodes.";
+echo -e "This node id is: ${STYLE_BOLD}$(cat $PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/tendermint.nodeid)${STYLE_DEFAULT}";
+
+echo -e "You ${STYLE_BOLD}MUST NOT${STYLE_DEFAULT} delete the constructor script nor the destination folder where node's data is. They will be used later on for starting the nodes.";

@@ -11,12 +11,17 @@ if [ "$?" != 0 ]; then
     exit $?;
 fi;
 
-source "./src/incs/var.sh"
+source "./src/incs/var.sh" "start"
 if [ "$?" != 0 ]; then
     exit $?;
 fi;
 
 source "$WORKING_SRC_DIR/incs/validate.sh"
+if [ "$?" != 0 ]; then
+    exit $?;
+fi;
+
+source "$WORKING_SRC_DIR/modules/start-node.sh"
 if [ "$?" != 0 ]; then
     exit $?;
 fi;

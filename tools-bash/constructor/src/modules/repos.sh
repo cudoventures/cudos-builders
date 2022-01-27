@@ -7,7 +7,7 @@ branch="cudos-dev"
 git clone -q --branch $branch https://github.com/CudoVentures/cudos-node.git CudosNode
 git clone -q --branch $branch https://github.com/CudoVentures/cudos-builders.git CudosBuilders
 git clone -q --branch $branch https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge
-echo -e "${COLOR_GREEN}OK${COLOR_DEFAULT}";
+echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Copying the .env files...";
 if [ "$NODE_NAME" = "full-node" ]; then
@@ -27,4 +27,4 @@ if [ ! -f "$dockerIgnorePath" ]; then
     echo "CudosData" > $dockerIgnorePath;
 fi
 
-echo -e "${COLOR_GREEN}OK${COLOR_DEFAULT}";
+echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
