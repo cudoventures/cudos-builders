@@ -2,7 +2,7 @@
 
 echo -ne "Processing arguments...";
 
-if ([ $# != 1 ]) || ([ $1 != "full-node" ] && [ $1 != 'seed-node' ] && [ $1 != 'sentry-node' ] && [ $1 != 'validator-node' ]); then
+if ([ $# != 1 ]) || ([ "$1" != "full-node" ] && [ "$1" != 'seed-node' ] && [ "$1" != 'sentry-node' ] && [ "$1" != 'validator-node' ]); then
     echo "Usage: $0 [node-name]";
     echo '[node-name] = full-node|seed-node|sentry-node|validator-node';
     exit 1

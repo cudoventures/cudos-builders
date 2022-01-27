@@ -22,6 +22,22 @@ if [ "$(ls -A $PARAM_SOURCE_DIR)" ]; then
     exit 1
 fi
 
+if [ "$PARAM_VALIDATOR_MNEMONIC" = "" ]; then
+    echo -e "${COLOR_RED}Error:${COLOR_DEFAULT} The param PARAM_VALIDATOR_MNEMONIC must not be empty";
+    exit 1
+fi
+
+numberOfWords=$(echo "$PARAM_VALIDATOR_MNEMONIC" | wc -w)
+if ([ "$numberOfWords" != "12" ] && [ "$numberOfWords" != "24" ]); then
+    echo -e "${COLOR_RED}Error:${COLOR_DEFAULT} The param PARAM_VALIDATOR_MNEMONIC must be 12 or 24 words phrase";
+    exit 1
+fi;
+
+if [ "$PARAM_KEYRING_OS_PASS" = "" ]; then
+    echo -e "${COLOR_RED}Error:${COLOR_DEFAULT} The param PARAM_KEYRING_OS_PASS must not be empty";
+    exit 1
+fi
+
 if [ ! -x "$(command -v docker)" ]; then
     echo -e "${COLOR_RED}Error:${COLOR_DEFAULT} You must install docker";
     exit 1

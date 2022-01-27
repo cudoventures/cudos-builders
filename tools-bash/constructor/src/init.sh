@@ -30,3 +30,8 @@ source "$WORKING_SRC_DIR/modules/init-node.sh"
 if [ "$?" != 0 ]; then
     exit $?;
 fi;
+
+source "$WORKING_SRC_DIR/modules/export-gentx.sh"
+if [ "$?" != 0 ]; then
+    exit $?;
+fi;

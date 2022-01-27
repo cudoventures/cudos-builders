@@ -15,3 +15,4 @@ topology.*.json
 users*override.yml
 docker/tests/**/data
 docker/monitoring/config/prometheus.tesnet.public.yml
+/tools-bash/constructor/gen-tx

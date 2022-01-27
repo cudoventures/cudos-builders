@@ -22,4 +22,6 @@ if [ ! -f "$WORKING_DIR/config/node.env" ]; then
     exit 1
 fi
 
+source "$WORKING_DIR/config/node.env"
+
 echo -e "${COLOR_GREEN}OK${COLOR_DEFAULT}";

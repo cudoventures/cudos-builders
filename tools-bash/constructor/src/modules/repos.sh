@@ -22,10 +22,6 @@ if [ "$NODE_NAME" = "sentry-node" ]; then
     cp "$WORKING_DIR/config/node.env" "$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.client.mainnet.env";
 fi
 
-if [ $IS_VALIDATOR = "true" ]; then
-    cp "$WORKING_DIR/scripts/init-validator.sh" "$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/init-validator.sh";
-fi
-
 dockerIgnorePath="$PARAM_SOURCE_DIR/.dockerignore"
 if [ ! -f "$dockerIgnorePath" ]; then
     echo "CudosData" > $dockerIgnorePath;
