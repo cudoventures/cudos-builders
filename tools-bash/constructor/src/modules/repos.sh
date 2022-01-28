@@ -10,17 +10,7 @@ git clone -q --branch $branch https://github.com/CudoVentures/cosmos-gravity-bri
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Copying the .env files...";
-if [ "$NODE_NAME" = "full-node" ]; then
-    cp "$WORKING_DIR/config/node.env" "$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.client.mainnet.env";
-fi
-
-if [ "$NODE_NAME" = "seed-node" ]; then
-    cp "$WORKING_DIR/config/node.env" "$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.client.mainnet.env";
-fi
-
-if [ "$NODE_NAME" = "sentry-node" ]; then
-    cp "$WORKING_DIR/config/node.env" "$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.client.mainnet.env";
-fi
+cp "$WORKING_DIR/config/node.env" "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME/$NODE_NAME.client.mainnet.env";
 
 dockerIgnorePath="$PARAM_SOURCE_DIR/.dockerignore"
 if [ ! -f "$dockerIgnorePath" ]; then

@@ -26,4 +26,11 @@ if [ "$?" != 0 ]; then
     exit $?;
 fi;
 
+echo "" # new line
+
 echo -e "You could inspect the logs of your node by executing: ${STYLE_BOLD}sudo docker logs cudos-start-$NODE_NAME-client-mainnet --tail=32${STYLE_DEFAULT}"
+
+echo "" # new line
+
+echo -ne "Starting...";
+echo -e "${STYLE_GREEN}DONE${STYLE_DEFAULT}";

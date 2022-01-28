@@ -45,3 +45,8 @@ echo -e "This node ID could always be checked using ${STYLE_BOLD}cudos-noded ten
 echo "" # new line
 
 echo -e "You ${STYLE_BOLD}MUST NOT${STYLE_DEFAULT} delete the constructor script nor the destination folder where node's data is. They will be used later on for starting the nodes.";
+
+echo "" # new line
+
+echo -ne "Initialiazing...";
+echo -e "${STYLE_GREEN}DONE${STYLE_DEFAULT}";

@@ -18,6 +18,19 @@ if [ "$?" != 0 ]; then
 fi
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
+echo -ne "Configurating the $NODE_NAME...";
+if [ "$IS_VALIDATOR" = "true" ]; then
+    sed -i "s/pex = true/pex = false/" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
+    sed -i "s/laddr = \"tcp:\/\/0.0.0.0:26657\"/laddr = \"tcp:\/\/127.0.0.1:26657\"/" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
+    sed -i "s/cors_allowed_origins = .*/cors_allowed_origins = \[\]/" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
+fi
+if [ "$IS_VALIDATOR" = "false" ]; then
+    sed -i "s/pex = false/pex = true/" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
+    sed -i "s/laddr = \"tcp:\/\/127.0.0.1:26657\"/laddr = \"tcp:\/\/0.0.0.0:26657\"/" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
+    sed -i "s/cors_allowed_origins = \[\]/cors_allowed_origins = \[\"\*\"\]/" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
+fi
+echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+
 if [ $IS_VALIDATOR = "true" ]; then
     echo -ne "Initializing the validator...";
     cd "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME";
