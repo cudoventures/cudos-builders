@@ -12,23 +12,23 @@ echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 echo -ne "Configurating the $NODE_NAME...";
 cp "$WORKING_DIR/config/genesis.mainnet.json" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/genesis.json"
 sed -i "s/private_peer_ids = \".*\"/private_peer_ids = \"$PARAMS_PRIVATE_PEER_IDS\"/g" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
-if [ "$IS_VALIDATOR" = "true" ]; then
+if [ "$IS_CLUSTERED_VALIDATOR" = "true" ]; then
     sed -i "s/seeds = \".*\"/seeds = \"\"/g" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
     sed -i "s/persistent_peers = \".*\"/persistent_peers = \"$PARAMS_PERSISTENT_PEERS\"/g" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
 fi
-if [ "$IS_VALIDATOR" = "false" ]; then
+if [ "$IS_CLUSTERED_VALIDATOR" = "false" ]; then
     sed -i "s/seeds = \".*\"/seeds = \"$PARAMS_SEED\"/g" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
     sed -i "s/persistent_peers = \".*\"/persistent_peers = \"\"/g" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
 fi
 
-if [ "$IS_VALIDATOR" = "true" ]; then
+if [ "$IS_CLUSTERED_VALIDATOR" = "true" ]; then
     sed -i "s/PERSISTENT_PEERS=.*/PERSISTENT_PEERS=\"$PARAMS_PERSISTENT_PEERS\"/" "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME/$NODE_NAME.client.mainnet.env"
     sed -i "s/SEEDS=.*/SEEDS=\"\"/" "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME/$NODE_NAME.client.mainnet.env"
     sed -i "s/SHOULD_USE_GLOBAL_PEERS=.*/SHOULD_USE_GLOBAL_PEERS=\"false\"/" "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME/$NODE_NAME.client.mainnet.env"
     sed -i "s/SHOULD_USE_STATE_SYNC=.*/SHOULD_USE_STATE_SYNC=\"false\"/" "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME/$NODE_NAME.client.mainnet.env"
 fi
 
-if [ "$IS_VALIDATOR" = "false" ]; then
+if [ "$IS_CLUSTERED_VALIDATOR" = "false" ]; then
     sed -i "s/PERSISTENT_PEERS=.*/PERSISTENT_PEERS=\"\"/" "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME/$NODE_NAME.client.mainnet.env"
     sed -i "s/SEEDS=.*/SEEDS=\"$PARAMS_SEED\"/" "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME/$NODE_NAME.client.mainnet.env"
     sed -i "s/SHOULD_USE_GLOBAL_PEERS=.*/SHOULD_USE_GLOBAL_PEERS=\"true\"/" "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME/$NODE_NAME.client.mainnet.env"

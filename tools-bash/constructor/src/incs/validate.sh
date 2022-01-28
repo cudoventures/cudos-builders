@@ -19,7 +19,7 @@ fi
 
 if [ "$STARTING" = "true" ]; then
 
-    if [ "$IS_VALIDATOR" = "true" ]; then
+    if [ "$IS_CLUSTERED_VALIDATOR" = "true" ]; then
 
         if [ "$PARAMS_PERSISTENT_PEERS" = "" ]; then
             echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAMS_PERSISTENT_PEERS must not be empty";
@@ -28,7 +28,7 @@ if [ "$STARTING" = "true" ]; then
 
     fi;
 
-    if [ "$IS_VALIDATOR" = "false" ]; then
+    if [ "$IS_CLUSTERED_VALIDATOR" = "false" ]; then
 
         if [ "$PARAMS_SEED" = "" ]; then
             echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAMS_SEED must not be empty";
