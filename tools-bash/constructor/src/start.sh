@@ -25,3 +25,5 @@ source "$WORKING_SRC_DIR/modules/start-node.sh"
 if [ "$?" != 0 ]; then
     exit $?;
 fi;
+
+echo -e "You could inspect the logs of your node by executing: ${STYLE_BOLD}sudo docker logs cudos-start-$NODE_NAME-client-mainnet --tail=32${STYLE_DEFAULT}"

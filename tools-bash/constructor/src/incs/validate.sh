@@ -17,6 +17,33 @@ if [ ! -w "$PARAM_SOURCE_DIR" ]; then
     exit 1;
 fi
 
+if [ "$STARTING" = "true" ]; then
+
+    if [ "$IS_VALIDATOR" = "true" ]; then
+
+        if [ "$PARAMS_PERSISTENT_PEERS" = "" ]; then
+            echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAMS_PERSISTENT_PEERS must not be empty";
+            exit 1;
+        fi;
+
+    fi;
+
+    if [ "$IS_VALIDATOR" = "false" ]; then
+
+        if [ "$PARAMS_SEED" = "" ]; then
+            echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAMS_SEED must not be empty";
+            exit 1;
+        fi;
+
+    fi;
+
+    if [ "$PARAMS_PRIVATE_PEER_IDS" = "" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAMS_PRIVATE_PEER_IDS must not be empty";
+        exit 1;
+    fi;
+
+fi
+
 if [ "$INITIALIZING" = "true" ]; then
     if [ "$(ls -A $PARAM_SOURCE_DIR)" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The folder $PARAM_SOURCE_DIR is not empty";

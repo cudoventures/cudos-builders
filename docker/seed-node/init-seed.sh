@@ -18,8 +18,24 @@ cp ./external-config/genesis.json "${CUDOS_HOME}/config/genesis.json"
 # gas price
 sed -i "s/minimum-gas-prices = \"\"/minimum-gas-prices = \"0${BOND_DENOM}\"/" "${CUDOS_HOME}/config/app.toml"
 
+# port 1317
+sed -i "104s/enable = true/enable = false/" "${CUDOS_HOME}/config/app.toml"
+
+# port 9090
+sed -i "158s/enable = true/enable = false/" "${CUDOS_HOME}/config/app.toml"
+
 # for port 26657
 sed -i "s/laddr = \"tcp:\/\/127.0.0.1:26657\"/laddr = \"tcp:\/\/0.0.0.0:26657\"/" "${CUDOS_HOME}/config/config.toml"
+sed -i "s/cors_allowed_origins = \[\]/cors_allowed_origins = \[\"\*\"\]/" "${CUDOS_HOME}/config/config.toml"
+
+# monitoring
+# port 26660
+if [ "${MONITORING_ENABLED}" = "true" ]; then
+    sed -i "s/prometheus = .*/prometheus = true/g" "${CUDOS_HOME}/config/config.toml"
+fi
+if [ "${MONITORING_ENABLED}" = "false" ]; then
+    sed -i "s/prometheus = .*/prometheus = false/g" "${CUDOS_HOME}/config/config.toml"
+fi
 
 sed -i "s/persistent_peers = \".*\"/persistent_peers = \"$PERSISTENT_PEERS\"/g" "${CUDOS_HOME}/config/config.toml"
 
@@ -28,11 +44,6 @@ sed -i "s/seeds = \".*\"/seeds = \"$SEEDS\"/g" "${CUDOS_HOME}/config/config.toml
 sed -i "s/seed_mode = false/seed_mode = true/g" "${CUDOS_HOME}/config/config.toml"
 
 sed -i "s/private_peer_ids = \"\"/private_peer_ids = \"$PRIVATE_PEERS\"/g" "${CUDOS_HOME}/config/config.toml"
-
-# Monitoring enabled
-if [ "${MONITORING_ENABLED}" = "true" ]; then
-    sed -i "s/prometheus = .*/prometheus = true/g" "${CUDOS_HOME}/config/config.toml"
-fi
 
 if [ "${EXTERNAL_ADDRESS}" != "" ]; then
     sed -i "s/external_address = \"\"/external_address = \"${EXTERNAL_ADDRESS}\"/g" "${CUDOS_HOME}/config/config.toml"
