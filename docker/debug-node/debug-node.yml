@@ -25,11 +25,11 @@ services:
     networks:
       - shared-cudos-network
     ports:
-      - "${PORT26656}:26656"
-      - "${PORT26657}:26657"
-      - "${PORT1317}:1317"
-      - "${PORT9090}:9090"
-      - "${PORT26660}:26660"
+      - "${EXPOSE_IP}:${PORT26656}:26656"
+      - "${EXPOSE_IP}:${PORT26657}:26657"
+      - "${EXPOSE_IP}:${PORT1317}:1317"
+      - "${EXPOSE_IP}:${PORT9090}:9090"
+      - "${EXPOSE_IP}:${PORT26660}:26660"
     logging:
       driver: "json-file"
       options:
