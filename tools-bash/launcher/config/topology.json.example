@@ -67,20 +67,12 @@
         }
     ],
     "nodes": {
-        "validators": [
-            {
-                "computerId": "node001",
-                "validatorId": "validator01",
-                "orchEthAddress": "0x....",
-                "ethPrivKey": ""
-            },
-            {
-                "validatorId": "validator02",
-                "computerId": "node002",
-                "orchEthAddress": "0x",
-                "ethPrivKey": ""
-            }
-        ],
+        "primary-validator": {
+            "computerId": "node001",
+            "validatorId": "validator01",
+            "orchEthAddress": "0x....",
+            "ethPrivKey": ""
+        },
         "seeds": [
             {
                 "validatorId": "validator01",
