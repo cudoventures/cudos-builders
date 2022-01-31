@@ -21,13 +21,20 @@ if [ "$?" != 0 ]; then
     exit $?;
 fi;
 
+if [ "$SSH_AGENT_PID" = "" ]; then
+    eval $(ssh-agent -s);
+fi
+
 IP=$(getComputerIp 0)
 PORT=$(getComputerPort 0)
 USER=$(getComputerUser 0)
 SSH_KEY_PATH=$(getComputerSshKeyPath 0)
 PASS=$(getComputerPass 0)
 
-DISPLAY=:0 SSH_ASKPASS="$WORKING_SRC_DIR/helpers/ask-pass-helper.sh" ssh-add $SSH_KEY_PATH < /dev/null
+echo "echo 'cudos'" > /tmp/laucher-ask-pass.sh
+chmod +x /tmp/laucher-ask-pass.sh
+DISPLAY=:0 SSH_ASKPASS="/tmp/laucher-ask-pass.sh" ssh-add $SSH_KEY_PATH < /dev/null
+rm -rf /tmp/laucher-ask-pass.sh
 
 # DISPLAY=:0 SSH_ASKPASS="$WORKING_SRC_DIR/helpers/ask-pass-helper.sh" ssh -o "StrictHostKeyChecking no" ${USER}@${IP} -p ${PORT} < /dev/null
 ssh -o "StrictHostKeyChecking no" ${USER}@${IP} -p ${PORT} "ls -la"
