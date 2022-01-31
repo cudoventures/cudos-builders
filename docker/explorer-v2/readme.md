@@ -3,55 +3,78 @@
 NOTE: Requires a running cudos-node instance !
 1. Setup the configuration files:
    - From dev-configs to root of explorer-v2 folder:
-       - Copy and Rename bdjuno-sample to bdjuno
-         - Inside this folder replace the genesis.example.json with your local node genesis.json (located in cudos-data/config)
-       - Copy and Rename .env-bdjuno.sample to .env-bdjuno
-       - Copy Rename .env-big-dipper-2.sample to .env-big-dipper-2
+       - Create new foler named bdjuno_local_deploy, inside it:
+         - Copy and Rename bdjuno-sample to bdjuno
+           - Inside this folder replace the genesis.example.json with your local node genesis.json (located in cudos-data/config)
+         - Copy and Rename .env-bdjuno.sample to .env-bdjuno
+         - Copy Rename .env-big-dipper-2.sample to .env-big-dipper-2
 2. Call the script with  ``` ./deploy.sh dev http://localhost:8080 myadminsecret``` and  ```./big-dipper-2-ui-deploy.sh dev```
 
 ## Testnet/Mainnet deployment guide
-1. Provision new SQL instance in gcloud SQL
+1. Provision new SQL instance in gcloud SQL ( or connect to an already created one)
    - must have public IP address enabled
 2. Create a new database in the gcloud SQL instance (public-testnet-explorer-v2 / private-testnet-exporer-v2)
 3. Connect to this instance from your local machine 
     - Connection can be made through [gcloud sql auth proxy](https://cloud.google.com/sql/docs/postgres/connect-admin-proxy) through your favorite database explorer / psql console
 4. Once connected to the  DB and execute the DB init sciprt: big_dipper_2_init_script_combined
-5. Provision new Compute Engine instance in gcloud
-    - RAM has to be >= 8 GB   
-    - Tag your instance, for example : private-testnet-explorer-v2-vm
-    - In dentity and API access tab / Access Scopes / choose "Set access for each API" and from the dropdown for "Cloud SQL" choose enable. 
-6. [Create a static IP address for your GCE Instance](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address)
-
-7. White list the GCE VM IP to gcloud SQL Instance ( this is so because hasura is making requests directly to the IP and cannot go over sql auth proxy)
-    - GSQL Instance => Connections => Networking => Authorized Networks => Add the public ( static one ) IP of the GCE instance
-    - In the Connectivity Test tab try to make a test from the VM to GSQL on port 5432, should be reachable
-8. Expose PORT 3000,5000,8080 for the outside world:
-      - Go to cloud.google.com
-      - Go to my Console
-      - Choose your Project
-      - Choose Networking > VPC network
-      - Choose "Firewall"
-      - Choose "Create Firewall Rule"
-      - To apply the rule to select VM instances, select Targets > "Specified target tags", and enter into "Target tags" the name of the tag ( private-testnet-explorer-v2-vm for example ). This tag will be used to apply the new firewall rule onto whichever instance you'd like. Then, make sure the instances have the network tag applied.
-      - Set Source IP ranges to allow traffic from all IPs: 0.0.0.0/0
-      - To allow incoming TCP connections to port 3000,5000,8080, in "Protocols and Ports", check "tcp" and enter 3000,5000,8080
-      - Click Create (or click “Equivalent Command Line” to show the gcloud command to create the same rule)
-9.  Create a new folder and inside it place the relevant configs(depending in the where you are deploying)
-    - From the relevant folder(private/public) to the new folder:
-      - Copy and Rename bdjuno-sample to bdjuno
-        - Rename genesis file to genesis.json
-      - Copy and Rename .env-bdjuno.sample to .env-bdjuno
-      - Copy and Rename .env-big-dipper-2.sample to .env-big-dipper-2
-10. Go over the configs and check if the parameters are right (IP of the node, Hasura URL, Db names, etc)
-       - Please note that HASURA_GRAPHQL_DATABASE_URL requires the real IP address:port of the SQL DB
-11.  Copy the bdjuno-deploy.sh script from explorer-v2 to the new folder
-12.  Copy the big-dipper-2-ui-deploy.sh script from explorer-v2 to the new folder
-13.  Copy the new folder to the [VM via SSH](https://cloud.google.com/sdk/gcloud/reference/compute/scp) 
-14. [Install Docker on the VM](https://docs.docker.com/engine/install/) and [Install docker-compose](https://docs.docker.com/compose/install/)
-15. Inside the VM place to the newly copied folder and call them like ``` ./bdjuno-deploy.sh prod HASURA_URL HASURA_SECRET_KEY``` and ```./big-dipper-2-ui-deploy.sh prod```
-   - Hasura URL and Secret Key should be the same as the ones defined in .env-bdjuno : HASURA_GRAPHQL_ADMIN_SECRET and HASURA_GRAPHQL_ENDPOINT_URL
-   - This will pull, build and deploy the latest code for both cudos-bdjuno and big-dipper-2 and deploy it via docker to the specified instance using the configs you provided
-14. Delete the newly created folder that you transfered to the server
+5. Provision new Compute Engine instance in gcloud for BDJuno/Parser
+       - RAM has to be >= 8 GB   
+       - Tag your instance(Networking => Network tags), for example : private-testnet-gql / public-testnet-gql
+       - In dentity and API access tab / Access Scopes / choose "Set access for each API" and from the dropdown for "Cloud SQL" choose enable. 
+   1. [Create a static IP address for your GCE Instance](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address)
+   2. White list the GCE VM IP to gcloud SQL Instance ( this is so because hasura is making requests directly to the IP and cannot go over sql auth proxy)
+       - GSQL Instance => Connections => Networking => Authorized Networks => Add the public ( static one ) IP of the GCE instance
+       - In the Connectivity Test tab try to make a test from the VM to GSQL on port 5432, should be reachable
+   3. Expose PORT 5000,8080 for the outside world: ( Explorer-v2-ui calls this )
+         - Go to cloud.google.com
+         - Go to my Console
+         - Choose your Project
+         - Choose Networking > VPC network
+         - Choose "Firewall"
+         - Choose "Create Firewall Rule"
+         - To apply the rule to select VM instances, select Targets > "Specified target tags", and enter into "Target tags" the name of the tag ( private-testnet-gql for example ). This tag will be used to apply the new firewall rule onto whichever instance you'd like. Then, make sure the instances have the network tag applied.
+         - Set Source IP ranges to allow traffic from all IPs: 0.0.0.0/0
+         - To allow incoming TCP connections to port 5000,8080, in "Protocols and Ports", check "tcp" and enter 5000,8080
+         - Click Create (or click “Equivalent Command Line” to show the gcloud command to create the same rule)
+   4.  Create a new folder named bdjuno_gql_deploy and inside it place the relevant configs(depending on the environment)
+       - From the relevant folder(private/public) to the new folder:
+         - Copy and Rename bdjuno-sample to bdjuno
+           - Rename genesis file to genesis.json
+         - Copy and Rename .env-bdjuno.sample to .env-bdjuno
+   5.  Go over the configs and check if the parameters are right (IP of the node, Hasura URL, Db names, etc)
+          - Please note that HASURA_GRAPHQL_DATABASE_URL requires the real IP address:port of the SQL DB
+   6.   Copy the bdjuno-deploy.sh script from explorer-v2 to the new folder
+   7.   Copy the new folder bdjuno_gql_deploy to the [new VM via SSH](https://cloud.google.com/sdk/gcloud/reference/compute/scp) 
+   8.  [Install Docker on the VM](https://docs.docker.com/engine/install/) and [Install docker-compose](https://docs.docker.com/compose/install/)
+   9.  Inside the VM change dir to the newly copied folder and deploy BDJuno/Hasura like ``` ./bdjuno-deploy.sh prod HASURA_URL HASURA_SECRET_KEY``` 
+      - Hasura URL and Secret Key should be the same as the ones defined in .env-bdjuno : HASURA_GRAPHQL_ADMIN_SECRET and HASURA_GRAPHQL_ENDPOINT_URL
+      - This will pull, build and deploy the latest code for cudos-bdjuno and deploy it via docker to the specified instance using the configs you provided
+   10. Delete the newly created folder that you transfered to the server on both local and remote
+6. Provision new Compute Engine instance in gcloud for Explorer-v2 UI
+       - RAM has to be >= 8 GB   
+       - Tag your instance, for example : private-testnet-explorer-v2-ui / public-testnet-explorer-v2-ui
+   1. [Create a static IP address for your GCE Instance](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address)
+   2. Expose PORT 3000 for the outside world:
+         - Go to cloud.google.com
+         - Go to my Console
+         - Choose your Project
+         - Choose Networking > VPC network
+         - Choose "Firewall"
+         - Choose "Create Firewall Rule"
+         - To apply the rule to select VM instances, select Targets > "Specified target tags", and enter into "Target tags" the name of the tag ( private-testnet-gql for example ). This tag will be used to apply the new firewall rule onto whichever instance you'd like. Then, make sure the instances have the network tag applied.
+         - Set Source IP ranges to allow traffic from all IPs: 0.0.0.0/0
+         - To allow incoming TCP connections to port 5000,8080, in "Protocols and Ports", check "tcp" and enter 5000,8080
+         - Click Create (or click “Equivalent Command Line” to show the gcloud command to create the same rule)
+   3.  Create a new folder named explorer-v2-ui-deploy and inside it place the relevant configs(depending on the environment)
+       - From the relevant folder(private/public) to the new folder:
+         - Copy and Rename .env-big-dipper-2.sample to .env-big-dipper-2
+   4.  Go over the configs and check if the parameters are right (IP of the node, Hasura URL, Db names, etc)
+   5.  Copy the big-dipper-2-ui-deploy.sh script from explorer-v2 to the new folder
+   6.  Copy the new folder explorer-v2-ui-deploy to the [new VM via SSH](https://cloud.google.com/sdk/gcloud/reference/compute/scp) 
+   7.  [Install Docker on the VM](https://docs.docker.com/engine/install/) and [Install docker-compose](https://docs.docker.com/compose/install/)
+   8.  Inside the VM change dir to the newly copied folder and deploy BDJuno/Hasura like ```./big-dipper-2-ui-deploy.sh prod```
+      - This will pull, build and deploy the latest code for abig-dipper-2 and deploy it via docker to the specified instance using the configs you provided
+   9.  Delete the newly created folder that you transfered to the server on both local and remote
 
 ## Additional:
 ### More info about gcloud sql proxy: 
