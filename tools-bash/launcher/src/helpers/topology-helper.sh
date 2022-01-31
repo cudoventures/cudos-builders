@@ -1,19 +1,12 @@
-# TO DO: Process topology
-# TO DO: Validate topology
-# function a () {
-#     echo '{"hostname":"test","domainname":"example.com"}' | python -c 'import json,sys;obj=json.load(sys.stdin);print obj["hostname"]'
-# }
-
-topology=$(cat $LAUNCHER_DIR/config/topology.json)
+topology=$(cat $WORKING_DIR/config/topology.json)
 
 # computers
-
 function getComputersSize {
-    echo $topology | python3 -c 'import json, sys; obj = json.load(sys.stdin); print(len(obj['computers']))'
+    echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(len(obj['computers']))"
 }
 
 function getComputerIp {
-    echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['computers'][$1]['id'])"
+    echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['computers'][$1]['ip'])"
 }
 
 function getComputerPort {
@@ -33,7 +26,6 @@ function getComputerPass {
 }
 
 # validators
-
 function getValidatorComputerId {
     echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['nodes']['primary-validator']['computerId'])"
 }
@@ -51,7 +43,6 @@ function getValidatorOrchEthPrivKey {
 }
 
 # seeds
-
 function getSeedsSize {
     echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(len(obj['nodes']['seeds']))"
 }
@@ -65,7 +56,6 @@ function getSeedComputerId {
 }
 
 # sentries
-
 function getSentriesSize {
     echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(len(obj['nodes']['sentries']))"
 }
@@ -77,6 +67,3 @@ function getSentryValidatorId {
 function getSentryComputerId {
     echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['nodes']['sentries'][$1]['computerId'])"
 }
-
-RES=$(getComputersSize)
-echo $RES

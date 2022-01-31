@@ -1,0 +1,36 @@
+version: '3.9'
+
+networks:
+  shared-cudos-launcher-network:
+    name: shared-cudos-launcher-network
+
+volumes:
+  cudosnodedata:
+    driver: local
+
+services:
+  cudos-launcher-node:
+    image: cudos-launcher-node
+    container_name: $CONTAINER_NAME
+    build:
+      dockerfile: ./node.dockerfile
+      context: ./
+      args:
+        USER_NAME: "$USER_NAME"
+        USER_ID: "$USER_ID"
+        GROUP_NAME: "$GROUP_NAME"
+        GROUP_ID: "$GROUP_ID"
+        DOCKER_GROUP_ID: "$DOCKER_GROUP_ID"
+        WORKDIR: "$WORKDIR"
+    restart: unless-stopped
+    ports:
+      - "$SSH_PORT:22"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - shared-cudos-launcher-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "128m"
+        max-file: "1"

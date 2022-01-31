@@ -1,0 +1,1 @@
+// TO DO: Check validators' node ports in .docker-compose

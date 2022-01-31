@@ -12,7 +12,7 @@ fi
 
 # TO DO: Check wallet balance
 
-if [ ! -f "$LAUNCHER_DIR/config/topology.json" ]; then
-    echo -e "${COLOR_RED}Error:${COLOR_DEFAULT} The $LAUNCHER_DIR/config/topology.json file is missing";
+if [ ! -f "$WORKING_DIR/config/topology.json" ]; then
+    echo -e "${COLOR_RED}Error:${COLOR_DEFAULT} The $WORKING_DIR/config/topology.json file is missing";
     exit 1
 fi
