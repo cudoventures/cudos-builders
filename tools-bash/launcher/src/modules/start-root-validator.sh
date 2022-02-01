@@ -38,4 +38,7 @@ SSH_VALIDATOR "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && docker-com
 SSH_VALIDATOR "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && docker-compose --env-file ./root-node.mainnet.arg -f ./start-root-node.yml -p cudos-start-root-node up --build -d"
 
 VALIDATOR_TENEDRMINT_NODE_ID=$(SSH_VALIDATOR "docker container exec cudos-start-root-node cudos-noded tendermint show-node-id")
+
+GENESIS_JSON=$(SSH_VALIDATOR "docker container exec cudos-start-root-node /bin/bash -c \"cat \\\$CUDOS_HOME/config/genesis.json\"")
+
 unalias SSH_VALIDATOR
