@@ -11,33 +11,45 @@ if [ "$?" != 0 ]; then
     exit $?;
 fi;
 
-source "$WORKING_SRC_DIR/incs/validate.sh"
+source "$WORKING_SRC_DIR/incs/validate-script-requirements.sh"
 if [ "$?" != 0 ]; then
     exit $?;
 fi;
 
-source "$WORKING_SRC_DIR/helpers/topology-helper.sh"
+source "$WORKING_SRC_DIR/incs/topology.sh"
 if [ "$?" != 0 ]; then
     exit $?;
 fi;
 
-if [ "$SSH_AGENT_PID" = "" ]; then
-    eval $(ssh-agent -s);
-fi
+source "$WORKING_SRC_DIR/incs/validate-topology.sh"
+if [ "$?" != 0 ]; then
+    exit $?;
+fi;
 
-IP=$(getComputerIp 0)
-PORT=$(getComputerPort 0)
-USER=$(getComputerUser 0)
-SSH_KEY_PATH=$(getComputerSshKeyPath 0)
-PASS=$(getComputerPass 0)
+source "$WORKING_SRC_DIR/modules/load-ssh-keys.sh"
+if [ "$?" != 0 ]; then
+    exit $?;
+fi;
 
-echo "echo 'cudos'" > /tmp/laucher-ask-pass.sh
-chmod +x /tmp/laucher-ask-pass.sh
-DISPLAY=:0 SSH_ASKPASS="/tmp/laucher-ask-pass.sh" ssh-add $SSH_KEY_PATH < /dev/null
-rm -rf /tmp/laucher-ask-pass.sh
+source "$WORKING_SRC_DIR/incs/validate-instances.sh"
+if [ "$?" != 0 ]; then
+    exit $?;
+fi;
 
-# DISPLAY=:0 SSH_ASKPASS="$WORKING_SRC_DIR/helpers/ask-pass-helper.sh" ssh -o "StrictHostKeyChecking no" ${USER}@${IP} -p ${PORT} < /dev/null
-ssh -o "StrictHostKeyChecking no" ${USER}@${IP} -p ${PORT} "ls -la"
+# start root-validator
+source "$WORKING_SRC_DIR/modules/start-root-validator.sh"
+if [ "$?" != 0 ]; then
+    exit $?;
+fi;
 
-# Validate software requirements
-# Start the nodes
+# start sentries
+source "$WORKING_SRC_DIR/modules/start-seeds.sh"
+if [ "$?" != 0 ]; then
+    exit $?;
+fi;
+
+# start seeds
+source "$WORKING_SRC_DIR/modules/start-sentries.sh"
+if [ "$?" != 0 ]; then
+    exit $?;
+fi;

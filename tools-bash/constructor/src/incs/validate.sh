@@ -103,7 +103,7 @@ freeSpaceInKiB=$(df -P . | tail -1 | awk '{print $4}')
 # freeSpaceRequirementInKiB=750000000
 freeSpaceRequirementInKiB=10000000
 if (( freeSpaceInKiB < freeSpaceRequirementInKiB )); then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Free space is less than 1TB ($freeSpaceInKiB KiB < $freeSpaceRequirementInKiB KiB)";
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Free space is less than $freeSpaceRequirementInKiB KiB (Available = $freeSpaceInKiB KiB)";
     exit 1;
 fi
 

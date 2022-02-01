@@ -1,0 +1,15 @@
+CUDOS_HOME=/usr/cudos/cudos-data
+
+ENV_FILE=./seed-node.mainnet.env
+GENESIS_FILENAME=genesis.mainnet.json
+PERSISTENT_PEERS_FILENAME=persistent-peers.mainnet.config
+SEEDS_FILENAME=seeds.mainnet.config
+STATE_SYNC_RPC_SERVERS_FILENAME=state-sync-rpc-servers.mainnet.config
+
+INIT_CONTAINER_NAME=cudos-init-seed-node-mainnet
+START_CONTAINER_NAME=cudos-start-seed-node-mainnet
+VOLUME_NAME=cudos-data-seed-node-mainnet
+
+PORT26656=26656
+PORT26657=26657
+PORT26660=26660
