@@ -8,8 +8,6 @@ WORKDIR /usr/cudos-builder
 
 COPY ./CudosNode ./CudosNode
 
-COPY ./CudosGravityBridge ./CudosGravityBridge
-
 RUN cd ./CudosNode && make
 
 RUN FOLDER=$(ls /go/pkg/mod/github.com/\!cosm\!wasm/ | grep wasmvm@v) && ln -s /go/pkg/mod/github.com/\!cosm\!wasm/${FOLDER} /go/pkg/mod/github.com/\!cosm\!wasm/wasmvm
