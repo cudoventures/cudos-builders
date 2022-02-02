@@ -19,7 +19,7 @@ CREATE TABLE pre_commit
 CREATE INDEX pre_commit_validator_address_index ON pre_commit (validator_address);
 CREATE INDEX pre_commit_height_index ON pre_commit (height);
 
-CREATE TABLE block 
+CREATE TABLE block
 (
     height           BIGINT UNIQUE PRIMARY KEY,
     hash             TEXT                        NOT NULL UNIQUE,
@@ -638,8 +638,8 @@ CREATE INDEX proposal_tally_result_height_index ON proposal_tally_result (height
 CREATE TABLE proposal_staking_pool_snapshot
 (
     proposal_id       INTEGER REFERENCES proposal (id) PRIMARY KEY,
-    bonded_tokens     BIGINT NOT NULL,
-    not_bonded_tokens BIGINT NOT NULL,
+    bonded_tokens     DECIMAL NOT NULL,
+    not_bonded_tokens DECIMAL NOT NULL,
     height            BIGINT NOT NULL,
     CONSTRAINT unique_staking_pool_snapshot UNIQUE (proposal_id)
 );

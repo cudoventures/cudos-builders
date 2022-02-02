@@ -11,6 +11,7 @@ NOTE: Requires a running cudos-node instance !
 2. Call the script with  ``` ./deploy.sh dev http://localhost:8080 myadminsecret``` and  ```./big-dipper-2-ui-deploy.sh dev```
 
 ## Testnet/Mainnet deployment guide
+### If you are only redeploying on an already existing instance - please skip to 5.4 or 6.3
 1. Provision new SQL instance in gcloud SQL ( or connect to an already created one)
    - must have public IP address enabled
 2. Create a new database in the gcloud SQL instance (public-testnet-explorer-v2 / private-testnet-exporer-v2)
@@ -63,7 +64,7 @@ NOTE: Requires a running cudos-node instance !
          - Choose "Create Firewall Rule"
          - To apply the rule to select VM instances, select Targets > "Specified target tags", and enter into "Target tags" the name of the tag ( private-testnet-gql for example ). This tag will be used to apply the new firewall rule onto whichever instance you'd like. Then, make sure the instances have the network tag applied.
          - Set Source IP ranges to allow traffic from all IPs: 0.0.0.0/0
-         - To allow incoming TCP connections to port 5000,8080, in "Protocols and Ports", check "tcp" and enter 5000,8080
+         - To allow incoming TCP connections to port 3000, in "Protocols and Ports", check "tcp" and enter 3000
          - Click Create (or click “Equivalent Command Line” to show the gcloud command to create the same rule)
    3.  Create a new folder named explorer-v2-ui-deploy and inside it place the relevant configs(depending on the environment)
        - From the relevant folder(private/public) to the new folder:

@@ -12,7 +12,8 @@ if [ $env = "prod" ]; then
 elif [ $env = "dev" ]; then
     docker-compose --file=docker-compose-dev.yml up --build -d
 else
-    echo "Wrong env passed: can be either dev or prod"
+    echo ERROR: "Wrong env passed: can be either dev or prod"
+    exit 1
 fi
 
 # clean up
