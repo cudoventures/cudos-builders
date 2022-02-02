@@ -1,7 +1,9 @@
 #!/bin/bash -i
 
+echo -ne "Loading SSH keys...";
+
 if [ "$SSH_AGENT_PID" = "" ]; then
-    eval $(ssh-agent -s);
+    result=$(eval $(ssh-agent -s))
 fi
 
 computersSize=$(getComputersSize)
@@ -11,7 +13,12 @@ do
     pass=$(getComputerPass $i)
     echo "echo '$pass'" > /tmp/laucher-ask-pass.sh
     chmod +x /tmp/laucher-ask-pass.sh
-    DISPLAY=:0 SSH_ASKPASS="/tmp/laucher-ask-pass.sh" ssh-add $sshKeyPath < /dev/null
+    DISPLAY=:0 SSH_ASKPASS="/tmp/laucher-ask-pass.sh" ssh-add $sshKeyPath < /dev/null 2> /dev/null
+    if [ "$?" != 0 ]; then
+        exit $?;
+    fi;
 done
 
 rm -rf /tmp/laucher-ask-pass.sh
+
+echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";

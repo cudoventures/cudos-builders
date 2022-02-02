@@ -11,6 +11,11 @@ if [ "$?" != 0 ]; then
     exit $?;
 fi;
 
+source "./src/incs/utils.sh"
+if [ "$?" != 0 ]; then
+    exit $?;
+fi;
+
 source "$WORKING_SRC_DIR/incs/validate-script-requirements.sh"
 if [ "$?" != 0 ]; then
     exit $?;
@@ -36,11 +41,15 @@ if [ "$?" != 0 ]; then
     exit $?;
 fi;
 
+echo "" # new line
+
 # start root-validator
 source "$WORKING_SRC_DIR/modules/start-root-validator.sh"
 if [ "$?" != 0 ]; then
     exit $?;
 fi;
+
+echo "" # new line
 
 # start sentries
 source "$WORKING_SRC_DIR/modules/start-seeds.sh"
@@ -48,8 +57,14 @@ if [ "$?" != 0 ]; then
     exit $?;
 fi;
 
+echo "" # new line
+
 # start seeds
 source "$WORKING_SRC_DIR/modules/start-sentries.sh"
 if [ "$?" != 0 ]; then
     exit $?;
 fi;
+
+echo "" # new line
+
+echo -e "${STYLE_GREEN}The network has been started${STYLE_DEFAULT}";

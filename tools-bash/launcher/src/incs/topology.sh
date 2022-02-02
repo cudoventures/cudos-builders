@@ -36,10 +36,6 @@ function getValidatorComputerId {
     echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['nodes']['primary-validator']['computerId'])"
 }
 
-function getValidatorId {
-    echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['nodes']['primary-validator']['validatorId'])"
-}
-
 function getValidatorEnvPath {
     echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['nodes']['primary-validator']['envPath'])"
 }
@@ -57,10 +53,6 @@ function getSeedsSize {
     echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(len(obj['nodes']['seeds']))"
 }
 
-function getSeedValidatorId {
-    echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['nodes']['seeds'][$1]['validatorId'])"
-}
-
 function getSeedComputerId {
     echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['nodes']['seeds'][$1]['computerId'])"
 }
@@ -74,14 +66,25 @@ function getSentriesSize {
     echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(len(obj['nodes']['sentries']))"
 }
 
-function getSentryValidatorId {
-    echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['nodes']['sentries'][$1]['validatorId'])"
-}
-
 function getSentryComputerId {
     echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['nodes']['sentries'][$1]['computerId'])"
 }
 
 function getSentryEnvPath {
     echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['nodes']['sentries'][$1]['envPath'])"
+}
+
+# topology utils
+function getComputerIndexById {
+    result="-1"
+    computersSize=$(getComputersSize)
+    for i in $(seq 0 $(($computersSize-1)))
+    do
+        computerId=$(getComputerId $i)
+        if [ "$computerId" = "$1" ]; then
+            result="$i"
+            break
+        fi
+    done
+    echo "$result"
 }

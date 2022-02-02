@@ -5,35 +5,27 @@
             "ip": "auto",
             "port": 22,
             "user": "",
-            "sshKey": "",
+            "sshKeyPath": "",
             "pass": ""
         }
     ],
     "nodes": {
         "primary-validator": {
             "computerId": "node001",
-            "validatorId": "validator01",
+            "envPath": "/absolute-path-to-the-env",
             "orchEthAddress": "0x....",
-            "ethPrivKey": ""
+            "ethPrivKey": "hex-formated-private-key"
         },
         "seeds": [
             {
-                "validatorId": "validator01",
-                "computerId": "node100"
-            },
-            {
-                "validatorId": "validator02",
-                "computerId": "node101"
+                "computerId": "node100",
+                "envPath": "/absolute-path-to-the-env"
             }
         ],
         "sentries": [
             {
-                "validatorId": "validator01",
-                "computerId": "node200"
-            },
-            {
-                "validatorId": "validator02",
-                "computerId": "node201"
+                "computerId": "node200",
+                "envPath": "/absolute-path-to-the-env"
             }
         ]
     }

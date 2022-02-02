@@ -1,6 +1,6 @@
 #!/bin/bash -i
 
-echo -ne "Validating...";
+echo -ne "Validating instances...";
 
 computersSize=$(getComputersSize)
 for i in $(seq 0 $(($computersSize-1)))
@@ -8,6 +8,8 @@ do
     ip=$(getComputerIp $i)
     port=$(getComputerPort $i)
     user=$(getComputerUser $i)
+
+    # check if can execute docker commands without sudo
 
     result=$(ssh -o "StrictHostKeyChecking no" ${user}@${ip} -p ${port} "sudo -n true")
     if [ "$result" != "" ]; then

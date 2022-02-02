@@ -1,13 +1,14 @@
-Alpha 1
-Add params for local and production
-Peers - ID and params for local and production
-Add binary builder
-add sentries
-!genesis should be initialized first
+# -> Alpha 1
+Done
 
-Beta 1:
+# Beta 1 (Thursday):
+Standalone validate script which checks connection to peers
 Add Docker ports issue fix
+Add new Gravity Smart Contract
+
+# RC 1 (Friday):
+Genesis should be initialized first
 Orchestrators
 
-RC 1:
-Logging
+# Validation and verification (Saturday)
+Validate topology

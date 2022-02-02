@@ -1,5 +1,7 @@
 #!/bin/bash -i
 
+echo -ne "Validating script requirements...";
+
 if [ "$PARAM_ETH_RPC" = "" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_ETH_RPC must not be empty";
     exit 1
@@ -21,4 +23,4 @@ fi
 
 # validate the software on each instance
 
-
+echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";

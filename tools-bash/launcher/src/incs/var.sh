@@ -1,5 +1,7 @@
 #!/bin/bash -i
 
+echo -ne "Processing variables...";
+
 scriptDir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 WORKING_SRC_DIR=$(cd $scriptDir/..  && pwd)
 WORKING_DIR=$(cd $scriptDir/../..  && pwd)
@@ -15,3 +17,5 @@ if [ ! -f "$WORKING_DIR/config/.env" ]; then
 fi
 
 source "$WORKING_DIR/config/.env"
+
+echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
