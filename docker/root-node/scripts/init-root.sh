@@ -174,7 +174,7 @@ cat "${CUDOS_HOME}/config/genesis.json" | jq --arg VALIDATOR_03_ADDRESS "$VALIDA
 cat "${CUDOS_HOME}/config/genesis.json" | jq '.app_state.auth.accounts += [{
           "@type": "/cosmos.auth.v1beta1.ModuleAccount",
           "base_account": {
-            "account_number": "16",
+            "account_number": "0",
             "address": "cudos16n3lc7cywa68mg50qhp847034w88pntq8823tx",
             "pub_key": null,
             "sequence": "0"
