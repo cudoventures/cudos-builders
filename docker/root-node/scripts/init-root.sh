@@ -165,9 +165,37 @@ cudos-noded add-genesis-account $FAUCET_ADDRESS "20000000000000000000000000000${
 
 cat "${CUDOS_HOME}/config/genesis.json" | jq '.app_state.gravity.erc20_to_denoms[0] |= .+ {"erc20": "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d", "denom": "acudos"}' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
 
+# Setting static val orchestrator addresses
 cat "${CUDOS_HOME}/config/genesis.json" | jq --arg ROOT_VALIDATOR_01_ADDRESS "$ROOT_VALIDATOR_01_ADDRESS" '.app_state.gravity.static_val_cosmos_addrs += [$ROOT_VALIDATOR_01_ADDRESS]' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
 cat "${CUDOS_HOME}/config/genesis.json" | jq --arg VALIDATOR_02_ADDRESS "$VALIDATOR_02_ADDRESS" '.app_state.gravity.static_val_cosmos_addrs += [$VALIDATOR_02_ADDRESS]' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
 cat "${CUDOS_HOME}/config/genesis.json" | jq --arg VALIDATOR_03_ADDRESS "$VALIDATOR_03_ADDRESS" '.app_state.gravity.static_val_cosmos_addrs += [$VALIDATOR_03_ADDRESS]' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
+
+# Setting gravity module account and funding it as per parameter
+cat "${CUDOS_HOME}/config/genesis.json" | jq '.app_state.auth.accounts += [{
+          "@type": "/cosmos.auth.v1beta1.ModuleAccount",
+          "base_account": {
+            "account_number": "16",
+            "address": "cudos16n3lc7cywa68mg50qhp847034w88pntq8823tx",
+            "pub_key": null,
+            "sequence": "0"
+          },
+          "name": "gravity",
+          "permissions": [
+            "minter",
+            "burner"
+          ]
+        }]' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
+
+cat "${CUDOS_HOME}/config/genesis.json" | jq --arg GRAVITY_MODULE_BALANCE "$GRAVITY_MODULE_BALANCE" '.app_state.bank.balances += [{
+          "address": "cudos16n3lc7cywa68mg50qhp847034w88pntq8823tx",
+          "coins": [
+            {
+              "amount": "\($GRAVITY_MODULE_BALANCE)",
+              "denom": "acudos"
+            }
+          ]
+        }]' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
+
 
 cudos-noded collect-gentxs
 
