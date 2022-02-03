@@ -1,6 +1,7 @@
 FROM binary-builder
 
 ARG CUDOS_HOME
+ARG EXPOSE_IP
 ARG GENESIS_FILENAME
 ARG SEEDS_FILENAME
 ARG PERSISTENT_PEERS_FILENAME
@@ -20,5 +21,6 @@ RUN mv "./external-config/${PERSISTENT_PEERS_FILENAME}" ./external-config/persis
     sed -i 's/\r$//' ./init-seed.sh
 
 ENV CUDOS_HOME=${CUDOS_HOME}
+ENV EXTERNAL_ADDRESS=${EXPOSE_IP}:26656
 
 CMD ["/bin/bash", "-c", "./init-seed.sh"]

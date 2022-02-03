@@ -9,6 +9,7 @@ services:
       context: ../../../
       args:
         CUDOS_HOME: "$CUDOS_HOME"
+        EXPOSE_IP: "$EXPOSE_IP"
         GENESIS_FILENAME: "$GENESIS_FILENAME"
         SEEDS_FILENAME: "$SEEDS_FILENAME"
         PERSISTENT_PEERS_FILENAME: "$PERSISTENT_PEERS_FILENAME"
