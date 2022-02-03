@@ -4,11 +4,10 @@ Done
 # Beta 1 (Thursday):
 Standalone validate script which checks connection to peers
 Add Docker ports issue fix
-Add new Gravity Smart Contract
+Orchestrators
 
 # RC 1 (Friday):
-Genesis should be initialized first
-Orchestrators
+Merge genesis
 
 # Validation and verification (Saturday)
 Validate topology
