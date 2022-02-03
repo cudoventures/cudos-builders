@@ -11,6 +11,4 @@ RUN chmod +x ./init-root.sh && \
 
 ENV CUDOS_HOME=${CUDOS_HOME}
 
-ENV GRAVITY_MODULE_BALANCE=${GRAVITY_MODULE_BALANCE}
-
 CMD ["/bin/bash", "-c", "./init-root.sh"]
