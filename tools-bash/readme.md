@@ -1,5 +1,6 @@
+## Constructor
 # Overview
-The purpose of the constructor is to init and launch nodes on a predefined network.
+The purpose of the constructor is to init and start nodes on a predefined network.
 
 # Params setting
 All the parameters that an user needs to set are in the .env files in the config folder.
@@ -53,3 +54,63 @@ After that, to start the node, run (again from the constructor folder):
 # Things to keep in mind
 1. The folder you use for a node needs to be created and empty. You will get errors otherwise.
 2. If you are running more than one node on a same server, you might not be able to create the docker, because they will try to ppen the same ports.
+
+## Launcher
+# Overview
+This sets a validator setup with a sentry and a seed on one or more servers. For that purpose a topology is prewritten and according to it docker containers are created for each of the nodes.
+
+# Prerequisites
+On each of the servers you are goin to use you need:
+1. At least 10gb free space.
+2. Docker installed.
+3. Docker-compose version 1.29 installed.
+
+# Params setting
+All the parameters that an user needs to set are in the .env files in the config folder.
+To set them, copy the .env.example files and fill them.
+
+1. .env
+    This is a common env for all nodes. Here you need to fill:
+    1. PARAM_ETH_RPC a RPC endpoint of an Ethereum node. This is used for orchestrators.
+    2. PARAM_CONTRACT_DEPLOYER_ETH_PRIV_KEY a private key of an address with some ETH for gravity bridge contract deployment
+    3. PARAM_SOURCE_DIR this is the dir on which the nodes home dir will be, usually we use something like "/usr/cudos"
+2. validator.env
+    This is the same env that we use for a standalone root node.
+3. seed.env
+    This is the same env that we use for a standalone seed node.
+4. sentry.env
+    This is the same env that we use for a standalone sentry node.
+5. topology.env
+    This is where we define the servers info and the nodes. See the examples given, but to summarize:
+    1. Under "computers" add up to 3 servers according to the structure below:
+    ```
+    {
+        "id": "node001", //server name to be used in the nodes topology
+        "ip": "192.168.1.102", //server ip
+        "port": 22, //port for ssh connection
+        "user": "username", //username for ssh access
+        "sshKeyPath": "/mnt/keys/vmware", // global path to the SSH key on the machine you are running this script from
+        "pass": "password" //password for ssh access
+    }
+    ```
+    2. Under nodes you already have defined the nodes topology, you just need to replace the values. On all noded the "computerId" is the id of the server they are goin to be deployed and the "envPath" is the global path to the env files that you filled out for each node.
+
+    The "orchEthAddress" on the validator node is an ethereum address that is going to be used for the orchestrator.
+    The "ethPrivKey" is the private key for that same address.
+
+# Launching
+To be able to run the script without a constant prompt for a password, set you ssh key to each of the servers with the same username you set in the topology:
+```
+ssh-copy-id username@server_ip
+```
+
+After all the params are filled out, all that is left to do go to tho "launcher" dir and from there run the launch script:
+```
+ ./src/launch.sh 
+```
+
+If the script is not executable, make it so:
+```
+chmode +x ./src/launch.sh
+```
+And then try again to execute it.
