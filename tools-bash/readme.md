@@ -1,8 +1,8 @@
-## Constructor
-# Overview
+# Constructor
+## Overview
 The purpose of the constructor is to init and start nodes on a predefined network.
 
-# Params setting
+## Params setting
 All the parameters that an user needs to set are in the .env files in the config folder.
 To set them, copy the .env.example files and fill them.
 
@@ -24,7 +24,7 @@ To set them, copy the .env.example files and fill them.
     2. PARAMS_SEED is same as the above, but for seed nodes.
     3. PARAMS_PRIVATE_PEER_IDS is the node ids of the nodes you would like not to send to the network, when requested through the PEX.
 
-# Init node
+## Init node
 To setup a node you first need to initialize it. This will build the binary, make a node init and then set all the params inside the app.toml and config.toml config files.
 
 When you first clone the repo, the scripts you need to execute might not be executable. So if you are under linux, you would need to make them executable.
@@ -38,7 +38,7 @@ cd cudos-builders/tools-bash/constructor
 ```
 Types of nodes are: full-node|seed-node|sentry-node|clustered-validator-node|standalone-validator-node
 
-# Start node
+## Start node
 To start a node it first needs to be innitialized from the step above. This will setup a docker container with the node started inside of it.
 
 To do this, you need to make the start script executable again:
@@ -51,21 +51,21 @@ After that, to start the node, run (again from the constructor folder):
 ./src/start.sh <the type of node you want to init>
 ```
 
-# Things to keep in mind
+## Things to keep in mind
 1. The folder you use for a node needs to be created and empty. You will get errors otherwise.
 2. If you are running more than one node on a same server, you might not be able to create the docker, because they will try to ppen the same ports.
 
-## Launcher
-# Overview
+# Launcher
+## Overview
 This sets a validator setup with a sentry and a seed on one or more servers. For that purpose a topology is prewritten and according to it docker containers are created for each of the nodes.
 
-# Prerequisites
+## Prerequisites
 On each of the servers you are goin to use you need:
 1. At least 10gb free space.
 2. Docker installed.
 3. Docker-compose version 1.29 installed.
 
-# Params setting
+## Params setting
 All the parameters that an user needs to set are in the .env files in the config folder.
 To set them, copy the .env.example files and fill them.
 
@@ -98,7 +98,7 @@ To set them, copy the .env.example files and fill them.
     The "orchEthAddress" on the validator node is an ethereum address that is going to be used for the orchestrator.
     The "ethPrivKey" is the private key for that same address.
 
-# Launching
+## Launching
 To be able to run the script without a constant prompt for a password, set you ssh key to each of the servers with the same username you set in the topology:
 ```
 ssh-copy-id username@server_ip
