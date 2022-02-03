@@ -15,6 +15,10 @@ function getComputerIp {
     echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['computers'][$1]['ip'])"
 }
 
+function getComputerInternalIp {
+    echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['computers'][$1]['internalIp'])"
+}
+
 function getComputerPort {
     echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['computers'][$1]['port'])"
 }
@@ -38,6 +42,10 @@ function getValidatorComputerId {
 
 function getValidatorEnvPath {
     echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['nodes']['primary-validator']['envPath'])"
+}
+
+function getValidatorOrchEnvPath {
+    echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['nodes']['primary-validator']['orchEnvPath'])"
 }
 
 function getValidatorOrchEthAddress {

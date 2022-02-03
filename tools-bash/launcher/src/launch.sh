@@ -67,4 +67,12 @@ fi;
 
 echo "" # new line
 
+# start seeds
+source "$WORKING_SRC_DIR/modules/start-gravity.sh"
+if [ "$?" != 0 ]; then
+    exit $?;
+fi;
+
+echo "" # new line
+
 echo -e "${STYLE_GREEN}The network has been started${STYLE_DEFAULT}";
