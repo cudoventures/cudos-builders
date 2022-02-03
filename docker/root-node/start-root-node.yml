@@ -18,8 +18,8 @@ services:
     volumes:
       - '../../../CudosData/$VOLUME_NAME:$CUDOS_HOME'
     ports:
-      - "${PORT26656}:26656"
-      - "${PORT26660}:26660"
+      - "${EXPOSE_IP}:${PORT26656}:26656"
+      - "${EXPOSE_IP}:${PORT26660}:26660"
     networks:
       - shared-cudos-network
     logging:
