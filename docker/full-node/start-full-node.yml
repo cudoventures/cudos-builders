@@ -13,6 +13,7 @@ services:
       context: ../../../
       args:
         CUDOS_HOME: "$CUDOS_HOME"
+        EXPOSE_IP: "$EXPOSE_IP"
     restart: unless-stopped
     env_file: "$ENV_FILE"
     volumes:
