@@ -155,6 +155,8 @@ Each **computer** defined in the <code>topology.json</code> is accessed by a pri
 
 There are 2 scripts.
 
+**Important**: The side effect of executing any of these scripts will be a folder, defined in PARAM_SOURCE_DIR at .env, on each machine defined in topology.json
+
 **Launcher**: It starts the cluster.
 
 Ensure that it has execute permission and then start the script from ./launcher folder
@@ -163,7 +165,7 @@ Ensure that it has execute permission and then start the script from ./launcher 
 ./src/launcher.sh
 ```
 
-**Validate**: It validates the connection from current machine to other machines defined in the topology
+**Validate**: It validates the connection from current machine to other machines defined in the topology and also checks for available space, software, etc.
 
 Ensure that it has execute permission and then start the script from ./launcher folder
 
