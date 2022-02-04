@@ -9,7 +9,11 @@ do
     port=$(getComputerPort $i)
     user=$(getComputerUser $i)
 
-    # check if can execute docker commands without sudo
+    ssh -q -o "StrictHostKeyChecking no" ${user}@${ip} -p ${port} exit
+    if [ "$?" != 0 ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Unable to establish SSH connection to ${user}@${ip}:${port}";
+        exit 1;
+    fi;
 
     result=$(ssh -o "StrictHostKeyChecking no" ${user}@${ip} -p ${port} "sudo -n true")
     if [ "$result" != "" ]; then
@@ -32,8 +36,7 @@ do
     fi
 
     freeSpaceInKiB=$(ssh -o "StrictHostKeyChecking no" ${user}@${ip} -p ${port} "df -P \"$PARAM_SOURCE_DIR\" | tail -1 | awk '{print \$4}'")
-    # freeSpaceRequirementInKiB=750000000
-    freeSpaceRequirementInKiB=10000000
+    freeSpaceRequirementInKiB=500000000
     if (( freeSpaceInKiB < freeSpaceRequirementInKiB )); then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The instance $ip:$port has less than $freeSpaceRequirementInKiB KiB free space available (Available = $freeSpaceInKiB KiB)";
         exit 1;

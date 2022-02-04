@@ -2,7 +2,8 @@
     "computers": [
         {
             "id": "node001",
-            "ip": "auto",
+            "ip": "",
+            "internalIp": "",
             "port": 22,
             "user": "",
             "sshKeyPath": "",
@@ -13,8 +14,7 @@
         "primary-validator": {
             "computerId": "node001",
             "envPath": "/absolute-path-to-the-env",
-            "orchEthAddress": "0x....",
-            "ethPrivKey": "hex-formated-private-key"
+            "orchEnvPath": "/absolute-path-to-the-env",
         },
         "seeds": [
             {

@@ -48,7 +48,7 @@ if [ $IS_VALIDATOR = "true" ]; then
     chainId="cudos-1";
 
     # delete the existing genesis file in order to initialize the chain again
-    dockerResult=$(docker container exec $startContainerName /bin/bash -c "rm \$CUDOS_HOME/config/genesis.json");
+    dockerResult=$(docker container exec $startContainerName /bin/bash -c "rm -f \$CUDOS_HOME/config/genesis.json");
     dockerResult=$(docker container exec $startContainerName /bin/bash -c "cudos-noded init \$MONIKER 2> /dev/null");
 
     # Creating a random empty account to ensure that the keyring-backed is initialized, because when it is initialized the password is requested first, otherwise - the mnemonic

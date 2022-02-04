@@ -15,6 +15,10 @@ function getComputerIp {
     echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['computers'][$1]['ip'])"
 }
 
+function getComputerInternalIp {
+    echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['computers'][$1]['internalIp'])"
+}
+
 function getComputerPort {
     echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['computers'][$1]['port'])"
 }
@@ -40,13 +44,17 @@ function getValidatorEnvPath {
     echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['nodes']['primary-validator']['envPath'])"
 }
 
-function getValidatorOrchEthAddress {
-    echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['nodes']['primary-validator']['orchEthAddress'])"
+function getValidatorOrchEnvPath {
+    echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['nodes']['primary-validator']['orchEnvPath'])"
 }
 
-function getValidatorOrchEthPrivKey {
-    echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['nodes']['primary-validator']['ethPrivKey'])"
-}
+# function getValidatorOrchEthAddress {
+#     echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['nodes']['primary-validator']['orchEthAddress'])"
+# }
+
+# function getValidatorOrchEthPrivKey {
+#     echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['nodes']['primary-validator']['ethPrivKey'])"
+# }
 
 # seeds
 function getSeedsSize {
