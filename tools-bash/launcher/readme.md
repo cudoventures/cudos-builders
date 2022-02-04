@@ -170,7 +170,7 @@ Ensure that it has execute permission and then start the script from ./launcher 
 Ensure that it has execute permission and then start the script from ./launcher folder
 
 ```bash
-./src/validate-connection.sh
+./src/validate.sh
 ```
 
 
