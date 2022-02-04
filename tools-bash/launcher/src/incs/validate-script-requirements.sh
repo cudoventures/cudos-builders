@@ -14,6 +14,11 @@ if [ "$PARAM_CONTRACT_DEPLOYER_ETH_PRIV_KEY" = "" ]; then
     exit 1
 fi
 
+if [ "$PARAM_SOURCE_DIR" = "" ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_SOURCE_DIR must not be empty";
+    exit 1
+fi
+
 # TO DO: Check wallet balance
 
 if [ ! -f "$WORKING_DIR/config/topology.json" ]; then

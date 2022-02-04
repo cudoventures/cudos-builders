@@ -15,8 +15,6 @@
             "computerId": "node001",
             "envPath": "/absolute-path-to-the-env",
             "orchEnvPath": "/absolute-path-to-the-env",
-            "orchEthAddress": "0x....",
-            "ethPrivKey": "hex-formated-private-key"
         },
         "seeds": [
             {

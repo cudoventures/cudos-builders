@@ -1,8 +1,8 @@
 #!/bin/bash -i
 
 validatorComputerId=$(getValidatorComputerId)
-validatorOrchEthAddress=$(getValidatorOrchEthAddress)
-validatorOrchEthPrivKey=$(getValidatorOrchEthPrivKey)
+# validatorOrchEthAddress=$(getValidatorOrchEthAddress)
+# validatorOrchEthPrivKey=$(getValidatorOrchEthPrivKey)
 validatorComputerIndex=$(getComputerIndexById "$validatorComputerId")
 
 validatorComputerIp=$(getComputerIp $validatorComputerIndex)

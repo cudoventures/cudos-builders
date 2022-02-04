@@ -48,13 +48,13 @@ function getValidatorOrchEnvPath {
     echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['nodes']['primary-validator']['orchEnvPath'])"
 }
 
-function getValidatorOrchEthAddress {
-    echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['nodes']['primary-validator']['orchEthAddress'])"
-}
+# function getValidatorOrchEthAddress {
+#     echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['nodes']['primary-validator']['orchEthAddress'])"
+# }
 
-function getValidatorOrchEthPrivKey {
-    echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['nodes']['primary-validator']['ethPrivKey'])"
-}
+# function getValidatorOrchEthPrivKey {
+#     echo $topology | python3 -c "import json, sys; obj = json.load(sys.stdin); print(obj['nodes']['primary-validator']['ethPrivKey'])"
+# }
 
 # seeds
 function getSeedsSize {

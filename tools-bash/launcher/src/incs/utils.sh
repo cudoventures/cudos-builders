@@ -10,7 +10,3 @@ function readEnvFromString {
     echo "$tmpEnv"
     unset tmpEnv
 }
-
-function execSsh {
-    ssh -o "StrictHostKeyChecking no" ${1}@${2} -p ${3} "$4"
-}
