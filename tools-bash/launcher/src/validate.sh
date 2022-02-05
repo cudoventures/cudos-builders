@@ -16,10 +16,10 @@ if [ "$?" != 0 ]; then
     exit $?;
 fi;
 
-source "$WORKING_SRC_DIR/incs/validate-script-requirements.sh"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
+# source "$WORKING_SRC_DIR/incs/validate-script-requirements.sh"
+# if [ "$?" != 0 ]; then
+#     exit $?;
+# fi;
 
 source "$WORKING_SRC_DIR/incs/topology.sh"
 if [ "$?" != 0 ]; then
@@ -31,15 +31,15 @@ if [ "$?" != 0 ]; then
     exit $?;
 fi;
 
-source "$WORKING_SRC_DIR/modules/load-ssh-keys.sh"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
+# source "$WORKING_SRC_DIR/modules/load-ssh-keys.sh"
+# if [ "$?" != 0 ]; then
+#     exit $?;
+# fi;
 
-source "$WORKING_SRC_DIR/incs/validate-instances.sh"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
+# source "$WORKING_SRC_DIR/incs/validate-instances.sh"
+# if [ "$?" != 0 ]; then
+#     exit $?;
+# fi;
 
 echo "" # new line
 

@@ -1,6 +1,6 @@
 # Overview
 
-The goal of this project is to start the primary-validator in a cluster with its corresponding seed and sentry nodes.
+The goal of this project is to start the primary-validator of a new blockchain network in a cluster with its corresponding seed and sentry nodes.
 
 ## Prerequirements 
 
@@ -35,7 +35,7 @@ Prepare the .env files for each of the nodes.
 
 **Validator:**
 
-Clone <em>validator.env.example</em> to <em>validator.mainnet.env</em> (The actual name could be arbitrary because the absolute path to this file is specified below in the configuration). It contains the following variables:
+Clone <em>validator.env.example</em> to <em>validator.mainnet.env</em> (The actual name could be arbitrary because the absolute filename to this file is specified below in the configuration). It contains the following variables:
 1. **MONIKER:** The name of the node. You could safely use the default value provided in the .example file. <em>Example: MONIKER="cudos-root-node-mainnet"</em>
 1. **CHAIN_ID:** The id of the chain. DO NOT MODIFY THIS VALUE. Leave it "cudos-1" as it is in the example.
 1. **ORCH_ETH_ADDRESS:** The ETH address of the the wallet that will be used by the orchestrator. <em>Example: ORCH_ETH_ADDRESS="0x582436824932f3b313e3a3b3d3e31413be6d6a"</em>
@@ -45,7 +45,7 @@ Clone <em>validator.env.example</em> to <em>validator.mainnet.env</em> (The actu
 
 **Seed:**
 
-Clone <em>seed.env.example</em> to <em>seed.mainnet.env</em> (The actual name could be arbitrary because the absolute path to this file is specified below in the configuration). It contains the following variables:
+Clone <em>seed.env.example</em> to <em>seed.mainnet.env</em> (The actual name could be arbitrary because the absolute filename to this file is specified below in the configuration). It contains the following variables:
 
 1. **MONIKER:** The name of the node. You could safely use the default value provided in the .example file. <em>Example: MONIKER="cudos-seed-node-mainnet-01"</em>
 1. **PERSISTENT_PEERS:** DO NOT MODIFY THIS VALUE. Leave it empty as it is in the example.
@@ -59,7 +59,7 @@ Clone <em>seed.env.example</em> to <em>seed.mainnet.env</em> (The actual name co
 
 **Sentry:**
 
-Clone <em>sentry.env.example</em> to <em>sentry.mainnet.env</em> (The actual name could be arbitrary because the absolute path to this file is specified below in the configuration). It contains the following variables:
+Clone <em>sentry.env.example</em> to <em>sentry.mainnet.env</em> (The actual name could be arbitrary because the absolute filename to this file is specified below in the configuration). It contains the following variables:
 
 1. **MONIKER:** The name of the node. You could safely use the default value provided in the .example file. <em>Example: MONIKER="cudos-sentry-node-mainnet-01"</em>
 1. **PERSISTENT_PEERS:** DO NOT MODIFY THIS VALUE. Leave it empty as it is in the example.
@@ -74,7 +74,7 @@ Clone <em>sentry.env.example</em> to <em>sentry.mainnet.env</em> (The actual nam
 
 **Orchestrator:**
 
-Clone <em>orchestrator.env.example</em> to <em>orchestrator.mainnet.env</em> (The actual name could be arbitrary because the absolute path to this file is specified below in the configuration). It contains the following variables:
+Clone <em>orchestrator.env.example</em> to <em>orchestrator.mainnet.env</em> (The actual name could be arbitrary because the absolute filename to this file is specified below in the configuration). It contains the following variables:
 
 1. **ADDRESS_PREFIX:** DO NOT MODIFY THIS VALUE. Leave it "cudos" as it is in the example.
 1. **FEES:** The amount of fees, with acudos suffix, that are paid by the orchestrator when he iteracts with the blockchain. The value must be large enough to ensure that a transaction will be included by some validator in a block. <em>Example: FEES="1000acudos"</em>
@@ -108,7 +108,7 @@ Each **computer** defined in the <code>topology.json</code> is accessed by a pri
     "internalIp": string, // The internal IP of the computer. It will be used for communication betweek the computers themselves.
     "port": number, // The SSH service port. Usually it is 22.
     "user": string, // The SSH service user.
-    "sshKeyPath": string, // Absolute path of the sshKey.
+    "sshKeyPath": string, // Absolute filename of the sshKey.
     "pass": string // The password of the sshKey.
 }
 ```
@@ -126,8 +126,8 @@ Each **computer** defined in the <code>topology.json</code> is accessed by a pri
 ```json
 {
     "computerId": string, // The id of the computer where this node will run.
-    "envPath": string, // Absolute path to the validator.mainnet.env created in step 2 of the config section above
-    "orchEnvPath": string, // Absolute path to the orchestrator.mainnet.env craeted in step 2 of the config section above
+    "envPath": string, // Absolute filename to the validator.mainnet.env created in step 2 of the config section above
+    "orchEnvPath": string, // Absolute filename to the orchestrator.mainnet.env craeted in step 2 of the config section above
 }
 ```
 
@@ -135,7 +135,7 @@ Each **computer** defined in the <code>topology.json</code> is accessed by a pri
 ```json
 {
     "computerId": string, // The id of the computer where this node will run.
-    "envPath": string, // Absolute path to the seed.mainnet.env created in step 2 of the config section above
+    "envPath": string, // Absolute filename to the seed.mainnet.env created in step 2 of the config section above
 }
 ```
 
@@ -143,7 +143,7 @@ Each **computer** defined in the <code>topology.json</code> is accessed by a pri
 ```json
 {
     "computerId": string, // The id of the computer where this node will run.
-    "envPath": string, // Absolute path to the seed.mainnet.env created in step 2 of the config section above
+    "envPath": string, // Absolute filename to the seed.mainnet.env created in step 2 of the config section above
 }
 ```
 
