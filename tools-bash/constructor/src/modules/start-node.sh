@@ -35,6 +35,10 @@ if [ "$IS_CLUSTERED_VALIDATOR" = "false" ]; then
     sed -i "s/PRIVATE_PEERS=.*/PRIVATE_PEERS=\"$PARAMS_PRIVATE_PEER_IDS\"/" "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME/$NODE_NAME.client.mainnet.env"
 fi
 
+if [ "$SHOULD_START_ORCHESTRATOR" = "true" ]; then
+    sed -i "158s/enable = false/enable = true/" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/app.toml"
+fi
+
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Starting the $NODE_NAME...";

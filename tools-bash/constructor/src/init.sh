@@ -16,6 +16,11 @@ if [ "$?" != 0 ]; then
     exit $?;
 fi;
 
+source "$WORKING_SRC_DIR/incs/utils.sh"
+if [ "$?" != 0 ]; then
+    exit $?;
+fi;
+
 source "$WORKING_SRC_DIR/incs/validate.sh"
 if [ "$?" != 0 ]; then
     exit $?;

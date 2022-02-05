@@ -89,6 +89,20 @@ if [ "$PARAM_KEYRING_OS_PASS" = "" ]; then
     exit 1;
 fi
 
+if [ "$SHOULD_START_ORCHESTRATOR" = "true" ]; then
+
+    if [ "$PARAMS_ORCHESTRATOR_ENV_PATH" != "" ] && [ ! -f "$PARAMS_ORCHESTRATOR_ENV_PATH" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Cannot find \"$PARAMS_ORCHESTRATOR_ENV_PATH\" (Orchestrator's .env file)";
+        exit 1;
+    fi;
+
+    if [ "$PARAMS_ORCH_ETH_ADDRESS" = "" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAMS_ORCH_ETH_ADDRESS must not be empty";
+        exit 1;
+    fi;
+
+fi;
+
 if [ ! -x "$(command -v docker)" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} You must install docker";
     exit 1;

@@ -12,6 +12,7 @@ NODE_NAME="$1"
 IS_VALIDATOR="false"
 IS_CLUSTERED_VALIDATOR="false"
 IS_STANDALONE_VALIDATOR="false"
+SHOULD_START_ORCHESTRATOR="false"
 if [ "$NODE_NAME" = "clustered-validator-node" ]; then
     NODE_NAME="full-node";
     IS_VALIDATOR="true"

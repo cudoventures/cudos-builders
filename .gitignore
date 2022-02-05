@@ -18,3 +18,4 @@ docker/monitoring/config/prometheus.tesnet.public.yml
 /tools-bash/constructor/gen-tx
 tools-bash/launcher/config/genesis.*
 tools-bash/launcher/src/genesis.sh
+tools-bash/launcher/exports

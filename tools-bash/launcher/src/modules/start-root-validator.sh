@@ -1,8 +1,6 @@
 #!/bin/bash -i
 
 validatorComputerId=$(getValidatorComputerId)
-# validatorOrchEthAddress=$(getValidatorOrchEthAddress)
-# validatorOrchEthPrivKey=$(getValidatorOrchEthPrivKey)
 validatorComputerIndex=$(getComputerIndexById "$validatorComputerId")
 
 validatorComputerIp=$(getComputerIp $validatorComputerIndex)
@@ -19,6 +17,7 @@ echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 arg=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && cat ./root-node.mainnet.arg")
 VALIDATOR_START_CONTAINER_NAME=$(readEnvFromString "$arg" "START_CONTAINER_NAME")
+VALIDATOR_VOLUME_NAME=$(readEnvFromString "$arg" "VOLUME_NAME")
 unset arg
 result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker stop $VALIDATOR_START_CONTAINER_NAME 2> /dev/null")
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR && sudo rm -rf ./CudosData"
@@ -41,6 +40,7 @@ if [ "$?" != 0 ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
     exit 1;
 fi
+ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosData/$VALIDATOR_VOLUME_NAME/config && sudo sed -i \"158s/enable = false/enable = true/\" ./app.toml"
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Clean-up after the initialization of the root-validator...";

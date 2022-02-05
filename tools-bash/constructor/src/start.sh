@@ -16,6 +16,15 @@ if [ "$?" != 0 ]; then
     exit $?;
 fi;
 
+source "$WORKING_SRC_DIR/incs/utils.sh"
+if [ "$?" != 0 ]; then
+    exit $?;
+fi;
+
+if [ "$IS_VALIDATOR"  = "true" ] && [ "$PARAMS_ORCHESTRATOR_ENV_PATH" != "" ]; then
+    SHOULD_START_ORCHESTRATOR="true"
+fi
+
 source "$WORKING_SRC_DIR/incs/validate.sh"
 if [ "$?" != 0 ]; then
     exit $?;
@@ -24,7 +33,14 @@ fi;
 source "$WORKING_SRC_DIR/modules/start-node.sh"
 if [ "$?" != 0 ]; then
     exit $?;
-fi;
+fi
+
+if [ "$SHOULD_START_ORCHESTRATOR" = "true" ]; then
+    source "$WORKING_SRC_DIR/modules/start-gravity.sh"
+    if [ "$?" != 0 ]; then
+        exit $?;
+    fi  
+fi
 
 echo "" # new line
 

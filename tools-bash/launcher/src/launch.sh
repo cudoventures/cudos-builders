@@ -11,7 +11,7 @@ if [ "$?" != 0 ]; then
     exit $?;
 fi;
 
-source "./src/incs/utils.sh"
+source "$WORKING_SRC_DIR/incs/utils.sh"
 if [ "$?" != 0 ]; then
     exit $?;
 fi;
@@ -72,6 +72,10 @@ source "$WORKING_SRC_DIR/modules/start-gravity.sh"
 if [ "$?" != 0 ]; then
     exit $?;
 fi;
+
+echo "" # new line
+
+source "$WORKING_SRC_DIR/modules/exports.sh"
 
 echo "" # new line
 

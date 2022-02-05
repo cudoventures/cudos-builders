@@ -2,6 +2,16 @@
 
 echo -ne "Validating script requirements...";
 
+if [ ! -x "$(command -v jq)" ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The host does not have jq installed";
+    exit 1;
+fi
+
+if [ ! -x "$(command -v python3)" ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The host does not have python3 installed";
+    exit 1;
+fi
+
 if [ "$PARAM_ETH_RPC" = "" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_ETH_RPC must not be empty";
     exit 1
