@@ -26,8 +26,9 @@ All of the config files are in ./laucher/config folder.
 
 Prepare the .env based on .env.example. It contains the following variables:
 1. **PARAM_ETH_RPC:** a RPC endpoint of an Ethereum node. This is used for orchestrators. <em>Example: PARAM_ETH_RPC="http://1.2.3.4:8545"</em>
-2. **PARAM_CONTRACT_DEPLOYER_ETH_PRIV_KEY:** a private key of an address with some ETH for gravity bridge contract deployment. <em>Example: PARAM_CONTRACT_DEPLOYER_ETH_PRIV_KEY="ae1341352513513a7f9a9a7a9a9a08a6a4a5f6ea9204135f1f3e1a3b1dae413e"</em>
-3. **PARAM_SOURCE_DIR:** this is the dir on which the nodes home dir will be, usually we use something like "/usr/cudos" <em>Example: PARAM_SOURCE_DIR="/usr/cudos"</em>
+1. **PARAM_CONTRACT_DEPLOYER_ETH_PRIV_KEY:** a private key of an address with some ETH for gravity bridge contract deployment. <em>Example: PARAM_CONTRACT_DEPLOYER_ETH_PRIV_KEY="ae1341352513513a7f9a9a7a9a9a08a6a4a5f6ea9204135f1f3e1a3b1dae413e"</em>
+1. **PARAM_CONTRACT_DEPLOYER_ETH_ADDRESS:** the eth address of the PARAM_CONTRACT_DEPLOYER_ETH_PRIV_KEY. <em>Example: PARAM_CONTRACT_DEPLOYER_ETH_ADDRESS="0x582436824932f3b313e3a3b3d3e31413be6d6a"</em>
+1. **PARAM_SOURCE_DIR:** this is the dir on which the nodes home dir will be, usually we use something like "/usr/cudos" <em>Example: PARAM_SOURCE_DIR="/usr/cudos"</em>
 
 ## Step 2
 
@@ -176,5 +177,4 @@ Ensure that it has execute permission and then start the script from ./launcher 
 
 # To do
 
-1. Add better verification and validation for all config files
 1. Add genesis processing step
