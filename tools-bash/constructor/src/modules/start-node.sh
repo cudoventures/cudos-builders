@@ -39,6 +39,18 @@ if [ "$SHOULD_START_ORCHESTRATOR" = "true" ]; then
     sed -i "158s/enable = false/enable = true/" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/app.toml"
 fi
 
+if [ "$IS_VALIDATOR" = "true" ]; then
+    sed -i "/\${PORT26657}:26657/d" "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME/start-$NODE_NAME.yml"
+
+    arg=$(cd $PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME && cat ./$NODE_NAME.client.mainnet.env)
+    monitoringEnabled=$(readEnvFromString "$arg" "MONITORING_ENABLED")
+    unset arg
+
+    if [ "$monitoringEnabled" = "false" ]; then
+        sed -i "/{PORT26660}:26660/d" "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME/start-$NODE_NAME.yml"
+    fi
+fi
+
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Starting the $NODE_NAME...";

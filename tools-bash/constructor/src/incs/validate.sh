@@ -44,12 +44,12 @@ if [ "$STARTING" = "true" ]; then
 
 fi
 
-if [ "$INITIALIZING" = "true" ]; then
-    if [ "$(ls -A $PARAM_SOURCE_DIR)" ]; then
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The folder $PARAM_SOURCE_DIR is not empty";
-        exit 1;
-    fi;
-fi
+# if [ "$INITIALIZING" = "true" ]; then
+#     if [ "$(ls -A $PARAM_SOURCE_DIR)" ]; then
+#         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The folder $PARAM_SOURCE_DIR is not empty";
+#         exit 1;
+#     fi;
+# fi
 
 if [ "$STARTING" = "true" ]; then
     if [ ! -d "$PARAM_SOURCE_DIR/CudosBuilders" ]; then
@@ -91,17 +91,23 @@ fi
 
 if [ "$SHOULD_START_ORCHESTRATOR" = "true" ]; then
 
-    if [ "$PARAMS_ORCHESTRATOR_ENV_PATH" != "" ] && [ ! -f "$PARAMS_ORCHESTRATOR_ENV_PATH" ]; then
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Cannot find \"$PARAMS_ORCHESTRATOR_ENV_PATH\" (Orchestrator's .env file)";
-        exit 1;
-    fi;
-
     if [ "$PARAMS_ORCH_ETH_ADDRESS" = "" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAMS_ORCH_ETH_ADDRESS must not be empty";
         exit 1;
     fi;
 
+    if [[ ! "$PARAMS_ORCH_ETH_ADDRESS" =~ (^0x[0-9a-fA-F]{40}$) ]]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Orch ethereum address is invalid $PARAMS_ORCH_ETH_ADDRESS";
+        exit 1;
+    fi
+
+    if [ "$PARAMS_ORCHESTRATOR_ENV_PATH" != "" ] && [ ! -f "$PARAMS_ORCHESTRATOR_ENV_PATH" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Cannot find \"$PARAMS_ORCHESTRATOR_ENV_PATH\" (Orchestrator's .env file)";
+        exit 1;
+    fi;
+
 fi;
+
 
 if [ ! -x "$(command -v docker)" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} You must install docker";
