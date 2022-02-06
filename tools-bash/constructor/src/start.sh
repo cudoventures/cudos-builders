@@ -21,7 +21,7 @@ if [ "$?" != 0 ]; then
     exit $?;
 fi;
 
-if [ "$IS_VALIDATOR"  = "true" ] && [ "$PARAMS_ORCHESTRATOR_ENV_PATH" != "" ]; then
+if [ "$IS_VALIDATOR"  = "true" ] && [ "$PARAM_ORCHESTRATOR_ENV_PATH" != "" ]; then
     SHOULD_START_ORCHESTRATOR="true"
 fi
 

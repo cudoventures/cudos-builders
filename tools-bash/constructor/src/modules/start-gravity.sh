@@ -9,7 +9,7 @@ arg=$(cd $PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME && cat ./$NODE_NAME.c
 validatorMoniker=$(readEnvFromString "$arg" "MONIKER")
 unset arg
 
-orchNodeEnv=$(cat "$PARAMS_ORCHESTRATOR_ENV_PATH")
+orchNodeEnv=$(cat "$PARAM_ORCHESTRATOR_ENV_PATH")
 orchestratorMnemonic=$(readEnvFromString "$orchNodeEnv" "COSMOS_ORCH_MNEMONIC")
 
 validatorsJson=$(docker exec -it "$validatorStartContainerName" /bin/bash -c "cudos-noded q staking validators -o json")
@@ -27,7 +27,7 @@ if [ "$?" != 0 ]; then
 fi;
 orchestratorAddress=$(docker container exec "$validatorStartContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys show orchestrator -a --keyring-backend os");
 
-dockerResult=$(docker container exec "$validatorStartContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded tx gravity set-orchestrator-address \"$validatorOperatorAddress\" \"$orchestratorAddress\" \"$PARAMS_ORCH_ETH_ADDRESS\" --from validator --keyring-backend os --chain-id \$CHAIN_ID -y");
+dockerResult=$(docker container exec "$validatorStartContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded tx gravity set-orchestrator-address \"$validatorOperatorAddress\" \"$orchestratorAddress\" \"$PARAM_ORCH_ETH_ADDRESS\" --from validator --keyring-backend os --chain-id \$CHAIN_ID -y");
 if [ "$?" != 0 ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error importing your validator account $?: ${dockerResult}";
     exit 1;

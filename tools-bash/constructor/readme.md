@@ -20,9 +20,9 @@ To set them, copy the .env.example files and fill them.
     6. SHOULD_USE_STATE_SYNC - if set to true your node will try to use state sync, which is a lot faster way to sync, but requires some of the peers you are connected to provide this service.
 
 3. start.env
-    1. PARAMS_PERSISTENT_PEERS contains PERSISTENT_PEERS in the format "xyz.....@<ip_or_domain_naim>:<port>" separated by comas.
-    2. PARAMS_SEED is same as the above, but for seed nodes.
-    3. PARAMS_PRIVATE_PEER_IDS is the node ids of the nodes you would like not to send to the network, when requested through the PEX.
+    1. PARAM_PERSISTENT_PEERS contains PERSISTENT_PEERS in the format "xyz.....@<ip_or_domain_naim>:<port>" separated by comas.
+    2. PARAM_SEED is same as the above, but for seed nodes.
+    3. PARAM_PRIVATE_PEER_IDS is the node ids of the nodes you would like not to send to the network, when requested through the PEX.
 
 ## Init node
 To setup a node you first need to initialize it. This will build the binary, make a node init and then set all the params inside the app.toml and config.toml config files.
