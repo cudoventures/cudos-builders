@@ -51,6 +51,9 @@ if [ "$IS_VALIDATOR" = "true" ]; then
     fi
 fi
 
+cd "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME";
+sed -i "s/EXPOSE_IP=.*/EXPOSE_IP=\"$PARAM_EXPOSE_IP\"/g" "./$NODE_NAME.client.mainnet.arg"
+
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Starting the $NODE_NAME...";

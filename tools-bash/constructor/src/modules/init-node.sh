@@ -34,13 +34,13 @@ echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 if [ $IS_VALIDATOR = "true" ]; then
     echo -ne "Initializing the validator...";
     cd "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME";
-    sed -i "s/cudos-noded start/sleep infinity/g" ./start-full-node.dockerfile;
+    sed -i "s/cudos-noded start/sleep infinity/g" "./start-full-node.dockerfile";
     dockerResult=$(docker-compose --env-file ./full-node.client.mainnet.arg -f ./start-full-node.yml -p cudos-start-full-node-client-mainnet-01 up --build -d 2> /dev/null);
     if [ "$?" != 0 ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error building the container $?: ${dockerResult}";
         exit 1;
     fi;
-    sed -i "s/sleep infinity/cudos-noded start/g" ./start-full-node.dockerfile;
+    sed -i "s/sleep infinity/cudos-noded start/g" "./start-full-node.dockerfile";
     echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
     echo -ne "Creating gen-tx...";
@@ -48,31 +48,31 @@ if [ $IS_VALIDATOR = "true" ]; then
     chainId="cudos-1";
 
     # delete the existing genesis file in order to initialize the chain again
-    dockerResult=$(docker container exec $startContainerName /bin/bash -c "rm -f \$CUDOS_HOME/config/genesis.json");
-    dockerResult=$(docker container exec $startContainerName /bin/bash -c "cudos-noded init \$MONIKER 2> /dev/null");
+    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "rm -f \$CUDOS_HOME/config/genesis.json");
+    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "cudos-noded init \$MONIKER 2> /dev/null");
 
     # Creating a random empty account to ensure that the keyring-backed is initialized, because when it is initialized the password is requested first, otherwise - the mnemonic
-    dockerResult=$(docker container exec $startContainerName /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\"; echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys add empty --keyring-backend os 2> /dev/null");
+    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\"; echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys add empty --keyring-backend os 2> /dev/null");
     if [ "$?" != 0 ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error creating the empty account $?: ${dockerResult}";
         exit 1;
     fi;
-    emptyAddress=$(docker container exec $startContainerName /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys show empty -a --keyring-backend os");
+    emptyAddress=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys show empty -a --keyring-backend os");
 
-    dockerResult=$(docker container exec $startContainerName /bin/bash -c "(echo \"$PARAM_VALIDATOR_MNEMONIC\"; echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys add validator --recover --keyring-backend os 2> /dev/null");
+    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_VALIDATOR_MNEMONIC\"; echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys add validator --recover --keyring-backend os 2> /dev/null");
     if [ "$?" != 0 ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error importing your validator account $?: ${dockerResult}";
         exit 1;
     fi;
-    validatorAddress=$(docker container exec $startContainerName /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys show validator -a --keyring-backend os");
+    validatorAddress=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys show validator -a --keyring-backend os");
 
-    dockerResult=$(docker container exec $startContainerName /bin/bash -c "cudos-noded add-genesis-account $validatorAddress 2000000000000000000000000acudos");
-    dockerResult=$(docker container exec $startContainerName /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\"; echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded gentx validator "2000000000000000000000000acudos" 0x0000000000000000000000000000000000000000 $emptyAddress --chain-id $chainId --keyring-backend os 2> /dev/null");
+    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "cudos-noded add-genesis-account $validatorAddress 2000000000000000000000000acudos");
+    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\"; echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded gentx validator "2000000000000000000000000acudos" 0x0000000000000000000000000000000000000000 $emptyAddress --chain-id $chainId --keyring-backend os 2> /dev/null");
     if [ "$?" != 0 ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error creating gen-tx $?: ${dockerResult}";
         exit 1;
     fi;
-    dockerResult=$(docker container exec $startContainerName /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys delete empty --keyring-backend os -y 2> /dev/null");
-    dockerResult=$(docker stop $startContainerName);
+    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys delete empty --keyring-backend os -y 2> /dev/null");
+    dockerResult=$(docker stop "$startContainerName");
     echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 fi

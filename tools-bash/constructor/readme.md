@@ -57,5 +57,4 @@ After that, to start the node, run (again from the constructor folder):
 
 
 # TO DO
-1. Check validators' node ports in .docker-compose
 1. Add Ledger to init script

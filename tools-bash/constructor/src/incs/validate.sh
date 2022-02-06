@@ -2,6 +2,16 @@
 
 echo -ne "Validating...";
 
+if [ ! -x "$(command -v jq)" ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The host does not have jq installed";
+    exit 1;
+fi
+
+if [ ! -x "$(command -v python3)" ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The host does not have python3 installed";
+    exit 1;
+fi
+
 if [ "$PARAM_SOURCE_DIR" = "" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_SOURCE_DIR must not be empty";
     exit 1;
@@ -39,6 +49,11 @@ if [ "$STARTING" = "true" ]; then
 
     if [ "$PARAMS_PRIVATE_PEER_IDS" = "" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAMS_PRIVATE_PEER_IDS must not be empty";
+        exit 1;
+    fi;
+
+    if [ "$PARAM_EXPOSE_IP" = "" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_EXPOSE_IP must not be empty";
         exit 1;
     fi;
 
