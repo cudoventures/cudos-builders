@@ -59,12 +59,12 @@ if [ "$STARTING" = "true" ]; then
 
 fi
 
-# if [ "$INITIALIZING" = "true" ]; then
-#     if [ "$(ls -A $PARAM_SOURCE_DIR)" ]; then
-#         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The folder $PARAM_SOURCE_DIR is not empty";
-#         exit 1;
-#     fi;
-# fi
+if [ "$INITIALIZING" = "true" ]; then
+    if [ "$(ls -A $PARAM_SOURCE_DIR)" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The folder $PARAM_SOURCE_DIR is not empty";
+        exit 1;
+    fi;
+fi
 
 if [ "$STARTING" = "true" ]; then
     if [ ! -d "$PARAM_SOURCE_DIR/CudosBuilders" ]; then
