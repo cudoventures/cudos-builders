@@ -67,7 +67,7 @@ fi;
 
 echo "" # new line
 
-# start seeds
+# start gravity
 source "$WORKING_SRC_DIR/modules/start-gravity.sh"
 if [ "$?" != 0 ]; then
     exit $?;

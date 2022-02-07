@@ -4,6 +4,8 @@ validatorInternalIp=$(getComputerInternalIp $validatorComputerIndex)
 
 sentriesSize=$(getSentriesSize)
 
+SENTRY_PUBLIC_PEERS=()
+SENTRIES_PUBLIC_PEERS_LIST=""
 for i in $(seq 0 $(($sentriesSize-1)))
 do
     sentryComputerId=$(getSentryComputerId $i)
@@ -44,7 +46,7 @@ do
     echo -ne "Preparing sentry($i)'s peers...";
     ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sed -i \"s/PERSISTENT_PEERS=.*/PERSISTENT_PEERS=\\\"$VALIDATOR_TENEDRMINT_NODE_ID@$validatorInternalIp:26656\\\"/g\" ./sentry-node.mainnet.env"
     ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sed -i \"s/PRIVATE_PEERS=.*/PRIVATE_PEERS=\\\"$VALIDATOR_TENEDRMINT_NODE_ID\\\"/g\" ./sentry-node.mainnet.env"
-    ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sed -i \"s/SEEDS=.*/SEEDS=\\\"$SEEDS_PEERS\\\"/g\" ./sentry-node.mainnet.env"
+    ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sed -i \"s/SEEDS=.*/SEEDS=\\\"$SEEDS_PEERS_LIST\\\"/g\" ./sentry-node.mainnet.env"
     echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
     echo -ne "Initializing sentry($i)...";
@@ -65,13 +67,18 @@ do
 
     echo -ne "Starting sentry($i)...";
     result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sudo docker-compose --env-file ./sentry-node.mainnet.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node up --build -d 2> /dev/null")
-    result=$(ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node && sudo docker-compose --env-file ./seed-node.mainnet.arg -f ./start-seed-node.yml -p cudos-start-seed-node up --build -d 2> /dev/null")
     if [ "$?" != 0 ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
         exit 1;
     fi
     echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+
+    tendermintNodeId=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "sudo docker container exec $startContainerName cudos-noded tendermint show-node-id")
+    SENTRY_TENEDRMINT_NODE_IDS+=("$tendermintNodeId")
+    SENTRY_PUBLIC_PEERS+=("$tendermintNodeId@$sentryComputerIp:26656")
 done
+
+SENTRIES_PUBLIC_PEERS_LIST=$(joinBy , ${SENTRY_PUBLIC_PEERS[@]})
 
 echo -ne "Starting the sentries...";
 echo -e "${STYLE_GREEN}DONE${STYLE_DEFAULT}";

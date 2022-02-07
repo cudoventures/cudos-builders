@@ -4,6 +4,9 @@ validatorInternalIp=$(getComputerInternalIp $validatorComputerIndex)
 
 seedsSize=$(getSeedsSize)
 SEEDS_PEERS=()
+SEEDS_PUBLIC_PEERS=()
+SEEDS_PEERS_LIST=""
+SEEDS_PUBLIC_PEERS_LIST=""
 for i in $(seq 0 $(($seedsSize-1)))
 do
     seedComputerId=$(getSeedComputerId $i)
@@ -72,7 +75,11 @@ do
 
     tendermintNodeId=$(ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "sudo docker container exec $startContainerName cudos-noded tendermint show-node-id")
     SEEDS_PEERS+=("$tendermintNodeId@$seedComputerInternalIp:26656")
+    SEEDS_PUBLIC_PEERS+=("$tendermintNodeId@$seedComputerIp:26656")
 done
+
+SEEDS_PEERS_LIST=$(joinBy , ${SEEDS_PEERS[@]})
+SEEDS_PUBLIC_PEERS_LIST=$(joinBy , ${SEEDS_PUBLIC_PEERS[@]})
 
 echo -ne "Starting the seeds...";
 echo -e "${STYLE_GREEN}DONE${STYLE_DEFAULT}";

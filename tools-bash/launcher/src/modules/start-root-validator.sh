@@ -56,6 +56,49 @@ echo -ne "Starting root-validator...";
 if [ "$monitoringEnabled" = "false" ]; then
     ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sed -i \"/{PORT26660}:26660/d\" ./start-root-node.yml"
 fi
+# start the contianer
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./start-root-node.yml -p cudos-start-root-node up --build -d 2> /dev/null")
+if [ "$?" != 0 ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
+    exit 1;
+fi
+# wait until there is at least 1 block
+while true
+do
+    sleep 1
+    result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker exec $VALIDATOR_START_CONTAINER_NAME /bin/bash -c \"cudos-noded status |& tee /tmp/cudos-status\" 2> /dev/null")    
+    sleep 1
+    cudosNodedStatus=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker exec $VALIDATOR_START_CONTAINER_NAME /bin/bash -c \"cat /tmp/cudos-status\"")
+    latestBlockHeight=$(echo $cudosNodedStatus | jq '.SyncInfo.latest_block_height')
+    latestBlockHeight=${latestBlockHeight//\"/}
+    if [ "$latestBlockHeight" != "0" ]; then
+        result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker exec $VALIDATOR_START_CONTAINER_NAME /bin/bash -c \"rm /tmp/cudos-status\"")
+        break
+    fi
+done
+# stop the docker
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./start-root-node.yml -p cudos-start-root-node down 2> /dev/null")
+# set sleep infinity
+ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sed -i \"s/cudos-noded start/sleep infinity/\" ./start-root-node.dockerfile"
+# start the sleeping docker
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./start-root-node.yml -p cudos-start-root-node up --build -d 2> /dev/null")
+# export genesis
+tmpFilePath="/tmp/genesis.cudos.json"
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container exec $VALIDATOR_START_CONTAINER_NAME /bin/bash -c \"cudos-noded export |& tee $tmpFilePath\" 2> /dev/null")
+exportedGenesis=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container exec $VALIDATOR_START_CONTAINER_NAME /bin/bash -c \"cat $tmpFilePath && rm $tmpFilePath\"")
+# reset the data
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container exec $VALIDATOR_START_CONTAINER_NAME /bin/bash -c \"cudos-noded unsafe-reset-all\" 2> /dev/null")
+# stop the docker
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./start-root-node.yml -p cudos-start-root-node down 2> /dev/null")
+# merge genesis
+echo $exportedGenesis > "$tmpFilePath"
+source "$WORKING_SRC_DIR/modules/merge-genesis.sh" "$tmpFilePath"
+rm "$tmpFilePath"
+finalGenesis=$(cat "$RESULT_GENESIS_PATH")
+ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "echo \"${finalGenesis//\"/\\\"}\" > $tmpFilePath && sudo mv $tmpFilePath $PARAM_SOURCE_DIR/CudosData/$VALIDATOR_VOLUME_NAME/config/genesis.json"
+# restore cudos-noded start
+ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sed -i \"s/sleep infinity/cudos-noded start/\" ./start-root-node.dockerfile"
+# start the node
 result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./start-root-node.yml -p cudos-start-root-node up --build -d 2> /dev/null")
 if [ "$?" != 0 ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
