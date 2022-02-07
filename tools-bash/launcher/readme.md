@@ -173,8 +173,3 @@ Ensure that it has execute permission and then start the script from ./launcher 
 ```bash
 ./src/validate.sh
 ```
-
-
-# To do
-
-1. Add genesis processing step
