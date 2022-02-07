@@ -1,14 +1,22 @@
 # How to use the deployment script:
 ## Local dev environment
 NOTE: Requires a running cudos-node instance !
-1. Setup the configuration files:
-   - From dev-configs to root of explorer-v2 folder:
-       - Create new foler named bdjuno_local_deploy, inside it:
-         - Copy and Rename bdjuno-sample to bdjuno
-           - Inside this folder replace the genesis.example.json with your local node genesis.json (located in cudos-data/config)
-         - Copy and Rename .env-bdjuno.sample to .env-bdjuno
-         - Copy Rename .env-big-dipper-2.sample to .env-big-dipper-2
-2. Call the script with  ``` ./deploy.sh dev http://localhost:8080 myadminsecret``` and  ```./big-dipper-2-ui-deploy.sh dev```
+### BDJuno + Hasura + PostgresSQL local deployment:
+  - Create a new folder named bdjuno_local_deploy
+   - Inside it copy the configs from local-dev-configs/bdjuno-dev-sample
+     - Rename bdjuno-sample folder to bdjuno
+       - Inside this folder replace the genesis.example.json with your local node genesis.json (located in cudos-data/config)
+       - Copy and Rename .env-bdjuno.sample to .env-bdjuno
+   - Inside it copy the bd-juno-deploy.sh from the root of explorer-v2 
+   - Call the new script like this ```./bdjuno-deploy.sh dev http://localhost:8080 myadminsecret```
+   - Delete the folder bdjuno_local_deploy
+### Big-Dipper-UI-2 Local deploy:
+   - Create a new folder named big_dipper_local_deploy
+   - Inside it copy .env-dev-big-dipper-2.sample from local-dev-configs
+   - Rename the file to .env-big-dipper-2
+   - Call the script like ```./big-dipper-2-ui-deploy.sh dev```
+   - Delete the big_dipper_local_deploy folder
+
 
 ## Testnet/Mainnet deployment guide
 ### If you are only redeploying on an already existing instance - please skip to 5.4 or 6.3
