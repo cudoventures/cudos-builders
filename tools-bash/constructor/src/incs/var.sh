@@ -46,4 +46,8 @@ fi
 
 source "$WORKING_DIR/config/node.env"
 
+if [ "$IS_VALIDATOR"  = "true" ] && [ "$PARAM_ORCHESTRATOR_ENV_PATH" != "" ]; then
+    SHOULD_START_ORCHESTRATOR="true"
+fi
+
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";

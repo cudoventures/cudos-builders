@@ -12,39 +12,18 @@ if [ "$launcherPath" != "constructor" ]; then
 fi
 
 source "./src/incs/args.sh" $@
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
 
 source "./src/incs/var.sh" "init"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
 
 source "$WORKING_SRC_DIR/incs/utils.sh"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
 
 source "$WORKING_SRC_DIR/incs/validate.sh"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
 
 source "$WORKING_SRC_DIR/modules/repos.sh"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
 
 source "$WORKING_SRC_DIR/modules/init-node.sh"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
 
 source "$WORKING_SRC_DIR/modules/export-gentx.sh"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
 
 echo "" # new line
 

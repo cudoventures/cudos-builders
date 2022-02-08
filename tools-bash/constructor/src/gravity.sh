@@ -19,11 +19,7 @@ source "$WORKING_SRC_DIR/incs/utils.sh"
 
 source "$WORKING_SRC_DIR/incs/validate.sh"
 
-source "$WORKING_SRC_DIR/modules/start-node.sh"
-
-echo "" # new line
-
-echo -e "You could inspect the logs of your node by executing: ${STYLE_BOLD}sudo docker logs cudos-start-$NODE_NAME-client-mainnet --tail=32${STYLE_DEFAULT}"
+source "$WORKING_SRC_DIR/modules/start-gravity.sh"  
 
 echo "" # new line
 
