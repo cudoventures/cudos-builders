@@ -88,23 +88,37 @@ if [ "$STARTING" = "true" ]; then
     fi;
 fi
 
-if [ "$PARAM_VALIDATOR_MNEMONIC" = "" ]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_MNEMONIC must not be empty";
-    exit 1;
-fi
+if [ "$IS_VALIDATOR" = "true" ]; then
 
-numberOfWords=$(echo "$PARAM_VALIDATOR_MNEMONIC" | wc -w)
-if ([ "$numberOfWords" != "12" ] && [ "$numberOfWords" != "24" ]); then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_MNEMONIC must be 12 or 24 words phrase";
-    exit 1;
-fi;
+    if [ "$PARAM_VALIDATOR_MNEMONIC" = "" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_MNEMONIC must not be empty";
+        exit 1;
+    fi
 
-if [ "$PARAM_KEYRING_OS_PASS" = "" ]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_KEYRING_OS_PASS must not be empty";
-    exit 1;
+    numberOfWords=$(echo "$PARAM_VALIDATOR_MNEMONIC" | wc -w)
+    if ([ "$numberOfWords" != "12" ] && [ "$numberOfWords" != "24" ]); then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_MNEMONIC must be 12 or 24 words phrase";
+        exit 1;
+    fi;
+
+    if [ "$PARAM_KEYRING_OS_PASS" = "" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_KEYRING_OS_PASS must not be empty";
+        exit 1;
+    fi
+
+    if [ "$PARAM_VALIDATOR_BALANCE" = "" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_BALANCE must not be empty";
+        exit 1;
+    fi
+
 fi
 
 if [ "$SHOULD_START_ORCHESTRATOR" = "true" ]; then
+
+    if [ "$PARAM_ORCHESTRATOR_ENV_PATH" != "" ] && [ ! -f "$PARAM_ORCHESTRATOR_ENV_PATH" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Cannot find \"$PARAM_ORCHESTRATOR_ENV_PATH\" (Orchestrator's .env file)";
+        exit 1;
+    fi;
 
     if [ "$PARAM_ORCH_ETH_ADDRESS" = "" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_ORCH_ETH_ADDRESS must not be empty";
@@ -116,17 +130,7 @@ if [ "$SHOULD_START_ORCHESTRATOR" = "true" ]; then
         exit 1;
     fi
 
-    if [ "$PARAM_ORCHESTRATOR_ENV_PATH" != "" ] && [ ! -f "$PARAM_ORCHESTRATOR_ENV_PATH" ]; then
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Cannot find \"$PARAM_ORCHESTRATOR_ENV_PATH\" (Orchestrator's .env file)";
-        exit 1;
-    fi;
-
 fi;
-
-if [ "$PARAM_VALIDATOR_BALANCE" = "" ]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_BALANCE must not be empty";
-    exit 1;
-fi
 
 
 if [ ! -x "$(command -v docker)" ]; then
