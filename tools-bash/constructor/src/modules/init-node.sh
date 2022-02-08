@@ -1,13 +1,13 @@
 #!/bin/bash -i
 
-echo -ne "Preparing the binary builder...";
-cd "$PARAM_SOURCE_DIR/CudosBuilders/docker/binary-builder"
-dockerResult=$(docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder build 2> /dev/null)
-if [ "$?" != 0 ]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error building the container $?: ${dockerResult}";
-    exit 1;
-fi
-echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+# echo -ne "Preparing the binary builder...";
+# cd "$PARAM_SOURCE_DIR/CudosBuilders/docker/binary-builder"
+# dockerResult=$(docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder build 2> /dev/null)
+# if [ "$?" != 0 ]; then
+#     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error building the container $?: ${dockerResult}";
+#     exit 1;
+# fi
+# echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Preparing the $NODE_NAME...";
 cd "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME"
@@ -40,7 +40,6 @@ if [ $IS_VALIDATOR = "true" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error building the container $?: ${dockerResult}";
         exit 1;
     fi;
-    sed -i "s/sleep infinity/cudos-noded start/g" "./start-full-node.dockerfile";
     echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
     echo -ne "Creating gen-tx...";
@@ -49,7 +48,7 @@ if [ $IS_VALIDATOR = "true" ]; then
 
     # delete the existing genesis file in order to initialize the chain again
     dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "rm -f \$CUDOS_HOME/config/genesis.json");
-    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "cudos-noded init \$MONIKER 2> /dev/null");
+    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "cudos-noded init \$MONIKER --chain-id $chainId 2> /dev/null");
 
     # Creating a random empty account to ensure that the keyring-backed is initialized, because when it is initialized the password is requested first, otherwise - the mnemonic
     dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\"; echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys add empty --keyring-backend os 2> /dev/null");
@@ -67,12 +66,57 @@ if [ $IS_VALIDATOR = "true" ]; then
     validatorAddress=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys show validator -a --keyring-backend os");
 
     dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "cudos-noded add-genesis-account $validatorAddress ${PARAM_VALIDATOR_BALANCE}acudos");
-    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\"; echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded gentx validator "${PARAM_VALIDATOR_BALANCE}acudos" 0x0000000000000000000000000000000000000000 $emptyAddress --chain-id $chainId --keyring-backend os 2> /dev/null");
+    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\"; echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded gentx validator "${PARAM_VALIDATOR_BALANCE}acudos" 0x364af07E1bb08288a1F3D9a578317baa9ED4fb2d $emptyAddress --chain-id $chainId --keyring-backend os 2> /dev/null");
     if [ "$?" != 0 ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error creating gen-tx $?: ${dockerResult}";
         exit 1;
     fi;
+
     dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys delete empty --keyring-backend os -y 2> /dev/null");
+
+    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "cat \"\${CUDOS_HOME}/config/genesis.json\" | jq '.app_state.staking.params.bond_denom = \"acudos\"' > \"\${CUDOS_HOME}/config/tmp_genesis.json\" && mv \"\${CUDOS_HOME}/config/tmp_genesis.json\" \"\${CUDOS_HOME}/config/genesis.json\"");
+    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "cat \"\${CUDOS_HOME}/config/genesis.json\" | jq --arg validatorAddress \"$validatorAddress\" '.app_state.gravity.static_val_cosmos_addrs += [\$validatorAddress]' > \"\${CUDOS_HOME}/config/tmp_genesis.json\" && mv \"\${CUDOS_HOME}/config/tmp_genesis.json\" \"\${CUDOS_HOME}/config/genesis.json\"");
+
+    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "cudos-noded collect-gentxs 2> /dev/null");
+
+    # starting the chain
+    sed -i "s/sleep infinity/cudos-noded start/g" "./start-full-node.dockerfile";
+    dockerResult=$(docker-compose --env-file ./full-node.client.mainnet.arg -f ./start-full-node.yml -p cudos-start-full-node-client-mainnet-01 up --build -d 2> /dev/null);
+    if [ "$?" != 0 ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error building the container $?: ${dockerResult}";
+        exit 1;
+    fi;
+
+    # wait until there is at least 1 block
+    while true
+    do
+        sleep 1
+        result=$(docker exec "$startContainerName" /bin/bash -c "cudos-noded status |& tee /tmp/cudos-status" 2> /dev/null)
+        sleep 1
+        cudosNodedStatus=$(docker exec "$startContainerName" /bin/bash -c "cat /tmp/cudos-status")
+        latestBlockHeight=$(echo $cudosNodedStatus | jq '.SyncInfo.latest_block_height')
+        latestBlockHeight=${latestBlockHeight//\"/}
+        if [ "$latestBlockHeight" != "0" ]; then
+            result=$(docker exec "$startContainerName" /bin/bash -c "rm /tmp/cudos-status")
+            break
+        fi
+    done
+    # stop the docker
     dockerResult=$(docker stop "$startContainerName");
+    # set sleep infinity
+    sed -i "s/cudos-noded start/sleep infinity/g" "./start-full-node.dockerfile";
+    # start the sleeping docker
+    dockerResult=$(docker-compose --env-file ./full-node.client.mainnet.arg -f ./start-full-node.yml -p cudos-start-full-node-client-mainnet-01 up --build -d 2> /dev/null);
+    # export genesis
+    tmpFilePath="/tmp/genesis.cudos.json"
+    result=$(docker container exec "$startContainerName" /bin/bash -c "cudos-noded export |& tee $tmpFilePath" 2> /dev/null)
+    EXPORTED_GENESIS=$(docker container exec "$startContainerName" /bin/bash -c "cat $tmpFilePath && rm $tmpFilePath")
+    # reset the data
+    result=$(docker container exec "$startContainerName" /bin/bash -c "cudos-noded unsafe-reset-all" 2> /dev/null)
+    # stop the docker
+    dockerResult=$(docker stop "$startContainerName");
+    # restore cudos-noded start
+    sed -i "s/sleep infinity/cudos-noded start/g" "./start-full-node.dockerfile";
+    
     echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 fi
