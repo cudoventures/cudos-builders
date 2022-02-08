@@ -66,8 +66,8 @@ if [ $IS_VALIDATOR = "true" ]; then
     fi;
     validatorAddress=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys show validator -a --keyring-backend os");
 
-    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "cudos-noded add-genesis-account $validatorAddress 2000000000000000000000000acudos");
-    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\"; echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded gentx validator "2000000000000000000000000acudos" 0x0000000000000000000000000000000000000000 $emptyAddress --chain-id $chainId --keyring-backend os 2> /dev/null");
+    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "cudos-noded add-genesis-account $validatorAddress ${PARAM_VALIDATOR_BALANCE}acudos");
+    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\"; echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded gentx validator "${PARAM_VALIDATOR_BALANCE}acudos" 0x0000000000000000000000000000000000000000 $emptyAddress --chain-id $chainId --keyring-backend os 2> /dev/null");
     if [ "$?" != 0 ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error creating gen-tx $?: ${dockerResult}";
         exit 1;

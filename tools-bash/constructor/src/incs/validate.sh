@@ -123,6 +123,11 @@ if [ "$SHOULD_START_ORCHESTRATOR" = "true" ]; then
 
 fi;
 
+if [ "$PARAM_VALIDATOR_BALANCE" = "" ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_BALANCE must not be empty";
+    exit 1;
+fi
+
 
 if [ ! -x "$(command -v docker)" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} You must install docker";
