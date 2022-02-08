@@ -20,6 +20,7 @@ services:
     environment:
       - CUDOS_HOME=$CUDOS_HOME
     volumes:
+      - '../../../CudosBuilders:/usr/cudos/CudosBuilders'
       - '../../../CudosNode:/usr/cudos/CudosNode'
       - '../../../CudosGravityBridge:/usr/cudos/CudosGravityBridge'
     networks:

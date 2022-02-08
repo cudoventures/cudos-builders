@@ -74,6 +74,11 @@ if [ "${MONITORING_ENABLED}" = "false" ]; then
     sed -i "s/prometheus = .*/prometheus = false/g" "${CUDOS_HOME}/config/config.toml"
 fi
 
+sed -i "s/pex = true/pex = false/" "${CUDOS_HOME}/config/config.toml"
+
+MY_OWN_PEER_ID=$(cudos-noded tendermint show-node-id)
+sed -i "s/private_peer_ids = \"\"/private_peer_ids = \"$MY_OWN_PEER_ID\"/g" "${CUDOS_HOME}/config/config.toml"
+
 # gas price
 sed -i "s/minimum-gas-prices = \"\"/minimum-gas-prices = \"0${BOND_DENOM}\"/" "${CUDOS_HOME}/config/app.toml"
 
@@ -118,57 +123,45 @@ cat "${CUDOS_HOME}/config/genesis.json" | jq --arg BLOCKS_PER_YEAR "$BLOCKS_PER_
 # setting bank params
 cat "${CUDOS_HOME}/config/genesis.json" | jq  --argjson BANK_SEND_ENABLED "$BANK_SEND_ENABLED" '.app_state.bank.params.send_enabled = $BANK_SEND_ENABLED' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
 
-
 # setting fractions metadata
 cat "${CUDOS_HOME}/config/genesis.json" | jq --arg DENOM_METADATA_DESC "$DENOM_METADATA_DESC" --arg DENOM1 "$DENOM1" --arg EXP1 "$EXP1" --arg ALIAS1 "$ALIAS1" --arg DENOM2 "$DENOM2" --arg EXP2 "$EXP2" --arg ALIAS2 "$ALIAS2" --arg DENOM3 "$DENOM3" --arg EXP3 "$EXP3" --arg ALIAS3 "$ALIAS3" --arg DENOM4 "$DENOM4" --arg EXP4 "$EXP4" --arg ALIAS4 "$ALIAS4" --arg DENOM5 "$DENOM5" --arg EXP5 "$EXP5" --arg ALIAS5 "$ALIAS5" --arg DENOM6 "$DENOM6" --arg EXP6 "$EXP6" --arg ALIAS6 "$ALIAS6" --arg DENOM7 "$DENOM7" --arg EXP7 "$EXP7" --arg BASE "$BASE" --arg DISPLAY "$DISPLAY" --arg NAME "$NAME" --arg SYMBOL "$SYMBOL" '.app_state.bank.denom_metadata[0].description=$DENOM_METADATA_DESC | .app_state.bank.denom_metadata[0].denom_units[0].denom=$DENOM1 | .app_state.bank.denom_metadata[0].denom_units[0].exponent=$EXP1 | .app_state.bank.denom_metadata[0].denom_units[0].aliases[0]=$ALIAS1 | .app_state.bank.denom_metadata[0].denom_units[1].denom=$DENOM2 | .app_state.bank.denom_metadata[0].denom_units[1].exponent=$EXP2 | .app_state.bank.denom_metadata[0].denom_units[1].aliases[0]=$ALIAS2 | .app_state.bank.denom_metadata[0].denom_units[2].denom=$DENOM3 | .app_state.bank.denom_metadata[0].denom_units[2].exponent=$EXP3 | .app_state.bank.denom_metadata[0].denom_units[2].aliases[0]=$ALIAS3 | .app_state.bank.denom_metadata[0].denom_units[3].denom=$DENOM4 | .app_state.bank.denom_metadata[0].denom_units[3].exponent=$EXP4 | .app_state.bank.denom_metadata[0].denom_units[3].aliases[0]=$ALIAS4 | .app_state.bank.denom_metadata[0].denom_units[4].denom=$DENOM5 | .app_state.bank.denom_metadata[0].denom_units[4].exponent=$EXP5 | .app_state.bank.denom_metadata[0].denom_units[4].aliases[0]=$ALIAS5 | .app_state.bank.denom_metadata[0].denom_units[5].denom=$DENOM6 | .app_state.bank.denom_metadata[0].denom_units[5].exponent=$EXP6 | .app_state.bank.denom_metadata[0].denom_units[5].aliases[0]=$ALIAS6 | .app_state.bank.denom_metadata[0].denom_units[6].denom=$DENOM7 | .app_state.bank.denom_metadata[0].denom_units[6].exponent=$EXP7 | .app_state.bank.denom_metadata[0].base=$BASE | .app_state.bank.denom_metadata[0].name=$NAME | .app_state.bank.denom_metadata[0].symbol=$SYMBOL | .app_state.bank.denom_metadata[0].display=$DISPLAY'  > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
 
+# create zero account
 (echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add zero-account --keyring-backend os |& tee "${CUDOS_HOME}/zero-account.wallet"
 chmod 600 "${CUDOS_HOME}/zero-account.wallet"
 ZERO_ACCOUNT_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show zero-account -a --keyring-backend os)
-
-# add a new key entry from which to make validator
-(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add root-validator-01 --keyring-backend os |& tee "${CUDOS_HOME}/root-validator-01.wallet"
-chmod 600 "${CUDOS_HOME}/root-validator-01.wallet"
-ROOT_VALIDATOR_01_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show root-validator-01 -a --keyring-backend os)
-(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add orch-01 --keyring-backend os |& tee "${CUDOS_HOME}/orch-01.wallet"
-chmod 600 "${CUDOS_HOME}/orch-01.wallet"
-ORCH_01_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show orch-01 -a --keyring-backend os)
-(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add validator-02 --keyring-backend os |& tee "${CUDOS_HOME}/validator-02.wallet"
-chmod 600 "${CUDOS_HOME}/validator-02.wallet"
-VALIDATOR_02_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show validator-02 -a --keyring-backend os)
-(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add orch-02 --keyring-backend os |& tee "${CUDOS_HOME}/orch-02.wallet"
-chmod 600 "${CUDOS_HOME}/orch-02.wallet"
-ORCH_02_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show orch-02 -a --keyring-backend os)
-(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add validator-03 --keyring-backend os |& tee "${CUDOS_HOME}/validator-03.wallet"
-chmod 600 "${CUDOS_HOME}/validator-03.wallet"
-VALIDATOR_03_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show validator-03 -a --keyring-backend os)
-(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add orch-03 --keyring-backend os |& tee "${CUDOS_HOME}/orch-03.wallet"
-chmod 600 "${CUDOS_HOME}/orch-03.wallet"
-ORCH_03_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show orch-03 -a --keyring-backend os)
-
-# create validators
 cudos-noded add-genesis-account $ZERO_ACCOUNT_ADDRESS "1${BOND_DENOM}"
-cudos-noded add-genesis-account $ROOT_VALIDATOR_01_ADDRESS "2000001000000000000000000${BOND_DENOM},1cudosAdmin"
-cudos-noded add-genesis-account $VALIDATOR_02_ADDRESS "2000001000000000000000000${BOND_DENOM},1cudosAdmin"
-cudos-noded add-genesis-account $VALIDATOR_03_ADDRESS "2000001000000000000000000${BOND_DENOM},1cudosAdmin"
-cudos-noded add-genesis-account $ORCH_01_ADDRESS "2000000000000000000000000${BOND_DENOM}"
-cudos-noded add-genesis-account $ORCH_02_ADDRESS "2000000000000000000000000${BOND_DENOM}"
-cudos-noded add-genesis-account $ORCH_03_ADDRESS "2000000000000000000000000${BOND_DENOM}"
-(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded gentx root-validator-01 "2000000000000000000000000${BOND_DENOM}" ${ORCH_ETH_ADDRESS} ${ORCH_01_ADDRESS} --chain-id $CHAIN_ID --keyring-backend os
+
+for i in $(seq 1 $NUMBER_OF_VALIDATORS); do
+    (echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add "validator-$i" --keyring-backend os |& tee "${CUDOS_HOME}/validator-$i.wallet"
+    chmod 600 "${CUDOS_HOME}/validator-$i.wallet"
+    validatorAddress=$(echo $KEYPASSWD | cudos-noded keys show validator-$i -a --keyring-backend os)
+    cudos-noded add-genesis-account $validatorAddress "${VALIDATOR_BALANCE}${BOND_DENOM},1cudosAdmin"
+    cat "${CUDOS_HOME}/config/genesis.json" | jq --arg validatorAddress "$validatorAddress" '.app_state.gravity.static_val_cosmos_addrs += [$validatorAddress]' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
+done
+
+for i in $(seq 1 $NUMBER_OF_ORCHESTRATORS); do
+    (echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add "orch-$i" --keyring-backend os |& tee "${CUDOS_HOME}/orch-$i.wallet"
+    chmod 600 "${CUDOS_HOME}/orch-$i.wallet"
+    orchAddress=$(echo $KEYPASSWD | cudos-noded keys show orch-$i -a --keyring-backend os)    
+    cudos-noded add-genesis-account $orchAddress "${ORCHESTRATOR_BALANCE}${BOND_DENOM}"
+    if [ "$i" = "1" ]; then
+        ORCH_01_ADDRESS="$orchAddress"
+    fi
+done
+
+echo cudos-noded gentx validator-1 "${VALIDATOR_BALANCE}${BOND_DENOM}" ${ORCH_ETH_ADDRESS} ${ORCH_01_ADDRESS} --chain-id $CHAIN_ID --keyring-backend os
+(echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded gentx validator-1 "${VALIDATOR_BALANCE}${BOND_DENOM}" ${ORCH_ETH_ADDRESS} ${ORCH_01_ADDRESS} --chain-id $CHAIN_ID --keyring-backend os
 
 # add faucet account
-((echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add faucet --keyring-backend os) |& tee "${CUDOS_HOME}/faucet.wallet"
-chmod 600 "${CUDOS_HOME}/faucet.wallet"
-FAUCET_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show faucet -a --keyring-backend os)
-cudos-noded add-genesis-account $FAUCET_ADDRESS "20000000000000000000000000000${BOND_DENOM}"
+if [ "$FAUCET_BALANCE" != "0" ]; then
+    ((echo $KEYPASSWD; echo $KEYPASSWD) | cudos-noded keys add faucet --keyring-backend os) |& tee "${CUDOS_HOME}/faucet.wallet"
+    chmod 600 "${CUDOS_HOME}/faucet.wallet"
+    FAUCET_ADDRESS=$(echo $KEYPASSWD | cudos-noded keys show faucet -a --keyring-backend os)
+    cudos-noded add-genesis-account $FAUCET_ADDRESS "${FAUCET_BALANCE}${BOND_DENOM}"
+fi
 
-
-cat "${CUDOS_HOME}/config/genesis.json" | jq '.app_state.gravity.erc20_to_denoms[0] |= .+ {"erc20": "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d", "denom": "acudos"}' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
-
-# Setting static val orchestrator addresses
-cat "${CUDOS_HOME}/config/genesis.json" | jq --arg ROOT_VALIDATOR_01_ADDRESS "$ROOT_VALIDATOR_01_ADDRESS" '.app_state.gravity.static_val_cosmos_addrs += [$ROOT_VALIDATOR_01_ADDRESS]' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
-cat "${CUDOS_HOME}/config/genesis.json" | jq --arg VALIDATOR_02_ADDRESS "$VALIDATOR_02_ADDRESS" '.app_state.gravity.static_val_cosmos_addrs += [$VALIDATOR_02_ADDRESS]' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
-cat "${CUDOS_HOME}/config/genesis.json" | jq --arg VALIDATOR_03_ADDRESS "$VALIDATOR_03_ADDRESS" '.app_state.gravity.static_val_cosmos_addrs += [$VALIDATOR_03_ADDRESS]' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
+cat "${CUDOS_HOME}/config/genesis.json" | jq ".app_state.gravity.erc20_to_denoms[0] |= .+ {\"erc20\": \"$CUDOS_TOKEN_CONTRACT_ADDRESS\", \"denom\": \"acudos\"}" > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
 
 # Setting gravity module account and funding it as per parameter
 cat "${CUDOS_HOME}/config/genesis.json" | jq '.app_state.auth.accounts += [{
@@ -198,11 +191,6 @@ cat "${CUDOS_HOME}/config/genesis.json" | jq --arg GRAVITY_MODULE_BALANCE "$GRAV
 
 
 cudos-noded collect-gentxs
-
-sed -i "s/pex = true/pex = false/" "${CUDOS_HOME}/config/config.toml"
-
-MY_OWN_PEER_ID=$(cudos-noded tendermint show-node-id)
-sed -i "s/private_peer_ids = \"\"/private_peer_ids = \"$MY_OWN_PEER_ID\"/g" "${CUDOS_HOME}/config/config.toml"
 
 cudos-noded tendermint show-node-id |& tee "${CUDOS_HOME}/tendermint.nodeid"
 
