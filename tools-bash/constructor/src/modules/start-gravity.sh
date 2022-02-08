@@ -15,7 +15,7 @@ orchestratorMnemonic=$(readEnvFromString "$orchNodeEnv" "COSMOS_ORCH_MNEMONIC")
 validatorsJson=$(docker exec -it "$validatorStartContainerName" /bin/bash -c "cudos-noded q staking validators -o json")
 validatorOperatorAddress=$(echo "$validatorsJson" |  jq .validators | jq "map(select(.description.moniker == \"$validatorMoniker\") | .operator_address)" | jq .[0])
 validatorOperatorAddress=${validatorOperatorAddress//\"/}
-if [ "$validatorOperatorAddress" = "" ]; then
+if [ "$validatorOperatorAddress" = "" ] || [ "$validatorOperatorAddress" = "null" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Could not get validator's operator address";
     exit 1;
 fi
@@ -28,8 +28,10 @@ fi;
 orchestratorAddress=$(docker container exec "$validatorStartContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys show orchestrator -a --keyring-backend os");
 
 dockerResult=$(docker container exec "$validatorStartContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded tx gravity set-orchestrator-address \"$validatorOperatorAddress\" \"$orchestratorAddress\" \"$PARAM_ORCH_ETH_ADDRESS\" --from validator --keyring-backend os --chain-id \$CHAIN_ID -y");
-if [ "$?" != 0 ]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error importing your validator account $?: ${dockerResult}";
+transactionHeight=$(echo "$dockerResult" | jq '.height')
+transactionHeight=${transactionHeight//\"/}
+if [ "$?" != 0 ] || [ "$transactionHeight" = "0" ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error setting the orchestrator address $?: ${dockerResult}";
     exit 1;
 fi;
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";

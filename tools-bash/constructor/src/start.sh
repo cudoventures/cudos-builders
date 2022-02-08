@@ -1,5 +1,10 @@
 #!/bin/bash -i
 
+if [ "$EUID" -ne 0 ]; then
+    echo -e "\033[1;31mError:\033[m The script MUST be executed as root";
+    exit 1
+fi
+
 launcherPath=$(basename $(pwd))
 if [ "$launcherPath" != "constructor" ]; then
     echo -e "\033[1;31mError:\033[m The script MUST be executed from constructor folder";

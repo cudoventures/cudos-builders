@@ -58,4 +58,3 @@ After that, to start the node, run (again from the constructor folder):
 
 # TO DO
 1. Add Ledger to init script
-1. Check set-orchestrator-address response height. If it is 0 then there is an error with the transaction
