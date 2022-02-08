@@ -16,6 +16,7 @@ users*override.yml
 docker/tests/**/data
 docker/monitoring/config/prometheus.tesnet.public.yml
 /tools-bash/constructor/gen-tx
-tools-bash/launcher/config/genesis.*
+tools-bash/launcher/config/genesis.data.json
+tools-bash/launcher/config/genesis.root.json
 tools-bash/launcher/src/genesis.sh
 tools-bash/launcher/exports

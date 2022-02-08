@@ -14,6 +14,10 @@ RESULT_GENESIS_PATH="$WORKING_EXPORT_DIR/genesis.json"
 
 cp "$rootGenesisPath" "$RESULT_GENESIS_PATH"
 
+if [ ! -f "$dataGenesisPath" ] || [ "$(cat "$dataGenesisPath")" = "" ]; then
+    return
+fi
+
 result=$(jq ".initial_height = \"1\"" "$RESULT_GENESIS_PATH")
 echo $result > "$RESULT_GENESIS_PATH"
 
@@ -30,7 +34,7 @@ result=$(jq ".app_state.gravity.static_val_cosmos_addrs = [.app_state.gravity.st
 echo $result > "$RESULT_GENESIS_PATH"
 
 # auth.accounts (only BaseAccounts)
-# jq .app_state.auth.accounts ./config/genesis.data.json | jq "map(select(.\"@type\" == \"/cosmos.auth.v1beta1.BaseAccount\") | .)" > "$tmpGenesisPath"
+# jq .app_state.auth.accounts "$dataGenesisPath" | jq "map(select(.\"@type\" == \"/cosmos.auth.v1beta1.BaseAccount\") | .)" > "$tmpGenesisPath"
 # result=$(jq -s '.[0].app_state.auth.accounts = .[0].app_state.auth.accounts + .[1]' "$RESULT_GENESIS_PATH" "$tmpGenesisPath" | jq '.[0]')
 # echo $result > "$RESULT_GENESIS_PATH"
 result=$(jq -s ".[0].app_state.auth.accounts = .[0].app_state.auth.accounts + .[1].app_state.auth.accounts" "$RESULT_GENESIS_PATH" "$dataGenesisPath" | jq '.[0]')
@@ -106,9 +110,9 @@ result=$(jq ".app_state.bank.balances = [.app_state.bank.balances[] | if (.addre
 echo $result > "$RESULT_GENESIS_PATH"
 
 # bank.supply
-jq ".app_state.bank.balances | map(.coins[0].amount)" "$RESULT_GENESIS_PATH" > "$tmpGenesisPath"
+jq ".app_state.bank.balances | map(.coins) | flatten | map(select(.denom == \"acudos\") | .amount)" "$RESULT_GENESIS_PATH" > "$tmpGenesisPath"
 totalSupply=$(sum $tmpGenesisPath)
 result=$(jq ".app_state.bank.supply[0].amount = \"$totalSupply\"" "$RESULT_GENESIS_PATH")
 echo $result > "$RESULT_GENESIS_PATH"
 
-rm -f "$tmpGenesisPath"
+# rm -f "$tmpGenesisPath"

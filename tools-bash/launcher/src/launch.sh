@@ -7,71 +7,44 @@ if [ "$launcherPath" != "launcher" ]; then
 fi
 
 source "./src/incs/var.sh"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
+
 
 source "$WORKING_SRC_DIR/incs/utils.sh"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
+
 
 source "$WORKING_SRC_DIR/incs/validate-script-requirements.sh"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
+
 
 source "$WORKING_SRC_DIR/incs/topology.sh"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
+
 
 source "$WORKING_SRC_DIR/incs/validate-topology.sh"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
+
 
 source "$WORKING_SRC_DIR/modules/load-ssh-keys.sh"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
+
 
 source "$WORKING_SRC_DIR/incs/validate-instances.sh"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
 
 echo "" # new line
 
 # start root-validator
 source "$WORKING_SRC_DIR/modules/start-root-validator.sh"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
 
 echo "" # new line
 
 # start sentries
 source "$WORKING_SRC_DIR/modules/start-seeds.sh"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
 
 echo "" # new line
 
 # start seeds
 source "$WORKING_SRC_DIR/modules/start-sentries.sh"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
 
 echo "" # new line
 
 # start gravity
 source "$WORKING_SRC_DIR/modules/start-gravity.sh"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
 
 echo "" # new line
 

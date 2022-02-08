@@ -17,6 +17,7 @@ ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/gravity-contract-deployer && sed -i \"s~ETH_NODE=.*~ETH_NODE=\\\"$PARAM_ETH_RPC\\\"~g\" ./gravity-contract-deployer.env"
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/gravity-contract-deployer && sed -i \"s/ETH_PRIV_KEY_HEX=.*/ETH_PRIV_KEY_HEX=\\\"$PARAM_CONTRACT_DEPLOYER_ETH_PRIV_KEY\\\"/g\" ./gravity-contract-deployer.env"
 
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/gravity-contract-deployer && sudo docker-compose --env-file ./gravity-contract-deployer.arg -f ./gravity-contract-deployer.yml -p cudos-gravity-contract-deployer down 2> /dev/null")
 result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/gravity-contract-deployer && sudo docker-compose --env-file ./gravity-contract-deployer.arg -f ./gravity-contract-deployer.yml -p cudos-gravity-contract-deployer up --build 2> /dev/null")
 if [ "$?" != 0 ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
@@ -26,7 +27,7 @@ if [[ "$result" =~ (Gravity deployed at Address[ ]*-[ ]*0x[0-9a-fA-F]+) ]]; then
     GRAVITY_CONTRACT_ADDRESS=${BASH_REMATCH[1]//Gravity deployed at Address[ ]*-/}
     GRAVITY_CONTRACT_ADDRESS=$(echo $GRAVITY_CONTRACT_ADDRESS | sed 's/ *$//g')
 else
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Cannot find gravity contract address";
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Cannot find gravity contract address: $result";
     exit 1;
 fi
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";

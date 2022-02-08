@@ -32,6 +32,7 @@ echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 rootNodeEnv=$(cat $(getValidatorEnvPath))
 monitoringEnabled=$(readEnvFromString "$rootNodeEnv" "MONITORING_ENABLED")
+numberOfOrchestrators=$(readEnvFromString "$rootNodeEnv" "NUMBER_OF_ORCHESTRATORS")
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && echo \"${rootNodeEnv//\"/\\\"}\" > ./root-node.mainnet.env"
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sed -i \"s/EXPOSE_IP=.*/EXPOSE_IP=\\\"$validatorComputerInternalIp\\\"/g\" ./root-node.mainnet.arg"
 
@@ -118,23 +119,20 @@ if [ "$GENESIS_JSON" = "" ]; then
     exit 1;
 fi
 
-ORCH_01_MNEMONIC=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container exec cudos-start-root-node /bin/bash -c \"cat \\\$CUDOS_HOME/orch-01.wallet\" | tail -n 1")
-if [ "$ORCH_01_MNEMONIC" = "" ]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Unable to get the wallet of orchestrator 01";
-    exit 1;
-fi
-
-ORCH_02_MNEMONIC=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container exec cudos-start-root-node /bin/bash -c \"cat \\\$CUDOS_HOME/orch-02.wallet\" | tail -n 1")
-if [ "$ORCH_02_MNEMONIC" = "" ]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Unable to get the wallet of orchestrator 02";
-    exit 1;
-fi
-
-ORCH_03_MNEMONIC=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container exec cudos-start-root-node /bin/bash -c \"cat \\\$CUDOS_HOME/orch-03.wallet\" | tail -n 1")
-if [ "$ORCH_03_MNEMONIC" = "" ]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Unable to get the wallet of orchestrator 03";
-    exit 1;
-fi
+orchestratorMnemonics=()
+ORCHESTRATOR_MNEMONICS_LIST=""
+for i in $(seq 1 $(($numberOfOrchestrators))); do
+    orchMnemonic=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container exec cudos-start-root-node /bin/bash -c \"cat \\\$CUDOS_HOME/orch-$i.wallet\" | tail -n 1")
+    if [ "$orchMnemonic" = "" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Unable to get the wallet of orchestrator $i";
+        exit 1;
+    fi
+    if [ "$i" = "1" ]; then
+        ORCH_03_MNEMONIC="$orchMnemonic"
+    fi
+    orchestratorMnemonics+=("orch-$i:${orchMnemonic// /_}\n")
+done
+ORCHESTRATOR_MNEMONICS_LIST=$(joinBy , ${orchestratorMnemonics[@]})
 
 echo -ne "Starting the root-validator...";
 echo -e "${STYLE_GREEN}DONE${STYLE_DEFAULT}";

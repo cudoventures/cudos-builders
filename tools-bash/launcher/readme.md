@@ -29,6 +29,7 @@ Prepare the .env based on .env.example. It contains the following variables:
 1. **PARAM_CONTRACT_DEPLOYER_ETH_PRIV_KEY:** a private key of an address with some ETH for gravity bridge contract deployment. <em>Example: PARAM_CONTRACT_DEPLOYER_ETH_PRIV_KEY="ae1341352513513a7f9a9a7a9a9a08a6a4a5f6ea9204135f1f3e1a3b1dae413e"</em>
 1. **PARAM_CONTRACT_DEPLOYER_ETH_ADDRESS:** the eth address of the PARAM_CONTRACT_DEPLOYER_ETH_PRIV_KEY. <em>Example: PARAM_CONTRACT_DEPLOYER_ETH_ADDRESS="0x582436824932f3b313e3a3b3d3e31413be6d6a"</em>
 1. **PARAM_SOURCE_DIR:** this is the dir on which the nodes home dir will be, usually we use something like "/usr/cudos" <em>Example: PARAM_SOURCE_DIR="/usr/cudos"</em>
+1. **PARAM_STATIC_VAL_COSMOS_ADDRS:** this is a list of wallets of validators that MUST run orchestrators <em>Example: PARAM_SOURCE_DIR="cudos1yveg0eu5rfak5dl5z72d5h143rfna2cp0jew0a,cudos193jq2nalg24vrew5adbdycuk8cz6n9h6ya9g77t"</em>
 
 ## Step 2
 
@@ -43,6 +44,12 @@ Clone <em>validator.env.example</em> to <em>validator.mainnet.env</em> (The actu
 1. **MONITORING_ENABLED:** This variable defined whether the code will export data to port 26660 for prometheus. If the monitoring is disabled the port 26660 will be closed, otherwise it will be opened to the internal private interface. <em>Example: MONITORING_ENABLED="false"</em>
 1. **ADDR_BOOK_STRICT:** This defines the behaviour of the internal address book. DO NOT MODIFY THIS VALUE. Leave it "true" as it is in the example.
 1. **GRAVITY_MODULE_BALANCE:** This value defined the initial balance of the Gravity module in acudos. <em>Example: GRAVITY_MODULE_BALANCE="8000000000000000000000000000"</em>
+1. **CUDOS_TOKEN_CONTRACT_ADDRESS:** The address of the CUDOS token contract. <em>Example: CUDOS_TOKEN_CONTRACT_ADDRESS="0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d"</em>
+1. **NUMBER_OF_VALIDATORS:** The number of validator accounts that will be initialized with the primary-validator. DO NOT MODIFY THIS VALUE. Leave it "1" as it is in the example.
+1. **NUMBER_OF_ORCHESTRATORS:** The number of orchestrator accounts that will initialized with the primary-validator. The default value is 3 <em>Example: NUMBER_OF_ORCHESTRATORS="3"</em>
+1. **VALIDATOR_BALANCE:** The amount of staked tokens that each genesis validator will have. <em>Example: VALIDATOR_BALANCE="2000000000000000000000000"</em>
+1. **ORCHESTRATOR_BALANCE:** This is the balance that each orchestrator will have. <em>Example: ORCHESTRATOR_BALANCE="1000000000000000000"</em>
+1. **FAUCET_BALANCE:** The balance of the faucet. If set to 0 then no faucet will be created. <em>Example: FAUCET_BALANCE="8000000000000000000000000000"</em>
 
 **Seed:**
 

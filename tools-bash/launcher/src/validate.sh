@@ -7,39 +7,18 @@ if [ "$launcherPath" != "launcher" ]; then
 fi
 
 source "./src/incs/var.sh"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
 
 source "./src/incs/utils.sh"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
 
 source "$WORKING_SRC_DIR/incs/validate-script-requirements.sh"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
 
 source "$WORKING_SRC_DIR/incs/topology.sh"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
 
 source "$WORKING_SRC_DIR/incs/validate-topology.sh"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
 
 source "$WORKING_SRC_DIR/modules/load-ssh-keys.sh"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
 
 source "$WORKING_SRC_DIR/incs/validate-instances.sh"
-if [ "$?" != 0 ]; then
-    exit $?;
-fi;
 
 echo "" # new line
 
