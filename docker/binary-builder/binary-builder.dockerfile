@@ -14,6 +14,10 @@ RUN FOLDER=$(ls /go/pkg/mod/github.com/\!cosm\!wasm/ | grep wasmvm@v) && ln -s /
 
 FROM golang:buster
 
+RUN apt update
+
+RUN apt install -y jq
+
 WORKDIR /usr/cudos
 
 COPY --from=builder /go/pkg/mod/github.com/!cosm!wasm/wasmvm/api/libwasmvm.so /usr/lib

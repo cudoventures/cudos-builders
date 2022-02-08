@@ -15,7 +15,7 @@ topology.*.json
 users*override.yml
 docker/tests/**/data
 docker/monitoring/config/prometheus.tesnet.public.yml
-/tools-bash/constructor/gen-tx
+/tools-bash/constructor/exports
 tools-bash/launcher/config/genesis.data.json
 tools-bash/launcher/config/genesis.root.json
 tools-bash/launcher/src/genesis.sh

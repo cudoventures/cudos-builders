@@ -5,6 +5,7 @@ echo -ne "Processing variables...";
 scriptDir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 WORKING_SRC_DIR=$(cd $scriptDir/..  && pwd)
 WORKING_DIR=$(cd $scriptDir/../..  && pwd)
+WORKING_EXPORT_DIR="$WORKING_DIR/exports"
 
 STYLE_BOLD='\033[1m'
 STYLE_RED='\033[1;31m'
