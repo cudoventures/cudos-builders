@@ -26,6 +26,9 @@ echo $result > "$RESULT_GENESIS_PATH"
 result=$(jq '.app_state.distribution.outstanding_rewards = []' "$RESULT_GENESIS_PATH")
 echo $result > "$RESULT_GENESIS_PATH"
 
+result=$(jq ".app_state.gravity.static_val_cosmos_addrs = [.app_state.gravity.static_val_cosmos_addrs | join(\",\") + \",$PARAM_STATIC_VAL_COSMOS_ADDRS\"]" "$RESULT_GENESIS_PATH")
+echo $result > "$RESULT_GENESIS_PATH"
+
 # auth.accounts (only BaseAccounts)
 # jq .app_state.auth.accounts ./config/genesis.data.json | jq "map(select(.\"@type\" == \"/cosmos.auth.v1beta1.BaseAccount\") | .)" > "$tmpGenesisPath"
 # result=$(jq -s '.[0].app_state.auth.accounts = .[0].app_state.auth.accounts + .[1]' "$RESULT_GENESIS_PATH" "$tmpGenesisPath" | jq '.[0]')
