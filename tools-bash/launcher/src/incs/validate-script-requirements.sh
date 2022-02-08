@@ -46,7 +46,4 @@ if [ ! -f "$WORKING_DIR/config/topology.json" ]; then
     exit 1
 fi
 
-rm -rf "$WORKING_EXPORT_DIR"
-mkdir -p "$WORKING_EXPORT_DIR"
-
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";

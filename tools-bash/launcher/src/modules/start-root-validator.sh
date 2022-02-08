@@ -16,19 +16,19 @@ ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 arg=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && cat ./root-node.mainnet.arg")
-VALIDATOR_START_CONTAINER_NAME=$(readEnvFromString "$arg" "START_CONTAINER_NAME")
-VALIDATOR_VOLUME_NAME=$(readEnvFromString "$arg" "VOLUME_NAME")
+validatorStartContainerName=$(readEnvFromString "$arg" "START_CONTAINER_NAME")
+validatorVolumeName=$(readEnvFromString "$arg" "VOLUME_NAME")
 unset arg
-result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker stop $VALIDATOR_START_CONTAINER_NAME 2> /dev/null")
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker stop $validatorStartContainerName 2> /dev/null")
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR && sudo rm -rf ./CudosData"
 
-echo -ne "Preparing root-validator's binary builder...";
-result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/binary-builder && sudo docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder build 2> /dev/null")
-if [ "$?" != 0 ]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
-    exit 1;
-fi
-echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+# echo -ne "Preparing root-validator's binary builder...";
+# result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/binary-builder && sudo docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder build 2> /dev/null")
+# if [ "$?" != 0 ]; then
+#     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
+#     exit 1;
+# fi
+# echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 rootNodeEnv=$(cat $(getValidatorEnvPath))
 monitoringEnabled=$(readEnvFromString "$rootNodeEnv" "MONITORING_ENABLED")
@@ -42,7 +42,7 @@ if [ "$?" != 0 ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
     exit 1;
 fi
-ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosData/$VALIDATOR_VOLUME_NAME/config && sudo sed -i \"158s/enable = false/enable = true/\" ./app.toml"
+ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosData/$validatorVolumeName/config && sudo sed -i \"158s/enable = false/enable = true/\" ./app.toml"
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Clean-up after the initialization of the root-validator...";
@@ -67,13 +67,13 @@ fi
 while true
 do
     sleep 1
-    result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker exec $VALIDATOR_START_CONTAINER_NAME /bin/bash -c \"cudos-noded status |& tee /tmp/cudos-status\" 2> /dev/null")    
+    result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker exec $validatorStartContainerName /bin/bash -c \"cudos-noded status |& tee /tmp/cudos-status\" 2> /dev/null")    
     sleep 1
-    cudosNodedStatus=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker exec $VALIDATOR_START_CONTAINER_NAME /bin/bash -c \"cat /tmp/cudos-status\"")
+    cudosNodedStatus=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker exec $validatorStartContainerName /bin/bash -c \"cat /tmp/cudos-status\"")
     latestBlockHeight=$(echo $cudosNodedStatus | jq '.SyncInfo.latest_block_height')
     latestBlockHeight=${latestBlockHeight//\"/}
     if [ "$latestBlockHeight" != "0" ]; then
-        result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker exec $VALIDATOR_START_CONTAINER_NAME /bin/bash -c \"rm /tmp/cudos-status\"")
+        result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker exec $validatorStartContainerName /bin/bash -c \"rm /tmp/cudos-status\"")
         break
     fi
 done
@@ -85,10 +85,10 @@ ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp
 result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./start-root-node.yml -p cudos-start-root-node up --build -d 2> /dev/null")
 # export genesis
 tmpFilePath="/tmp/genesis.cudos.json"
-result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container exec $VALIDATOR_START_CONTAINER_NAME /bin/bash -c \"cudos-noded export |& tee $tmpFilePath\" 2> /dev/null")
-exportedGenesis=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container exec $VALIDATOR_START_CONTAINER_NAME /bin/bash -c \"cat $tmpFilePath && rm $tmpFilePath\"")
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container exec $validatorStartContainerName /bin/bash -c \"cudos-noded export |& tee $tmpFilePath\" 2> /dev/null")
+exportedGenesis=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container exec $validatorStartContainerName /bin/bash -c \"cat $tmpFilePath && rm $tmpFilePath\"")
 # reset the data
-result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container exec $VALIDATOR_START_CONTAINER_NAME /bin/bash -c \"cudos-noded unsafe-reset-all\" 2> /dev/null")
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container exec $validatorStartContainerName /bin/bash -c \"cudos-noded unsafe-reset-all\" 2> /dev/null")
 # stop the docker
 result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./start-root-node.yml -p cudos-start-root-node down 2> /dev/null")
 # merge genesis
@@ -96,7 +96,7 @@ echo $exportedGenesis > "$tmpFilePath"
 source "$WORKING_SRC_DIR/modules/merge-genesis.sh" "$tmpFilePath"
 rm "$tmpFilePath"
 finalGenesis=$(cat "$RESULT_GENESIS_PATH")
-ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "echo \"${finalGenesis//\"/\\\"}\" > $tmpFilePath && sudo mv $tmpFilePath $PARAM_SOURCE_DIR/CudosData/$VALIDATOR_VOLUME_NAME/config/genesis.json"
+ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "echo \"${finalGenesis//\"/\\\"}\" > $tmpFilePath && sudo mv $tmpFilePath $PARAM_SOURCE_DIR/CudosData/$validatorVolumeName/config/genesis.json"
 # restore cudos-noded start
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sed -i \"s/sleep infinity/cudos-noded start/\" ./start-root-node.dockerfile"
 # start the node
@@ -107,7 +107,7 @@ if [ "$?" != 0 ]; then
 fi
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
-VALIDATOR_TENEDRMINT_NODE_ID=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container exec $VALIDATOR_START_CONTAINER_NAME cudos-noded tendermint show-node-id")
+VALIDATOR_TENEDRMINT_NODE_ID=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container exec $validatorStartContainerName cudos-noded tendermint show-node-id")
 if [ "$VALIDATOR_TENEDRMINT_NODE_ID" = "" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Root validator's tendermint node id is not defined";
     exit 1;
@@ -127,9 +127,9 @@ for i in $(seq 1 $(($numberOfOrchestrators))); do
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Unable to get the wallet of orchestrator $i";
         exit 1;
     fi
-    if [ "$i" = "1" ]; then
-        ORCH_03_MNEMONIC="$orchMnemonic"
-    fi
+    # if [ "$i" = "1" ]; then
+    #     ORCH_01_MNEMONIC="$orchMnemonic"
+    # fi
     orchestratorMnemonics+=("orch-$i:${orchMnemonic// /_}\n")
 done
 ORCHESTRATOR_MNEMONICS_LIST=$(joinBy , ${orchestratorMnemonics[@]})

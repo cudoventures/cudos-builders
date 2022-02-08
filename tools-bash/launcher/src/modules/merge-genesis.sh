@@ -30,8 +30,10 @@ echo $result > "$RESULT_GENESIS_PATH"
 result=$(jq '.app_state.distribution.outstanding_rewards = []' "$RESULT_GENESIS_PATH")
 echo $result > "$RESULT_GENESIS_PATH"
 
-result=$(jq ".app_state.gravity.static_val_cosmos_addrs = [.app_state.gravity.static_val_cosmos_addrs | join(\",\") + \",$PARAM_STATIC_VAL_COSMOS_ADDRS\"]" "$RESULT_GENESIS_PATH")
-echo $result > "$RESULT_GENESIS_PATH"
+if [ "$PARAM_STATIC_VAL_COSMOS_ADDRS" != "" ]; then
+    result=$(jq ".app_state.gravity.static_val_cosmos_addrs = [.app_state.gravity.static_val_cosmos_addrs | join(\",\") + \",$PARAM_STATIC_VAL_COSMOS_ADDRS\"]" "$RESULT_GENESIS_PATH")
+    echo $result > "$RESULT_GENESIS_PATH"
+fi
 
 # auth.accounts (only BaseAccounts)
 # jq .app_state.auth.accounts "$dataGenesisPath" | jq "map(select(.\"@type\" == \"/cosmos.auth.v1beta1.BaseAccount\") | .)" > "$tmpGenesisPath"

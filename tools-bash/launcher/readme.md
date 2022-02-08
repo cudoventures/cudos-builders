@@ -29,7 +29,7 @@ Prepare the .env based on .env.example. It contains the following variables:
 1. **PARAM_CONTRACT_DEPLOYER_ETH_PRIV_KEY:** a private key of an address with some ETH for gravity bridge contract deployment. <em>Example: PARAM_CONTRACT_DEPLOYER_ETH_PRIV_KEY="ae1341352513513a7f9a9a7a9a9a08a6a4a5f6ea9204135f1f3e1a3b1dae413e"</em>
 1. **PARAM_CONTRACT_DEPLOYER_ETH_ADDRESS:** the eth address of the PARAM_CONTRACT_DEPLOYER_ETH_PRIV_KEY. <em>Example: PARAM_CONTRACT_DEPLOYER_ETH_ADDRESS="0x582436824932f3b313e3a3b3d3e31413be6d6a"</em>
 1. **PARAM_SOURCE_DIR:** this is the dir on which the nodes home dir will be, usually we use something like "/usr/cudos" <em>Example: PARAM_SOURCE_DIR="/usr/cudos"</em>
-1. **PARAM_STATIC_VAL_COSMOS_ADDRS:** this is a list of wallets of validators that MUST run orchestrators <em>Example: PARAM_SOURCE_DIR="cudos1yveg0eu5rfak5dl5z72d5h143rfna2cp0jew0a,cudos193jq2nalg24vrew5adbdycuk8cz6n9h6ya9g77t"</em>
+1. **PARAM_STATIC_VAL_COSMOS_ADDRS:** this is a list of wallets of validators that MUST run orchestrators. This value CAN be empty if only the primary-validator will have an orchestrator. <em>Example: PARAM_SOURCE_DIR="cudos1yveg0eu5rfak5dl5z72d5h143rfna2cp0jew0a,cudos193jq2nalg24vrew5adbdycuk8cz6n9h6ya9g77t"</em>
 
 ## Step 2
 
@@ -161,7 +161,7 @@ Each **computer** defined in the <code>topology.json</code> is accessed by a pri
 
 # Usage
 
-There are 2 scripts.
+There are 3 scripts.
 
 **Important**: The side effect of executing any of these scripts will be a folder, defined in PARAM_SOURCE_DIR at .env, on each machine defined in topology.json
 
@@ -171,6 +171,14 @@ Ensure that it has execute permission and then start the script from ./launcher 
 
 ```bash
 ./src/launcher.sh
+```
+
+**Gravity**: It starts the gravity.
+
+Ensure that it has execute permission and then start the script from ./launcher folder
+
+```bash
+./src/gravity.sh
 ```
 
 **Validate**: It validates the connection from current machine to other machines defined in the topology and also checks for available space, software, etc.

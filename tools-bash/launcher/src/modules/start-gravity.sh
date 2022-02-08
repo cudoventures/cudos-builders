@@ -11,6 +11,10 @@ sentryComputerId=$(getSentryComputerId 0)
 sentryComputerIndex=$(getComputerIndexById "$sentryComputerId")
 sentryComputerInternalIp=$(getComputerInternalIp $sentryComputerIndex)
 
+arg=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && cat ./root-node.mainnet.arg")
+validatorStartContainerName=$(readEnvFromString "$arg" "START_CONTAINER_NAME")
+orchMnemonic=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container exec cudos-start-root-node /bin/bash -c \"cat \\\$CUDOS_HOME/orch-1.wallet\" | tail -n 1")
+
 echo -ne "Deploying gravity smart contract...";
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/gravity-contract-deployer && cp ./gravity-contract-deployer.env.example ./gravity-contract-deployer.env"
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/gravity-contract-deployer && sed -i \"s~COSMOS_NODE=.*~COSMOS_NODE=\\\"http://$sentryComputerInternalIp:26657\\\"~g\" ./gravity-contract-deployer.env"
@@ -39,9 +43,9 @@ echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 echo -ne "Starting the orchestrator...";
 orchNodeEnv=$(cat $(getValidatorOrchEnvPath))
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator && echo \"${orchNodeEnv//\"/\\\"}\" > ./orchestrator.mainnet.env"
-ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator && sed -i \"s~GRPC=.*~GRPC=\\\"http://$VALIDATOR_START_CONTAINER_NAME:9090\\\"~g\" ./orchestrator.mainnet.env"
+ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator && sed -i \"s~GRPC=.*~GRPC=\\\"http://$validatorStartContainerName:9090\\\"~g\" ./orchestrator.mainnet.env"
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator && sed -i \"s/CONTRACT_ADDR=.*/CONTRACT_ADDR=\\\"$GRAVITY_CONTRACT_ADDRESS\\\"/g\" ./orchestrator.mainnet.env"
-ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator && sed -i \"s/COSMOS_ORCH_MNEMONIC=.*/COSMOS_ORCH_MNEMONIC=\\\"$ORCH_01_MNEMONIC\\\"/g\" ./orchestrator.mainnet.env"
+ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator && sed -i \"s/COSMOS_ORCH_MNEMONIC=.*/COSMOS_ORCH_MNEMONIC=\\\"$orchMnemonic\\\"/g\" ./orchestrator.mainnet.env"
 
 arg=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator && cat ./orchestrator.mainnet.arg")
 orchestratorStartContainerName=$(readEnvFromString "$arg" "CONTAINER_NAME")

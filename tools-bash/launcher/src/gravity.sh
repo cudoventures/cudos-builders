@@ -8,9 +8,6 @@ fi
 
 source "./src/incs/var.sh"
 
-rm -rf "$WORKING_EXPORT_DIR"
-mkdir -p "$WORKING_EXPORT_DIR"
-
 source "$WORKING_SRC_DIR/incs/utils.sh"
 
 source "$WORKING_SRC_DIR/incs/validate-script-requirements.sh"
@@ -25,20 +22,12 @@ source "$WORKING_SRC_DIR/incs/validate-instances.sh"
 
 echo "" # new line
 
-source "$WORKING_SRC_DIR/modules/start-root-validator.sh"
+source "$WORKING_SRC_DIR/modules/start-gravity.sh"
 
 echo "" # new line
 
-source "$WORKING_SRC_DIR/modules/start-seeds.sh"
+source "$WORKING_SRC_DIR/modules/exports-gravity.sh"
 
 echo "" # new line
 
-source "$WORKING_SRC_DIR/modules/start-sentries.sh"
-
-echo "" # new line
-
-source "$WORKING_SRC_DIR/modules/exports-launch.sh"
-
-echo "" # new line
-
-echo -e "${STYLE_GREEN}The network has been started${STYLE_DEFAULT}";
+echo -e "${STYLE_GREEN}The gravity has been started${STYLE_DEFAULT}";
