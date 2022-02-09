@@ -1,13 +1,13 @@
 #!/bin/bash -i
 
-# echo -ne "Preparing the binary builder...";
-# cd "$PARAM_SOURCE_DIR/CudosBuilders/docker/binary-builder"
-# dockerResult=$(docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder build 2> /dev/null)
-# if [ "$?" != 0 ]; then
-#     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error building the container $?: ${dockerResult}";
-#     exit 1;
-# fi
-# echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+echo -ne "Preparing the binary builder...";
+cd "$PARAM_SOURCE_DIR/CudosBuilders/docker/binary-builder"
+dockerResult=$(docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder build 2> /dev/null)
+if [ "$?" != 0 ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error building the container $?: ${dockerResult}";
+    exit 1;
+fi
+echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Preparing the $NODE_NAME...";
 cd "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME"
@@ -34,6 +34,10 @@ echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 if [ $IS_VALIDATOR = "true" ]; then
     echo -ne "Initializing the validator...";
     cd "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME";
+
+    # stopping previous instances of the root-validator
+    dockerResult=$(docker-compose --env-file ./full-node.client.mainnet.arg -f ./start-full-node.yml -p cudos-start-full-node-client-mainnet-01 down 2> /dev/null);
+
     sed -i "s/cudos-noded start/sleep infinity/g" "./start-full-node.dockerfile";
     dockerResult=$(docker-compose --env-file ./full-node.client.mainnet.arg -f ./start-full-node.yml -p cudos-start-full-node-client-mainnet-01 up --build -d 2> /dev/null);
     if [ "$?" != 0 ]; then
@@ -91,7 +95,11 @@ if [ $IS_VALIDATOR = "true" ]; then
     while true
     do
         sleep 1
-        result=$(docker exec "$startContainerName" /bin/bash -c "cudos-noded status |& tee /tmp/cudos-status" 2> /dev/null)
+        dockerResult=$(docker exec "$startContainerName" /bin/bash -c "cudos-noded status |& tee /tmp/cudos-status" 2> /dev/null)
+        if [ "$?" != 0 ]; then
+            echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error initializing the network $?: ${dockerResult}";
+            exit 1;
+        fi;
         sleep 1
         cudosNodedStatus=$(docker exec "$startContainerName" /bin/bash -c "cat /tmp/cudos-status")
         latestBlockHeight=$(echo $cudosNodedStatus | jq '.SyncInfo.latest_block_height')
@@ -111,6 +119,11 @@ if [ $IS_VALIDATOR = "true" ]; then
     tmpFilePath="/tmp/init-genesis.cudos.json"
     result=$(docker container exec "$startContainerName" /bin/bash -c "cudos-noded export |& tee $tmpFilePath" 2> /dev/null)
     EXPORTED_GENESIS=$(docker container exec "$startContainerName" /bin/bash -c "cat $tmpFilePath && rm $tmpFilePath")
+    validJson=$(echo $EXPORTED_GENESIS | jq -e . 2> /dev/null)
+    if [ "$?" != 0 ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Invalid genesis $?: ${EXPORTED_GENESIS}";
+        exit 1;
+    fi;
     # reset the data
     result=$(docker container exec "$startContainerName" /bin/bash -c "cudos-noded unsafe-reset-all" 2> /dev/null)
     # stop the docker

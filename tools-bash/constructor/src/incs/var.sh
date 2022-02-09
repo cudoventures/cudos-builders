@@ -6,7 +6,7 @@ scriptDir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 WORKING_SRC_DIR=$(cd $scriptDir/..  && pwd)
 WORKING_DIR=$(cd $scriptDir/../..  && pwd)
 WORKING_EXPORT_DIR="$WORKING_DIR/exports"
-VALIDATOR_BALANCE="123456789987654321"
+VALIDATOR_BALANCE="123456789987654321123456789"
 
 STYLE_BOLD='\033[1m'
 STYLE_RED='\033[1;31m'
