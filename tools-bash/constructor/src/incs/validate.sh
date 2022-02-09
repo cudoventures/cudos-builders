@@ -40,8 +40,8 @@ if [ "$STARTING" = "true" ]; then
 
     if [ "$IS_CLUSTERED_VALIDATOR" = "false" ]; then
 
-        if [ "$PARAM_SEED" = "" ]; then
-            echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_SEED must not be empty";
+        if [ "$PARAM_SEED" = "" ] && [ "$PARAM_PERSISTENT_PEERS" = "" ]; then
+            echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_SEED or PARAM_PERSISTENT_PEERS must not be empty";
             exit 1;
         fi;
 
@@ -106,8 +106,8 @@ if [ "$IS_VALIDATOR" = "true" ]; then
         exit 1;
     fi
 
-    if [ "$PARAM_VALIDATOR_BALANCE" = "" ]; then
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_BALANCE must not be empty";
+    if [ ${#PARAM_KEYRING_OS_PASS} -lt 8 ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_KEYRING_OS_PASS must be at least 8 characters";
         exit 1;
     fi
 

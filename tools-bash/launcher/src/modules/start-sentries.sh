@@ -49,6 +49,11 @@ do
     ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sed -i \"s/SEEDS=.*/SEEDS=\\\"$SEEDS_PEERS_LIST\\\"/g\" ./sentry-node.mainnet.env"
     echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
+    echo -ne "Stopping previous instances of the sentry($i)...";
+    result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sudo docker-compose --env-file ./sentry-node.mainnet.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node down 2> /dev/null")
+    result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sudo docker-compose --env-file ./sentry-node.mainnet.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node down 2> /dev/null")
+    echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+
     echo -ne "Initializing sentry($i)...";
     result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sudo docker-compose --env-file ./sentry-node.mainnet.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node up --build 2> /dev/null")
     if [ "$?" != 0 ]; then

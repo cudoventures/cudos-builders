@@ -36,6 +36,13 @@ numberOfOrchestrators=$(readEnvFromString "$rootNodeEnv" "NUMBER_OF_ORCHESTRATOR
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && echo \"${rootNodeEnv//\"/\\\"}\" > ./root-node.mainnet.env"
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sed -i \"s/EXPOSE_IP=.*/EXPOSE_IP=\\\"$validatorComputerInternalIp\\\"/g\" ./root-node.mainnet.arg"
 
+# stop any running instance
+# stop the docker
+echo -ne "Stopping previous instances of the root-validator...";
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./init-root-node.yml -p cudos-init-root-node down 2> /dev/null")
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./start-root-node.yml -p cudos-start-root-node down 2> /dev/null")
+echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+
 echo -ne "Initializing root-validator...";
 result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./init-root-node.yml -p cudos-init-root-node up --build 2> /dev/null")
 if [ "$?" != 0 ]; then

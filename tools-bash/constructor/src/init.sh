@@ -23,7 +23,7 @@ source "$WORKING_SRC_DIR/modules/repos.sh"
 
 source "$WORKING_SRC_DIR/modules/init-node.sh"
 
-source "$WORKING_SRC_DIR/modules/export-gentx.sh"
+source "$WORKING_SRC_DIR/modules/export.sh"
 
 echo "" # new line
 
