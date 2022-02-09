@@ -30,13 +30,13 @@ do
     result=$(ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node && sudo docker stop $startContainerName 2> /dev/null")
     ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "cd $PARAM_SOURCE_DIR && sudo rm -rf ./CudosData"
 
-    echo -ne "Preparing seed($i)'s binary builder...";
-    result=$(ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/binary-builder && sudo docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder build 2> /dev/null");
-    if [ "$?" != 0 ]; then
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
-        exit 1;
-    fi
-    echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+    # echo -ne "Preparing seed($i)'s binary builder...";
+    # result=$(ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/binary-builder && sudo docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder build 2> /dev/null");
+    # if [ "$?" != 0 ]; then
+    #     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
+    #     exit 1;
+    # fi
+    # echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
     seedNodeEnv=$(cat $(getSeedEnvPath $i))
     ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node && echo \"${seedNodeEnv//\"/\\\"}\" > ./seed-node.mainnet.env"
@@ -47,6 +47,11 @@ do
     echo -ne "Preparing seed($i)'s peers...";
     ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node && sed -i \"s/PERSISTENT_PEERS=.*/PERSISTENT_PEERS=\\\"$VALIDATOR_TENEDRMINT_NODE_ID@$validatorInternalIp:26656\\\"/g\" ./seed-node.mainnet.env"
     ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node && sed -i \"s/PRIVATE_PEERS=.*/PRIVATE_PEERS=\\\"$VALIDATOR_TENEDRMINT_NODE_ID\\\"/g\" ./seed-node.mainnet.env"
+    echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+
+    echo -ne "Stopping previous instances of the seed($i)...";
+    result=$(ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node && sudo docker-compose --env-file ./seed-node.mainnet.arg -f ./init-seed-node.yml -p cudos-init-seed-node down 2> /dev/null")
+    result=$(ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node && sudo docker-compose --env-file ./seed-node.mainnet.arg -f ./start-seed-node.yml -p cudos-start-seed-node down 2> /dev/null")
     echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
     echo -ne "Initializing seed($i)...";

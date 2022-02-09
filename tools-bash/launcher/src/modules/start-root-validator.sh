@@ -22,19 +22,26 @@ unset arg
 result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker stop $validatorStartContainerName 2> /dev/null")
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR && sudo rm -rf ./CudosData"
 
-echo -ne "Preparing root-validator's binary builder...";
-result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/binary-builder && sudo docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder build 2> /dev/null")
-if [ "$?" != 0 ]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
-    exit 1;
-fi
-echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+# echo -ne "Preparing root-validator's binary builder...";
+# result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/binary-builder && sudo docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder build 2> /dev/null")
+# if [ "$?" != 0 ]; then
+#     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
+#     exit 1;
+# fi
+# echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 rootNodeEnv=$(cat $(getValidatorEnvPath))
 monitoringEnabled=$(readEnvFromString "$rootNodeEnv" "MONITORING_ENABLED")
 numberOfOrchestrators=$(readEnvFromString "$rootNodeEnv" "NUMBER_OF_ORCHESTRATORS")
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && echo \"${rootNodeEnv//\"/\\\"}\" > ./root-node.mainnet.env"
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sed -i \"s/EXPOSE_IP=.*/EXPOSE_IP=\\\"$validatorComputerInternalIp\\\"/g\" ./root-node.mainnet.arg"
+
+# stop any running instance
+# stop the docker
+echo -ne "Stopping previous instances of the root-validator...";
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./init-root-node.yml -p cudos-init-root-node down 2> /dev/null")
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./start-root-node.yml -p cudos-start-root-node down 2> /dev/null")
+echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Initializing root-validator...";
 result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./init-root-node.yml -p cudos-init-root-node up --build 2> /dev/null")
