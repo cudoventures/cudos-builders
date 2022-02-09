@@ -41,7 +41,7 @@ database:
     max_idle_connections: 10
 logging:
     level: debug
-    format: text
+    format: json
 telemetry:
     port: 5000
 pricefeed:
@@ -52,4 +52,4 @@ pricefeed:
               exponent: 0
               price_id: cudos
 distribution:
-    rewards_frequency: 10000
+    rewards_frequency: 1000

@@ -52,4 +52,4 @@ pricefeed:
               exponent: 0
               price_id: cudos
 distribution:
-    rewards_frequency: 10000
+    rewards_frequency: 1000

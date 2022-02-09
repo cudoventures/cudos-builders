@@ -28,13 +28,15 @@ NOTE: Requires a running cudos-node instance !
 4. Once connected to the  DB and execute the DB init sciprt: big_dipper_2_init_script_combined
 5. Provision new Compute Engine instance in gcloud for BDJuno/Parser
        - RAM has to be >= 8 GB   
-       - Tag your instance(Networking => Network tags), for example : private-testnet-gql / public-testnet-gql
-       - In dentity and API access tab / Access Scopes / choose "Set access for each API" and from the dropdown for "Cloud SQL" choose enable. 
-   1. [Create a static IP address for your GCE Instance](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address)
-   2. White list the GCE VM IP to gcloud SQL Instance ( this is so because hasura is making requests directly to the IP and cannot go over sql auth proxy)
+       - Set book disk to 100 GB
+   1. Tag your instance(Networking => Network tags), for example : private-testnet-gql / public-testnet-gql
+   2. In dentity and API access tab / Access Scopes / choose "Set access for each API" and from the dropdown for "Cloud SQL" choose enable. 
+   3. [Create a static IP address for your GCE Instance](https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address)
+   4. Create the instance 
+   5. White list the GCE VM IP to gcloud SQL Instance ( this is so because hasura is making requests directly to the IP and cannot go over sql auth proxy)
        - GSQL Instance => Connections => Networking => Authorized Networks => Add the public ( static one ) IP of the GCE instance
        - In the Connectivity Test tab try to make a test from the VM to GSQL on port 5432, should be reachable
-   3. Expose PORT 5000,8080 for the outside world: ( Explorer-v2-ui calls this )
+   6. Expose PORT 5000,8080 for the outside world: ( Explorer-v2-ui calls this )
          - Go to cloud.google.com
          - Go to my Console
          - Choose your Project
@@ -45,20 +47,20 @@ NOTE: Requires a running cudos-node instance !
          - Set Source IP ranges to allow traffic from all IPs: 0.0.0.0/0
          - To allow incoming TCP connections to port 5000,8080, in "Protocols and Ports", check "tcp" and enter 5000,8080
          - Click Create (or click “Equivalent Command Line” to show the gcloud command to create the same rule)
-   4.  Create a new folder named bdjuno_gql_deploy and inside it place the relevant configs(depending on the environment)
+   7.  Create a new folder named bdjuno_gql_deploy and inside it place the relevant configs(depending on the environment)
        - From the relevant folder(private/public) to the new folder:
          - Copy and Rename bdjuno-sample to bdjuno
            - Rename genesis file to genesis.json
          - Copy and Rename .env-bdjuno.sample to .env-bdjuno
-   5.  Go over the configs and check if the parameters are right (IP of the node, Hasura URL, Db names, etc)
+   8.  Go over the configs and check if the parameters are right (IP of the node, Hasura URL, Db names, etc)
           - Please note that HASURA_GRAPHQL_DATABASE_URL requires the real IP address:port of the SQL DB
-   6.   Copy the bdjuno-deploy.sh script from explorer-v2 to the new folder
-   7.   Copy the new folder bdjuno_gql_deploy to the [new VM via SSH](https://cloud.google.com/sdk/gcloud/reference/compute/scp) 
-   8.  [Install Docker on the VM](https://docs.docker.com/engine/install/) and [Install docker-compose](https://docs.docker.com/compose/install/)
-   9.  Inside the VM change dir to the newly copied folder and deploy BDJuno/Hasura like ``` ./bdjuno-deploy.sh prod HASURA_URL HASURA_SECRET_KEY``` 
+   9.   Copy the bdjuno-deploy.sh script from explorer-v2 to the new folder
+   10.  Copy the new folder bdjuno_gql_deploy to the [new VM via SSH](https://cloud.google.com/sdk/gcloud/reference/compute/scp) 
+   11. [Install Docker on the VM](https://docs.docker.com/engine/install/) and [Install docker-compose](https://docs.docker.com/compose/install/)
+   12. Inside the VM change dir to the newly copied folder and deploy BDJuno/Hasura like ``` ./bdjuno-deploy.sh prod HASURA_URL HASURA_SECRET_KEY``` 
       - Hasura URL and Secret Key should be the same as the ones defined in .env-bdjuno : HASURA_GRAPHQL_ADMIN_SECRET and HASURA_GRAPHQL_ENDPOINT_URL
       - This will pull, build and deploy the latest code for cudos-bdjuno and deploy it via docker to the specified instance using the configs you provided
-   10. Delete the newly created folder that you transfered to the server on both local and remote
+   13. Delete the newly created folder that you transfered to the server on both local and remote
 6. Provision new Compute Engine instance in gcloud for Explorer-v2 UI
        - RAM has to be >= 8 GB   
        - Tag your instance, for example : private-testnet-explorer-v2-ui / public-testnet-explorer-v2-ui
