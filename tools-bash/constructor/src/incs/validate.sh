@@ -106,6 +106,11 @@ if [ "$IS_VALIDATOR" = "true" ]; then
         exit 1;
     fi
 
+    if [ ${#PARAM_KEYRING_OS_PASS} -lt 8 ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_KEYRING_OS_PASS must be at least 8 characters";
+        exit 1;
+    fi
+
 fi
 
 if [ "$SHOULD_START_ORCHESTRATOR" = "true" ]; then
