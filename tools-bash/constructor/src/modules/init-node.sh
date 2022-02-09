@@ -66,7 +66,13 @@ if [ $IS_VALIDATOR = "true" ]; then
     validatorAddress=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys show validator -a --keyring-backend os");
 
     dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "cudos-noded add-genesis-account $validatorAddress ${VALIDATOR_BALANCE}acudos");
-    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\"; echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded gentx validator "${VALIDATOR_BALANCE}acudos" 0x364af07E1bb08288a1F3D9a578317baa9ED4fb2d $emptyAddress --chain-id $chainId --keyring-backend os 2> /dev/null");
+    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\"; echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded gentx validator "${VALIDATOR_BALANCE}acudos" 0x364af07E1bb08288a1F3D9a578317baa9ED4fb2d $emptyAddress --chain-id $chainId --keyring-backend os     --commission-rate="$PARAM_COMMISION_RATE" \
+    --commission-max-rate="$PARAM_COMMISSION_MAX_RATE" \
+    --commission-max-change-rate="$PARAM_COMMISSION_MAX_CHANGE_RATE" \
+    --gas="auto" \
+    --gas-prices="$PARAM_GAS_PRICE" \
+    --gas-adjustment="$PARAM_GAS_ADJUSTMENT" 2> /dev/null");
+
     if [ "$?" != 0 ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error creating gen-tx $?: ${dockerResult}";
         exit 1;
