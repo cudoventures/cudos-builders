@@ -111,6 +111,25 @@ if [ "$IS_VALIDATOR" = "true" ]; then
         exit 1;
     fi
 
+    if [ ${#PARAM_COMMISSION_MAX_RATE} = ""  ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_COMMISSION_MAX_RATE must not be empty";
+        exit 1;
+    fi
+
+    if [ ${#PARAM_COMMISION_RATE} -lt ${#PARAM_COMMISSION_MAX_RATE}  && ${#PARAM_COMMISION_RATE} -gt 0 ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_COMMISION_RATE must be between 0 and PARAM_COMMISSION_MAX_RATE";
+        exit 1;
+    fi
+
+    if [ ${#PARAM_COMMISSION_MAX_CHANGE_RATE} = "" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_COMMISSION_MAX_CHANGE_RATE must not be empty";
+        exit 1;
+    fi
+    if [ ${#PARAM_GAS_PRICE} = "" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_GAS_PRICE must be not be empty";
+        exit 1;
+    fi
+
 fi
 
 if [ "$SHOULD_START_ORCHESTRATOR" = "true" ]; then
