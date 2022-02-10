@@ -46,7 +46,7 @@ if [ $IS_VALIDATOR = "true" ]; then
     fi;
     echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
-    echo -ne "Creating gen-tx...";
+    echo -ne "Creating genesis...";
     startContainerName="cudos-start-full-node-client-mainnet";
     chainId="cudos-1";
 

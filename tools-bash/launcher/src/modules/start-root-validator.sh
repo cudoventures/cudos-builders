@@ -9,10 +9,10 @@ validatorComputerPort=$(getComputerPort $validatorComputerIndex)
 validatorComputerUser=$(getComputerUser $validatorComputerIndex)
 
 echo -ne "Preparing root-validator's repos...";
-branch="cudos-master"
-ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR && rm -rf ./CudosNode && git clone -q --branch $branch https://github.com/CudoVentures/cudos-node.git CudosNode"
-ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR && rm -rf ./CudosBuilders && git clone -q --branch $branch https://github.com/CudoVentures/cudos-builders.git CudosBuilders"
-ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR && rm -rf ./CudosGravityBridge && git clone -q --branch $branch https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge"
+branch="cudos-dev"
+ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR && sudo rm -rf ./CudosNode && git clone -q --branch $branch https://github.com/CudoVentures/cudos-node.git CudosNode"
+ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR && sudo rm -rf ./CudosBuilders && git clone -q --branch $branch https://github.com/CudoVentures/cudos-builders.git CudosBuilders"
+ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR && sudo rm -rf ./CudosGravityBridge && git clone -q --branch $branch https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge"
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 arg=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && cat ./root-node.mainnet.arg")
@@ -80,7 +80,7 @@ do
     latestBlockHeight=$(echo $cudosNodedStatus | jq '.SyncInfo.latest_block_height')
     latestBlockHeight=${latestBlockHeight//\"/}
     if [ "$latestBlockHeight" != "0" ]; then
-        result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker exec $validatorStartContainerName /bin/bash -c \"rm /tmp/cudos-status\"")
+        result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker exec $validatorStartContainerName /bin/bash -c \"rm -f /tmp/cudos-status\"")
         break
     fi
 done
@@ -93,7 +93,7 @@ result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorC
 # export genesis
 tmpFilePath="/tmp/genesis.cudos.json"
 result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container exec $validatorStartContainerName /bin/bash -c \"cudos-noded export |& tee $tmpFilePath\" 2> /dev/null")
-exportedGenesis=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container exec $validatorStartContainerName /bin/bash -c \"cat $tmpFilePath && rm $tmpFilePath\"")
+exportedGenesis=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container exec $validatorStartContainerName /bin/bash -c \"cat $tmpFilePath && rm -f $tmpFilePath\"")
 # reset the data
 result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container exec $validatorStartContainerName /bin/bash -c \"cudos-noded unsafe-reset-all\" 2> /dev/null")
 # stop the docker
@@ -101,7 +101,7 @@ result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorC
 # merge genesis
 echo $exportedGenesis > "$tmpFilePath"
 source "$WORKING_SRC_DIR/modules/merge-genesis.sh" "$tmpFilePath"
-rm "$tmpFilePath"
+rm -f "$tmpFilePath"
 finalGenesis=$(cat "$RESULT_GENESIS_PATH")
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "echo \"${finalGenesis//\"/\\\"}\" > $tmpFilePath && sudo mv $tmpFilePath $PARAM_SOURCE_DIR/CudosData/$validatorVolumeName/config/genesis.json"
 # restore cudos-noded start

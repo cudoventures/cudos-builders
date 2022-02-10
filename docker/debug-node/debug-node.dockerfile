@@ -7,7 +7,7 @@ ARG GROUP_NAME
 
 RUN apt update
 
-RUN apt install -y jq build-essential
+RUN apt install -y jq build-essential nano
 
 RUN if [ $USER_NAME != 'root' ]; then \
         groupadd --gid ${GROUP_ID} ${GROUP_NAME}; \

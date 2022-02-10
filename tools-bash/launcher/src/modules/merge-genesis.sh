@@ -8,9 +8,7 @@ function sum {
 }
 
 tmpGenesisPath="/tmp/genesis.tmp.json"
-# tmpGenesisPath="$WORKING_DIR/config/genesis.tmp.json"
 rootGenesisPath="$1"
-# dataGenesisPath="$WORKING_DIR/config/genesis.gentxs.json"
 accountDataGenesisPath="/tmp/genesis.filtered.json"
 RESULT_GENESIS_PATH="$WORKING_EXPORT_DIR/genesis.json"
 
@@ -47,7 +45,7 @@ for dataGenesisPath in ./*; do
     validatorOperAddress=$(jq ".[0]" "$tmpGenesisPath")
     validatorOperAddress=${validatorOperAddress//\"/}
 
-    # STAKING - validator operator address
+    # STAKING - validator hash address
     jq "[.validators[].address]" $dataGenesisPath > "$tmpGenesisPath"
     validatorsSize=$(jq length "$tmpGenesisPath")
     if [ "$validatorsSize" != "1" ]; then
@@ -61,7 +59,9 @@ for dataGenesisPath in ./*; do
     jq "map(select(.address == \"$validatorAddress\") | .)" "$STAKING_JSON" > "$tmpGenesisPath"
     stakingSize=$(jq length "$tmpGenesisPath")
     if [ "$stakingSize" = "0" ]; then
-        continue;
+        echo "[]" | jq ". += [{id: \"0x0\", tokens: \"500000000000000000000000000\", address: \"$validatorAddress\"}]" > "$tmpGenesisPath"
+        stakingSize="1"
+        # continue;
     fi
     if [ "$stakingSize" != "1" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There are several staked accounts with identical address: $validatorAddress";
@@ -130,7 +130,6 @@ for dataGenesisPath in ./*; do
     echo $result > $RESULT_GENESIS_PATH
 
     # STAKING - calculate total delegations
-    # jq "[.app_state.staking.delegations[].shares | gsub(\".000000000000000000$\"; \"\")]" $RESULT_GENESIS_PATH
     jq "[.app_state.staking.delegations | map(select(.validator_address == \"$validatorOperAddress\") | .shares) | .[] | gsub(\".000000000000000000$\"; \"\")]" $RESULT_GENESIS_PATH > "$tmpGenesisPath"
     validatorTotalShares=$(sum $tmpGenesisPath)
     validatorVotingPower=${validatorTotalShares::-18}
@@ -219,7 +218,7 @@ result=$(jq '.app_state.distribution.outstanding_rewards = []' "$RESULT_GENESIS_
 echo $result > "$RESULT_GENESIS_PATH"
 
 if [ "$PARAM_STATIC_VAL_COSMOS_ADDRS" != "" ]; then
-    result=$(jq ".app_state.gravity.static_val_cosmos_addrs = [.app_state.gravity.static_val_cosmos_addrs | join(\",\") + \",$PARAM_STATIC_VAL_COSMOS_ADDRS\"]" "$RESULT_GENESIS_PATH")
+    result=$(jq ".app_state.gravity.static_val_cosmos_addrs = (.app_state.gravity.static_val_cosmos_addrs | join(\",\") + \",$PARAM_STATIC_VAL_COSMOS_ADDRS\" | split(\",\"))" "$RESULT_GENESIS_PATH")
     echo $result > "$RESULT_GENESIS_PATH"
 fi
 

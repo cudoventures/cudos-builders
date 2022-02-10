@@ -17,10 +17,10 @@ do
     sentryComputerUser=$(getComputerUser $sentryComputerIndex)
 
     echo -ne "Preparing sentry($i)'s repos...";
-    branch="cudos-master"
-    ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR && rm -rf ./CudosNode && git clone -q --branch $branch https://github.com/CudoVentures/cudos-node.git CudosNode"
-    ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR && rm -rf ./CudosBuilders && git clone -q --branch $branch https://github.com/CudoVentures/cudos-builders.git CudosBuilders"
-    ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR && rm -rf ./CudosGravityBridge && git clone -q --branch $branch https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge"
+    branch="cudos-dev"
+    ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR && sudo rm -rf ./CudosNode && git clone -q --branch $branch https://github.com/CudoVentures/cudos-node.git CudosNode"
+    ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR && sudo rm -rf ./CudosBuilders && git clone -q --branch $branch https://github.com/CudoVentures/cudos-builders.git CudosBuilders"
+    ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR && sudo rm -rf ./CudosGravityBridge && git clone -q --branch $branch https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge"
     echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
     arg=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && cat ./sentry-node.mainnet.arg")
