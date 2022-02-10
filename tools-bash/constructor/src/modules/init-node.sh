@@ -20,14 +20,14 @@ echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Configurating the $NODE_NAME...";
 if [ "$IS_VALIDATOR" = "true" ]; then
-    sed -i "s/pex = true/pex = false/" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
-    sed -i "s/laddr = \"tcp:\/\/0.0.0.0:26657\"/laddr = \"tcp:\/\/127.0.0.1:26657\"/" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
-    sed -i "s/cors_allowed_origins = .*/cors_allowed_origins = \[\]/" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
+    sed -i "" "s/pex = true/pex = false/" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
+    sed -i "" "s/laddr = \"tcp:\/\/0.0.0.0:26657\"/laddr = \"tcp:\/\/127.0.0.1:26657\"/" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
+    sed -i "" "s/cors_allowed_origins = .*/cors_allowed_origins = \[\]/" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
 fi
 if [ "$IS_VALIDATOR" = "false" ]; then
-    sed -i "s/pex = false/pex = true/" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
-    sed -i "s/laddr = \"tcp:\/\/127.0.0.1:26657\"/laddr = \"tcp:\/\/0.0.0.0:26657\"/" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
-    sed -i "s/cors_allowed_origins = \[\]/cors_allowed_origins = \[\"\*\"\]/" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
+    sed -i "" "s/pex = false/pex = true/" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
+    sed -i "" "s/laddr = \"tcp:\/\/127.0.0.1:26657\"/laddr = \"tcp:\/\/0.0.0.0:26657\"/" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
+    sed -i "" "s/cors_allowed_origins = \[\]/cors_allowed_origins = \[\"\*\"\]/" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
 fi
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
@@ -38,7 +38,7 @@ if [ $IS_VALIDATOR = "true" ]; then
     # stopping previous instances of the root-validator
     dockerResult=$(docker-compose --env-file ./full-node.client.mainnet.arg -f ./start-full-node.yml -p cudos-start-full-node-client-mainnet-01 down 2> /dev/null);
 
-    sed -i "s/cudos-noded start/sleep infinity/g" "./start-full-node.dockerfile";
+    sed -i "" "s/cudos-noded start/sleep infinity/g" "./start-full-node.dockerfile";
     dockerResult=$(docker-compose --env-file ./full-node.client.mainnet.arg -f ./start-full-node.yml -p cudos-start-full-node-client-mainnet-01 up --build -d 2> /dev/null);
     if [ "$?" != 0 ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error building the container $?: ${dockerResult}";
@@ -70,7 +70,10 @@ if [ $IS_VALIDATOR = "true" ]; then
     validatorAddress=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys show validator -a --keyring-backend os");
 
     dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "cudos-noded add-genesis-account $validatorAddress ${VALIDATOR_BALANCE}acudos");
-    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\"; echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded gentx validator "${VALIDATOR_BALANCE}acudos" 0x364af07E1bb08288a1F3D9a578317baa9ED4fb2d $emptyAddress --chain-id $chainId --keyring-backend os 2> /dev/null");
+    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\"; echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded gentx validator "${VALIDATOR_BALANCE}acudos" 0x364af07E1bb08288a1F3D9a578317baa9ED4fb2d $emptyAddress --chain-id $chainId --keyring-backend os --commission-rate="$PARAM_COMMISION_RATE" \
+    --commission-max-rate="$PARAM_COMMISSION_MAX_RATE" \
+    --commission-max-change-rate="$PARAM_COMMISSION_MAX_CHANGE_RATE" 2> /dev/null");
+
     if [ "$?" != 0 ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error creating gen-tx $?: ${dockerResult}";
         exit 1;
@@ -84,7 +87,7 @@ if [ $IS_VALIDATOR = "true" ]; then
     dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "cudos-noded collect-gentxs 2> /dev/null");
 
     # starting the chain
-    sed -i "s/sleep infinity/cudos-noded start/g" "./start-full-node.dockerfile";
+    sed -i "" "s/sleep infinity/cudos-noded start/g" "./start-full-node.dockerfile";
     dockerResult=$(docker-compose --env-file ./full-node.client.mainnet.arg -f ./start-full-node.yml -p cudos-start-full-node-client-mainnet-01 up --build -d 2> /dev/null);
     if [ "$?" != 0 ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error building the container $?: ${dockerResult}";
@@ -112,7 +115,7 @@ if [ $IS_VALIDATOR = "true" ]; then
     # stop the docker
     dockerResult=$(docker stop "$startContainerName");
     # set sleep infinity
-    sed -i "s/cudos-noded start/sleep infinity/g" "./start-full-node.dockerfile";
+    sed -i "" "s/cudos-noded start/sleep infinity/g" "./start-full-node.dockerfile";
     # start the sleeping docker
     dockerResult=$(docker-compose --env-file ./full-node.client.mainnet.arg -f ./start-full-node.yml -p cudos-start-full-node-client-mainnet-01 up --build -d 2> /dev/null);
     # export genesis
@@ -129,7 +132,7 @@ if [ $IS_VALIDATOR = "true" ]; then
     # stop the docker
     dockerResult=$(docker stop "$startContainerName");
     # restore cudos-noded start
-    sed -i "s/sleep infinity/cudos-noded start/g" "./start-full-node.dockerfile";
+    sed -i "" "s/sleep infinity/cudos-noded start/g" "./start-full-node.dockerfile";
     
     echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 fi

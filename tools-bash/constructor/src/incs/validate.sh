@@ -95,8 +95,8 @@ if [ "$IS_VALIDATOR" = "true" ]; then
         exit 1;
     fi
 
-    numberOfWords=$(echo "$PARAM_VALIDATOR_MNEMONIC" | wc -w)
-    if ([ "$numberOfWords" != "12" ] && [ "$numberOfWords" != "24" ]); then
+ numberOfWords=$(echo "$PARAM_VALIDATOR_MNEMONIC" | wc -w)
+     if ([ "$numberOfWords" != "12" ] && [ "$numberOfWords" != "24" ]); then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_MNEMONIC must be 12 or 24 words phrase";
         exit 1;
     fi;
@@ -108,6 +108,19 @@ if [ "$IS_VALIDATOR" = "true" ]; then
 
     if [ ${#PARAM_KEYRING_OS_PASS} -lt 8 ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_KEYRING_OS_PASS must be at least 8 characters";
+        exit 1;
+    fi
+
+    if [ "$PARAM_COMMISSION_MAX_RATE" = "" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_COMMISSION_MAX_RATE must not be empty";
+        exit 1;
+    fi
+        if [ "$PARAM_COMMISION_RATE" = "" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_COMMISION_RATE must not be empty";
+        exit 1;
+    fi
+        if [ "$PARAM_COMMISSION_MAX_CHANGE_RATE" = "" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_COMMISSION_MAX_CHANGE_RATE must not be empty";
         exit 1;
     fi
 
@@ -144,7 +157,7 @@ if [ ! -x "$(command -v docker-compose)" ]; then
 fi
 
 freeSpaceInKiB=$(df -P . | tail -1 | awk '{print $4}')
-freeSpaceRequirementInKiB=5000000
+freeSpaceRequirementInKiB=500000000
 if (( freeSpaceInKiB < freeSpaceRequirementInKiB )); then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Free space is less than $freeSpaceRequirementInKiB KiB (Available = $freeSpaceInKiB KiB)";
     exit 1;
