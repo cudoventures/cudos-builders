@@ -165,10 +165,10 @@ There are 3 scripts.
 
 **Important**: The side effect of executing any of these scripts will be a folder, defined in PARAM_SOURCE_DIR at .env, on each machine defined in topology.json
 
-**Launch sequence**: Execute these scripts only when all config files are ready.
-1. Execute <em>validate</em> to ensure that the connection to peers is fine
-2. Execute <em>launcher</em> to start the network
-3. Execute <em>gravity</em> WHEN THE NETWORK STARS PRODUCING BLOCKS. In other words - when 2/3 of genesis validator are online. The result of this execution will be a <em>gravity smart contract address</em>. Get this <em>contract address</em> and orchestrator mnemonics from <em>./exports/orchs.mnemonics</em> and proceed with Step 4
+**Launch sequence**: Execute these scripts only when all config files are ready. Follow the order below.
+- First execute <em>validate</em> to ensure that the connection to peers is fine
+- Second execute <em>launcher</em> to start the network
+- **[This script must be executed when the network has started producing blocks, in other words - when 2/3 of genesis validator are online.]** Third Execute <em>gravity</em> to deploy the smart contract and start the first orchestrator. The result of this execution will be a <em>gravity smart contract address</em> in the console. Get this <em>contract address</em> and orchestrator mnemonics from <em>./exports/orchs.mnemonics</em> and proceed with the readme in ./constructor folder
 
 **Validate**: It validates the connection from current machine to other machines defined in the topology and also checks for available space, software, etc.
 
