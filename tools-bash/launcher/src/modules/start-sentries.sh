@@ -17,7 +17,7 @@ do
     sentryComputerUser=$(getComputerUser $sentryComputerIndex)
 
     echo -ne "Preparing sentry($i)'s repos...";
-    branch="cudos-dev"
+    branch="cudos-master"
     ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR && rm -rf ./CudosNode && git clone -q --branch $branch https://github.com/CudoVentures/cudos-node.git CudosNode"
     ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR && rm -rf ./CudosBuilders && git clone -q --branch $branch https://github.com/CudoVentures/cudos-builders.git CudosBuilders"
     ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR && rm -rf ./CudosGravityBridge && git clone -q --branch $branch https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge"
@@ -29,13 +29,13 @@ do
     result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sudo docker stop $startContainerName 2> /dev/null")
     ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR && sudo rm -rf ./CudosData"
 
-    # echo -ne "Preparing sentry($i)'s binary builder...";
-    # result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/binary-builder && sudo docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder build 2> /dev/null")
-    # if [ "$?" != 0 ]; then
-    #     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
-    #     exit 1;
-    # fi
-    # echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+    echo -ne "Preparing sentry($i)'s binary builder...";
+    result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/binary-builder && sudo docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder build 2> /dev/null")
+    if [ "$?" != 0 ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
+        exit 1;
+    fi
+    echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
     sentryNodeEnv=$(cat $(getSentryEnvPath $i))
     ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && echo \"${sentryNodeEnv//\"/\\\"}\" > ./sentry-node.mainnet.env"

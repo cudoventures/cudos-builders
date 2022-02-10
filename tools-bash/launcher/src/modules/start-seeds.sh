@@ -18,7 +18,7 @@ do
     seedComputerUser=$(getComputerUser $seedComputerIndex)
 
     echo -ne "Preparing seed($i)'s repos...";
-    branch="cudos-dev"
+    branch="cudos-master"
     ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "cd $PARAM_SOURCE_DIR && rm -rf ./CudosNode && git clone -q --branch $branch https://github.com/CudoVentures/cudos-node.git CudosNode"
     ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "cd $PARAM_SOURCE_DIR && rm -rf ./CudosBuilders && git clone -q --branch $branch https://github.com/CudoVentures/cudos-builders.git CudosBuilders"
     ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "cd $PARAM_SOURCE_DIR && rm -rf ./CudosGravityBridge && git clone -q --branch $branch https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge"
@@ -30,13 +30,13 @@ do
     result=$(ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node && sudo docker stop $startContainerName 2> /dev/null")
     ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "cd $PARAM_SOURCE_DIR && sudo rm -rf ./CudosData"
 
-    # echo -ne "Preparing seed($i)'s binary builder...";
-    # result=$(ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/binary-builder && sudo docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder build 2> /dev/null");
-    # if [ "$?" != 0 ]; then
-    #     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
-    #     exit 1;
-    # fi
-    # echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+    echo -ne "Preparing seed($i)'s binary builder...";
+    result=$(ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/binary-builder && sudo docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder build 2> /dev/null");
+    if [ "$?" != 0 ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
+        exit 1;
+    fi
+    echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
     seedNodeEnv=$(cat $(getSeedEnvPath $i))
     ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node && echo \"${seedNodeEnv//\"/\\\"}\" > ./seed-node.mainnet.env"
