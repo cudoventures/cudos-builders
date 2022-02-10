@@ -95,8 +95,8 @@ if [ "$IS_VALIDATOR" = "true" ]; then
         exit 1;
     fi
 
-    numberOfWords=$(echo "$PARAM_VALIDATOR_MNEMONIC" | wc -w)
-    if ([ "$numberOfWords" != "12" ] && [ "$numberOfWords" != "24" ]); then
+ numberOfWords=$(echo "$PARAM_VALIDATOR_MNEMONIC" | wc -w)
+     if ([ "$numberOfWords" != "12" ] && [ "$numberOfWords" != "24" ]); then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_MNEMONIC must be 12 or 24 words phrase";
         exit 1;
     fi;
@@ -111,22 +111,16 @@ if [ "$IS_VALIDATOR" = "true" ]; then
         exit 1;
     fi
 
-    if [ ${#PARAM_COMMISSION_MAX_RATE} = ""  ]; then
+    if [ "$PARAM_COMMISSION_MAX_RATE" = "" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_COMMISSION_MAX_RATE must not be empty";
         exit 1;
     fi
-
-    if [ ${#PARAM_COMMISION_RATE} -lt ${#PARAM_COMMISSION_MAX_RATE}  && ${#PARAM_COMMISION_RATE} -gt 0 ]; then
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_COMMISION_RATE must be between 0 and PARAM_COMMISSION_MAX_RATE";
+        if [ "$PARAM_COMMISION_RATE" = "" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_COMMISION_RATE must not be empty";
         exit 1;
     fi
-
-    if [ ${#PARAM_COMMISSION_MAX_CHANGE_RATE} = "" ]; then
+        if [ "$PARAM_COMMISSION_MAX_CHANGE_RATE" = "" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_COMMISSION_MAX_CHANGE_RATE must not be empty";
-        exit 1;
-    fi
-    if [ ${#PARAM_GAS_PRICE} = "" ]; then
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_GAS_PRICE must be not be empty";
         exit 1;
     fi
 
