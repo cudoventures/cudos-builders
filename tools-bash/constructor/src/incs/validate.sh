@@ -28,35 +28,35 @@ if [ ! -w "$PARAM_SOURCE_DIR" ]; then
 fi
 
 if [ "$STARTING" = "true" ]; then
-
+    
     if [ "$IS_CLUSTERED_VALIDATOR" = "true" ]; then
-
+        
         if [ "$PARAM_PERSISTENT_PEERS" = "" ]; then
             echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_PERSISTENT_PEERS must not be empty";
             exit 1;
         fi;
-
+        
     fi;
-
+    
     if [ "$IS_CLUSTERED_VALIDATOR" = "false" ]; then
-
+        
         if [ "$PARAM_SEED" = "" ] && [ "$PARAM_PERSISTENT_PEERS" = "" ]; then
             echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_SEED or PARAM_PERSISTENT_PEERS must not be empty";
             exit 1;
         fi;
-
+        
+        if [ "$PARAM_PRIVATE_PEER_IDS" = "" ]; then
+            echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_PRIVATE_PEER_IDS must not be empty";
+            exit 1;
+        fi;
+        
+        if [ "$PARAM_EXPOSE_IP" = "" ]; then
+            echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_EXPOSE_IP must not be empty";
+            exit 1;
+        fi;
+        
     fi;
-
-    if [ "$PARAM_PRIVATE_PEER_IDS" = "" ]; then
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_PRIVATE_PEER_IDS must not be empty";
-        exit 1;
-    fi;
-
-    if [ "$PARAM_EXPOSE_IP" = "" ]; then
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_EXPOSE_IP must not be empty";
-        exit 1;
-    fi;
-
+    
 fi
 
 if [ "$INITIALIZING" = "true" ]; then
@@ -71,17 +71,17 @@ if [ "$STARTING" = "true" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The folder $PARAM_SOURCE_DIR/CudosBuilders does not exists";
         exit 1;
     fi;
-
+    
     if [ ! -d "$PARAM_SOURCE_DIR/CudosData" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The folder $PARAM_SOURCE_DIR/CudosData does not exists";
         exit 1;
     fi;
-
+    
     if [ ! -d "$PARAM_SOURCE_DIR/CudosGravityBridge" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The folder $PARAM_SOURCE_DIR/CudosGravityBridge does not exists";
         exit 1;
     fi;
-
+    
     if [ ! -d "$PARAM_SOURCE_DIR/CudosNode" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The folder $PARAM_SOURCE_DIR/CudosNode does not exists";
         exit 1;
@@ -89,47 +89,47 @@ if [ "$STARTING" = "true" ]; then
 fi
 
 if [ "$IS_VALIDATOR" = "true" ]; then
-
+    
     if [ "$PARAM_VALIDATOR_MNEMONIC" = "" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_MNEMONIC must not be empty";
         exit 1;
     fi
-
+    
     numberOfWords=$(echo "$PARAM_VALIDATOR_MNEMONIC" | wc -w)
     if ([ "$numberOfWords" != "12" ] && [ "$numberOfWords" != "24" ]); then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_MNEMONIC must be 12 or 24 words phrase";
         exit 1;
     fi;
-
+    
     if [ "$PARAM_KEYRING_OS_PASS" = "" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_KEYRING_OS_PASS must not be empty";
         exit 1;
     fi
-
+    
     if [ ${#PARAM_KEYRING_OS_PASS} -lt 8 ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_KEYRING_OS_PASS must be at least 8 characters";
         exit 1;
     fi
-
+    
 fi
 
 if [ "$SHOULD_START_ORCHESTRATOR" = "true" ]; then
-
+    
     if [ "$PARAM_ORCHESTRATOR_ENV_PATH" != "" ] && [ ! -f "$PARAM_ORCHESTRATOR_ENV_PATH" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Cannot find \"$PARAM_ORCHESTRATOR_ENV_PATH\" (Orchestrator's .env file)";
         exit 1;
     fi;
-
+    
     if [ "$PARAM_ORCH_ETH_ADDRESS" = "" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_ORCH_ETH_ADDRESS must not be empty";
         exit 1;
     fi;
-
+    
     if [[ ! "$PARAM_ORCH_ETH_ADDRESS" =~ (^0x[0-9a-fA-F]{40}$) ]]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Orch ethereum address is invalid $PARAM_ORCH_ETH_ADDRESS";
         exit 1;
     fi
-
+    
 fi;
 
 
