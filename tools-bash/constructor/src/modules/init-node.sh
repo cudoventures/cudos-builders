@@ -81,8 +81,8 @@ if [ $IS_VALIDATOR = "true" ]; then
 
     dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys delete empty --keyring-backend os -y 2> /dev/null");
 
-    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "cat \"\${CUDOS_HOME}/config/genesis.json\" | jq '.app_state.staking.params.bond_denom = \"acudos\"' > \"\${CUDOS_HOME}/config/tmp_genesis.json\" && mv \"\${CUDOS_HOME}/config/tmp_genesis.json\" \"\${CUDOS_HOME}/config/genesis.json\"");
-    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "cat \"\${CUDOS_HOME}/config/genesis.json\" | jq --arg validatorAddress \"$validatorAddress\" '.app_state.gravity.static_val_cosmos_addrs += [\$validatorAddress]' > \"\${CUDOS_HOME}/config/tmp_genesis.json\" && mv \"\${CUDOS_HOME}/config/tmp_genesis.json\" \"\${CUDOS_HOME}/config/genesis.json\"");
+    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "cat \"\${CUDOS_HOME}/config/genesis.json\" | jq '.app_state.staking.params.bond_denom = \"acudos\"' > \"\${CUDOS_HOME}/config/tmp_genesis.json\" && mv -f \"\${CUDOS_HOME}/config/tmp_genesis.json\" \"\${CUDOS_HOME}/config/genesis.json\"");
+    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "cat \"\${CUDOS_HOME}/config/genesis.json\" | jq --arg validatorAddress \"$validatorAddress\" '.app_state.gravity.static_val_cosmos_addrs += [\$validatorAddress]' > \"\${CUDOS_HOME}/config/tmp_genesis.json\" && mv -f \"\${CUDOS_HOME}/config/tmp_genesis.json\" \"\${CUDOS_HOME}/config/genesis.json\"");
 
     dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "cudos-noded collect-gentxs 2> /dev/null");
 
@@ -104,11 +104,10 @@ if [ $IS_VALIDATOR = "true" ]; then
             exit 1;
         fi;
         sleep 1
-        cudosNodedStatus=$(docker exec "$startContainerName" /bin/bash -c "cat /tmp/cudos-status")
+        cudosNodedStatus=$(docker exec "$startContainerName" /bin/bash -c "cat /tmp/cudos-status && rm -f /tmp/cudos-status")
         latestBlockHeight=$(echo $cudosNodedStatus | jq '.SyncInfo.latest_block_height')
         latestBlockHeight=${latestBlockHeight//\"/}
         if [ "$latestBlockHeight" != "0" ]; then
-            result=$(docker exec "$startContainerName" /bin/bash -c "rm /tmp/cudos-status")
             break
         fi
     done
@@ -121,7 +120,7 @@ if [ $IS_VALIDATOR = "true" ]; then
     # export genesis
     tmpFilePath="/tmp/init-genesis.cudos.json"
     result=$(docker container exec "$startContainerName" /bin/bash -c "cudos-noded export |& tee $tmpFilePath" 2> /dev/null)
-    EXPORTED_GENESIS=$(docker container exec "$startContainerName" /bin/bash -c "cat $tmpFilePath && rm $tmpFilePath")
+    EXPORTED_GENESIS=$(docker container exec "$startContainerName" /bin/bash -c "cat $tmpFilePath && rm -f $tmpFilePath")
     validJson=$(echo $EXPORTED_GENESIS | jq -e . 2> /dev/null)
     if [ "$?" != 0 ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Invalid genesis $?: ${EXPORTED_GENESIS}";

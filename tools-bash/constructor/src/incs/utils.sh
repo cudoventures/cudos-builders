@@ -9,5 +9,5 @@ function readEnvFromString {
     eval $(source "$tmpFilePath"; echo tmpEnv="\"${!envName}\"")
     echo "$tmpEnv"
     unset tmpEnv
-    rm "$tmpFilePath"
+    rm -f "$tmpFilePath"
 }
