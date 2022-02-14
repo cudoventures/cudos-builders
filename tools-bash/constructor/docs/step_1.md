@@ -2,19 +2,14 @@
 
 This section describes the first steps needed for validator setup as part of the Phase 4 testnet launch.
 
-
 ## Prerequisites
 
-
-You need to have a local copy of our build tools.
-
-Setup your environment
-
-Create your main Cudos directory. On the first row you can define where all Cudos data will be stored.
+### Setup the environment
+You need to have a local copy of our build tools.Create your main Cudos directory. On the first row you can define where all Cudos data will be stored.
 
 ```
 CUDOS_DIR = "/usr/cudos"
-mkrid $CUDOS_DIR
+mkdir $CUDOS_DIR
 
 git clone --branch cudos-master https://github.com/CudoVentures/cudos-builders.git CudosBuilders
 ```
@@ -38,9 +33,7 @@ PARAM_COMMISSION_MAX_RATE="0.20" // Can't be changed later
 PARAM_COMMISSION_MAX_CHANGE_RATE="0.01" //Can't be changed later
 ```
 
-<!--
-// TODO describe the process for ledger use
--->
+NOTE: It is advisable you do NOT use your mainnet mnemonic for the test phase.
 
 **Now it's time to init your node.**
 
