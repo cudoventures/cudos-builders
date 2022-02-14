@@ -4,7 +4,14 @@ If you executed Step 1 instructions your machines should already have all the ne
 
 ## Get the genesis
 
-Once the Cudos team has setup their nodes and you've got the green light to continue with this step you need to make sure you have the correct genesis file. It should be located in the cudos-builders config folder. Make sure to check the checksum.
+Once the Cudos team has setup their nodes and you've got the green light to continue with this step you need to make sure you have the correct genesis file. It should be located in the cudos-builders config folder.
+
+```
+cd $CUDOS_DIR/CudosBuilders
+git pull
+```
+
+Make sure to check the checksum.
 All the nodes listed bellow need to have the same genesis. Otherwise they won't be connected to the root validator.
 ## Validator setup
 If you suceessfuly submited you genesis in the previous step of Phase 4 you're validator node is already initialized and
