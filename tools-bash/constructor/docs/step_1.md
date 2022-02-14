@@ -3,7 +3,7 @@
 This section describes the first steps needed for validator setup as part of the Phase 4 testnet launch.
 
 ## Prerequisites
-
+Check all the needed prerequisites [here](./prerequisites.md).
 ### Setup the environment
 You need to have a local copy of our build tools.Create your main Cudos directory. On the first row you can define where all Cudos data will be stored.
 
@@ -51,7 +51,7 @@ cd ${WORKING_DIR}/cudos-builders/tools-bash/constructor
 ./src/init.sh clustered-validator-node
 ```
 
-The command will use the configuration you have setup in the previous step and build the needed binaries. Successfull run should print someting like:
+The command will use the configuration you have setup in the previous step and build the needed binaries. Successful run should print someting like:
 <img src="./init-full.png">
 
 <!--

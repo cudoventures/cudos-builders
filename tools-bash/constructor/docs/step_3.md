@@ -1,7 +1,8 @@
 # Phase 4 Step 2 instructions
 
 If you executed Step 1 instructions your machines should already have all the needed tools. You should go to the directory where the CudosBuilders were downloaded.
-
+## Prerequisites
+Check all the needed prerequisites [here](./prerequisites.md).
 ## Get the genesis
 
 Once the Cudos team has setup their nodes and you've got the green light to continue with this step you need to make sure you have the correct genesis file. It should be located in the cudos-builders config folder.
@@ -14,8 +15,7 @@ git pull
 Make sure to check the checksum.
 All the nodes listed bellow need to have the same genesis. Otherwise they won't be connected to the root validator.
 ## Validator setup
-If you suceessfuly submited you genesis in the previous step of Phase 4 you're validator node is already initialized and
-setup. If you deleted your configuration contact Cudos team for support.
+If you successfully submitted your genesis in the previous step of Phase 4 your validator node is already initialized and setup. If you deleted your configuration contact Cudos team for support.
 
 ## Setup of the sentry node
 You should copy the example configuration and setup all needed params
@@ -28,7 +28,7 @@ PARAM_SOURCE_DIR="$CUDOS_DIR/CudosData"
 ```
 The directory you create here should exist.
 
-Time to fill the information for the node configuration. Fist copy the node.env.example and fill it in the next step.
+Time to fill the information for the node configuration. First copy the node.env.example and fill it in the next step.
 ```
 mv ./config/node.env.example ./config/node.env
 ```
@@ -138,7 +138,7 @@ Note your node ID. You are going to need it for the next steps of the configurat
 
 ### Senty node
 
-Paramethers for the start node should be located in start.env file as follows:
+Parameters for the start node should be located in start.env file as follows:
 ```
 PARAM_PERSISTENT_PEERS=""
 PARAM_SEED="<seeds_tendermint_id>@<ip>:26656"
@@ -153,7 +153,7 @@ NOTE: There may be an error for the Resetting the sentry-node step.
 
 ### Seed node
 
-Paramethers for the start node should be located in start.env file as follows:
+Parameters for the start node should be located in start.env file as follows:
 ```
 PARAM_PERSISTENT_PEERS=""
 PARAM_SEED="<seeds_tendermint_id>@<ip>:26656"
