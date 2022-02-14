@@ -1,20 +1,12 @@
 # Phase 4 Step 2 instructions
 
-First define where you would like to store the Cudos configuration and scripts
+If you executed Step 1 instructions your machines should already have all the needed tools. You should go to the directory where the CudosBuilders were downloaded.
 
-```shell
-export CUDOS_DIR="/usr/cudos"
-mkdir $CUDOS_DIR
-cd  $CUDOS_DIR
-```
-Now it's time to clone the CudosBuilders repository
-```shell
-git clone https://github.com/CudoVentures/cudos-builders.git CudosBuilders
-cd CudosBuilders/tools-bash/constructor
-```
-The previous steps should be executed on each machine you are connected to.
+## Get the genesis
 
-##Validator setup
+Once the Cudos team has setup their nodes and you've got the green light to continue with this step you need to make sure you have the correct genesis file. It should be located in the cudos-builders config folder. Make sure to check the checksum.
+All the nodes listed bellow need to have the same genesis. Otherwise they won't be connected to the root validator.
+## Validator setup
 If you suceessfuly submited you genesis in the previous step of Phase 4 you're validator node is already initialized and
 setup. If you deleted your configuration contact Cudos team for support.
 
