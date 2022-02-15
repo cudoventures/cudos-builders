@@ -62,7 +62,11 @@ if [ $IS_VALIDATOR = "true" ]; then
     fi;
     emptyAddress=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys show empty -a --keyring-backend os");
 
-    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_VALIDATOR_MNEMONIC\"; echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys add validator --recover --keyring-backend os 2> /dev/null");
+    if [ "$PARAM_VALIDATOR_LEDGER_TYPE" = "default" ]; then
+        dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_VALIDATOR_MNEMONIC\"; echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys add validator --recover --keyring-backend os 2> /dev/null");
+    else
+        dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys add validator --ledger --account $PARAM_VALIDATOR_LEDGER_ACCOUNT_NAME --keyring-backend os 2> /dev/null");
+    fi
     if [ "$?" != 0 ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error importing your validator account $?: ${dockerResult}";
         exit 1;

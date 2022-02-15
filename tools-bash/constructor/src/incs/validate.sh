@@ -90,16 +90,41 @@ fi
 
 if [ "$IS_VALIDATOR" = "true" ]; then
     
-    if [ "$PARAM_VALIDATOR_MNEMONIC" = "" ]; then
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_MNEMONIC must not be empty";
-        exit 1;
+    
+
+    if [ "$PARAM_VALIDATOR_LEDGER_TYPE" = "default" ]; then
+
+        if [ "$PARAM_VALIDATOR_MNEMONIC" = "" ]; then
+            echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_MNEMONIC must not be empty";
+            exit 1;
+        fi
+
+        if [ "$PARAM_VALIDATOR_LEDGER_ACCOUNT_NAME" != "" ]; then
+            echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_LEDGER_ACCOUNT_NAME must be empty when PARAM_VALIDATOR_LEDGER_TYPE=default";
+            exit 1;
+        fi
+
+        numberOfWords=$(echo "$PARAM_VALIDATOR_MNEMONIC" | wc -w)
+        if ([ "$numberOfWords" != "12" ] && [ "$numberOfWords" != "24" ]); then
+            echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_MNEMONIC must be 12 or 24 words phrase";
+            exit 1;
+        fi;
+
     fi
     
-    numberOfWords=$(echo "$PARAM_VALIDATOR_MNEMONIC" | wc -w)
-    if ([ "$numberOfWords" != "12" ] && [ "$numberOfWords" != "24" ]); then
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_MNEMONIC must be 12 or 24 words phrase";
-        exit 1;
-    fi;
+    if [ "$PARAM_VALIDATOR_LEDGER_TYPE" = "ledger" ]; then
+
+        if [ "$PARAM_VALIDATOR_LEDGER_ACCOUNT_NAME" = "" ]; then
+            echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_LEDGER_ACCOUNT_NAME must not be empty";
+            exit 1;
+        fi
+
+        if [ "$PARAM_VALIDATOR_MNEMONIC" != "" ]; then
+            echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_MNEMONIC must be empty when PARAM_VALIDATOR_LEDGER_TYPE=ledger";
+            exit 1;
+        fi
+
+    fi
     
     if [ "$PARAM_KEYRING_OS_PASS" = "" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_KEYRING_OS_PASS must not be empty";
