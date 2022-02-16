@@ -134,12 +134,11 @@ for i in $(seq 1 $(($numberOfOrchestrators))); do
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Unable to get the wallet of orchestrator $i";
         exit 1;
     fi
-    # if [ "$i" = "1" ]; then
-    #     ORCH_01_MNEMONIC="$orchMnemonic"
-    # fi
     orchestratorMnemonics+=("orch-$i:${orchMnemonic// /_}\n")
 done
 ORCHESTRATOR_MNEMONICS_LIST=$(joinBy , ${orchestratorMnemonics[@]})
+ORCHESTRATOR_MNEMONICS_LIST=${ORCHESTRATOR_MNEMONICS_LIST//,/}
+ORCHESTRATOR_MNEMONICS_LIST=${ORCHESTRATOR_MNEMONICS_LIST//_/ }
 
 echo -ne "Starting the root-validator...";
 echo -e "${STYLE_GREEN}DONE${STYLE_DEFAULT}";
