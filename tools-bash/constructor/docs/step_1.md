@@ -8,8 +8,9 @@ Check all the needed prerequisites [here](./prerequisites.md).
 You need to have a local copy of our build tools.Create your main Cudos directory. On the first row you can define where all Cudos data will be stored.
 
 ```
-CUDOS_DIR = "/usr/cudos"
+CUDOS_DIR="/usr/cudos"
 mkdir $CUDOS_DIR
+cd $CUDOS_DIR
 
 git clone --branch cudos-master https://github.com/CudoVentures/cudos-builders.git CudosBuilders
 ```
@@ -22,7 +23,15 @@ Go into the newly created CudosBuilders directory and make sure the init.sh can 
 cd CudosBuilders
 sudo chmod +x ./tools-bash/constructor/src/init.sh
 ```
-Copy the ${$CUDOS_DIR}/cudos-builders/tools-bash/constructor/config/init.env.example and rename it to init.env. Example content of the file:
+Copy the ${$CUDOS_DIR}/cudos-builders/tools-bash/constructor/config/init.env.example and rename it to init.env. 
+
+```
+cd "${CUDOS_DIR}"/CudosBuilders/tools-bash/constructor/config
+
+cp init.env.example init.env
+```
+
+Example content of the file:
 
 ```
 PARAM_SOURCE_DIR="${CUDOS_DIR}}" // is where the repos will be cloned and the binary compiled. It should be an existing and empty folder. The same you created above
