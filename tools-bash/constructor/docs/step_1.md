@@ -25,40 +25,41 @@ sudo chmod +x ./tools-bash/constructor/src/init.sh
 Copy the ${$CUDOS_DIR}/cudos-builders/tools-bash/constructor/config/init.env.example and rename it to init.env. Example content of the file:
 
 ```
-PARAM_SOURCE_DIR="${CUDOS_DIR}}" // is where the repos will be cloned and the binary compiled. It should be an existing and empty folder. The same you created above
-PARAM_VALIDATOR_MNEMONIC="<KEY>" // the private key of the account you want to use for your validator.
-PARAM_KEYRING_OS_PASS="<PASS>" // the password of your keyring
-PARAM_COMMISSION_RATE="0.10" // commision rate of the validator. Must be between 0 and the validator's PARAM_COMMISSION_MAX_RATE
-PARAM_COMMISSION_MAX_RATE="0.20" // Can't be changed later
-PARAM_COMMISSION_MAX_CHANGE_RATE="0.01" //Can't be changed later
+PARAM_SOURCE_DIR="<CudosData dir>" 
+PARAM_VALIDATOR_MNEMONIC="<KEY>" 
+PARAM_KEYRING_OS_PASS="<PASS>"
+PARAM_COMMISSION_RATE="0.10" 
+PARAM_COMMISSION_MAX_RATE="0.20" 
+PARAM_COMMISSION_MAX_CHANGE_RATE="0.01" 
 ```
+**PARAM_SOURCE_DIR** is where the repos will be cloned and the binary compiled. It should be an existing and empty folder. The same you created above
+**PARAM_VALIDATOR_MNEMONIC** is the private key of the account you want to use for your validator.
+**PARAM_KEYRING_OS_PAS**S is the password of your keyring
+**PARAM_COMMISSION_RATE** is commision rate of the validator. Must be between 0 and the validator's PARAM_COMMISSION_MAX_RATE
+**PARAM_COMMISSION_MAX_RATE**  Can't be changed later
+**PARAM_COMMISSION_MAX_CHANGE_RATE** Can't be changed later
 
 NOTE: It is advisable you do NOT use your mainnet mnemonic for the test phase.
 
 **Now it's time to init your node.**
 
 
-You can ether initialize the standalone validator node or a validator cluster:
+You can ether initialize the validator node :
 
-- Standalone validator
 ```
-cd ${WORKING_DIR}/cudos-builders/tools-bash/constructor
-./src/init.sh standalone-validator-node
-```
-- Validator cluster
-```
-cd ${WORKING_DIR}/cudos-builders/tools-bash/constructor
+export WORKING_DIR="<whatever it is>"
+cd ${WORKING_DIR}/CudosBuilders/tools-bash/constructor
 ./src/init.sh clustered-validator-node
 ```
 
-The command will use the configuration you have setup in the previous step and build the needed binaries. Successful run should print someting like:
+The command will use the configuration you have setup in the previous step and build the needed binaries. Successful run should print something like:
 <img src="./init-full.png">
 
 <!--
 If you see any additional messages or error please refer to the troubleshooting section.
 -->
 
-## Genesis submition
+## Genesis submission
 
 Once your validator is running you should get it's genesis. It is located under /usr/cudos/CudosBuilders/tools-bash/constructor/exports on your machine. To get the file of the you can use
 
