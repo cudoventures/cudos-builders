@@ -18,9 +18,8 @@ unset arg
 
 dockerResult=$(docker-compose --env-file ./$NODE_NAME.client.mainnet.arg -f ./start-$NODE_NAME.yml -p cudos-start-$NODE_NAME-client-mainnet-01 down 2> /dev/null);
 sed -i "s/cudos-noded start/sleep infinity/g" "./start-$NODE_NAME.dockerfile";
-sed -i "s/--state-sync.snapshot-interval 2000 --state-sync.snapshot-keep-recent 2/sleep infinity/g" "./start-$NODE_NAME.dockerfile";
+sed -i "s/--state-sync.snapshot-interval 2000 --state-sync.snapshot-keep-recent 2//g" "./start-$NODE_NAME.dockerfile";
 dockerResult=$(docker-compose --env-file ./$NODE_NAME.client.mainnet.arg -f ./start-$NODE_NAME.yml -p cudos-start-$NODE_NAME-client-mainnet-01 up --build -d 2> /dev/null);
-docker container exec "$startContainerName" /bin/bash -c "cudos-noded tendermint show-node-id"
 dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "cudos-noded unsafe-reset-all" 2> /dev/null)
 if [ "$NODE_NAME" = "full-node" ]; then
     sed -i "s/sleep infinity/cudos-noded start/g" "./start-$NODE_NAME.dockerfile";
