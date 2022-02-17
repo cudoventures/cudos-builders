@@ -1,11 +1,11 @@
-# Phase 4 Step 2 instructions
+# Phase 4 Step 3 instructions
 
 If you executed Step 1 instructions your machines should already have all the needed tools. You should go to the directory where the CudosBuilders were downloaded.
 ## Prerequisites
-Check all the needed prerequisites [here](./prerequisites.md).
+Check all the needed prerequisites [here](./prerequisites.md). Successful execution of [Step 1](./step_1.md) is also required. 
 ## Get the genesis
 
-Once the Cudos team has setup their nodes and you've got the green light to continue with this step you need to make sure you have the correct genesis file. It should be located in the cudos-builders config folder.
+Once the Cudos team has setup their nodes and you've got the green light to continue with this step you need to make sure you have the correct genesis file. It should be located in the cudos-builders config folder. 
 
 ```
 cd $CUDOS_DIR/CudosBuilders
@@ -13,7 +13,12 @@ git pull
 ```
 
 Make sure to check the checksum.
-All the nodes listed bellow need to have the same genesis. Otherwise they won't be connected to the root validator.
+All the nodes listed bellow need to have the same genesis. Otherwise they won't be connected to the root validator. This step should be executed for every node in the cluster.
+
+### Manual setup of genesis
+
+If you want to manualy provide a genesis file for you nodes you need to place it in the <code>$CUDOS_DIR/CudosBuilders/docker/config/genesis.mainnet.json </code>. The CUDOS_DIR is the directory you specified in Step 1. This step should be executed for every node in the cluster.
+
 ## Validator setup
 If you successfully submitted your genesis in the previous step of Phase 4 your validator node is already initialized and setup. If you deleted your configuration contact Cudos team for support.
 
