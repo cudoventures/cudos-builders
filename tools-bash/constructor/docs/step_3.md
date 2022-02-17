@@ -19,6 +19,7 @@ All the nodes listed bellow need to have the same genesis. Otherwise they won't 
 
 If you want to manualy provide a genesis file for you nodes you need to place it in the <code>$CUDOS_DIR/CudosBuilders/docker/config/genesis.mainnet.json </code>. The CUDOS_DIR is the directory you specified in Step 1. This step should be executed for every node in the cluster.
 
+If you have a list of peers you need to connect add their info to the <code>$CUDOS_DIR/CudosBuilders/docker/config/seeds.mainnet.config </code> and <code>$CUDOS_DIR/CudosBuilders/docker/config/persistent-peers.mainnet.config </code>
 ## Validator setup
 If you successfully submitted your genesis in the previous step of Phase 4 your validator node is already initialized and setup. If you deleted your configuration contact Cudos team for support.
 
