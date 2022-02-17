@@ -52,6 +52,7 @@ NOTE: Requires a running cudos-node instance !
          - Copy and Rename bdjuno-sample to bdjuno
            - Rename genesis file to genesis.json
          - Copy and Rename .env-bdjuno.sample to .env-bdjuno
+       - From CudosBuilders/docker/config copy the relevant genesis file to the bdjuno folder and name it genesis.json 
    8.  Go over the configs and check if the parameters are right (IP of the node, Hasura URL, Db names, etc)
           - Please note that HASURA_GRAPHQL_DATABASE_URL requires the real IP address:port of the SQL DB
    9.   Copy the bdjuno-deploy.sh script from explorer-v2 to the new folder
