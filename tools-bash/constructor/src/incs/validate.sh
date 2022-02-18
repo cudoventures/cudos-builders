@@ -140,8 +140,8 @@ if [ "$IS_VALIDATOR" = "true" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_COMMISSION_MAX_RATE must not be empty";
         exit 1;
     fi
-        if [ "$PARAM_COMMISION_RATE" = "" ]; then
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_COMMISION_RATE must not be empty";
+        if [ "$PARAM_COMMISSION_RATE" = "" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_COMMISSION_RATE must not be empty";
         exit 1;
     fi
         if [ "$PARAM_COMMISSION_MAX_CHANGE_RATE" = "" ]; then

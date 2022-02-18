@@ -2,7 +2,14 @@
     "0x0": {
         "id": "0x0",
         "tokens": "5000000000000000000000000",
-        "address": "cudos196mqpeqqf7g2qhhdnjpcpxg6853mjqzarqkmyn"
+        "address": "cudos196mqpeqqf7g2qhhdnjpcpxg6853mjqzarqkmyn",
+        "delegation": [
+            {
+                "delegator": "0xb5ed8ababc2d9e42add650b26d7684f891d2c649",
+                "delegation": "7487100000000000000000",
+                "delegatorAddress": "cudos1luqr8n7fyu5hsmvamsm2vuyw28d7luq6p5p2hq"
+            }
+        ]
     },
     "0x090232b7f7fa39c46cf7f4649162606588d2183e": {
         "id": "0x35284488a7b0ac42d49e3f4e998957830338a45a",

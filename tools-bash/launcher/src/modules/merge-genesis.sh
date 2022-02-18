@@ -32,6 +32,7 @@ for dataGenesisPath in ./*; do
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There are several accounts in $WORKING_DATA_GENESIS_DIR/$dataGenesisPath";
         exit 1;
     fi
+    result=$(jq ".[0].sequence = \"1\"" "$accountDataGenesisPath")
     validatorAddress=$(jq .[0].address "$accountDataGenesisPath")
     validatorAddress=${validatorAddress//\"/}
 
@@ -77,7 +78,7 @@ for dataGenesisPath in ./*; do
         historicalRefCount=$(jq .delegation "$tmpGenesisPath" | jq length)
         historicalRefCount=$(($historicalRefCount + 2))
         stakingDelegations=$(jq ".delegation | map({delegator_address: .delegatorAddress, shares: (.delegation + \".000000000000000000\"), validator_address: \"$validatorOperAddress\"})" "$tmpGenesisPath")
-        authAccounts=$(jq ".delegation | map({\"@type\": \"/cosmos.auth.v1beta1.BaseAccount\", account_number: \"0\", address: .delegatorAddress, pub_key: null, sequence: \"0\"})" "$tmpGenesisPath")
+        authAccounts=$(jq ".delegation | map({\"@type\": \"/cosmos.auth.v1beta1.BaseAccount\", account_number: \"0\", address: .delegatorAddress, pub_key: null, sequence: \"1\"})" "$tmpGenesisPath")
         distributionDelegatorStartingInfos=$(jq ".delegation | map({delegator_address: .delegatorAddress, starting_info: {height: \"0\", previous_period: \"1\", stake: (.delegation + \".000000000000000000\")}, validator_address: \"$validatorOperAddress\"})" "$tmpGenesisPath")
     else
         historicalRefCount="2"
@@ -231,8 +232,8 @@ echo $result > "$RESULT_GENESIS_PATH"
 
 result=$(jq ".app_state.auth.accounts = [.app_state.auth.accounts[] | if (.\"@type\" == \"/cosmos.auth.v1beta1.BaseAccount\") then (.account_number = \"0\") else . end]" "$RESULT_GENESIS_PATH")
 echo $result > "$RESULT_GENESIS_PATH"
-result=$(jq ".app_state.auth.accounts = [.app_state.auth.accounts[] | if (.\"@type\" == \"/cosmos.auth.v1beta1.BaseAccount\") then (.sequence = \"0\") else . end]" "$RESULT_GENESIS_PATH")
-echo $result > "$RESULT_GENESIS_PATH"
+# result=$(jq ".app_state.auth.accounts = [.app_state.auth.accounts[] | if (.\"@type\" == \"/cosmos.auth.v1beta1.BaseAccount\") then (.sequence = \"0\") else . end]" "$RESULT_GENESIS_PATH")
+# echo $result > "$RESULT_GENESIS_PATH"
 result=$(jq ".app_state.auth.accounts = [.app_state.auth.accounts[] | if (.\"@type\" == \"/cosmos.auth.v1beta1.BaseAccount\") then (.pub_key = null) else . end]" "$RESULT_GENESIS_PATH")
 echo $result > "$RESULT_GENESIS_PATH"
 
