@@ -65,7 +65,6 @@ NOTE: It is advisable you do NOT use your mainnet mnemonic for the test phase.
 
 Copy the node.env.example and rename it to node.env. 
 ```
-cd ./tools-bash/constructor/config
 
 cp node.env.example node.env
 ```
@@ -80,8 +79,7 @@ MONIKER="<name of the node>"
 **Now it's time to init your node.**
 
 ```
-export WORKING_DIR="<whatever it is>"
-cd ${WORKING_DIR}/CudosBuilders/tools-bash/constructor
+cd ${HOME}/CudosBuilders/tools-bash/constructor
 ./src/init.sh clustered-validator-node
 
 ```
