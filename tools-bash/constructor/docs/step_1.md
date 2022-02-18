@@ -8,9 +8,10 @@ Check all the needed prerequisites [here](./prerequisites.md).
 You need to have a local copy of our build tools.Create your main Cudos directory. On the first row you can define where all Cudos data will be stored.
 
 ```
-CUDOS_DIR="/usr/cudos"
+export CUDOS_DIR="/usr/cudos"
 mkdir $CUDOS_DIR
 
+cd $HOME
 git clone --branch cudos-master https://github.com/CudoVentures/cudos-builders.git CudosBuilders
 ```
 
@@ -79,8 +80,10 @@ MONIKER="<name of the node>"
 **Now it's time to init your node.**
 
 ```
-cd ${CUDOS_DIR}/CudosBuilders/tools-bash/constructor
+export WORKING_DIR="<whatever it is>"
+cd ${WORKING_DIR}/CudosBuilders/tools-bash/constructor
 ./src/init.sh clustered-validator-node
+
 ```
 
 The command will use the configuration you have setup in the previous step and build the needed binaries. Successful run should print something like:
