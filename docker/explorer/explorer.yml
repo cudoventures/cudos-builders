@@ -32,28 +32,4 @@ services:
       options:
         max-size: "128m"
         max-file: "1"
-    depends_on:
-      - cudos-explorer-mongodb
-
-  cudos-explorer-mongodb:
-    image: cudos-explorer-mongodb
-    container_name: cudos-explorer-mongodb
-    build:
-      dockerfile: CudosBuilders/docker/explorer/explorer-mongodb.dockerfile
-      context: ../../../
-    restart: unless-stopped
-    ports:
-      - "27017:27017"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: cudos-root-db-pass
-    volumes:
-      - '../../../CudosData/cudos-data-explorer-release-mongodb:/data/db'
-      - './mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro'
-    networks:
-      - shared-cudos-network
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "128m"
-        max-file: "1"
+        

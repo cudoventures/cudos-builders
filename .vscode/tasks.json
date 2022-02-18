@@ -728,6 +728,18 @@
             "type": "shell",
             "group": "build"
         },
+        {
+            "label": "Build ETHEREUM MAINNET FULL NODE in docker",
+            "command": "cd ./docker/ethereum&& docker-compose -f ./ethereum-mainnet.yml -p ethereum-mainnet up --build",
+            "type": "shell",
+            "group": "build",
+        },
+        {
+            "label": "Destroy ETHEREUM MAINNET FULL NODE in docker",
+            "command": "cd ./docker/ethereum&& docker-compose -f ./ethereum-mainnet.yml -p ethereum-mainnet down",
+            "type": "shell",
+            "group": "build"
+        },
 
         // Bridge UI dev
         {

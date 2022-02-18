@@ -19,15 +19,23 @@ sed -i "s/minimum-gas-prices = \"\"/minimum-gas-prices = \"0${BOND_DENOM}\"/" "$
 
 # for port 1317
 sed -i "104s/enable = false/enable = true/" "${CUDOS_HOME}/config/app.toml"
-
-# for port 1317
 sed -i "s/enabled-unsafe-cors = false/enabled-unsafe-cors = true/" "${CUDOS_HOME}/config/app.toml"
 
-# for port 26657
-sed -i "s/cors_allowed_origins = \[\]/cors_allowed_origins = \[\"\*\"\]/" "${CUDOS_HOME}/config/config.toml"
+# port 9090
+sed -i "158s/enable = false/enable = true/" "${CUDOS_HOME}/config/app.toml"
 
 # for port 26657
 sed -i "s/laddr = \"tcp:\/\/127.0.0.1:26657\"/laddr = \"tcp:\/\/0.0.0.0:26657\"/" "${CUDOS_HOME}/config/config.toml"
+sed -i "s/cors_allowed_origins = \[\]/cors_allowed_origins = \[\"\*\"\]/" "${CUDOS_HOME}/config/config.toml"
+
+# monitoring
+# port 26660
+if [ "${MONITORING_ENABLED}" = "true" ]; then
+    sed -i "s/prometheus = .*/prometheus = true/g" "${CUDOS_HOME}/config/config.toml"
+fi
+if [ "${MONITORING_ENABLED}" = "false" ]; then
+    sed -i "s/prometheus = .*/prometheus = false/g" "${CUDOS_HOME}/config/config.toml"
+fi
 
 sed -i "s/persistent_peers = \".*\"/persistent_peers = \"$PERSISTENT_PEERS\"/g" "${CUDOS_HOME}/config/config.toml"
 
@@ -39,11 +47,6 @@ sed -i "s/private_peer_ids = \".*\"/private_peer_ids = \"$PRIVATE_PEERS\"/g" "${
 if [ "${TLS_ENABLED}" = "true" ]; then
     sed -i "s|tls_cert_file = \".*\"|tls_cert_file = \"$TLS_DOCKER_PATH/live/$TLS_DOMAIN/fullchain.pem\"|g" "${CUDOS_HOME}/config/config.toml"
     sed -i "s|tls_key_file = \".*\"|tls_key_file = \"$TLS_DOCKER_PATH/live/$TLS_DOMAIN/privkey.pem\"|g" "${CUDOS_HOME}/config/config.toml"
-fi
-
-# Monitoring enabled
-if [ "${MONITORING_ENABLED}" = "true" ]; then
-    sed -i "s/prometheus = .*/prometheus = true/g" "${CUDOS_HOME}/config/config.toml"
 fi
 
 if [ "${EXTERNAL_ADDRESS}" != "" ]; then
