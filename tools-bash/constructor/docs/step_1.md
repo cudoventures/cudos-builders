@@ -78,7 +78,6 @@ MONIKER="<name of the node>"
 ```
 cd ${HOME}/CudosBuilders/tools-bash/constructor
 ./src/init.sh clustered-validator-node
-
 ```
 
 The command will use the configuration you have setup in the previous step and build the needed binaries. Successful run should print something like:
@@ -95,7 +94,6 @@ Once your validator is running you should get it's genesis. It is located under 
 ```
 GENESIS=$(ls ${CUDOS_DIR}/tools-bash/constructor/exports)
 cat $GENESIS
-
 ```
 Once you get the file contents submit them as a json file in https://github.com/CudoVentures/cudos-gentx. The name of the file should match the moniker of your validator node.
 

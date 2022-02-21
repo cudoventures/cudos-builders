@@ -142,7 +142,6 @@ MONITORING_ENABLED=false
 
 EXTERNAL_ADDRESS=
 ADDR_BOOK_STRICT=true
-
 ```
 
 **MONIKER** is the name of the node.
@@ -221,18 +220,6 @@ PARAM_SEED="<seeds_tendermint_id>@<ip>:26656"
 PARAM_PRIVATE_PEER_IDS="<validator_tendermint_id>@<ip>:26656"
 PARAM_EXPOSE_IP="0.0.0.0"
 ```
-
-If your validator is running an orchestrator also add:
-```
-PARAM_ORCHESTRATOR_ENV_PATH=""
-PARAM_ORCH_ETH_ADDRESS=""
-```
-
-You can see the gravity instructions [here](./gravity.md).
-
-```
-sudo ./src/start.sh sentry-node
-```
 NOTE: There may be an error for the Resetting the sentry-node step.
 
 ### Seed node
@@ -295,6 +282,18 @@ PARAM_EXPOSE_IP="0.0.0.0"
 **PARAM_PERSISTENT_PEERS** Add the node ID and IP address+port of any Sentry nodes on your private network to
 **PARAM_SEED** node ID and IP address+port of any Seed nodes on your private network.
 **PARAM_EXPOSE_IP** IP that would be exposed. Default is 0.0.0.0
+
+If your validator is running an orchestrator also add:
+```
+PARAM_ORCHESTRATOR_ENV_PATH=""
+PARAM_ORCH_ETH_ADDRESS=""
+```
+
+You can see the gravity instructions [here](./gravity.md).
+
+```
+sudo ./src/start.sh sentry-node
+```
 
 Now you can run
 ```
