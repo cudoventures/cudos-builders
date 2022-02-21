@@ -14,12 +14,12 @@ mkdir $CUDOS_DIR
 
 cd $HOME
 git clone --branch cudos-master https://github.com/CudoVentures/cudos-builders.git CudosBuilders
-cd CudosBuilders
+cd CudosBuilders/tools-bash/constructor
 ```
 
 You should copy the example configuration and setup all needed params
 ```
-cp ./config/init.env.example ./config/init.env
+cp ./config/init-peers.env.example ./config/init.env
 ```
 The content of the init.env should be as follows:
 ```bash
@@ -42,15 +42,39 @@ SHOULD_USE_GLOBAL_PEERS=true
 SHOULD_USE_STATE_SYNC=false
 
 TLS_ENABLED=false
-TLS_DOMAIN= #required if TLS_ENABLED=true
-TLS_DOCKER_PATH= #required if TLS_ENABLED=true
+TLS_DOMAIN=""
+TLS_DOCKER_PATH=""
 
 MONITORING_ENABLED=false
 
 EXTERNAL_ADDRESS=
 ADDR_BOOK_STRICT=true
 ```
-For now we can leave the information about the peers empty
+For now we can leave the information about the peers empty. 
+
+**MONIKER** is the name of the node.
+
+**PERSISTENT_PEERS** comma separated list of peers to connect to. If you have a list of Sentry nodes you should add them here. The format should be <_tendermint_id_>@<_ip_>:<_port_>
+
+**PRIVATE_PEERS** list with the node ID of any Validator nodes on your private network with format: <_tendermint_id_>@<_ip_>:<_port_>.
+
+**SEEDS** list of Seed nodes with format <_tendermint_id_>@<_ip_>:<_port_>.
+
+**SHOULD_USE_GLOBAL_PEERS** if the node should try to connect to global peers or not. Should be set to true.
+**SHOULD_USE_STATE_SYNC** if set to true the node will try to sync from a state sync point.
+
+**TLS_ENABLED** enables TLS. Default false
+
+**TLS_DOMAIN** required if TLS_ENABLED=true
+
+**TLS_DOCKER_PATH** required if TLS_ENABLED=true
+
+**MONITORING_ENABLED** defines if the port for monitoring should be open or not.
+
+**EXTERNAL_ADDRESS** This variable defines the address to advertise to peers for them to dial. It must be the public address of the node plus the 26656 (or any other external number that could be redirected to internal port 26656) port.
+
+**ADDR_BOOK_STRICT** connect only to peers in the address book.
+
 
 ```
 sudo ./src/init.sh sentry-node
@@ -87,12 +111,12 @@ mkdir $CUDOS_DIR
 
 cd $HOME
 git clone --branch cudos-master https://github.com/CudoVentures/cudos-builders.git CudosBuilders
-cd CudosBuilders
+cd CudosBuilders/tools-bash/constructor
 ```
 
 You should copy the example configuration and setup all needed params
 ```
-cp ./config/init.env.example ./config/init.env
+cp ./config/init-peers.env.example ./config/init.env
 ```
 The content of the init.env should be as follows:
 ```shell
@@ -120,6 +144,30 @@ EXTERNAL_ADDRESS=
 ADDR_BOOK_STRICT=true
 
 ```
+
+**MONIKER** is the name of the node.
+
+**PERSISTENT_PEERS** comma separated list of peers to connect to. If you have a list of Sentry nodes you should add them here. The format should be <_tendermint_id_>@<_ip_>:<_port_>
+
+**PRIVATE_PEERS** list with the node ID of any Validator nodes on your private network with format: <_tendermint_id_>@<_ip_>:<_port_>.
+
+**SEEDS** list of Seed nodes with format <_tendermint_id_>@<_ip_>:<_port_>.
+
+**SHOULD_USE_GLOBAL_PEERS** if the node should try to connect to global peers or not. Should be set to true.
+**SHOULD_USE_STATE_SYNC** if set to true the node will try to sync from a state sync point.
+
+**TLS_ENABLED** enables TLS. Default false
+
+**TLS_DOMAIN** required if TLS_ENABLED=true
+
+**TLS_DOCKER_PATH** required if TLS_ENABLED=true
+
+**MONITORING_ENABLED** defines if the port for monitoring should be open or not.
+
+**EXTERNAL_ADDRESS** This variable defines the address to advertise to peers for them to dial. It must be the public address of the node plus the 26656 (or any other external number that could be redirected to internal port 26656) port.
+
+**ADDR_BOOK_STRICT** connect only to peers in the address book.
+
 For now we can leave the information about the peers empty
 
 ```
@@ -155,15 +203,32 @@ Note your node ID. You are going to need it for the next steps of the configurat
 If you successfully submitted your genesis in the previous step of Phase 4 your validator node is already initialized and setup. If you deleted your configuration contact Cudos team for support.
 ## Start the sentry and seed nodes
 
-### Senty node
+### Sentry node
 
-Parameters for the start node should be located in start.env file as follows:
+Copy the start.env.example and rename it to start.env. 
+```
+cp start.env.example start.env
+```
+Enter the newly copied file with the command below:
+```
+nano start.env
+```
+Then enter the following:
+
 ```
 PARAM_PERSISTENT_PEERS=""
 PARAM_SEED="<seeds_tendermint_id>@<ip>:26656"
 PARAM_PRIVATE_PEER_IDS="<validator_tendermint_id>@<ip>:26656"
 PARAM_EXPOSE_IP="0.0.0.0"
 ```
+
+If your validator is running an orchestrator also add:
+```
+PARAM_ORCHESTRATOR_ENV_PATH=""
+PARAM_ORCH_ETH_ADDRESS=""
+```
+
+You can see the gravity instructions [here](./gravity.md).
 
 ```
 sudo ./src/start.sh sentry-node
@@ -179,6 +244,9 @@ PARAM_SEED="<seeds_tendermint_id>@<ip>:26656"
 PARAM_PRIVATE_PEER_IDS="<validator_tendermint_id>@<ip>:26656"
 PARAM_EXPOSE_IP="0.0.0.0"
 ```
+
+**PARAM_PRIVATE_PEER_IDS** contains the validator node ID, IP and port.
+**PARAM_PERSISTENT_PEERS** comma separated list of sentry nodes.
 
 ```
 sudo ./src/start.sh seed-node
@@ -205,10 +273,17 @@ All the nodes listed bellow need to have the same genesis. Otherwise they won't 
 
 If you want to manualy provide a genesis file for your nodes you need to place it in the <code>$CUDOS_DIR/CudosBuilders/docker/config/genesis.mainnet.json </code>. The CUDOS_DIR is the directory you specified in Step 1. This step should be executed for every node in the cluster.
 
-If you have a list of peers you need to connect add their info to the <code>$CUDOS_DIR/CudosBuilders/docker/config/seeds.mainnet.config </code> and <code>$CUDOS_DIR/CudosBuilders/docker/config/persistent-peers.mainnet.config </code>
+If you have a list of peers you need to connect to, add their info to the <code>$CUDOS_DIR/CudosBuilders/docker/config/seeds.mainnet.config </code> and <code>$CUDOS_DIR/CudosBuilders/docker/config/persistent-peers.mainnet.config </code>
 
-
-To start the validator edit once again the start.env
+To start the validator first setup it's environement. Copy the start.env.example and rename it to start.env. 
+```
+cp start.env.example start.env
+```
+Enter the newly copied file with the command below:
+```
+nano start.env
+```
+Then enter the following:
 
 It should contain the following:
 ```
@@ -216,12 +291,17 @@ PARAM_PERSISTENT_PEERS="<sentry_tendermint_id@ip:26656>"
 PARAM_SEED="<seed_tendermint_id@ip:26656>"
 PARAM_EXPOSE_IP="0.0.0.0"
 ```
+
+**PARAM_PERSISTENT_PEERS** Add the node ID and IP address+port of any Sentry nodes on your private network to
+**PARAM_SEED** node ID and IP address+port of any Seed nodes on your private network.
+**PARAM_EXPOSE_IP** IP that would be exposed. Default is 0.0.0.0
+
 Now you can run
 ```
 sudo ./src/start.sh clustered-validator-node
 ```
 
-# Sucesful run of your nodes
+# Successful run of your nodes
 If your node connected to the network but 2/3 of the voting power is not online your nodes will log something similar to:
 <img src="./start-log.png">
 

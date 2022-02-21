@@ -22,23 +22,22 @@ Go into the newly created CudosBuilders directory and make sure the init.sh can 
 ```
 cd CudosBuilders
 sudo chmod +x ./tools-bash/constructor/src/init.sh
-
 ```
+
 Copy the init.env.example and rename it to init.env. 
 ```
-cd ./tools-bash/constructor/config
-
 cp init.env.example init.env
 ```
-
-Example content of the file:
+Enter the newly copied file with the command below:
+```
+nano init.env
+```
+Then enter the following:
 
 ```
 PARAM_SOURCE_DIR="<CudosData dir>" 
 PARAM_VALIDATOR_MNEMONIC="<KEY>" 
 PARAM_KEYRING_OS_PASS="<PASS>"
-PARAM_VALIDATOR_LEDGER_TYPE="default"
-PARAM_VALIDATOR_LEDGER_ACCOUNT_NAME=""
 PARAM_COMMISSION_RATE="0.10" 
 PARAM_COMMISSION_MAX_RATE="0.20" 
 PARAM_COMMISSION_MAX_CHANGE_RATE="0.01" 
@@ -50,11 +49,7 @@ PARAM_COMMISSION_MAX_CHANGE_RATE="0.01"
 
 **PARAM_KEYRING_OS_PASS** is the password of your keyring.
 
-**PARAM_VALIDATOR_LEDGER_TYPE** is the type of the ledger you are using. Use "default" or "ledger". If set to "ledger" the PARAM_VALIDATOR_LEDGER_ACCOUNT_NAME should be specified.
-
-**PARAM_VALIDATOR_LEDGER_ACCOUNT_NAME** is you ledger account. Only applicable if PARAM_VALIDATOR_LEDGER_TYPE="ledger", otherwise leave as "".
-
-**PARAM_COMMISSION_RATE** is commision rate of the validator. Must be between 0 and the validator's PARAM_COMMISSION_MAX_RATE.
+**PARAM_COMMISSION_RATE** is commission rate of the validator. Must be between 0 and the validator's PARAM_COMMISSION_MAX_RATE.
 
 **PARAM_COMMISSION_MAX_RATE**  Can't be changed later.
 
@@ -65,11 +60,13 @@ NOTE: It is advisable you do NOT use your mainnet mnemonic for the test phase.
 
 Copy the node.env.example and rename it to node.env. 
 ```
-
 cp node.env.example node.env
 ```
-
-Example content of the node.env file:
+Enter the newly copied file with the command below:
+```
+nano node.env
+```
+Then enter the following:
 
 ```
 MONIKER="<name of the node>"
