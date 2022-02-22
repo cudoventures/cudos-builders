@@ -50,6 +50,7 @@ Clone <em>validator.env.example</em> to <em>validator.mainnet.env</em> (The actu
 1. **VALIDATOR_BALANCE:** The amount of staked tokens that each genesis validator will have. <em>Example: VALIDATOR_BALANCE="2000000000000000000000000"</em>
 1. **ORCHESTRATOR_BALANCE:** This is the balance that each orchestrator will have. <em>Example: ORCHESTRATOR_BALANCE="1000000000000000000"</em>
 1. **FAUCET_BALANCE:** The balance of the faucet. If set to 0 then no faucet will be created. <em>Example: FAUCET_BALANCE="8000000000000000000000000000"</em>
+1. **KEYRING_OS_PASS:** The password of your keyring. It must be at least 8 characters. <em>Example: KEYRING_OS_PASS="11111111"</em>
 
 **Seed:**
 
