@@ -28,6 +28,16 @@ if [ ! -w "$PARAM_SOURCE_DIR" ]; then
 fi
 
 if [ "$STARTING" = "true" ]; then
+
+    if [ ! -f "$WORKING_DIR/config/genesis.mainnet.json" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The $WORKING_DIR/config/genesis.mainnet.json file is missing";
+        exit 1;
+    fi
+
+    if [ ! -r "$WORKING_DIR/config/genesis.mainnet.json" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Permission denied $WORKING_DIR/config/genesis.mainnet.json";
+        exit 1;
+    fi
     
     if [ "$IS_CLUSTERED_VALIDATOR" = "true" ]; then
         

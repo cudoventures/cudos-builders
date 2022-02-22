@@ -46,4 +46,14 @@ if [ ! -f "$WORKING_DIR/config/topology.json" ]; then
     exit 1
 fi
 
+if [ ! -f "$STAKING_JSON" ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The $STAKING_JSON file is missing";
+    exit 1
+fi
+
+if [ ! -r "$STAKING_JSON" ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Permission denied $STAKING_JSON";
+    exit 1
+fi
+
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
