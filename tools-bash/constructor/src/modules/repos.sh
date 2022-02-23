@@ -10,7 +10,7 @@ git clone -q --branch $branch https://github.com/CudoVentures/cosmos-gravity-bri
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Copying the .env files...";
-cp -f "$WORKING_DIR/config/node.env" "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME/$NODE_NAME.client.mainnet.env";
+\cp -f "$WORKING_DIR/config/node.env" "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME/$NODE_NAME.client.mainnet.env";
 
 dockerIgnorePath="$PARAM_SOURCE_DIR/.dockerignore"
 if [ ! -f "$dockerIgnorePath" ]; then
