@@ -17,3 +17,8 @@ services:
       - "26657:26657"
       - "1317:1317"
       - "9090:9090"
+    logging:
+      driver: "gcplogs"
+      options:
+        max-size: "128m"
+        max-file: "1"

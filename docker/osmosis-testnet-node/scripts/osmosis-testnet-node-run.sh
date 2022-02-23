@@ -9,6 +9,9 @@ echo "Setting up config.toml"
 sed -i "s/seeds = \".*\"/seeds = \"$SEEDS\"/g" "${OSMOSIS_HOME}/config/config.toml"
 sed -i "s/persistent_peers = \".*\"/persistent_peers = \"$PERSISTENT_PEERS\"/g" "${CUDOS_HOME}/config/config.toml"
 
+# changing the default log-format to avoid ANSII coloring issues on GCLOUD LOGGING
+sed -i "53s/log_format = \"plain\"/log_format = \"json\"/" "${CUDOS_HOME}/config/config.toml"
+
 # for port 26657
 sed -i "s/laddr = \"tcp:\/\/127.0.0.1:26657\"/laddr = \"tcp:\/\/0.0.0.0:26657\"/" "${CUDOS_HOME}/config/config.toml"
 

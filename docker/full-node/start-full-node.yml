@@ -24,7 +24,7 @@ services:
       - "${EXPOSE_IP}:${PORT26657}:26657"
       - "${EXPOSE_IP}:${PORT26660}:26660"
     logging:
-      driver: "json-file"
+      driver: "gcplogs"
       options:
         max-size: "128m"
         max-file: "1"

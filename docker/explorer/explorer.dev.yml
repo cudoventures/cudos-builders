@@ -38,7 +38,7 @@ services:
     networks:
       - shared-cudos-network
     logging:
-      driver: "json-file"
+      driver: "gcplogs"
       options:
         max-size: "128m"
         max-file: "1"

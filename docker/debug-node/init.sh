@@ -69,6 +69,9 @@ SYMBOL="CUDOS"
 
 cudos-noded init $MONIKER --chain-id=$CHAIN_ID
 
+# changing the default log-format to avoid ANSII coloring issues on GCLOUD LOGGING
+sed -i "53s/log_format = \"plain\"/log_format = \"json\"/" "${CUDOS_HOME}/config/config.toml"
+
 # port 1317
 sed -i "104s/enable = true/enable = false/" "${CUDOS_HOME}/config/app.toml"
 

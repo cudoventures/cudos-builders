@@ -60,6 +60,7 @@ In most docker instances in this project host file system is mounted inside the 
 <em>.vscode</em> - Contains predefined set of commands for VSCode only. They can be triggered by Control(or Cmd)+Shift+B.
 
 <em>docker</em> - Contains configuration, docker, docker-compose files for all build variants of the cudos network.
+>For most docker instances the default logging is set to emmit logs from a deployed container to GCloud using "gcplogs" logging driver. There are various other options which allow reconfiguration. They are described <a href="https://docs.docker.com/config/containers/logging/configure/">here</a>.
 
 <em>tools</em> - Conains scripts for network deployment.
 
