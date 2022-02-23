@@ -278,9 +278,11 @@ PARAM_SEED="<seed_tendermint_id@ip:26656>"
 PARAM_EXPOSE_IP="0.0.0.0"
 ```
 
-**PARAM_PERSISTENT_PEERS** Add the node ID and IP address+port of any Sentry nodes on your private network to
-**PARAM_SEED** node ID and IP address+port of any Seed nodes on your private network.
-**PARAM_EXPOSE_IP** IP that would be exposed. Default is 0.0.0.0
+**PARAM_PERSISTENT_PEERS** Add the node ID and IP address+port of ALL Sentry nodes on your private network, eg node 3 sentry must connect to Node1 Sentry and Node 2 Sentry
+
+**PARAM_SEED** node ID and IP address+port of ALL Seed nodes on your private network, eg Node 3 Seed must connect to node 1 Seed and Node 2 Seed.
+
+**PARAM_EXPOSE_IP** the IP that would be exposed. Default is 0.0.0.0
 
 If your validator is running an orchestrator also add:
 ```
