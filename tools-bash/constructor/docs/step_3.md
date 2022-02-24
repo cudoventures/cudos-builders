@@ -9,8 +9,7 @@ Check all the needed prerequisites [here](./prerequisites.md).
 You need to have a local copy of our build tools.Create your main Cudos directory. On the first row you can define where all Cudos data will be stored.
 
 ```
-export CUDOS_DIR="/usr/cudos"
-mkdir $CUDOS_DIR
+mkdir /usr/cudos
 
 cd $HOME
 git clone --branch cudos-master https://github.com/CudoVentures/cudos-builders.git CudosBuilders
@@ -23,7 +22,7 @@ cp ./config/init-peers.env.example ./config/init.env
 ```
 The content of the init.env should be as follows:
 ```bash
-PARAM_SOURCE_DIR="<CUDOS_DIR_PATH>"
+PARAM_SOURCE_DIR="/usr/cudos" 
 ```
 The directory you create here should exist.
 
@@ -106,8 +105,7 @@ Note your node ID. You are going to need it for the next steps of the configurat
 You need to have a local copy of our build tools.Create your main Cudos directory. On the first row you can define where all Cudos data will be stored.
 
 ```
-export CUDOS_DIR="/usr/cudos"
-mkdir $CUDOS_DIR
+mkdir /usr/cudos
 
 cd $HOME
 git clone --branch cudos-master https://github.com/CudoVentures/cudos-builders.git CudosBuilders
@@ -120,7 +118,7 @@ cp ./config/init-peers.env.example ./config/init.env
 ```
 The content of the init.env should be as follows:
 ```shell
-PARAM_SOURCE_DIR="<CUDOS_DIR_PATH>"
+PARAM_SOURCE_DIR="/usr/cudos" 
 ```
 The directory you create here should exist.
 

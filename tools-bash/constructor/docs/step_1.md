@@ -8,8 +8,7 @@ Check all the needed prerequisites [here](./prerequisites.md).
 You need to have a local copy of our build tools.Create your main Cudos directory. On the first row you can define where all Cudos data will be stored.
 
 ```
-export CUDOS_DIR="/usr/cudos"
-mkdir $CUDOS_DIR
+mkdir /usr/cudos
 
 cd $HOME
 git clone --branch cudos-master https://github.com/CudoVentures/cudos-builders.git CudosBuilders
@@ -35,7 +34,7 @@ nano init.env
 Then enter the following:
 
 ```
-PARAM_SOURCE_DIR="<CudosData dir>" 
+PARAM_SOURCE_DIR="/usr/cudos" 
 PARAM_VALIDATOR_MNEMONIC="<KEY>" 
 PARAM_KEYRING_OS_PASS="<PASS>"
 PARAM_COMMISSION_RATE="0.10" 
