@@ -139,8 +139,8 @@ genesisJson=$(jq ".app_state.gravity.erc20_to_denoms[0] |= .+ {
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 genesisJson=$(jq ".app_state.gravity.params.minimum_transfer_to_eth = \"300000000000000000000\"" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
-# genesisJson=$(jq ".app_state.gravity.params.minimum_fee_transfer_to_eth = \"333000000000000000000\"" "${CUDOS_HOME}/config/genesis.json")
-# echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
+genesisJson=$(jq ".app_state.gravity.params.minimum_fee_transfer_to_eth = \"333000000000000000000\"" "${CUDOS_HOME}/config/genesis.json")
+echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 
 # create zero account
 (echo $KEYRING_OS_PASS; echo $KEYRING_OS_PASS) | cudos-noded keys add zero-account --keyring-backend os |& tee "${CUDOS_HOME}/zero-account.wallet"
