@@ -22,3 +22,8 @@ services:
       - '../../../CudosData/cudos-data-hermes-ibc-relayer:/root/.hermes'
     networks:
       - shared-cudos-network
+    logging:
+      driver: $LOGGING_DRIVER
+      options:
+        max-size: "128m"
+        max-file: "1"

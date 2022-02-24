@@ -9,6 +9,7 @@ STATE_SYNC_RPC_SERVERS_FILENAME=state-sync-rpc-servers.testnet.private.config
 INIT_CONTAINER_NAME=cudos-init-sentry-node-testnet-private
 START_CONTAINER_NAME=cudos-start-sentry-node-testnet-private
 VOLUME_NAME=cudos-data-sentry-node-testnet-private
+LOGGING_DRIVER="gcplogs"
 
 PORT26656=26656
 PORT26657=26657

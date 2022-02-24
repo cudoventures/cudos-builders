@@ -41,7 +41,7 @@ database:
     max_idle_connections: 10
 logging:
     level: debug
-    format: text
+    format: json
 telemetry:
     port: 5000
 pricefeed:

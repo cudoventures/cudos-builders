@@ -1,1 +1,2 @@
 ENV_FILE=./faucet.local.env
+LOGGING_DRIVER="json-file"

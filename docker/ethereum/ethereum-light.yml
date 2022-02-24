@@ -17,3 +17,8 @@ services:
       - '../../../CudosData/ethereum-light:/var/ethereum-light'
     networks:
       - shared-cudos-network
+    logging:
+      driver: "gcplogs"
+      options:
+        max-size: "128m"
+        max-file: "1"

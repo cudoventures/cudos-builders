@@ -1,5 +1,6 @@
 OSMOSIS_HOME=/usr/osmosis/OsmosisData
 ENV_FILE=./osmosis-testnet-node.local.env
+LOGGING_DRIVER="gcplogs"
 
 PORT26656=26656
 PORT26657=26657

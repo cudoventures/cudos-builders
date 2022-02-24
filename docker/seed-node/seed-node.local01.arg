@@ -9,6 +9,7 @@ STATE_SYNC_RPC_SERVERS_FILENAME=state-sync-rpc-servers.local.config
 INIT_CONTAINER_NAME=cudos-init-seed-node-01
 START_CONTAINER_NAME=cudos-start-seed-node-01
 VOLUME_NAME=cudos-data-seed-node-01 
+LOGGING_DRIVER="json-file"
 
 PORT26656=60201
 PORT26657=60202

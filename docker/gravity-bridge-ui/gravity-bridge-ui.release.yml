@@ -19,7 +19,7 @@ services:
     networks:
       - shared-cudos-network
     logging:
-      driver: "json-file"
+      driver: $LOGGING_DRIVER
       options:
         max-size: "128m"
         max-file: "1"

@@ -28,3 +28,8 @@ services:
       - '/usr/src/orchestrator/relayer/target'
     networks:
       - shared-cudos-network
+    logging:
+      driver: $LOGGING_DRIVER
+      options:
+        max-size: "128m"
+        max-file: "1"

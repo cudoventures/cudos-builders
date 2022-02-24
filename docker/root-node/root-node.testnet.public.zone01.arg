@@ -4,6 +4,7 @@ ENV_FILE=./root-node.testnet.public.zone01.env
 INIT_CONTAINER_NAME=cudos-init-root-node
 START_CONTAINER_NAME=cudos-start-root-node
 VOLUME_NAME=cudos-data-root-node
+LOGGING_DRIVER="gcplogs"
 
 PORT26656=26656
 PORT26660=26660

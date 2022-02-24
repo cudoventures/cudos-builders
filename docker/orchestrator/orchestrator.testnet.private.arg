@@ -1,2 +1,3 @@
 ENV_FILE=./orchestrator.testnet.private.env
 CONTAINER_NAME=cudos-orchestrator-testnet-private-01
+LOGGING_DRIVER="gcplogs"

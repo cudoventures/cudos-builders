@@ -9,6 +9,7 @@ STATE_SYNC_RPC_SERVERS_FILENAME=state-sync-rpc-servers.mainnet.config
 INIT_CONTAINER_NAME=cudos-init-sentry-node-client-mainnet
 START_CONTAINER_NAME=cudos-start-sentry-node-client-mainnet
 VOLUME_NAME=cudos-data-sentry-node-client-mainnet
+LOGGING_DRIVER="gcplogs"
 
 PORT26656=26656
 PORT26657=26657

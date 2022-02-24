@@ -8,6 +8,9 @@ WORKING_PATH=$(pwd) && cd $CUDOS_HOME && rm -Rf ./* && cd $WORKING_PATH
 
 cudos-noded init $MONIKER --chain-id=$CHAIN_ID
 
+# changing the default log-format to avoid ANSII coloring issues on GCLOUD LOGGING
+sed -i "53s/log_format = \"plain\"/log_format = \"json\"/" "${CUDOS_HOME}/config/config.toml"
+
 # gas price
 sed -i "s/minimum-gas-prices = \"\"/minimum-gas-prices = \"5000000000000${BOND_DENOM}\"/" "${CUDOS_HOME}/config/app.toml"
 

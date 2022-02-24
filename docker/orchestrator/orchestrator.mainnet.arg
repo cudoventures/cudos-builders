@@ -1,2 +1,3 @@
 ENV_FILE=./orchestrator.mainnet.env
 CONTAINER_NAME=cudos-orchestrator-mainnet
+LOGGING_DRIVER="gcplogs"

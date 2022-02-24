@@ -10,6 +10,7 @@ INIT_CONTAINER_NAME=cudos-init-full-node-client-testnet-public-01
 CONFIG_CONTAINER_NAME=cudos-config-full-node-client-testnet-public-01
 START_CONTAINER_NAME=cudos-start-full-node-client-testnet-public-01
 VOLUME_NAME=cudos-data-full-node-client-testnet-public-01
+LOGGING_DRIVER="gcplogs"
 
 PORT26656=26656
 PORT26657=26657

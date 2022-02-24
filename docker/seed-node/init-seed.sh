@@ -15,6 +15,9 @@ cudos-noded init $MONIKER
 
 cp ./external-config/genesis.json "${CUDOS_HOME}/config/genesis.json"
 
+# changing the default log-format to avoid ANSII coloring issues on GCLOUD LOGGING
+sed -i "53s/log_format = \"plain\"/log_format = \"json\"/" "${CUDOS_HOME}/config/config.toml"
+
 # gas price
 sed -i "s/minimum-gas-prices = \"\"/minimum-gas-prices = \"0${BOND_DENOM}\"/" "${CUDOS_HOME}/config/app.toml"
 

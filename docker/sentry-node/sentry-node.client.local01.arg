@@ -9,6 +9,7 @@ STATE_SYNC_RPC_SERVERS_FILENAME=state-sync-rpc-servers.testnet.local.config
 INIT_CONTAINER_NAME=cudos-init-sentry-node-client-local-01
 START_CONTAINER_NAME=cudos-start-sentry-node-client-local-01
 VOLUME_NAME=cudos-data-sentry-node-client-local-01
+LOGGING_DRIVER="json-file"
 
 PORT26656=60301
 PORT26657=60302

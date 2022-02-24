@@ -8,3 +8,4 @@ EXTERNAL_API_URL="http://localhost:60008"
 EXTERNAL_STAKING_URL="http://localhost:3000/validators"
 CHAIN_NAME="CudosTestnet-Public"
 CHAIN_ID="cudos-testnet-public"
+LOGGING_DRIVER=json-file

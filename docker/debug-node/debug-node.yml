@@ -32,7 +32,7 @@ services:
       - "${EXPOSE_IP}:${PORT9090}:9090"
       - "${EXPOSE_IP}:${PORT26660}:26660"
     logging:
-      driver: "json-file"
+      driver: $LOGGING_DRIVER
       options:
         max-size: "128m"
         max-file: "1"

@@ -1,1 +1,2 @@
 CUDOS_HOME=/usr/cudos/cudos-data
+LOGGING_DRIVER=json-file

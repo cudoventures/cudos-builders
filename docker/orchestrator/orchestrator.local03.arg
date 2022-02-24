@@ -1,2 +1,3 @@
 ENV_FILE=./orchestrator.local03.env
 CONTAINER_NAME=cudos-orchestrator-local-03
+LOGGING_DRIVER="json-file"
