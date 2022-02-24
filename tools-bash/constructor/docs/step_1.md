@@ -95,7 +95,7 @@ Once your validator is running you should get it's genesis. It is located under 
 GENESIS=$(ls ${CUDOS_DIR}/tools-bash/constructor/exports)
 cat $GENESIS
 ```
-Once you get the file contents submit them as a json file in https://github.com/CudoVentures/cudos-gentx. The name of the file should match the moniker of your validator node.
+Once you get the file contents send them as a **json** file to the Cudos team via email to [services@cudoventures.com](mailto:services@cudoventures.com).
 
 # Things to keep in mind
 1. The folder you use for a node needs to be created and empty. You will get errors otherwise.
