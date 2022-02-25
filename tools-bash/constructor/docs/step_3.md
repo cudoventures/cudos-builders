@@ -31,9 +31,7 @@ cp ./config/node.env.example ./config/node.env
 The content of the node.env should be:
 ```bash
 MONIKER=<TYPE DOWN NODE NAME>
-PERSISTENT_PEERS=<list of peers>
 PRIVATE_PEERS=<validator node tendermint id>
-SEEDS=<>
 
 SHOULD_USE_GLOBAL_PEERS=true
 SHOULD_USE_STATE_SYNC=false
@@ -51,11 +49,7 @@ For now we can leave the information about the peers empty.
 
 **MONIKER** is the name of the node.
 
-**PERSISTENT_PEERS** comma separated list of peers to connect to. If you have a list of Sentry nodes you should add them here. The format should be <_tendermint_id_>@<_ip_>:<_port_>
-
-**PRIVATE_PEERS** list with the node ID of any Validator nodes on your private network with format: <_tendermint_id_>@<_ip_>:<_port_>.
-
-**SEEDS** list of Seed nodes with format <_tendermint_id_>@<_ip_>:<_port_>.
+**PRIVATE_PEERS** list with the node ID of any Validator nodes on your private network with format: <_tendermint_id_>.
 
 **SHOULD_USE_GLOBAL_PEERS** if the node should try to connect to global peers or not. Should be set to true.
 **SHOULD_USE_STATE_SYNC** if set to true the node will try to sync from a state sync point.
@@ -127,9 +121,7 @@ cp ./config/node.env.example ./config/node.env
 The content of the node.env should be:
 ```shell
 MONIKER=<name of the node>
-PERSISTENT_PEERS=
 PRIVATE_PEERS=
-SEEDS=
 
 SHOULD_USE_GLOBAL_PEERS=true
 SHOULD_USE_STATE_SYNC=false
@@ -142,11 +134,7 @@ ADDR_BOOK_STRICT=true
 
 **MONIKER** is the name of the node.
 
-**PERSISTENT_PEERS** comma separated list of peers to connect to. If you have a list of Sentry nodes you should add them here. The format should be <_tendermint_id_>@<_ip_>:<_port_>
-
-**PRIVATE_PEERS** list with the node ID of any Validator nodes on your private network with format: <_tendermint_id_>@<_ip_>:<_port_>.
-
-**SEEDS** list of Seed nodes with format <_tendermint_id_>@<_ip_>:<_port_>.
+**PRIVATE_PEERS** list with the node ID of any Validator nodes on your private network with format: <_tendermint_id_>.
 
 **SHOULD_USE_GLOBAL_PEERS** if the node should try to connect to global peers or not. Should be set to true.
 **SHOULD_USE_STATE_SYNC** if set to true the node will try to sync from a state sync point.
@@ -208,12 +196,10 @@ Enter the newly copied file with the command below:
 ```
 nano start.env
 ```
-Then enter the following:
+Leave the **PARAMS_SEED** and **PARAM_PERSISTENT_PEERS**. They represent the Cudos peers - you'll need them to connect to the network. Then only change is the following:
 
 ```
-PARAM_PERSISTENT_PEERS=""
-PARAM_SEED="<seeds_tendermint_id>@<ip>:26656"
-PARAM_PRIVATE_PEER_IDS="<validator_tendermint_id>@<ip>:26656"
+PARAM_PRIVATE_PEER_IDS="<validator_tendermint_id>"
 PARAM_EXPOSE_IP="0.0.0.0"
 ```
 NOTE: There may be an error for the Resetting the sentry-node step.
@@ -265,10 +251,9 @@ nano start.env
 ```
 Then enter the following:
 
-It should contain the following:
+It should contain the following. Leave the **PARAMS_SEED** and **PARAM_PERSISTENT_PEERS**. They represent the Cudos peers - you'll need them to connect to the network. Then only change is the following:
 ```
-PARAM_PERSISTENT_PEERS="<sentry_tendermint_id@ip:26656>"
-PARAM_SEED="<seed_tendermint_id@ip:26656>"
+PARAM_PRIVATE_PEER_IDS="<validator_tendermint_id>"
 PARAM_EXPOSE_IP="0.0.0.0"
 ```
 
