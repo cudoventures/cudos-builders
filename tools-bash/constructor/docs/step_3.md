@@ -9,8 +9,6 @@ Check all the needed prerequisites [here](./prerequisites.md).
 You need to have a local copy of our build tools.Create your main Cudos directory. On the first row you can define where all Cudos data will be stored.
 
 ```
-mkdir /usr/cudos
-
 cd $HOME
 git clone --branch cudos-master https://github.com/CudoVentures/cudos-builders.git CudosBuilders
 cd CudosBuilders/tools-bash/constructor
@@ -91,7 +89,7 @@ Preparing the sentry-node...OK
 Configurating the sentry-node...OK
 
 This node ID is: 3c8b529b9eeef3a6240284ae5ca8d9add378674f
-This node ID can be found at $CUDOS_DIR/CudosData/cudos-data-sentry-node-client-mainnet/tendermint.nodeid
+This node ID can be found at $HOME/CudosData/cudos-data-sentry-node-client-mainnet/tendermint.nodeid
 This node ID could always be checked using cudos-noded tendermint show-node-id
 
 You MUST NOT delete the constructor script nor the destination folder where node's data is. They will be used later on for starting the nodes.
@@ -184,7 +182,7 @@ Preparing the seed-node...OK
 Configurating the seed-node...OK
 
 This node ID is: a3831e25275f9f3a81e0d2a7c7b0d947bc6e4512
-This node ID can be found at ${CUDOS_DIR}/CudosData/cudos-data-seed-node-client-mainnet/tendermint.nodeid
+This node ID can be found at $HOME/CudosData/cudos-data-seed-node-client-mainnet/tendermint.nodeid
 This node ID could always be checked using cudos-noded tendermint show-node-id
 
 You MUST NOT delete the constructor script nor the destination folder where node's data is. They will be used later on for starting the nodes.
@@ -204,7 +202,7 @@ If you successfully submitted your genesis in the previous step of Phase 4 your 
 
 Copy the start.env.example and rename it to start.env. 
 ```
-cp start.env.example start.env
+cp start-peers.env.example start.env
 ```
 Enter the newly copied file with the command below:
 ```
@@ -246,22 +244,20 @@ NOTE: There may be an error for the Resetting the seed-node step.
 Once the Cudos team has setup their nodes and you've got the green light to continue with this step you need to make sure you have the correct genesis file. It should be located in the cudos-builders config folder. 
 
 ```
-export CUDOS_DIR=/usr/cudos
-cd $CUDOS_DIR/CudosBuilders
+cd $HOME/CudosBuilders
 git pull
 ```
 
-Make sure to check the checksum.
 All the nodes listed bellow need to have the same genesis. Otherwise they won't be connected to the root validator. This step should be executed for every node in the cluster.
 
 ### Manual setup of genesis
 
-If you want to manualy provide a genesis file for your nodes you need to place it in the <code>$CUDOS_DIR/CudosBuilders/tools-bash/config/genesis.mainnet.json </code>. The CUDOS_DIR is the directory you pulled the CudosBuilders before initialising the nodes. This step should be executed for every node in the cluster.
+If you want to manualy provide a genesis file for your nodes you need to place it in the <code>$HOME/CudosBuilders/tools-bash/config/genesis.mainnet.json </code>. This step should be executed for every node in the cluster.
 
 ## Start the node
 To start the validator first setup it's environement. Copy the start.env.example and rename it to start.env. 
 ```
-cp start.env.example start.env
+cp start-peers.env.example start.env
 ```
 Enter the newly copied file with the command below:
 ```
@@ -310,5 +306,4 @@ INF executed block height=1 module=state num_invalid_txs=0 num_valid_txs=0
 INF commit synced commit=436F6D6D697449447B5B3131362032313920313338203838203232352031313720313534203233392031393420373620313734203137352038382031353020313020313837203138372032333820323137203238203233322031343120393020313838203135382034322035392032353220313237203835203235352038315D3A317D
 INF committed state app_hash=74DB8A58E1759AEFC24CAEAF58960ABBBBEED91CE88D5ABC9E2A3BFC7F55FF51 height=1 module=state num_txs=0
 INF indexed block height=1 module=txindex
-
 ```
