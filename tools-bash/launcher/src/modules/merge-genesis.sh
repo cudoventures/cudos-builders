@@ -57,12 +57,12 @@ for dataGenesisPath in ./*; do
     validatorHashAddress=${validatorHashAddress//\"/}
 
     # STAKING - validator staking balance, delegations
-    jq "map(select(.address == \"$validatorAddress\") | .)" "$STAKING_JSON" > "$tmpGenesisPath"
+    jq ".staking | map(select(.address == \"$validatorAddress\") | .)" "$STAKING_JSON" > "$tmpGenesisPath"
     stakingSize=$(jq length "$tmpGenesisPath")
     if [ "$stakingSize" = "0" ]; then
-        echo "[]" | jq ". += [{id: \"0x0\", tokens: \"500000000000000000000000000\", address: \"$validatorAddress\"}]" > "$tmpGenesisPath"
-        stakingSize="1"
-        # continue;
+        # echo "[]" | jq ". += [{id: \"0x0\", tokens: \"500000000000000000000000000\", address: \"$validatorAddress\"}]" > "$tmpGenesisPath"
+        # stakingSize="1"
+        continue;
     fi
     if [ "$stakingSize" != "1" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There are several staked accounts with identical address: $validatorAddress";
@@ -87,6 +87,20 @@ for dataGenesisPath in ./*; do
         distributionDelegatorStartingInfos=""
     fi
 
+    # STAKING - rewards
+    jq ".bank | map(select(.address == \"$validatorAddress\") | .)" "$STAKING_JSON" > "$tmpGenesisPath"
+    validatorRewardsSize=$(jq length "$tmpGenesisPath")
+    validatorReward="0"
+    if [ "$validatorRewardsSize" != "0" ]; then
+        if [ "$validatorRewardsSize" != "1" ]; then
+            echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} More than a single reward for a validator: $validatorAddress";
+            exit 1;
+        fi
+
+        validatorReward=$(jq .[0].balance "$tmpGenesisPath")
+        validatorReward=${validatorReward//\"/}
+    fi
+
     # auth.accounts
     result=$(jq -s '.[0].app_state.auth.accounts = .[0].app_state.auth.accounts + .[1]' "$RESULT_GENESIS_PATH" "$accountDataGenesisPath" | jq '.[0]')
     echo $result > "$RESULT_GENESIS_PATH"
@@ -101,19 +115,30 @@ for dataGenesisPath in ./*; do
     # bank.balances
     jq .app_state.bank.balances "$dataGenesisPath" | jq "map(select(.address == \"$validatorAddress\") | .)" > "$tmpGenesisPath"
     balancesSize=$(jq length "$tmpGenesisPath")
-    if [ "$balancesSize" != "0" ]; then
-        if [ "$balancesSize" = "1" ]; then
-            # set validator's balance to 0, because all of its state will be delegated
-            result=$(jq ".[].coins = [.[].coins[] | if (.denom == \"acudos\") then (.amount = \"0\") else . end]" $tmpGenesisPath)
-            echo $result > $tmpGenesisPath
-            # merge balances
-            result=$(jq -s '.[0].app_state.bank.balances = .[0].app_state.bank.balances + .[1]' "$RESULT_GENESIS_PATH" "$tmpGenesisPath" | jq '.[0]')
-            echo $result > "$RESULT_GENESIS_PATH"
-        else
-            echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There are several balances for account: $validatorAddress";
-            exit 1;
-        fi
+    if [ "$balancesSize" = "0" ]; then
+        # set validator's account to 0 just to trigger the condition below
+        echo "[{
+                \"address\": \"$validatorAddress\",
+                \"coins\": [{
+                    \"amount\": \"0\",
+                    \"denom\": \"acudos\"
+                }]
+            }]" > "$tmpGenesisPath"
     fi
+    balancesSize=$(jq length "$tmpGenesisPath")
+    # if [ "$balancesSize" != "0" ]; then
+    if [ "$balancesSize" = "1" ]; then
+        # set validator's balance to his reward, because the rest of his funds will be delegated
+        result=$(jq ".[].coins = [.[].coins[] | if (.denom == \"acudos\") then (.amount = \"$validatorReward\") else . end]" $tmpGenesisPath)
+        echo $result > $tmpGenesisPath
+        # merge balances
+        result=$(jq -s '.[0].app_state.bank.balances = .[0].app_state.bank.balances + .[1]' "$RESULT_GENESIS_PATH" "$tmpGenesisPath" | jq '.[0]')
+        echo $result > "$RESULT_GENESIS_PATH"
+    else
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There are several balances for account: $validatorAddress";
+        exit 1;
+    fi
+    # fi
     
     # staking.delegations
     result=$(jq -s '.[0].app_state.staking.delegations = .[0].app_state.staking.delegations + .[1].app_state.staking.delegations' "$RESULT_GENESIS_PATH" "$dataGenesisPath" | jq '.[0]')

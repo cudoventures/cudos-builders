@@ -1,3 +1,21 @@
+VALID_TOKEN_CONTRACT_ADDRESS="false"
+if [ "$CUDOS_TOKEN_CONTRACT_ADDRESS" = "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d" ] || [ "$CUDOS_TOKEN_CONTRACT_ADDRESS" = "0x12d474723cb8c02bcbf46cd335a3bb4c75e9de44" ]; then
+  VALID_TOKEN_CONTRACT_ADDRESS="true"
+  PARAM_UNBONDING_TIME="28800s"
+  PARAM_MAX_DEPOSIT_PERIOD="21600s"
+  PARAM_VOTING_PERIOD="21600s"
+fi
+if [ "$CUDOS_TOKEN_CONTRACT_ADDRESS" = "" ]; then
+  VALID_TOKEN_CONTRACT_ADDRESS="true"
+  PARAM_UNBONDING_TIME="1814400s"
+  PARAM_MAX_DEPOSIT_PERIOD="1209600s"
+  PARAM_VOTING_PERIOD="1209600s"
+fi
+if [ "$VALID_TOKEN_CONTRACT_ADDRESS" = "false" ]; then
+  echo "Wrong contract address"
+  exit 0;
+fi;
+
 if [[ -z "${CUDOS_HOME}" ]]; then
     CUDOS_HOME="./cudos-data"
 fi
@@ -57,6 +75,8 @@ echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 # staking params
 genesisJson=$(jq ".app_state.staking.params.bond_denom = \"$BOND_DENOM\"" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
+genesisJson=$(jq ".app_state.staking.params.unbonding_time = \"$PARAM_UNBONDING_TIME\"" "${CUDOS_HOME}/config/genesis.json")
+echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 
 # crisis params
 genesisJson=$(jq ".app_state.crisis.constant_fee.amount = \"100000000000000000000\"" "${CUDOS_HOME}/config/genesis.json")
@@ -69,9 +89,15 @@ genesisJson=$(jq ".app_state.gov.deposit_params.min_deposit[0].amount = \"500000
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 genesisJson=$(jq ".app_state.gov.deposit_params.min_deposit[0].denom = \"$BOND_DENOM\"" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
-genesisJson=$(jq ".app_state.gov.deposit_params.max_deposit_period = \"1209600s\"" "${CUDOS_HOME}/config/genesis.json")
+genesisJson=$(jq ".app_state.gov.deposit_params.max_deposit_period = \"$PARAM_MAX_DEPOSIT_PERIOD\"" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
-genesisJson=$(jq ".app_state.gov.voting_params.voting_period = \"1209600s\"" "${CUDOS_HOME}/config/genesis.json")
+genesisJson=$(jq ".app_state.gov.voting_params.voting_period = \"$PARAM_VOTING_PERIOD\"" "${CUDOS_HOME}/config/genesis.json")
+echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
+genesisJson=$(jq ".app_state.gov.tally_params.quorum = \"0.5\"" "${CUDOS_HOME}/config/genesis.json")
+echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
+genesisJson=$(jq ".app_state.gov.tally_params.threshold = \"0.5\"" "${CUDOS_HOME}/config/genesis.json")
+echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
+genesisJson=$(jq ".app_state.gov.tally_params.veto_threshold = \"0.4\"" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 
 # bank params
@@ -137,9 +163,9 @@ genesisJson=$(jq ".app_state.gravity.erc20_to_denoms[0] |= .+ {
   \"denom\": \"acudos\"
 }" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
-genesisJson=$(jq ".app_state.gravity.params.minimum_transfer_to_eth = \"300000000000000000000\"" "${CUDOS_HOME}/config/genesis.json")
+genesisJson=$(jq ".app_state.gravity.params.minimum_transfer_to_eth = \"1\"" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
-genesisJson=$(jq ".app_state.gravity.params.minimum_fee_transfer_to_eth = \"333000000000000000000\"" "${CUDOS_HOME}/config/genesis.json")
+genesisJson=$(jq ".app_state.gravity.params.minimum_fee_transfer_to_eth = \"1200000000000000000000\"" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 
 # create zero account

@@ -1,971 +1,961 @@
 {
-    "0x0": {
-        "id": "0x0",
-        "tokens": "5000000000000000000000000",
-        "address": "cudos196mqpeqqf7g2qhhdnjpcpxg6853mjqzarqkmyn",
-        "delegation": [
-            {
+    "bank": [
+        {
+            "address": "cudos1hkj4tsevzj9axhrkqsts7r5k55965d357h3cp2",
+            "balance": "2"
+        },
+        {
+            "address": "cudos1luqr8n7fyu5hsmvamsm2vuyw28d7luq6p5p2hq",
+            "balance": "20"
+        }
+    ],
+    "staking": {
+        "0x0": {
+            "id": "0x0",
+            "tokens": "15000000000000000000000000",
+            "address": "cudos1hkj4tsevzj9axhrkqsts7r5k55965d357h3cp2",
+            "delegation": [{
                 "delegator": "0xb5ed8ababc2d9e42add650b26d7684f891d2c649",
                 "delegation": "7487100000000000000000",
                 "delegatorAddress": "cudos1luqr8n7fyu5hsmvamsm2vuyw28d7luq6p5p2hq"
-            }
-        ]
-    },
-    "0x090232b7f7fa39c46cf7f4649162606588d2183e": {
-        "id": "0x35284488a7b0ac42d49e3f4e998957830338a45a",
-        "tokens": "2007340000000000000000000",
-        "address": "cudos10k88h988kcpzx4zqelgh0w6cpy20n9pn5lclfk"
-    },
-    "0x128118c56e5a794286a4f4047e417adaa98a5554": {
-        "id": "0x89d48988ddb382aa1485f80f5d187291a9966b2b",
-        "tokens": "2000000000000000000000000",
-        "address": "cudos1s5qa3dpghnre6dqfgfhudxqjhwsv0mx4v4n9hp"
-    },
-    "0x1db232364f215670e8b14ba242e776c07d5b0599": {
-        "id": "0xf135e2249a76dce2fcde962131b7169565f1888d",
-        "tokens": "2000000000000000000000000",
-        "address": "cudos1myyl3a0vlsqwqp0phjarqup0w3xl9wtqs2m6s8",
-        "delegation": [
-            {
+            }]
+        },
+        "0x090232b7f7fa39c46cf7f4649162606588d2183e": {
+            "id": "0x35284488a7b0ac42d49e3f4e998957830338a45a",
+            "tokens": "2007340000000000000000000",
+            "address": "cudos10k88h988kcpzx4zqelgh0w6cpy20n9pn5lclfk"
+        },
+        "0x128118c56e5a794286a4f4047e417adaa98a5554": {
+            "id": "0x89d48988ddb382aa1485f80f5d187291a9966b2b",
+            "tokens": "2000000000000000000000000",
+            "address": "cudos1s5qa3dpghnre6dqfgfhudxqjhwsv0mx4v4n9hp"
+        },
+        "0x1db232364f215670e8b14ba242e776c07d5b0599": {
+            "id": "0xf135e2249a76dce2fcde962131b7169565f1888d",
+            "tokens": "2000000000000000000000000",
+            "address": "cudos1myyl3a0vlsqwqp0phjarqup0w3xl9wtqs2m6s8",
+            "delegation": [{
                 "delegator": "0xb5ed8ababc2d9e42add650b26d7684f891d2c649",
                 "delegation": "7487100000000000000000",
                 "delegatorAddress": "cudos1luqr8n7fyu5hsmvamsm2vuyw28d7luq6p5p2hq"
-            }
-        ]
-    },
-    "0x241ac257f8dc47848d4702c68b80b05806566b0e": {
-        "id": "0x439ef5decfea78f907ef6b6bc3e7f0194b5157a5",
-        "tokens": "2000002000000000000000000",
-        "address": "cudos16q3f9ech805pa995x9u5g3hqk0cvtah8xqncqu",
-        "delegation": [
-            {
-                "delegator": "0x0a715ec6549926c0863e3ea21fc5d682de28d386",
-                "delegation": "115331000000000000000000",
-                "delegatorAddress": "cudos1gp88dlg86ha868qhf8c4lac8t3tjqpzqajn9vz"
-            },
-            {
-                "delegator": "0xd4365e3589fd7f9c849f6a41838210e0763c4305",
-                "delegation": "505703260000000000000000",
-                "delegatorAddress": "cudos1uzwd9793nhv2dged73wg99jgjc0737y9znlz06"
-            },
-            {
-                "delegator": "0xf5d80a5b2e94de23fb8a7836e59a6ef9aa23eaa2",
-                "delegation": "1849709000000000000000000",
-                "delegatorAddress": "cudos15rpegkxykvl7h36f6es4890ad9lswt7epwpfm8"
-            }
-        ]
-    },
-    "0x299e99d2ac0d4ca074935e846c3b4f8f65bc4d19": {
-        "id": "0xc11e23434bcfe131c44adfbe1b1a973a7405418c",
-        "tokens": "2064393313900000000000000",
-        "address": "cudos1al7ax9c4r5n4tfcmpnm43amxknj8wfsadcze46",
-        "delegation": [
-            {
-                "delegator": "0x6a5c47c243cf187f56aa93e3892a3904a9cedb28",
-                "delegation": "526260112829053744141080",
-                "delegatorAddress": "cudos14tvf7368f9v76mgpcne3p6x3lnt8cjxfenpu3f"
-            },
-            {
-                "delegator": "0x9cbe7697e8dfa7e311a54b70a86bdabc37fe2e92",
-                "delegation": "10058000000000000000000",
-                "delegatorAddress": "cudos15efygvjwttv73p79eu4rc5e2kmu67cw2qrv8ls"
-            }
-        ]
-    },
-    "0x2bf599e27454d9f7eac1ecf9a051d08cb0e4b819": {
-        "id": "0xca60597ede75a29f6f199871da05a8f08dc1010c",
-        "tokens": "2406847382600000000000000",
-        "address": "cudos1wx95r29g06awaspmfjlwmqnvtdvcfd8g0mkmyq"
-    },
-    "0x345144493850a41b42829098f558e2771a4088bc": {
-        "id": "0x81b7edc53bdcbd2212230a5ea49cc0be5156e5aa",
-        "tokens": "2000000000000000000000000",
-        "address": "cudos1avnl53xv6kj7dk5u35jlk52vxwg95n9zzyln76"
-    },
-    "0x3ce0e64ac2d359cd4a1ea5956053e5fc159a1287": {
-        "id": "0x40d2935a0ea3cae6a782b62d09efc84ef838a3e1",
-        "tokens": "2139895000000000000000000",
-        "address": "cudos13r9fymrwdx3zrf7ne69s37dr5zua6ermzhv3ye"
-    },
-    "0x3faf4d60bcf51a393887333168a3020c52733857": {
-        "id": "0x896aea93ae29147e810059c75390ef4bbbeebe29",
-        "tokens": "2682459000000000000000000",
-        "address": "cudos1vueg5jkqfwl5exxqnmsvlgce6v884l8m9xm8hz",
-        "delegation": [
-            {
-                "delegator": "0x076b9e9c591ce30bc596feaca0ccd24fbd9dcab0",
-                "delegation": "10645000000000000000000",
-                "delegatorAddress": "cudos1gea0xx98e6r3qcg7q4zj0n4a8xfzmfs47s7avm"
-            },
-            {
-                "delegator": "0x0be5b1cd299e13237f2e40f109ac705399a8cc97",
-                "delegation": "54000000000000000000000",
-                "delegatorAddress": "cudos1fvulqw450ga9su67epthdwetgc3qeqwtg7h67s"
-            },
-            {
-                "delegator": "0x17528e9cc58f4f3bcaf6a1c1df3f735ba50d7bb7",
-                "delegation": "353888200000000000000000",
-                "delegatorAddress": "cudos100dzyv9wv4ggdj24pyywtw39ck9ex8qpux6m9d"
-            },
-            {
-                "delegator": "0x19e5452e972fe19b829617e673235b84d60c52a1",
-                "delegation": "24504872970116354116638",
-                "delegatorAddress": "cudos1fsl274kcgygmafmmvp6dytjg07gat4gjqw9sq7"
-            },
-            {
-                "delegator": "0x2a637fbfe99844c94efe4ff7c52d3c06d6009a98",
-                "delegation": "120000000000000000000000",
-                "delegatorAddress": "cudos15ypxkyac89mpm7xzwk6mudrww3z2746x5z9nnd"
-            },
-            {
-                "delegator": "0x32b9867ae3117afa6f0d4f15c376ecd1f4ee73b9",
-                "delegation": "9799000000000000000000",
-                "delegatorAddress": "cudos1gd636akd9cl8a3kgm9dqnqqpmvl3shz928r2kg"
-            },
-            {
-                "delegator": "0x42ea1932c57026184436d6316cb44605f1194a18",
-                "delegation": "57442000000000000000000",
-                "delegatorAddress": "cudos1ufdcncy2ekfglpmkkdj8cx4lt6hegc0adxk5z6"
-            },
-            {
-                "delegator": "0x5a34861b911226b5f6c0f5cdc4868c67962fa8f6",
-                "delegation": "51673000000000000000000",
-                "delegatorAddress": "cudos1fazvtujzap4hgn7qh6jac9uvakvc3k5wv4p0vc"
-            },
-            {
-                "delegator": "0x5bd708b57bf7d4e702b4f854ee5c743ce8b46528",
-                "delegation": "9207000000000000000000",
-                "delegatorAddress": "cudos1u0su36hcf7j0jnpr5gd8txn8rvepep4jemp5v8"
-            },
-            {
-                "delegator": "0x677daea7c820159b0461adcfa014fbf96f012d35",
-                "delegation": "50000000000000000000000",
-                "delegatorAddress": "cudos1v84t5dez66rsd98jgyedjc59wfv2whqszpqs42"
-            },
-            {
-                "delegator": "0x683f479a07a236419e97f1ceb70db11609d82543",
-                "delegation": "2000000000000000000000000",
-                "delegatorAddress": "cudos1ce5sr9cgelx62rhwy8lmxgdw0ery98ld5s0m5z"
-            },
-            {
-                "delegator": "0x88085ac991638b54274af21a62a3c31562c49f67",
-                "delegation": "49580000000000000000000",
-                "delegatorAddress": "cudos10nwxew42c23592tw74dx6r4a6u0pxh8kdq72cf"
-            },
-            {
-                "delegator": "0x9c0d23846aa10aaa5a6be61f50a5c1ede00aafff",
-                "delegation": "10052473980000000000000",
-                "delegatorAddress": "cudos1a2r2a720kk406ha8fxkx9pj8maf3m9vauja85r"
-            },
-            {
-                "delegator": "0xaf383897bb67e5cf323a3c7340e1605d21da8fa0",
-                "delegation": "1436561000000000000000000",
-                "delegatorAddress": "cudos1769ea7zkxnh4t2ts8ecghz2g44xmlf9rjw2v0f"
-            },
-            {
-                "delegator": "0xc17a2452ee5ed583752e721cec670461b55959e6",
-                "delegation": "65269800000000000000000",
-                "delegatorAddress": "cudos14fz2vy8xhdpw7snmhee9t23fqnhnkvt6w50gcm"
-            },
-            {
-                "delegator": "0xdf4ec0fd0f096f624988895d1f887d1f581c987a",
-                "delegation": "500000000000000000000000",
-                "delegatorAddress": "cudos1y0qj43ys36srjydgzlf65cy463ms8lygjsjz58"
-            },
-            {
-                "delegator": "0xe0de99790a98c11e62b8eeea81b0b131d93cf862",
-                "delegation": "112090000000000000000000",
-                "delegatorAddress": "cudos1te8wqkjun83md9yrrn4j3myxf0nc0u9w632vnd"
-            },
-            {
-                "delegator": "0xee2795a445a164fbdabb9a58c64b6d6eb1b30a98",
-                "delegation": "100276774098378926083627",
-                "delegatorAddress": "cudos1d2pfaq095v427l6ttuled8lklqs53hq0aksddg"
-            }
-        ]
-    },
-    "0x4440c9697feeeee30ae2ef0eaab1e09cb0e834a8": {
-        "id": "0x36b3eae777bf2b1c79877355460b888228b3eb39",
-        "tokens": "2000000000000000000000000",
-        "address": "cudos1r578nztwhauxf0npervcuxg786psf46re38zjd",
-        "delegation": [
-            {
+            }]
+        },
+        "0x241ac257f8dc47848d4702c68b80b05806566b0e": {
+            "id": "0x439ef5decfea78f907ef6b6bc3e7f0194b5157a5",
+            "tokens": "2000002000000000000000000",
+            "address": "cudos16q3f9ech805pa995x9u5g3hqk0cvtah8xqncqu",
+            "delegation": [{
+                    "delegator": "0x0a715ec6549926c0863e3ea21fc5d682de28d386",
+                    "delegation": "115331000000000000000000",
+                    "delegatorAddress": "cudos1gp88dlg86ha868qhf8c4lac8t3tjqpzqajn9vz"
+                },
+                {
+                    "delegator": "0xd4365e3589fd7f9c849f6a41838210e0763c4305",
+                    "delegation": "505703260000000000000000",
+                    "delegatorAddress": "cudos1uzwd9793nhv2dged73wg99jgjc0737y9znlz06"
+                },
+                {
+                    "delegator": "0xf5d80a5b2e94de23fb8a7836e59a6ef9aa23eaa2",
+                    "delegation": "1849709000000000000000000",
+                    "delegatorAddress": "cudos15rpegkxykvl7h36f6es4890ad9lswt7epwpfm8"
+                }
+            ]
+        },
+        "0x299e99d2ac0d4ca074935e846c3b4f8f65bc4d19": {
+            "id": "0xc11e23434bcfe131c44adfbe1b1a973a7405418c",
+            "tokens": "2064393313900000000000000",
+            "address": "cudos1al7ax9c4r5n4tfcmpnm43amxknj8wfsadcze46",
+            "delegation": [{
+                    "delegator": "0x6a5c47c243cf187f56aa93e3892a3904a9cedb28",
+                    "delegation": "526260112829053744141080",
+                    "delegatorAddress": "cudos14tvf7368f9v76mgpcne3p6x3lnt8cjxfenpu3f"
+                },
+                {
+                    "delegator": "0x9cbe7697e8dfa7e311a54b70a86bdabc37fe2e92",
+                    "delegation": "10058000000000000000000",
+                    "delegatorAddress": "cudos15efygvjwttv73p79eu4rc5e2kmu67cw2qrv8ls"
+                }
+            ]
+        },
+        "0x2bf599e27454d9f7eac1ecf9a051d08cb0e4b819": {
+            "id": "0xca60597ede75a29f6f199871da05a8f08dc1010c",
+            "tokens": "2406847382600000000000000",
+            "address": "cudos1wx95r29g06awaspmfjlwmqnvtdvcfd8g0mkmyq"
+        },
+        "0x345144493850a41b42829098f558e2771a4088bc": {
+            "id": "0x81b7edc53bdcbd2212230a5ea49cc0be5156e5aa",
+            "tokens": "2000000000000000000000000",
+            "address": "cudos1avnl53xv6kj7dk5u35jlk52vxwg95n9zzyln76"
+        },
+        "0x3ce0e64ac2d359cd4a1ea5956053e5fc159a1287": {
+            "id": "0x40d2935a0ea3cae6a782b62d09efc84ef838a3e1",
+            "tokens": "2139895000000000000000000",
+            "address": "cudos13r9fymrwdx3zrf7ne69s37dr5zua6ermzhv3ye"
+        },
+        "0x3faf4d60bcf51a393887333168a3020c52733857": {
+            "id": "0x896aea93ae29147e810059c75390ef4bbbeebe29",
+            "tokens": "2682459000000000000000000",
+            "address": "cudos1vueg5jkqfwl5exxqnmsvlgce6v884l8m9xm8hz",
+            "delegation": [{
+                    "delegator": "0x076b9e9c591ce30bc596feaca0ccd24fbd9dcab0",
+                    "delegation": "10645000000000000000000",
+                    "delegatorAddress": "cudos1gea0xx98e6r3qcg7q4zj0n4a8xfzmfs47s7avm"
+                },
+                {
+                    "delegator": "0x0be5b1cd299e13237f2e40f109ac705399a8cc97",
+                    "delegation": "54000000000000000000000",
+                    "delegatorAddress": "cudos1fvulqw450ga9su67epthdwetgc3qeqwtg7h67s"
+                },
+                {
+                    "delegator": "0x17528e9cc58f4f3bcaf6a1c1df3f735ba50d7bb7",
+                    "delegation": "353888200000000000000000",
+                    "delegatorAddress": "cudos100dzyv9wv4ggdj24pyywtw39ck9ex8qpux6m9d"
+                },
+                {
+                    "delegator": "0x19e5452e972fe19b829617e673235b84d60c52a1",
+                    "delegation": "24504872970116354116638",
+                    "delegatorAddress": "cudos1fsl274kcgygmafmmvp6dytjg07gat4gjqw9sq7"
+                },
+                {
+                    "delegator": "0x2a637fbfe99844c94efe4ff7c52d3c06d6009a98",
+                    "delegation": "120000000000000000000000",
+                    "delegatorAddress": "cudos15ypxkyac89mpm7xzwk6mudrww3z2746x5z9nnd"
+                },
+                {
+                    "delegator": "0x32b9867ae3117afa6f0d4f15c376ecd1f4ee73b9",
+                    "delegation": "9799000000000000000000",
+                    "delegatorAddress": "cudos1gd636akd9cl8a3kgm9dqnqqpmvl3shz928r2kg"
+                },
+                {
+                    "delegator": "0x42ea1932c57026184436d6316cb44605f1194a18",
+                    "delegation": "57442000000000000000000",
+                    "delegatorAddress": "cudos1ufdcncy2ekfglpmkkdj8cx4lt6hegc0adxk5z6"
+                },
+                {
+                    "delegator": "0x5a34861b911226b5f6c0f5cdc4868c67962fa8f6",
+                    "delegation": "51673000000000000000000",
+                    "delegatorAddress": "cudos1fazvtujzap4hgn7qh6jac9uvakvc3k5wv4p0vc"
+                },
+                {
+                    "delegator": "0x5bd708b57bf7d4e702b4f854ee5c743ce8b46528",
+                    "delegation": "9207000000000000000000",
+                    "delegatorAddress": "cudos1u0su36hcf7j0jnpr5gd8txn8rvepep4jemp5v8"
+                },
+                {
+                    "delegator": "0x677daea7c820159b0461adcfa014fbf96f012d35",
+                    "delegation": "50000000000000000000000",
+                    "delegatorAddress": "cudos1v84t5dez66rsd98jgyedjc59wfv2whqszpqs42"
+                },
+                {
+                    "delegator": "0x683f479a07a236419e97f1ceb70db11609d82543",
+                    "delegation": "2000000000000000000000000",
+                    "delegatorAddress": "cudos1ce5sr9cgelx62rhwy8lmxgdw0ery98ld5s0m5z"
+                },
+                {
+                    "delegator": "0x88085ac991638b54274af21a62a3c31562c49f67",
+                    "delegation": "49580000000000000000000",
+                    "delegatorAddress": "cudos10nwxew42c23592tw74dx6r4a6u0pxh8kdq72cf"
+                },
+                {
+                    "delegator": "0x9c0d23846aa10aaa5a6be61f50a5c1ede00aafff",
+                    "delegation": "10052473980000000000000",
+                    "delegatorAddress": "cudos1a2r2a720kk406ha8fxkx9pj8maf3m9vauja85r"
+                },
+                {
+                    "delegator": "0xaf383897bb67e5cf323a3c7340e1605d21da8fa0",
+                    "delegation": "1436561000000000000000000",
+                    "delegatorAddress": "cudos1769ea7zkxnh4t2ts8ecghz2g44xmlf9rjw2v0f"
+                },
+                {
+                    "delegator": "0xc17a2452ee5ed583752e721cec670461b55959e6",
+                    "delegation": "65269800000000000000000",
+                    "delegatorAddress": "cudos14fz2vy8xhdpw7snmhee9t23fqnhnkvt6w50gcm"
+                },
+                {
+                    "delegator": "0xdf4ec0fd0f096f624988895d1f887d1f581c987a",
+                    "delegation": "500000000000000000000000",
+                    "delegatorAddress": "cudos1y0qj43ys36srjydgzlf65cy463ms8lygjsjz58"
+                },
+                {
+                    "delegator": "0xe0de99790a98c11e62b8eeea81b0b131d93cf862",
+                    "delegation": "112090000000000000000000",
+                    "delegatorAddress": "cudos1te8wqkjun83md9yrrn4j3myxf0nc0u9w632vnd"
+                },
+                {
+                    "delegator": "0xee2795a445a164fbdabb9a58c64b6d6eb1b30a98",
+                    "delegation": "100276774098378926083627",
+                    "delegatorAddress": "cudos1d2pfaq095v427l6ttuled8lklqs53hq0aksddg"
+                }
+            ]
+        },
+        "0x4440c9697feeeee30ae2ef0eaab1e09cb0e834a8": {
+            "id": "0x36b3eae777bf2b1c79877355460b888228b3eb39",
+            "tokens": "2000000000000000000000000",
+            "address": "cudos1r578nztwhauxf0npervcuxg786psf46re38zjd",
+            "delegation": [{
                 "delegator": "0x8b82c9e190b3358f4b5dbb015b405dfd8241ef60",
                 "delegation": "1172582966700000000000000",
                 "delegatorAddress": "cudos1w5cyhfquwrqx2y0m4s6g2y0s7f3fmj4r865sdp"
-            }
-        ]
-    },
-    "0x528b3bb78da7d18789e657b195612e2da6946076": {
-        "id": "0x2a637fbfe99844c94efe4ff7c52d3c06d6009a98",
-        "tokens": "3000000000000000000000000",
-        "address": "cudos15ypxkyac89mpm7xzwk6mudrww3z2746x5z9nnd",
-        "delegation": [
-            {
-                "delegator": "0x068700c9b97264c60a3881b8931309811bfca12b",
-                "delegation": "60413400000000000000000",
-                "delegatorAddress": "cudos1vu43wgepswwkdpvhs3y4a6d7p28w2kx87unhr2"
-            },
-            {
-                "delegator": "0x0e7ee65f1eada1109a451d0da343f88503a6e41d",
-                "delegation": "33175000000000000000000",
-                "delegatorAddress": "cudos17rwvrxgnzydhge2n7y9yuj7q4q4e8zzapzfyp2"
-            },
-            {
-                "delegator": "0x1096eed27c7b707a6a0d3a2b480854c0f4c51d1e",
-                "delegation": "179016000000000000000000",
-                "delegatorAddress": "cudos1r7c5vy806w7hjt5sn03pg748msm0vny4y8rsyx"
-            },
-            {
-                "delegator": "0x1c40f953ae985b7894081e6e6d9e2a8804735118",
-                "delegation": "2674153000000000000000000",
-                "delegatorAddress": "cudos175a848llmkzf6a30ggf5dswctcu557pekwlg57"
-            },
-            {
-                "delegator": "0x1da2ed7e4d300d29166ff6753d9cd341ed3ab21c",
-                "delegation": "2011948890000000000000000",
-                "delegatorAddress": "cudos1pjsefgcsx96jczkr006n5cu2f3yucadfzpk5c8"
-            },
-            {
-                "delegator": "0x20bf2ab3a83e0e7ed0b71bb858704b94469dcb94",
-                "delegation": "104000000000000000000000",
-                "delegatorAddress": "cudos16ggjjy65kql0zfxl6rwhvvhle2kf0ry2zw8vgl"
-            },
-            {
-                "delegator": "0x29920d11367571b59fb1ee3ea3cf4c8d619e30dc",
-                "delegation": "745427600000000000000000",
-                "delegatorAddress": "cudos1yex9ma0333z549jhs2ejl9yjufpyufn2gj548q"
-            },
-            {
-                "delegator": "0x2cf0a4b23a0015b161aa072292852b52f55eb95a",
-                "delegation": "37787000000000000000000",
-                "delegatorAddress": "cudos1nyshzjlgr6xx3cgr5xn9jcvw3uglylav8ds3gr"
-            },
-            {
-                "delegator": "0x41a7add6a9d11c540ac2286b690fe0d544d559fd",
-                "delegation": "5000000000000000000000000",
-                "delegatorAddress": "cudos1ys8p3c2qm0g4g6sq2rc0jtq5r9cd5z757stgym"
-            },
-            {
-                "delegator": "0x4491b501e0cdba151d40ac158d662b6015e00b18",
-                "delegation": "81667302468286324980759",
-                "delegatorAddress": "cudos1hrys44n8lca4hj5g0af2f4crq2868yym02h8z5"
-            },
-            {
-                "delegator": "0x4ad27bb2b6c7eb011cf5f731b54f8d93a43d60c3",
-                "delegation": "109113306415436791177710",
-                "delegatorAddress": "cudos1cqrg3489cjjxk9f2hpz6qdxuwzsyf999p3ddzv"
-            },
-            {
-                "delegator": "0x5355fb2b1953a39edcb72595923c0703fce002fa",
-                "delegation": "314159265360000000000000",
-                "delegatorAddress": "cudos148zfk29z8fmvc68gnqpre4xgztcyug4qg5nfmj"
-            },
-            {
-                "delegator": "0x5c3db663c800ad3f5f0bef07cd302f0fc2bba390",
-                "delegation": "247946900000000000000000",
-                "delegatorAddress": "cudos1uh0ffc4xl0h65244pjfppe8tqlheq3al7p2hdl"
-            },
-            {
-                "delegator": "0x5de76d204176700ce9b6b32a493888d6775eba88",
-                "delegation": "77194630126901208262000",
-                "delegatorAddress": "cudos1f5he7gdhe8yx59r5cfs7v5qtftfnrmtx20mrcx"
-            },
-            {
-                "delegator": "0x638f6cd147173cc4f08b324b8b990af3992e089a",
-                "delegation": "2000000000000000000000000",
-                "delegatorAddress": "cudos173309nkwlah7nk5x3pmn85x8u7tyggqpgp6mju"
-            },
-            {
-                "delegator": "0x718036baccd4fa05b47d01b93e35d6ec33483732",
-                "delegation": "680998953200000000000000",
-                "delegatorAddress": "cudos16yd60hls8lw4ulw528l68vmdanwu6hhwq2vr0l"
-            },
-            {
-                "delegator": "0x766b143164d5dd21b38957ea2b47703956d16c45",
-                "delegation": "12381000000000000071601",
-                "delegatorAddress": "cudos12cffjgwnnq0f9raksmmqm55lg83vujks04rnz3"
-            },
-            {
-                "delegator": "0x76948d29383f747017f4cc14d4b1e2f35221bd82",
-                "delegation": "92876300000000000000000",
-                "delegatorAddress": "cudos1r2h6ysfgt3eyuf5j27vz4l9gtcmf6plt9nezpd"
-            },
-            {
-                "delegator": "0x84777878fcac5debf87b2de19b6f493ec1cfc8f0",
-                "delegation": "1000000000000000000000000",
-                "delegatorAddress": "cudos1z82t87plek8zyqcgyalkdrppl9hftekwr4vd5x"
-            },
-            {
-                "delegator": "0x9d7dfe58139efbe949e35fc0050eeaf1b695036f",
-                "delegation": "25714000000000000000000",
-                "delegatorAddress": "cudos1q3g8a5097lx8qfxkunham958fsp0g5pvxzf2p9"
-            },
-            {
-                "delegator": "0xa40bec5129553a25aba8c8eeeb0954ed5ead97ec",
-                "delegation": "1000000000000000000000000",
-                "delegatorAddress": "cudos1ac3wjj0a6994nmyjpu8rp32w6r9xqsd35ces5j"
-            },
-            {
-                "delegator": "0xa865804f226e3eff39789f25ed3509810dc7ecf7",
-                "delegation": "143403000000000000000000",
-                "delegatorAddress": "cudos1hxh7pf878rj682jxj36wjy6zt3pyzlqp33slz9"
-            },
-            {
-                "delegator": "0xae35697c7a4b6f4fe4f5cf332f52f24ba64e5527",
-                "delegation": "1010000000000000000000000",
-                "delegatorAddress": "cudos1a8cs2p204y23gnvf38pd2803e3qqgj4jnsnhd5"
-            },
-            {
-                "delegator": "0xaf383897bb67e5cf323a3c7340e1605d21da8fa0",
-                "delegation": "1950000000000000000000000",
-                "delegatorAddress": "cudos1769ea7zkxnh4t2ts8ecghz2g44xmlf9rjw2v0f"
-            },
-            {
-                "delegator": "0xb30a0ddd3e291968ada118a1b81d80e5c0878756",
-                "delegation": "1000000000000000000000000",
-                "delegatorAddress": "cudos1xcnkc3zf52n6tkuw6rtatdn6y9j8wdtfuncc3h"
-            },
-            {
-                "delegator": "0xb714740e11844a7d6d41b5c21196860ba6386b3d",
-                "delegation": "543372631000000000000000",
-                "delegatorAddress": "cudos1frmc544vzdj88f6djq0hhsxzs7n3kl9256xkmz"
-            },
-            {
-                "delegator": "0xdce8f312fac2865e1c8bf0ee3da138e84e0a0639",
-                "delegation": "334561566159000661390000",
-                "delegatorAddress": "cudos1rcjv3m7kq55q9sx7y7qldwpucccsgjhmmavkxw"
-            },
-            {
-                "delegator": "0xe444578726302a0ac1bba8fc128fdd371074f679",
-                "delegation": "346973546846580675598383",
-                "delegatorAddress": "cudos1jujf2nf4z9xlfteaqfgsxa2hey4fxncng57zc7"
-            },
-            {
-                "delegator": "0xe8a97320ff162c1924a70ecdae525fb116e8b1ca",
-                "delegation": "134599122962717694941952",
-                "delegatorAddress": "cudos1wd2xj54alzgwmhj6za2fcwf2mggq443wn79sha"
-            },
-            {
-                "delegator": "0xed01fdb9dbe769a984f1e7a73f6c359fd6977ad7",
-                "delegation": "638890138052216891182694",
-                "delegatorAddress": "cudos1t6q4sm66anqacurs46gfwfqs5twr2vlcd4kkc6"
-            },
-            {
-                "delegator": "0xee0f71dd3ffd82312a2ec21522e08bcd246ef8ce",
-                "delegation": "939014091914035798437440",
-                "delegatorAddress": "cudos13qvc55kf5zaupwcmcdy2w8yjzgwh9jfyctvasg"
-            }
-        ]
-    },
-    "0x72af388a63fd1d58e913931f8d9687e33a4170ce": {
-        "id": "0x4406877e74bd4f64891a2975d0201a2028898bb6",
-        "tokens": "2000000000000000000000000",
-        "address": "cudos1lkynsfs566ng9m98cj7au00h39fj8cvmy3fjff",
-        "delegation": [
-            {
-                "delegator": "0x0488cea617118e38cb6060ec264d529de3f70cac",
-                "delegation": "284979400000000000000000",
-                "delegatorAddress": "cudos1dvsx39nu9h4lr68zdswevsft544ym60hhf5uu9"
-            },
-            {
-                "delegator": "0x076b9e9c591ce30bc596feaca0ccd24fbd9dcab0",
-                "delegation": "391303011843849535004802",
-                "delegatorAddress": "cudos1gea0xx98e6r3qcg7q4zj0n4a8xfzmfs47s7avm"
-            },
-            {
-                "delegator": "0x0a715ec6549926c0863e3ea21fc5d682de28d386",
-                "delegation": "700000000000000000000000",
-                "delegatorAddress": "cudos1gp88dlg86ha868qhf8c4lac8t3tjqpzqajn9vz"
-            },
-            {
-                "delegator": "0x0fd26b47417d3287ed3a82098408e5e979bdce52",
-                "delegation": "113918510044910141738847",
-                "delegatorAddress": "cudos18hh7s3gf66wlg6uyr7pp9pwww77smu02uv6ycs"
-            },
-            {
-                "delegator": "0x17a52803ce6b6ae02db2b9d85d7180eb5fe4fbbb",
-                "delegation": "372963541442936411867025",
-                "delegatorAddress": "cudos19st803yppmg07zg48t6a3trm2g5lymyrt2r5wv"
-            },
-            {
-                "delegator": "0x1c40f953ae985b7894081e6e6d9e2a8804735118",
-                "delegation": "338841000000000000000000",
-                "delegatorAddress": "cudos175a848llmkzf6a30ggf5dswctcu557pekwlg57"
-            },
-            {
-                "delegator": "0x2ebfba6bd579877d2f29c112b24b32cfe0600d00",
-                "delegation": "1049336200531466863216761",
-                "delegatorAddress": "cudos1lq9d7zj2ymlmwkpxfcef9e86vlrzx89t67gk9n"
-            },
-            {
-                "delegator": "0x3011ec7ccaa32924ac8bee19bf0a4320591f6d25",
-                "delegation": "222779137248189814800000",
-                "delegatorAddress": "cudos1k3apnqppf6cuacs5uyuddf46g4z9d5ay7n2y4w"
-            },
-            {
-                "delegator": "0x3055b87331ce2bcee1dc2b4c3527c5ccb105e83d",
-                "delegation": "380534240000000000000000",
-                "delegatorAddress": "cudos1e3mz9vpw5ks34sdtnpe4rqp6vs3xyp7evm2dg9"
-            },
-            {
-                "delegator": "0x3194952a155965f19c0e798551bc77baf6421778",
-                "delegation": "750924157664609052191538",
-                "delegatorAddress": "cudos14587ctw8j0nxq2f9ljemh9hzy00zjlgz3083pk"
-            },
-            {
-                "delegator": "0x376720eb2ef9736bbfa4b69b1124b0938f804e54",
-                "delegation": "101500000000000000000000",
-                "delegatorAddress": "cudos1sefqlyc0z67nxf72aha2ecl83z2294kn4k2g88"
-            },
-            {
-                "delegator": "0x44455d18414c5da62131a6b076f65b5eef8ca661",
-                "delegation": "3000000900000000000000000",
-                "delegatorAddress": "cudos1vv4sg4ze6kmwuq5kecqtce7upuzsj5zu6qstel"
-            },
-            {
-                "delegator": "0x4491b501e0cdba151d40ac158d662b6015e00b18",
-                "delegation": "80837183450000000000000",
-                "delegatorAddress": "cudos1hrys44n8lca4hj5g0af2f4crq2868yym02h8z5"
-            },
-            {
-                "delegator": "0x4784439195af4684cdb1af043a59f557bca82b45",
-                "delegation": "448470000000000000000000",
-                "delegatorAddress": "cudos17jjcc5f7fwhy62h635vsvd5q4f3d0jaj64dlk4"
-            },
-            {
-                "delegator": "0x4d8a2a79a0afcc1ec19f056897f2b3bda0f79f79",
-                "delegation": "149349207052965920178203",
-                "delegatorAddress": "cudos13dlvj63ldaee65krukjhn2hkmf9sav9wkun94f"
-            },
-            {
-                "delegator": "0x53603afb92d750fbc8c4a25824761c099f869982",
-                "delegation": "20000000000000000000000000",
-                "delegatorAddress": "cudos1afndk0m7xpscgrsuafhexl8aeclxu72rnuchnl"
-            },
-            {
-                "delegator": "0x573252aa84d6ae1745a419af903bde40abcb2225",
-                "delegation": "41093331753519968186978",
-                "delegatorAddress": "cudos1ft95wflzp78q8ltkmau8aefe4qmv0jnthwhau0"
-            },
-            {
-                "delegator": "0x5921d289b43604940edc5e6e2fee162ef3986f00",
-                "delegation": "334782502304892562930884",
-                "delegatorAddress": "cudos1gvjnv4359r545wh0e2ugz4ea8sgdlnkqgesjvk"
-            },
-            {
-                "delegator": "0x60a56f991914e6dd0ed7d28d94e0197a5026e952",
-                "delegation": "1078928000000000000000000",
-                "delegatorAddress": "cudos1dwj0g7djz3fpx0ehhqvfhd8pdtdw8mcza6ja59"
-            },
-            {
-                "delegator": "0x8f00b660643eda9ffe937dccfe9269e1c52928d5",
-                "delegation": "182000000000000000000000",
-                "delegatorAddress": "cudos1kz4f20zakl2qepav29p00088j6utsd5lxthul8"
-            },
-            {
-                "delegator": "0x957da03ee1dfede7a27d35f88b142cd75f103e0b",
-                "delegation": "92335000000000000000000",
-                "delegatorAddress": "cudos1m7a9ady5678m57k208rphas2362d524g0trvux"
-            },
-            {
-                "delegator": "0x98c62c11d10f48a2d4c542bc4d18f28a8ffc3817",
-                "delegation": "685932279444290000000000",
-                "delegatorAddress": "cudos1fqgf6gtsd27kav30qyc2dwyrvyp9rfcmvgl8cs"
-            },
-            {
-                "delegator": "0xa35d8da33fdaef6739d90fc412c46459ff5ab276",
-                "delegation": "99267703805571245821470",
-                "delegatorAddress": "cudos1xp3jr8g70raw8dgwvlrhqfqjtvqhftn3g38uja"
-            },
-            {
-                "delegator": "0xb39d022edf05c31e1981f4f4d8137dda9c57cfae",
-                "delegation": "1804977591030000000000",
-                "delegatorAddress": "cudos18mqn8vssedje6ux24apmpl5y8fsn7ajvh2zvqt"
-            },
-            {
-                "delegator": "0xb643d6e6973b4d607c8d2dbb194d0a4a5d2b668f",
-                "delegation": "50473681618480000000000",
-                "delegatorAddress": "cudos13daa0rue6l3s4uqs8cuf56846329jp2tvdr5rp"
-            },
-            {
-                "delegator": "0xb815f7e04387c7158712c53bc10a8d12850d6bf2",
-                "delegation": "150000120000000000000000",
-                "delegatorAddress": "cudos19dg8m2nlg0pg36f4rhwf3zcrglffx2ls4fwwc3"
-            }
-        ]
-    },
-    "0x7d004cd44cb00d527b08f02c664dbabd1983e13e": {
-        "id": "0xe7d4d83aab8b14e8bb2fbca29a4b409f2b438686",
-        "tokens": "2000000000000000000000000",
-        "address": "cudos1wkd0e3zzamaa2xwawe5tvh80n0qzrcwjrjvfva"
-    },
-    "0x8ce9cd864f1ad1b7d60d3a5d9add29e0e45039db": {
-        "id": "0x6f5d935ff97dd6efb4f73fda477b86b14d49e2ad",
-        "tokens": "2000000000000000000000000",
-        "address": "cudos1wyv883wzp84d7hzf3q2jeq3l43aga72ts57qdd",
-        "delegation": [
-            {
-                "delegator": "0x01c2c343d7d63ffabe1816a0466783d64d7214e5",
-                "delegation": "13133770265299564727560846",
-                "delegatorAddress": "cudos1m9703sdadvgn22vq5gs6yt8zwk3dzj993y48l7"
-            },
-            {
-                "delegator": "0x4dd5a4d1fcb6f8938aa8ad070aefe1b19e8f9c0c",
-                "delegation": "25000000000000000000000",
-                "delegatorAddress": "cudos12l3e2ua7d4yq9nu4xly9a53jpt4e9djcqxex3f"
-            },
-            {
-                "delegator": "0x7ad0f16c056511a0c7ff8c241913a48fef1c5b48",
-                "delegation": "867232832510348460827020",
-                "delegatorAddress": "cudos17pv8udnp2tuls5j3c0em7k9h95np8c5efaptax"
-            },
-            {
-                "delegator": "0x84dbf39789226f358537e1a939aec794f1c96ca9",
-                "delegation": "3170518996208036721421211",
-                "delegatorAddress": "cudos1dlemcw5yazemfq7hq9dxn7hfeel5spf04msp2c"
-            },
-            {
-                "delegator": "0x8f00b660643eda9ffe937dccfe9269e1c52928d5",
-                "delegation": "1041199697200000000000000",
-                "delegatorAddress": "cudos1kz4f20zakl2qepav29p00088j6utsd5lxthul8"
-            },
-            {
-                "delegator": "0xa234bc9c3656db7eef6d7d39ac160191dd65323d",
-                "delegation": "295643132143659784980980",
-                "delegatorAddress": "cudos14tc29ftjt635vhawr4zrj27zkdsl3kx728mnfy"
-            },
-            {
-                "delegator": "0xa836ad5a82a2eb57fe5ab7c76971a83c18544944",
-                "delegation": "570799000000000000000000",
-                "delegatorAddress": "cudos1yhkjhyh30ltjf9pd2k3zrfly66lyydwz9jz66h"
-            },
-            {
-                "delegator": "0xdbf3945bba47fa4f3bc36dc6a7ddc0ae89fd04a5",
-                "delegation": "31393895908900000000000",
-                "delegatorAddress": "cudos1rhwg4l9zrxtd7xx9c6wph7c3sqel33eql0ye5v"
-            }
-        ]
-    },
-    "0x8f5eda2571ed699515422738b9f3f9db7469644b": {
-        "id": "0x814b42188f9b5b078e5b9859988fed24136060ee",
-        "tokens": "0",
-        "address": "cudos19kqft853ehvnyxz4fteza9euc5mesrlrag8r4w"
-    },
-    "0x986132f703d640ac2faa76b17c745a8713d73264": {
-        "id": "0xffbbf0f5402eb65cc7ceb7e35256063c780ecb52",
-        "tokens": "2040000000000000000000000",
-        "address": "cudos1n5tuwett2ulexgg8hrhhlj6gh87vjfarvwh3n6",
-        "delegation": [
-            {
-                "delegator": "0x1221991a826d554db5856c89c5ffccf7be409b00",
-                "delegation": "251288882207774475317611",
-                "delegatorAddress": "cudos15nd3jr6pqq6n30zzc05ph08c09qyd9epwkkj82"
-            },
-            {
-                "delegator": "0x22d3f96ec83cb249541f27d2b7e50848b698bba7",
-                "delegation": "582000000000000000000000",
-                "delegatorAddress": "cudos1sxtscw86slxz9c0x65j4mvrfscm50dglhgh35m"
-            },
-            {
-                "delegator": "0x2360fd1f413197a2180ae809dd023e2fdbd98db4",
-                "delegation": "2749435000000000000000000",
-                "delegatorAddress": "cudos1ynqxm6ns47nxhk8unt0ep47rw8m7z4937vfmmr"
-            },
-            {
-                "delegator": "0x263a13fbe5416661d8ff67c5d98624d1553900ae",
-                "delegation": "1170944514339509325006838",
-                "delegatorAddress": "cudos195fn0wytw8vmddts9e7te8j77xzx9nh6qwnmyr"
-            },
-            {
-                "delegator": "0x2a637fbfe99844c94efe4ff7c52d3c06d6009a98",
-                "delegation": "572817273711817919158808",
-                "delegatorAddress": "cudos15ypxkyac89mpm7xzwk6mudrww3z2746x5z9nnd"
-            },
-            {
-                "delegator": "0x3194952a155965f19c0e798551bc77baf6421778",
-                "delegation": "750000000000000000000000",
-                "delegatorAddress": "cudos14587ctw8j0nxq2f9ljemh9hzy00zjlgz3083pk"
-            },
-            {
-                "delegator": "0x387a003e901b22daaa4a2c20a574d1708edd594c",
-                "delegation": "642190036880582753311361",
-                "delegatorAddress": "cudos1xwzjra0h7q6trjf2p7ffcpmxqfvrgnptkyknwa"
-            },
-            {
-                "delegator": "0x3c10a68b08f97a2c7d4d6ccfdf2ef3c408cf530a",
-                "delegation": "1279263088522706431225299",
-                "delegatorAddress": "cudos1lxddfagjv2mf0wexmzykphf2tgrlrd8upawck6"
-            },
-            {
-                "delegator": "0x3c63145999cbb532669cb6697b07405c80756adf",
-                "delegation": "11587446138697945335336679",
-                "delegatorAddress": "cudos14587ctw8j0nxq2f9ljemh9hzy00zjlgz3083pk"
-            },
-            {
-                "delegator": "0x3cc21b0459a96cacb56a28a823eb6f723bbf4fbf",
-                "delegation": "1008975204008721925715227",
-                "delegatorAddress": "cudos19vzjaw3zwxaur5pnhw8vyrm6mmknrzw0l6ewyr"
-            },
-            {
-                "delegator": "0x4085e9fb679dd2f60c2e64afe9533107fa1c18f2",
-                "delegation": "3403947886123051084534408",
-                "delegatorAddress": "cudos104v3e5ydyszf6t0k5hsgcqw2hhpvekvj6zs7an"
-            },
-            {
-                "delegator": "0x44968b6fca867de789dcd518f6805af8adf4e3c3",
-                "delegation": "718542168671160872143899",
-                "delegatorAddress": "cudos1gs5dwgm9w2slgrp8lqggg4vug6v8vww00z7xaz"
-            },
-            {
-                "delegator": "0x4d1b9439ece710cf9da9d0c60b17685cb00c2141",
-                "delegation": "160034350700000000000000",
-                "delegatorAddress": "cudos1zttx3fyue9jwdl8xp2d97kjypthta5t5rhpyqy"
-            },
-            {
-                "delegator": "0x55557bef6702870985486615c2cb647ed5516cfb",
-                "delegation": "106152620500211906683170",
-                "delegatorAddress": "cudos17dmp98e9dk6hrnh55gax5fd8qwej7c6q02mavt"
-            },
-            {
-                "delegator": "0x588d1dc17c24d3d017c69509bb8e9a6e622fa8c1",
-                "delegation": "824760000000000000000000",
-                "delegatorAddress": "cudos13qmpx8gfjzwaf55645m46syg0cptyqftwymz0a"
-            },
-            {
-                "delegator": "0x5d3c13f980c19f00a5d1b336499878c6bd9f04be",
-                "delegation": "1905917235465972851353360",
-                "delegatorAddress": "cudos1dstnf243rled97uqmapnkzsa29qn39ud0r7j55"
-            },
-            {
-                "delegator": "0x5dbfabb100c0c30abf94fc8ecd75881a840d7429",
-                "delegation": "2018859000000000000000000",
-                "delegatorAddress": "cudos1nhfmgll3wsyu7s8vsqe365urdrcgmzpy7gne7s"
-            },
-            {
-                "delegator": "0x64986c71df68c5cad80a273df61a95ad7ba939ad",
-                "delegation": "481300000000000000000000",
-                "delegatorAddress": "cudos1uz8vnrylw23lcu783m586wkhfcgvg6sfyzxaa9"
-            },
-            {
-                "delegator": "0x67b9491dc3cf0f58c35b6e350e229e018ff4a267",
-                "delegation": "2445049874102700973154505",
-                "delegatorAddress": "cudos1p9a4ln0fefkh7wec657mmnf97w43hxj5tk2z7y"
-            },
-            {
-                "delegator": "0x6ca93742493afc4ea4dd161b58d7a67c191fd49d",
-                "delegation": "4868503000000000000000000",
-                "delegatorAddress": "cudos1hv85tke39dx8epagjf5r7zzd02j32zgznq23rv"
-            },
-            {
-                "delegator": "0x6f05a70f43b9717ce1dd5feffa10e0d308f42298",
-                "delegation": "146442238195395726781701",
-                "delegatorAddress": "cudos1y79m5rlv8gzrekyh87aue8esz46aj40zg2z486"
-            },
-            {
-                "delegator": "0x706a7a593eb2dba426a417ac0cf580e38bcc4783",
-                "delegation": "427360000000000000000000",
-                "delegatorAddress": "cudos13sq6z8m99ezgam4jufs7p9gceq9s84clmaqtnt"
-            },
-            {
-                "delegator": "0x707f9d985174f0d20e9729898e68b6d56df8f2a1",
-                "delegation": "4403148000000000000000000",
-                "delegatorAddress": "cudos1k5q70mrzn78tyfrv73uysepsr2a0q4xy3mnmzq"
-            },
-            {
-                "delegator": "0x721656ad4763924f98f4e92487cf716942d9b8b0",
-                "delegation": "1104451320000000000000000",
-                "delegatorAddress": "cudos144dm7th880uh6uvd7uk252u65w98j4e5cfwkjn"
-            },
-            {
-                "delegator": "0x814b42188f9b5b078e5b9859988fed24136060ee",
-                "delegation": "7544200714194415636699133",
-                "delegatorAddress": "cudos19kqft853ehvnyxz4fteza9euc5mesrlrag8r4w"
-            },
-            {
-                "delegator": "0x826ddf75b96e783ab516e7fa19568aa4fdd7ab8f",
-                "delegation": "13968000000000000000000000",
-                "delegatorAddress": "cudos1w089jarayq8mzfnsqv5lnkkdwl85dsdvh07lh7"
-            },
-            {
-                "delegator": "0x83e6fff2f4e6d51f7a145ae8e40dc2b5497721c2",
-                "delegation": "72558000000000000000000",
-                "delegatorAddress": "cudos1hv85tke39dx8epagjf5r7zzd02j32zgznq23rv"
-            },
-            {
-                "delegator": "0x97bc3c6ee595b0c88d0f26cb7d169098cf28d463",
-                "delegation": "3247662250000000000000000",
-                "delegatorAddress": "cudos1wpqawg857w82pkw99f8yh7k0wpnfylk0ung9uk"
-            },
-            {
-                "delegator": "0x9a3ccd07dae0c3b9d9fc33b134742d02cc05bdfd",
-                "delegation": "2743902000000000000000000",
-                "delegatorAddress": "cudos1242qr4lep578hefhdg0qlvqrfknjwg67hyxvcx"
-            },
-            {
-                "delegator": "0xa637c2c718ef04ad1ffa91e239848e638c6fc14a",
-                "delegation": "2846384123582931938677943",
-                "delegatorAddress": "cudos1kktk227xgvq0dkaa3k7anyz4hwfajyfam50egy"
-            },
-            {
-                "delegator": "0xad3e9e2d65f9c3ef88cc9a29865b365fedfdc852",
-                "delegation": "5549519000000000000000000",
-                "delegatorAddress": "cudos1wt6rj06m2ny98xqdqcc5u4x0ldzy5sfk026juy"
-            },
-            {
-                "delegator": "0xba74346b8cb29f5f619be02ea78786120c6f3044",
-                "delegation": "25395000000000000000000",
-                "delegatorAddress": "cudos1hv85tke39dx8epagjf5r7zzd02j32zgznq23rv"
-            },
-            {
-                "delegator": "0xbd0a986714ad3bf2bf97f33d320223c2542c66f0",
-                "delegation": "1194847310000000000000000",
-                "delegatorAddress": "cudos1k5q70mrzn78tyfrv73uysepsr2a0q4xy3mnmzq"
-            },
-            {
-                "delegator": "0xc0e59a8f75f43c737e7944096f650383d703f818",
-                "delegation": "2661096000000000000000000",
-                "delegatorAddress": "cudos1ynqxm6ns47nxhk8unt0ep47rw8m7z4937vfmmr"
-            },
-            {
-                "delegator": "0xc47eb07732b2092e4930d2b0b2e86c1800a4699d",
-                "delegation": "2858637479926575411558330",
-                "delegatorAddress": "cudos1kktk227xgvq0dkaa3k7anyz4hwfajyfam50egy"
-            },
-            {
-                "delegator": "0xd4365e3589fd7f9c849f6a41838210e0763c4305",
-                "delegation": "1269501510000000000000000",
-                "delegatorAddress": "cudos1uzwd9793nhv2dged73wg99jgjc0737y9znlz06"
-            },
-            {
-                "delegator": "0xd439252081937641dd717c8101b64680193e2336",
-                "delegation": "2395810370000000000000000",
-                "delegatorAddress": "cudos13yla3ekqeg52e98mhx7qkhqjeuuuaq22lkaaml"
-            },
-            {
-                "delegator": "0xd97fc3f12ecd4957016f43d942ef7ba3fa3a9d3f",
-                "delegation": "611090260849630000000000",
-                "delegatorAddress": "cudos15ad7gtceywhsqpuy4ca3yprg2m9x8pg0vx78wy"
-            },
-            {
-                "delegator": "0xda3b287dd9ac9229d48a2169dd6925faf8bb373e",
-                "delegation": "820000000000000000000000",
-                "delegatorAddress": "cudos1sxtscw86slxz9c0x65j4mvrfscm50dglhgh35m"
-            },
-            {
-                "delegator": "0xdbd81cdab91ce928810cfa4a4e35de138140ca5b",
-                "delegation": "50000000000000000000000",
-                "delegatorAddress": "cudos1q9knzyvzdpff2apqe70rhshkq60tq2pzhwx83u"
-            },
-            {
-                "delegator": "0xe4ed7b2db688c2c873191065ba8f64d925fddfec",
-                "delegation": "2192586003942615454949228",
-                "delegatorAddress": "cudos17pl2srx49ccqvy500fwqymckjmpm933vc0zmlz"
-            },
-            {
-                "delegator": "0xf0615861a7bc12a20ad8ea3476c14a9763fe5be6",
-                "delegation": "8765770413157288282467378",
-                "delegatorAddress": "cudos1nshxgf56avrt43k8u2ra55z00h8zysld5kxe8c"
-            }
-        ]
-    },
-    "0x99967b017103b680179f4e90fcfa10d4f00f38de": {
-        "id": "0xec7ad4233eb904482b1608ed7dc5afa3523c3d4c",
-        "tokens": "2792756000000000000000000",
-        "address": "cudos1xtj9syn94ukupxnxhtrpgwhxquy98cu64jyvxc",
-        "delegation": [
-            {
+            }]
+        },
+        "0x528b3bb78da7d18789e657b195612e2da6946076": {
+            "id": "0x2a637fbfe99844c94efe4ff7c52d3c06d6009a98",
+            "tokens": "3000000000000000000000000",
+            "address": "cudos15ypxkyac89mpm7xzwk6mudrww3z2746x5z9nnd",
+            "delegation": [{
+                    "delegator": "0x068700c9b97264c60a3881b8931309811bfca12b",
+                    "delegation": "60413400000000000000000",
+                    "delegatorAddress": "cudos1vu43wgepswwkdpvhs3y4a6d7p28w2kx87unhr2"
+                },
+                {
+                    "delegator": "0x0e7ee65f1eada1109a451d0da343f88503a6e41d",
+                    "delegation": "33175000000000000000000",
+                    "delegatorAddress": "cudos17rwvrxgnzydhge2n7y9yuj7q4q4e8zzapzfyp2"
+                },
+                {
+                    "delegator": "0x1096eed27c7b707a6a0d3a2b480854c0f4c51d1e",
+                    "delegation": "179016000000000000000000",
+                    "delegatorAddress": "cudos1r7c5vy806w7hjt5sn03pg748msm0vny4y8rsyx"
+                },
+                {
+                    "delegator": "0x1c40f953ae985b7894081e6e6d9e2a8804735118",
+                    "delegation": "2674153000000000000000000",
+                    "delegatorAddress": "cudos175a848llmkzf6a30ggf5dswctcu557pekwlg57"
+                },
+                {
+                    "delegator": "0x1da2ed7e4d300d29166ff6753d9cd341ed3ab21c",
+                    "delegation": "2011948890000000000000000",
+                    "delegatorAddress": "cudos1pjsefgcsx96jczkr006n5cu2f3yucadfzpk5c8"
+                },
+                {
+                    "delegator": "0x20bf2ab3a83e0e7ed0b71bb858704b94469dcb94",
+                    "delegation": "104000000000000000000000",
+                    "delegatorAddress": "cudos16ggjjy65kql0zfxl6rwhvvhle2kf0ry2zw8vgl"
+                },
+                {
+                    "delegator": "0x29920d11367571b59fb1ee3ea3cf4c8d619e30dc",
+                    "delegation": "745427600000000000000000",
+                    "delegatorAddress": "cudos1yex9ma0333z549jhs2ejl9yjufpyufn2gj548q"
+                },
+                {
+                    "delegator": "0x2cf0a4b23a0015b161aa072292852b52f55eb95a",
+                    "delegation": "37787000000000000000000",
+                    "delegatorAddress": "cudos1nyshzjlgr6xx3cgr5xn9jcvw3uglylav8ds3gr"
+                },
+                {
+                    "delegator": "0x41a7add6a9d11c540ac2286b690fe0d544d559fd",
+                    "delegation": "5000000000000000000000000",
+                    "delegatorAddress": "cudos1ys8p3c2qm0g4g6sq2rc0jtq5r9cd5z757stgym"
+                },
+                {
+                    "delegator": "0x4491b501e0cdba151d40ac158d662b6015e00b18",
+                    "delegation": "81667302468286324980759",
+                    "delegatorAddress": "cudos1hrys44n8lca4hj5g0af2f4crq2868yym02h8z5"
+                },
+                {
+                    "delegator": "0x4ad27bb2b6c7eb011cf5f731b54f8d93a43d60c3",
+                    "delegation": "109113306415436791177710",
+                    "delegatorAddress": "cudos1cqrg3489cjjxk9f2hpz6qdxuwzsyf999p3ddzv"
+                },
+                {
+                    "delegator": "0x5355fb2b1953a39edcb72595923c0703fce002fa",
+                    "delegation": "314159265360000000000000",
+                    "delegatorAddress": "cudos148zfk29z8fmvc68gnqpre4xgztcyug4qg5nfmj"
+                },
+                {
+                    "delegator": "0x5c3db663c800ad3f5f0bef07cd302f0fc2bba390",
+                    "delegation": "247946900000000000000000",
+                    "delegatorAddress": "cudos1uh0ffc4xl0h65244pjfppe8tqlheq3al7p2hdl"
+                },
+                {
+                    "delegator": "0x5de76d204176700ce9b6b32a493888d6775eba88",
+                    "delegation": "77194630126901208262000",
+                    "delegatorAddress": "cudos1f5he7gdhe8yx59r5cfs7v5qtftfnrmtx20mrcx"
+                },
+                {
+                    "delegator": "0x638f6cd147173cc4f08b324b8b990af3992e089a",
+                    "delegation": "2000000000000000000000000",
+                    "delegatorAddress": "cudos173309nkwlah7nk5x3pmn85x8u7tyggqpgp6mju"
+                },
+                {
+                    "delegator": "0x718036baccd4fa05b47d01b93e35d6ec33483732",
+                    "delegation": "680998953200000000000000",
+                    "delegatorAddress": "cudos16yd60hls8lw4ulw528l68vmdanwu6hhwq2vr0l"
+                },
+                {
+                    "delegator": "0x766b143164d5dd21b38957ea2b47703956d16c45",
+                    "delegation": "12381000000000000071601",
+                    "delegatorAddress": "cudos12cffjgwnnq0f9raksmmqm55lg83vujks04rnz3"
+                },
+                {
+                    "delegator": "0x76948d29383f747017f4cc14d4b1e2f35221bd82",
+                    "delegation": "92876300000000000000000",
+                    "delegatorAddress": "cudos1r2h6ysfgt3eyuf5j27vz4l9gtcmf6plt9nezpd"
+                },
+                {
+                    "delegator": "0x84777878fcac5debf87b2de19b6f493ec1cfc8f0",
+                    "delegation": "1000000000000000000000000",
+                    "delegatorAddress": "cudos1z82t87plek8zyqcgyalkdrppl9hftekwr4vd5x"
+                },
+                {
+                    "delegator": "0x9d7dfe58139efbe949e35fc0050eeaf1b695036f",
+                    "delegation": "25714000000000000000000",
+                    "delegatorAddress": "cudos1q3g8a5097lx8qfxkunham958fsp0g5pvxzf2p9"
+                },
+                {
+                    "delegator": "0xa40bec5129553a25aba8c8eeeb0954ed5ead97ec",
+                    "delegation": "1000000000000000000000000",
+                    "delegatorAddress": "cudos1ac3wjj0a6994nmyjpu8rp32w6r9xqsd35ces5j"
+                },
+                {
+                    "delegator": "0xa865804f226e3eff39789f25ed3509810dc7ecf7",
+                    "delegation": "143403000000000000000000",
+                    "delegatorAddress": "cudos1hxh7pf878rj682jxj36wjy6zt3pyzlqp33slz9"
+                },
+                {
+                    "delegator": "0xae35697c7a4b6f4fe4f5cf332f52f24ba64e5527",
+                    "delegation": "1010000000000000000000000",
+                    "delegatorAddress": "cudos1a8cs2p204y23gnvf38pd2803e3qqgj4jnsnhd5"
+                },
+                {
+                    "delegator": "0xaf383897bb67e5cf323a3c7340e1605d21da8fa0",
+                    "delegation": "1950000000000000000000000",
+                    "delegatorAddress": "cudos1769ea7zkxnh4t2ts8ecghz2g44xmlf9rjw2v0f"
+                },
+                {
+                    "delegator": "0xb30a0ddd3e291968ada118a1b81d80e5c0878756",
+                    "delegation": "1000000000000000000000000",
+                    "delegatorAddress": "cudos1xcnkc3zf52n6tkuw6rtatdn6y9j8wdtfuncc3h"
+                },
+                {
+                    "delegator": "0xb714740e11844a7d6d41b5c21196860ba6386b3d",
+                    "delegation": "543372631000000000000000",
+                    "delegatorAddress": "cudos1frmc544vzdj88f6djq0hhsxzs7n3kl9256xkmz"
+                },
+                {
+                    "delegator": "0xdce8f312fac2865e1c8bf0ee3da138e84e0a0639",
+                    "delegation": "334561566159000661390000",
+                    "delegatorAddress": "cudos1rcjv3m7kq55q9sx7y7qldwpucccsgjhmmavkxw"
+                },
+                {
+                    "delegator": "0xe444578726302a0ac1bba8fc128fdd371074f679",
+                    "delegation": "346973546846580675598383",
+                    "delegatorAddress": "cudos1jujf2nf4z9xlfteaqfgsxa2hey4fxncng57zc7"
+                },
+                {
+                    "delegator": "0xe8a97320ff162c1924a70ecdae525fb116e8b1ca",
+                    "delegation": "134599122962717694941952",
+                    "delegatorAddress": "cudos1wd2xj54alzgwmhj6za2fcwf2mggq443wn79sha"
+                },
+                {
+                    "delegator": "0xed01fdb9dbe769a984f1e7a73f6c359fd6977ad7",
+                    "delegation": "638890138052216891182694",
+                    "delegatorAddress": "cudos1t6q4sm66anqacurs46gfwfqs5twr2vlcd4kkc6"
+                },
+                {
+                    "delegator": "0xee0f71dd3ffd82312a2ec21522e08bcd246ef8ce",
+                    "delegation": "939014091914035798437440",
+                    "delegatorAddress": "cudos13qvc55kf5zaupwcmcdy2w8yjzgwh9jfyctvasg"
+                }
+            ]
+        },
+        "0x72af388a63fd1d58e913931f8d9687e33a4170ce": {
+            "id": "0x4406877e74bd4f64891a2975d0201a2028898bb6",
+            "tokens": "2000000000000000000000000",
+            "address": "cudos1lkynsfs566ng9m98cj7au00h39fj8cvmy3fjff",
+            "delegation": [{
+                    "delegator": "0x0488cea617118e38cb6060ec264d529de3f70cac",
+                    "delegation": "284979400000000000000000",
+                    "delegatorAddress": "cudos1dvsx39nu9h4lr68zdswevsft544ym60hhf5uu9"
+                },
+                {
+                    "delegator": "0x076b9e9c591ce30bc596feaca0ccd24fbd9dcab0",
+                    "delegation": "391303011843849535004802",
+                    "delegatorAddress": "cudos1gea0xx98e6r3qcg7q4zj0n4a8xfzmfs47s7avm"
+                },
+                {
+                    "delegator": "0x0a715ec6549926c0863e3ea21fc5d682de28d386",
+                    "delegation": "700000000000000000000000",
+                    "delegatorAddress": "cudos1gp88dlg86ha868qhf8c4lac8t3tjqpzqajn9vz"
+                },
+                {
+                    "delegator": "0x0fd26b47417d3287ed3a82098408e5e979bdce52",
+                    "delegation": "113918510044910141738847",
+                    "delegatorAddress": "cudos18hh7s3gf66wlg6uyr7pp9pwww77smu02uv6ycs"
+                },
+                {
+                    "delegator": "0x17a52803ce6b6ae02db2b9d85d7180eb5fe4fbbb",
+                    "delegation": "372963541442936411867025",
+                    "delegatorAddress": "cudos19st803yppmg07zg48t6a3trm2g5lymyrt2r5wv"
+                },
+                {
+                    "delegator": "0x1c40f953ae985b7894081e6e6d9e2a8804735118",
+                    "delegation": "338841000000000000000000",
+                    "delegatorAddress": "cudos175a848llmkzf6a30ggf5dswctcu557pekwlg57"
+                },
+                {
+                    "delegator": "0x2ebfba6bd579877d2f29c112b24b32cfe0600d00",
+                    "delegation": "1049336200531466863216761",
+                    "delegatorAddress": "cudos1lq9d7zj2ymlmwkpxfcef9e86vlrzx89t67gk9n"
+                },
+                {
+                    "delegator": "0x3011ec7ccaa32924ac8bee19bf0a4320591f6d25",
+                    "delegation": "222779137248189814800000",
+                    "delegatorAddress": "cudos1k3apnqppf6cuacs5uyuddf46g4z9d5ay7n2y4w"
+                },
+                {
+                    "delegator": "0x3055b87331ce2bcee1dc2b4c3527c5ccb105e83d",
+                    "delegation": "380534240000000000000000",
+                    "delegatorAddress": "cudos1e3mz9vpw5ks34sdtnpe4rqp6vs3xyp7evm2dg9"
+                },
+                {
+                    "delegator": "0x3194952a155965f19c0e798551bc77baf6421778",
+                    "delegation": "750924157664609052191538",
+                    "delegatorAddress": "cudos14587ctw8j0nxq2f9ljemh9hzy00zjlgz3083pk"
+                },
+                {
+                    "delegator": "0x376720eb2ef9736bbfa4b69b1124b0938f804e54",
+                    "delegation": "101500000000000000000000",
+                    "delegatorAddress": "cudos1sefqlyc0z67nxf72aha2ecl83z2294kn4k2g88"
+                },
+                {
+                    "delegator": "0x44455d18414c5da62131a6b076f65b5eef8ca661",
+                    "delegation": "3000000900000000000000000",
+                    "delegatorAddress": "cudos1vv4sg4ze6kmwuq5kecqtce7upuzsj5zu6qstel"
+                },
+                {
+                    "delegator": "0x4491b501e0cdba151d40ac158d662b6015e00b18",
+                    "delegation": "80837183450000000000000",
+                    "delegatorAddress": "cudos1hrys44n8lca4hj5g0af2f4crq2868yym02h8z5"
+                },
+                {
+                    "delegator": "0x4784439195af4684cdb1af043a59f557bca82b45",
+                    "delegation": "448470000000000000000000",
+                    "delegatorAddress": "cudos17jjcc5f7fwhy62h635vsvd5q4f3d0jaj64dlk4"
+                },
+                {
+                    "delegator": "0x4d8a2a79a0afcc1ec19f056897f2b3bda0f79f79",
+                    "delegation": "149349207052965920178203",
+                    "delegatorAddress": "cudos13dlvj63ldaee65krukjhn2hkmf9sav9wkun94f"
+                },
+                {
+                    "delegator": "0x53603afb92d750fbc8c4a25824761c099f869982",
+                    "delegation": "20000000000000000000000000",
+                    "delegatorAddress": "cudos1afndk0m7xpscgrsuafhexl8aeclxu72rnuchnl"
+                },
+                {
+                    "delegator": "0x573252aa84d6ae1745a419af903bde40abcb2225",
+                    "delegation": "41093331753519968186978",
+                    "delegatorAddress": "cudos1ft95wflzp78q8ltkmau8aefe4qmv0jnthwhau0"
+                },
+                {
+                    "delegator": "0x5921d289b43604940edc5e6e2fee162ef3986f00",
+                    "delegation": "334782502304892562930884",
+                    "delegatorAddress": "cudos1gvjnv4359r545wh0e2ugz4ea8sgdlnkqgesjvk"
+                },
+                {
+                    "delegator": "0x60a56f991914e6dd0ed7d28d94e0197a5026e952",
+                    "delegation": "1078928000000000000000000",
+                    "delegatorAddress": "cudos1dwj0g7djz3fpx0ehhqvfhd8pdtdw8mcza6ja59"
+                },
+                {
+                    "delegator": "0x8f00b660643eda9ffe937dccfe9269e1c52928d5",
+                    "delegation": "182000000000000000000000",
+                    "delegatorAddress": "cudos1kz4f20zakl2qepav29p00088j6utsd5lxthul8"
+                },
+                {
+                    "delegator": "0x957da03ee1dfede7a27d35f88b142cd75f103e0b",
+                    "delegation": "92335000000000000000000",
+                    "delegatorAddress": "cudos1m7a9ady5678m57k208rphas2362d524g0trvux"
+                },
+                {
+                    "delegator": "0x98c62c11d10f48a2d4c542bc4d18f28a8ffc3817",
+                    "delegation": "685932279444290000000000",
+                    "delegatorAddress": "cudos1fqgf6gtsd27kav30qyc2dwyrvyp9rfcmvgl8cs"
+                },
+                {
+                    "delegator": "0xa35d8da33fdaef6739d90fc412c46459ff5ab276",
+                    "delegation": "99267703805571245821470",
+                    "delegatorAddress": "cudos1xp3jr8g70raw8dgwvlrhqfqjtvqhftn3g38uja"
+                },
+                {
+                    "delegator": "0xb39d022edf05c31e1981f4f4d8137dda9c57cfae",
+                    "delegation": "1804977591030000000000",
+                    "delegatorAddress": "cudos18mqn8vssedje6ux24apmpl5y8fsn7ajvh2zvqt"
+                },
+                {
+                    "delegator": "0xb643d6e6973b4d607c8d2dbb194d0a4a5d2b668f",
+                    "delegation": "50473681618480000000000",
+                    "delegatorAddress": "cudos13daa0rue6l3s4uqs8cuf56846329jp2tvdr5rp"
+                },
+                {
+                    "delegator": "0xb815f7e04387c7158712c53bc10a8d12850d6bf2",
+                    "delegation": "150000120000000000000000",
+                    "delegatorAddress": "cudos19dg8m2nlg0pg36f4rhwf3zcrglffx2ls4fwwc3"
+                }
+            ]
+        },
+        "0x7d004cd44cb00d527b08f02c664dbabd1983e13e": {
+            "id": "0xe7d4d83aab8b14e8bb2fbca29a4b409f2b438686",
+            "tokens": "2000000000000000000000000",
+            "address": "cudos1wkd0e3zzamaa2xwawe5tvh80n0qzrcwjrjvfva"
+        },
+        "0x8ce9cd864f1ad1b7d60d3a5d9add29e0e45039db": {
+            "id": "0x6f5d935ff97dd6efb4f73fda477b86b14d49e2ad",
+            "tokens": "2000000000000000000000000",
+            "address": "cudos1wyv883wzp84d7hzf3q2jeq3l43aga72ts57qdd",
+            "delegation": [{
+                    "delegator": "0x01c2c343d7d63ffabe1816a0466783d64d7214e5",
+                    "delegation": "13133770265299564727560846",
+                    "delegatorAddress": "cudos1m9703sdadvgn22vq5gs6yt8zwk3dzj993y48l7"
+                },
+                {
+                    "delegator": "0x4dd5a4d1fcb6f8938aa8ad070aefe1b19e8f9c0c",
+                    "delegation": "25000000000000000000000",
+                    "delegatorAddress": "cudos12l3e2ua7d4yq9nu4xly9a53jpt4e9djcqxex3f"
+                },
+                {
+                    "delegator": "0x7ad0f16c056511a0c7ff8c241913a48fef1c5b48",
+                    "delegation": "867232832510348460827020",
+                    "delegatorAddress": "cudos17pv8udnp2tuls5j3c0em7k9h95np8c5efaptax"
+                },
+                {
+                    "delegator": "0x84dbf39789226f358537e1a939aec794f1c96ca9",
+                    "delegation": "3170518996208036721421211",
+                    "delegatorAddress": "cudos1dlemcw5yazemfq7hq9dxn7hfeel5spf04msp2c"
+                },
+                {
+                    "delegator": "0x8f00b660643eda9ffe937dccfe9269e1c52928d5",
+                    "delegation": "1041199697200000000000000",
+                    "delegatorAddress": "cudos1kz4f20zakl2qepav29p00088j6utsd5lxthul8"
+                },
+                {
+                    "delegator": "0xa234bc9c3656db7eef6d7d39ac160191dd65323d",
+                    "delegation": "295643132143659784980980",
+                    "delegatorAddress": "cudos14tc29ftjt635vhawr4zrj27zkdsl3kx728mnfy"
+                },
+                {
+                    "delegator": "0xa836ad5a82a2eb57fe5ab7c76971a83c18544944",
+                    "delegation": "570799000000000000000000",
+                    "delegatorAddress": "cudos1yhkjhyh30ltjf9pd2k3zrfly66lyydwz9jz66h"
+                },
+                {
+                    "delegator": "0xdbf3945bba47fa4f3bc36dc6a7ddc0ae89fd04a5",
+                    "delegation": "31393895908900000000000",
+                    "delegatorAddress": "cudos1rhwg4l9zrxtd7xx9c6wph7c3sqel33eql0ye5v"
+                }
+            ]
+        },
+        "0x8f5eda2571ed699515422738b9f3f9db7469644b": {
+            "id": "0x814b42188f9b5b078e5b9859988fed24136060ee",
+            "tokens": "0",
+            "address": "cudos19kqft853ehvnyxz4fteza9euc5mesrlrag8r4w"
+        },
+        "0x986132f703d640ac2faa76b17c745a8713d73264": {
+            "id": "0xffbbf0f5402eb65cc7ceb7e35256063c780ecb52",
+            "tokens": "2040000000000000000000000",
+            "address": "cudos1n5tuwett2ulexgg8hrhhlj6gh87vjfarvwh3n6",
+            "delegation": [{
+                    "delegator": "0x1221991a826d554db5856c89c5ffccf7be409b00",
+                    "delegation": "251288882207774475317611",
+                    "delegatorAddress": "cudos15nd3jr6pqq6n30zzc05ph08c09qyd9epwkkj82"
+                },
+                {
+                    "delegator": "0x22d3f96ec83cb249541f27d2b7e50848b698bba7",
+                    "delegation": "582000000000000000000000",
+                    "delegatorAddress": "cudos1sxtscw86slxz9c0x65j4mvrfscm50dglhgh35m"
+                },
+                {
+                    "delegator": "0x2360fd1f413197a2180ae809dd023e2fdbd98db4",
+                    "delegation": "2749435000000000000000000",
+                    "delegatorAddress": "cudos1ynqxm6ns47nxhk8unt0ep47rw8m7z4937vfmmr"
+                },
+                {
+                    "delegator": "0x263a13fbe5416661d8ff67c5d98624d1553900ae",
+                    "delegation": "1170944514339509325006838",
+                    "delegatorAddress": "cudos195fn0wytw8vmddts9e7te8j77xzx9nh6qwnmyr"
+                },
+                {
+                    "delegator": "0x2a637fbfe99844c94efe4ff7c52d3c06d6009a98",
+                    "delegation": "572817273711817919158808",
+                    "delegatorAddress": "cudos15ypxkyac89mpm7xzwk6mudrww3z2746x5z9nnd"
+                },
+                {
+                    "delegator": "0x3194952a155965f19c0e798551bc77baf6421778",
+                    "delegation": "750000000000000000000000",
+                    "delegatorAddress": "cudos14587ctw8j0nxq2f9ljemh9hzy00zjlgz3083pk"
+                },
+                {
+                    "delegator": "0x387a003e901b22daaa4a2c20a574d1708edd594c",
+                    "delegation": "642190036880582753311361",
+                    "delegatorAddress": "cudos1xwzjra0h7q6trjf2p7ffcpmxqfvrgnptkyknwa"
+                },
+                {
+                    "delegator": "0x3c10a68b08f97a2c7d4d6ccfdf2ef3c408cf530a",
+                    "delegation": "1279263088522706431225299",
+                    "delegatorAddress": "cudos1lxddfagjv2mf0wexmzykphf2tgrlrd8upawck6"
+                },
+                {
+                    "delegator": "0x3c63145999cbb532669cb6697b07405c80756adf",
+                    "delegation": "11587446138697945335336679",
+                    "delegatorAddress": "cudos14587ctw8j0nxq2f9ljemh9hzy00zjlgz3083pk"
+                },
+                {
+                    "delegator": "0x3cc21b0459a96cacb56a28a823eb6f723bbf4fbf",
+                    "delegation": "1008975204008721925715227",
+                    "delegatorAddress": "cudos19vzjaw3zwxaur5pnhw8vyrm6mmknrzw0l6ewyr"
+                },
+                {
+                    "delegator": "0x4085e9fb679dd2f60c2e64afe9533107fa1c18f2",
+                    "delegation": "3403947886123051084534408",
+                    "delegatorAddress": "cudos104v3e5ydyszf6t0k5hsgcqw2hhpvekvj6zs7an"
+                },
+                {
+                    "delegator": "0x44968b6fca867de789dcd518f6805af8adf4e3c3",
+                    "delegation": "718542168671160872143899",
+                    "delegatorAddress": "cudos1gs5dwgm9w2slgrp8lqggg4vug6v8vww00z7xaz"
+                },
+                {
+                    "delegator": "0x4d1b9439ece710cf9da9d0c60b17685cb00c2141",
+                    "delegation": "160034350700000000000000",
+                    "delegatorAddress": "cudos1zttx3fyue9jwdl8xp2d97kjypthta5t5rhpyqy"
+                },
+                {
+                    "delegator": "0x55557bef6702870985486615c2cb647ed5516cfb",
+                    "delegation": "106152620500211906683170",
+                    "delegatorAddress": "cudos17dmp98e9dk6hrnh55gax5fd8qwej7c6q02mavt"
+                },
+                {
+                    "delegator": "0x588d1dc17c24d3d017c69509bb8e9a6e622fa8c1",
+                    "delegation": "824760000000000000000000",
+                    "delegatorAddress": "cudos13qmpx8gfjzwaf55645m46syg0cptyqftwymz0a"
+                },
+                {
+                    "delegator": "0x5d3c13f980c19f00a5d1b336499878c6bd9f04be",
+                    "delegation": "1905917235465972851353360",
+                    "delegatorAddress": "cudos1dstnf243rled97uqmapnkzsa29qn39ud0r7j55"
+                },
+                {
+                    "delegator": "0x5dbfabb100c0c30abf94fc8ecd75881a840d7429",
+                    "delegation": "2018859000000000000000000",
+                    "delegatorAddress": "cudos1nhfmgll3wsyu7s8vsqe365urdrcgmzpy7gne7s"
+                },
+                {
+                    "delegator": "0x64986c71df68c5cad80a273df61a95ad7ba939ad",
+                    "delegation": "481300000000000000000000",
+                    "delegatorAddress": "cudos1uz8vnrylw23lcu783m586wkhfcgvg6sfyzxaa9"
+                },
+                {
+                    "delegator": "0x67b9491dc3cf0f58c35b6e350e229e018ff4a267",
+                    "delegation": "2445049874102700973154505",
+                    "delegatorAddress": "cudos1p9a4ln0fefkh7wec657mmnf97w43hxj5tk2z7y"
+                },
+                {
+                    "delegator": "0x6ca93742493afc4ea4dd161b58d7a67c191fd49d",
+                    "delegation": "4868503000000000000000000",
+                    "delegatorAddress": "cudos1hv85tke39dx8epagjf5r7zzd02j32zgznq23rv"
+                },
+                {
+                    "delegator": "0x6f05a70f43b9717ce1dd5feffa10e0d308f42298",
+                    "delegation": "146442238195395726781701",
+                    "delegatorAddress": "cudos1y79m5rlv8gzrekyh87aue8esz46aj40zg2z486"
+                },
+                {
+                    "delegator": "0x706a7a593eb2dba426a417ac0cf580e38bcc4783",
+                    "delegation": "427360000000000000000000",
+                    "delegatorAddress": "cudos13sq6z8m99ezgam4jufs7p9gceq9s84clmaqtnt"
+                },
+                {
+                    "delegator": "0x707f9d985174f0d20e9729898e68b6d56df8f2a1",
+                    "delegation": "4403148000000000000000000",
+                    "delegatorAddress": "cudos1k5q70mrzn78tyfrv73uysepsr2a0q4xy3mnmzq"
+                },
+                {
+                    "delegator": "0x721656ad4763924f98f4e92487cf716942d9b8b0",
+                    "delegation": "1104451320000000000000000",
+                    "delegatorAddress": "cudos144dm7th880uh6uvd7uk252u65w98j4e5cfwkjn"
+                },
+                {
+                    "delegator": "0x814b42188f9b5b078e5b9859988fed24136060ee",
+                    "delegation": "7544200714194415636699133",
+                    "delegatorAddress": "cudos19kqft853ehvnyxz4fteza9euc5mesrlrag8r4w"
+                },
+                {
+                    "delegator": "0x826ddf75b96e783ab516e7fa19568aa4fdd7ab8f",
+                    "delegation": "13968000000000000000000000",
+                    "delegatorAddress": "cudos1w089jarayq8mzfnsqv5lnkkdwl85dsdvh07lh7"
+                },
+                {
+                    "delegator": "0x83e6fff2f4e6d51f7a145ae8e40dc2b5497721c2",
+                    "delegation": "72558000000000000000000",
+                    "delegatorAddress": "cudos1hv85tke39dx8epagjf5r7zzd02j32zgznq23rv"
+                },
+                {
+                    "delegator": "0x97bc3c6ee595b0c88d0f26cb7d169098cf28d463",
+                    "delegation": "3247662250000000000000000",
+                    "delegatorAddress": "cudos1wpqawg857w82pkw99f8yh7k0wpnfylk0ung9uk"
+                },
+                {
+                    "delegator": "0x9a3ccd07dae0c3b9d9fc33b134742d02cc05bdfd",
+                    "delegation": "2743902000000000000000000",
+                    "delegatorAddress": "cudos1242qr4lep578hefhdg0qlvqrfknjwg67hyxvcx"
+                },
+                {
+                    "delegator": "0xa637c2c718ef04ad1ffa91e239848e638c6fc14a",
+                    "delegation": "2846384123582931938677943",
+                    "delegatorAddress": "cudos1kktk227xgvq0dkaa3k7anyz4hwfajyfam50egy"
+                },
+                {
+                    "delegator": "0xad3e9e2d65f9c3ef88cc9a29865b365fedfdc852",
+                    "delegation": "5549519000000000000000000",
+                    "delegatorAddress": "cudos1wt6rj06m2ny98xqdqcc5u4x0ldzy5sfk026juy"
+                },
+                {
+                    "delegator": "0xba74346b8cb29f5f619be02ea78786120c6f3044",
+                    "delegation": "25395000000000000000000",
+                    "delegatorAddress": "cudos1hv85tke39dx8epagjf5r7zzd02j32zgznq23rv"
+                },
+                {
+                    "delegator": "0xbd0a986714ad3bf2bf97f33d320223c2542c66f0",
+                    "delegation": "1194847310000000000000000",
+                    "delegatorAddress": "cudos1k5q70mrzn78tyfrv73uysepsr2a0q4xy3mnmzq"
+                },
+                {
+                    "delegator": "0xc0e59a8f75f43c737e7944096f650383d703f818",
+                    "delegation": "2661096000000000000000000",
+                    "delegatorAddress": "cudos1ynqxm6ns47nxhk8unt0ep47rw8m7z4937vfmmr"
+                },
+                {
+                    "delegator": "0xc47eb07732b2092e4930d2b0b2e86c1800a4699d",
+                    "delegation": "2858637479926575411558330",
+                    "delegatorAddress": "cudos1kktk227xgvq0dkaa3k7anyz4hwfajyfam50egy"
+                },
+                {
+                    "delegator": "0xd4365e3589fd7f9c849f6a41838210e0763c4305",
+                    "delegation": "1269501510000000000000000",
+                    "delegatorAddress": "cudos1uzwd9793nhv2dged73wg99jgjc0737y9znlz06"
+                },
+                {
+                    "delegator": "0xd439252081937641dd717c8101b64680193e2336",
+                    "delegation": "2395810370000000000000000",
+                    "delegatorAddress": "cudos13yla3ekqeg52e98mhx7qkhqjeuuuaq22lkaaml"
+                },
+                {
+                    "delegator": "0xd97fc3f12ecd4957016f43d942ef7ba3fa3a9d3f",
+                    "delegation": "611090260849630000000000",
+                    "delegatorAddress": "cudos15ad7gtceywhsqpuy4ca3yprg2m9x8pg0vx78wy"
+                },
+                {
+                    "delegator": "0xda3b287dd9ac9229d48a2169dd6925faf8bb373e",
+                    "delegation": "820000000000000000000000",
+                    "delegatorAddress": "cudos1sxtscw86slxz9c0x65j4mvrfscm50dglhgh35m"
+                },
+                {
+                    "delegator": "0xdbd81cdab91ce928810cfa4a4e35de138140ca5b",
+                    "delegation": "50000000000000000000000",
+                    "delegatorAddress": "cudos1q9knzyvzdpff2apqe70rhshkq60tq2pzhwx83u"
+                },
+                {
+                    "delegator": "0xe4ed7b2db688c2c873191065ba8f64d925fddfec",
+                    "delegation": "2192586003942615454949228",
+                    "delegatorAddress": "cudos17pl2srx49ccqvy500fwqymckjmpm933vc0zmlz"
+                },
+                {
+                    "delegator": "0xf0615861a7bc12a20ad8ea3476c14a9763fe5be6",
+                    "delegation": "8765770413157288282467378",
+                    "delegatorAddress": "cudos1nshxgf56avrt43k8u2ra55z00h8zysld5kxe8c"
+                }
+            ]
+        },
+        "0x99967b017103b680179f4e90fcfa10d4f00f38de": {
+            "id": "0xec7ad4233eb904482b1608ed7dc5afa3523c3d4c",
+            "tokens": "2792756000000000000000000",
+            "address": "cudos1xtj9syn94ukupxnxhtrpgwhxquy98cu64jyvxc",
+            "delegation": [{
                 "delegator": "0xecf97efa5346acf51918714aa041a8ed416af27e",
                 "delegation": "1115218484052745615320556",
                 "delegatorAddress": "cudos1w956jw3tnz8awcgvvz5943ah22vxhrlvatakt8"
-            }
-        ]
-    },
-    "0x9cbaa5bd1e62096a7191080f4909cd30bd14040f": {
-        "id": "0x7b52b022517b77708da1ae07b481efa5a9a788aa",
-        "tokens": "2000000000000000000000000",
-        "address": "cudos18ygfl4ahy988k4skf6mat0ya8n3sj565anjgv5",
-        "delegation": [
-            {
+            }]
+        },
+        "0x9cbaa5bd1e62096a7191080f4909cd30bd14040f": {
+            "id": "0x7b52b022517b77708da1ae07b481efa5a9a788aa",
+            "tokens": "2000000000000000000000000",
+            "address": "cudos18ygfl4ahy988k4skf6mat0ya8n3sj565anjgv5",
+            "delegation": [{
                 "delegator": "0x76cd1373d4c7ddba63cb5e3a1d733ac0724227c8",
                 "delegation": "111269377164523152550991",
                 "delegatorAddress": "cudos1wjtjudrgeytt8k4ke7hge6xvazncq38gxc72rr"
-            }
-        ]
-    },
-    "0xa431c2b3ce2eb4e288b36fd30907e8226d206a3d": {
-        "id": "0x4d3cb2104fe0327de948a04ff3d3ff73bbf58bfb",
-        "tokens": "2133184000000000000000000",
-        "address": "cudos19x6hxpuasshs80vy39j2kh2rcjhz0982navyzj",
-        "delegation": [
-            {
-                "delegator": "0x2ebfba6bd579877d2f29c112b24b32cfe0600d00",
-                "delegation": "1162272000000000000000000",
-                "delegatorAddress": "cudos1lq9d7zj2ymlmwkpxfcef9e86vlrzx89t67gk9n"
-            },
-            {
-                "delegator": "0x64763309212982a769df4d3966b4ddff5e1b219e",
-                "delegation": "2195588104520973344100000",
-                "delegatorAddress": "cudos16pcqtam6a3p9lejka9z8z8grms9ddwumrsw36t"
-            },
-            {
-                "delegator": "0x98c62c11d10f48a2d4c542bc4d18f28a8ffc3817",
-                "delegation": "501893421394394957340423",
-                "delegatorAddress": "cudos1fqgf6gtsd27kav30qyc2dwyrvyp9rfcmvgl8cs"
-            },
-            {
-                "delegator": "0xf23f6bd1a912c34d1d06c3989441d88ec0204917",
-                "delegation": "55640000000000000000000",
-                "delegatorAddress": "cudos12fl7863nlusq5t43ft5mcnaf9tvwwk322wfcjv"
-            }
-        ]
-    },
-    "0xa755b5711647c5d33272d2a17801d5aee2fec797": {
-        "id": "0x79840f653050530e46e36b7ef4756529b6680f10",
-        "tokens": "252100000000000000000000000",
-        "address": "cudos1ynmchc0a7090vxd4eqkswar5cpzqng4qdnr98c",
-        "delegation": [
-            {
-                "delegator": "0x22d3f96ec83cb249541f27d2b7e50848b698bba7",
-                "delegation": "140000000000000000000000",
-                "delegatorAddress": "cudos1sxtscw86slxz9c0x65j4mvrfscm50dglhgh35m"
-            },
-            {
-                "delegator": "0x257d4b7d2e68d7a6395f53761eefa5a8119f5872",
-                "delegation": "612551000000000000000000",
-                "delegatorAddress": "cudos12mjvd7jtjf98zlgj0jm0pqqs5l33qmexnsrp90"
-            },
-            {
-                "delegator": "0x2a637fbfe99844c94efe4ff7c52d3c06d6009a98",
-                "delegation": "141016000000000000000000",
-                "delegatorAddress": "cudos15ypxkyac89mpm7xzwk6mudrww3z2746x5z9nnd"
-            },
-            {
-                "delegator": "0x7e7c216a6bde6b7961df877bc9b7d83086d00e2e",
-                "delegation": "164737370000000000000000",
-                "delegatorAddress": "cudos1tm6e33pwmg2rk6uff374k4e05k47d6vdk4nlrz"
-            },
-            {
-                "delegator": "0xb570a4c88d2f5b546cc04e9dae7e223edcbda338",
-                "delegation": "3101544000000000000000000",
-                "delegatorAddress": "cudos1hv85tke39dx8epagjf5r7zzd02j32zgznq23rv"
-            },
-            {
-                "delegator": "0xba0dc6b4b179bece80768692a4935af61e2f26ab",
-                "delegation": "1520713000000000000000000",
-                "delegatorAddress": "cudos1hv85tke39dx8epagjf5r7zzd02j32zgznq23rv"
-            },
-            {
-                "delegator": "0xda3b287dd9ac9229d48a2169dd6925faf8bb373e",
-                "delegation": "200000000000000000000000",
-                "delegatorAddress": "cudos1sxtscw86slxz9c0x65j4mvrfscm50dglhgh35m"
-            },
-            {
-                "delegator": "0xda8615a94c5a813c62f951049355f9e22acfcedf",
-                "delegation": "382605000000000000000000",
-                "delegatorAddress": "cudos1hv85tke39dx8epagjf5r7zzd02j32zgznq23rv"
-            },
-            {
-                "delegator": "0xdf4ec0fd0f096f624988895d1f887d1f581c987a",
-                "delegation": "200000000000000000000000",
-                "delegatorAddress": "cudos1y0qj43ys36srjydgzlf65cy463ms8lygjsjz58"
-            },
-            {
-                "delegator": "0xef31a73046524787912b20619a0aa3630e08abe6",
-                "delegation": "37374000000000000000000",
-                "delegatorAddress": "cudos1fyttdqsg0udcr0vwfux6ksmfhrtxmrspthe2t0"
-            }
-        ]
-    },
-    "0xc4eec3646fc4b7476d0e56a79aa09f4def00b7bf": {
-        "id": "0xd2cb03e0bc8077301f3c1d34c082cc10fd8149e7",
-        "tokens": "2000000000000000000000000",
-        "address": "cudos16guyt456l9wd7lnem8fq7xzmyrl62wfhgmq2sx",
-        "delegation": [
-            {
-                "delegator": "0x3d9ea2de2143655544bf0a519cdd5767ce24ef23",
-                "delegation": "76372761176170000000000",
-                "delegatorAddress": "cudos1ke3k7vv0jv2fuzuk283k3w3kqrp6ez5zydw08h"
-            },
-            {
-                "delegator": "0x91862c6b2f637f612a7da9082a61fb09c864b00f",
-                "delegation": "201551192199740000000000",
-                "delegatorAddress": "cudos1h9en4e6d8nz4y2hyrfeh3jl7h2r9qvmhtjdtck"
-            },
-            {
-                "delegator": "0xcb734c3ad22f0c9a43a5c41a7c98a8d464e18dd0",
-                "delegation": "191689661377382018850650",
-                "delegatorAddress": "cudos1f8as3adfnpaglz2zxphn08d7t2kqfj658ym3vz"
-            }
-        ]
-    },
-    "0xdf1395e995e7df7c5d62fb0040478af1940ea7fe": {
-        "id": "0xcc9656270e2cd8f61df72d79cbda3a6e172fd000",
-        "tokens": "2000000000000000000000000",
-        "address": "cudos14mnn0thd4a0cqfy9zy6vuwr3lwm229eyc75v9v",
-        "delegation": [
-            {
-                "delegator": "0x33b467f1e5c3d6234e2aaec1225f73fccdc31fcd",
-                "delegation": "209551399109259301177890",
-                "delegatorAddress": "cudos1gsvjmap83wpdqrkxt7qu4gejfdr02txs6quvtg"
-            },
-            {
-                "delegator": "0x93af6f78ffcf0b1fee99c23c193d33c4e16a2a78",
-                "delegation": "9292638800000000000000",
-                "delegatorAddress": "cudos15zvg7lsgmd7dkg2kxt78u75ce5rf3vx0t5z28f"
-            },
-            {
-                "delegator": "0xda621740fb7b0486feec8e51ab261bec81f8d8b6",
-                "delegation": "171957826538887616100000",
-                "delegatorAddress": "cudos1h04355zvw5869fsz7qt8z5uxjvcm8d2mt3ujj6"
-            },
-            {
-                "delegator": "0xfd36acd8338017a42a011c1b4ccbc418836599db",
-                "delegation": "13000000000000000000000",
-                "delegatorAddress": "cudos1k604fk7nf2zw3vagxx6u3gf90n3kdasa2jtjhf"
-            }
-        ]
-    },
-    "0xf8e564325121e46474b872fc9fb94ef9d05d1ef1": {
-        "id": "0x190f390f547ffd33d65ddc7365b057a86a13e6ce",
-        "tokens": "0",
-        "address": "cudos1z4xpwuyj3uzudhws9rkjaycw7rv90kufjr3rw8"
-    },
-    "0xf99e4792851f2b62b6da5ce5f0ae7a755bbd502f": {
-        "id": "0x050801be60d8535f433d5c15db3129276cc1cc6a",
-        "tokens": "2000000000000000000000000",
-        "address": "cudos1p9k2u5xz8znxrvrvxrfy2rnmpxpc2lu5vu7c7z"
-    },
-    "0xfc822924d85da4ef99a699545c92ea243dd09254": {
-        "id": "0xe52e1c4c5041dcd9bdf0fb1a1441bdea23a1eaa9",
-        "tokens": "2287085000000000000000000",
-        "address": "cudos15wchehvk9ltzp6k45vdqzs9qtkr758pnah5sf9",
-        "delegation": [
-            {
-                "delegator": "0x2d96a8741e8c958e2a7dc0a7ea86b36fc2575468",
-                "delegation": "1282028410000000000000000",
-                "delegatorAddress": "cudos1s5jx8m7kgavmng8pgmzdeww5z7fr6ec3xz4r97"
-            },
-            {
-                "delegator": "0x68c8d8e302594e7d3027ff64ccbcf263bd3be8d5",
-                "delegation": "747423829601607322161260",
-                "delegatorAddress": "cudos1yppcxk0seuavmju9p0rfr3y6xr2zh40hcam9cg"
-            },
-            {
-                "delegator": "0x74bf9baaadfa4380ccfbf43f049d1568c3cc9cc7",
-                "delegation": "100000000000000000000",
-                "delegatorAddress": "cudos1vfgc45smrr5vuydzqvv0w8vc2gknxm9z9xf5yg"
-            },
-            {
-                "delegator": "0x9a9d8087b201685f4824d2f265a2ad62e792c766",
-                "delegation": "59520714655998576378132",
-                "delegatorAddress": "cudos1yc77nehcwxnwwuhq94gmm982vldpr3qpmexwpw"
-            },
-            {
-                "delegator": "0xe24f5471181fbfe7874a3227d97d32d5e0baf4ca",
-                "delegation": "20306522765040792791115",
-                "delegatorAddress": "cudos1pe0zt92l2nacnetlgfpevq5qt4f2yfa9jfn9wf"
-            }
-        ]
+            }]
+        },
+        "0xa431c2b3ce2eb4e288b36fd30907e8226d206a3d": {
+            "id": "0x4d3cb2104fe0327de948a04ff3d3ff73bbf58bfb",
+            "tokens": "2133184000000000000000000",
+            "address": "cudos19x6hxpuasshs80vy39j2kh2rcjhz0982navyzj",
+            "delegation": [{
+                    "delegator": "0x2ebfba6bd579877d2f29c112b24b32cfe0600d00",
+                    "delegation": "1162272000000000000000000",
+                    "delegatorAddress": "cudos1lq9d7zj2ymlmwkpxfcef9e86vlrzx89t67gk9n"
+                },
+                {
+                    "delegator": "0x64763309212982a769df4d3966b4ddff5e1b219e",
+                    "delegation": "2195588104520973344100000",
+                    "delegatorAddress": "cudos16pcqtam6a3p9lejka9z8z8grms9ddwumrsw36t"
+                },
+                {
+                    "delegator": "0x98c62c11d10f48a2d4c542bc4d18f28a8ffc3817",
+                    "delegation": "501893421394394957340423",
+                    "delegatorAddress": "cudos1fqgf6gtsd27kav30qyc2dwyrvyp9rfcmvgl8cs"
+                },
+                {
+                    "delegator": "0xf23f6bd1a912c34d1d06c3989441d88ec0204917",
+                    "delegation": "55640000000000000000000",
+                    "delegatorAddress": "cudos12fl7863nlusq5t43ft5mcnaf9tvwwk322wfcjv"
+                }
+            ]
+        },
+        "0xa755b5711647c5d33272d2a17801d5aee2fec797": {
+            "id": "0x79840f653050530e46e36b7ef4756529b6680f10",
+            "tokens": "252100000000000000000000000",
+            "address": "cudos1ynmchc0a7090vxd4eqkswar5cpzqng4qdnr98c",
+            "delegation": [{
+                    "delegator": "0x22d3f96ec83cb249541f27d2b7e50848b698bba7",
+                    "delegation": "140000000000000000000000",
+                    "delegatorAddress": "cudos1sxtscw86slxz9c0x65j4mvrfscm50dglhgh35m"
+                },
+                {
+                    "delegator": "0x257d4b7d2e68d7a6395f53761eefa5a8119f5872",
+                    "delegation": "612551000000000000000000",
+                    "delegatorAddress": "cudos12mjvd7jtjf98zlgj0jm0pqqs5l33qmexnsrp90"
+                },
+                {
+                    "delegator": "0x2a637fbfe99844c94efe4ff7c52d3c06d6009a98",
+                    "delegation": "141016000000000000000000",
+                    "delegatorAddress": "cudos15ypxkyac89mpm7xzwk6mudrww3z2746x5z9nnd"
+                },
+                {
+                    "delegator": "0x7e7c216a6bde6b7961df877bc9b7d83086d00e2e",
+                    "delegation": "164737370000000000000000",
+                    "delegatorAddress": "cudos1tm6e33pwmg2rk6uff374k4e05k47d6vdk4nlrz"
+                },
+                {
+                    "delegator": "0xb570a4c88d2f5b546cc04e9dae7e223edcbda338",
+                    "delegation": "3101544000000000000000000",
+                    "delegatorAddress": "cudos1hv85tke39dx8epagjf5r7zzd02j32zgznq23rv"
+                },
+                {
+                    "delegator": "0xba0dc6b4b179bece80768692a4935af61e2f26ab",
+                    "delegation": "1520713000000000000000000",
+                    "delegatorAddress": "cudos1hv85tke39dx8epagjf5r7zzd02j32zgznq23rv"
+                },
+                {
+                    "delegator": "0xda3b287dd9ac9229d48a2169dd6925faf8bb373e",
+                    "delegation": "200000000000000000000000",
+                    "delegatorAddress": "cudos1sxtscw86slxz9c0x65j4mvrfscm50dglhgh35m"
+                },
+                {
+                    "delegator": "0xda8615a94c5a813c62f951049355f9e22acfcedf",
+                    "delegation": "382605000000000000000000",
+                    "delegatorAddress": "cudos1hv85tke39dx8epagjf5r7zzd02j32zgznq23rv"
+                },
+                {
+                    "delegator": "0xdf4ec0fd0f096f624988895d1f887d1f581c987a",
+                    "delegation": "200000000000000000000000",
+                    "delegatorAddress": "cudos1y0qj43ys36srjydgzlf65cy463ms8lygjsjz58"
+                },
+                {
+                    "delegator": "0xef31a73046524787912b20619a0aa3630e08abe6",
+                    "delegation": "37374000000000000000000",
+                    "delegatorAddress": "cudos1fyttdqsg0udcr0vwfux6ksmfhrtxmrspthe2t0"
+                }
+            ]
+        },
+        "0xc4eec3646fc4b7476d0e56a79aa09f4def00b7bf": {
+            "id": "0xd2cb03e0bc8077301f3c1d34c082cc10fd8149e7",
+            "tokens": "2000000000000000000000000",
+            "address": "cudos16guyt456l9wd7lnem8fq7xzmyrl62wfhgmq2sx",
+            "delegation": [{
+                    "delegator": "0x3d9ea2de2143655544bf0a519cdd5767ce24ef23",
+                    "delegation": "76372761176170000000000",
+                    "delegatorAddress": "cudos1ke3k7vv0jv2fuzuk283k3w3kqrp6ez5zydw08h"
+                },
+                {
+                    "delegator": "0x91862c6b2f637f612a7da9082a61fb09c864b00f",
+                    "delegation": "201551192199740000000000",
+                    "delegatorAddress": "cudos1h9en4e6d8nz4y2hyrfeh3jl7h2r9qvmhtjdtck"
+                },
+                {
+                    "delegator": "0xcb734c3ad22f0c9a43a5c41a7c98a8d464e18dd0",
+                    "delegation": "191689661377382018850650",
+                    "delegatorAddress": "cudos1f8as3adfnpaglz2zxphn08d7t2kqfj658ym3vz"
+                }
+            ]
+        },
+        "0xdf1395e995e7df7c5d62fb0040478af1940ea7fe": {
+            "id": "0xcc9656270e2cd8f61df72d79cbda3a6e172fd000",
+            "tokens": "2000000000000000000000000",
+            "address": "cudos14mnn0thd4a0cqfy9zy6vuwr3lwm229eyc75v9v",
+            "delegation": [{
+                    "delegator": "0x33b467f1e5c3d6234e2aaec1225f73fccdc31fcd",
+                    "delegation": "209551399109259301177890",
+                    "delegatorAddress": "cudos1gsvjmap83wpdqrkxt7qu4gejfdr02txs6quvtg"
+                },
+                {
+                    "delegator": "0x93af6f78ffcf0b1fee99c23c193d33c4e16a2a78",
+                    "delegation": "9292638800000000000000",
+                    "delegatorAddress": "cudos15zvg7lsgmd7dkg2kxt78u75ce5rf3vx0t5z28f"
+                },
+                {
+                    "delegator": "0xda621740fb7b0486feec8e51ab261bec81f8d8b6",
+                    "delegation": "171957826538887616100000",
+                    "delegatorAddress": "cudos1h04355zvw5869fsz7qt8z5uxjvcm8d2mt3ujj6"
+                },
+                {
+                    "delegator": "0xfd36acd8338017a42a011c1b4ccbc418836599db",
+                    "delegation": "13000000000000000000000",
+                    "delegatorAddress": "cudos1k604fk7nf2zw3vagxx6u3gf90n3kdasa2jtjhf"
+                }
+            ]
+        },
+        "0xf8e564325121e46474b872fc9fb94ef9d05d1ef1": {
+            "id": "0x190f390f547ffd33d65ddc7365b057a86a13e6ce",
+            "tokens": "0",
+            "address": "cudos1z4xpwuyj3uzudhws9rkjaycw7rv90kufjr3rw8"
+        },
+        "0xf99e4792851f2b62b6da5ce5f0ae7a755bbd502f": {
+            "id": "0x050801be60d8535f433d5c15db3129276cc1cc6a",
+            "tokens": "2000000000000000000000000",
+            "address": "cudos1p9k2u5xz8znxrvrvxrfy2rnmpxpc2lu5vu7c7z"
+        },
+        "0xfc822924d85da4ef99a699545c92ea243dd09254": {
+            "id": "0xe52e1c4c5041dcd9bdf0fb1a1441bdea23a1eaa9",
+            "tokens": "2287085000000000000000000",
+            "address": "cudos15wchehvk9ltzp6k45vdqzs9qtkr758pnah5sf9",
+            "delegation": [{
+                    "delegator": "0x2d96a8741e8c958e2a7dc0a7ea86b36fc2575468",
+                    "delegation": "1282028410000000000000000",
+                    "delegatorAddress": "cudos1s5jx8m7kgavmng8pgmzdeww5z7fr6ec3xz4r97"
+                },
+                {
+                    "delegator": "0x68c8d8e302594e7d3027ff64ccbcf263bd3be8d5",
+                    "delegation": "747423829601607322161260",
+                    "delegatorAddress": "cudos1yppcxk0seuavmju9p0rfr3y6xr2zh40hcam9cg"
+                },
+                {
+                    "delegator": "0x74bf9baaadfa4380ccfbf43f049d1568c3cc9cc7",
+                    "delegation": "100000000000000000000",
+                    "delegatorAddress": "cudos1vfgc45smrr5vuydzqvv0w8vc2gknxm9z9xf5yg"
+                },
+                {
+                    "delegator": "0x9a9d8087b201685f4824d2f265a2ad62e792c766",
+                    "delegation": "59520714655998576378132",
+                    "delegatorAddress": "cudos1yc77nehcwxnwwuhq94gmm982vldpr3qpmexwpw"
+                },
+                {
+                    "delegator": "0xe24f5471181fbfe7874a3227d97d32d5e0baf4ca",
+                    "delegation": "20306522765040792791115",
+                    "delegatorAddress": "cudos1pe0zt92l2nacnetlgfpevq5qt4f2yfa9jfn9wf"
+                }
+            ]
+        }
     }
 }
