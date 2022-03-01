@@ -1,4 +1,9 @@
 #!/bin/bash -i
+echo -ne "Cleaning the docker...";
+dockerResult=$(docker-compose system prune -a -f 2> /dev/null)
+dockerResult=$(docker-compose container prune -f 2> /dev/null)
+echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+
 
 echo -ne "Preparing the binary builder...";
 cd "$PARAM_SOURCE_DIR/CudosBuilders/docker/binary-builder"

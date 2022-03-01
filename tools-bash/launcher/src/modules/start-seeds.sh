@@ -30,6 +30,11 @@ do
     result=$(ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node && sudo docker stop $startContainerName 2> /dev/null")
     ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "cd $PARAM_SOURCE_DIR && sudo rm -rf ./CudosData"
 
+    echo -ne "Cleaning the docker...";
+    result=$(ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "sudo docker system prune -a -f 2> /dev/null")
+    result=$(ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "sudo docker container prune -f 2> /dev/null")
+    echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+
     echo -ne "Preparing seed($i)'s binary builder...";
     result=$(ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/binary-builder && sudo docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder build 2> /dev/null");
     if [ "$?" != 0 ]; then
