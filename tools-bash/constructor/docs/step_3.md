@@ -9,9 +9,6 @@ Check all the needed prerequisites [here](./prerequisites.md).
 You need to have a local copy of our build tools.Create your main Cudos directory. On the first row you can define where all Cudos data will be stored.
 
 ```
-export CUDOS_DIR="/usr/cudos"
-mkdir $CUDOS_DIR
-
 cd $HOME
 git clone --branch cudos-master https://github.com/CudoVentures/cudos-builders.git CudosBuilders
 cd CudosBuilders/tools-bash/constructor
@@ -23,7 +20,7 @@ cp ./config/init-peers.env.example ./config/init.env
 ```
 The content of the init.env should be as follows:
 ```bash
-PARAM_SOURCE_DIR="<CUDOS_DIR_PATH>"
+PARAM_SOURCE_DIR="/usr/cudos" 
 ```
 The directory you create here should exist.
 
@@ -34,9 +31,7 @@ cp ./config/node.env.example ./config/node.env
 The content of the node.env should be:
 ```bash
 MONIKER=<TYPE DOWN NODE NAME>
-PERSISTENT_PEERS=<list of peers>
 PRIVATE_PEERS=<validator node tendermint id>
-SEEDS=<>
 
 SHOULD_USE_GLOBAL_PEERS=true
 SHOULD_USE_STATE_SYNC=false
@@ -54,11 +49,7 @@ For now we can leave the information about the peers empty.
 
 **MONIKER** is the name of the node.
 
-**PERSISTENT_PEERS** comma separated list of peers to connect to. If you have a list of Sentry nodes you should add them here. The format should be <_tendermint_id_>@<_ip_>:<_port_>
-
-**PRIVATE_PEERS** list with the node ID of any Validator nodes on your private network with format: <_tendermint_id_>@<_ip_>:<_port_>.
-
-**SEEDS** list of Seed nodes with format <_tendermint_id_>@<_ip_>:<_port_>.
+**PRIVATE_PEERS** list with the node ID of any Validator nodes on your private network with format: <_tendermint_id_>.
 
 **SHOULD_USE_GLOBAL_PEERS** if the node should try to connect to global peers or not. Should be set to true.
 **SHOULD_USE_STATE_SYNC** if set to true the node will try to sync from a state sync point.
@@ -92,7 +83,7 @@ Preparing the sentry-node...OK
 Configurating the sentry-node...OK
 
 This node ID is: 3c8b529b9eeef3a6240284ae5ca8d9add378674f
-This node ID can be found at $CUDOS_DIR/CudosData/cudos-data-sentry-node-client-mainnet/tendermint.nodeid
+This node ID can be found at $HOME/CudosData/cudos-data-sentry-node-client-mainnet/tendermint.nodeid
 This node ID could always be checked using cudos-noded tendermint show-node-id
 
 You MUST NOT delete the constructor script nor the destination folder where node's data is. They will be used later on for starting the nodes.
@@ -106,8 +97,7 @@ Note your node ID. You are going to need it for the next steps of the configurat
 You need to have a local copy of our build tools.Create your main Cudos directory. On the first row you can define where all Cudos data will be stored.
 
 ```
-export CUDOS_DIR="/usr/cudos"
-mkdir $CUDOS_DIR
+mkdir /usr/cudos
 
 cd $HOME
 git clone --branch cudos-master https://github.com/CudoVentures/cudos-builders.git CudosBuilders
@@ -120,7 +110,7 @@ cp ./config/init-peers.env.example ./config/init.env
 ```
 The content of the init.env should be as follows:
 ```shell
-PARAM_SOURCE_DIR="<CUDOS_DIR_PATH>"
+PARAM_SOURCE_DIR="/usr/cudos" 
 ```
 The directory you create here should exist.
 
@@ -131,9 +121,7 @@ cp ./config/node.env.example ./config/node.env
 The content of the node.env should be:
 ```shell
 MONIKER=<name of the node>
-PERSISTENT_PEERS=
 PRIVATE_PEERS=
-SEEDS=
 
 SHOULD_USE_GLOBAL_PEERS=true
 SHOULD_USE_STATE_SYNC=false
@@ -146,11 +134,7 @@ ADDR_BOOK_STRICT=true
 
 **MONIKER** is the name of the node.
 
-**PERSISTENT_PEERS** comma separated list of peers to connect to. If you have a list of Sentry nodes you should add them here. The format should be <_tendermint_id_>@<_ip_>:<_port_>
-
-**PRIVATE_PEERS** list with the node ID of any Validator nodes on your private network with format: <_tendermint_id_>@<_ip_>:<_port_>.
-
-**SEEDS** list of Seed nodes with format <_tendermint_id_>@<_ip_>:<_port_>.
+**PRIVATE_PEERS** list with the node ID of any Validator nodes on your private network with format: <_tendermint_id_>.
 
 **SHOULD_USE_GLOBAL_PEERS** if the node should try to connect to global peers or not. Should be set to true.
 **SHOULD_USE_STATE_SYNC** if set to true the node will try to sync from a state sync point.
@@ -186,7 +170,7 @@ Preparing the seed-node...OK
 Configurating the seed-node...OK
 
 This node ID is: a3831e25275f9f3a81e0d2a7c7b0d947bc6e4512
-This node ID can be found at ${CUDOS_DIR}/CudosData/cudos-data-seed-node-client-mainnet/tendermint.nodeid
+This node ID can be found at $HOME/CudosData/cudos-data-seed-node-client-mainnet/tendermint.nodeid
 This node ID could always be checked using cudos-noded tendermint show-node-id
 
 You MUST NOT delete the constructor script nor the destination folder where node's data is. They will be used later on for starting the nodes.
@@ -206,18 +190,16 @@ If you successfully submitted your genesis in the previous step of Phase 4 your 
 
 Copy the start.env.example and rename it to start.env. 
 ```
-cp start.env.example start.env
+cp start-peers.env.example start.env
 ```
 Enter the newly copied file with the command below:
 ```
 nano start.env
 ```
-Then enter the following:
+Leave the **PARAMS_SEED** and **PARAM_PERSISTENT_PEERS**. They represent the Cudos peers - you'll need them to connect to the network. Then only change is the following:
 
 ```
-PARAM_PERSISTENT_PEERS=""
-PARAM_SEED="<seeds_tendermint_id>@<ip>:26656"
-PARAM_PRIVATE_PEER_IDS="<validator_tendermint_id>@<ip>:26656"
+PARAM_PRIVATE_PEER_IDS="<validator_tendermint_id>"
 PARAM_EXPOSE_IP="0.0.0.0"
 ```
 NOTE: There may be an error for the Resetting the sentry-node step.
@@ -248,23 +230,20 @@ NOTE: There may be an error for the Resetting the seed-node step.
 Once the Cudos team has setup their nodes and you've got the green light to continue with this step you need to make sure you have the correct genesis file. It should be located in the cudos-builders config folder. 
 
 ```
-export CUDOS_DIR=/usr/cudos
-cd $CUDOS_DIR/CudosBuilders
+cd $HOME/CudosBuilders
 git pull
 ```
 
-Make sure to check the checksum.
 All the nodes listed bellow need to have the same genesis. Otherwise they won't be connected to the root validator. This step should be executed for every node in the cluster.
 
 ### Manual setup of genesis
 
-If you want to manualy provide a genesis file for your nodes you need to place it in the <code>$CUDOS_DIR/CudosBuilders/docker/config/genesis.mainnet.json </code>. The CUDOS_DIR is the directory you specified in Step 1. This step should be executed for every node in the cluster.
+If you want to manualy provide a genesis file for your nodes you need to place it in the <code>$HOME/CudosBuilders/tools-bash/config/genesis.mainnet.json </code>. This step should be executed for every node in the cluster.
 
-If you have a list of peers you need to connect to, add their info to the <code>$CUDOS_DIR/CudosBuilders/docker/config/seeds.mainnet.config </code> and <code>$CUDOS_DIR/CudosBuilders/docker/config/persistent-peers.mainnet.config </code>
-
+## Start the node
 To start the validator first setup it's environement. Copy the start.env.example and rename it to start.env. 
 ```
-cp start.env.example start.env
+cp start-peers.env.example start.env
 ```
 Enter the newly copied file with the command below:
 ```
@@ -272,16 +251,17 @@ nano start.env
 ```
 Then enter the following:
 
-It should contain the following:
+It should contain the following. Leave the **PARAMS_SEED** and **PARAM_PERSISTENT_PEERS**. They represent the Cudos peers - you'll need them to connect to the network. Then only change is the following:
 ```
-PARAM_PERSISTENT_PEERS="<sentry_tendermint_id@ip:26656>"
-PARAM_SEED="<seed_tendermint_id@ip:26656>"
+PARAM_PRIVATE_PEER_IDS="<validator_tendermint_id>"
 PARAM_EXPOSE_IP="0.0.0.0"
 ```
 
-**PARAM_PERSISTENT_PEERS** Add the node ID and IP address+port of any Sentry nodes on your private network to
-**PARAM_SEED** node ID and IP address+port of any Seed nodes on your private network.
-**PARAM_EXPOSE_IP** IP that would be exposed. Default is 0.0.0.0
+**PARAM_PERSISTENT_PEERS** Add the node ID and IP address+port of ALL Sentry nodes on your private network, eg node 3 sentry must connect to Node1 Sentry and Node 2 Sentry
+
+**PARAM_SEED** node ID and IP address+port of ALL Seed nodes on your private network, eg Node 3 Seed must connect to node 1 Seed and Node 2 Seed.
+
+**PARAM_EXPOSE_IP** the IP that would be exposed. Default is 0.0.0.0
 
 If your validator is running an orchestrator also add:
 ```
@@ -311,5 +291,4 @@ INF executed block height=1 module=state num_invalid_txs=0 num_valid_txs=0
 INF commit synced commit=436F6D6D697449447B5B3131362032313920313338203838203232352031313720313534203233392031393420373620313734203137352038382031353020313020313837203138372032333820323137203238203233322031343120393020313838203135382034322035392032353220313237203835203235352038315D3A317D
 INF committed state app_hash=74DB8A58E1759AEFC24CAEAF58960ABBBBEED91CE88D5ABC9E2A3BFC7F55FF51 height=1 module=state num_txs=0
 INF indexed block height=1 module=txindex
-
 ```

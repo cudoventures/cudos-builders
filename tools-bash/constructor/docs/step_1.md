@@ -8,8 +8,7 @@ Check all the needed prerequisites [here](./prerequisites.md).
 You need to have a local copy of our build tools.Create your main Cudos directory. On the first row you can define where all Cudos data will be stored.
 
 ```
-export CUDOS_DIR="/usr/cudos"
-mkdir $CUDOS_DIR
+mkdir /usr/cudos
 
 cd $HOME
 git clone --branch cudos-master https://github.com/CudoVentures/cudos-builders.git CudosBuilders
@@ -35,7 +34,7 @@ nano init.env
 Then enter the following:
 
 ```
-PARAM_SOURCE_DIR="<CudosData dir>" 
+PARAM_SOURCE_DIR="/usr/cudos" 
 PARAM_VALIDATOR_MNEMONIC="<KEY>" 
 PARAM_KEYRING_OS_PASS="<PASS>"
 PARAM_COMMISSION_RATE="0.10" 
@@ -92,10 +91,10 @@ If you see any additional messages or error please refer to the troubleshooting 
 Once your validator is running you should get it's genesis. It is located under ${CUDOS_DIR}/tools-bash/constructor/exports on your machine. To get the file of the you can use
 
 ```
-GENESIS=$(ls ${CUDOS_DIR}/tools-bash/constructor/exports)
+GENESIS=$(ls $HOME/CudosBuilders/tools-bash/constructor/exports)
 cat $GENESIS
 ```
-Once you get the file contents submit them as a json file in https://github.com/CudoVentures/cudos-gentx. The name of the file should match the moniker of your validator node.
+Once you get the file contents send them as a **json** file to the Cudos team via email to [services@cudoventures.com](mailto:services@cudoventures.com).
 
 # Things to keep in mind
 1. The folder you use for a node needs to be created and empty. You will get errors otherwise.
