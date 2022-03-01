@@ -5,7 +5,7 @@ if [ "$CUDOS_TOKEN_CONTRACT_ADDRESS" = "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d58
   PARAM_MAX_DEPOSIT_PERIOD="21600s"
   PARAM_VOTING_PERIOD="21600s"
 fi
-if [ "$CUDOS_TOKEN_CONTRACT_ADDRESS" = "" ]; then
+if [ "$CUDOS_TOKEN_CONTRACT_ADDRESS" = "0x817bbDbC3e8A1204f3691d14bB44992841e3dB35" ]; then
   VALID_TOKEN_CONTRACT_ADDRESS="true"
   PARAM_UNBONDING_TIME="1814400s"
   PARAM_MAX_DEPOSIT_PERIOD="1209600s"
@@ -79,7 +79,7 @@ genesisJson=$(jq ".app_state.staking.params.unbonding_time = \"$PARAM_UNBONDING_
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 
 # crisis params
-genesisJson=$(jq ".app_state.crisis.constant_fee.amount = \"100000000000000000000\"" "${CUDOS_HOME}/config/genesis.json")
+genesisJson=$(jq ".app_state.crisis.constant_fee.amount = \"5000000000000000000000\"" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 genesisJson=$(jq ".app_state.crisis.constant_fee.denom = \"$BOND_DENOM\"" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
