@@ -19,9 +19,9 @@ WORKDIR /usr/cudos
 
 COPY ./CudosBuilders/docker/root-node/root-node.local.env ./init.sh
 
-COPY ./CudosBuilders/docker/debug-node/init.sh ./init-root.sh
+COPY ./CudosBuilders/docker/root-node/scripts/init-root.sh ./init-root.sh
 
-RUN echo "$(cat ./init-root.sh)" > ./init.sh && \
+RUN echo "\n$(cat ./init-root.sh)" >> ./init.sh && \
     rm -f ./init-root.sh && \
     chmod +x ./init.sh
 
