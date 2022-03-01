@@ -9,6 +9,7 @@ services:
       context: ../../../
       args:
         CUDOS_HOME: "$CUDOS_HOME"
+        LOGGING_DRIVER: "$LOGGING_DRIVER"
     env_file: "$ENV_FILE"
     volumes:
       - '../../../CudosData/$VOLUME_NAME:$CUDOS_HOME'

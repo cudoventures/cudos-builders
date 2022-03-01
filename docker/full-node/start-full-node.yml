@@ -13,6 +13,7 @@ services:
       context: ../../../
       args:
         CUDOS_HOME: "$CUDOS_HOME"
+        LOGGING_DRIVER: "$LOGGING_DRIVER"
     restart: unless-stopped
     env_file: "$ENV_FILE"
     volumes:
@@ -24,7 +25,7 @@ services:
       - "${EXPOSE_IP}:${PORT26657}:26657"
       - "${EXPOSE_IP}:${PORT26660}:26660"
     logging:
-      driver: $LOGGING_DRIVER
+      driver: "$LOGGING_DRIVER"
       options:
         max-size: "128m"
         max-file: "1"

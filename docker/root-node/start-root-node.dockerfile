@@ -1,8 +1,10 @@
 FROM binary-builder
 
 ARG CUDOS_HOME
+ARG LOGGING_DRIVER
 
 ENV CUDOS_HOME=${CUDOS_HOME}
+ENV LOGGING_DRIVER=${LOGGING_DRIVER}
 
 # COPY ./CudosBuilders/docker/root-node/scripts/new-test-proposal.sh ./
 

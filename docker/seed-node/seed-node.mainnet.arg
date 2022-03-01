@@ -9,7 +9,7 @@ STATE_SYNC_RPC_SERVERS_FILENAME=state-sync-rpc-servers.mainnet.config
 INIT_CONTAINER_NAME=cudos-init-seed-node-mainnet
 START_CONTAINER_NAME=cudos-start-seed-node-mainnet
 VOLUME_NAME=cudos-data-seed-node-mainnet
-LOGGING_DRIVER="gcplogs"
+LOGGING_DRIVER="json-file"
 
 PORT26656=26656
 PORT26657=26657

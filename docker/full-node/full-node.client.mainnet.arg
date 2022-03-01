@@ -10,7 +10,7 @@ INIT_CONTAINER_NAME=cudos-init-full-node-client-mainnet
 CONFIG_CONTAINER_NAME=cudos-config-full-node-client-mainnet
 START_CONTAINER_NAME=cudos-start-full-node-client-mainnet
 VOLUME_NAME=cudos-data-full-node-client-mainnet
-LOGGING_DRIVER="gcplogs"
+LOGGING_DRIVER="json-file"
 
 PORT26656=26656
 PORT26657=26657

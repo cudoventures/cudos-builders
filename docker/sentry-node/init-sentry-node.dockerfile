@@ -5,6 +5,7 @@ ARG GENESIS_FILENAME
 ARG SEEDS_FILENAME
 ARG PERSISTENT_PEERS_FILENAME
 ARG STATE_SYNC_RPC_SERVERS_FILENAME
+ARG LOGGING_DRIVER
 
 RUN apt update && apt install -y jq
 
@@ -20,5 +21,6 @@ RUN mv "./external-config/${PERSISTENT_PEERS_FILENAME}" ./external-config/persis
     sed -i 's/\r$//' ./init-sentry.sh
 
 ENV CUDOS_HOME=${CUDOS_HOME}
+ENV LOGGING_DRIVER=${LOGGING_DRIVER}
 
 CMD ["/bin/bash", "-c", "./init-sentry.sh"]
