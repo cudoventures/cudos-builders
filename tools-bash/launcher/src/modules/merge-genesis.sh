@@ -57,7 +57,7 @@ for dataGenesisPath in ./*; do
     validatorHashAddress=${validatorHashAddress//\"/}
 
     # STAKING - validator staking balance, delegations
-    jq ".staking | map(select(.address == \"$validatorAddress\") | .)" "$STAKING_JSON" > "$tmpGenesisPath"
+    jq ".stake | map(select(.address == \"$validatorAddress\") | .)" "$STAKING_JSON" > "$tmpGenesisPath"
     stakingSize=$(jq length "$tmpGenesisPath")
     if [ "$stakingSize" = "0" ]; then
         # echo "[]" | jq ". += [{id: \"0x0\", tokens: \"500000000000000000000000000\", address: \"$validatorAddress\"}]" > "$tmpGenesisPath"
