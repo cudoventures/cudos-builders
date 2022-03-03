@@ -9,7 +9,8 @@ function sum {
 
 tmpGenesisPath="/tmp/genesis.tmp.json"
 rootGenesisPath="$1"
-accountDataGenesisPath="/tmp/genesis.filtered.json"
+accountDataGenesisPath="/tmp/genesis.accounts.json"
+delegatorsDataGenesisPath="/tmp/genesis.delegators.json"
 RESULT_GENESIS_PATH="$WORKING_EXPORT_DIR/genesis.json"
 
 # copy to result genesis location
@@ -74,6 +75,7 @@ for dataGenesisPath in ./*; do
     validatorStakingBalance=${validatorStakingBalance//\"/}
 
     result=$(jq ".delegation" "$tmpGenesisPath")
+    echo $result > "$delegatorsDataGenesisPath"
     if [ "$result" != "null" ]; then
         historicalRefCount=$(jq .delegation "$tmpGenesisPath" | jq length)
         historicalRefCount=$(($historicalRefCount + 2))
@@ -85,6 +87,17 @@ for dataGenesisPath in ./*; do
         stakingDelegations=""
         authAccounts=""
         distributionDelegatorStartingInfos=""
+    fi
+
+    # auth.accounts
+    result=$(jq -s '.[0].app_state.auth.accounts = .[0].app_state.auth.accounts + .[1]' "$RESULT_GENESIS_PATH" "$accountDataGenesisPath" | jq '.[0]')
+    echo $result > "$RESULT_GENESIS_PATH"
+
+    # STAKING - append to auth.accounts
+    if [ "$authAccounts" != "" ]; then
+        echo $authAccounts > "$tmpGenesisPath"
+        result=$(jq -s '.[0].app_state.auth.accounts = .[0].app_state.auth.accounts + .[1]' "$RESULT_GENESIS_PATH" "$tmpGenesisPath" | jq '.[0]')
+        echo $result > "$RESULT_GENESIS_PATH"
     fi
 
     # STAKING - rewards
@@ -101,17 +114,6 @@ for dataGenesisPath in ./*; do
         validatorReward=${validatorReward//\"/}
     fi
 
-    # auth.accounts
-    result=$(jq -s '.[0].app_state.auth.accounts = .[0].app_state.auth.accounts + .[1]' "$RESULT_GENESIS_PATH" "$accountDataGenesisPath" | jq '.[0]')
-    echo $result > "$RESULT_GENESIS_PATH"
-
-    # STAKING - append to auth.accounts
-    if [ "$authAccounts" != "" ]; then
-        echo $authAccounts > "$tmpGenesisPath"
-        result=$(jq -s '.[0].app_state.auth.accounts = .[0].app_state.auth.accounts + .[1]' "$RESULT_GENESIS_PATH" "$tmpGenesisPath" | jq '.[0]')
-        echo $result > "$RESULT_GENESIS_PATH"
-    fi
-
     # bank.balances
     jq .app_state.bank.balances "$dataGenesisPath" | jq "map(select(.address == \"$validatorAddress\") | .)" > "$tmpGenesisPath"
     balancesSize=$(jq length "$tmpGenesisPath")
@@ -126,7 +128,6 @@ for dataGenesisPath in ./*; do
             }]" > "$tmpGenesisPath"
     fi
     balancesSize=$(jq length "$tmpGenesisPath")
-    # if [ "$balancesSize" != "0" ]; then
     if [ "$balancesSize" = "1" ]; then
         # set validator's balance to his reward, because the rest of his funds will be delegated
         result=$(jq ".[].coins = [.[].coins[] | if (.denom == \"acudos\") then (.amount = \"$validatorReward\") else . end]" $tmpGenesisPath)
@@ -138,7 +139,34 @@ for dataGenesisPath in ./*; do
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There are several balances for account: $validatorAddress";
         exit 1;
     fi
-    # fi
+
+    # bank.balances - rewards for delegators
+    delegatorsSize=$(jq length "$delegatorsDataGenesisPath")
+    for i in $(seq 0 $(($delegatorsSize-1))); do
+        delegatorAddress=$(jq ".[$i].delegatorAddress" "$delegatorsDataGenesisPath")
+        delegatorAddress=${delegatorAddress//\"/}
+
+        jq ".bank | map(select(.address == \"$delegatorAddress\") | .)" "$STAKING_JSON" > "$tmpGenesisPath"
+        delegatorRewardsSize=$(jq length "$tmpGenesisPath")
+        delegatorReward="0"
+        if [ "$delegatorRewardsSize" != "0" ]; then
+            if [ "$delegatorRewardsSize" != "1" ]; then
+                echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} More than a single reward for a delegator: $delegatorAddress";
+                exit 1;
+            fi
+
+            delegatorReward=$(jq .[0].balance "$tmpGenesisPath")
+            delegatorReward=${delegatorReward//\"/}
+            result=$(jq ".app_state.bank.balances += [{
+                \"address\": \"$delegatorAddress\",
+                \"coins\": [{
+                    \"amount\": \"$delegatorReward\",
+                    \"denom\": \"acudos\"
+                }]
+            }]" "$RESULT_GENESIS_PATH")
+            echo $result > "$RESULT_GENESIS_PATH"
+        fi
+    done;
     
     # staking.delegations
     result=$(jq -s '.[0].app_state.staking.delegations = .[0].app_state.staking.delegations + .[1].app_state.staking.delegations' "$RESULT_GENESIS_PATH" "$dataGenesisPath" | jq '.[0]')
@@ -285,4 +313,6 @@ totalSupply=$(sum $tmpGenesisPath)
 result=$(jq ".app_state.bank.supply[0].amount = \"$totalSupply\"" "$RESULT_GENESIS_PATH")
 echo $result > "$RESULT_GENESIS_PATH"
 
-# rm -f "$tmpGenesisPath"
+rm -f "$tmpGenesisPath"
+rm -f "$accountDataGenesisPath"
+rm -f "$delegatorsDataGenesisPath"
