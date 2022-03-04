@@ -35,7 +35,7 @@ if [ "$IS_CLUSTERED_VALIDATOR" = "true" ]; then
     sed -i "s/seeds = \".*\"/seeds = \"\"/g" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
     sed -i "s/persistent_peers = \".*\"/persistent_peers = \"$PARAM_PERSISTENT_PEERS\"/g" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
 fi
-if [ "$IS_CLUSTERED_VALIDATOR" = "false" ]; then # clustered validator and any other case
+if [ "$IS_CLUSTERED_VALIDATOR" = "false" ]; then # standalone validator and any other case
     if [ "$PARAM_SEED" != "" ]; then
         sed -i "s/seeds = \".*\"/seeds = \"$PARAM_SEED\"/g" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
         sed -i "s/persistent_peers = \".*\"/persistent_peers = \"\"/g" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"

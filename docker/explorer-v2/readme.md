@@ -18,8 +18,9 @@ NOTE: Requires a running cudos-node instance !
    - Delete the big_dipper_local_deploy folder
 
 
-## Testnet/Mainnet deployment guide
-### If you are only redeploying on an already existing instance - please skip to 5.4 or 6.3
+## Testnet/Mainnet deployment guide for GCloud
+### If you are only redeploying on an already existing instance - please skip to 6.7 or 7.3
+1. Enable Cloud SQL Admin API (gcloud console)
 1. Provision new SQL instance in gcloud SQL ( or connect to an already created one)
    - must have public IP address enabled
 2. Create a new database in the gcloud SQL instance (public-testnet-explorer-v2 / private-testnet-exporer-v2)
@@ -50,9 +51,8 @@ NOTE: Requires a running cudos-node instance !
    7.  Create a new folder named bdjuno_gql_deploy and inside it place the relevant configs(depending on the environment)
        - From the relevant folder(private/public) to the new folder:
          - Copy and Rename bdjuno-sample to bdjuno
-           - Rename genesis file to genesis.json
+           - From CudosBuilders/docker/config copy the relevant genesis file to the bdjuno folder and name it genesis.json 
          - Copy and Rename .env-bdjuno.sample to .env-bdjuno
-       - From CudosBuilders/docker/config copy the relevant genesis file to the bdjuno folder and name it genesis.json 
    8.  Go over the configs and check if the parameters are right (IP of the node, Hasura URL, Db names, etc)
           - Please note that HASURA_GRAPHQL_DATABASE_URL requires the real IP address:port of the SQL DB
    9.   Copy the bdjuno-deploy.sh script from explorer-v2 to the new folder

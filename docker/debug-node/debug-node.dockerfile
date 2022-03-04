@@ -13,14 +13,19 @@ RUN if [ $USER_NAME != 'root' ]; then \
         groupadd --gid ${GROUP_ID} ${GROUP_NAME}; \
         useradd --no-log-init --create-home --shell /bin/bash --uid ${USER_ID} --gid ${GROUP_ID} ${USER_NAME}; \
     fi && \
-    mkdir -p /usr/cudos && \
-    chown ${USER_NAME}:${GROUP_NAME} /usr/cudos
+    mkdir -p /usr/cudos
 
 WORKDIR /usr/cudos
 
-COPY ./CudosBuilders/docker/debug-node/init.sh ./
+COPY ./CudosBuilders/docker/root-node/root-node.local.env ./init.sh
 
-RUN chown ${USER_NAME}:${GROUP_NAME} ./init.sh
+COPY ./CudosBuilders/docker/root-node/scripts/init-root.sh ./init-root.sh
+
+RUN echo "\n$(cat ./init-root.sh)" >> ./init.sh && \
+    rm -f ./init-root.sh && \
+    chmod +x ./init.sh
+
+RUN chown -R ${USER_NAME}:${GROUP_NAME} /usr/cudos
 
 USER ${USER_NAME}
 
