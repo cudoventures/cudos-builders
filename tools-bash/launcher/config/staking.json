@@ -1274,7 +1274,7 @@
                 },
                 {
                     "delegator": "0x22d3f96ec83cb249541f27d2b7e50848b698bba7",
-                    "delegation": "200000000000000000000000",
+                    "delegation": "400000000000000000000000",
                     "delegatorAddress": "cudos1sxtscw86slxz9c0x65j4mvrfscm50dglhgh35m"
                 },
                 {
@@ -1501,11 +1501,6 @@
                     "delegator": "0xd930de2473aab788a1ad4a931838a3d29a737be2",
                     "delegation": "29747531000000000000000",
                     "delegatorAddress": "cudos1pz0wjj30699avg98nslpuuldzznly6f5cvf8y3"
-                },
-                {
-                    "delegator": "0xda3b287dd9ac9229d48a2169dd6925faf8bb373e",
-                    "delegation": "200000000000000000000000",
-                    "delegatorAddress": "cudos1sxtscw86slxz9c0x65j4mvrfscm50dglhgh35m"
                 },
                 {
                     "delegator": "0xdb2e4a8f7cd81c7738021bf1c58c832675451c10",

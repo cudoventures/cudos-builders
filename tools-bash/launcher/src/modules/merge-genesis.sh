@@ -78,6 +78,12 @@ for dataGenesisPath in ./*; do
 
     result=$(jq ".delegation" "$tmpGenesisPath")
     echo $result > "$delegatorsDataGenesisPath"
+    delegationsSize=$(jq length "$delegatorsDataGenesisPath")
+    uniqueDelegationsSize=$(jq "unique_by(.delegatorAddress)" "$delegatorsDataGenesisPath" | jq length)
+    if [ "$delegationsSize" != "$uniqueDelegationsSize" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Duplicate delegation address for: $validatorAddress";
+        exit 1;
+    fi
     if [ "$result" != "null" ]; then
         historicalRefCount=$(jq .delegation "$tmpGenesisPath" | jq length)
         historicalRefCount=$(($historicalRefCount + 2))
