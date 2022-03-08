@@ -1,7 +1,7 @@
 #!/bin/bash -i
 echo -ne "Cleaning the docker...";
-dockerResult=$(docker-compose system prune -a -f 2> /dev/null)
-dockerResult=$(docker-compose container prune -f 2> /dev/null)
+dockerResult=$(docker system prune -a -f 2> /dev/null)
+dockerResult=$(docker container prune -f 2> /dev/null)
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 
