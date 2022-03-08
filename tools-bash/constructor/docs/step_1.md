@@ -68,7 +68,7 @@ nano ./tools-bash/constructor/config/node.env
 Then enter the following:
 
 ```
-MONIKER="<name of the node>"
+MONIKER="<name of the node, it MUST contains only lowercase english letters and/or a dash>"
 ```
 
 

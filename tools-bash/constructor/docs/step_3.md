@@ -47,7 +47,7 @@ ADDR_BOOK_STRICT=true
 ```
 For now we can leave the information about the peers empty. 
 
-**MONIKER** is the name of the node.
+**MONIKER** is the name of the node. It MUST contains only lowercase english letters and/or a dash.
 
 **PRIVATE_PEERS** list with the node ID of any Validator nodes on your private network with format: <_tendermint_id_>.
 
@@ -132,7 +132,7 @@ EXTERNAL_ADDRESS=
 ADDR_BOOK_STRICT=true
 ```
 
-**MONIKER** is the name of the node.
+**MONIKER** is the name of the node. It MUST contains only lowercase english letters and/or a dash.
 
 **PRIVATE_PEERS** list with the node ID of any Validator nodes on your private network with format: <_tendermint_id_>.
 
