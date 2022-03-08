@@ -96,4 +96,4 @@ Full/Seed nodes use the following ports: **26656, 26657, 26660**.
 
 Sentry nodes use the following ports: **1317, 9090, 26656, 26657, 26660**.
 
-The Docker instance is binding the above ports to your host machine automatically, so you just have to open the following ports on your machine where the Cudos nodes are running.
+The Docker instance is binding the above ports to your host machine automatically, so you just have to open the above ports on your machine where the Cudos nodes are running.
