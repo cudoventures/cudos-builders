@@ -88,7 +88,7 @@ If you see any additional messages or error please refer to the troubleshooting 
 
 ## Genesis submission
 
-Once your validator is running you should get it's genesis. It is located under ${CUDOS_DIR}/tools-bash/constructor/exports on your machine. To get the file of the you can use
+Once your validator is running you should get it's genesis. It is located under ./tools-bash/constructor/exports on your machine. To get the file of the you can use
 
 ```
 GENESIS=$(ls $HOME/CudosBuilders/tools-bash/constructor/exports)
