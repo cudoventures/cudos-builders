@@ -19,6 +19,8 @@ source "$WORKING_SRC_DIR/incs/topology.sh"
 
 source "$WORKING_SRC_DIR/incs/validate-topology.sh"
 
+source "$WORKING_SRC_DIR/incs/validate-staking-json.sh"
+
 source "$WORKING_SRC_DIR/modules/load-ssh-keys.sh"
 
 source "$WORKING_SRC_DIR/incs/validate-instances.sh"
