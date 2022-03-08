@@ -29,7 +29,7 @@ cp ./tools-bash/constructor/config/init.env.example ./tools-bash/constructor/con
 ```
 Enter the newly copied file with the command below:
 ```
-nano init.env
+nano ./tools-bash/constructor/config/init.env
 ```
 Then enter the following:
 
