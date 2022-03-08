@@ -25,7 +25,7 @@ sudo chmod +x ./tools-bash/constructor/src/init.sh
 
 Copy the init.env.example and rename it to init.env. 
 ```
-cp init.env.example init.env
+cp ./tools-bash/constructor/config/init.env.example ./tools-bash/constructor/config/init.env
 ```
 Enter the newly copied file with the command below:
 ```
@@ -42,33 +42,33 @@ PARAM_COMMISSION_MAX_RATE="0.20"
 PARAM_COMMISSION_MAX_CHANGE_RATE="0.01" 
 ```
 
-**PARAM_SOURCE_DIR** is where the repos will be cloned and the binary compiled. It should be an existing and empty folder. The same you created above.
+**PARAM_SOURCE_DIR** is where the repos will be cloned and the binary compiled. It should be an existing and empty folder. 
 
 **PARAM_VALIDATOR_MNEMONIC** is the private key of the account you want to use for your validator.
 
 **PARAM_KEYRING_OS_PASS** is the password of your keyring.
 
-**PARAM_COMMISSION_RATE** is commission rate of the validator. Must be between 0 and the validator's PARAM_COMMISSION_MAX_RATE.
+**PARAM_COMMISSION_RATE** is commission rate of the validator. Must be between 0 and the validator's PARAM_COMMISSION_MAX_RATE. The value is in percentage, where 0.10 means 10%.
 
-**PARAM_COMMISSION_MAX_RATE**  Can't be changed later.
+**PARAM_COMMISSION_MAX_RATE**  Can't be changed later. The value is in percentage, where 0.20 means 20%.
 
-**PARAM_COMMISSION_MAX_CHANGE_RATE** Can't be changed later.
+**PARAM_COMMISSION_MAX_CHANGE_RATE** Can't be changed later. The value is in percentage, where 0.01 means 1%.
 
 NOTE: It is advisable you do NOT use your mainnet mnemonic for the test phase.
 
 
 Copy the node.env.example and rename it to node.env. 
 ```
-cp node.env.example node.env
+cp ./tools-bash/constructor/config/node.env.example ./tools-bash/constructor/config/node.env
 ```
 Enter the newly copied file with the command below:
 ```
-nano node.env
+nano ./tools-bash/constructor/config/node.env
 ```
 Then enter the following:
 
 ```
-MONIKER="<name of the node>"
+MONIKER="<name of the node, it MUST contains only lowercase english letters and/or a dash>"
 ```
 
 
@@ -88,7 +88,7 @@ If you see any additional messages or error please refer to the troubleshooting 
 
 ## Genesis submission
 
-Once your validator is running you should get it's genesis. It is located under ${CUDOS_DIR}/tools-bash/constructor/exports on your machine. To get the file of the you can use
+Once your validator is running you should get it's genesis. It is located under ./tools-bash/constructor/exports on your machine. To get the file of the you can use
 
 ```
 GENESIS=$(ls $HOME/CudosBuilders/tools-bash/constructor/exports)
