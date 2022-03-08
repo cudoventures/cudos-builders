@@ -42,7 +42,7 @@ PARAM_COMMISSION_MAX_RATE="0.20"
 PARAM_COMMISSION_MAX_CHANGE_RATE="0.01" 
 ```
 
-**PARAM_SOURCE_DIR** is where the repos will be cloned and the binary compiled. It should be an existing and empty folder. The same you created above.
+**PARAM_SOURCE_DIR** is where the repos will be cloned and the binary compiled. It should be an existing and empty folder. 
 
 **PARAM_VALIDATOR_MNEMONIC** is the private key of the account you want to use for your validator.
 
