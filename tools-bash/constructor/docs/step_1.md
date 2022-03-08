@@ -48,11 +48,11 @@ PARAM_COMMISSION_MAX_CHANGE_RATE="0.01"
 
 **PARAM_KEYRING_OS_PASS** is the password of your keyring.
 
-**PARAM_COMMISSION_RATE** is commission rate of the validator. Must be between 0 and the validator's PARAM_COMMISSION_MAX_RATE.
+**PARAM_COMMISSION_RATE** is commission rate of the validator. Must be between 0 and the validator's PARAM_COMMISSION_MAX_RATE. The value is in percentage, where 0.10 means 10%.
 
-**PARAM_COMMISSION_MAX_RATE**  Can't be changed later.
+**PARAM_COMMISSION_MAX_RATE**  Can't be changed later. The value is in percentage, where 0.20 means 20%.
 
-**PARAM_COMMISSION_MAX_CHANGE_RATE** Can't be changed later.
+**PARAM_COMMISSION_MAX_CHANGE_RATE** Can't be changed later. The value is in percentage, where 0.01 means 1%.
 
 NOTE: It is advisable you do NOT use your mainnet mnemonic for the test phase.
 

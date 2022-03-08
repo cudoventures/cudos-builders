@@ -202,6 +202,8 @@ Leave the **PARAMS_SEED** and **PARAM_PERSISTENT_PEERS**. They represent the Cud
 PARAM_PRIVATE_PEER_IDS="<validator_tendermint_id>"
 PARAM_EXPOSE_IP="0.0.0.0"
 ```
+**PARAM_PRIVATE_PEER_IDS** contains the validator tendermint node ID. <em>Example: PARAM_PRIVATE_PEER_IDS="2faaf03451abe212561affffbee119835a4a94ae"</em>
+
 NOTE: There may be an error for the Resetting the sentry-node step.
 
 ### Seed node
@@ -210,12 +212,13 @@ Parameters for the start node should be located in start.env file as follows:
 ```
 PARAM_PERSISTENT_PEERS=""
 PARAM_SEED="<seeds_tendermint_id>@<ip>:26656"
-PARAM_PRIVATE_PEER_IDS="<validator_tendermint_id>@<ip>:26656"
+PARAM_PRIVATE_PEER_IDS="<validator_tendermint_id>"
 PARAM_EXPOSE_IP="0.0.0.0"
 ```
 
-**PARAM_PRIVATE_PEER_IDS** contains the validator node ID, IP and port.
-**PARAM_PERSISTENT_PEERS** comma separated list of sentry nodes.
+**PARAM_PRIVATE_PEER_IDS** contains the validator tendermint node ID. <em>Example: PARAM_PRIVATE_PEER_IDS="2faaf03451abe212561affffbee119835a4a94ae"</em>
+
+**PARAM_PERSISTENT_PEERS** comma separated list of sentry nodes using format <tendermint_node_id>@<ip>:26656.
 
 ```
 sudo ./src/start.sh seed-node
