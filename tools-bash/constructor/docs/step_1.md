@@ -25,7 +25,7 @@ sudo chmod +x ./tools-bash/constructor/src/init.sh
 
 Copy the init.env.example and rename it to init.env. 
 ```
-cp init.env.example init.env
+cp ./tools-bash/constructor/config/init.env.example ./tools-bash/constructor/config/init.env
 ```
 Enter the newly copied file with the command below:
 ```
@@ -59,11 +59,11 @@ NOTE: It is advisable you do NOT use your mainnet mnemonic for the test phase.
 
 Copy the node.env.example and rename it to node.env. 
 ```
-cp node.env.example node.env
+cp ./tools-bash/constructor/config/node.env.example ./tools-bash/constructor/config/node.env
 ```
 Enter the newly copied file with the command below:
 ```
-nano node.env
+nano ./tools-bash/constructor/config/node.env
 ```
 Then enter the following:
 
