@@ -92,6 +92,7 @@ Once your validator is running you should get it's genesis. It is located under 
 
 ```
 GENESIS=$(ls $HOME/CudosBuilders/tools-bash/constructor/exports)
+cd ${HOME}/CudosBuilders/tools-bash/constructor/exports
 cat $GENESIS
 ```
 Once you get the file contents send them as a **json** file to the Cudos team via email to [services@cudoventures.com](mailto:services@cudoventures.com).
