@@ -20,6 +20,9 @@ Missing any of the prerequisites above can lead to errors and being unable to ru
 sudo docker -v
 sudo docker-compose -v
 ```
+## Notes for installing docker for the first time
+
+<em>Follow the docker install procedure for your OS</em>
 
 * [Get docker](https://docs.docker.com/get-docker/)
 * [Install compose](https://docs.docker.com/compose/install/)
