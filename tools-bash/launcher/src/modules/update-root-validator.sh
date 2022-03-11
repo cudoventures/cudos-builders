@@ -14,7 +14,7 @@ validatorStartContainerName=$(readEnvFromString "$arg" "START_CONTAINER_NAME")
 validatorVolumeName=$(readEnvFromString "$arg" "VOLUME_NAME")
 unset arg
 
-ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosData/$validatorVolumeName/config && sudo sed -i \"s/persistent_peers = \".*\"/persistent_peers = \\\"$SENTRIES_PUBLIC_PEERS_LIST\\\"/g\" ./config.toml"
+ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosData/$validatorVolumeName/config && sudo sed -i \"s/persistent_peers = \".*\"/persistent_peers = \\\"$SENTRIES_PRIVATE_PEERS_LIST\\\"/g\" ./config.toml"
 
 result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker restart $validatorStartContainerName")
 

@@ -5,7 +5,9 @@ validatorInternalIp=$(getComputerInternalIp $validatorComputerIndex)
 sentriesSize=$(getSentriesSize)
 
 SENTRY_PUBLIC_PEERS=()
+SENTRY_PRIVATE_PEERS=()
 SENTRIES_PUBLIC_PEERS_LIST=""
+SENTRIES_PRIVATE_PEERS_LIST=""
 for i in $(seq 0 $(($sentriesSize-1)))
 do
     sentryComputerId=$(getSentryComputerId $i)
@@ -93,9 +95,11 @@ do
     tendermintNodeId=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "sudo docker container exec $startContainerName cudos-noded tendermint show-node-id")
     SENTRY_TENEDRMINT_NODE_IDS+=("$tendermintNodeId")
     SENTRY_PUBLIC_PEERS+=("$tendermintNodeId@$sentryComputerIp:26656")
+    SENTRY_PRIVATE_PEERS+=("$tendermintNodeId@$sentryComputerInternalIp:26656")
 done
 
 SENTRIES_PUBLIC_PEERS_LIST=$(joinBy , ${SENTRY_PUBLIC_PEERS[@]})
+SENTRIES_PRIVATE_PEERS_LIST=$(joinBy , ${SENTRY_PRIVATE_PEERS[@]})
 
 echo -ne "Starting the sentries...";
 echo -e "${STYLE_GREEN}DONE${STYLE_DEFAULT}";

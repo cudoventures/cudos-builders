@@ -49,9 +49,7 @@ result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorC
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Initializing root-validator...";
-result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./init-root-node.yml -p cudos-init-root-node up --build")
-echo $result;
-echo "end of init"
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./init-root-node.yml -p cudos-init-root-node up --build 2> /dev/null")
 if [ "$?" != 0 ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
     exit 1;
@@ -72,9 +70,7 @@ if [ "$monitoringEnabled" = "false" ]; then
     ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sed -i \"/{PORT26660}:26660/d\" ./start-root-node.yml"
 fi
 # start the contianer
-result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./start-root-node.yml -p cudos-start-root-node up --build -d")
-echo $result;
-echo "end of start"
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./start-root-node.yml -p cudos-start-root-node up --build -d 2> /dev/null")
 if [ "$?" != 0 ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
     exit 1;
