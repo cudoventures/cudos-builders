@@ -65,10 +65,8 @@ for dataGenesisPath in ./*; do
     if [ "$stakingSize" = "0" ]; then
         # echo "[]" | jq ". += [{id: \"0x0\", tokens: \"500000000000000000000000000\", address: \"$validatorAddress\"}]" > "$tmpGenesisPath"
         # stakingSize="1"
-        echo "Skipping validator...$validatorAddress"
         continue;
     fi
-    echo "Working validator... $validatorAddress"
     if [ "$stakingSize" != "1" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There are several staked accounts with identical address: $validatorAddress";
         exit 1;
