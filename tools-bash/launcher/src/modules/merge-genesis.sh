@@ -65,8 +65,10 @@ for dataGenesisPath in ./*; do
     if [ "$stakingSize" = "0" ]; then
         # echo "[]" | jq ". += [{id: \"0x0\", tokens: \"500000000000000000000000000\", address: \"$validatorAddress\"}]" > "$tmpGenesisPath"
         # stakingSize="1"
+        echo "Skipping validator...$validatorAddress"
         continue;
     fi
+    echo "Working validator... $validatorAddress"
     if [ "$stakingSize" != "1" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There are several staked accounts with identical address: $validatorAddress";
         exit 1;
@@ -77,20 +79,21 @@ for dataGenesisPath in ./*; do
     validatorStakingBalance=${validatorStakingBalance//\"/}
 
     result=$(jq ".delegation" "$tmpGenesisPath")
-    echo $result > "$delegatorsDataGenesisPath"
-    delegationsSize=$(jq length "$delegatorsDataGenesisPath")
-    uniqueDelegationsSize=$(jq "unique_by(.delegatorAddress)" "$delegatorsDataGenesisPath" | jq length)
-    if [ "$delegationsSize" != "$uniqueDelegationsSize" ]; then
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Duplicate delegation address for: $validatorAddress";
-        exit 1;
-    fi
+    # delegationsSize=$(jq length "$delegatorsDataGenesisPath")
+    # uniqueDelegationsSize=$(jq "unique_by(.delegatorAddress)" "$delegatorsDataGenesisPath" | jq length)
+    # if [ "$delegationsSize" != "$uniqueDelegationsSize" ]; then
+    #     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Duplicate delegation address for: $validatorAddress";
+    #     exit 1;
+    # fi
     if [ "$result" != "null" ]; then
+        echo $result > "$delegatorsDataGenesisPath"
         historicalRefCount=$(jq .delegation "$tmpGenesisPath" | jq length)
         historicalRefCount=$(($historicalRefCount + 2))
         stakingDelegations=$(jq ".delegation | map({delegator_address: .delegatorAddress, shares: (.delegation + \".000000000000000000\"), validator_address: \"$validatorOperAddress\"})" "$tmpGenesisPath")
         # authAccounts=$(jq ".delegation | map({\"@type\": \"/cosmos.auth.v1beta1.BaseAccount\", account_number: \"0\", address: .delegatorAddress, pub_key: null, sequence: \"1\"})" "$tmpGenesisPath")
         distributionDelegatorStartingInfos=$(jq ".delegation | map({delegator_address: .delegatorAddress, starting_info: {height: \"0\", previous_period: \"1\", stake: (.delegation + \".000000000000000000\")}, validator_address: \"$validatorOperAddress\"})" "$tmpGenesisPath")
     else
+        echo "[]" > "$delegatorsDataGenesisPath"
         historicalRefCount="2"
         stakingDelegations=""
         # authAccounts=""

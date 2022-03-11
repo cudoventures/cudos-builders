@@ -43,7 +43,9 @@ sed -i "s/seeds = \".*\"/seeds = \"$SEEDS\"/g" "${CUDOS_HOME}/config/config.toml
 
 sed -i "s/seed_mode = false/seed_mode = true/g" "${CUDOS_HOME}/config/config.toml"
 
-sed -i "s/private_peer_ids = \"\"/private_peer_ids = \"$PRIVATE_PEERS\"/g" "${CUDOS_HOME}/config/config.toml"
+sed -i "s/private_peer_ids = \".*\"/private_peer_ids = \"$PRIVATE_PEERS\"/g" "${CUDOS_HOME}/config/config.toml"
+
+sed -i "s/unconditional_peer_ids = \".*\"/unconditional_peer_ids = \"$PRIVATE_PEERS\"/g" "${CUDOS_HOME}/config/config.toml"
 
 if [ "${EXTERNAL_ADDRESS}" != "" ]; then
     sed -i "s/external_address = \"\"/external_address = \"${EXTERNAL_ADDRESS}\"/g" "${CUDOS_HOME}/config/config.toml"
