@@ -39,6 +39,10 @@ source "$WORKING_SRC_DIR/modules/start-sentries.sh"
 
 echo "" # new line
 
+source "$WORKING_SRC_DIR/modules/update-root-validator.sh"
+
+echo "" # new line
+
 source "$WORKING_SRC_DIR/modules/exports-launch.sh"
 
 echo "" # new line

@@ -67,6 +67,7 @@ for dataGenesisPath in ./*; do
         # stakingSize="1"
         continue;
     fi
+    echo "Merging validator... $validatorAddress from $dataGenesisPath"
     if [ "$stakingSize" != "1" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There are several staked accounts with identical address: $validatorAddress";
         exit 1;

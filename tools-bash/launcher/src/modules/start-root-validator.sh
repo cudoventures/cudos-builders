@@ -105,6 +105,7 @@ result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorC
 result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./start-root-node.yml -p cudos-start-root-node down 2> /dev/null")
 # merge genesis
 echo $exportedGenesis > "$tmpFilePath"
+cp "$tmpFilePath" "$WORKING_EXPORT_DIR/genesis-root.json"
 source "$WORKING_SRC_DIR/modules/merge-genesis.sh" "$tmpFilePath"
 rm -f "$tmpFilePath"
 finalGenesis=$(cat "$RESULT_GENESIS_PATH")
