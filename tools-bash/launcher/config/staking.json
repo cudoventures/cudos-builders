@@ -413,6 +413,12 @@
             "cudos": true,
             "delegation": []
         },
+        "0xc28378b39d659dc55d19218c101719c27875c4ee": {
+            "id": "0x310566ac9b710f8ed6e8012529b164c22d9effa9",
+            "tokens": "4273000130000000000000000",
+            "address": "cudos1fpuwfv5cn6nzm8twe326u676d4mmv0xrfx5v7h",
+            "fee": "500"
+        },
         "0xc4eec3646fc4b7476d0e56a79aa09f4def00b7bf": {
             "id": "0xd2cb03e0bc8077301f3c1d34c082cc10fd8149e7",
             "tokens": "2000000000000000000000000",
@@ -455,28 +461,20 @@
         }
     },
     "admins": [{
-        "address": "cudos1rkh2ja53k4364aacy6vhlxvcl6p88mdtfgcqhn",
-        "balance": "5000000000000000000000000"
-    }, {
-        "address": "cudos1tjq7r2kcfcksktq8vfj4fxsm58faj6y9nyeq3u",
-        "balance": "5000000000000000000000000"
-    }, {
-        "address": "cudos1lgyh4qmsnl9xq3xrphsu2h7wq4yd6xuhx8gjfd",
-        "balance": "5000000000000000000000000"
+        "address": "cudos1c0gvh4qaq5q0hzvg237swpffsrnr22lhxpq5vw",
+        "balance": "1"
     }],
     "balances": [{
-        "address": "cudos1rkh2ja53k4364aacy6vhlxvcl6p88mdtfgcqhn",
+        "address": "cudos1nj49l56x7sss5hqyvfmctxr3mq64whg273g3x5",
         "balance": "5000000000000000000000000"
     }, {
-        "address": "cudos1709url666lqrg3pl7dcqf5rrda6he43762jnzf",
+        "address": "cudos1h80z6e4knjqmxc2lkhppmadr5ag0z9xruzpxdz",
         "balance": "5000000000000000000000000"
     }, {
-        "name": "mulstisig_manager2",
-        "address": "cudos1u284ayj3lpc4j7an9nzjh8qauhnv040v6u9mdt",
+        "address": "cudos1jzacf4hrrcwwq3e9m8uq9de74867e978v5dtse",
         "balance": "5000000000000000000000000"
     }, {
-        "name": "mulstisig_manager3",
-        "address": "cudos1u04z23xvvcjlcwa6my73pyt0qgpkxr8nvdyt5f",
+        "address": "cudos12djehdktnaamdxf00u54cufj7j06jy4s8tzk02",
         "balance": "5000000000000000000000000"
     }]
 }

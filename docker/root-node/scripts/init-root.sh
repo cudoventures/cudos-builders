@@ -228,6 +228,10 @@ genesisJson=$(jq ".app_state.auth.accounts += [{
 }]" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 
+if [ "$GRAVITY_MODULE_BALANCE" = "" ]; then
+  GRAVITY_MODULE_BALANCE="0"
+fi
+
 genesisJson=$(jq ".app_state.bank.balances += [{
   \"address\": \"cudos16n3lc7cywa68mg50qhp847034w88pntq8823tx\",
   \"coins\": [
