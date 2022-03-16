@@ -7,6 +7,10 @@ function sum {
     cat "$1" | python3 -c "import json, sys; print(sum(map(lambda x: int(x), json.load(sys.stdin))))"
 }
 
+function calculateGravityModuleBalance {
+    python3 -c "import json, sys; print(10000000000000000000000000000 - 134949630643200000000000000 - $1 - $2)"
+}
+
 tmpGenesisPath="/tmp/genesis.tmp.json"
 rootGenesisPath="$1"
 accountDataGenesisPath="/tmp/genesis.accounts.json"
@@ -65,7 +69,13 @@ for dataGenesisPath in ./*; do
     if [ "$stakingSize" = "0" ]; then
         # echo "[]" | jq ". += [{id: \"0x0\", tokens: \"500000000000000000000000000\", address: \"$validatorAddress\"}]" > "$tmpGenesisPath"
         # stakingSize="1"
+        if [ "$DEBUG_GENESIS" = "true" ]; then
+            echo "Skipping validator $validatorAddress from file $dataGenesisPath"
+        fi
         continue;
+    fi
+    if [ "$DEBUG_GENESIS" = "true" ]; then
+        echo "Processing validator $validatorAddress from file $dataGenesisPath"
     fi
     if [ "$stakingSize" != "1" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There are several staked accounts with identical address: $validatorAddress";
@@ -434,6 +444,19 @@ echo $result > "$RESULT_GENESIS_PATH"
 # remove distribution module balance
 distributionAddress=$(getModuleAddress "$RESULT_GENESIS_PATH" "distribution")
 result=$(jq ".app_state.bank.balances = [.app_state.bank.balances[] | if (.address == \"$distributionAddress\") then (.coins[0].amount = \"0\") else . end]" "$RESULT_GENESIS_PATH")
+echo $result > "$RESULT_GENESIS_PATH"
+
+# calculate total supply so far
+gravityAddress=$(getModuleAddress "$RESULT_GENESIS_PATH" "gravity")
+result=$(jq ".app_state.bank.balances = [.app_state.bank.balances[] | if (.address == \"$gravityAddress\") then (.coins[0].amount = \"0\") else . end]" "$RESULT_GENESIS_PATH")
+echo $result > "$RESULT_GENESIS_PATH"
+jq ".app_state.bank.balances | map(.coins) | flatten | map(select(.denom == \"acudos\") | .amount)" "$RESULT_GENESIS_PATH" > "$tmpGenesisPath"
+totalSupply=$(sum $tmpGenesisPath)
+
+# gravity module balance
+gravityAddress=$(getModuleAddress "$RESULT_GENESIS_PATH" "gravity")
+gravityTotalSupply=$(calculateGravityModuleBalance $totalSupply $bondedTokens)
+result=$(jq ".app_state.bank.balances = [.app_state.bank.balances[] | if (.address == \"$gravityAddress\") then (.coins[0].amount = \"$gravityTotalSupply\") else . end]" "$RESULT_GENESIS_PATH")
 echo $result > "$RESULT_GENESIS_PATH"
 
 # bank.supply

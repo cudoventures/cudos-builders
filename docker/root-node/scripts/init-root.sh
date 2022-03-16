@@ -179,6 +179,10 @@ echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 genesisJson=$(jq ".app_state.gravity.params.minimum_fee_transfer_to_eth = \"1200000000000000000000\"" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 
+# mint params
+genesisJson=$(jq ".app_state.cudoMint.minter.norm_time_passed = \"0.9678829209\"" "${CUDOS_HOME}/config/genesis.json")
+echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
+
 # create zero account
 (echo $KEYRING_OS_PASS; echo $KEYRING_OS_PASS) | cudos-noded keys add zero-account --keyring-backend os |& tee "${CUDOS_HOME}/zero-account.wallet"
 chmod 600 "${CUDOS_HOME}/zero-account.wallet"
@@ -227,6 +231,10 @@ genesisJson=$(jq ".app_state.auth.accounts += [{
   ]
 }]" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
+
+if [ "$GRAVITY_MODULE_BALANCE" = "" ]; then
+  GRAVITY_MODULE_BALANCE="0"
+fi
 
 genesisJson=$(jq ".app_state.bank.balances += [{
   \"address\": \"cudos16n3lc7cywa68mg50qhp847034w88pntq8823tx\",
