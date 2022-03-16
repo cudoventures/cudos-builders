@@ -110,6 +110,7 @@ source "$WORKING_SRC_DIR/modules/merge-genesis.sh" "$tmpFilePath"
 rm -f "$tmpFilePath"
 
 scp -o "StrictHostKeyChecking no" -p ${validatorComputerPort} $RESULT_GENESIS_PATH ${validatorComputerUser}@${validatorComputerIp}:"${PARAM_SOURCE_DIR}/CudosData/${validatorVolumeName}/config/genesis.json"
+$PARAM_SOURCE_DIR/CudosData/$validatorVolumeName/config/genesis.json"
 
 # restore cudos-noded start
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sed -i \"s/sleep infinity/cudos-noded start/\" ./start-root-node.dockerfile"
