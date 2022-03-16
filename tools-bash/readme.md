@@ -2,6 +2,7 @@
 
 Update branch variable in from "cudos-dev" to "cudos-master".
 Update required free space from 5GB to 500GB
+Update git commit hash
 
 # Debug command
 
