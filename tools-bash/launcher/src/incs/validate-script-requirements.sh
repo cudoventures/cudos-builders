@@ -17,7 +17,7 @@ if [ ! -x "$(command -v git)" ]; then
     exit 1;
 fi
 
-gitStatus=$(git branch --contains 8f422922e9bec035138cf1f82cc36997bdb3e707 2>&1)
+gitStatus=$(git branch --contains 7684715d335a699459770e7db7b12ab7f718daf5 2>&1)
 if [[ "$gitStatus" == *"error:"* ]]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} You must pull the latest changes";
     exit 1;
