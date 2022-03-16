@@ -46,6 +46,7 @@ do
 
     sentryNodeEnv=$(cat $(getSentryEnvPath $i))
     monitoringEnabled=$(readEnvFromString "$sentryNodeEnv" "MONITORING_ENABLED")
+    loggingDriver=$(readEnvFromString "$sentryNodeEnv" "LOGGING_DRIVER")
     ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && echo \"${sentryNodeEnv//\"/\\\"}\" > ./sentry-node.mainnet.env"
     # ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sed -i \"s/EXPOSE_IP=.*/EXPOSE_IP=\\\"$sentryComputerInternalIp\\\"/g\" ./sentry-node.mainnet.arg"
     ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sed -i \"s/EXTERNAL_ADDRESS=.*/EXTERNAL_ADDRESS=\\\"$sentryComputerIp:26656\\\"/g\" ./sentry-node.mainnet.env"
@@ -79,13 +80,18 @@ do
     echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
     echo -ne "Starting sentry($i)...";
+    if [ "$loggingDriver" = "gcplogs" ]; then
+        startYmlOverrideLogging="-f ./start-sentry-node.override.logging.yml"
+    else
+        startYmlOverrideLogging=""
+    fi
     # ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sed -i \"/{PORT26660}:1317/d\" ./start-sentry-node.yml"
     # ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sed -i \"/{PORT26660}:9090/d\" ./start-sentry-node.yml"
     # ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sed -i \"/{PORT26660}:26657/d\" ./start-sentry-node.yml"
     if [ "$monitoringEnabled" = "false" ]; then
         ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sed -i \"/{PORT26660}:26660/d\" ./start-sentry-node.yml"
     fi
-    result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sudo docker-compose --env-file ./sentry-node.mainnet.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node up --build -d 2> /dev/null")
+    result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sudo docker-compose --env-file ./sentry-node.mainnet.arg -f ./start-sentry-node.yml $startYmlOverrideLogging -p cudos-start-sentry-node up --build -d 2> /dev/null")
     if [ "$?" != 0 ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
         exit 1;

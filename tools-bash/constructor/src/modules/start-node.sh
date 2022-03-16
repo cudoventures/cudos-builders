@@ -16,10 +16,20 @@ arg=$(cat ./$NODE_NAME.client.mainnet.arg)
 startContainerName=$(readEnvFromString "$arg" "START_CONTAINER_NAME")
 unset arg
 
-dockerResult=$(docker-compose --env-file ./$NODE_NAME.client.mainnet.arg -f ./start-$NODE_NAME.yml -p cudos-start-$NODE_NAME-client-mainnet-01 down 2> /dev/null);
+arg=$(cat ./$NODE_NAME.client.mainnet.env)
+loggingDriver=$(readEnvFromString "$arg" "LOGGING_DRIVER")
+unset arg
+
+if [ "$loggingDriver" = "gcplogs" ]; then
+    startYmlOverrideLogging="-f ./start-$NODE_NAME.override.logging.yml"
+else
+    startYmlOverrideLogging=""
+fi
+
+dockerResult=$(docker-compose --env-file ./$NODE_NAME.client.mainnet.arg -f ./start-$NODE_NAME.yml $startYmlOverrideLogging -p cudos-start-$NODE_NAME-client-mainnet-01 down 2> /dev/null);
 sed -i "s/cudos-noded start/sleep infinity/g" "./start-$NODE_NAME.dockerfile";
 sed -i "s/--state-sync.snapshot-interval 2000 --state-sync.snapshot-keep-recent 2//g" "./start-$NODE_NAME.dockerfile";
-dockerResult=$(docker-compose --env-file ./$NODE_NAME.client.mainnet.arg -f ./start-$NODE_NAME.yml -p cudos-start-$NODE_NAME-client-mainnet-01 up --build -d 2> /dev/null);
+dockerResult=$(docker-compose --env-file ./$NODE_NAME.client.mainnet.arg -f ./start-$NODE_NAME.yml $startYmlOverrideLogging -p cudos-start-$NODE_NAME-client-mainnet-01 up --build -d 2> /dev/null);
 dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "cudos-noded unsafe-reset-all" 2> /dev/null)
 if [ "$NODE_NAME" = "full-node" ]; then
     sed -i "s/sleep infinity/cudos-noded start/g" "./start-$NODE_NAME.dockerfile";
@@ -82,7 +92,7 @@ echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Starting the $NODE_NAME...";
 cd "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME";
-dockerResult=$(docker-compose --env-file ./$NODE_NAME.client.mainnet.arg -f ./start-$NODE_NAME.yml -p cudos-start-$NODE_NAME-client-mainnet-01 up --build -d 2> /dev/null);
+dockerResult=$(docker-compose --env-file ./$NODE_NAME.client.mainnet.arg -f ./start-$NODE_NAME.yml $startYmlOverrideLogging -p cudos-start-$NODE_NAME-client-mainnet-01 up --build -d 2> /dev/null);
 if [ "$?" != 0 ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error building the container $?: ${dockerResult}";
     exit 1;

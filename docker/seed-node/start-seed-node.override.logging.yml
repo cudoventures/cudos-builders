@@ -1,0 +1,10 @@
+version: '3.1'
+
+networks:
+  shared-cudos-network:
+    name: shared-cudos-network
+
+services:
+  cudos-seed-node:
+    logging:
+      driver: "gcplogs"

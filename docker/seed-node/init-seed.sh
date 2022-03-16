@@ -13,6 +13,13 @@ BOND_DENOM="acudos"
 
 cudos-noded init $MONIKER
 
+if [ "$LOGGING_DRIVER" = "json-file" ]; then
+    sed -i "53s/log_format = \".*\"/log_format = \"plain\"/" "${CUDOS_HOME}/config/config.toml"
+fi
+if [ "$LOGGING_DRIVER" = "gcplogs" ]; then
+    sed -i "53s/log_format = \".*\"/log_format = \"json\"/" "${CUDOS_HOME}/config/config.toml"
+fi
+
 cp ./external-config/genesis.json "${CUDOS_HOME}/config/genesis.json"
 
 # gas price

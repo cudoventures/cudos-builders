@@ -26,6 +26,13 @@ WORKING_PATH=$(pwd) && cd $CUDOS_HOME && rm -Rf ./* && cd $WORKING_PATH
 
 cudos-noded init $MONIKER --chain-id=$CHAIN_ID
 
+if [ "$LOGGING_DRIVER" = "json-file" ]; then
+    sed -i "53s/log_format = \".*\"/log_format = \"plain\"/" "${CUDOS_HOME}/config/config.toml"
+fi
+if [ "$LOGGING_DRIVER" = "gcplogs" ]; then
+    sed -i "53s/log_format = \".*\"/log_format = \"json\"/" "${CUDOS_HOME}/config/config.toml"
+fi
+
 # gas price
 sed -i "s/minimum-gas-prices = \"\"/minimum-gas-prices = \"5000000000000${BOND_DENOM}\"/" "${CUDOS_HOME}/config/app.toml"
 

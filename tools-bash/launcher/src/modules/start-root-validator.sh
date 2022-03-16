@@ -38,6 +38,7 @@ echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 rootNodeEnv=$(cat $(getValidatorEnvPath))
 monitoringEnabled=$(readEnvFromString "$rootNodeEnv" "MONITORING_ENABLED")
 numberOfOrchestrators=$(readEnvFromString "$rootNodeEnv" "NUMBER_OF_ORCHESTRATORS")
+loggingDriver=$(readEnvFromString "$rootNodeEnv" "LOGGING_DRIVER")
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && echo \"${rootNodeEnv//\"/\\\"}\" > ./root-node.mainnet.env"
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sed -i \"s/EXPOSE_IP=.*/EXPOSE_IP=\\\"$validatorComputerInternalIp\\\"/g\" ./root-node.mainnet.arg"
 
@@ -70,7 +71,12 @@ if [ "$monitoringEnabled" = "false" ]; then
     ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sed -i \"/{PORT26660}:26660/d\" ./start-root-node.yml"
 fi
 # start the contianer
-result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./start-root-node.yml -p cudos-start-root-node up --build -d 2> /dev/null")
+if [ "$loggingDriver" = "gcplogs" ]; then
+    startYmlOverrideLogging="-f ./start-root-node.override.logging.yml"
+else
+    startYmlOverrideLogging=""
+fi
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./start-root-node.yml $startYmlOverrideLogging -p cudos-start-root-node up --build -d 2> /dev/null")
 if [ "$?" != 0 ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
     exit 1;
@@ -90,11 +96,11 @@ do
     fi
 done
 # stop the docker
-result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./start-root-node.yml -p cudos-start-root-node down 2> /dev/null")
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./start-root-node.yml $startYmlOverrideLogging -p cudos-start-root-node down 2> /dev/null")
 # set sleep infinity
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sed -i \"s/cudos-noded start/sleep infinity/\" ./start-root-node.dockerfile"
 # start the sleeping docker
-result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./start-root-node.yml -p cudos-start-root-node up --build -d 2> /dev/null")
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./start-root-node.yml $startYmlOverrideLogging -p cudos-start-root-node up --build -d 2> /dev/null")
 # export genesis
 tmpFilePath="/tmp/genesis.cudos.json"
 result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container exec $validatorStartContainerName /bin/bash -c \"cudos-noded export |& tee $tmpFilePath\" 2> /dev/null")
@@ -102,7 +108,7 @@ exportedGenesis=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${v
 # reset the data
 result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container exec $validatorStartContainerName /bin/bash -c \"cudos-noded unsafe-reset-all\" 2> /dev/null")
 # stop the docker
-result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./start-root-node.yml -p cudos-start-root-node down 2> /dev/null")
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./start-root-node.yml $startYmlOverrideLogging -p cudos-start-root-node down 2> /dev/null")
 # merge genesis
 echo $exportedGenesis > "$tmpFilePath"
 cp "$tmpFilePath" "$WORKING_EXPORT_DIR/genesis-root.json"
@@ -113,7 +119,7 @@ ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp
 # restore cudos-noded start
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sed -i \"s/sleep infinity/cudos-noded start/\" ./start-root-node.dockerfile"
 # start the node
-result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./start-root-node.yml -p cudos-start-root-node up --build -d 2> /dev/null")
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./start-root-node.yml $startYmlOverrideLogging -p cudos-start-root-node up --build -d 2> /dev/null")
 if [ "$?" != 0 ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
     exit 1;
