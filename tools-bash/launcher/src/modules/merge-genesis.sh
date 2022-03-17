@@ -448,8 +448,23 @@ echo $result > "$RESULT_GENESIS_PATH"
 
 # calculate total supply so far
 gravityAddress=$(getModuleAddress "$RESULT_GENESIS_PATH" "gravity")
-result=$(jq ".app_state.bank.balances = [.app_state.bank.balances[] | if (.address == \"$gravityAddress\") then (.coins[0].amount = \"0\") else . end]" "$RESULT_GENESIS_PATH")
-echo $result > "$RESULT_GENESIS_PATH"
+jq .app_state.bank.balances "$RESULT_GENESIS_PATH" | jq "map(select(.address == \"$gravityAddress\") | .)" > "$tmpGenesisPath"
+hasGravityBalance=$(jq length "$tmpGenesisPath")
+if [ "$hasGravityBalance" = "0" ]; then
+    result=$(jq ".app_state.bank.balances += [{
+        \"address\": \"$gravityAddress\",
+        \"coins\": [
+            {
+            \"amount\": \"0\",
+            \"denom\": \"acudos\"
+            }
+        ]
+    }]" "$RESULT_GENESIS_PATH")
+    echo $result > "$RESULT_GENESIS_PATH"
+else
+    result=$(jq ".app_state.bank.balances = [.app_state.bank.balances[] | if (.address == \"$gravityAddress\") then (.coins[0].amount = \"0\") else . end]" "$RESULT_GENESIS_PATH")
+    echo $result > "$RESULT_GENESIS_PATH"
+fi
 jq ".app_state.bank.balances | map(.coins) | flatten | map(select(.denom == \"acudos\") | .amount)" "$RESULT_GENESIS_PATH" > "$tmpGenesisPath"
 totalSupply=$(sum $tmpGenesisPath)
 
