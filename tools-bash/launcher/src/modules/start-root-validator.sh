@@ -108,8 +108,8 @@ echo $exportedGenesis > "$tmpFilePath"
 cp "$tmpFilePath" "$WORKING_EXPORT_DIR/genesis-root.json"
 source "$WORKING_SRC_DIR/modules/merge-genesis.sh" "$tmpFilePath"
 rm -f "$tmpFilePath"
-
-scp -o "StrictHostKeyChecking no" -p ${validatorComputerPort} $RESULT_GENESIS_PATH ${validatorComputerUser}@${validatorComputerIp}:"${PARAM_SOURCE_DIR}/CudosData/${validatorVolumeName}/config/genesis.json"
+scp -o "StrictHostKeyChecking no" -P ${validatorComputerPort} "$RESULT_GENESIS_PATH" ${validatorComputerUser}@${validatorComputerIp}:"/tmp/genesis.mainnet.json" &>/dev/null
+ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosData/$validatorVolumeName/config && sudo mv /tmp/genesis.mainnet.json ./genesis.json"
 
 # restore cudos-noded start
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sed -i \"s/sleep infinity/cudos-noded start/\" ./start-root-node.dockerfile"
@@ -127,8 +127,8 @@ if [ "$VALIDATOR_TENEDRMINT_NODE_ID" = "" ]; then
     exit 1;
 fi
 
-GENESIS_JSON=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container exec cudos-start-root-node /bin/bash -c \"head \\\$CUDOS_HOME/config/genesis.json\"")
-if [ "$GENESIS_JSON" = "" ]; then
+genesisJson=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container exec cudos-start-root-node /bin/bash -c \"head \\\$CUDOS_HOME/config/genesis.json\"")
+if [ "$genesisJson" = "" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The genesis.json is not defined";
     exit 1;
 fi

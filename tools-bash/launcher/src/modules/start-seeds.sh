@@ -48,7 +48,7 @@ do
     ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node && echo \"${seedNodeEnv//\"/\\\"}\" > ./seed-node.mainnet.env"
     # ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node && sed -i \"s/EXPOSE_IP=.*/EXPOSE_IP=\\\"$seedComputerInternalIp\\\"/g\" ./seed-node.mainnet.arg"
     ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node && sed -i \"s/EXTERNAL_ADDRESS=.*/EXTERNAL_ADDRESS=\\\"$seedComputerIp:26656\\\"/g\" ./seed-node.mainnet.env"
-    ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/config && echo \"${GENESIS_JSON//\"/\\\"}\" > ./genesis.mainnet.json"
+    scp -o "StrictHostKeyChecking no" -P ${seedComputerPort} "$RESULT_GENESIS_PATH" ${seedComputerUser}@${seedComputerIp}:"$PARAM_SOURCE_DIR/CudosBuilders/docker/config/genesis.mainnet.json" &>/dev/null
 
     echo -ne "Preparing seed($i)'s peers...";
     ssh -o "StrictHostKeyChecking no" ${seedComputerUser}@${seedComputerIp} -p ${seedComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node && sed -i \"s/PERSISTENT_PEERS=.*/PERSISTENT_PEERS=\\\"$VALIDATOR_TENEDRMINT_NODE_ID@$validatorInternalIp:26656\\\"/g\" ./seed-node.mainnet.env"
