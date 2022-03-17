@@ -6,11 +6,11 @@ Check all the needed prerequisites [here](./prerequisites.md).
 ## Setup of the sentry node
 
 ### Setup the environment
-You need to have an up to date local copy of our build tools. When you executed the first step your CudosBuilders directory was created in $HOME.
+You need to have an up to date local copy of our build tools.
 
 ```
 cd $HOME
-git pull
+git clone --branch cudos-master https://github.com/CudoVentures/cudos-builders.git CudosBuilders
 cd CudosBuilders/tools-bash/constructor
 ```
 
