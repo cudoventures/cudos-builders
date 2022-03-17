@@ -109,8 +109,12 @@ for dataGenesisPath in ./*; do
     fi
 
     # auth.accounts
-    result=$(jq -s '.[0].app_state.auth.accounts = .[0].app_state.auth.accounts + .[1]' "$RESULT_GENESIS_PATH" "$accountDataGenesisPath" | jq '.[0]')
-    echo $result > "$RESULT_GENESIS_PATH"
+    jq .app_state.auth.accounts "$RESULT_GENESIS_PATH" | jq "map(select(.address == \"$validatorAddress\") | .)" > "$tmpGenesisPath"
+    hasValidatorAuthAccount=$(jq length "$tmpGenesisPath")
+    if [ "$hasValidatorAuthAccount" = "0" ]; then
+        result=$(jq -s '.[0].app_state.auth.accounts = .[0].app_state.auth.accounts + .[1]' "$RESULT_GENESIS_PATH" "$accountDataGenesisPath" | jq '.[0]')
+        echo $result > "$RESULT_GENESIS_PATH"
+    fi
 
     # STAKING - append to auth.accounts
     # if [ "$authAccounts" != "" ]; then
@@ -134,29 +138,33 @@ for dataGenesisPath in ./*; do
     fi
 
     # bank.balances
-    jq .app_state.bank.balances "$dataGenesisPath" | jq "map(select(.address == \"$validatorAddress\") | .)" > "$tmpGenesisPath"
-    balancesSize=$(jq length "$tmpGenesisPath")
-    if [ "$balancesSize" = "0" ]; then
-        # set validator's account to 0 just to trigger the condition below
-        echo "[{
-                \"address\": \"$validatorAddress\",
-                \"coins\": [{
-                    \"amount\": \"0\",
-                    \"denom\": \"acudos\"
-                }]
-            }]" > "$tmpGenesisPath"
-    fi
-    balancesSize=$(jq length "$tmpGenesisPath")
-    if [ "$balancesSize" = "1" ]; then
-        # set validator's balance to his reward, because the rest of his funds will be delegated
-        result=$(jq ".[].coins = [.[].coins[] | if (.denom == \"acudos\") then (.amount = \"$validatorReward\") else . end]" $tmpGenesisPath)
-        echo $result > $tmpGenesisPath
-        # merge balances
-        result=$(jq -s '.[0].app_state.bank.balances = .[0].app_state.bank.balances + .[1]' "$RESULT_GENESIS_PATH" "$tmpGenesisPath" | jq '.[0]')
-        echo $result > "$RESULT_GENESIS_PATH"
-    else
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There are several balances for account: $validatorAddress";
-        exit 1;
+    jq .app_state.bank.balances "$RESULT_GENESIS_PATH" | jq "map(select(.address == \"$validatorAddress\") | .)" > "$tmpGenesisPath"
+    hasValidatorBankBalance=$(jq length "$tmpGenesisPath")
+    if [ "$hasValidatorBankBalance" = "0" ]; then
+        jq .app_state.bank.balances "$dataGenesisPath" | jq "map(select(.address == \"$validatorAddress\") | .)" > "$tmpGenesisPath"
+        balancesSize=$(jq length "$tmpGenesisPath")
+        if [ "$balancesSize" = "0" ]; then
+            # set validator's account to 0 just to trigger the condition below
+            echo "[{
+                    \"address\": \"$validatorAddress\",
+                    \"coins\": [{
+                        \"amount\": \"0\",
+                        \"denom\": \"acudos\"
+                    }]
+                }]" > "$tmpGenesisPath"
+        fi
+        balancesSize=$(jq length "$tmpGenesisPath")
+        if [ "$balancesSize" = "1" ]; then
+            # set validator's balance to his reward, because the rest of his funds will be delegated
+            result=$(jq ".[].coins = [.[].coins[] | if (.denom == \"acudos\") then (.amount = \"$validatorReward\") else . end]" $tmpGenesisPath)
+            echo $result > $tmpGenesisPath
+            # merge balances
+            result=$(jq -s '.[0].app_state.bank.balances = .[0].app_state.bank.balances + .[1]' "$RESULT_GENESIS_PATH" "$tmpGenesisPath" | jq '.[0]')
+            echo $result > "$RESULT_GENESIS_PATH"
+        else
+            echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There are several balances for account: $validatorAddress";
+            exit 1;
+        fi
     fi
 
     # bank.balances - rewards for delegators
@@ -222,7 +230,7 @@ for dataGenesisPath in ./*; do
     fi
 
     # STAKING - update self delegation
-    result=$(jq ".app_state.staking.delegations = [.app_state.staking.delegations[] | if (.delegator_address == \"$validatorAddress\") then (.shares = \"$validatorStakingBalance.000000000000000000\") else . end]" $RESULT_GENESIS_PATH)
+    result=$(jq ".app_state.staking.delegations = [.app_state.staking.delegations[] | if (.delegator_address == \"$validatorAddress\" and .validator_address == \"$validatorOperAddress\") then (.shares = \"$validatorStakingBalance.000000000000000000\") else . end]" $RESULT_GENESIS_PATH)
     echo $result > $RESULT_GENESIS_PATH
 
     # STAKING - calculate total delegations
@@ -265,7 +273,7 @@ for dataGenesisPath in ./*; do
     echo $result > "$RESULT_GENESIS_PATH"
 
     # STAKING - update distribution starting info
-    result=$(jq ".app_state.distribution.delegator_starting_infos = [.app_state.distribution.delegator_starting_infos[] | if (.delegator_address == \"$validatorAddress\") then (.starting_info.stake = \"$validatorStakingBalance.000000000000000000\") else . end]" "$RESULT_GENESIS_PATH")
+    result=$(jq ".app_state.distribution.delegator_starting_infos = [.app_state.distribution.delegator_starting_infos[] | if (.delegator_address == \"$validatorAddress\" and .validator_address == \"$validatorOperAddress\") then (.starting_info.stake = \"$validatorStakingBalance.000000000000000000\") else . end]" "$RESULT_GENESIS_PATH")
     echo $result > "$RESULT_GENESIS_PATH"
 
     if [ "$distributionDelegatorStartingInfos" != "" ]; then
