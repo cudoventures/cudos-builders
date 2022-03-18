@@ -282,10 +282,6 @@ PARAM_ORCH_ETH_ADDRESS=""
 
 You can see the gravity instructions [here](./gravity.md).
 
-```
-sudo ./src/start.sh sentry-node
-```
-
 Now you can run
 ```
 sudo ./src/start.sh clustered-validator-node
