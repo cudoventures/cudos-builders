@@ -33,7 +33,7 @@ The content of the node.env should be:
 MONIKER=<TYPE DOWN NODE NAME>
 PRIVATE_PEERS=<validator node tendermint id>
 
-SHOULD_USE_GLOBAL_PEERS=true
+SHOULD_USE_GLOBAL_PEERS=false
 SHOULD_USE_STATE_SYNC=false
 
 TLS_ENABLED=false
@@ -123,7 +123,7 @@ The content of the node.env should be:
 MONIKER=<name of the node>
 PRIVATE_PEERS=
 
-SHOULD_USE_GLOBAL_PEERS=true
+SHOULD_USE_GLOBAL_PEERS=false
 SHOULD_USE_STATE_SYNC=false
 
 MONITORING_ENABLED=false
