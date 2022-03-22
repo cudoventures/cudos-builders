@@ -7,3 +7,5 @@ Update git commit hash
 # Debug command
 
 sudo rm -rf ../../../CudosConstruct/* && (sudo rm -rf ../../../CudosConstruct/.* || true) && sudo ./src/init.sh standalone-validator-node
+
+sudo rm -rf ../../../CudosConstruct/* && (sudo rm -rf ../../../CudosConstruct/.* || true) && sudo ./src/relayer.sh
