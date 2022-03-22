@@ -15,7 +15,7 @@ cudos-noded init $MONIKER
 cp ./external-config/genesis.json "${CUDOS_HOME}/config/genesis.json"
 
 # gas price
-sed -i "s/minimum-gas-prices = \"\"/minimum-gas-prices = \"0${BOND_DENOM}\"/" "${CUDOS_HOME}/config/app.toml"
+sed -i "s/minimum-gas-prices = \"\"/minimum-gas-prices = \"5000000000000${BOND_DENOM}\"/" "${CUDOS_HOME}/config/app.toml"
 
 # port 1317
 # enable
