@@ -49,7 +49,7 @@ do
     ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && echo \"${sentryNodeEnv//\"/\\\"}\" > ./sentry-node.mainnet.env"
     # ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sed -i \"s/EXPOSE_IP=.*/EXPOSE_IP=\\\"$sentryComputerInternalIp\\\"/g\" ./sentry-node.mainnet.arg"
     ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sed -i \"s/EXTERNAL_ADDRESS=.*/EXTERNAL_ADDRESS=\\\"$sentryComputerIp:26656\\\"/g\" ./sentry-node.mainnet.env"
-    ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/config && echo \"${GENESIS_JSON//\"/\\\"}\" > ./genesis.mainnet.json"
+    scp -o "StrictHostKeyChecking no" -P ${sentryComputerPort} "$RESULT_GENESIS_PATH" ${sentryComputerUser}@${sentryComputerIp}:"$PARAM_SOURCE_DIR/CudosBuilders/docker/config/genesis.mainnet.json" &>/dev/null
 
     echo -ne "Preparing sentry($i)'s peers...";
     ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sed -i \"s/PERSISTENT_PEERS=.*/PERSISTENT_PEERS=\\\"$VALIDATOR_TENEDRMINT_NODE_ID@$validatorInternalIp:26656\\\"/g\" ./sentry-node.mainnet.env"

@@ -6,11 +6,11 @@ Check all the needed prerequisites [here](./prerequisites.md).
 ## Setup of the sentry node
 
 ### Setup the environment
-You need to have a local copy of our build tools.Create your main Cudos directory. On the first row you can define where all Cudos data will be stored.
+You need to have an up to date local copy of our build tools.
 
 ```
 cd $HOME
-git clone --branch cudos-master https://github.com/CudoVentures/cudos-builders.git CudosBuilders
+git clone --branch v0.5.0 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
 cd CudosBuilders/tools-bash/constructor
 ```
 
@@ -33,7 +33,7 @@ The content of the node.env should be:
 MONIKER=<TYPE DOWN NODE NAME>
 PRIVATE_PEERS=<validator node tendermint id>
 
-SHOULD_USE_GLOBAL_PEERS=true
+SHOULD_USE_GLOBAL_PEERS=false
 SHOULD_USE_STATE_SYNC=false
 
 TLS_ENABLED=false
@@ -100,7 +100,7 @@ You need to have a local copy of our build tools.Create your main Cudos director
 mkdir /usr/cudos
 
 cd $HOME
-git clone --branch cudos-master https://github.com/CudoVentures/cudos-builders.git CudosBuilders
+git clone --branch v0.5.0 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
 cd CudosBuilders/tools-bash/constructor
 ```
 
@@ -123,7 +123,7 @@ The content of the node.env should be:
 MONIKER=<name of the node>
 PRIVATE_PEERS=
 
-SHOULD_USE_GLOBAL_PEERS=true
+SHOULD_USE_GLOBAL_PEERS=false
 SHOULD_USE_STATE_SYNC=false
 
 MONITORING_ENABLED=false
@@ -281,10 +281,6 @@ PARAM_ORCH_ETH_ADDRESS=""
 ```
 
 You can see the gravity instructions [here](./gravity.md).
-
-```
-sudo ./src/start.sh sentry-node
-```
 
 Now you can run
 ```
