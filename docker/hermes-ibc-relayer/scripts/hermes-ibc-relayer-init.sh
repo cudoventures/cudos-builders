@@ -41,5 +41,5 @@ hermes keys restore ${CHAIN_ID_1} -m "${SEED_1}"
 #init
 if [ "$CREATE_CHANNEL" = true ] ; then
     echo "Creating channel"
-    hermes create channel ${CHAIN_ID_0} ${CHAIN_ID_1} --port-a transfer --port-b transfer
+    hermes create channel ${CHAIN_ID_0} ${CHAIN_ID_1} --port-a transfer --port-b transfer &> /root/.hermes/create-channel-data.txt
 fi

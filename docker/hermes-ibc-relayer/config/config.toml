@@ -113,7 +113,7 @@ id = ''
 rpc_addr = ''
 
 # Specify the GRPC address and port where the chain GRPC server listens on. Required
-grpc_addr = 'h'
+grpc_addr = ''
 
 # Specify the WebSocket address and port where the chain WebSocket server
 # listens on. Required
