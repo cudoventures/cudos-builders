@@ -47,7 +47,7 @@ ADDR_BOOK_STRICT=true
 ```
 For now we can leave the information about the peers empty. 
 
-**MONIKER** is the name of the node.
+**MONIKER** is the name of the node. It MUST contains only lowercase english letters and/or a dash.
 
 **PRIVATE_PEERS** list with the node ID of any Validator nodes on your private network with format: <_tendermint_id_>.
 
@@ -132,7 +132,7 @@ EXTERNAL_ADDRESS=
 ADDR_BOOK_STRICT=true
 ```
 
-**MONIKER** is the name of the node.
+**MONIKER** is the name of the node. It MUST contains only lowercase english letters and/or a dash.
 
 **PRIVATE_PEERS** list with the node ID of any Validator nodes on your private network with format: <_tendermint_id_>.
 
@@ -188,13 +188,13 @@ If you successfully submitted your genesis in the previous step of Phase 4 your 
 
 ### Sentry node
 
-Copy the start.env.example and rename it to start.env. 
+Copy the start-peers.env.example and rename it to start.env. 
 ```
-cp start-peers.env.example start.env
+cp ./tools-bash/constructor/config/start-peers.env.example ./tools-bash/constructor/config/start.env
 ```
 Enter the newly copied file with the command below:
 ```
-nano start.env
+nano ./tools-bash/constructor/config/start.env
 ```
 Leave the **PARAMS_SEED** and **PARAM_PERSISTENT_PEERS**. They represent the Cudos peers - you'll need them to connect to the network. Then only change is the following:
 
@@ -202,20 +202,31 @@ Leave the **PARAMS_SEED** and **PARAM_PERSISTENT_PEERS**. They represent the Cud
 PARAM_PRIVATE_PEER_IDS="<validator_tendermint_id>"
 PARAM_EXPOSE_IP="0.0.0.0"
 ```
-NOTE: There may be an error for the Resetting the sentry-node step.
 
+**PARAM_PRIVATE_PEER_IDS** contains the validator tendermint node ID. <em>Example: PARAM_PRIVATE_PEER_IDS="2faaf03451abe212561affffbee119835a4a94ae"</em>
+
+```
+sudo ./src/start.sh sentry-node
+```
+NOTE: There may be an error for the Resetting the sentry-node step.
 ### Seed node
 
-Parameters for the start node should be located in start.env file as follows:
+Copy the start-peers.env.example and rename it to start.env. 
 ```
-PARAM_PERSISTENT_PEERS=""
-PARAM_SEED="<seeds_tendermint_id>@<ip>:26656"
-PARAM_PRIVATE_PEER_IDS="<validator_tendermint_id>@<ip>:26656"
+cp ./tools-bash/constructor/config/start-peers.env.example ./tools-bash/constructor/config/start.env
+```
+Enter the newly copied file with the command below:
+```
+nano ./tools-bash/constructor/config/start.env
+```
+Leave the **PARAMS_SEED** and **PARAM_PERSISTENT_PEERS**. They represent the Cudos peers - you'll need them to connect to the network. Then only change is the following:
+
+```
+PARAM_PRIVATE_PEER_IDS="<validator_tendermint_id>"
 PARAM_EXPOSE_IP="0.0.0.0"
 ```
 
-**PARAM_PRIVATE_PEER_IDS** contains the validator node ID, IP and port.
-**PARAM_PERSISTENT_PEERS** comma separated list of sentry nodes.
+**PARAM_PRIVATE_PEER_IDS** contains the validator tendermint node ID. <em>Example: PARAM_PRIVATE_PEER_IDS="2faaf03451abe212561affffbee119835a4a94ae"</em>
 
 ```
 sudo ./src/start.sh seed-node
@@ -243,11 +254,11 @@ If you want to manualy provide a genesis file for your nodes you need to place i
 ## Start the node
 To start the validator first setup it's environement. Copy the start.env.example and rename it to start.env. 
 ```
-cp start-peers.env.example start.env
+cp ./tools-bash/constructor/config/start-peers.env.example ./tools-bash/constructor/config/start.env
 ```
 Enter the newly copied file with the command below:
 ```
-nano start.env
+nano ./tools-bash/constructor/config/start.env
 ```
 Then enter the following:
 

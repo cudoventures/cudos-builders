@@ -19,6 +19,8 @@ source "$WORKING_SRC_DIR/incs/utils.sh"
 
 source "$WORKING_SRC_DIR/incs/validate.sh"
 
+source "$WORKING_SRC_DIR/modules/update-repos.sh"
+
 source "$WORKING_SRC_DIR/modules/start-node.sh"
 
 echo "" # new line

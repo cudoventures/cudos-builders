@@ -30,12 +30,23 @@ cudos-noded init $MONIKER --chain-id=$CHAIN_ID
 sed -i "s/minimum-gas-prices = \"\"/minimum-gas-prices = \"5000000000000${BOND_DENOM}\"/" "${CUDOS_HOME}/config/app.toml"
 
 # port 1317
+# enable
+# sed -i "104s/enable = false/enable = true/" "${CUDOS_HOME}/config/app.toml"
+# sed -i "s/enabled-unsafe-cors = false/enabled-unsafe-cors = true/" "${CUDOS_HOME}/config/app.toml"
+# disable
 sed -i "104s/enable = true/enable = false/" "${CUDOS_HOME}/config/app.toml"
 
 # port 9090
+# enable
+# sed -i "158s/enable = false/enable = true/" "${CUDOS_HOME}/config/app.toml"
+# disable
 sed -i "158s/enable = true/enable = false/" "${CUDOS_HOME}/config/app.toml"
 
 # port 26657
+# enable
+# sed -i "s/laddr = \"tcp:\/\/127.0.0.1:26657\"/laddr = \"tcp:\/\/0.0.0.0:26657\"/" "${CUDOS_HOME}/config/config.toml"
+# sed -i "s/cors_allowed_origins = \[\]/cors_allowed_origins = \[\"\*\"\]/" "${CUDOS_HOME}/config/config.toml"
+# disable
 sed -i "s/laddr = \"tcp:\/\/0.0.0.0:26657\"/laddr = \"tcp:\/\/127.0.0.1:26657\"/" "${CUDOS_HOME}/config/config.toml"
 sed -i "s/cors_allowed_origins = .*/cors_allowed_origins = \[\]/" "${CUDOS_HOME}/config/config.toml"
 
@@ -168,6 +179,10 @@ echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 genesisJson=$(jq ".app_state.gravity.params.minimum_fee_transfer_to_eth = \"1200000000000000000000\"" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 
+# mint params
+genesisJson=$(jq ".app_state.cudoMint.minter.norm_time_passed = \"0.9678829209\"" "${CUDOS_HOME}/config/genesis.json")
+echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
+
 # create zero account
 (echo $KEYRING_OS_PASS; echo $KEYRING_OS_PASS) | cudos-noded keys add zero-account --keyring-backend os |& tee "${CUDOS_HOME}/zero-account.wallet"
 chmod 600 "${CUDOS_HOME}/zero-account.wallet"
@@ -178,7 +193,7 @@ for i in $(seq 1 $NUMBER_OF_VALIDATORS); do
     (echo $KEYRING_OS_PASS; echo $KEYRING_OS_PASS) | cudos-noded keys add "validator-$i" --keyring-backend os |& tee "${CUDOS_HOME}/validator-$i.wallet"
     chmod 600 "${CUDOS_HOME}/validator-$i.wallet"
     validatorAddress=$(echo $KEYRING_OS_PASS | cudos-noded keys show validator-$i -a --keyring-backend os)
-    cudos-noded add-genesis-account $validatorAddress "${VALIDATOR_BALANCE}${BOND_DENOM},1cudosAdmin"
+    cudos-noded add-genesis-account $validatorAddress "${VALIDATOR_BALANCE}${BOND_DENOM}"
     cat "${CUDOS_HOME}/config/genesis.json" | jq --arg validatorAddress "$validatorAddress" '.app_state.gravity.static_val_cosmos_addrs += [$validatorAddress]' > "${CUDOS_HOME}/config/tmp_genesis.json" && mv "${CUDOS_HOME}/config/tmp_genesis.json" "${CUDOS_HOME}/config/genesis.json"
 done
 
@@ -216,6 +231,10 @@ genesisJson=$(jq ".app_state.auth.accounts += [{
   ]
 }]" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
+
+if [ "$GRAVITY_MODULE_BALANCE" = "" ]; then
+  GRAVITY_MODULE_BALANCE="0"
+fi
 
 genesisJson=$(jq ".app_state.bank.balances += [{
   \"address\": \"cudos16n3lc7cywa68mg50qhp847034w88pntq8823tx\",

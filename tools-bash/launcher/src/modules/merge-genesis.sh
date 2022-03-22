@@ -7,9 +7,16 @@ function sum {
     cat "$1" | python3 -c "import json, sys; print(sum(map(lambda x: int(x), json.load(sys.stdin))))"
 }
 
+function calculateGravityModuleBalance {
+    python3 -c "import json, sys; print(10000000000000000000000000000 - 134949630643200000000000000 - $1 - $2)"
+}
+
 tmpGenesisPath="/tmp/genesis.tmp.json"
 rootGenesisPath="$1"
-accountDataGenesisPath="/tmp/genesis.filtered.json"
+accountDataGenesisPath="/tmp/genesis.accounts.json"
+delegatorsDataGenesisPath="/tmp/genesis.delegators.json"
+predefinedBalancesDataGenesisPath="/tmp/genesis.balances.json"
+adminDataGenesisPath="/tmp/genesis.admin.json"
 RESULT_GENESIS_PATH="$WORKING_EXPORT_DIR/genesis.json"
 
 # copy to result genesis location
@@ -23,7 +30,7 @@ fi
 # process client genesises
 cd "$WORKING_DATA_GENESIS_DIR"
 for dataGenesisPath in ./*; do
-    [ -e $dataGenesisPath ] || continue
+    [ -e "$dataGenesisPath" ] || continue
 
     # validator address
     jq .app_state.auth.accounts "$dataGenesisPath" | jq "map(select(.\"@type\" == \"/cosmos.auth.v1beta1.BaseAccount\") | .)" > "$accountDataGenesisPath"
@@ -57,12 +64,18 @@ for dataGenesisPath in ./*; do
     validatorHashAddress=${validatorHashAddress//\"/}
 
     # STAKING - validator staking balance, delegations
-    jq ".staking | map(select(.address == \"$validatorAddress\") | .)" "$STAKING_JSON" > "$tmpGenesisPath"
+    jq ".stake | map(select(.address == \"$validatorAddress\") | .)" "$STAKING_JSON" > "$tmpGenesisPath"
     stakingSize=$(jq length "$tmpGenesisPath")
     if [ "$stakingSize" = "0" ]; then
         # echo "[]" | jq ". += [{id: \"0x0\", tokens: \"500000000000000000000000000\", address: \"$validatorAddress\"}]" > "$tmpGenesisPath"
         # stakingSize="1"
+        if [ "$DEBUG_GENESIS" = "true" ]; then
+            echo "Skipping validator $validatorAddress from file $dataGenesisPath"
+        fi
         continue;
+    fi
+    if [ "$DEBUG_GENESIS" = "true" ]; then
+        echo "Processing validator $validatorAddress from file $dataGenesisPath"
     fi
     if [ "$stakingSize" != "1" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There are several staked accounts with identical address: $validatorAddress";
@@ -74,18 +87,37 @@ for dataGenesisPath in ./*; do
     validatorStakingBalance=${validatorStakingBalance//\"/}
 
     result=$(jq ".delegation" "$tmpGenesisPath")
+    # delegationsSize=$(jq length "$delegatorsDataGenesisPath")
+    # uniqueDelegationsSize=$(jq "unique_by(.delegatorAddress)" "$delegatorsDataGenesisPath" | jq length)
+    # if [ "$delegationsSize" != "$uniqueDelegationsSize" ]; then
+    #     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Duplicate delegation address for: $validatorAddress";
+    #     exit 1;
+    # fi
     if [ "$result" != "null" ]; then
+        echo $result > "$delegatorsDataGenesisPath"
         historicalRefCount=$(jq .delegation "$tmpGenesisPath" | jq length)
         historicalRefCount=$(($historicalRefCount + 2))
         stakingDelegations=$(jq ".delegation | map({delegator_address: .delegatorAddress, shares: (.delegation + \".000000000000000000\"), validator_address: \"$validatorOperAddress\"})" "$tmpGenesisPath")
-        authAccounts=$(jq ".delegation | map({\"@type\": \"/cosmos.auth.v1beta1.BaseAccount\", account_number: \"0\", address: .delegatorAddress, pub_key: null, sequence: \"1\"})" "$tmpGenesisPath")
+        # authAccounts=$(jq ".delegation | map({\"@type\": \"/cosmos.auth.v1beta1.BaseAccount\", account_number: \"0\", address: .delegatorAddress, pub_key: null, sequence: \"1\"})" "$tmpGenesisPath")
         distributionDelegatorStartingInfos=$(jq ".delegation | map({delegator_address: .delegatorAddress, starting_info: {height: \"0\", previous_period: \"1\", stake: (.delegation + \".000000000000000000\")}, validator_address: \"$validatorOperAddress\"})" "$tmpGenesisPath")
     else
+        echo "[]" > "$delegatorsDataGenesisPath"
         historicalRefCount="2"
         stakingDelegations=""
-        authAccounts=""
+        # authAccounts=""
         distributionDelegatorStartingInfos=""
     fi
+
+    # auth.accounts
+    result=$(jq -s '.[0].app_state.auth.accounts = .[0].app_state.auth.accounts + .[1]' "$RESULT_GENESIS_PATH" "$accountDataGenesisPath" | jq '.[0]')
+    echo $result > "$RESULT_GENESIS_PATH"
+
+    # STAKING - append to auth.accounts
+    # if [ "$authAccounts" != "" ]; then
+    #     echo $authAccounts > "$tmpGenesisPath"
+    #     result=$(jq -s '.[0].app_state.auth.accounts = .[0].app_state.auth.accounts + .[1]' "$RESULT_GENESIS_PATH" "$tmpGenesisPath" | jq '.[0]')
+    #     echo $result > "$RESULT_GENESIS_PATH"
+    # fi
 
     # STAKING - rewards
     jq ".bank | map(select(.address == \"$validatorAddress\") | .)" "$STAKING_JSON" > "$tmpGenesisPath"
@@ -99,17 +131,6 @@ for dataGenesisPath in ./*; do
 
         validatorReward=$(jq .[0].balance "$tmpGenesisPath")
         validatorReward=${validatorReward//\"/}
-    fi
-
-    # auth.accounts
-    result=$(jq -s '.[0].app_state.auth.accounts = .[0].app_state.auth.accounts + .[1]' "$RESULT_GENESIS_PATH" "$accountDataGenesisPath" | jq '.[0]')
-    echo $result > "$RESULT_GENESIS_PATH"
-
-    # STAKING - append to auth.accounts
-    if [ "$authAccounts" != "" ]; then
-        echo $authAccounts > "$tmpGenesisPath"
-        result=$(jq -s '.[0].app_state.auth.accounts = .[0].app_state.auth.accounts + .[1]' "$RESULT_GENESIS_PATH" "$tmpGenesisPath" | jq '.[0]')
-        echo $result > "$RESULT_GENESIS_PATH"
     fi
 
     # bank.balances
@@ -126,7 +147,6 @@ for dataGenesisPath in ./*; do
             }]" > "$tmpGenesisPath"
     fi
     balancesSize=$(jq length "$tmpGenesisPath")
-    # if [ "$balancesSize" != "0" ]; then
     if [ "$balancesSize" = "1" ]; then
         # set validator's balance to his reward, because the rest of his funds will be delegated
         result=$(jq ".[].coins = [.[].coins[] | if (.denom == \"acudos\") then (.amount = \"$validatorReward\") else . end]" $tmpGenesisPath)
@@ -138,7 +158,57 @@ for dataGenesisPath in ./*; do
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There are several balances for account: $validatorAddress";
         exit 1;
     fi
-    # fi
+
+    # bank.balances - rewards for delegators
+    delegatorsSize=$(jq length "$delegatorsDataGenesisPath")
+    for i in $(seq 0 $(($delegatorsSize-1))); do
+        delegatorAddress=$(jq ".[$i].delegatorAddress" "$delegatorsDataGenesisPath")
+        delegatorAddress=${delegatorAddress//\"/}
+
+        jq .app_state.auth.accounts "$RESULT_GENESIS_PATH" | jq "map(select(.address == \"$delegatorAddress\") | .)" > "$tmpGenesisPath"
+        delegatorAuthAccountsSize=$(jq length "$tmpGenesisPath")
+        if [ "$delegatorAuthAccountsSize" = "0" ]; then
+            result=$(jq ".app_state.auth.accounts += [{
+                \"@type\": \"/cosmos.auth.v1beta1.BaseAccount\", 
+                account_number: \"0\", 
+                address: \"$delegatorAddress\", 
+                pub_key: null, 
+                sequence: \"1\"
+            }]" "$RESULT_GENESIS_PATH")
+            echo $result > "$RESULT_GENESIS_PATH"
+        fi
+
+        jq ".bank | map(select(.address == \"$delegatorAddress\") | .)" "$STAKING_JSON" > "$tmpGenesisPath"
+        delegatorRewardsSize=$(jq length "$tmpGenesisPath")
+        delegatorReward="0"
+        if [ "$delegatorRewardsSize" != "0" ]; then
+            if [ "$delegatorRewardsSize" != "1" ]; then
+                echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} More than a single reward for a delegator: $delegatorAddress";
+                exit 1;
+            fi
+
+            delegatorReward=$(jq .[0].balance "$tmpGenesisPath")
+            delegatorReward=${delegatorReward//\"/}
+            
+            jq .app_state.bank.balances "$RESULT_GENESIS_PATH" | jq "map(select(.address == \"$delegatorAddress\") | .)" > "$tmpGenesisPath"
+            delegatorBankBalancesSize=$(jq length "$tmpGenesisPath")
+            if [ "$delegatorBankBalancesSize" != "0" ] && [ "$delegatorBankBalancesSize" != "1" ]; then
+                echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There are $delegatorBankBalancesSize entries in balances for the following address (rewards): $delegatorAddress";
+                exit 1;
+            fi
+            # if the "size" is 0 then add the rewards to bank.balances, otherwise - the rewars has already been added because the delegator has delegatd to more than a single validator
+            if [ "$delegatorBankBalancesSize" = "0" ]; then
+                result=$(jq ".app_state.bank.balances += [{
+                    \"address\": \"$delegatorAddress\",
+                    \"coins\": [{
+                        \"amount\": \"$delegatorReward\",
+                        \"denom\": \"acudos\"
+                    }]
+                }]" "$RESULT_GENESIS_PATH")
+                echo $result > "$RESULT_GENESIS_PATH"
+            fi
+        fi
+    done;
     
     # staking.delegations
     result=$(jq -s '.[0].app_state.staking.delegations = .[0].app_state.staking.delegations + .[1].app_state.staking.delegations' "$RESULT_GENESIS_PATH" "$dataGenesisPath" | jq '.[0]')
@@ -231,6 +301,103 @@ for dataGenesisPath in ./*; do
     echo $result > "$RESULT_GENESIS_PATH"
 done
 
+# pre-defined balances
+result=$(jq ".balances" "$STAKING_JSON")
+echo $result > "$predefinedBalancesDataGenesisPath"
+predefinedBalancesSize=$(jq length "$predefinedBalancesDataGenesisPath")
+for i in $(seq 0 $(($predefinedBalancesSize-1))); do
+    predefinedAddress=$(jq ".[$i].address" "$predefinedBalancesDataGenesisPath")
+    predefinedAddress=${predefinedAddress//\"/}
+    predefinedBalance=$(jq ".[$i].balance" "$predefinedBalancesDataGenesisPath")
+    predefinedBalance=${predefinedBalance//\"/}
+
+    jq .app_state.auth.accounts "$RESULT_GENESIS_PATH" | jq "map(select(.address == \"$predefinedAddress\") | .)" > "$tmpGenesisPath"
+    predefinedBalanceSize=$(jq length "$tmpGenesisPath")
+    if [ "$predefinedBalanceSize" = "0" ]; then
+        result=$(jq ".app_state.auth.accounts += [{
+            \"@type\": \"/cosmos.auth.v1beta1.BaseAccount\", 
+            account_number: \"0\", 
+            address: \"$predefinedAddress\", 
+            pub_key: null, 
+            sequence: \"1\"
+        }]" "$RESULT_GENESIS_PATH")
+        echo $result > "$RESULT_GENESIS_PATH"
+    fi
+
+    jq .app_state.bank.balances "$RESULT_GENESIS_PATH" | jq "map(select(.address == \"$predefinedAddress\") | .)" > "$tmpGenesisPath"
+    predefinedBalanceSize=$(jq length "$tmpGenesisPath")
+    if [ "$predefinedBalanceSize" != "0" ] && [ "$predefinedBalanceSize" != "1" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There are $predefinedBalanceSize entries in balances for the following address (cudos): $predefinedAddress";
+        exit 1;
+    fi
+    if [ "$predefinedBalanceSize" = "0" ]; then
+        result=$(jq ".app_state.bank.balances += [{
+            address: \"$predefinedAddress\",
+            coins: [{
+                amount: \"$predefinedBalance\",
+                denom: \"acudos\"
+            }]
+        }]" "$RESULT_GENESIS_PATH")
+        echo $result > "$RESULT_GENESIS_PATH"
+    fi
+    if [ "$predefinedBalanceSize" = "1" ]; then
+        jq ".app_state.bank.balances | map(select(.address == \"$predefinedAddress\") | .coins[0].amount)" "$RESULT_GENESIS_PATH" > "$tmpGenesisPath"
+        result=$(jq ". += [\"$predefinedBalance\"]" "$tmpGenesisPath")
+        echo $result > "$tmpGenesisPath"
+        totalBalance=$(sum $tmpGenesisPath)
+        result=$(jq ".app_state.bank.balances = [.app_state.bank.balances[] | if (.address == \"$predefinedAddress\") then (.coins[0].amount = \"$totalBalance\") else . end]" "$RESULT_GENESIS_PATH")
+        echo $result > "$RESULT_GENESIS_PATH"
+    fi
+done
+
+# accounts with cudoAdmin
+result=$(jq ".admins" "$STAKING_JSON")
+echo $result > "$adminDataGenesisPath"
+adminsSize=$(jq length "$adminDataGenesisPath")
+for i in $(seq 0 $(($adminsSize-1))); do
+    adminAddress=$(jq ".[$i].address" "$adminDataGenesisPath")
+    adminAddress=${adminAddress//\"/}
+    adminBalance=$(jq ".[$i].balance" "$adminDataGenesisPath")
+    adminBalance=${adminBalance//\"/}
+
+    jq .app_state.auth.accounts "$RESULT_GENESIS_PATH" | jq "map(select(.address == \"$adminAddress\") | .)" > "$tmpGenesisPath"
+    adminSize=$(jq length "$tmpGenesisPath")
+    if [ "$adminSize" = "0" ]; then
+        result=$(jq ".app_state.auth.accounts += [{
+            \"@type\": \"/cosmos.auth.v1beta1.BaseAccount\", 
+            account_number: \"0\", 
+            address: \"$adminAddress\", 
+            pub_key: null, 
+            sequence: \"1\"
+        }]" "$RESULT_GENESIS_PATH")
+        echo $result > "$RESULT_GENESIS_PATH"
+    fi
+
+    jq .app_state.bank.balances "$RESULT_GENESIS_PATH" | jq "map(select(.address == \"$adminAddress\") | .)" > "$tmpGenesisPath"
+    adminSize=$(jq length "$tmpGenesisPath")
+    if [ "$adminSize" != "0" ] && [ "$adminSize" != "1" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There are $adminSize entries in balances for the following address (cudosAdmin): $adminAddress";
+        exit 1;
+    fi
+    if [ "$adminSize" = "0" ]; then
+        result=$(jq ".app_state.bank.balances += [{
+            address: \"$adminAddress\",
+            coins: [{
+                amount: \"$adminBalance\",
+                denom: \"cudosAdmin\"
+            }]
+        }]" "$RESULT_GENESIS_PATH")
+        echo $result > "$RESULT_GENESIS_PATH"
+    fi
+    if [ "$adminSize" = "1" ]; then
+        result=$(jq ".app_state.bank.balances = [.app_state.bank.balances[] | if (.address == \"$adminAddress\") then (.coins += [{
+                amount: \"$adminBalance\",
+                denom: \"cudosAdmin\"
+            }]) else . end]" "$RESULT_GENESIS_PATH")
+        echo $result > "$RESULT_GENESIS_PATH"
+    fi
+done
+
 result=$(jq ".initial_height = \"1\"" "$RESULT_GENESIS_PATH")
 echo $result > "$RESULT_GENESIS_PATH"
 
@@ -279,10 +446,40 @@ distributionAddress=$(getModuleAddress "$RESULT_GENESIS_PATH" "distribution")
 result=$(jq ".app_state.bank.balances = [.app_state.bank.balances[] | if (.address == \"$distributionAddress\") then (.coins[0].amount = \"0\") else . end]" "$RESULT_GENESIS_PATH")
 echo $result > "$RESULT_GENESIS_PATH"
 
+# calculate total supply so far
+gravityAddress=$(getModuleAddress "$RESULT_GENESIS_PATH" "gravity")
+result=$(jq ".app_state.bank.balances = [.app_state.bank.balances[] | if (.address == \"$gravityAddress\") then (.coins[0].amount = \"0\") else . end]" "$RESULT_GENESIS_PATH")
+echo $result > "$RESULT_GENESIS_PATH"
+jq ".app_state.bank.balances | map(.coins) | flatten | map(select(.denom == \"acudos\") | .amount)" "$RESULT_GENESIS_PATH" > "$tmpGenesisPath"
+totalSupply=$(sum $tmpGenesisPath)
+
+# gravity module balance
+gravityAddress=$(getModuleAddress "$RESULT_GENESIS_PATH" "gravity")
+gravityTotalSupply=$(calculateGravityModuleBalance $totalSupply $bondedTokens)
+result=$(jq ".app_state.bank.balances = [.app_state.bank.balances[] | if (.address == \"$gravityAddress\") then (.coins[0].amount = \"$gravityTotalSupply\") else . end]" "$RESULT_GENESIS_PATH")
+echo $result > "$RESULT_GENESIS_PATH"
+
 # bank.supply
 jq ".app_state.bank.balances | map(.coins) | flatten | map(select(.denom == \"acudos\") | .amount)" "$RESULT_GENESIS_PATH" > "$tmpGenesisPath"
 totalSupply=$(sum $tmpGenesisPath)
-result=$(jq ".app_state.bank.supply[0].amount = \"$totalSupply\"" "$RESULT_GENESIS_PATH")
+result=$(jq ".app_state.bank.supply = [{
+    \"amount\": \"$totalSupply\",
+    \"denom\": \"acudos\"
+}]" "$RESULT_GENESIS_PATH")
 echo $result > "$RESULT_GENESIS_PATH"
 
-# rm -f "$tmpGenesisPath"
+jq ".app_state.bank.balances | map(.coins) | flatten | map(select(.denom == \"cudosAdmin\") | .amount)" "$RESULT_GENESIS_PATH" > "$tmpGenesisPath"
+totalSupply=$(sum $tmpGenesisPath)
+if [ "$totalSupply" != "0" ]; then
+    result=$(jq ".app_state.bank.supply += [{
+        \"amount\": \"$totalSupply\",
+        \"denom\": \"cudosAdmin\"
+    }]" "$RESULT_GENESIS_PATH")
+    echo $result > "$RESULT_GENESIS_PATH"
+fi
+
+rm -f "$tmpGenesisPath"
+rm -f "$accountDataGenesisPath"
+rm -f "$delegatorsDataGenesisPath"
+rm -f "$predefinedBalancesDataGenesisPath"
+rm -f "$adminDataGenesisPath"

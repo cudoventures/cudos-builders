@@ -1,7 +1,5 @@
 #!/bin/bash -i
 
-# check deployer network
-
 echo -ne "Validating topology...";
 
 computersSize=$(getComputersSize)
