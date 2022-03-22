@@ -1,0 +1,16 @@
+CUDOS_HOME=/usr/cudos/cudos-data
+
+ENV_FILE=./seed-node.client.dressrehearsal.env
+GENESIS_FILENAME=genesis.dressrehearsal.json
+PERSISTENT_PEERS_FILENAME=persistent-peers.dressrehearsal.config
+SEEDS_FILENAME=seeds.dressrehearsal.config
+STATE_SYNC_RPC_SERVERS_FILENAME=state-sync-rpc-servers.dressrehearsal.config
+
+INIT_CONTAINER_NAME=cudos-init-seed-node-client-dressrehearsal
+START_CONTAINER_NAME=cudos-start-seed-node-client-dressrehearsal
+VOLUME_NAME=cudos-data-seed-node-client-dressrehearsal
+
+PORT26656=26656
+PORT26657=26657
+PORT26660=26660
+EXPOSE_IP=0.0.0.0
