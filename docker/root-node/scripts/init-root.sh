@@ -247,7 +247,7 @@ genesisJson=$(jq ".app_state.bank.balances += [{
 }]" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 
-(echo $KEYRING_OS_PASS; echo $KEYRING_OS_PASS) | cudos-noded gentx validator-1 "${VALIDATOR_BALANCE}${BOND_DENOM}" ${ORCH_ETH_ADDRESS} ${ORCH_01_ADDRESS} --chain-id $CHAIN_ID --keyring-backend os
+(echo $KEYRING_OS_PASS; echo $KEYRING_OS_PASS) | cudos-noded gentx validator-1 "${VALIDATOR_BALANCE}${BOND_DENOM}" ${ORCH_ETH_ADDRESS} ${ORCH_01_ADDRESS} --min-self-delegation 2000000000000000000000000 --chain-id $CHAIN_ID --keyring-backend os
 
 cudos-noded collect-gentxs
 
