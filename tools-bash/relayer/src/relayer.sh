@@ -13,6 +13,8 @@ fi
 
 source "./src/incs/var.sh"
 
+source "$WORKING_SRC_DIR/incs/utils.sh"
+
 source "$WORKING_SRC_DIR/incs/validate.sh"
 
 source "$WORKING_SRC_DIR/modules/repos.sh"

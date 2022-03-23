@@ -7,7 +7,7 @@ networks:
 services:
   cudos-hermes-ibc-relayer:
     image: hermes-ibc-relayer-init
-    container_name: hermes-ibc-relayer-cudos-init
+    container_name: hermes-ibc-relayer-init
     build:
       dockerfile: CudosBuilders/docker/hermes-ibc-relayer/hermes-ibc-relayer-init.dockerfile
       context: ../../../
