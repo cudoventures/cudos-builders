@@ -2,6 +2,12 @@
 
 echo -ne "Validating staking.json...";
 
+result=$(jq ".root" "$STAKING_JSON")
+if [ "$result" = "null" ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} .root is missing from staking.json";
+    exit 1;
+fi
+
 result=$(jq ".admins" "$STAKING_JSON")
 if [ "$result" = "null" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} .admins is missing from staking.json";

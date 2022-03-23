@@ -1,0 +1,445 @@
+{
+    "app_hash": "",
+    "app_state": {
+        "admin": {},
+        "auth": {
+            "accounts": [{
+                "@type": "/cosmos.auth.v1beta1.ModuleAccount",
+                "base_account": {
+                    "account_number": "6",
+                    "address": "cudos1yl6hdjhmkf37639730gffanpzndzdpmh0wlkfk",
+                    "pub_key": null,
+                    "sequence": "0"
+                },
+                "name": "transfer",
+                "permissions": ["minter", "burner"]
+            }, {
+                "@type": "/cosmos.auth.v1beta1.BaseAccount",
+                "account_number": "0",
+                "address": "cudos1",
+                "pub_key": {
+                    "@type": "/cosmos.crypto.secp256k1.PubKey",
+                    "key": "Arh0ypCZnPPe16zeQtAx4EoRpv0CaV0rBqsYHyiZUB5M"
+                },
+                "sequence": "1"
+            }, {
+                "@type": "/cosmos.auth.v1beta1.ModuleAccount",
+                "base_account": {
+                    "account_number": "3",
+                    "address": "cudos1fl48vsnmsdzcv85q5d2q4z5ajdha8yu352qs8z",
+                    "pub_key": null,
+                    "sequence": "0"
+                },
+                "name": "bonded_tokens_pool",
+                "permissions": ["burner", "staking"]
+            }, {
+                "@type": "/cosmos.auth.v1beta1.ModuleAccount",
+                "base_account": {
+                    "account_number": "4",
+                    "address": "cudos1tygms3xhhs3yv487phx3dw4a95jn7t7lq2up3k",
+                    "pub_key": null,
+                    "sequence": "0"
+                },
+                "name": "not_bonded_tokens_pool",
+                "permissions": ["burner", "staking"]
+            }, {
+                "@type": "/cosmos.auth.v1beta1.ModuleAccount",
+                "base_account": {
+                    "account_number": "5",
+                    "address": "cudos10d07y265gmmuvt4z0w9aw880jnsr700jmn66gx",
+                    "pub_key": null,
+                    "sequence": "0"
+                },
+                "name": "gov",
+                "permissions": ["burner"]
+            }, {
+                "@type": "/cosmos.auth.v1beta1.ModuleAccount",
+                "base_account": {
+                    "account_number": "2",
+                    "address": "cudos1jv65s3grqf6v6jl3dp4t6c9t9rk99cd8xwdrh2",
+                    "pub_key": null,
+                    "sequence": "0"
+                },
+                "name": "distribution",
+                "permissions": []
+            }, {
+                "@type": "/cosmos.auth.v1beta1.ModuleAccount",
+                "base_account": {
+                    "account_number": "7",
+                    "address": "cudos16n3lc7cywa68mg50qhp847034w88pntq8823tx",
+                    "pub_key": null,
+                    "sequence": "0"
+                },
+                "name": "gravity",
+                "permissions": ["minter", "burner"]
+            }, {
+                "@type": "/cosmos.auth.v1beta1.ModuleAccount",
+                "base_account": {
+                    "account_number": "1",
+                    "address": "cudos17xpfvakm2amg962yls6f84z3kell8c5l3g2l4g",
+                    "pub_key": null,
+                    "sequence": "0"
+                },
+                "name": "fee_collector",
+                "permissions": []
+            }],
+            "params": {
+                "max_memo_characters": "256",
+                "sig_verify_cost_ed25519": "590",
+                "sig_verify_cost_secp256k1": "1000",
+                "tx_sig_limit": "7",
+                "tx_size_cost_per_byte": "10"
+            }
+        },
+        "bank": {
+            "balances": [{
+                "address": "cudos1fl48vsnmsdzcv85q5d2q4z5ajdha8yu352qs8z",
+                "coins": [{
+                    "amount": "123456789987654321123456789",
+                    "denom": "acudos"
+                }]
+            }],
+            "denom_metadata": [],
+            "params": {
+                "default_send_enabled": true,
+                "send_enabled": []
+            },
+            "supply": [{
+                "amount": "123456789987654321123456789",
+                "denom": "acudos"
+            }]
+        },
+        "capability": {
+            "index": "2",
+            "owners": [{
+                "index": "1",
+                "index_owners": {
+                    "owners": [{
+                        "module": "ibc",
+                        "name": "ports/transfer"
+                    }, {
+                        "module": "transfer",
+                        "name": "ports/transfer"
+                    }]
+                }
+            }]
+        },
+        "crisis": {
+            "constant_fee": {
+                "amount": "1000",
+                "denom": "stake"
+            }
+        },
+        "cudoMint": {
+            "minter": {
+                "mint_remainder": "0.000000000000000000",
+                "norm_time_passed": "0.000000158462131350"
+            },
+            "params": {
+                "blocks_per_day": "17280"
+            }
+        },
+        "distribution": {
+            "delegator_starting_infos": [{
+                "delegator_address": "cudos1",
+                "starting_info": {
+                    "height": "0",
+                    "previous_period": "1",
+                    "stake": "123456789987654321123456789.000000000000000000"
+                },
+                "validator_address": "cudosvaloper18a3vc40w65je0dy430flr3u8eec60x6a0hfmck"
+            }],
+            "delegator_withdraw_infos": [],
+            "fee_pool": {
+                "community_pool": []
+            },
+            "outstanding_rewards": [{
+                "outstanding_rewards": [],
+                "validator_address": "cudosvaloper18a3vc40w65je0dy430flr3u8eec60x6a0hfmck"
+            }],
+            "params": {
+                "base_proposer_reward": "0.010000000000000000",
+                "bonus_proposer_reward": "0.040000000000000000",
+                "community_tax": "0.020000000000000000",
+                "withdraw_addr_enabled": true
+            },
+            "previous_proposer": "cudosvalcons17vdlafvsumrthj0uy3rqhh9r6sdpwlddn0zhks",
+            "validator_accumulated_commissions": [{
+                "accumulated": {
+                    "commission": []
+                },
+                "validator_address": "cudosvaloper18a3vc40w65je0dy430flr3u8eec60x6a0hfmck"
+            }],
+            "validator_current_rewards": [{
+                "rewards": {
+                    "period": "2",
+                    "rewards": []
+                },
+                "validator_address": "cudosvaloper18a3vc40w65je0dy430flr3u8eec60x6a0hfmck"
+            }],
+            "validator_historical_rewards": [{
+                "period": "1",
+                "rewards": {
+                    "cumulative_reward_ratio": [],
+                    "reference_count": 2
+                },
+                "validator_address": "cudosvaloper18a3vc40w65je0dy430flr3u8eec60x6a0hfmck"
+            }],
+            "validator_slash_events": []
+        },
+        "evidence": {
+            "evidence": []
+        },
+        "feegrant": {
+            "allowances": []
+        },
+        "genutil": {
+            "gen_txs": []
+        },
+        "gov": {
+            "deposit_params": {
+                "max_deposit_period": "172800s",
+                "min_deposit": [{
+                    "amount": "10000000",
+                    "denom": "stake"
+                }]
+            },
+            "deposits": [],
+            "proposals": [],
+            "starting_proposal_id": "1",
+            "tally_params": {
+                "quorum": "0.334000000000000000",
+                "threshold": "0.500000000000000000",
+                "veto_threshold": "0.334000000000000000"
+            },
+            "votes": [],
+            "voting_params": {
+                "voting_period": "172800s"
+            }
+        },
+        "gravity": {
+            "attestations": [],
+            "batch_confirms": [],
+            "batches": [],
+            "delegate_keys": [{
+                "eth_address": "0x364af07e1bb08288a1f3d9a578317baa9ed4fb2d",
+                "orchestrator": "cudos1czex78elq47zpeppv5kw5xw94k74pfc77c0fef",
+                "validator": "cudosvaloper18a3vc40w65je0dy430flr3u8eec60x6a0hfmck"
+            }],
+            "erc20_to_denoms": [],
+            "last_latest_valset_nonce": "1",
+            "last_observed_nonce": "0",
+            "last_outgoing_batch_id": "1",
+            "last_slashed_batched_block": "0",
+            "last_slashed_logic_call_block": "0",
+            "last_slashed_valset_nonce": "0",
+            "last_tx_pool_id": "1",
+            "last_un_bonding_block_height": "0",
+            "logic_call_confirms": [],
+            "logic_calls": [],
+            "params": {
+                "average_block_time": "5000",
+                "average_ethereum_block_time": "15000",
+                "bridge_chain_id": "0",
+                "bridge_ethereum_address": "0x0000000000000000000000000000000000000000",
+                "contract_source_hash": "",
+                "gravity_id": "defaultgravityid",
+                "minimum_fee_transfer_to_eth": "1",
+                "minimum_transfer_to_eth": "5",
+                "signed_batches_window": "10000",
+                "signed_logic_calls_window": "10000",
+                "signed_valsets_window": "10000",
+                "slash_fraction_bad_eth_signature": "0.001000000000000000",
+                "slash_fraction_batch": "0.001000000000000000",
+                "slash_fraction_logic_call": "0",
+                "slash_fraction_valset": "0.001000000000000000",
+                "target_batch_timeout": "43200000",
+                "unbond_slashing_valsets_window": "10000",
+                "valset_reward": {
+                    "amount": "0",
+                    "denom": ""
+                }
+            },
+            "static_val_cosmos_addrs": ["cudos1"],
+            "unbatched_transfers": [],
+            "valset_confirms": [],
+            "valsets": [{
+                "height": "1",
+                "members": [{
+                    "ethereum_address": "0x364af07e1bb08288a1f3d9a578317baa9ed4fb2d",
+                    "power": "4294967295"
+                }],
+                "nonce": "1",
+                "reward_amount": "0",
+                "reward_token": "0x0000000000000000000000000000000000000000"
+            }]
+        },
+        "ibc": {
+            "channel_genesis": {
+                "ack_sequences": [],
+                "acknowledgements": [],
+                "channels": [],
+                "commitments": [],
+                "next_channel_sequence": "0",
+                "receipts": [],
+                "recv_sequences": [],
+                "send_sequences": []
+            },
+            "client_genesis": {
+                "clients": [],
+                "clients_consensus": [],
+                "clients_metadata": [],
+                "create_localhost": false,
+                "next_client_sequence": "0",
+                "params": {
+                    "allowed_clients": ["06-solomachine", "07-tendermint"]
+                }
+            },
+            "connection_genesis": {
+                "client_connection_paths": [],
+                "connections": [],
+                "next_connection_sequence": "0",
+                "params": {
+                    "max_expected_time_per_block": "30000000000"
+                }
+            }
+        },
+        "nft": {
+            "collections": []
+        },
+        "params": null,
+        "slashing": {
+            "missed_blocks": [{
+                "address": "cudosvalcons17vdlafvsumrthj0uy3rqhh9r6sdpwlddn0zhks",
+                "missed_blocks": []
+            }],
+            "params": {
+                "downtime_jail_duration": "600s",
+                "min_signed_per_window": "0.500000000000000000",
+                "signed_blocks_window": "100",
+                "slash_fraction_double_sign": "0.050000000000000000",
+                "slash_fraction_downtime": "0.010000000000000000"
+            },
+            "signing_infos": [{
+                "address": "cudosvalcons17vdlafvsumrthj0uy3rqhh9r6sdpwlddn0zhks",
+                "validator_signing_info": {
+                    "address": "cudosvalcons17vdlafvsumrthj0uy3rqhh9r6sdpwlddn0zhks",
+                    "index_offset": "0",
+                    "jailed_until": "1970-01-01T00:00:00Z",
+                    "missed_blocks_counter": "0",
+                    "start_height": "0",
+                    "tombstoned": false
+                }
+            }]
+        },
+        "staking": {
+            "delegations": [{
+                "delegator_address": "cudos1",
+                "shares": "123456789987654321123456789.000000000000000000",
+                "validator_address": "cudosvaloper18a3vc40w65je0dy430flr3u8eec60x6a0hfmck"
+            }],
+            "exported": true,
+            "last_total_power": "123456789",
+            "last_validator_powers": [{
+                "address": "cudosvaloper18a3vc40w65je0dy430flr3u8eec60x6a0hfmck",
+                "power": "123456789"
+            }],
+            "params": {
+                "bond_denom": "acudos",
+                "historical_entries": 10000,
+                "max_entries": 7,
+                "max_validators": 100,
+                "unbonding_time": "1814400s"
+            },
+            "redelegations": [],
+            "unbonding_delegations": [],
+            "validators": [{
+                "commission": {
+                    "commission_rates": {
+                        "max_change_rate": "0.010000000000000000",
+                        "max_rate": "0.200000000000000000",
+                        "rate": "0.100000000000000000"
+                    },
+                    "update_time": "2022-03-08T15:18:42.707332878Z"
+                },
+                "consensus_pubkey": {
+                    "@type": "/cosmos.crypto.ed25519.PubKey",
+                    "key": "lsbDCFyVlQ1qa1Kr5/1RuDano7u6/D185HpMF/lPzkY="
+                },
+                "delegator_shares": "123456789987654321123456789.000000000000000000",
+                "description": {
+                    "details": "",
+                    "identity": "",
+                    "moniker": "amsterdamnode",
+                    "security_contact": "",
+                    "website": ""
+                },
+                "jailed": false,
+                "min_self_delegation": "2000000000000000000000000",
+                "operator_address": "cudosvaloper18a3vc40w65je0dy430flr3u8eec60x6a0hfmck",
+                "status": "BOND_STATUS_BONDED",
+                "tokens": "123456789987654321123456789",
+                "unbonding_height": "0",
+                "unbonding_time": "1970-01-01T00:00:00Z"
+            }]
+        },
+        "transfer": {
+            "denom_traces": [],
+            "params": {
+                "receive_enabled": true,
+                "send_enabled": true
+            },
+            "port_id": "transfer"
+        },
+        "upgrade": {},
+        "vesting": {},
+        "wasm": {
+            "codes": [],
+            "contracts": [],
+            "gen_msgs": [],
+            "params": {
+                "code_upload_access": {
+                    "address": "",
+                    "permission": "Everybody"
+                },
+                "instantiate_default_permission": "Everybody",
+                "max_wasm_code_size": "1228800"
+            },
+            "sequences": [{
+                "id_key": "BGxhc3RDb2RlSWQ=",
+                "value": "1"
+            }, {
+                "id_key": "BGxhc3RDb250cmFjdElk",
+                "value": "1"
+            }]
+        }
+    },
+    "chain_id": "cudos-1",
+    "consensus_params": {
+        "block": {
+            "max_bytes": "22020096",
+            "max_gas": "-1",
+            "time_iota_ms": "1000"
+        },
+        "evidence": {
+            "max_age_duration": "172800000000000",
+            "max_age_num_blocks": "100000",
+            "max_bytes": "1048576"
+        },
+        "validator": {
+            "pub_key_types": ["ed25519"]
+        },
+        "version": {}
+    },
+    "genesis_time": "2022-03-08T15:18:42.707332878Z",
+    "initial_height": "2",
+    "validators": [{
+        "address": "F31BFEA590E6C6BBC9FC24460BDCA3D41A177DAD",
+        "name": "amsterdamnode",
+        "power": "123456789",
+        "pub_key": {
+            "type": "tendermint/PubKeyEd25519",
+            "value": "lsbDCFyVlQ1qa1Kr5/1RuDano7u6/D185HpMF/lPzkY="
+        }
+    }]
+}

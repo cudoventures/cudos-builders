@@ -13,6 +13,8 @@ mkdir -p "$WORKING_EXPORT_DIR"
 
 source "$WORKING_SRC_DIR/incs/utils.sh"
 
+source "$WORKING_SRC_DIR/incs/utils-genesis.sh"
+
 source "$WORKING_SRC_DIR/incs/validate-script-requirements.sh"
 
 source "$WORKING_SRC_DIR/incs/topology.sh"
