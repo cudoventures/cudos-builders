@@ -26,7 +26,7 @@ if [ "$?" != 0 ]; then
     exit 1;
 fi
 
-docker wait hermes-ibc-relayer-init 2> /dev/null
+dockerResult=$(docker wait hermes-ibc-relayer-init 2> /dev/null)
 
 initResult=$(cat $PARAM_SOURCE_DIR/CudosData/cudos-data-hermes-ibc-relayer/create-channel-data.txt | grep Error)
 
