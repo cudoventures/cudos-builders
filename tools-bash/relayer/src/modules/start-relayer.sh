@@ -8,7 +8,6 @@ echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 echo -ne "Preparing the binary builder...";
 cd "$PARAM_SOURCE_DIR/CudosBuilders/docker/hermes-ibc-relayer"
 dockerResult=$(sudo docker-compose -f ./hermes-ibc-relayer-binary-builder.yml -p hermes-ibc-relayer-binary-builder --env-file ./hermes-ibc-relayer.mainnet.arg build 2> /dev/null)
-
 if [ "$?" != 0 ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error building the container $?: ${dockerResult}";
     exit 1;
@@ -27,14 +26,16 @@ if [ "$?" != 0 ]; then
 fi
 
 dockerResult=$(docker wait hermes-ibc-relayer-init 2> /dev/null)
+if [ "$?" != 0 ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error building the container $?: ${dockerResult}";
+    exit 1;
+fi
 
 initResult=$(cat $PARAM_SOURCE_DIR/CudosData/cudos-data-hermes-ibc-relayer/create-channel-data.txt | grep Error)
-
 if [ "$initResult" != "" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error while in the init script: ${initResult}";
     exit 1;
 fi
-
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Stopping previous START instances...";

@@ -21,5 +21,7 @@ source "$WORKING_SRC_DIR/modules/repos.sh"
 
 source "$WORKING_SRC_DIR/modules/start-relayer.sh"
 
+echo "" # new line
+
 echo -ne "Starting...";
 echo -e "${STYLE_GREEN}DONE${STYLE_DEFAULT}";
