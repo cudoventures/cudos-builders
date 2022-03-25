@@ -35,8 +35,8 @@ sed -zi "s/denom = '[^']*'/denom = '${GAS_DENOM_1}'/2" "/root/.hermes/config.tom
 
 
 echo "Setting up wallets for each chain"
-hermes keys restore ${CHAIN_ID_0} -m "${SEED_0}"
-hermes keys restore ${CHAIN_ID_1} -m "${SEED_1}"
+hermes keys restore ${CHAIN_ID_0} -m "${MNEMONIC_0}"
+hermes keys restore ${CHAIN_ID_1} -m "${MNEMNIC_1}"
 
 #init
 if [ "$CREATE_CHANNEL" = true ] ; then
