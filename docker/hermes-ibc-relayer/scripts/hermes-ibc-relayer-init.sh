@@ -38,7 +38,7 @@ sed -zi "s/trusting_period = '[^']*'/trusting_period = '${TRUSTING_PERIOD_1}'/2"
 
 echo "Setting up wallets for each chain"
 hermes keys restore ${CHAIN_ID_0} -m "${MNEMONIC_0}"
-hermes keys restore ${CHAIN_ID_1} -m "${MNEMNIC_1}"
+hermes keys restore ${CHAIN_ID_1} -m "${MNEMONIC_1}"
 
 #init
 if [ "$CREATE_CHANNEL" = true ] ; then
