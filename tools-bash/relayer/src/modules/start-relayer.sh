@@ -31,7 +31,7 @@ if [ "$?" != 0 ]; then
     exit 1;
 fi
 
-initResult=$(cat $PARAM_SOURCE_DIR/CudosData/cudos-data-hermes-ibc-relayer/create-channel-data.txt | grep Error)
+initResult=$(cat $PARAM_SOURCE_DIR/CudosData/cudos-data-hermes-ibc-relayer/create-channel-data.txt | grep cd rror)
 if [ "$initResult" != "" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error while in the init script: ${initResult}";
     exit 1;
