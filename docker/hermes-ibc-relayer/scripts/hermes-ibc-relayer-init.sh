@@ -22,6 +22,7 @@ sed -zi "s/\naccount_prefix = '[^']*'/\naccount_prefix = '${ACCOUNT_PREFIX_0}'/1
 sed -zi "s/\nkey_name = '[^']*'/\nkey_name = '${CHAIN_ID_0}_key'/1" "/root/.hermes/config.toml"
 sed -zi "s/{ price = [^,]*/{ price = ${GAS_PRICE_0}/1" "/root/.hermes/config.toml"
 sed -zi "s/denom = '[^']*'/denom = '${GAS_DENOM_0}'/1" "/root/.hermes/config.toml"
+sed -zi "s/trusting_period = '[^']*'/trusting_period = '${TRUSTING_PERIOD_0}'/1" "/root/.hermes/config.toml"
 
 # chain 2 settings
 sed -zi "s/\nid = '[^']*'/\nid = '${CHAIN_ID_1}'/2" "/root/.hermes/config.toml"
@@ -32,6 +33,7 @@ sed -zi "s/\naccount_prefix = '[^']*'/\naccount_prefix = '${ACCOUNT_PREFIX_1}'/2
 sed -zi "s/\nkey_name = '[^']*'/\nkey_name = '${CHAIN_ID_1}_key'/2" "/root/.hermes/config.toml"
 sed -zi "s/{ price = [^,]*/{ price = ${GAS_PRICE_1}/2" "/root/.hermes/config.toml"
 sed -zi "s/denom = '[^']*'/denom = '${GAS_DENOM_1}'/2" "/root/.hermes/config.toml"
+sed -zi "s/trusting_period = '[^']*'/trusting_period = '${TRUSTING_PERIOD_1}'/2" "/root/.hermes/config.toml"
 
 
 echo "Setting up wallets for each chain"
