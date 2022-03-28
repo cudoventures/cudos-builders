@@ -12,3 +12,7 @@ source "$WORKING_SRC_DIR/modules/merge-genesis.sh" "$WORKING_DIR/tests/config/ge
 
 source "$WORKING_DIR/tests/test-counts.sh"
 
+source "$WORKING_DIR/tests/test-addresses.sh"
+
+source "$WORKING_DIR/tests/test-amounts.sh"
+

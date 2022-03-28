@@ -1,4 +1,4 @@
-echo -ne "Testing exported genesis counts match...";
+echo "Testing exported genesis counts match:";
 
 EXPORTED_GENESIS="$WORKING_DIR/exports/genesis.json"
 BASE_GENESIS="$WORKING_DIR/tests/config/genesis.root.json"
@@ -7,6 +7,7 @@ STAKING_JSON="$WORKING_DIR/tests/config/staking.json"
 ######################################
 # CHECK number of validators equals  #
 ######################################
+echo -ne "  -number of validators exported equals expected...";
 
 givenValCount=$(ls "$WORKING_DATA_GENESIS_DIR"/* | wc -l)
 givenValCount=$(($givenValCount + 1))
@@ -58,9 +59,13 @@ if [ "$tempCount" != "$givenValCount" ]; then
     exit 1
 fi
 
+
+echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+
 ####################################################
 # CHECK number of delegations per validator equal  #
 ####################################################
+echo -ne "  -number of delegations per validator equals expected...";
 
 # check root validator delegations
 rootValOperAddress=$(jq .app_state.staking.delegations[0].validator_address "$rootGenesisPath")
@@ -149,9 +154,12 @@ if [ "$tempCount" != "$totalDelegationsExpected" ]; then
     exit 1
 fi
 
+echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+
 ###################################
 # CHECK number of auth accounts   #
 ###################################
+echo -ne "  -number of auth accounts equals expected...";
 
 jq .app_state.auth.accounts "$EXPORTED_GENESIS" > "$accountDataGenesisPath"
 exportedTotalAccounts=$(jq length "$accountDataGenesisPath")
@@ -202,9 +210,12 @@ if [ "$exportedTotalAccounts" != "$totalAddExpected" ]; then
     exit 1
 fi
 
+echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+
 ###################################
 # CHECK number of bank balances   #
 ###################################
+echo -ne "  -number of bank balances equals expected...";
 
 #get exported total balances
 jq "".app_state.bank.balances "$EXPORTED_GENESIS" > "$accountDataGenesisPath"
