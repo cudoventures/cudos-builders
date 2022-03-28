@@ -18,7 +18,7 @@ Curl must be installed
 
 # Config
 
-All of the config files are in ./laucher/config folder.
+All of the config files are in ./relayer/config folder.
 
 **Important: Do not leave any comments in any .env file**
 
@@ -29,72 +29,40 @@ Prepare the .env based on .env.example. It contains the following variables:
 
 Prepare the .relayer.env based on relayer.env.example. It contains the following variables:
 
-**Validator:**
-
-Clone <em>validator.env.example</em> to <em>validator.mainnet.env</em> (The actual name could be arbitrary because the absolute filename to this file is specified below in the configuration). It contains the following variables:
-1. **MONIKER:** The name of the node. You could safely use the default value provided in the .example file. <em>Example: MONIKER="cudos-root-node-mainnet"</em>
-1. **CHAIN_ID:** The id of the chain. DO NOT MODIFY THIS VALUE. Leave it "cudos-1" as it is in the example.
-1. **ORCH_ETH_ADDRESS:** The ETH address of the the wallet that will be used by the orchestrator. <em>Example: ORCH_ETH_ADDRESS="0x582436824932f3b313e3a3b3d3e31413be6d6a"</em>
-1. **MONITORING_ENABLED:** This variable defined whether the code will export data to port 26660 for prometheus. If the monitoring is disabled the port 26660 will be closed, otherwise it will be opened to the internal private interface. <em>Example: MONITORING_ENABLED="false"</em>
-1. **ADDR_BOOK_STRICT:** This defines the behaviour of the internal address book. DO NOT MODIFY THIS VALUE. Leave it "true" as it is in the example.
-1. **GRAVITY_MODULE_BALANCE:** DO NOT MODIFY THIS VALUE. Leave it "0" as it is in the example.
-1. **CUDOS_TOKEN_CONTRACT_ADDRESS:** The address of the CUDOS token contract. <em>Example: CUDOS_TOKEN_CONTRACT_ADDRESS="0x12d474723cb8c02bcbf46cd335a3bb4c75e9de44"</em>
-1. **NUMBER_OF_VALIDATORS:** The number of validator accounts that will be initialized with the primary-validator. DO NOT MODIFY THIS VALUE. Leave it "1" as it is in the example.
-1. **NUMBER_OF_ORCHESTRATORS:** The number of orchestrator accounts that will initialized with the primary-validator. The default value is 3 <em>Example: NUMBER_OF_ORCHESTRATORS="3"</em>
-1. **VALIDATOR_BALANCE:** The amount of staked tokens that each genesis validator will have. <em>Example: VALIDATOR_BALANCE="2000000000000000000000000"</em>
-1. **ORCHESTRATOR_BALANCE:** This is the balance that each orchestrator will have. <em>Example: ORCHESTRATOR_BALANCE="1000000000000000000"</em>
-1. **FAUCET_BALANCE:** The balance of the faucet. If set to 0 then no faucet will be created. <em>Example: FAUCET_BALANCE="8000000000000000000000000000"</em>
-1. **KEYRING_OS_PASS:** The password of your keyring. It must be at least 8 characters. <em>Example: KEYRING_OS_PASS="11111111"</em>
-
-**Seed:**
-
-Clone <em>seed.env.example</em> to <em>seed.mainnet.env</em> (The actual name could be arbitrary because the absolute filename to this file is specified below in the configuration). It contains the following variables:
-
-1. **MONIKER:** The name of the node. You could safely use the default value provided in the .example file. <em>Example: MONIKER="cudos-seed-node-mainnet-01"</em>
-1. **PERSISTENT_PEERS:** DO NOT MODIFY THIS VALUE. Leave it empty as it is in the example.
-1. **PRIVATE_PEERS:** DO NOT MODIFY THIS VALUE. Leave it empty as it is in the example.
-1. **SEEDS:** DO NOT MODIFY THIS VALUE. Leave it empty as it is in the example.
-1. **SHOULD_USE_GLOBAL_PEERS:** DO NOT MODIFY THIS VALUE. Leave it "false" as it is in the example.
-1. **SHOULD_USE_STATE_SYNC:** DO NOT MODIFY THIS VALUE. Leave it "false" as it is in the example.
-1. **MONITORING_ENABLED:** This variable defined whether the code will export data to port 26660 for prometheus. If the monitoring is disabled the port 26660 will be closed, otherwise it will be opened to the internal private interface. <em>Example: MONITORING_ENABLED="false"</em>
-1. **EXTERNAL_ADDRESS:** This variable defines the address to advertise to peers for them to dial. It must be the public address of the node plus the 26656 (or any other external number that could be redirected to internal port 26656) port. <em>Example: EXTERNAL_ADDRESS="43.14.14.12:26656"</em>
-1. **ADDR_BOOK_STRICT:** This defines the behaviour of the internal address book. DO NOT MODIFY THIS VALUE. Leave it "true" as it is in the example.
-
-**Sentry:**
-
-Clone <em>sentry.env.example</em> to <em>sentry.mainnet.env</em> (The actual name could be arbitrary because the absolute filename to this file is specified below in the configuration). It contains the following variables:
-
-1. **MONIKER:** The name of the node. You could safely use the default value provided in the .example file. <em>Example: MONIKER="cudos-sentry-node-mainnet-01"</em>
-1. **PERSISTENT_PEERS:** DO NOT MODIFY THIS VALUE. Leave it empty as it is in the example.
-1. **PRIVATE_PEERS:** DO NOT MODIFY THIS VALUE. Leave it empty as it is in the example.
-1. **SEEDS:** DO NOT MODIFY THIS VALUE. Leave it empty as it is in the example.
-1. **SHOULD_USE_GLOBAL_PEERS:** DO NOT MODIFY THIS VALUE. Leave it "false" as it is in the example.
-1. **SHOULD_USE_STATE_SYNC:** DO NOT MODIFY THIS VALUE. Leave it "false" as it is in the example.
-1. **TLS_ENABLED**: DO NOT MODIFY THIS VALUE. Leave it "false" as it is in the example.
-1. **MONITORING_ENABLED:** This variable defined whether the code will export data to port 26660 for prometheus. If the monitoring is disabled the port 26660 will be closed, otherwise it will be opened to the internal private interface. <em>Example: MONITORING_ENABLED="false"</em>
-1. **EXTERNAL_ADDRESS:** This variable defines the address to advertise to peers for them to dial. It must be the public address of the node plus the 26656 (or any other external number that could be redirected to internal port 26656) port. <em>Example: EXTERNAL_ADDRESS="43.14.14.12:26656"</em>
-1. **ADDR_BOOK_STRICT:** This defines the behaviour of the internal address book. DO NOT MODIFY THIS VALUE. Leave it "true" as it is in the example.
-
-**Orchestrator:**
-
-Clone <em>orchestrator.env.example</em> to <em>orchestrator.mainnet.env</em> (The actual name could be arbitrary because the absolute filename to this file is specified below in the configuration). It contains the following variables:
-
-1. **ADDRESS_PREFIX:** DO NOT MODIFY THIS VALUE. Leave it "cudos" as it is in the example.
-1. **FEES:** The gas price, with acudos suffix, that are paid by the orchestrator when he iteracts with the blockchain. The value must be >= than minimum gas price which is 5*1E12 <em>Example: FEES="5000000000000acudos"</em>
-1. **GRPC:** DO NOT MODIFY THIS VALUE. Leave it empty as it is in the example.
-1. **ETHRPC:** Address to the ethereum full node. <em>Example: ETHRPC="http://43.14.14.12:8545"</em>
-1. **CONTRACT_ADDR:** DO NOT MODIFY THIS VALUE. Leave it empty as it is in the example.
-1. **COSMOS_ORCH_MNEMONIC:** DO NOT MODIFY THIS VALUE. Leave it empty as it is in the example.
-1. **ETH_PRIV_KEY_HEX:** The private key of the address defined in ORCH_ETH_ADDRESS of <em>validator.mainnet.env</em>. <em>Example: ETH_PRIV_KEY_HEX="ae1341352513513a7f9a9a7a9a9a08a6a4a5f6ea9204135f1f3e1a3b1dae413e"</em>
+1. **CREATE_CHANNEL:** Defines whether the channel between the two chains must be created. Usually it must be created only once when the relayer is started for the first name. All subsequent starts/rebuild MUST not create a channel. <em>Example: CREATE_CHANNEL="true"</em>
+1. **REST_ENABLED:** Defines whether the relayer's REST API must be enabled. Currently it is not used but could be used in the future so settings it to true will be no harm. <em>Example: REST_ENABLED="true"</em>
+1. **REST_HOST:** Defines the bind address of relayer's REST API. <em>Example: REST_HOST="127.0.0.1"</em>
+1. **REST_PORT:** Defines the post of relayer's REST API. <em>Example: REST_PORT="3001"</em>
+1. **TELEMETRY_ENABLED:** Defines whether the relayer's telemetry must be enabled. Currently it is not used but could be used in the future so settings it to true will be no harm. <em>Example: TELEMETRY_ENABLED="true"</em>
+1. **TELEMETRY_HOST:** Defines the bind address of relayer's telemetry. <em>Example: TELEMETRY_HOST="127.0.0.1"</em>
+1. **TELEMETRY_PORT:** Defines the post of relayer's telemetry. <em>Example: TELEMETRY_PORT="3001"</em>
+1. **CHAIN_ID_0:** Defines the chain-id of the 1st chain. <em>Example: CHAIN_ID_0="cudos-1"</em>
+1. **RPC_ADDR_0:** Defines the endpoint of RPC service of the 1st chain. You MUST escape the strings here. <em>Example: RPC_ADDR_0="http:\/\/127.0.0.1:26657"</em>
+1. **GRPC_ADDR_0:** Defines the endpoint of GRPC service of the 1st chain. You MUST escape the strings here. <em>Example: GRPC_ADDR_0="http:\/\/127.0.0.1:9090"</em>
+1. **WEBSOCKET_ADDR_0:** Defines the endpoint of RPC's websocket service of the 1st chain. You MUST escape the strings here. <em>Example: WEBSOCKET_ADDR_0="ws:\/\/127.0.0.1:26657\/websocket"</em>
+1. **ACCOUNT_PREFIX_0:** Defines the account prefixes of the 1st chain. <em>Example: ACCOUNT_PREFIX_0="cudos"</em>
+1. **GAS_PRICE_0:** Defines the gas prices of the 1st chain. <em>Example: GAS_PRICE_0="5000000000000"</em>
+1. **GAS_DENOM_0:** Defines the gas prices' denom of the 1st chain. <em>Example: GAS_DENOM_0="acudos"</em>
+1. **MNEMONIC_0:** Defines the account that will pay transactions costs of the 1st chain.
+1. **TRUSTING_PERIOD_0:** Defines the trusting period of the 1st chain. It is good to be 2/3 of the unbonding period. <em>Example: TRUSTING_PERIOD_0="4hours"</em>
+1. **CHAIN_ID_1:** Defines the chain-id of the 2nd chain. <em>Example: CHAIN_ID_1="cudos-1"</em>
+1. **RPC_ADDR_1:** Defines the endpoint of RPC service of the 2nd chain. You MUST escape the strings here. <em>Example: RPC_ADDR_1="http:\/\/127.0.0.1:26657"</em>
+1. **GRPC_ADDR_1:** Defines the endpoint of GRPC service of the 2nd chain. You MUST escape the strings here. <em>Example: GRPC_ADDR_1="http:\/\/127.0.0.1:9090"</em>
+1. **WEBSOCKET_ADDR_1:** Defines the endpoint of RPC's websocket service of the 2nd chain. You MUST escape the strings here. <em>Example: WEBSOCKET_ADDR_1="ws:\/\/127.0.0.1:26657\/websocket"</em>
+1. **ACCOUNT_PREFIX_1:** Defines the account prefixes of the 2nd chain. <em>Example: ACCOUNT_PREFIX_1="osmo"</em>
+1. **GAS_PRICE_1:** Defines the gas prices of the 2nd chain. <em>Example: GAS_PRICE_1="0.0011"</em>
+1. **GAS_DENOM_1:** Defines the gas prices' denom of the 2nd chain. <em>Example: GAS_DENOM_1="uosmo"</em>
+1. **MNEMONIC_1:** Defines the account that will pay transactions costs of the 2nd chain.
+1. **TRUSTING_PERIOD_1:** Defines the trusting period of the 2nd chain. It is good to be 2/3 of the unbonding period. <em>Example: TRUSTING_PERIOD_1="4hours"</em>
 
 # Usage
 
 There are 2 scripts.
 
-**Important**: The side effect of executing any of these scripts will be a folder, defined in PARAM_SOURCE_DIR at .env, on each machine defined in topology.json
+**Important**: The side effect of executing any of these scripts will be a folder, defined in PARAM_SOURCE_DIR at .env.
 
 **Launch sequence**: Execute these scripts only when all config files are ready. Follow the order below.
-- First execute <em>validate</em> to ensure that the connection to peers is fine
+- First execute <em>validate</em> to ensure that the connection to IBC-enabled chain is fine
 - Second execute <em>relayer</em> to start the relayer
 
 
