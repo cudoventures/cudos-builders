@@ -31,14 +31,14 @@ if [ "$?" != 0 ]; then
     exit 1;
 fi
 
-initResult=$(cat $PARAM_SOURCE_DIR/CudosData/cudos-data-hermes-ibc-relayer/create-channel-data.txt | grep rror)
-if [ "$initResult" != "" ]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error while in the init script: ${initResult}";
+initResultError=$(cat $PARAM_SOURCE_DIR/CudosData/cudos-data-hermes-ibc-relayer/create-channel-data.txt | grep rror)
+if [ "$initResultError" != "" ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error while in the init script: ${initResultError}";
     exit 1;
 fi
+initResult=$(cat $PARAM_SOURCE_DIR/CudosData/cudos-data-hermes-ibc-relayer/create-channel-data.txt)
 initResultSearchFor="Success:"
-initResultSearchForPos=${initResult#*$initResultSearchFor}
-CONNETION_INFO=$((${#initResult} - ${#initResultSearchForPos} - ${#initResultSearchFor}))
+CONNECTION_INFO=${initResult#*$initResultSearchFor}
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Stopping previous START instances...";

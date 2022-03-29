@@ -1,8 +1,8 @@
 #!/bin/bash -i
 
-echo "$CONNETION_INFO" > "$WORKING_EXPORT_DIR/result.txt"
+echo "$CONNECTION_INFO" > "$WORKING_EXPORT_DIR/result.txt"
 
-echo "CONNETION_INFO: $CONNETION_INFO";
+echo "CONNECTION_INFO: $CONNECTION_INFO";
 
 echo "" # new line
 
