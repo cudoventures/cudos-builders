@@ -36,6 +36,9 @@ if [ "$initResult" != "" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error while in the init script: ${initResult}";
     exit 1;
 fi
+initResultSearchFor="Success:"
+initResultSearchForPos=${initResult#*$initResultSearchFor}
+CONNETION_INFO=$((${#initResult} - ${#initResultSearchForPos} - ${#initResultSearchFor}))
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Stopping previous START instances...";
