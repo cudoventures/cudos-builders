@@ -2,7 +2,7 @@
 
 echo "$CONNECTION_INFO" > "$WORKING_EXPORT_DIR/result.txt"
 
-echo "CONNECTION_INFO: $CONNECTION_INFO";
+echo -e "${STYLE_BOLD}CONNECTION_INFO:${STYLE_DEFAULT}\n $CONNECTION_INFO";
 
 echo "" # new line
 
