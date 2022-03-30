@@ -79,7 +79,7 @@ for addr in $(echo "${exportedBankBalAddresses}" | jq -r '.[]'); do
 
     echo "$stakeAdmins" | jq ". | map(select(.address == \"${addr}\") | .balance) | flatten" > "$addrStakeAdminPath"
 
-    echo "$stakeBank" | jq ". | map(select(.address == \"${addr}\") | .balance) | flatten" > "$addrStakeBankPath"
+    echo "$stakeBank" | jq ". | map(select(.address == \"${addr}\" and .address as \$in | $allGivenAddrInStake | index(\$in)) | .balance) | flatten" > "$addrStakeBankPath"
 
     #get amounts for acudos
     echo "$addrExportedBalances" | jq ". | map(select(.denom == \"acudos\") | .amount) | flatten" > "$addrExportedAcudosBalancePath"

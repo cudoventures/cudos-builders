@@ -46,12 +46,17 @@ echo "$stakeAdmins" | jq "[.[].address]" > "$tmpExportedAddressespath"
 stakeAdminsAddr=$(cat "$tmpExportedAddressespath")
 
 #get staking validators
-jq ".stake | map(. | .)" "$STAKING_JSON" > "$tmpExportedAddressespath"
-stakeValidators=$(cat "$tmpExportedAddressespath")
-
 #get staking validators addresses
-echo "$stakeValidators" | jq "[.[].address]" > "$tmpExportedAddressespath"
-stakeValidatorsAddr=$(cat "$tmpExportedAddressespath")
+
+stakeValidatorsAddr="[]"
+for dataGenesisPath in $WORKING_DATA_GENESIS_DIR/*; do
+    [ -e "$dataGenesisPath" ] || continue
+    setAllValAddrFromGen "$dataGenesisPath"
+
+    if [ "$tempValStakeAddrLength" != "0" ]; then
+        stakeValidatorsAddr=$(echo "$stakeValidatorsAddr" | jq ". + $tempValStakeAddrArray")
+    fi
+done
 
 #get root delegators
 jq "[.app_state.staking.delegations[]]" "$rootGenesisPath" > "$tmpExportedAddressespath"
@@ -63,7 +68,7 @@ rootDelegationsAddr=$(cat "$tmpExportedAddressespath")
 
 #get staking delegators
 tmpStakeDelegPath="/tmp/tmpStakeDelegPath.json"
-jq ".stake | map(select(.delegation != null) | .delegation) | flatten" "$STAKING_JSON" > "$tmpStakeDelegPath"
+jq ".stake | map(select(.delegation != null and .address as \$in | $stakeValidatorsAddr | index(\$in)) | .delegation) | flatten" "$STAKING_JSON" > "$tmpStakeDelegPath"
 
 #get staking delegators
 tmpStakeRootDelegPath="/tmp/tmpStakeRootDelegPath.json"
@@ -75,13 +80,14 @@ stakeDelegators=$(cat "$tmpExportedAddressespath")
 echo "$stakeDelegators" | jq "[.[].delegatorAddress]" > "$tmpExportedAddressespath"
 stakeDelegatorsAddr=$(cat "$tmpExportedAddressespath")
 
+allGivenAddrInStake=$(echo "$stakeValidatorsAddr" | jq ". + $stakeDelegatorsAddr")
+
 #get staking validators with rewards addresses
 jq ".bank | map(select(.address as \$in | $stakeValidatorsAddr | index(\$in)) | .address)" "$STAKING_JSON" > "$tmpExportedAddressespath"
 stakeValidatorsWithRewards=$(cat "$tmpExportedAddressespath")
 
 #get staking delegators with rewards addresses
-jq ".bank | map(select(.address as \$in | $stakeDelegators | index(\$in)) | .address)" "$STAKING_JSON" > "$tmpExportedAddressespath"
-stakeDelegatorsWithRewards=$(cat "$tmpExportedAddressespath")
+stakeDelegatorsWithRewards=$(jq ".bank | map(select(.address as \$in | $stakeDelegatorsAddr | index(\$in)) | .address)" "$STAKING_JSON")
 
 #get all validator addresses
 ## get all validators consesnsus pubkeys

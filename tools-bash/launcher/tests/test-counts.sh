@@ -1,5 +1,7 @@
 echo "Checking if exported genesis counts match:";
 
+source "$WORKING_DIR/tests/varGetters.sh"
+
 EXPORTED_GENESIS="$WORKING_DIR/exports/genesis.json"
 BASE_GENESIS="$WORKING_DIR/tests/config/genesis.root.json"
 STAKING_JSON="$WORKING_DIR/tests/config/staking.json"
@@ -186,11 +188,12 @@ tmpStakingBalancesAddrPath="/tmp/stakingBalancesAddr.json"
 tmpStakingDelAddrPath="/tmp/stakingDelAddr.json"
 tmpStakingRootDelAddrPath="/tmp/stakingRootDelAddr.json"
 tmpStakingRootAddrPath="/tmp/stakingRootAddr.json"
+tmpExportedAddressespath="/tmp/tmpExportedAddressespath.json"
 
 jq .app_state.auth.accounts "$rootGenesisPath" | jq "map(select(.\"@type\" == \"/cosmos.auth.v1beta1.BaseAccount\") | .address)" > "$accountDataGenesisPath"
 
-jq ".stake | map(. .address)" "$STAKING_JSON" > "$tmpStakingValAddrPath"
-jq ".stake | map(select(.delegation != null) | .delegation) | flatten | map(. .delegatorAddress)" "$STAKING_JSON" > "$tmpStakingDelAddrPath"
+echo "$stakeValidatorsAddr" > "$tmpStakingValAddrPath"
+jq ".stake | map(select(.delegation != null and .address as \$in | $stakeValidatorsAddr | index(\$in)) | .delegation) | flatten | map(. .delegatorAddress)" "$STAKING_JSON" > "$tmpStakingDelAddrPath"
 jq "[.root.delegation[].delegatorAddress]" "$STAKING_JSON" > "$tmpStakingRootDelAddrPath"
 jq ".admins | map(. .address)" "$STAKING_JSON" > "$tmpStakingAdminAddrPath"
 jq ".balances | map(. .address)" "$STAKING_JSON" > "$tmpStakingBalancesAddrPath"
@@ -199,14 +202,14 @@ jq -s ". = .[0] + .[1] + .[2] + .[3] + .[4] + .[5] " "$accountDataGenesisPath" "
 totalbaseAddr=$(jq length "$tmpGenesisPath")
 
 if [ "$totalbaseAddr" != "$exportedBaseAccounts" ]; then 
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} auth base type accounts count don't match";
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} auth base type accounts count don't match - expected ${totalbaseAddr} but exported ${exportedBaseAccounts}";
     exit 1
 fi
 
 #check auth total accounts match
 totalAddExpected=$(($totalbaseAddr+$rootModuleAccounts))
 if [ "$exportedTotalAccounts" != "$totalAddExpected" ]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} auth total accounts count don't match";
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} auth total accounts count don't match - expected ${totalAddExpected} but exported ${exportedTotalAccounts}";
     exit 1
 fi
 
@@ -239,14 +242,8 @@ exportedAdminBalances=$(jq length "$accountDataGenesisPath")
 
 
 #check acudos balances
-tmpStakingBankBalPath="/tmp/stakingBankBal.json"
-tmpStakingBalBalPath="/tmp/stakingBalBal.json"
-
 ##get taking all nonrepeating balances count
-jq "[.bank[]] | map(select(.balance != \"0\") | .address)" "$STAKING_JSON" > "$tmpStakingBankBalPath"
-jq "[.balances[]] | map(select(.balance != \"0\") | .address)" "$STAKING_JSON" > "$tmpStakingBalBalPath"
-jq -s ". = .[0] + .[1]" "$tmpStakingBankBalPath" "$tmpStakingBalBalPath" | jq "unique" > "$accountDataGenesisPath"
-stakingBalances=$(jq length "$accountDataGenesisPath")
+stakingBalances=$(echo "$stakeValidatorsWithRewards" | jq ". + $stakeDelegatorsWithRewards + $stakeBalancesAddr | unique | length")
 
 ##get root genesis all nonmodule account balances count
 jq .app_state.auth.accounts "$rootGenesisPath" | jq "map(select(.\"@type\" == \"/cosmos.auth.v1beta1.ModuleAccount\") | .base_account.address)" > "$tmpModuleAccountAddr"
@@ -260,7 +257,7 @@ rootBankBalances=$(jq length "$accountDataGenesisPath")
 
 expectedBalances=$(("$stakingBalances"+"$rootBankBalances"))
 if [ "$exportedNonZeroAcudosBalances" != "$expectedBalances" ]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} acudos nonzero balances count don't match";
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} acudos nonzero balances count don't match - expected ${expectedBalances} but exported ${exportedNonZeroAcudosBalances}";
     exit 1   
 fi
 
@@ -271,12 +268,11 @@ jq ".app_state.bank.balances | map(select(.address as \$in | $baseAccountArray |
 rootAdminBalances=$(jq length "$accountDataGenesisPath")
 
 ##get taking all nonrepeating balances count
-jq "[.admins[]] | map(select(.balance != \"0\") | .address)" "$STAKING_JSON" > "$tmpStakingBankBalPath"
-stakingBalances=$(jq length "$tmpStakingBankBalPath")
+stakingBalances=$(jq "[.admins[]] | map(select(.balance != \"0\") | .address) | length" "$STAKING_JSON")
 
 expectedBalances=$(("$stakingBalances"+"$rootAdminBalances"))
 if [ "$exportedAdminBalances" != "$expectedBalances" ]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} cudosAdmin nonzero balances count don't match";
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} cudosAdmin nonzero balances count don't match - expected ${expectedBalances} but exported ${exportedAdminBalances}";
     exit 1   
 fi
 
@@ -290,7 +286,7 @@ jq ".app_state.bank.balances | map(select(.address as \$in | $moduleAddrArray | 
 rootModuleBalances=$(jq length "$accountDataGenesisPath")
 
 if [ "$exportedModuleBalances" != "$rootModuleBalances" ]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} module type account balances count don't match";
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} module type account balances count don't match - expected ${rootModuleBalances} but exported ${exportedModuleBalances}";
     exit 1   
 fi
 
