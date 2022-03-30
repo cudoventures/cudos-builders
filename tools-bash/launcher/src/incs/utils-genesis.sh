@@ -49,6 +49,73 @@ function getRewardByAddress {
     echo $validatorReward
 }
 
+function getValAddr {
+    tmpPath="/tmp/getRewardByAddress"
+
+    case "$1" in
+
+    oper)
+    addressTypeSelector="[.app_state.staking.validators[].operator_address]"
+    ;;
+
+    cons)
+    addressTypeSelector="[.app_state.slashing.signing_infos[].address]"
+    ;;
+
+    consPubKey)
+    addressTypeSelector="[.app_state.staking.validators[].consensus_pubkey.key]"
+    ;;
+
+    stake)
+    addressTypeSelector="[.app_state.staking.delegations[].delegator_address]"
+    ;;
+    *)
+    echo "ERROR: WRONG SELECTOR";
+    exit 1;
+    ;;
+
+    esac
+
+    jq "$addressTypeSelector" "$2" > "$tmpPath"
+    valOperAddr=$(cat "$tmpPath")
+
+    echo $valOperAddr
+}
+
+function setAllValAddrFromGen {
+    tempValOperAddrArray=$(getValAddr "oper" $1)
+    tempValOperAddr=$(echo "$tempValOperAddrArray" | jq .[0])
+    tempValOperAddrArrayLength=$(echo "$tempValOperAddrArray" | jq length)
+    tempValOperAddr=${tempValOperAddr//\"/}
+    
+    if  [ "$tempValOperAddrArrayLength" != "1" ]; then 
+        echo -e "\n${STYLE_RED}Error:${STYLE_DEFAULT} More than one validator in genesis.";
+        exit 1 
+    fi
+    
+    tempValStakeAddrArray=$(getValAddr "stake" $dataGenesisPath)
+    tempValStakeAddrLength=$(echo "$tempValStakeAddrArray" | jq length)
+    tempValStakeAddr=$(echo "$tempValStakeAddrArray" | jq .[0])
+    tempValStakeAddr=${tempValStakeAddr//\"/}
+    if  [ "$tempValStakeAddrLength" != "1" ]; then 
+        echo -e "\n${STYLE_RED}Error:${STYLE_DEFAULT} More than one delegation in genesis: ${dataGenesisPath}";
+        exit 1 
+    fi
+}
+# $1-addresses to check, $2 - array in which to ckech if 1 exists, $3 - error message
+function checkAddrExists {
+    tmpCheckPath="/tmp/tmpCheckPath.json"
+    echo "$1" | jq -c ". - $2" > "$tmpCheckPath"
+    notFoundCount=$(jq length "$tmpCheckPath")
+    searchArrayLength=$(echo "$1" | jq length .)
+
+    if [ "$notFoundCount" != 0 ] || [ "$searchArrayLength" == 0 ]; then
+        echo -ne "\n${STYLE_RED}Error:${STYLE_DEFAULT} $3: ";
+        cat "$tmpCheckPath";
+        exit 1  
+    fi
+}
+
 function addAuthAccountIfNotExists {
     tmpPath="/tmp/addAuthAccountIfNotExists"
 

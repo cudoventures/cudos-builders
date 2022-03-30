@@ -1,4 +1,4 @@
-echo "Testing exported genesis counts match:";
+echo "Checking if exported genesis counts match:";
 
 EXPORTED_GENESIS="$WORKING_DIR/exports/genesis.json"
 BASE_GENESIS="$WORKING_DIR/tests/config/genesis.root.json"
