@@ -8,6 +8,8 @@ source "$WORKING_SRC_DIR/incs/utils.sh"
 
 source "$WORKING_SRC_DIR/incs/utils-genesis.sh"
 
+# source "$WORKING_SRC_DIR/incs/validate-staking-json.sh"
+
 source "$WORKING_SRC_DIR/modules/merge-genesis.sh" "$WORKING_DIR/tests/config/genesis.root.json"
 
 source "$WORKING_DIR/tests/test-counts.sh"
