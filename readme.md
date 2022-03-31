@@ -1012,7 +1012,7 @@ Execute the command below and your validator will be created.
 
 ```bash
 cudos-noded tx staking create-validator --amount=$STAKE \
-    --from=validator \
+    --from=validator-2 \
     --pubkey=$(cudos-noded tendermint show-validator) \
     --moniker=$MONIKER \
     --chain-id=$CHAIN_ID \
@@ -1020,10 +1020,7 @@ cudos-noded tx staking create-validator --amount=$STAKE \
     --commission-max-rate="0.20" \
     --commission-max-change-rate="0.01" \
     --min-self-delegation="2000000000000000000000000" \
-    --gas="auto" \
-    --gas-prices="0.025acudos" \
-    --gas-adjustment="1.80" \
-    --keyring-backend="os" \
+    --gas-prices="5000000000000acudos" \
     -y
 ```
 
@@ -1038,9 +1035,7 @@ cudos-noded tx staking edit-validator \
     --chain-id=$CHAIN_ID \
     --commission-rate="0.10" \
     --min-self-delegation="1" \
-    --gas="auto" \
-    --gas-prices="0.025acudos" \
-    --gas-adjustment="1.80" \
+    --gas-prices="5000000000000acudos" \
     --keyring-backend="os" \
     -y
 ```
