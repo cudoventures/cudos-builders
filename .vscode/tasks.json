@@ -1,6 +1,13 @@
 {
     "version": "2.0.0",
     "tasks": [
+        //stress test gravity bridge
+        {
+            "label": "Run Gravity Bridge stress test",
+            "command": "cd ./tools/stress-test-gravity-bridge && node runTest",
+            "type": "shell",
+            "group": "build"
+        },
         //hermes-ibc-relayer
         {
             "label": "Build HERMES-IBC-RELAYER BINARY BUILDER in docker",
