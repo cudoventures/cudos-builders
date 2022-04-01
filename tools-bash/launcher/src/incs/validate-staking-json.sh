@@ -60,6 +60,25 @@ if [ "$size" != "$uniqueSize" ]; then
     exit 1;
 fi
 
+rootValidatorRefAddress=$(jq .root.address "$STAKING_JSON")
+rootValidatorRefAddress=${rootValidatorRefAddress//\"/}
+
+delegation=$(jq ".root.delegation" "$STAKING_JSON")
+if [ "$delegation" != "null" ]; then
+    size=$(jq ".root.delegation | length" "$STAKING_JSON")
+    uniqueSize=$(jq ".root.delegation | unique_by(.delegatorAddress) | length" "$STAKING_JSON")
+    if [ "$size" != "$uniqueSize" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There is duplicate address in .delegations for the root-validator";
+        exit 1;
+    fi
+
+    containsRootValRefAddress=$(jq ".root.delegation | map(.delegatorAddress) | index(\"$rootValidatorRefAddress\")" "$STAKING_JSON")
+    if [ "$containsRootValRefAddress" != "null" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The root-validator could not be a delegator of the root-validator";
+        exit 1;
+    fi
+fi
+
 stakeSize=$(jq ".stake | length" "$STAKING_JSON")
 for i in $(seq 0 $(($stakeSize-1))); do
     delegation=$(jq ".stake | to_entries | .[$i] | .value.delegation" "$STAKING_JSON")
@@ -69,6 +88,13 @@ for i in $(seq 0 $(($stakeSize-1))); do
         if [ "$size" != "$uniqueSize" ]; then
             validatorAddress=$(jq ".stake | to_entries | .[$i] | .value.address" "$STAKING_JSON")
             echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There is duplicate address in .delegations for validator with address $validatorAddress";
+            exit 1;
+        fi
+
+        containsRootValRefAddress=$(jq ".stake | to_entries | .[$i] | .value.delegation | unique_by(.delegatorAddress) | map(.delegatorAddress) | index(\"$rootValidatorRefAddress\")" "$STAKING_JSON")
+        if [ "$containsRootValRefAddress" != "null" ]; then
+            validatorAddress=$(jq ".stake | to_entries | .[$i] | .value.address" "$STAKING_JSON")
+            echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The root-validator could not be a delegator of $validatorAddress";
             exit 1;
         fi
     fi

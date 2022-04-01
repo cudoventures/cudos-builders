@@ -72,7 +72,12 @@ jq ".stake | map(select(.delegation != null and .address as \$in | $stakeValidat
 
 #get staking delegators
 tmpStakeRootDelegPath="/tmp/tmpStakeRootDelegPath.json"
-jq ".root.delegation | map(select(.delegation != null) | .) | flatten" "$STAKING_JSON" > "$tmpStakeRootDelegPath"
+hasRootDelegation=$(jq ".root.delegation" "$STAKING_JSON")
+if [ "$hasRootDelegation" != "null" ]; then
+    jq ".root.delegation | map(select(.delegation != null) | .) | flatten" "$STAKING_JSON" > "$tmpStakeRootDelegPath"
+else
+    echo "[]" > "$tmpStakeRootDelegPath"
+fi
 jq -s ". = .[0] + .[1]" "$tmpStakeDelegPath" "$tmpStakeRootDelegPath" > "$tmpExportedAddressespath"
 stakeDelegators=$(cat "$tmpExportedAddressespath")
 

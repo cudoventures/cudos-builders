@@ -137,8 +137,13 @@ for addr in $(echo "${rootDelegationsAddr}" | jq -r '.[]'); do
 done
 
 #check root stake delegations
-rootStakeDelArray=$(jq ".root.delegation | map(select(.delegation != null) | .) | flatten" "$STAKING_JSON")
-rootStakeDelAddrArray=$(jq ".root.delegation | map(select(.delegation != null) | .delegatorAddress) | flatten" "$STAKING_JSON")
+if [ "$hasRootDelegation" != "null" ]; then
+    rootStakeDelArray=$(jq ".root.delegation | map(select(.delegation != null) | .) | flatten" "$STAKING_JSON")
+    rootStakeDelAddrArray=$(jq ".root.delegation | map(select(.delegation != null) | .delegatorAddress) | flatten" "$STAKING_JSON")
+else
+    rootStakeDelArray="[]"
+    rootStakeDelAddrArray="[]"
+fi
 
 rootDelTokensTotalPath="/tmp/rootDelTokensTotalPath.json"
 tmpDelegationCoinsPath="/tmp/tmpDelegationCoinsPath.json"
