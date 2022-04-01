@@ -17,46 +17,34 @@
         "deploy--config--start_validator-node-testnet-public-zone03": "node ./deployer-nodes/Main.js --target=validator-node-testnet-public-zone03 --init=0 --config=1 --start=1",
         "deploy--init--start_seed-node-testnet-public-zone03": "node ./deployer-nodes/Main.js --target=seed-node-testnet-public-zone03 --init=1 --config=0 --start=1",
         "deploy--init--start_sentry-node-testnet-public-zone03": "node ./deployer-nodes/Main.js --target=sentry-node-testnet-public-zone03 --init=1 --config=0 --start=1  --https=1",
-
         "deploy--orchestrator-testnet-public-zone01": "node ./deployer-orchestrator/Main.js --target=root-node-testnet-public-zone01",
         "deploy--orchestrator-testnet-public-zone02": "node ./deployer-orchestrator/Main.js --target=validator-node-testnet-public-zone02",
         "deploy--orchestrator-testnet-public-zone03": "node ./deployer-orchestrator/Main.js --target=validator-node-testnet-public-zone03",
-
         "deploy-utils-testnet-public": "node ./deployer-utils/Main.js --target=testnet-public --init=1",
-
         "deploy-gravity-bridge-ui-testnet-public": "node ./deployer-gravity-bridge-ui/Main.js --target=testnet-public",
-
         "deploy--monitoring-testnet-public": "node ./deployer-monitoring/Main.js --target=monitoring",
-
-
-
         "deploy--init--start_root-node-testnet-private": "node ./deployer-nodes/Main.js --target=root-node-testnet-private --init=1 --config=0 --start=1",
         "deploy--init--start_seed-node-testnet-private": "node ./deployer-nodes/Main.js --target=seed-node-testnet-private --init=1 --config=0 --start=1",
         "deploy--init--start_sentry-node-testnet-private": "node ./deployer-nodes/Main.js --target=sentry-node-testnet-private --init=1 --config=0 --start=1",
-
         "deploy--orchestrator-testnet-private": "node ./deployer-orchestrator/Main.js --target=root-node-testnet-private",
-        
         "deploy-utils-testnet-private": "node ./deployer-utils/Main.js --target=testnet-private --init=1",
-
         "deploy-gravity-bridge-ui-testnet-private": "node ./deployer-gravity-bridge-ui/Main.js --target=testnet-private",
-
-
-
         "deploy--ethereum-rinkeby": "node ./deployer-ethereum/Main.js --target=ethereum",
-        
         "network": "node ./deployer-network/src/Main.js"
     },
     "engines": {
         "node": ">=12"
     },
-    "dependencies": {},
+    "dependencies": {
+        "@cosmostation/cosmosjs": "^0.9.7"
+    },
     "devDependencies": {
+        "archiver": "^5.3.0",
         "argparse": "^2.0.1",
         "dotenv": "^8.2.0",
-        "scp2": "^0.5.0",
-        "archiver": "^5.3.0",
         "fs-extra": "^10.0.0",
-        "ssh2": "^1.4.0",
-        "node-ssh": "^12.0.0"
+        "node-ssh": "^12.0.0",
+        "scp2": "^0.5.0",
+        "ssh2": "^1.4.0"
     }
 }
