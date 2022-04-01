@@ -1,6 +1,6 @@
 echo "Checking if exported genesis counts match:";
 
-source "$WORKING_DIR/tests/varGetters.sh"
+source "$WORKING_DIR/tests/incs/var.sh"
 
 EXPORTED_GENESIS="$WORKING_DIR/exports/genesis.json"
 BASE_GENESIS="$WORKING_DIR/tests/config/genesis.root.json"
@@ -221,7 +221,7 @@ echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 echo -ne "  -number of bank balances equals expected...";
 
 #get exported total balances
-jq "".app_state.bank.balances "$EXPORTED_GENESIS" > "$accountDataGenesisPath"
+jq ".app_state.bank.balances" "$EXPORTED_GENESIS" > "$accountDataGenesisPath"
 exportedTotalBalances=$(jq length "$accountDataGenesisPath")
 
 #get exported acudos nonzero balances
@@ -240,7 +240,6 @@ exportedModuleBalances=$(jq length "$accountDataGenesisPath")
 jq ".app_state.bank.balances | map(.coins) | flatten | map(select(.denom == \"cudosAdmin\" and .amount != \"0\") | .amount)" "$EXPORTED_GENESIS"  > "$accountDataGenesisPath"
 exportedAdminBalances=$(jq length "$accountDataGenesisPath")
 
-
 #check acudos balances
 ##get taking all nonrepeating balances count
 stakingBalances=$(echo "$stakeValidatorsWithRewards" | jq ". + $stakeDelegatorsWithRewards + $stakeBalancesAddr | unique | length")
@@ -258,7 +257,7 @@ rootBankBalances=$(jq length "$accountDataGenesisPath")
 expectedBalances=$(("$stakingBalances"+"$rootBankBalances"))
 if [ "$exportedNonZeroAcudosBalances" != "$expectedBalances" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} acudos nonzero balances count don't match - expected ${expectedBalances} but exported ${exportedNonZeroAcudosBalances}";
-    exit 1   
+    exit 1 
 fi
 
 #check cudosAdmin balances

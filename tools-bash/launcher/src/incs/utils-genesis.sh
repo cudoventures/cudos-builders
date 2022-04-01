@@ -79,6 +79,7 @@ function getValAddr {
     jq "$addressTypeSelector" "$2" > "$tmpPath"
     valOperAddr=$(cat "$tmpPath")
 
+    rm -f "$tmpPath"
     echo $valOperAddr
 }
 
@@ -112,8 +113,11 @@ function checkAddrExists {
     if [ "$notFoundCount" != 0 ] || [ "$searchArrayLength" == 0 ]; then
         echo -ne "\n${STYLE_RED}Error:${STYLE_DEFAULT} $3: ";
         cat "$tmpCheckPath";
-        exit 1  
+        rm -f "$tmpCheckPath"
+        exit 1
     fi
+
+    rm -f "$tmpCheckPath"
 }
 
 function addAuthAccountIfNotExists {

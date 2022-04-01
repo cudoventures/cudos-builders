@@ -38,7 +38,7 @@ function checkIfInExportedDelegation(){
 ##################
 # SETUP          #
 ##################
-source "$WORKING_DIR/tests/varGetters.sh"
+source "$WORKING_DIR/tests/incs/var.sh"
 
 addrStakeAcudosPath="/tmp/addrStakeAcudosPath.json"
 addrRootAcudosBalancesPath="/tmp/addrRootAcudosBalancesPath.json"

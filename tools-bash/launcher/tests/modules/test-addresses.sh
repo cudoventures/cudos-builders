@@ -9,7 +9,7 @@ tmpExportedAddressespath="/tmp/tmpExportedAddresses.json"
 ##################
 # SETUP          #
 ##################
-source "$WORKING_DIR/tests/varGetters.sh"
+source "$WORKING_DIR/tests/incs/var.sh"
 
 ######################################################
 # TEST auth.accounts all addresses exist in exported #
