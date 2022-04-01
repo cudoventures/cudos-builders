@@ -89,6 +89,12 @@ stakeValidatorsWithRewards=$(cat "$tmpExportedAddressespath")
 #get staking delegators with rewards addresses
 stakeDelegatorsWithRewards=$(jq ".bank | map(select(.address as \$in | $stakeDelegatorsAddr | index(\$in)) | .address)" "$STAKING_JSON")
 
+#get staking root val address
+stakeRootValAddress=$(jq ".root.address" "$STAKING_JSON")
+
+#get staking root val with reward
+stakeRootWithReward=$(jq ".bank | map(select(.address as \$in | $stakeRootValAddress | index(\$in)) | .address)" "$STAKING_JSON")
+
 #get all validator addresses
 ## get all validators consesnsus pubkeys
 ### get exported validators consensus pubkeys

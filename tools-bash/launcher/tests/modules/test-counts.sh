@@ -242,7 +242,7 @@ exportedAdminBalances=$(jq length "$accountDataGenesisPath")
 
 #check acudos balances
 ##get taking all nonrepeating balances count
-stakingBalances=$(echo "$stakeValidatorsWithRewards" | jq ". + $stakeDelegatorsWithRewards + $stakeBalancesAddr | unique | length")
+stakingBalances=$(echo "$stakeValidatorsWithRewards" | jq ". + $stakeDelegatorsWithRewards + $stakeBalancesAddr + $stakeRootWithReward | unique | length")
 
 ##get root genesis all nonmodule account balances count
 jq .app_state.auth.accounts "$rootGenesisPath" | jq "map(select(.\"@type\" == \"/cosmos.auth.v1beta1.ModuleAccount\") | .base_account.address)" > "$tmpModuleAccountAddr"
