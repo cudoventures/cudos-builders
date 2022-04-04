@@ -1,5 +1,5 @@
 import Config from '../config/config.js';
-import message from "../cosmos/proto.js";
+import message from "./cosmos/proto";
 
 function generateSendToEthTx(msgInfos) {
     const sendMsgs = [];
@@ -22,7 +22,6 @@ function generateSendToEthMsg(msgInfo) {
     const bridgeFeeToAcudos = Config.CUDOS_NETWORK.BRIDGE_FEE + "0".repeat(18);
     const msgTypePath = '/gravity.v1.MsgSendToEth'
 
-    console.log(msgInfo.destiantionAddress);
     const msgData = {
             sender: msgInfo.sender,
             eth_dest: msgInfo.destiantionAddress,
@@ -38,7 +37,6 @@ function generateSendToEthMsg(msgInfo) {
 
     const sendMsg = new message.gravity.v1.MsgSendToEth(msgData);
 
-    console.log(sendMsg)
     return new message.google.protobuf.Any({
 		type_url: msgTypePath,
 		value: message.gravity.v1.MsgSendToEth.encode(sendMsg).finish()

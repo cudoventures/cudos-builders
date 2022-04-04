@@ -1,9 +1,10 @@
 import { Cosmos } from "@cosmostation/cosmosjs";
 import generateSendToEthTx from "./generateSendToEthTx.js";
 import Config from '../config/config.js';
-import message from "../cosmos/proto.js";
+import message from "./cosmos/proto";
+import BigNumber from 'bignum';
 
-export default function sendToEth(destiantionAddresses, sendAmount, senderMnemonic){
+export default function sendToEth(senderMnemonic, destiantionAddresses, sendAmount){
     const provider = new Cosmos(Config.CUDOS_NETWORK.REST, Config.CUDOS_NETWORK.CHAIN_ID);
     provider.setPath("m/44'/118'/0'/0/0");
     provider.bech32MainPrefix = 'cudos'
@@ -35,14 +36,15 @@ export default function sendToEth(destiantionAddresses, sendAmount, senderMnemon
             sequence: data.account.sequence
         });
 
+        const gasLimit = new BigNumber(Config.CUDOS_NETWORK.GAS_PER_MSG).mul(msgsCount);
+
         const feeValue = new message.cosmos.tx.v1beta1.Fee({
-            amount: [{ denom: "acudos", amount: Config.CUDOS_NETWORK.FEE }],
-            gas_limit: 200000 * msgsCount
+            amount: [{ denom: "acudos", amount: gasLimit.mul(Config.CUDOS_NETWORK.GAS_PRICE).toString(10)}],
+            gas_limit: gasLimit.toString(10),
         });
 
         const authInfo = new message.cosmos.tx.v1beta1.AuthInfo({ signer_infos: [signerInfo], fee: feeValue });
 
-        console.log(txBody)
         const signedTxBytes = provider.sign(txBody, authInfo, data.account.account_number, privKey);
         provider.broadcast(signedTxBytes).then(value => console.log(value));
     })
