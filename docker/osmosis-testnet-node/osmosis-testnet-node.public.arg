@@ -1,5 +1,5 @@
 OSMOSIS_HOME=/usr/osmosis/OsmosisData
-ENV_FILE=./osmosis-testnet-node.local.env
+ENV_FILE=./osmosis-testnet-node.public.env
 
 PORT26656=26656
 PORT26657=26657
