@@ -29,13 +29,13 @@ fi
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Configurating the $NODE_NAME...";
-cp -f "$WORKING_DIR/config/genesis.mainnet.json" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/genesis.json"
+\cp -f "$WORKING_DIR/config/genesis.mainnet.json" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/genesis.json"
 sed -i "s/private_peer_ids = \".*\"/private_peer_ids = \"$PARAM_PRIVATE_PEER_IDS\"/g" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
 if [ "$IS_CLUSTERED_VALIDATOR" = "true" ]; then
     sed -i "s/seeds = \".*\"/seeds = \"\"/g" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
     sed -i "s/persistent_peers = \".*\"/persistent_peers = \"$PARAM_PERSISTENT_PEERS\"/g" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
 fi
-if [ "$IS_CLUSTERED_VALIDATOR" = "false" ]; then # clustered validator and any other case
+if [ "$IS_CLUSTERED_VALIDATOR" = "false" ]; then # standalone validator and any other case
     if [ "$PARAM_SEED" != "" ]; then
         sed -i "s/seeds = \".*\"/seeds = \"$PARAM_SEED\"/g" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
         sed -i "s/persistent_peers = \".*\"/persistent_peers = \"\"/g" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
@@ -45,6 +45,7 @@ if [ "$IS_CLUSTERED_VALIDATOR" = "false" ]; then # clustered validator and any o
     fi
 fi
 
+sed -i "s/PRIVATE_PEERS=.*/PRIVATE_PEERS=\"$PARAM_PRIVATE_PEER_IDS\"/" "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME/$NODE_NAME.client.mainnet.env"
 if [ "$IS_CLUSTERED_VALIDATOR" = "true" ]; then
     sed -i "s/PERSISTENT_PEERS=.*/PERSISTENT_PEERS=\"$PARAM_PERSISTENT_PEERS\"/" "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME/$NODE_NAME.client.mainnet.env"
     sed -i "s/SEEDS=.*/SEEDS=\"\"/" "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME/$NODE_NAME.client.mainnet.env"
@@ -53,10 +54,14 @@ if [ "$IS_CLUSTERED_VALIDATOR" = "true" ]; then
 fi
 
 if [ "$IS_CLUSTERED_VALIDATOR" = "false" ]; then # clustered validator and any other case
-    sed -i "s/PERSISTENT_PEERS=.*/PERSISTENT_PEERS=\"\"/" "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME/$NODE_NAME.client.mainnet.env"
-    sed -i "s/SEEDS=.*/SEEDS=\"$PARAM_SEED\"/" "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME/$NODE_NAME.client.mainnet.env"
+    if [ "$PARAM_SEED" != "" ]; then
+        sed -i "s/SEEDS=.*/SEEDS=\"$PARAM_SEED\"/" "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME/$NODE_NAME.client.mainnet.env"
+        sed -i "s/PERSISTENT_PEERS=.*/PERSISTENT_PEERS=\"\"/" "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME/$NODE_NAME.client.mainnet.env"
+    fi
+    if [ "$PARAM_PERSISTENT_PEERS" != "" ]; then
+        sed -i "s/PERSISTENT_PEERS=.*/PERSISTENT_PEERS=\"$PARAM_PERSISTENT_PEERS\"/" "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME/$NODE_NAME.client.mainnet.env"
+    fi
     sed -i "s/SHOULD_USE_GLOBAL_PEERS=.*/SHOULD_USE_GLOBAL_PEERS=\"true\"/" "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME/$NODE_NAME.client.mainnet.env"
-    sed -i "s/PRIVATE_PEERS=.*/PRIVATE_PEERS=\"$PARAM_PRIVATE_PEER_IDS\"/" "$PARAM_SOURCE_DIR/CudosBuilders/docker/$NODE_NAME/$NODE_NAME.client.mainnet.env"
 fi
 
 if [ "$SHOULD_START_ORCHESTRATOR" = "true" ]; then

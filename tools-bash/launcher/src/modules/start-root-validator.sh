@@ -22,6 +22,11 @@ unset arg
 result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker stop $validatorStartContainerName 2> /dev/null")
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR && sudo rm -rf ./CudosData"
 
+echo -ne "Cleaning the docker...";
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker system prune -a -f 2> /dev/null")
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container prune -f 2> /dev/null")
+echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+
 echo -ne "Preparing root-validator's binary builder...";
 result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/binary-builder && sudo docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder build 2> /dev/null")
 if [ "$?" != 0 ]; then
@@ -100,10 +105,12 @@ result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorC
 result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sudo docker-compose --env-file ./root-node.mainnet.arg -f ./start-root-node.yml -p cudos-start-root-node down 2> /dev/null")
 # merge genesis
 echo $exportedGenesis > "$tmpFilePath"
+cp "$tmpFilePath" "$WORKING_EXPORT_DIR/genesis-root.json"
 source "$WORKING_SRC_DIR/modules/merge-genesis.sh" "$tmpFilePath"
 rm -f "$tmpFilePath"
-finalGenesis=$(cat "$RESULT_GENESIS_PATH")
-ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "echo \"${finalGenesis//\"/\\\"}\" > $tmpFilePath && sudo mv -f $tmpFilePath $PARAM_SOURCE_DIR/CudosData/$validatorVolumeName/config/genesis.json"
+scp -o "StrictHostKeyChecking no" -P ${validatorComputerPort} "$RESULT_GENESIS_PATH" ${validatorComputerUser}@${validatorComputerIp}:"/tmp/genesis.mainnet.json" &>/dev/null
+ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosData/$validatorVolumeName/config && sudo mv /tmp/genesis.mainnet.json ./genesis.json"
+
 # restore cudos-noded start
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && sed -i \"s/sleep infinity/cudos-noded start/\" ./start-root-node.dockerfile"
 # start the node
@@ -120,8 +127,8 @@ if [ "$VALIDATOR_TENEDRMINT_NODE_ID" = "" ]; then
     exit 1;
 fi
 
-GENESIS_JSON=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container exec cudos-start-root-node /bin/bash -c \"cat \\\$CUDOS_HOME/config/genesis.json\"")
-if [ "$GENESIS_JSON" = "" ]; then
+genesisJson=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "sudo docker container exec cudos-start-root-node /bin/bash -c \"head \\\$CUDOS_HOME/config/genesis.json\"")
+if [ "$genesisJson" = "" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The genesis.json is not defined";
     exit 1;
 fi

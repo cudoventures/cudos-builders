@@ -43,13 +43,14 @@ Clone <em>validator.env.example</em> to <em>validator.mainnet.env</em> (The actu
 1. **ORCH_ETH_ADDRESS:** The ETH address of the the wallet that will be used by the orchestrator. <em>Example: ORCH_ETH_ADDRESS="0x582436824932f3b313e3a3b3d3e31413be6d6a"</em>
 1. **MONITORING_ENABLED:** This variable defined whether the code will export data to port 26660 for prometheus. If the monitoring is disabled the port 26660 will be closed, otherwise it will be opened to the internal private interface. <em>Example: MONITORING_ENABLED="false"</em>
 1. **ADDR_BOOK_STRICT:** This defines the behaviour of the internal address book. DO NOT MODIFY THIS VALUE. Leave it "true" as it is in the example.
-1. **GRAVITY_MODULE_BALANCE:** This value defined the initial balance of the Gravity module in acudos. <em>Example: GRAVITY_MODULE_BALANCE="8000000000000000000000000000"</em>
-1. **CUDOS_TOKEN_CONTRACT_ADDRESS:** The address of the CUDOS token contract. <em>Example: CUDOS_TOKEN_CONTRACT_ADDRESS="0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d"</em>
+1. **GRAVITY_MODULE_BALANCE:** DO NOT MODIFY THIS VALUE. Leave it "0" as it is in the example.
+1. **CUDOS_TOKEN_CONTRACT_ADDRESS:** The address of the CUDOS token contract. <em>Example: CUDOS_TOKEN_CONTRACT_ADDRESS="0x12d474723cb8c02bcbf46cd335a3bb4c75e9de44"</em>
 1. **NUMBER_OF_VALIDATORS:** The number of validator accounts that will be initialized with the primary-validator. DO NOT MODIFY THIS VALUE. Leave it "1" as it is in the example.
 1. **NUMBER_OF_ORCHESTRATORS:** The number of orchestrator accounts that will initialized with the primary-validator. The default value is 3 <em>Example: NUMBER_OF_ORCHESTRATORS="3"</em>
 1. **VALIDATOR_BALANCE:** The amount of staked tokens that each genesis validator will have. <em>Example: VALIDATOR_BALANCE="2000000000000000000000000"</em>
 1. **ORCHESTRATOR_BALANCE:** This is the balance that each orchestrator will have. <em>Example: ORCHESTRATOR_BALANCE="1000000000000000000"</em>
 1. **FAUCET_BALANCE:** The balance of the faucet. If set to 0 then no faucet will be created. <em>Example: FAUCET_BALANCE="8000000000000000000000000000"</em>
+1. **KEYRING_OS_PASS:** The password of your keyring. It must be at least 8 characters. <em>Example: KEYRING_OS_PASS="11111111"</em>
 
 **Seed:**
 
@@ -85,7 +86,7 @@ Clone <em>sentry.env.example</em> to <em>sentry.mainnet.env</em> (The actual nam
 Clone <em>orchestrator.env.example</em> to <em>orchestrator.mainnet.env</em> (The actual name could be arbitrary because the absolute filename to this file is specified below in the configuration). It contains the following variables:
 
 1. **ADDRESS_PREFIX:** DO NOT MODIFY THIS VALUE. Leave it "cudos" as it is in the example.
-1. **FEES:** The amount of fees, with acudos suffix, that are paid by the orchestrator when he iteracts with the blockchain. The value must be large enough to ensure that a transaction will be included by some validator in a block. <em>Example: FEES="1000acudos"</em>
+1. **FEES:** The gas price, with acudos suffix, that are paid by the orchestrator when he iteracts with the blockchain. The value must be >= than minimum gas price which is 5*1E12 <em>Example: FEES="5000000000000acudos"</em>
 1. **GRPC:** DO NOT MODIFY THIS VALUE. Leave it empty as it is in the example.
 1. **ETHRPC:** Address to the ethereum full node. <em>Example: ETHRPC="http://43.14.14.12:8545"</em>
 1. **CONTRACT_ADDR:** DO NOT MODIFY THIS VALUE. Leave it empty as it is in the example.

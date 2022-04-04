@@ -1,6 +1,13 @@
 {
     "version": "2.0.0",
     "tasks": [
+        //stress test gravity bridge
+        {
+            "label": "Run Gravity Bridge stress test",
+            "command": "cd ./tools/stress-test-gravity-bridge && node runTest",
+            "type": "shell",
+            "group": "build"
+        },
         //hermes-ibc-relayer
         {
             "label": "Build HERMES-IBC-RELAYER BINARY BUILDER in docker",
@@ -322,6 +329,38 @@
             "type": "shell",
             "group": "build"
         },
+        // seed node client dress rehearsal
+        {
+            "label": "Build INIT SEED NODE CLIENT DRESS REHEARSAL in docker",
+            "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.client.dressrehearsal.arg -f ./init-seed-node.yml -p cudos-init-seed-node-client-dressrehearsal-01 up --build",
+            "type": "shell",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Destroy INIT SEED NODE CLIENT DRESS REHEARSAL in docker",
+            "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.client.dressrehearsal.arg -f ./init-seed-node.yml -p cudos-init-seed-node-client-dressrehearsal-01 down",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Start START SEED NODE CLIENT DRESS REHEARSAL in docker",
+            "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.client.dressrehearsal.arg -f ./start-seed-node.yml -p cudos-start-seed-node-client-dressrehearsal-01 up",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Build START SEED NODE CLIENT DRESS REHEARSAL in docker",
+            "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.client.dressrehearsal.arg -f ./start-seed-node.yml -p cudos-start-seed-node-client-dressrehearsal-01 up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Destroy START SEED NODE CLIENT DRESS REHEARSAL in docker",
+            "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.client.dressrehearsal.arg -f ./start-seed-node.yml -p cudos-start-seed-node-client-dressrehearsal-01 down",
+            "type": "shell",
+            "group": "build"
+        },
         // sentry node client local
         {
             "label": "Build INIT SENTRY NODE CLIENT LOCAL in docker",
@@ -417,6 +456,38 @@
             "type": "shell",
             "group": "build"
         },
+        // sentry node client dress rehearsal
+        {
+            "label": "Build INIT SENTRY NODE CLIENT DRESS REHEARSAL in docker",
+            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.dressrehearsal.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node-client-dressrehearsal-01 up --build",
+            "type": "shell",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Destroy INIT SENTRY NODE CLIENT DRESS REHEARSAL in docker",
+            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.dressrehearsal.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node-client-dressrehearsal-01 down",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Start START SENTRY NODE CLIENT DRESS REHEARSAL in docker",
+            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.dressrehearsal.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node-client-dressrehearsal-01 up",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Build START SENTRY NODE CLIENT DRESS REHEARSAL in docker",
+            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.dressrehearsal.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node-client-dressrehearsal-01 up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Destroy START SENTRY NODE CLIENT DRESS REHEARSAL in docker",
+            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.dressrehearsal.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node-client-dressrehearsal-01 down",
+            "type": "shell",
+            "group": "build"
+        },
         // full node client local
         {
             "label": "Build INIT FULL NODE CLIENT LOCAL in docker",
@@ -505,6 +576,7 @@
             "type": "shell",
             "group": "build"
         },
+
         // full node client testnet private
         {
             "label": "Build INIT FULL NODE CLIENT TESTNET PRIVATE in docker",
@@ -545,6 +617,51 @@
         {
             "label": "Destroy START FULL NODE CLIENT TESTNET PRIVATE in docker",
             "command": "cd ./docker/full-node && docker-compose --env-file ./full-node.client.testnet.private01.arg -f ./start-full-node.yml -p cudos-start-full-node-client-testnet-private-01 down",
+            "type": "shell",
+            "group": "build"
+        },
+
+        // full node client dress rehearsal
+        {
+            "label": "Build INIT FULL NODE CLIENT DRESS REHEARSAL in docker",
+            "command": "cd ./docker/full-node && docker-compose --env-file ./full-node.client.dressrehearsal.arg -f ./init-full-node.yml -p cudos-init-full-node-client-dressrehearsal-01 up --build",
+            "type": "shell",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Destroy INIT FULL NODE CLIENT DRESS REHEARSAL in docker",
+            "command": "cd ./docker/full-node && docker-compose --env-file ./full-node.client.dressrehearsal.arg -f ./init-full-node.yml -p cudos-init-full-node-client-dressrehearsal-01 down",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Build CONFIG FULL NODE CLIENT DRESS REHEARSAL in docker",
+            "command": "cd ./docker/full-node && docker-compose --env-file ./full-node.client.dressrehearsal.arg -f ./config-full-node.yml -p cudos-config-full-node-client-dressrehearsal-01 up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Destroy CONFIG FULL NODE CLIENT DRESS REHEARSAL in docker",
+            "command": "cd ./docker/full-node && docker-compose --env-file ./full-node.client.dressrehearsal.arg -f ./config-full-node.yml -p cudos-config-full-node-client-dressrehearsal-01 down",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Start START FULL NODE CLIENT DRESS REHEARSAL in docker",
+            "command": "cd ./docker/full-node && docker-compose --env-file ./full-node.client.dressrehearsal.arg -f ./start-full-node.yml -p cudos-start-full-node-client-dressrehearsal-01 up",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Build START FULL NODE CLIENT DRESS REHEARSAL in docker",
+            "command": "cd ./docker/full-node && docker-compose --env-file ./full-node.client.dressrehearsal.arg -f ./start-full-node.yml -p cudos-start-full-node-client-dressrehearsal-01 up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Destroy START FULL NODE CLIENT DRESS REHEARSAL in docker",
+            "command": "cd ./docker/full-node && docker-compose --env-file ./full-node.client.dressrehearsal.arg -f ./start-full-node.yml -p cudos-start-full-node-client-dressrehearsal-01 down",
             "type": "shell",
             "group": "build"
         },

@@ -15,6 +15,9 @@ topology.*.json
 users*override.yml
 docker/tests/**/data
 docker/monitoring/config/prometheus.tesnet.public.yml
+bdjuno
+.env-bdjuno
+.env-big-dipper-2
 /tools-bash/constructor/exports
 tools-bash/launcher/config/genesis.data.json
 tools-bash/launcher/config/genesis.root.json

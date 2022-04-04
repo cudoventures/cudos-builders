@@ -16,7 +16,7 @@ trust_threshold = { numerator = '1', denominator = '3' }
 
 [[chains]]
 id = 'osmosis-1'
-rpc_addr = 'http://13.235.252.154:26657/'
+rpc_addr = 'http://13.235.252.154:26657'
 grpc_addr = 'https://juno.stakesystems.io:2083'
 websocket_addr = 'ws://13.235.252.154:26657/websocket'
 rpc_timeout = '15s'

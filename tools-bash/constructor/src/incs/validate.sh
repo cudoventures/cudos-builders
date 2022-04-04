@@ -12,6 +12,17 @@ if [ ! -x "$(command -v python3)" ]; then
     exit 1;
 fi
 
+if [ ! -x "$(command -v git)" ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The host does not have git installed";
+    exit 1;
+fi
+
+gitStatus=$(git branch --contains 7684715d335a699459770e7db7b12ab7f718daf5 2>&1)
+if [[ "$gitStatus" == *"error:"* ]]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} You must pull the latest changes";
+    exit 1;
+fi 
+
 if [ "$PARAM_SOURCE_DIR" = "" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_SOURCE_DIR must not be empty";
     exit 1;
@@ -28,6 +39,16 @@ if [ ! -w "$PARAM_SOURCE_DIR" ]; then
 fi
 
 if [ "$STARTING" = "true" ]; then
+
+    if [ ! -f "$WORKING_DIR/config/genesis.mainnet.json" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The $WORKING_DIR/config/genesis.mainnet.json file is missing";
+        exit 1;
+    fi
+
+    if [ ! -r "$WORKING_DIR/config/genesis.mainnet.json" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Permission denied $WORKING_DIR/config/genesis.mainnet.json";
+        exit 1;
+    fi
     
     if [ "$IS_CLUSTERED_VALIDATOR" = "true" ]; then
         
@@ -90,17 +111,10 @@ fi
 
 if [ "$IS_VALIDATOR" = "true" ]; then
     
-    
 
-    if [ "$PARAM_VALIDATOR_LEDGER_TYPE" = "default" ]; then
 
         if [ "$PARAM_VALIDATOR_MNEMONIC" = "" ]; then
             echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_MNEMONIC must not be empty";
-            exit 1;
-        fi
-
-        if [ "$PARAM_VALIDATOR_LEDGER_ACCOUNT_NAME" != "" ]; then
-            echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_LEDGER_ACCOUNT_NAME must be empty when PARAM_VALIDATOR_LEDGER_TYPE=default";
             exit 1;
         fi
 
@@ -109,22 +123,6 @@ if [ "$IS_VALIDATOR" = "true" ]; then
             echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_MNEMONIC must be 12 or 24 words phrase";
             exit 1;
         fi;
-
-    fi
-    
-    if [ "$PARAM_VALIDATOR_LEDGER_TYPE" = "ledger" ]; then
-
-        if [ "$PARAM_VALIDATOR_LEDGER_ACCOUNT_NAME" = "" ]; then
-            echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_LEDGER_ACCOUNT_NAME must not be empty";
-            exit 1;
-        fi
-
-        if [ "$PARAM_VALIDATOR_MNEMONIC" != "" ]; then
-            echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_MNEMONIC must be empty when PARAM_VALIDATOR_LEDGER_TYPE=ledger";
-            exit 1;
-        fi
-
-    fi
     
     if [ "$PARAM_KEYRING_OS_PASS" = "" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_KEYRING_OS_PASS must not be empty";
@@ -140,8 +138,8 @@ if [ "$IS_VALIDATOR" = "true" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_COMMISSION_MAX_RATE must not be empty";
         exit 1;
     fi
-        if [ "$PARAM_COMMISION_RATE" = "" ]; then
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_COMMISION_RATE must not be empty";
+        if [ "$PARAM_COMMISSION_RATE" = "" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_COMMISSION_RATE must not be empty";
         exit 1;
     fi
         if [ "$PARAM_COMMISSION_MAX_CHANGE_RATE" = "" ]; then
@@ -181,7 +179,7 @@ if [ ! -x "$(command -v docker-compose)" ]; then
     exit 1;
 fi
 
-freeSpaceInKiB=$(df -P . | tail -1 | awk '{print $4}')
+freeSpaceInKiB=$(df -P "$PARAM_SOURCE_DIR" | tail -1 | awk '{print $4}')
 freeSpaceRequirementInKiB=5000000
 if (( freeSpaceInKiB < freeSpaceRequirementInKiB )); then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Free space is less than $freeSpaceRequirementInKiB KiB (Available = $freeSpaceInKiB KiB)";

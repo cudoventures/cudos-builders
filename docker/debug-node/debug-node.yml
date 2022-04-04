@@ -23,6 +23,7 @@ services:
       - '../../../CudosBuilders:/usr/cudos/CudosBuilders'
       - '../../../CudosNode:/usr/cudos/CudosNode'
       - '../../../CudosGravityBridge:/usr/cudos/CudosGravityBridge'
+      - '../../../cosmos-sdk:/usr/cudos/cosmos-sdk'
     networks:
       - shared-cudos-network
     ports:

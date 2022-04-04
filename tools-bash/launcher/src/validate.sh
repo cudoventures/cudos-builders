@@ -10,11 +10,15 @@ source "./src/incs/var.sh"
 
 source "./src/incs/utils.sh"
 
+source "$WORKING_SRC_DIR/incs/utils-genesis.sh"
+
 source "$WORKING_SRC_DIR/incs/validate-script-requirements.sh"
 
 source "$WORKING_SRC_DIR/incs/topology.sh"
 
 source "$WORKING_SRC_DIR/incs/validate-topology.sh"
+
+source "$WORKING_SRC_DIR/incs/validate-staking-json.sh"
 
 source "$WORKING_SRC_DIR/modules/load-ssh-keys.sh"
 

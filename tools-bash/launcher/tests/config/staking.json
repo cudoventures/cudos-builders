@@ -1,0 +1,90 @@
+{
+    "bank": [{
+        "address": "cudos1",
+        "balance": "10000"
+    }, {
+        "address": "cudos2",
+        "balance": "20000"
+    }, {
+        "address": "cudos3",
+        "balance": "40000"
+    }, {
+        "address": "cudos4",
+        "balance": "40000"
+    }, {
+        "address": "cudos5",
+        "balance": "50000"
+    }, {
+        "address": "cudos9",
+        "balance": "60000"
+    }],
+    "stake": {
+        "0x128118c56e5a794286a4f4047e417adaa98a5554": {
+            "id": "0x89d48988ddb382aa1485f80f5d187291a9966b2b",
+            "tokens": "100000000000000000000000",
+            "address": "cudos1",
+            "fee": "500"
+        },
+        "0x023cb17891968b1877f54ee05bf8b52f984e0dfe": {
+            "id": "0x477dc8f17ff5beea96132a943867546e2d11ca58",
+            "tokens": "200000000000000000000000",
+            "address": "cudos2",
+            "fee": "500",
+            "delegation": [{
+                "delegator": "0x05793f867398363313886657735f1df8b0ffcf42",
+                "delegation": "1000000000000000000000",
+                "delegatorAddress": "cudos3"
+            }, {
+                "delegator": "0x05942bf1c2332636be47afe9f2e978a65e84115e",
+                "delegation": "2000000000000000000000",
+                "delegatorAddress": "cudos4"
+            }, {
+                "delegator": "0x0ddc0e088493e0683b1bbe6c44a3896365d478e8",
+                "delegation": "3000000000000000000000",
+                "delegatorAddress": "cudos5"
+            }]
+        },
+        "0x1db232364f215670e8b14ba242e776c07d5b0599": {
+            "id": "0xf135e2249a76dce2fcde962131b7169565f1888d",
+            "tokens": "300000000000000000000000",
+            "address": "cudos5",
+            "fee": "500",
+            "delegation": [{
+                "delegator": "0xb5ed8ababc2d9e42add650b26d7684f891d2c649",
+                "delegation": "4000000000000000000000",
+                "delegatorAddress": "cudos2"
+            }]
+        }
+    },
+    "admins": [{
+        "address": "cudos4",
+        "balance": "1"
+    }, {
+        "address": "cudos5",
+        "balance": "2"
+    }, {
+        "address": "cudos7",
+        "balance": "3"
+    }, {
+        "address": "cudos8",
+        "balance": "4"
+    }],
+    "balances": [{
+        "address": "cudos4",
+        "balance": "100"
+    }, {
+        "address": "cudos6",
+        "balance": "200"
+    }, {
+        "address": "cudos8",
+        "balance": "300"
+    }],
+    "root": {
+        "address": "cudos9",
+        "delegation": [{
+            "delegator": "0x05793f867398363313886657735f1df8b0ffcf42",
+            "delegation": "5000000000000000000000",
+            "delegatorAddress": "cudos10"
+        }]
+    }
+}

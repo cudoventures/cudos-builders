@@ -15,17 +15,28 @@ cudos-noded init $MONIKER
 cp ./external-config/genesis.json "${CUDOS_HOME}/config/genesis.json"
 
 # gas price
-sed -i "s/minimum-gas-prices = \"\"/minimum-gas-prices = \"0${BOND_DENOM}\"/" "${CUDOS_HOME}/config/app.toml"
+sed -i "s/minimum-gas-prices = \"\"/minimum-gas-prices = \"5000000000000${BOND_DENOM}\"/" "${CUDOS_HOME}/config/app.toml"
 
 # port 1317
+# enable
+# sed -i "104s/enable = false/enable = true/" "${CUDOS_HOME}/config/app.toml"
+# sed -i "s/enabled-unsafe-cors = false/enabled-unsafe-cors = true/" "${CUDOS_HOME}/config/app.toml"
+# disable
 sed -i "104s/enable = true/enable = false/" "${CUDOS_HOME}/config/app.toml"
 
 # port 9090
+# enable
+# sed -i "158s/enable = false/enable = true/" "${CUDOS_HOME}/config/app.toml"
+# disable
 sed -i "158s/enable = true/enable = false/" "${CUDOS_HOME}/config/app.toml"
 
 # for port 26657
+# enable
 sed -i "s/laddr = \"tcp:\/\/127.0.0.1:26657\"/laddr = \"tcp:\/\/0.0.0.0:26657\"/" "${CUDOS_HOME}/config/config.toml"
 sed -i "s/cors_allowed_origins = \[\]/cors_allowed_origins = \[\"\*\"\]/" "${CUDOS_HOME}/config/config.toml"
+# disable
+# sed -i "s/laddr = \"tcp:\/\/0.0.0.0:26657\"/laddr = \"tcp:\/\/127.0.0.1:26657\"/" "${CUDOS_HOME}/config/config.toml"
+# sed -i "s/cors_allowed_origins = .*/cors_allowed_origins = \[\]/" "${CUDOS_HOME}/config/config.toml"
 
 sed -i "s/persistent_peers = \".*\"/persistent_peers = \"$PERSISTENT_PEERS\"/g" "${CUDOS_HOME}/config/config.toml"
 

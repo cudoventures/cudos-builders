@@ -1,4 +1,9 @@
 #!/bin/bash -i
+echo -ne "Cleaning the docker...";
+dockerResult=$(docker system prune -a -f 2> /dev/null)
+dockerResult=$(docker container prune -f 2> /dev/null)
+echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+
 
 echo -ne "Preparing the binary builder...";
 cd "$PARAM_SOURCE_DIR/CudosBuilders/docker/binary-builder"
@@ -61,12 +66,7 @@ if [ $IS_VALIDATOR = "true" ]; then
         exit 1;
     fi;
     emptyAddress=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys show empty -a --keyring-backend os");
-
-    if [ "$PARAM_VALIDATOR_LEDGER_TYPE" = "default" ]; then
-        dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_VALIDATOR_MNEMONIC\"; echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys add validator --recover --keyring-backend os 2> /dev/null");
-    else
-        dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys add validator --ledger --account $PARAM_VALIDATOR_LEDGER_ACCOUNT_NAME --keyring-backend os 2> /dev/null");
-    fi
+    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_VALIDATOR_MNEMONIC\"; echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys add validator --recover --keyring-backend os 2> /dev/null");
     if [ "$?" != 0 ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error importing your validator account $?: ${dockerResult}";
         exit 1;
@@ -74,7 +74,7 @@ if [ $IS_VALIDATOR = "true" ]; then
     validatorAddress=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys show validator -a --keyring-backend os");
 
     dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "cudos-noded add-genesis-account $validatorAddress ${VALIDATOR_BALANCE}acudos");
-    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\"; echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded gentx validator "${VALIDATOR_BALANCE}acudos" 0x364af07E1bb08288a1F3D9a578317baa9ED4fb2d $emptyAddress --chain-id $chainId --keyring-backend os --commission-rate="$PARAM_COMMISION_RATE" \
+    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\"; echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded gentx validator "${VALIDATOR_BALANCE}acudos" 0x364af07E1bb08288a1F3D9a578317baa9ED4fb2d $emptyAddress --chain-id $chainId --keyring-backend os --commission-rate="$PARAM_COMMISSION_RATE" \
     --commission-max-rate="$PARAM_COMMISSION_MAX_RATE" \
     --commission-max-change-rate="$PARAM_COMMISSION_MAX_CHANGE_RATE" 2> /dev/null");
 

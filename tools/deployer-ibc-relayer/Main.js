@@ -184,7 +184,7 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         `sudo docker system prune -a -f`,
         args.rebuild === '1' ? `sudo docker-compose -f ./${dockerBinaryBuild}.yml -p ${dockerBinaryBuild} --env-file ${dockerComposeArgFile[args.target]} build` : null,
         args.init === '1' ? `sudo docker-compose -f ./${dockerInit}.yml -p ${dockerInit} --env-file ${dockerComposeArgFile[args.target]} up --build -d` : null,
-        `sudo docker-compose -f ./${dockerStart}.yml -p ${dockerStart} --env-file ${dockerComposeArgFile[args.target]} up --build -d`,
+        args.init === '0' ?`sudo docker-compose -f ./${dockerStart}.yml -p ${dockerStart} --env-file ${dockerComposeArgFile[args.target]} up --build -d`: null,
         `cd ${secrets.serverPath}`,
         `sudo chmod -R g-rwx,o-rwx ./CudosBuilders`,
     ]
