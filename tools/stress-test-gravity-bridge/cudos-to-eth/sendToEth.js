@@ -39,8 +39,8 @@ export default function sendToEth(senderMnemonic, destiantionAddresses, sendAmou
         const gasLimit = new BigNumber(Config.CUDOS_NETWORK.GAS_PER_MSG).mul(msgsCount);
 
         const feeValue = new message.cosmos.tx.v1beta1.Fee({
-            amount: [{ denom: "acudos", amount: gasLimit.mul(Config.CUDOS_NETWORK.GAS_PRICE).toString(10)}],
-            gas_limit: gasLimit.toString(10),
+            amount: [{ denom: "acudos", amount: gasLimit.mul(Config.CUDOS_NETWORK.GAS_PRICE).toString()}],
+            gas_limit: gasLimit.toString(),
         });
 
         const authInfo = new message.cosmos.tx.v1beta1.AuthInfo({ signer_infos: [signerInfo], fee: feeValue });

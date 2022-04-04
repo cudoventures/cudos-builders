@@ -7,3 +7,7 @@ export function getCudosAddressBalance(address) {
         return data.balances.find(a => a.denom === 'acudos').amount;
     })
 }
+
+export function sendAcudos(faucetMnemonic, address, amount) {
+
+}
