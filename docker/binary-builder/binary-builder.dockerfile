@@ -7,6 +7,8 @@ RUN apt install -y jq build-essential
 WORKDIR /usr/cudos-builder
 
 COPY ./CudosNode ./CudosNode
+COPY ./CudosGravityBridge ./CudosGravityBridge
+COPY ./cosmos-sdk ./cosmos-sdk
 
 RUN cd ./CudosNode && make
 

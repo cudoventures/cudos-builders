@@ -163,7 +163,7 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
     const dockerBinaryBuild = 'osmosis-testnet-node-binary-builder';
     const dockerInit = 'osmosis-testnet-node-init';
     const dockerStart = 'osmosis-testnet-node-start';
-    const dockerComposeArgFile = './osmosis-testnet-node.local.arg';
+    const dockerComposeArgFile = './osmosis-testnet-node.public.arg';
 
     command = [
         `cd ${secrets.serverPath}`,
@@ -178,7 +178,7 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
         args.rebuild === '1' ? `sudo docker system prune -a -f` : null,
         args.rebuild === '1' ? `sudo docker-compose -f ./${dockerBinaryBuild}.yml -p ${dockerBinaryBuild} --env-file ${dockerComposeArgFile} build` : null,
         args.init === '1' ? `sudo docker-compose -f ./${dockerInit}.yml -p ${dockerInit} --env-file ${dockerComposeArgFile} up --build -d` : null,
-        `sudo docker-compose -f ./${dockerStart}.yml -p ${dockerStart} --env-file ${dockerComposeArgFile} up --build -d`,
+        args.init === '0' ?`sudo docker-compose -f ./${dockerStart}.yml -p ${dockerStart} --env-file ${dockerComposeArgFile} up --build -d` : null,
         `cd ${secrets.serverPath}`,
         `sudo chmod -R g-rwx,o-rwx ./CudosBuilders`,
     ]

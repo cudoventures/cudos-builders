@@ -13,13 +13,13 @@ RUN if [ $USER_NAME != 'root' ]; then \
 
 RUN apt-get update
 
-RUN apt-get install git build-essential ufw curl jq snapd cargo -y
+RUN apt-get install git build-essential ufw curl jq snapd cargo wget liblz4-tool aria2 -y
 
 WORKDIR ${OSMOSIS_HOME}
 
 RUN git clone https://github.com/osmosis-labs/osmosis && \
     cd osmosis && \
-    git checkout v6.0.0 && \
+    git checkout v7.0.3 && \
     make install
 
 CMD ["sleep", "infinity"]
