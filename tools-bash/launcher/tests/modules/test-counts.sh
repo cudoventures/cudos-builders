@@ -73,7 +73,11 @@ echo -ne "  -number of delegations per validator equals expected...";
 rootValOperAddress=$(jq .app_state.staking.delegations[0].validator_address "$rootGenesisPath")
 rootValOperAddress=${rootValOperAddress//\"/}
 
-jq ".root.delegation" "$STAKING_JSON" > "$tmpGenesisPath"
+if [ "$hasRootDelegation" != "null" ]; then
+    jq ".root.delegation" "$STAKING_JSON" > "$tmpGenesisPath"
+else
+    echo "[]" > "$tmpGenesisPath"
+fi
 stakingRootDelegations=$(jq length "$tmpGenesisPath")
 
 jq ".app_state.staking.delegations | map(select(.validator_address == \"$rootValOperAddress\") | .validator_address)" "$rootGenesisPath" > "$tmpGenesisPath"
@@ -194,7 +198,11 @@ jq .app_state.auth.accounts "$rootGenesisPath" | jq "map(select(.\"@type\" == \"
 
 echo "$stakeValidatorsAddr" > "$tmpStakingValAddrPath"
 jq ".stake | map(select(.delegation != null and .address as \$in | $stakeValidatorsAddr | index(\$in)) | .delegation) | flatten | map(. .delegatorAddress)" "$STAKING_JSON" > "$tmpStakingDelAddrPath"
-jq "[.root.delegation[].delegatorAddress]" "$STAKING_JSON" > "$tmpStakingRootDelAddrPath"
+if [ "$hasRootDelegation" != "null" ]; then
+    jq "[.root.delegation[].delegatorAddress]" "$STAKING_JSON" > "$tmpStakingRootDelAddrPath"
+else
+    echo "[]" > "$tmpStakingRootDelAddrPath"
+fi
 jq ".admins | map(. .address)" "$STAKING_JSON" > "$tmpStakingAdminAddrPath"
 jq ".balances | map(. .address)" "$STAKING_JSON" > "$tmpStakingBalancesAddrPath"
 jq -s ". = .[0] + .[1] + .[2] + .[3] + .[4] + .[5] " "$accountDataGenesisPath" "$tmpStakingValAddrPath" "$tmpStakingAdminAddrPath" "$tmpStakingBalancesAddrPath" "$tmpStakingDelAddrPath" "$tmpStakingRootDelAddrPath" | jq "unique" > "$tmpGenesisPath"

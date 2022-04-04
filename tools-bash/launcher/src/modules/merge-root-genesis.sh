@@ -49,12 +49,6 @@ rootValidatorVotingPower=${rootValidatorTotalShares::-18}
 result=$(jq ".app_state.staking.last_validator_powers = [.app_state.staking.last_validator_powers[] | if (.address == \"$rootValidatorOperAddress\") then (.power = \"$rootValidatorVotingPower\") else . end]" $RESULT_GENESIS_PATH)
 echo $result > $RESULT_GENESIS_PATH
 
-#!
-# jq "[.app_state.staking.last_validator_powers[].power]" "$RESULT_GENESIS_PATH" > "$tmpGenesisPath"
-# lastTotalPower=$(sum $tmpGenesisPath)
-# result=$(jq ".app_state.staking.last_total_power = \"$lastTotalPower\"" "$RESULT_GENESIS_PATH")
-# echo $result > "$RESULT_GENESIS_PATH"
-
 result=$(jq ".app_state.staking.validators = [.app_state.staking.validators[] | if (.operator_address == \"$rootValidatorOperAddress\") then (.delegator_shares = \"$rootValidatorTotalShares.000000000000000000\" | .tokens = \"$rootValidatorTotalShares\") else . end]" "$RESULT_GENESIS_PATH")
 echo $result > "$RESULT_GENESIS_PATH"
 
@@ -67,13 +61,5 @@ if [ "$distributionDelegatorStartingInfos" != "" ]; then
     echo $result > "$RESULT_GENESIS_PATH"
 fi
 
-#!
-# result=$(jq '.app_state.distribution.validator_current_rewards[].rewards.rewards = []' "$RESULT_GENESIS_PATH")
-# echo $result > "$RESULT_GENESIS_PATH"
-
 result=$(jq ".app_state.distribution.validator_historical_rewards = [.app_state.distribution.validator_historical_rewards[] | if (.validator_address == \"$rootValidatorOperAddress\") then (.rewards.reference_count = $historicalRefCount) else . end]" "$RESULT_GENESIS_PATH")
 echo $result > "$RESULT_GENESIS_PATH"
-
-#!
-# result=$(jq '.app_state.distribution.validator_accumulated_commissions[].accumulated.commission = []' "$RESULT_GENESIS_PATH")
-# echo $result > "$RESULT_GENESIS_PATH"
