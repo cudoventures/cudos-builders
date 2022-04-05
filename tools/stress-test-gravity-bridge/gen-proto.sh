@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-proto_dirs=$(find ./cosmos/proto -path -prune -o -name '*.proto' -print0 | xargs -0 -n1 dirname | sort | uniq)
+proto_dirs=$(find ./cudos-to-eth/cosmos/proto -path -prune -o -name '*.proto' -print0 | xargs -0 -n1 dirname | sort | uniq)
 proto_files=()
 
 for dir in $proto_dirs; do
@@ -9,7 +9,7 @@ for dir in $proto_dirs; do
 done
 
 npx pbjs \
-  -o ./cosmos/proto.cjs \
+  -o ./cudos-to-eth/cosmos/proto.cjs \
   -t static-module \
   --force-long \
   --keep-case \
@@ -20,7 +20,7 @@ npx pbjs \
   ${proto_files[@]}
 
 npx pbjs \
-  -o ./cosmos/proto.js \
+  -o ./cudos-to-eth/cosmos/proto.js \
   -t static-module \
   -w es6 \
   --es6 \
@@ -33,5 +33,5 @@ npx pbjs \
   ${proto_files[@]}
 
 npx pbts \
-  -o ./cosmos/proto.d.ts \
-  ./cosmos/proto.js
+  -o ./cudos-to-eth/cosmos/proto.d.ts \
+  ./cudos-to-eth/cosmos/proto.js

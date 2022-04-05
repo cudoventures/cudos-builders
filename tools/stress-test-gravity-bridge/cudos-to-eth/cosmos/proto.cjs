@@ -7408,6 +7408,6120 @@
          */
         var cosmos = {};
     
+        cosmos.bank = (function() {
+    
+            /**
+             * Namespace bank.
+             * @memberof cosmos
+             * @namespace
+             */
+            var bank = {};
+    
+            bank.v1beta1 = (function() {
+    
+                /**
+                 * Namespace v1beta1.
+                 * @memberof cosmos.bank
+                 * @namespace
+                 */
+                var v1beta1 = {};
+    
+                v1beta1.Params = (function() {
+    
+                    /**
+                     * Properties of a Params.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface IParams
+                     * @property {Array.<cosmos.bank.v1beta1.ISendEnabled>|null} [send_enabled] Params send_enabled
+                     * @property {boolean|null} [default_send_enabled] Params default_send_enabled
+                     */
+    
+                    /**
+                     * Constructs a new Params.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a Params.
+                     * @implements IParams
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.IParams=} [properties] Properties to set
+                     */
+                    function Params(properties) {
+                        this.send_enabled = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Params send_enabled.
+                     * @member {Array.<cosmos.bank.v1beta1.ISendEnabled>} send_enabled
+                     * @memberof cosmos.bank.v1beta1.Params
+                     * @instance
+                     */
+                    Params.prototype.send_enabled = $util.emptyArray;
+    
+                    /**
+                     * Params default_send_enabled.
+                     * @member {boolean} default_send_enabled
+                     * @memberof cosmos.bank.v1beta1.Params
+                     * @instance
+                     */
+                    Params.prototype.default_send_enabled = false;
+    
+                    /**
+                     * Encodes the specified Params message. Does not implicitly {@link cosmos.bank.v1beta1.Params.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.Params
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IParams} message Params message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Params.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.send_enabled != null && message.send_enabled.length)
+                            for (var i = 0; i < message.send_enabled.length; ++i)
+                                $root.cosmos.bank.v1beta1.SendEnabled.encode(message.send_enabled[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.default_send_enabled != null && Object.hasOwnProperty.call(message, "default_send_enabled"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.default_send_enabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Params message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.Params.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.Params
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IParams} message Params message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Params.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Params message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.Params
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.Params} Params
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Params.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.Params();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                if (!(message.send_enabled && message.send_enabled.length))
+                                    message.send_enabled = [];
+                                message.send_enabled.push($root.cosmos.bank.v1beta1.SendEnabled.decode(reader, reader.uint32()));
+                                break;
+                            case 2:
+                                message.default_send_enabled = reader.bool();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Params message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.Params
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.Params} Params
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Params.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Params message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.Params
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Params.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.send_enabled != null && message.hasOwnProperty("send_enabled")) {
+                            if (!Array.isArray(message.send_enabled))
+                                return "send_enabled: array expected";
+                            for (var i = 0; i < message.send_enabled.length; ++i) {
+                                var error = $root.cosmos.bank.v1beta1.SendEnabled.verify(message.send_enabled[i]);
+                                if (error)
+                                    return "send_enabled." + error;
+                            }
+                        }
+                        if (message.default_send_enabled != null && message.hasOwnProperty("default_send_enabled"))
+                            if (typeof message.default_send_enabled !== "boolean")
+                                return "default_send_enabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Params message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.Params
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.Params} Params
+                     */
+                    Params.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.Params)
+                            return object;
+                        var message = new $root.cosmos.bank.v1beta1.Params();
+                        if (object.send_enabled) {
+                            if (!Array.isArray(object.send_enabled))
+                                throw TypeError(".cosmos.bank.v1beta1.Params.send_enabled: array expected");
+                            message.send_enabled = [];
+                            for (var i = 0; i < object.send_enabled.length; ++i) {
+                                if (typeof object.send_enabled[i] !== "object")
+                                    throw TypeError(".cosmos.bank.v1beta1.Params.send_enabled: object expected");
+                                message.send_enabled[i] = $root.cosmos.bank.v1beta1.SendEnabled.fromObject(object.send_enabled[i]);
+                            }
+                        }
+                        if (object.default_send_enabled != null)
+                            message.default_send_enabled = Boolean(object.default_send_enabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Params message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.Params
+                     * @static
+                     * @param {cosmos.bank.v1beta1.Params} message Params
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Params.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.send_enabled = [];
+                        if (options.defaults)
+                            object.default_send_enabled = false;
+                        if (message.send_enabled && message.send_enabled.length) {
+                            object.send_enabled = [];
+                            for (var j = 0; j < message.send_enabled.length; ++j)
+                                object.send_enabled[j] = $root.cosmos.bank.v1beta1.SendEnabled.toObject(message.send_enabled[j], options);
+                        }
+                        if (message.default_send_enabled != null && message.hasOwnProperty("default_send_enabled"))
+                            object.default_send_enabled = message.default_send_enabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Params to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.Params
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Params.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return Params;
+                })();
+    
+                v1beta1.SendEnabled = (function() {
+    
+                    /**
+                     * Properties of a SendEnabled.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface ISendEnabled
+                     * @property {string|null} [denom] SendEnabled denom
+                     * @property {boolean|null} [enabled] SendEnabled enabled
+                     */
+    
+                    /**
+                     * Constructs a new SendEnabled.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a SendEnabled.
+                     * @implements ISendEnabled
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.ISendEnabled=} [properties] Properties to set
+                     */
+                    function SendEnabled(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SendEnabled denom.
+                     * @member {string} denom
+                     * @memberof cosmos.bank.v1beta1.SendEnabled
+                     * @instance
+                     */
+                    SendEnabled.prototype.denom = "";
+    
+                    /**
+                     * SendEnabled enabled.
+                     * @member {boolean} enabled
+                     * @memberof cosmos.bank.v1beta1.SendEnabled
+                     * @instance
+                     */
+                    SendEnabled.prototype.enabled = false;
+    
+                    /**
+                     * Encodes the specified SendEnabled message. Does not implicitly {@link cosmos.bank.v1beta1.SendEnabled.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.SendEnabled
+                     * @static
+                     * @param {cosmos.bank.v1beta1.ISendEnabled} message SendEnabled message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SendEnabled.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.denom != null && Object.hasOwnProperty.call(message, "denom"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.denom);
+                        if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.enabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SendEnabled message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.SendEnabled.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.SendEnabled
+                     * @static
+                     * @param {cosmos.bank.v1beta1.ISendEnabled} message SendEnabled message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SendEnabled.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SendEnabled message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.SendEnabled
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.SendEnabled} SendEnabled
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SendEnabled.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.SendEnabled();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.denom = reader.string();
+                                break;
+                            case 2:
+                                message.enabled = reader.bool();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SendEnabled message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.SendEnabled
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.SendEnabled} SendEnabled
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SendEnabled.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SendEnabled message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.SendEnabled
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SendEnabled.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.denom != null && message.hasOwnProperty("denom"))
+                            if (!$util.isString(message.denom))
+                                return "denom: string expected";
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            if (typeof message.enabled !== "boolean")
+                                return "enabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SendEnabled message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.SendEnabled
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.SendEnabled} SendEnabled
+                     */
+                    SendEnabled.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.SendEnabled)
+                            return object;
+                        var message = new $root.cosmos.bank.v1beta1.SendEnabled();
+                        if (object.denom != null)
+                            message.denom = String(object.denom);
+                        if (object.enabled != null)
+                            message.enabled = Boolean(object.enabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SendEnabled message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.SendEnabled
+                     * @static
+                     * @param {cosmos.bank.v1beta1.SendEnabled} message SendEnabled
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SendEnabled.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.denom = "";
+                            object.enabled = false;
+                        }
+                        if (message.denom != null && message.hasOwnProperty("denom"))
+                            object.denom = message.denom;
+                        if (message.enabled != null && message.hasOwnProperty("enabled"))
+                            object.enabled = message.enabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SendEnabled to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.SendEnabled
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SendEnabled.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return SendEnabled;
+                })();
+    
+                v1beta1.Input = (function() {
+    
+                    /**
+                     * Properties of an Input.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface IInput
+                     * @property {string|null} [address] Input address
+                     * @property {Array.<cosmos.base.v1beta1.ICoin>|null} [coins] Input coins
+                     */
+    
+                    /**
+                     * Constructs a new Input.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents an Input.
+                     * @implements IInput
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.IInput=} [properties] Properties to set
+                     */
+                    function Input(properties) {
+                        this.coins = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Input address.
+                     * @member {string} address
+                     * @memberof cosmos.bank.v1beta1.Input
+                     * @instance
+                     */
+                    Input.prototype.address = "";
+    
+                    /**
+                     * Input coins.
+                     * @member {Array.<cosmos.base.v1beta1.ICoin>} coins
+                     * @memberof cosmos.bank.v1beta1.Input
+                     * @instance
+                     */
+                    Input.prototype.coins = $util.emptyArray;
+    
+                    /**
+                     * Encodes the specified Input message. Does not implicitly {@link cosmos.bank.v1beta1.Input.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.Input
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IInput} message Input message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Input.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.address != null && Object.hasOwnProperty.call(message, "address"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.address);
+                        if (message.coins != null && message.coins.length)
+                            for (var i = 0; i < message.coins.length; ++i)
+                                $root.cosmos.base.v1beta1.Coin.encode(message.coins[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Input message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.Input.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.Input
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IInput} message Input message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Input.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an Input message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.Input
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.Input} Input
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Input.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.Input();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.address = reader.string();
+                                break;
+                            case 2:
+                                if (!(message.coins && message.coins.length))
+                                    message.coins = [];
+                                message.coins.push($root.cosmos.base.v1beta1.Coin.decode(reader, reader.uint32()));
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an Input message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.Input
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.Input} Input
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Input.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an Input message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.Input
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Input.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.address != null && message.hasOwnProperty("address"))
+                            if (!$util.isString(message.address))
+                                return "address: string expected";
+                        if (message.coins != null && message.hasOwnProperty("coins")) {
+                            if (!Array.isArray(message.coins))
+                                return "coins: array expected";
+                            for (var i = 0; i < message.coins.length; ++i) {
+                                var error = $root.cosmos.base.v1beta1.Coin.verify(message.coins[i]);
+                                if (error)
+                                    return "coins." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an Input message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.Input
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.Input} Input
+                     */
+                    Input.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.Input)
+                            return object;
+                        var message = new $root.cosmos.bank.v1beta1.Input();
+                        if (object.address != null)
+                            message.address = String(object.address);
+                        if (object.coins) {
+                            if (!Array.isArray(object.coins))
+                                throw TypeError(".cosmos.bank.v1beta1.Input.coins: array expected");
+                            message.coins = [];
+                            for (var i = 0; i < object.coins.length; ++i) {
+                                if (typeof object.coins[i] !== "object")
+                                    throw TypeError(".cosmos.bank.v1beta1.Input.coins: object expected");
+                                message.coins[i] = $root.cosmos.base.v1beta1.Coin.fromObject(object.coins[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an Input message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.Input
+                     * @static
+                     * @param {cosmos.bank.v1beta1.Input} message Input
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Input.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.coins = [];
+                        if (options.defaults)
+                            object.address = "";
+                        if (message.address != null && message.hasOwnProperty("address"))
+                            object.address = message.address;
+                        if (message.coins && message.coins.length) {
+                            object.coins = [];
+                            for (var j = 0; j < message.coins.length; ++j)
+                                object.coins[j] = $root.cosmos.base.v1beta1.Coin.toObject(message.coins[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Input to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.Input
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Input.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return Input;
+                })();
+    
+                v1beta1.Output = (function() {
+    
+                    /**
+                     * Properties of an Output.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface IOutput
+                     * @property {string|null} [address] Output address
+                     * @property {Array.<cosmos.base.v1beta1.ICoin>|null} [coins] Output coins
+                     */
+    
+                    /**
+                     * Constructs a new Output.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents an Output.
+                     * @implements IOutput
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.IOutput=} [properties] Properties to set
+                     */
+                    function Output(properties) {
+                        this.coins = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Output address.
+                     * @member {string} address
+                     * @memberof cosmos.bank.v1beta1.Output
+                     * @instance
+                     */
+                    Output.prototype.address = "";
+    
+                    /**
+                     * Output coins.
+                     * @member {Array.<cosmos.base.v1beta1.ICoin>} coins
+                     * @memberof cosmos.bank.v1beta1.Output
+                     * @instance
+                     */
+                    Output.prototype.coins = $util.emptyArray;
+    
+                    /**
+                     * Encodes the specified Output message. Does not implicitly {@link cosmos.bank.v1beta1.Output.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.Output
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IOutput} message Output message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Output.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.address != null && Object.hasOwnProperty.call(message, "address"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.address);
+                        if (message.coins != null && message.coins.length)
+                            for (var i = 0; i < message.coins.length; ++i)
+                                $root.cosmos.base.v1beta1.Coin.encode(message.coins[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Output message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.Output.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.Output
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IOutput} message Output message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Output.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an Output message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.Output
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.Output} Output
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Output.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.Output();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.address = reader.string();
+                                break;
+                            case 2:
+                                if (!(message.coins && message.coins.length))
+                                    message.coins = [];
+                                message.coins.push($root.cosmos.base.v1beta1.Coin.decode(reader, reader.uint32()));
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an Output message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.Output
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.Output} Output
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Output.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an Output message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.Output
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Output.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.address != null && message.hasOwnProperty("address"))
+                            if (!$util.isString(message.address))
+                                return "address: string expected";
+                        if (message.coins != null && message.hasOwnProperty("coins")) {
+                            if (!Array.isArray(message.coins))
+                                return "coins: array expected";
+                            for (var i = 0; i < message.coins.length; ++i) {
+                                var error = $root.cosmos.base.v1beta1.Coin.verify(message.coins[i]);
+                                if (error)
+                                    return "coins." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an Output message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.Output
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.Output} Output
+                     */
+                    Output.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.Output)
+                            return object;
+                        var message = new $root.cosmos.bank.v1beta1.Output();
+                        if (object.address != null)
+                            message.address = String(object.address);
+                        if (object.coins) {
+                            if (!Array.isArray(object.coins))
+                                throw TypeError(".cosmos.bank.v1beta1.Output.coins: array expected");
+                            message.coins = [];
+                            for (var i = 0; i < object.coins.length; ++i) {
+                                if (typeof object.coins[i] !== "object")
+                                    throw TypeError(".cosmos.bank.v1beta1.Output.coins: object expected");
+                                message.coins[i] = $root.cosmos.base.v1beta1.Coin.fromObject(object.coins[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an Output message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.Output
+                     * @static
+                     * @param {cosmos.bank.v1beta1.Output} message Output
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Output.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.coins = [];
+                        if (options.defaults)
+                            object.address = "";
+                        if (message.address != null && message.hasOwnProperty("address"))
+                            object.address = message.address;
+                        if (message.coins && message.coins.length) {
+                            object.coins = [];
+                            for (var j = 0; j < message.coins.length; ++j)
+                                object.coins[j] = $root.cosmos.base.v1beta1.Coin.toObject(message.coins[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Output to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.Output
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Output.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return Output;
+                })();
+    
+                v1beta1.Supply = (function() {
+    
+                    /**
+                     * Properties of a Supply.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface ISupply
+                     * @property {Array.<cosmos.base.v1beta1.ICoin>|null} [total] Supply total
+                     */
+    
+                    /**
+                     * Constructs a new Supply.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a Supply.
+                     * @implements ISupply
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.ISupply=} [properties] Properties to set
+                     */
+                    function Supply(properties) {
+                        this.total = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Supply total.
+                     * @member {Array.<cosmos.base.v1beta1.ICoin>} total
+                     * @memberof cosmos.bank.v1beta1.Supply
+                     * @instance
+                     */
+                    Supply.prototype.total = $util.emptyArray;
+    
+                    /**
+                     * Encodes the specified Supply message. Does not implicitly {@link cosmos.bank.v1beta1.Supply.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.Supply
+                     * @static
+                     * @param {cosmos.bank.v1beta1.ISupply} message Supply message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Supply.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.total != null && message.total.length)
+                            for (var i = 0; i < message.total.length; ++i)
+                                $root.cosmos.base.v1beta1.Coin.encode(message.total[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Supply message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.Supply.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.Supply
+                     * @static
+                     * @param {cosmos.bank.v1beta1.ISupply} message Supply message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Supply.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Supply message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.Supply
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.Supply} Supply
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Supply.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.Supply();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                if (!(message.total && message.total.length))
+                                    message.total = [];
+                                message.total.push($root.cosmos.base.v1beta1.Coin.decode(reader, reader.uint32()));
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Supply message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.Supply
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.Supply} Supply
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Supply.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Supply message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.Supply
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Supply.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.total != null && message.hasOwnProperty("total")) {
+                            if (!Array.isArray(message.total))
+                                return "total: array expected";
+                            for (var i = 0; i < message.total.length; ++i) {
+                                var error = $root.cosmos.base.v1beta1.Coin.verify(message.total[i]);
+                                if (error)
+                                    return "total." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Supply message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.Supply
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.Supply} Supply
+                     */
+                    Supply.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.Supply)
+                            return object;
+                        var message = new $root.cosmos.bank.v1beta1.Supply();
+                        if (object.total) {
+                            if (!Array.isArray(object.total))
+                                throw TypeError(".cosmos.bank.v1beta1.Supply.total: array expected");
+                            message.total = [];
+                            for (var i = 0; i < object.total.length; ++i) {
+                                if (typeof object.total[i] !== "object")
+                                    throw TypeError(".cosmos.bank.v1beta1.Supply.total: object expected");
+                                message.total[i] = $root.cosmos.base.v1beta1.Coin.fromObject(object.total[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Supply message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.Supply
+                     * @static
+                     * @param {cosmos.bank.v1beta1.Supply} message Supply
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Supply.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.total = [];
+                        if (message.total && message.total.length) {
+                            object.total = [];
+                            for (var j = 0; j < message.total.length; ++j)
+                                object.total[j] = $root.cosmos.base.v1beta1.Coin.toObject(message.total[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Supply to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.Supply
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Supply.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return Supply;
+                })();
+    
+                v1beta1.DenomUnit = (function() {
+    
+                    /**
+                     * Properties of a DenomUnit.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface IDenomUnit
+                     * @property {string|null} [denom] DenomUnit denom
+                     * @property {number|null} [exponent] DenomUnit exponent
+                     * @property {Array.<string>|null} [aliases] DenomUnit aliases
+                     */
+    
+                    /**
+                     * Constructs a new DenomUnit.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a DenomUnit.
+                     * @implements IDenomUnit
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.IDenomUnit=} [properties] Properties to set
+                     */
+                    function DenomUnit(properties) {
+                        this.aliases = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * DenomUnit denom.
+                     * @member {string} denom
+                     * @memberof cosmos.bank.v1beta1.DenomUnit
+                     * @instance
+                     */
+                    DenomUnit.prototype.denom = "";
+    
+                    /**
+                     * DenomUnit exponent.
+                     * @member {number} exponent
+                     * @memberof cosmos.bank.v1beta1.DenomUnit
+                     * @instance
+                     */
+                    DenomUnit.prototype.exponent = 0;
+    
+                    /**
+                     * DenomUnit aliases.
+                     * @member {Array.<string>} aliases
+                     * @memberof cosmos.bank.v1beta1.DenomUnit
+                     * @instance
+                     */
+                    DenomUnit.prototype.aliases = $util.emptyArray;
+    
+                    /**
+                     * Encodes the specified DenomUnit message. Does not implicitly {@link cosmos.bank.v1beta1.DenomUnit.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.DenomUnit
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IDenomUnit} message DenomUnit message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DenomUnit.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.denom != null && Object.hasOwnProperty.call(message, "denom"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.denom);
+                        if (message.exponent != null && Object.hasOwnProperty.call(message, "exponent"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).uint32(message.exponent);
+                        if (message.aliases != null && message.aliases.length)
+                            for (var i = 0; i < message.aliases.length; ++i)
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.aliases[i]);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified DenomUnit message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.DenomUnit.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.DenomUnit
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IDenomUnit} message DenomUnit message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DenomUnit.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a DenomUnit message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.DenomUnit
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.DenomUnit} DenomUnit
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DenomUnit.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.DenomUnit();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.denom = reader.string();
+                                break;
+                            case 2:
+                                message.exponent = reader.uint32();
+                                break;
+                            case 3:
+                                if (!(message.aliases && message.aliases.length))
+                                    message.aliases = [];
+                                message.aliases.push(reader.string());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a DenomUnit message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.DenomUnit
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.DenomUnit} DenomUnit
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DenomUnit.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a DenomUnit message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.DenomUnit
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    DenomUnit.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.denom != null && message.hasOwnProperty("denom"))
+                            if (!$util.isString(message.denom))
+                                return "denom: string expected";
+                        if (message.exponent != null && message.hasOwnProperty("exponent"))
+                            if (!$util.isInteger(message.exponent))
+                                return "exponent: integer expected";
+                        if (message.aliases != null && message.hasOwnProperty("aliases")) {
+                            if (!Array.isArray(message.aliases))
+                                return "aliases: array expected";
+                            for (var i = 0; i < message.aliases.length; ++i)
+                                if (!$util.isString(message.aliases[i]))
+                                    return "aliases: string[] expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a DenomUnit message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.DenomUnit
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.DenomUnit} DenomUnit
+                     */
+                    DenomUnit.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.DenomUnit)
+                            return object;
+                        var message = new $root.cosmos.bank.v1beta1.DenomUnit();
+                        if (object.denom != null)
+                            message.denom = String(object.denom);
+                        if (object.exponent != null)
+                            message.exponent = object.exponent >>> 0;
+                        if (object.aliases) {
+                            if (!Array.isArray(object.aliases))
+                                throw TypeError(".cosmos.bank.v1beta1.DenomUnit.aliases: array expected");
+                            message.aliases = [];
+                            for (var i = 0; i < object.aliases.length; ++i)
+                                message.aliases[i] = String(object.aliases[i]);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a DenomUnit message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.DenomUnit
+                     * @static
+                     * @param {cosmos.bank.v1beta1.DenomUnit} message DenomUnit
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    DenomUnit.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.aliases = [];
+                        if (options.defaults) {
+                            object.denom = "";
+                            object.exponent = 0;
+                        }
+                        if (message.denom != null && message.hasOwnProperty("denom"))
+                            object.denom = message.denom;
+                        if (message.exponent != null && message.hasOwnProperty("exponent"))
+                            object.exponent = message.exponent;
+                        if (message.aliases && message.aliases.length) {
+                            object.aliases = [];
+                            for (var j = 0; j < message.aliases.length; ++j)
+                                object.aliases[j] = message.aliases[j];
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this DenomUnit to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.DenomUnit
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    DenomUnit.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return DenomUnit;
+                })();
+    
+                v1beta1.Metadata = (function() {
+    
+                    /**
+                     * Properties of a Metadata.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface IMetadata
+                     * @property {string|null} [description] Metadata description
+                     * @property {Array.<cosmos.bank.v1beta1.IDenomUnit>|null} [denom_units] Metadata denom_units
+                     * @property {string|null} [base] Metadata base
+                     * @property {string|null} [display] Metadata display
+                     * @property {string|null} [name] Metadata name
+                     * @property {string|null} [symbol] Metadata symbol
+                     */
+    
+                    /**
+                     * Constructs a new Metadata.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a Metadata.
+                     * @implements IMetadata
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.IMetadata=} [properties] Properties to set
+                     */
+                    function Metadata(properties) {
+                        this.denom_units = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Metadata description.
+                     * @member {string} description
+                     * @memberof cosmos.bank.v1beta1.Metadata
+                     * @instance
+                     */
+                    Metadata.prototype.description = "";
+    
+                    /**
+                     * Metadata denom_units.
+                     * @member {Array.<cosmos.bank.v1beta1.IDenomUnit>} denom_units
+                     * @memberof cosmos.bank.v1beta1.Metadata
+                     * @instance
+                     */
+                    Metadata.prototype.denom_units = $util.emptyArray;
+    
+                    /**
+                     * Metadata base.
+                     * @member {string} base
+                     * @memberof cosmos.bank.v1beta1.Metadata
+                     * @instance
+                     */
+                    Metadata.prototype.base = "";
+    
+                    /**
+                     * Metadata display.
+                     * @member {string} display
+                     * @memberof cosmos.bank.v1beta1.Metadata
+                     * @instance
+                     */
+                    Metadata.prototype.display = "";
+    
+                    /**
+                     * Metadata name.
+                     * @member {string} name
+                     * @memberof cosmos.bank.v1beta1.Metadata
+                     * @instance
+                     */
+                    Metadata.prototype.name = "";
+    
+                    /**
+                     * Metadata symbol.
+                     * @member {string} symbol
+                     * @memberof cosmos.bank.v1beta1.Metadata
+                     * @instance
+                     */
+                    Metadata.prototype.symbol = "";
+    
+                    /**
+                     * Encodes the specified Metadata message. Does not implicitly {@link cosmos.bank.v1beta1.Metadata.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.Metadata
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IMetadata} message Metadata message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Metadata.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.description);
+                        if (message.denom_units != null && message.denom_units.length)
+                            for (var i = 0; i < message.denom_units.length; ++i)
+                                $root.cosmos.bank.v1beta1.DenomUnit.encode(message.denom_units[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.base != null && Object.hasOwnProperty.call(message, "base"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.base);
+                        if (message.display != null && Object.hasOwnProperty.call(message, "display"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.display);
+                        if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.name);
+                        if (message.symbol != null && Object.hasOwnProperty.call(message, "symbol"))
+                            writer.uint32(/* id 6, wireType 2 =*/50).string(message.symbol);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Metadata message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.Metadata.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.Metadata
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IMetadata} message Metadata message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Metadata.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Metadata message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.Metadata
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.Metadata} Metadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Metadata.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.Metadata();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.description = reader.string();
+                                break;
+                            case 2:
+                                if (!(message.denom_units && message.denom_units.length))
+                                    message.denom_units = [];
+                                message.denom_units.push($root.cosmos.bank.v1beta1.DenomUnit.decode(reader, reader.uint32()));
+                                break;
+                            case 3:
+                                message.base = reader.string();
+                                break;
+                            case 4:
+                                message.display = reader.string();
+                                break;
+                            case 5:
+                                message.name = reader.string();
+                                break;
+                            case 6:
+                                message.symbol = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Metadata message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.Metadata
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.Metadata} Metadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Metadata.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Metadata message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.Metadata
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Metadata.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.description != null && message.hasOwnProperty("description"))
+                            if (!$util.isString(message.description))
+                                return "description: string expected";
+                        if (message.denom_units != null && message.hasOwnProperty("denom_units")) {
+                            if (!Array.isArray(message.denom_units))
+                                return "denom_units: array expected";
+                            for (var i = 0; i < message.denom_units.length; ++i) {
+                                var error = $root.cosmos.bank.v1beta1.DenomUnit.verify(message.denom_units[i]);
+                                if (error)
+                                    return "denom_units." + error;
+                            }
+                        }
+                        if (message.base != null && message.hasOwnProperty("base"))
+                            if (!$util.isString(message.base))
+                                return "base: string expected";
+                        if (message.display != null && message.hasOwnProperty("display"))
+                            if (!$util.isString(message.display))
+                                return "display: string expected";
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            if (!$util.isString(message.name))
+                                return "name: string expected";
+                        if (message.symbol != null && message.hasOwnProperty("symbol"))
+                            if (!$util.isString(message.symbol))
+                                return "symbol: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Metadata message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.Metadata
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.Metadata} Metadata
+                     */
+                    Metadata.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.Metadata)
+                            return object;
+                        var message = new $root.cosmos.bank.v1beta1.Metadata();
+                        if (object.description != null)
+                            message.description = String(object.description);
+                        if (object.denom_units) {
+                            if (!Array.isArray(object.denom_units))
+                                throw TypeError(".cosmos.bank.v1beta1.Metadata.denom_units: array expected");
+                            message.denom_units = [];
+                            for (var i = 0; i < object.denom_units.length; ++i) {
+                                if (typeof object.denom_units[i] !== "object")
+                                    throw TypeError(".cosmos.bank.v1beta1.Metadata.denom_units: object expected");
+                                message.denom_units[i] = $root.cosmos.bank.v1beta1.DenomUnit.fromObject(object.denom_units[i]);
+                            }
+                        }
+                        if (object.base != null)
+                            message.base = String(object.base);
+                        if (object.display != null)
+                            message.display = String(object.display);
+                        if (object.name != null)
+                            message.name = String(object.name);
+                        if (object.symbol != null)
+                            message.symbol = String(object.symbol);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Metadata message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.Metadata
+                     * @static
+                     * @param {cosmos.bank.v1beta1.Metadata} message Metadata
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Metadata.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.denom_units = [];
+                        if (options.defaults) {
+                            object.description = "";
+                            object.base = "";
+                            object.display = "";
+                            object.name = "";
+                            object.symbol = "";
+                        }
+                        if (message.description != null && message.hasOwnProperty("description"))
+                            object.description = message.description;
+                        if (message.denom_units && message.denom_units.length) {
+                            object.denom_units = [];
+                            for (var j = 0; j < message.denom_units.length; ++j)
+                                object.denom_units[j] = $root.cosmos.bank.v1beta1.DenomUnit.toObject(message.denom_units[j], options);
+                        }
+                        if (message.base != null && message.hasOwnProperty("base"))
+                            object.base = message.base;
+                        if (message.display != null && message.hasOwnProperty("display"))
+                            object.display = message.display;
+                        if (message.name != null && message.hasOwnProperty("name"))
+                            object.name = message.name;
+                        if (message.symbol != null && message.hasOwnProperty("symbol"))
+                            object.symbol = message.symbol;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Metadata to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.Metadata
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Metadata.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return Metadata;
+                })();
+    
+                v1beta1.SendAuthorization = (function() {
+    
+                    /**
+                     * Properties of a SendAuthorization.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface ISendAuthorization
+                     * @property {Array.<cosmos.base.v1beta1.ICoin>|null} [spend_limit] SendAuthorization spend_limit
+                     */
+    
+                    /**
+                     * Constructs a new SendAuthorization.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a SendAuthorization.
+                     * @implements ISendAuthorization
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.ISendAuthorization=} [properties] Properties to set
+                     */
+                    function SendAuthorization(properties) {
+                        this.spend_limit = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SendAuthorization spend_limit.
+                     * @member {Array.<cosmos.base.v1beta1.ICoin>} spend_limit
+                     * @memberof cosmos.bank.v1beta1.SendAuthorization
+                     * @instance
+                     */
+                    SendAuthorization.prototype.spend_limit = $util.emptyArray;
+    
+                    /**
+                     * Encodes the specified SendAuthorization message. Does not implicitly {@link cosmos.bank.v1beta1.SendAuthorization.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.SendAuthorization
+                     * @static
+                     * @param {cosmos.bank.v1beta1.ISendAuthorization} message SendAuthorization message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SendAuthorization.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.spend_limit != null && message.spend_limit.length)
+                            for (var i = 0; i < message.spend_limit.length; ++i)
+                                $root.cosmos.base.v1beta1.Coin.encode(message.spend_limit[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SendAuthorization message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.SendAuthorization.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.SendAuthorization
+                     * @static
+                     * @param {cosmos.bank.v1beta1.ISendAuthorization} message SendAuthorization message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SendAuthorization.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SendAuthorization message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.SendAuthorization
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.SendAuthorization} SendAuthorization
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SendAuthorization.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.SendAuthorization();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                if (!(message.spend_limit && message.spend_limit.length))
+                                    message.spend_limit = [];
+                                message.spend_limit.push($root.cosmos.base.v1beta1.Coin.decode(reader, reader.uint32()));
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SendAuthorization message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.SendAuthorization
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.SendAuthorization} SendAuthorization
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SendAuthorization.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SendAuthorization message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.SendAuthorization
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SendAuthorization.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.spend_limit != null && message.hasOwnProperty("spend_limit")) {
+                            if (!Array.isArray(message.spend_limit))
+                                return "spend_limit: array expected";
+                            for (var i = 0; i < message.spend_limit.length; ++i) {
+                                var error = $root.cosmos.base.v1beta1.Coin.verify(message.spend_limit[i]);
+                                if (error)
+                                    return "spend_limit." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SendAuthorization message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.SendAuthorization
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.SendAuthorization} SendAuthorization
+                     */
+                    SendAuthorization.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.SendAuthorization)
+                            return object;
+                        var message = new $root.cosmos.bank.v1beta1.SendAuthorization();
+                        if (object.spend_limit) {
+                            if (!Array.isArray(object.spend_limit))
+                                throw TypeError(".cosmos.bank.v1beta1.SendAuthorization.spend_limit: array expected");
+                            message.spend_limit = [];
+                            for (var i = 0; i < object.spend_limit.length; ++i) {
+                                if (typeof object.spend_limit[i] !== "object")
+                                    throw TypeError(".cosmos.bank.v1beta1.SendAuthorization.spend_limit: object expected");
+                                message.spend_limit[i] = $root.cosmos.base.v1beta1.Coin.fromObject(object.spend_limit[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SendAuthorization message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.SendAuthorization
+                     * @static
+                     * @param {cosmos.bank.v1beta1.SendAuthorization} message SendAuthorization
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SendAuthorization.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.spend_limit = [];
+                        if (message.spend_limit && message.spend_limit.length) {
+                            object.spend_limit = [];
+                            for (var j = 0; j < message.spend_limit.length; ++j)
+                                object.spend_limit[j] = $root.cosmos.base.v1beta1.Coin.toObject(message.spend_limit[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SendAuthorization to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.SendAuthorization
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SendAuthorization.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return SendAuthorization;
+                })();
+    
+                v1beta1.Msg = (function() {
+    
+                    /**
+                     * Constructs a new Msg service.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a Msg
+                     * @extends $protobuf.rpc.Service
+                     * @constructor
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    function Msg(rpcImpl, requestDelimited, responseDelimited) {
+                        $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                    }
+    
+                    (Msg.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Msg;
+    
+                    /**
+                     * Callback as used by {@link cosmos.bank.v1beta1.Msg#send}.
+                     * @memberof cosmos.bank.v1beta1.Msg
+                     * @typedef SendCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {cosmos.bank.v1beta1.MsgSendResponse} [response] MsgSendResponse
+                     */
+    
+                    /**
+                     * Calls Send.
+                     * @function send
+                     * @memberof cosmos.bank.v1beta1.Msg
+                     * @instance
+                     * @param {cosmos.bank.v1beta1.IMsgSend} request MsgSend message or plain object
+                     * @param {cosmos.bank.v1beta1.Msg.SendCallback} callback Node-style callback called with the error, if any, and MsgSendResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(Msg.prototype.send = function send(request, callback) {
+                        return this.rpcCall(send, $root.cosmos.bank.v1beta1.MsgSend, $root.cosmos.bank.v1beta1.MsgSendResponse, request, callback);
+                    }, "name", { value: "Send" });
+    
+                    /**
+                     * Calls Send.
+                     * @function send
+                     * @memberof cosmos.bank.v1beta1.Msg
+                     * @instance
+                     * @param {cosmos.bank.v1beta1.IMsgSend} request MsgSend message or plain object
+                     * @returns {Promise<cosmos.bank.v1beta1.MsgSendResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link cosmos.bank.v1beta1.Msg#multiSend}.
+                     * @memberof cosmos.bank.v1beta1.Msg
+                     * @typedef MultiSendCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {cosmos.bank.v1beta1.MsgMultiSendResponse} [response] MsgMultiSendResponse
+                     */
+    
+                    /**
+                     * Calls MultiSend.
+                     * @function multiSend
+                     * @memberof cosmos.bank.v1beta1.Msg
+                     * @instance
+                     * @param {cosmos.bank.v1beta1.IMsgMultiSend} request MsgMultiSend message or plain object
+                     * @param {cosmos.bank.v1beta1.Msg.MultiSendCallback} callback Node-style callback called with the error, if any, and MsgMultiSendResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(Msg.prototype.multiSend = function multiSend(request, callback) {
+                        return this.rpcCall(multiSend, $root.cosmos.bank.v1beta1.MsgMultiSend, $root.cosmos.bank.v1beta1.MsgMultiSendResponse, request, callback);
+                    }, "name", { value: "MultiSend" });
+    
+                    /**
+                     * Calls MultiSend.
+                     * @function multiSend
+                     * @memberof cosmos.bank.v1beta1.Msg
+                     * @instance
+                     * @param {cosmos.bank.v1beta1.IMsgMultiSend} request MsgMultiSend message or plain object
+                     * @returns {Promise<cosmos.bank.v1beta1.MsgMultiSendResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    return Msg;
+                })();
+    
+                v1beta1.MsgSend = (function() {
+    
+                    /**
+                     * Properties of a MsgSend.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface IMsgSend
+                     * @property {string|null} [from_address] MsgSend from_address
+                     * @property {string|null} [to_address] MsgSend to_address
+                     * @property {Array.<cosmos.base.v1beta1.ICoin>|null} [amount] MsgSend amount
+                     */
+    
+                    /**
+                     * Constructs a new MsgSend.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a MsgSend.
+                     * @implements IMsgSend
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.IMsgSend=} [properties] Properties to set
+                     */
+                    function MsgSend(properties) {
+                        this.amount = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * MsgSend from_address.
+                     * @member {string} from_address
+                     * @memberof cosmos.bank.v1beta1.MsgSend
+                     * @instance
+                     */
+                    MsgSend.prototype.from_address = "";
+    
+                    /**
+                     * MsgSend to_address.
+                     * @member {string} to_address
+                     * @memberof cosmos.bank.v1beta1.MsgSend
+                     * @instance
+                     */
+                    MsgSend.prototype.to_address = "";
+    
+                    /**
+                     * MsgSend amount.
+                     * @member {Array.<cosmos.base.v1beta1.ICoin>} amount
+                     * @memberof cosmos.bank.v1beta1.MsgSend
+                     * @instance
+                     */
+                    MsgSend.prototype.amount = $util.emptyArray;
+    
+                    /**
+                     * Encodes the specified MsgSend message. Does not implicitly {@link cosmos.bank.v1beta1.MsgSend.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.MsgSend
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IMsgSend} message MsgSend message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MsgSend.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.from_address != null && Object.hasOwnProperty.call(message, "from_address"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.from_address);
+                        if (message.to_address != null && Object.hasOwnProperty.call(message, "to_address"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.to_address);
+                        if (message.amount != null && message.amount.length)
+                            for (var i = 0; i < message.amount.length; ++i)
+                                $root.cosmos.base.v1beta1.Coin.encode(message.amount[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MsgSend message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.MsgSend.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.MsgSend
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IMsgSend} message MsgSend message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MsgSend.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MsgSend message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.MsgSend
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.MsgSend} MsgSend
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MsgSend.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.MsgSend();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.from_address = reader.string();
+                                break;
+                            case 2:
+                                message.to_address = reader.string();
+                                break;
+                            case 3:
+                                if (!(message.amount && message.amount.length))
+                                    message.amount = [];
+                                message.amount.push($root.cosmos.base.v1beta1.Coin.decode(reader, reader.uint32()));
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MsgSend message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.MsgSend
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.MsgSend} MsgSend
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MsgSend.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MsgSend message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.MsgSend
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MsgSend.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.from_address != null && message.hasOwnProperty("from_address"))
+                            if (!$util.isString(message.from_address))
+                                return "from_address: string expected";
+                        if (message.to_address != null && message.hasOwnProperty("to_address"))
+                            if (!$util.isString(message.to_address))
+                                return "to_address: string expected";
+                        if (message.amount != null && message.hasOwnProperty("amount")) {
+                            if (!Array.isArray(message.amount))
+                                return "amount: array expected";
+                            for (var i = 0; i < message.amount.length; ++i) {
+                                var error = $root.cosmos.base.v1beta1.Coin.verify(message.amount[i]);
+                                if (error)
+                                    return "amount." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MsgSend message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.MsgSend
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.MsgSend} MsgSend
+                     */
+                    MsgSend.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.MsgSend)
+                            return object;
+                        var message = new $root.cosmos.bank.v1beta1.MsgSend();
+                        if (object.from_address != null)
+                            message.from_address = String(object.from_address);
+                        if (object.to_address != null)
+                            message.to_address = String(object.to_address);
+                        if (object.amount) {
+                            if (!Array.isArray(object.amount))
+                                throw TypeError(".cosmos.bank.v1beta1.MsgSend.amount: array expected");
+                            message.amount = [];
+                            for (var i = 0; i < object.amount.length; ++i) {
+                                if (typeof object.amount[i] !== "object")
+                                    throw TypeError(".cosmos.bank.v1beta1.MsgSend.amount: object expected");
+                                message.amount[i] = $root.cosmos.base.v1beta1.Coin.fromObject(object.amount[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a MsgSend message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.MsgSend
+                     * @static
+                     * @param {cosmos.bank.v1beta1.MsgSend} message MsgSend
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MsgSend.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.amount = [];
+                        if (options.defaults) {
+                            object.from_address = "";
+                            object.to_address = "";
+                        }
+                        if (message.from_address != null && message.hasOwnProperty("from_address"))
+                            object.from_address = message.from_address;
+                        if (message.to_address != null && message.hasOwnProperty("to_address"))
+                            object.to_address = message.to_address;
+                        if (message.amount && message.amount.length) {
+                            object.amount = [];
+                            for (var j = 0; j < message.amount.length; ++j)
+                                object.amount[j] = $root.cosmos.base.v1beta1.Coin.toObject(message.amount[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this MsgSend to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.MsgSend
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MsgSend.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return MsgSend;
+                })();
+    
+                v1beta1.MsgSendResponse = (function() {
+    
+                    /**
+                     * Properties of a MsgSendResponse.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface IMsgSendResponse
+                     */
+    
+                    /**
+                     * Constructs a new MsgSendResponse.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a MsgSendResponse.
+                     * @implements IMsgSendResponse
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.IMsgSendResponse=} [properties] Properties to set
+                     */
+                    function MsgSendResponse(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Encodes the specified MsgSendResponse message. Does not implicitly {@link cosmos.bank.v1beta1.MsgSendResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.MsgSendResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IMsgSendResponse} message MsgSendResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MsgSendResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MsgSendResponse message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.MsgSendResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.MsgSendResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IMsgSendResponse} message MsgSendResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MsgSendResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MsgSendResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.MsgSendResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.MsgSendResponse} MsgSendResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MsgSendResponse.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.MsgSendResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MsgSendResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.MsgSendResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.MsgSendResponse} MsgSendResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MsgSendResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MsgSendResponse message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.MsgSendResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MsgSendResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MsgSendResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.MsgSendResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.MsgSendResponse} MsgSendResponse
+                     */
+                    MsgSendResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.MsgSendResponse)
+                            return object;
+                        return new $root.cosmos.bank.v1beta1.MsgSendResponse();
+                    };
+    
+                    /**
+                     * Creates a plain object from a MsgSendResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.MsgSendResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.MsgSendResponse} message MsgSendResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MsgSendResponse.toObject = function toObject() {
+                        return {};
+                    };
+    
+                    /**
+                     * Converts this MsgSendResponse to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.MsgSendResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MsgSendResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return MsgSendResponse;
+                })();
+    
+                v1beta1.MsgMultiSend = (function() {
+    
+                    /**
+                     * Properties of a MsgMultiSend.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface IMsgMultiSend
+                     * @property {Array.<cosmos.bank.v1beta1.IInput>|null} [inputs] MsgMultiSend inputs
+                     * @property {Array.<cosmos.bank.v1beta1.IOutput>|null} [outputs] MsgMultiSend outputs
+                     */
+    
+                    /**
+                     * Constructs a new MsgMultiSend.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a MsgMultiSend.
+                     * @implements IMsgMultiSend
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.IMsgMultiSend=} [properties] Properties to set
+                     */
+                    function MsgMultiSend(properties) {
+                        this.inputs = [];
+                        this.outputs = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * MsgMultiSend inputs.
+                     * @member {Array.<cosmos.bank.v1beta1.IInput>} inputs
+                     * @memberof cosmos.bank.v1beta1.MsgMultiSend
+                     * @instance
+                     */
+                    MsgMultiSend.prototype.inputs = $util.emptyArray;
+    
+                    /**
+                     * MsgMultiSend outputs.
+                     * @member {Array.<cosmos.bank.v1beta1.IOutput>} outputs
+                     * @memberof cosmos.bank.v1beta1.MsgMultiSend
+                     * @instance
+                     */
+                    MsgMultiSend.prototype.outputs = $util.emptyArray;
+    
+                    /**
+                     * Encodes the specified MsgMultiSend message. Does not implicitly {@link cosmos.bank.v1beta1.MsgMultiSend.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.MsgMultiSend
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IMsgMultiSend} message MsgMultiSend message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MsgMultiSend.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.inputs != null && message.inputs.length)
+                            for (var i = 0; i < message.inputs.length; ++i)
+                                $root.cosmos.bank.v1beta1.Input.encode(message.inputs[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.outputs != null && message.outputs.length)
+                            for (var i = 0; i < message.outputs.length; ++i)
+                                $root.cosmos.bank.v1beta1.Output.encode(message.outputs[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MsgMultiSend message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.MsgMultiSend.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.MsgMultiSend
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IMsgMultiSend} message MsgMultiSend message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MsgMultiSend.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MsgMultiSend message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.MsgMultiSend
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.MsgMultiSend} MsgMultiSend
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MsgMultiSend.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.MsgMultiSend();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                if (!(message.inputs && message.inputs.length))
+                                    message.inputs = [];
+                                message.inputs.push($root.cosmos.bank.v1beta1.Input.decode(reader, reader.uint32()));
+                                break;
+                            case 2:
+                                if (!(message.outputs && message.outputs.length))
+                                    message.outputs = [];
+                                message.outputs.push($root.cosmos.bank.v1beta1.Output.decode(reader, reader.uint32()));
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MsgMultiSend message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.MsgMultiSend
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.MsgMultiSend} MsgMultiSend
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MsgMultiSend.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MsgMultiSend message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.MsgMultiSend
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MsgMultiSend.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.inputs != null && message.hasOwnProperty("inputs")) {
+                            if (!Array.isArray(message.inputs))
+                                return "inputs: array expected";
+                            for (var i = 0; i < message.inputs.length; ++i) {
+                                var error = $root.cosmos.bank.v1beta1.Input.verify(message.inputs[i]);
+                                if (error)
+                                    return "inputs." + error;
+                            }
+                        }
+                        if (message.outputs != null && message.hasOwnProperty("outputs")) {
+                            if (!Array.isArray(message.outputs))
+                                return "outputs: array expected";
+                            for (var i = 0; i < message.outputs.length; ++i) {
+                                var error = $root.cosmos.bank.v1beta1.Output.verify(message.outputs[i]);
+                                if (error)
+                                    return "outputs." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MsgMultiSend message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.MsgMultiSend
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.MsgMultiSend} MsgMultiSend
+                     */
+                    MsgMultiSend.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.MsgMultiSend)
+                            return object;
+                        var message = new $root.cosmos.bank.v1beta1.MsgMultiSend();
+                        if (object.inputs) {
+                            if (!Array.isArray(object.inputs))
+                                throw TypeError(".cosmos.bank.v1beta1.MsgMultiSend.inputs: array expected");
+                            message.inputs = [];
+                            for (var i = 0; i < object.inputs.length; ++i) {
+                                if (typeof object.inputs[i] !== "object")
+                                    throw TypeError(".cosmos.bank.v1beta1.MsgMultiSend.inputs: object expected");
+                                message.inputs[i] = $root.cosmos.bank.v1beta1.Input.fromObject(object.inputs[i]);
+                            }
+                        }
+                        if (object.outputs) {
+                            if (!Array.isArray(object.outputs))
+                                throw TypeError(".cosmos.bank.v1beta1.MsgMultiSend.outputs: array expected");
+                            message.outputs = [];
+                            for (var i = 0; i < object.outputs.length; ++i) {
+                                if (typeof object.outputs[i] !== "object")
+                                    throw TypeError(".cosmos.bank.v1beta1.MsgMultiSend.outputs: object expected");
+                                message.outputs[i] = $root.cosmos.bank.v1beta1.Output.fromObject(object.outputs[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a MsgMultiSend message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.MsgMultiSend
+                     * @static
+                     * @param {cosmos.bank.v1beta1.MsgMultiSend} message MsgMultiSend
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MsgMultiSend.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults) {
+                            object.inputs = [];
+                            object.outputs = [];
+                        }
+                        if (message.inputs && message.inputs.length) {
+                            object.inputs = [];
+                            for (var j = 0; j < message.inputs.length; ++j)
+                                object.inputs[j] = $root.cosmos.bank.v1beta1.Input.toObject(message.inputs[j], options);
+                        }
+                        if (message.outputs && message.outputs.length) {
+                            object.outputs = [];
+                            for (var j = 0; j < message.outputs.length; ++j)
+                                object.outputs[j] = $root.cosmos.bank.v1beta1.Output.toObject(message.outputs[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this MsgMultiSend to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.MsgMultiSend
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MsgMultiSend.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return MsgMultiSend;
+                })();
+    
+                v1beta1.MsgMultiSendResponse = (function() {
+    
+                    /**
+                     * Properties of a MsgMultiSendResponse.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface IMsgMultiSendResponse
+                     */
+    
+                    /**
+                     * Constructs a new MsgMultiSendResponse.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a MsgMultiSendResponse.
+                     * @implements IMsgMultiSendResponse
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.IMsgMultiSendResponse=} [properties] Properties to set
+                     */
+                    function MsgMultiSendResponse(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Encodes the specified MsgMultiSendResponse message. Does not implicitly {@link cosmos.bank.v1beta1.MsgMultiSendResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.MsgMultiSendResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IMsgMultiSendResponse} message MsgMultiSendResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MsgMultiSendResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified MsgMultiSendResponse message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.MsgMultiSendResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.MsgMultiSendResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IMsgMultiSendResponse} message MsgMultiSendResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    MsgMultiSendResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a MsgMultiSendResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.MsgMultiSendResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.MsgMultiSendResponse} MsgMultiSendResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MsgMultiSendResponse.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.MsgMultiSendResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a MsgMultiSendResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.MsgMultiSendResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.MsgMultiSendResponse} MsgMultiSendResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    MsgMultiSendResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a MsgMultiSendResponse message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.MsgMultiSendResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    MsgMultiSendResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a MsgMultiSendResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.MsgMultiSendResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.MsgMultiSendResponse} MsgMultiSendResponse
+                     */
+                    MsgMultiSendResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.MsgMultiSendResponse)
+                            return object;
+                        return new $root.cosmos.bank.v1beta1.MsgMultiSendResponse();
+                    };
+    
+                    /**
+                     * Creates a plain object from a MsgMultiSendResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.MsgMultiSendResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.MsgMultiSendResponse} message MsgMultiSendResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    MsgMultiSendResponse.toObject = function toObject() {
+                        return {};
+                    };
+    
+                    /**
+                     * Converts this MsgMultiSendResponse to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.MsgMultiSendResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    MsgMultiSendResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return MsgMultiSendResponse;
+                })();
+    
+                v1beta1.Query = (function() {
+    
+                    /**
+                     * Constructs a new Query service.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a Query
+                     * @extends $protobuf.rpc.Service
+                     * @constructor
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    function Query(rpcImpl, requestDelimited, responseDelimited) {
+                        $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                    }
+    
+                    (Query.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = Query;
+    
+                    /**
+                     * Callback as used by {@link cosmos.bank.v1beta1.Query#balance}.
+                     * @memberof cosmos.bank.v1beta1.Query
+                     * @typedef BalanceCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {cosmos.bank.v1beta1.QueryBalanceResponse} [response] QueryBalanceResponse
+                     */
+    
+                    /**
+                     * Calls Balance.
+                     * @function balance
+                     * @memberof cosmos.bank.v1beta1.Query
+                     * @instance
+                     * @param {cosmos.bank.v1beta1.IQueryBalanceRequest} request QueryBalanceRequest message or plain object
+                     * @param {cosmos.bank.v1beta1.Query.BalanceCallback} callback Node-style callback called with the error, if any, and QueryBalanceResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(Query.prototype.balance = function balance(request, callback) {
+                        return this.rpcCall(balance, $root.cosmos.bank.v1beta1.QueryBalanceRequest, $root.cosmos.bank.v1beta1.QueryBalanceResponse, request, callback);
+                    }, "name", { value: "Balance" });
+    
+                    /**
+                     * Calls Balance.
+                     * @function balance
+                     * @memberof cosmos.bank.v1beta1.Query
+                     * @instance
+                     * @param {cosmos.bank.v1beta1.IQueryBalanceRequest} request QueryBalanceRequest message or plain object
+                     * @returns {Promise<cosmos.bank.v1beta1.QueryBalanceResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link cosmos.bank.v1beta1.Query#allBalances}.
+                     * @memberof cosmos.bank.v1beta1.Query
+                     * @typedef AllBalancesCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {cosmos.bank.v1beta1.QueryAllBalancesResponse} [response] QueryAllBalancesResponse
+                     */
+    
+                    /**
+                     * Calls AllBalances.
+                     * @function allBalances
+                     * @memberof cosmos.bank.v1beta1.Query
+                     * @instance
+                     * @param {cosmos.bank.v1beta1.IQueryAllBalancesRequest} request QueryAllBalancesRequest message or plain object
+                     * @param {cosmos.bank.v1beta1.Query.AllBalancesCallback} callback Node-style callback called with the error, if any, and QueryAllBalancesResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(Query.prototype.allBalances = function allBalances(request, callback) {
+                        return this.rpcCall(allBalances, $root.cosmos.bank.v1beta1.QueryAllBalancesRequest, $root.cosmos.bank.v1beta1.QueryAllBalancesResponse, request, callback);
+                    }, "name", { value: "AllBalances" });
+    
+                    /**
+                     * Calls AllBalances.
+                     * @function allBalances
+                     * @memberof cosmos.bank.v1beta1.Query
+                     * @instance
+                     * @param {cosmos.bank.v1beta1.IQueryAllBalancesRequest} request QueryAllBalancesRequest message or plain object
+                     * @returns {Promise<cosmos.bank.v1beta1.QueryAllBalancesResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link cosmos.bank.v1beta1.Query#totalSupply}.
+                     * @memberof cosmos.bank.v1beta1.Query
+                     * @typedef TotalSupplyCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {cosmos.bank.v1beta1.QueryTotalSupplyResponse} [response] QueryTotalSupplyResponse
+                     */
+    
+                    /**
+                     * Calls TotalSupply.
+                     * @function totalSupply
+                     * @memberof cosmos.bank.v1beta1.Query
+                     * @instance
+                     * @param {cosmos.bank.v1beta1.IQueryTotalSupplyRequest} request QueryTotalSupplyRequest message or plain object
+                     * @param {cosmos.bank.v1beta1.Query.TotalSupplyCallback} callback Node-style callback called with the error, if any, and QueryTotalSupplyResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(Query.prototype.totalSupply = function totalSupply(request, callback) {
+                        return this.rpcCall(totalSupply, $root.cosmos.bank.v1beta1.QueryTotalSupplyRequest, $root.cosmos.bank.v1beta1.QueryTotalSupplyResponse, request, callback);
+                    }, "name", { value: "TotalSupply" });
+    
+                    /**
+                     * Calls TotalSupply.
+                     * @function totalSupply
+                     * @memberof cosmos.bank.v1beta1.Query
+                     * @instance
+                     * @param {cosmos.bank.v1beta1.IQueryTotalSupplyRequest} request QueryTotalSupplyRequest message or plain object
+                     * @returns {Promise<cosmos.bank.v1beta1.QueryTotalSupplyResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link cosmos.bank.v1beta1.Query#supplyOf}.
+                     * @memberof cosmos.bank.v1beta1.Query
+                     * @typedef SupplyOfCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {cosmos.bank.v1beta1.QuerySupplyOfResponse} [response] QuerySupplyOfResponse
+                     */
+    
+                    /**
+                     * Calls SupplyOf.
+                     * @function supplyOf
+                     * @memberof cosmos.bank.v1beta1.Query
+                     * @instance
+                     * @param {cosmos.bank.v1beta1.IQuerySupplyOfRequest} request QuerySupplyOfRequest message or plain object
+                     * @param {cosmos.bank.v1beta1.Query.SupplyOfCallback} callback Node-style callback called with the error, if any, and QuerySupplyOfResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(Query.prototype.supplyOf = function supplyOf(request, callback) {
+                        return this.rpcCall(supplyOf, $root.cosmos.bank.v1beta1.QuerySupplyOfRequest, $root.cosmos.bank.v1beta1.QuerySupplyOfResponse, request, callback);
+                    }, "name", { value: "SupplyOf" });
+    
+                    /**
+                     * Calls SupplyOf.
+                     * @function supplyOf
+                     * @memberof cosmos.bank.v1beta1.Query
+                     * @instance
+                     * @param {cosmos.bank.v1beta1.IQuerySupplyOfRequest} request QuerySupplyOfRequest message or plain object
+                     * @returns {Promise<cosmos.bank.v1beta1.QuerySupplyOfResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link cosmos.bank.v1beta1.Query#params}.
+                     * @memberof cosmos.bank.v1beta1.Query
+                     * @typedef ParamsCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {cosmos.bank.v1beta1.QueryParamsResponse} [response] QueryParamsResponse
+                     */
+    
+                    /**
+                     * Calls Params.
+                     * @function params
+                     * @memberof cosmos.bank.v1beta1.Query
+                     * @instance
+                     * @param {cosmos.bank.v1beta1.IQueryParamsRequest} request QueryParamsRequest message or plain object
+                     * @param {cosmos.bank.v1beta1.Query.ParamsCallback} callback Node-style callback called with the error, if any, and QueryParamsResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(Query.prototype.params = function params(request, callback) {
+                        return this.rpcCall(params, $root.cosmos.bank.v1beta1.QueryParamsRequest, $root.cosmos.bank.v1beta1.QueryParamsResponse, request, callback);
+                    }, "name", { value: "Params" });
+    
+                    /**
+                     * Calls Params.
+                     * @function params
+                     * @memberof cosmos.bank.v1beta1.Query
+                     * @instance
+                     * @param {cosmos.bank.v1beta1.IQueryParamsRequest} request QueryParamsRequest message or plain object
+                     * @returns {Promise<cosmos.bank.v1beta1.QueryParamsResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link cosmos.bank.v1beta1.Query#denomMetadata}.
+                     * @memberof cosmos.bank.v1beta1.Query
+                     * @typedef DenomMetadataCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {cosmos.bank.v1beta1.QueryDenomMetadataResponse} [response] QueryDenomMetadataResponse
+                     */
+    
+                    /**
+                     * Calls DenomMetadata.
+                     * @function denomMetadata
+                     * @memberof cosmos.bank.v1beta1.Query
+                     * @instance
+                     * @param {cosmos.bank.v1beta1.IQueryDenomMetadataRequest} request QueryDenomMetadataRequest message or plain object
+                     * @param {cosmos.bank.v1beta1.Query.DenomMetadataCallback} callback Node-style callback called with the error, if any, and QueryDenomMetadataResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(Query.prototype.denomMetadata = function denomMetadata(request, callback) {
+                        return this.rpcCall(denomMetadata, $root.cosmos.bank.v1beta1.QueryDenomMetadataRequest, $root.cosmos.bank.v1beta1.QueryDenomMetadataResponse, request, callback);
+                    }, "name", { value: "DenomMetadata" });
+    
+                    /**
+                     * Calls DenomMetadata.
+                     * @function denomMetadata
+                     * @memberof cosmos.bank.v1beta1.Query
+                     * @instance
+                     * @param {cosmos.bank.v1beta1.IQueryDenomMetadataRequest} request QueryDenomMetadataRequest message or plain object
+                     * @returns {Promise<cosmos.bank.v1beta1.QueryDenomMetadataResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link cosmos.bank.v1beta1.Query#denomsMetadata}.
+                     * @memberof cosmos.bank.v1beta1.Query
+                     * @typedef DenomsMetadataCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {cosmos.bank.v1beta1.QueryDenomsMetadataResponse} [response] QueryDenomsMetadataResponse
+                     */
+    
+                    /**
+                     * Calls DenomsMetadata.
+                     * @function denomsMetadata
+                     * @memberof cosmos.bank.v1beta1.Query
+                     * @instance
+                     * @param {cosmos.bank.v1beta1.IQueryDenomsMetadataRequest} request QueryDenomsMetadataRequest message or plain object
+                     * @param {cosmos.bank.v1beta1.Query.DenomsMetadataCallback} callback Node-style callback called with the error, if any, and QueryDenomsMetadataResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(Query.prototype.denomsMetadata = function denomsMetadata(request, callback) {
+                        return this.rpcCall(denomsMetadata, $root.cosmos.bank.v1beta1.QueryDenomsMetadataRequest, $root.cosmos.bank.v1beta1.QueryDenomsMetadataResponse, request, callback);
+                    }, "name", { value: "DenomsMetadata" });
+    
+                    /**
+                     * Calls DenomsMetadata.
+                     * @function denomsMetadata
+                     * @memberof cosmos.bank.v1beta1.Query
+                     * @instance
+                     * @param {cosmos.bank.v1beta1.IQueryDenomsMetadataRequest} request QueryDenomsMetadataRequest message or plain object
+                     * @returns {Promise<cosmos.bank.v1beta1.QueryDenomsMetadataResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    return Query;
+                })();
+    
+                v1beta1.QueryBalanceRequest = (function() {
+    
+                    /**
+                     * Properties of a QueryBalanceRequest.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface IQueryBalanceRequest
+                     * @property {string|null} [address] QueryBalanceRequest address
+                     * @property {string|null} [denom] QueryBalanceRequest denom
+                     */
+    
+                    /**
+                     * Constructs a new QueryBalanceRequest.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a QueryBalanceRequest.
+                     * @implements IQueryBalanceRequest
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.IQueryBalanceRequest=} [properties] Properties to set
+                     */
+                    function QueryBalanceRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * QueryBalanceRequest address.
+                     * @member {string} address
+                     * @memberof cosmos.bank.v1beta1.QueryBalanceRequest
+                     * @instance
+                     */
+                    QueryBalanceRequest.prototype.address = "";
+    
+                    /**
+                     * QueryBalanceRequest denom.
+                     * @member {string} denom
+                     * @memberof cosmos.bank.v1beta1.QueryBalanceRequest
+                     * @instance
+                     */
+                    QueryBalanceRequest.prototype.denom = "";
+    
+                    /**
+                     * Encodes the specified QueryBalanceRequest message. Does not implicitly {@link cosmos.bank.v1beta1.QueryBalanceRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.QueryBalanceRequest
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQueryBalanceRequest} message QueryBalanceRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryBalanceRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.address != null && Object.hasOwnProperty.call(message, "address"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.address);
+                        if (message.denom != null && Object.hasOwnProperty.call(message, "denom"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.denom);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified QueryBalanceRequest message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QueryBalanceRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QueryBalanceRequest
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQueryBalanceRequest} message QueryBalanceRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryBalanceRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a QueryBalanceRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.QueryBalanceRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.QueryBalanceRequest} QueryBalanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryBalanceRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.QueryBalanceRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.address = reader.string();
+                                break;
+                            case 2:
+                                message.denom = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a QueryBalanceRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QueryBalanceRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.QueryBalanceRequest} QueryBalanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryBalanceRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a QueryBalanceRequest message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.QueryBalanceRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    QueryBalanceRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.address != null && message.hasOwnProperty("address"))
+                            if (!$util.isString(message.address))
+                                return "address: string expected";
+                        if (message.denom != null && message.hasOwnProperty("denom"))
+                            if (!$util.isString(message.denom))
+                                return "denom: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a QueryBalanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.QueryBalanceRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.QueryBalanceRequest} QueryBalanceRequest
+                     */
+                    QueryBalanceRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.QueryBalanceRequest)
+                            return object;
+                        var message = new $root.cosmos.bank.v1beta1.QueryBalanceRequest();
+                        if (object.address != null)
+                            message.address = String(object.address);
+                        if (object.denom != null)
+                            message.denom = String(object.denom);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a QueryBalanceRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.QueryBalanceRequest
+                     * @static
+                     * @param {cosmos.bank.v1beta1.QueryBalanceRequest} message QueryBalanceRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    QueryBalanceRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.address = "";
+                            object.denom = "";
+                        }
+                        if (message.address != null && message.hasOwnProperty("address"))
+                            object.address = message.address;
+                        if (message.denom != null && message.hasOwnProperty("denom"))
+                            object.denom = message.denom;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this QueryBalanceRequest to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.QueryBalanceRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    QueryBalanceRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return QueryBalanceRequest;
+                })();
+    
+                v1beta1.QueryBalanceResponse = (function() {
+    
+                    /**
+                     * Properties of a QueryBalanceResponse.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface IQueryBalanceResponse
+                     * @property {cosmos.base.v1beta1.ICoin|null} [balance] QueryBalanceResponse balance
+                     */
+    
+                    /**
+                     * Constructs a new QueryBalanceResponse.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a QueryBalanceResponse.
+                     * @implements IQueryBalanceResponse
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.IQueryBalanceResponse=} [properties] Properties to set
+                     */
+                    function QueryBalanceResponse(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * QueryBalanceResponse balance.
+                     * @member {cosmos.base.v1beta1.ICoin|null|undefined} balance
+                     * @memberof cosmos.bank.v1beta1.QueryBalanceResponse
+                     * @instance
+                     */
+                    QueryBalanceResponse.prototype.balance = null;
+    
+                    /**
+                     * Encodes the specified QueryBalanceResponse message. Does not implicitly {@link cosmos.bank.v1beta1.QueryBalanceResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.QueryBalanceResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQueryBalanceResponse} message QueryBalanceResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryBalanceResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.balance != null && Object.hasOwnProperty.call(message, "balance"))
+                            $root.cosmos.base.v1beta1.Coin.encode(message.balance, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified QueryBalanceResponse message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QueryBalanceResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QueryBalanceResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQueryBalanceResponse} message QueryBalanceResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryBalanceResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a QueryBalanceResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.QueryBalanceResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.QueryBalanceResponse} QueryBalanceResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryBalanceResponse.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.QueryBalanceResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.balance = $root.cosmos.base.v1beta1.Coin.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a QueryBalanceResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QueryBalanceResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.QueryBalanceResponse} QueryBalanceResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryBalanceResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a QueryBalanceResponse message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.QueryBalanceResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    QueryBalanceResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.balance != null && message.hasOwnProperty("balance")) {
+                            var error = $root.cosmos.base.v1beta1.Coin.verify(message.balance);
+                            if (error)
+                                return "balance." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a QueryBalanceResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.QueryBalanceResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.QueryBalanceResponse} QueryBalanceResponse
+                     */
+                    QueryBalanceResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.QueryBalanceResponse)
+                            return object;
+                        var message = new $root.cosmos.bank.v1beta1.QueryBalanceResponse();
+                        if (object.balance != null) {
+                            if (typeof object.balance !== "object")
+                                throw TypeError(".cosmos.bank.v1beta1.QueryBalanceResponse.balance: object expected");
+                            message.balance = $root.cosmos.base.v1beta1.Coin.fromObject(object.balance);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a QueryBalanceResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.QueryBalanceResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.QueryBalanceResponse} message QueryBalanceResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    QueryBalanceResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.balance = null;
+                        if (message.balance != null && message.hasOwnProperty("balance"))
+                            object.balance = $root.cosmos.base.v1beta1.Coin.toObject(message.balance, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this QueryBalanceResponse to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.QueryBalanceResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    QueryBalanceResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return QueryBalanceResponse;
+                })();
+    
+                v1beta1.QueryAllBalancesRequest = (function() {
+    
+                    /**
+                     * Properties of a QueryAllBalancesRequest.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface IQueryAllBalancesRequest
+                     * @property {string|null} [address] QueryAllBalancesRequest address
+                     * @property {cosmos.base.query.v1beta1.IPageRequest|null} [pagination] QueryAllBalancesRequest pagination
+                     */
+    
+                    /**
+                     * Constructs a new QueryAllBalancesRequest.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a QueryAllBalancesRequest.
+                     * @implements IQueryAllBalancesRequest
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.IQueryAllBalancesRequest=} [properties] Properties to set
+                     */
+                    function QueryAllBalancesRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * QueryAllBalancesRequest address.
+                     * @member {string} address
+                     * @memberof cosmos.bank.v1beta1.QueryAllBalancesRequest
+                     * @instance
+                     */
+                    QueryAllBalancesRequest.prototype.address = "";
+    
+                    /**
+                     * QueryAllBalancesRequest pagination.
+                     * @member {cosmos.base.query.v1beta1.IPageRequest|null|undefined} pagination
+                     * @memberof cosmos.bank.v1beta1.QueryAllBalancesRequest
+                     * @instance
+                     */
+                    QueryAllBalancesRequest.prototype.pagination = null;
+    
+                    /**
+                     * Encodes the specified QueryAllBalancesRequest message. Does not implicitly {@link cosmos.bank.v1beta1.QueryAllBalancesRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.QueryAllBalancesRequest
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQueryAllBalancesRequest} message QueryAllBalancesRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryAllBalancesRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.address != null && Object.hasOwnProperty.call(message, "address"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.address);
+                        if (message.pagination != null && Object.hasOwnProperty.call(message, "pagination"))
+                            $root.cosmos.base.query.v1beta1.PageRequest.encode(message.pagination, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified QueryAllBalancesRequest message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QueryAllBalancesRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QueryAllBalancesRequest
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQueryAllBalancesRequest} message QueryAllBalancesRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryAllBalancesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a QueryAllBalancesRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.QueryAllBalancesRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.QueryAllBalancesRequest} QueryAllBalancesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryAllBalancesRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.QueryAllBalancesRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.address = reader.string();
+                                break;
+                            case 2:
+                                message.pagination = $root.cosmos.base.query.v1beta1.PageRequest.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a QueryAllBalancesRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QueryAllBalancesRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.QueryAllBalancesRequest} QueryAllBalancesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryAllBalancesRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a QueryAllBalancesRequest message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.QueryAllBalancesRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    QueryAllBalancesRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.address != null && message.hasOwnProperty("address"))
+                            if (!$util.isString(message.address))
+                                return "address: string expected";
+                        if (message.pagination != null && message.hasOwnProperty("pagination")) {
+                            var error = $root.cosmos.base.query.v1beta1.PageRequest.verify(message.pagination);
+                            if (error)
+                                return "pagination." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a QueryAllBalancesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.QueryAllBalancesRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.QueryAllBalancesRequest} QueryAllBalancesRequest
+                     */
+                    QueryAllBalancesRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.QueryAllBalancesRequest)
+                            return object;
+                        var message = new $root.cosmos.bank.v1beta1.QueryAllBalancesRequest();
+                        if (object.address != null)
+                            message.address = String(object.address);
+                        if (object.pagination != null) {
+                            if (typeof object.pagination !== "object")
+                                throw TypeError(".cosmos.bank.v1beta1.QueryAllBalancesRequest.pagination: object expected");
+                            message.pagination = $root.cosmos.base.query.v1beta1.PageRequest.fromObject(object.pagination);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a QueryAllBalancesRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.QueryAllBalancesRequest
+                     * @static
+                     * @param {cosmos.bank.v1beta1.QueryAllBalancesRequest} message QueryAllBalancesRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    QueryAllBalancesRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.address = "";
+                            object.pagination = null;
+                        }
+                        if (message.address != null && message.hasOwnProperty("address"))
+                            object.address = message.address;
+                        if (message.pagination != null && message.hasOwnProperty("pagination"))
+                            object.pagination = $root.cosmos.base.query.v1beta1.PageRequest.toObject(message.pagination, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this QueryAllBalancesRequest to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.QueryAllBalancesRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    QueryAllBalancesRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return QueryAllBalancesRequest;
+                })();
+    
+                v1beta1.QueryAllBalancesResponse = (function() {
+    
+                    /**
+                     * Properties of a QueryAllBalancesResponse.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface IQueryAllBalancesResponse
+                     * @property {Array.<cosmos.base.v1beta1.ICoin>|null} [balances] QueryAllBalancesResponse balances
+                     * @property {cosmos.base.query.v1beta1.IPageResponse|null} [pagination] QueryAllBalancesResponse pagination
+                     */
+    
+                    /**
+                     * Constructs a new QueryAllBalancesResponse.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a QueryAllBalancesResponse.
+                     * @implements IQueryAllBalancesResponse
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.IQueryAllBalancesResponse=} [properties] Properties to set
+                     */
+                    function QueryAllBalancesResponse(properties) {
+                        this.balances = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * QueryAllBalancesResponse balances.
+                     * @member {Array.<cosmos.base.v1beta1.ICoin>} balances
+                     * @memberof cosmos.bank.v1beta1.QueryAllBalancesResponse
+                     * @instance
+                     */
+                    QueryAllBalancesResponse.prototype.balances = $util.emptyArray;
+    
+                    /**
+                     * QueryAllBalancesResponse pagination.
+                     * @member {cosmos.base.query.v1beta1.IPageResponse|null|undefined} pagination
+                     * @memberof cosmos.bank.v1beta1.QueryAllBalancesResponse
+                     * @instance
+                     */
+                    QueryAllBalancesResponse.prototype.pagination = null;
+    
+                    /**
+                     * Encodes the specified QueryAllBalancesResponse message. Does not implicitly {@link cosmos.bank.v1beta1.QueryAllBalancesResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.QueryAllBalancesResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQueryAllBalancesResponse} message QueryAllBalancesResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryAllBalancesResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.balances != null && message.balances.length)
+                            for (var i = 0; i < message.balances.length; ++i)
+                                $root.cosmos.base.v1beta1.Coin.encode(message.balances[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.pagination != null && Object.hasOwnProperty.call(message, "pagination"))
+                            $root.cosmos.base.query.v1beta1.PageResponse.encode(message.pagination, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified QueryAllBalancesResponse message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QueryAllBalancesResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QueryAllBalancesResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQueryAllBalancesResponse} message QueryAllBalancesResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryAllBalancesResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a QueryAllBalancesResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.QueryAllBalancesResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.QueryAllBalancesResponse} QueryAllBalancesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryAllBalancesResponse.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.QueryAllBalancesResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                if (!(message.balances && message.balances.length))
+                                    message.balances = [];
+                                message.balances.push($root.cosmos.base.v1beta1.Coin.decode(reader, reader.uint32()));
+                                break;
+                            case 2:
+                                message.pagination = $root.cosmos.base.query.v1beta1.PageResponse.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a QueryAllBalancesResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QueryAllBalancesResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.QueryAllBalancesResponse} QueryAllBalancesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryAllBalancesResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a QueryAllBalancesResponse message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.QueryAllBalancesResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    QueryAllBalancesResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.balances != null && message.hasOwnProperty("balances")) {
+                            if (!Array.isArray(message.balances))
+                                return "balances: array expected";
+                            for (var i = 0; i < message.balances.length; ++i) {
+                                var error = $root.cosmos.base.v1beta1.Coin.verify(message.balances[i]);
+                                if (error)
+                                    return "balances." + error;
+                            }
+                        }
+                        if (message.pagination != null && message.hasOwnProperty("pagination")) {
+                            var error = $root.cosmos.base.query.v1beta1.PageResponse.verify(message.pagination);
+                            if (error)
+                                return "pagination." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a QueryAllBalancesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.QueryAllBalancesResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.QueryAllBalancesResponse} QueryAllBalancesResponse
+                     */
+                    QueryAllBalancesResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.QueryAllBalancesResponse)
+                            return object;
+                        var message = new $root.cosmos.bank.v1beta1.QueryAllBalancesResponse();
+                        if (object.balances) {
+                            if (!Array.isArray(object.balances))
+                                throw TypeError(".cosmos.bank.v1beta1.QueryAllBalancesResponse.balances: array expected");
+                            message.balances = [];
+                            for (var i = 0; i < object.balances.length; ++i) {
+                                if (typeof object.balances[i] !== "object")
+                                    throw TypeError(".cosmos.bank.v1beta1.QueryAllBalancesResponse.balances: object expected");
+                                message.balances[i] = $root.cosmos.base.v1beta1.Coin.fromObject(object.balances[i]);
+                            }
+                        }
+                        if (object.pagination != null) {
+                            if (typeof object.pagination !== "object")
+                                throw TypeError(".cosmos.bank.v1beta1.QueryAllBalancesResponse.pagination: object expected");
+                            message.pagination = $root.cosmos.base.query.v1beta1.PageResponse.fromObject(object.pagination);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a QueryAllBalancesResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.QueryAllBalancesResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.QueryAllBalancesResponse} message QueryAllBalancesResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    QueryAllBalancesResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.balances = [];
+                        if (options.defaults)
+                            object.pagination = null;
+                        if (message.balances && message.balances.length) {
+                            object.balances = [];
+                            for (var j = 0; j < message.balances.length; ++j)
+                                object.balances[j] = $root.cosmos.base.v1beta1.Coin.toObject(message.balances[j], options);
+                        }
+                        if (message.pagination != null && message.hasOwnProperty("pagination"))
+                            object.pagination = $root.cosmos.base.query.v1beta1.PageResponse.toObject(message.pagination, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this QueryAllBalancesResponse to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.QueryAllBalancesResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    QueryAllBalancesResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return QueryAllBalancesResponse;
+                })();
+    
+                v1beta1.QueryTotalSupplyRequest = (function() {
+    
+                    /**
+                     * Properties of a QueryTotalSupplyRequest.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface IQueryTotalSupplyRequest
+                     * @property {cosmos.base.query.v1beta1.IPageRequest|null} [pagination] QueryTotalSupplyRequest pagination
+                     */
+    
+                    /**
+                     * Constructs a new QueryTotalSupplyRequest.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a QueryTotalSupplyRequest.
+                     * @implements IQueryTotalSupplyRequest
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.IQueryTotalSupplyRequest=} [properties] Properties to set
+                     */
+                    function QueryTotalSupplyRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * QueryTotalSupplyRequest pagination.
+                     * @member {cosmos.base.query.v1beta1.IPageRequest|null|undefined} pagination
+                     * @memberof cosmos.bank.v1beta1.QueryTotalSupplyRequest
+                     * @instance
+                     */
+                    QueryTotalSupplyRequest.prototype.pagination = null;
+    
+                    /**
+                     * Encodes the specified QueryTotalSupplyRequest message. Does not implicitly {@link cosmos.bank.v1beta1.QueryTotalSupplyRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.QueryTotalSupplyRequest
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQueryTotalSupplyRequest} message QueryTotalSupplyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryTotalSupplyRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.pagination != null && Object.hasOwnProperty.call(message, "pagination"))
+                            $root.cosmos.base.query.v1beta1.PageRequest.encode(message.pagination, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified QueryTotalSupplyRequest message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QueryTotalSupplyRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QueryTotalSupplyRequest
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQueryTotalSupplyRequest} message QueryTotalSupplyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryTotalSupplyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a QueryTotalSupplyRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.QueryTotalSupplyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.QueryTotalSupplyRequest} QueryTotalSupplyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryTotalSupplyRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.QueryTotalSupplyRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.pagination = $root.cosmos.base.query.v1beta1.PageRequest.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a QueryTotalSupplyRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QueryTotalSupplyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.QueryTotalSupplyRequest} QueryTotalSupplyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryTotalSupplyRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a QueryTotalSupplyRequest message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.QueryTotalSupplyRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    QueryTotalSupplyRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.pagination != null && message.hasOwnProperty("pagination")) {
+                            var error = $root.cosmos.base.query.v1beta1.PageRequest.verify(message.pagination);
+                            if (error)
+                                return "pagination." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a QueryTotalSupplyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.QueryTotalSupplyRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.QueryTotalSupplyRequest} QueryTotalSupplyRequest
+                     */
+                    QueryTotalSupplyRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.QueryTotalSupplyRequest)
+                            return object;
+                        var message = new $root.cosmos.bank.v1beta1.QueryTotalSupplyRequest();
+                        if (object.pagination != null) {
+                            if (typeof object.pagination !== "object")
+                                throw TypeError(".cosmos.bank.v1beta1.QueryTotalSupplyRequest.pagination: object expected");
+                            message.pagination = $root.cosmos.base.query.v1beta1.PageRequest.fromObject(object.pagination);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a QueryTotalSupplyRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.QueryTotalSupplyRequest
+                     * @static
+                     * @param {cosmos.bank.v1beta1.QueryTotalSupplyRequest} message QueryTotalSupplyRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    QueryTotalSupplyRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.pagination = null;
+                        if (message.pagination != null && message.hasOwnProperty("pagination"))
+                            object.pagination = $root.cosmos.base.query.v1beta1.PageRequest.toObject(message.pagination, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this QueryTotalSupplyRequest to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.QueryTotalSupplyRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    QueryTotalSupplyRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return QueryTotalSupplyRequest;
+                })();
+    
+                v1beta1.QueryTotalSupplyResponse = (function() {
+    
+                    /**
+                     * Properties of a QueryTotalSupplyResponse.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface IQueryTotalSupplyResponse
+                     * @property {Array.<cosmos.base.v1beta1.ICoin>|null} [supply] QueryTotalSupplyResponse supply
+                     * @property {cosmos.base.query.v1beta1.IPageResponse|null} [pagination] QueryTotalSupplyResponse pagination
+                     */
+    
+                    /**
+                     * Constructs a new QueryTotalSupplyResponse.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a QueryTotalSupplyResponse.
+                     * @implements IQueryTotalSupplyResponse
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.IQueryTotalSupplyResponse=} [properties] Properties to set
+                     */
+                    function QueryTotalSupplyResponse(properties) {
+                        this.supply = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * QueryTotalSupplyResponse supply.
+                     * @member {Array.<cosmos.base.v1beta1.ICoin>} supply
+                     * @memberof cosmos.bank.v1beta1.QueryTotalSupplyResponse
+                     * @instance
+                     */
+                    QueryTotalSupplyResponse.prototype.supply = $util.emptyArray;
+    
+                    /**
+                     * QueryTotalSupplyResponse pagination.
+                     * @member {cosmos.base.query.v1beta1.IPageResponse|null|undefined} pagination
+                     * @memberof cosmos.bank.v1beta1.QueryTotalSupplyResponse
+                     * @instance
+                     */
+                    QueryTotalSupplyResponse.prototype.pagination = null;
+    
+                    /**
+                     * Encodes the specified QueryTotalSupplyResponse message. Does not implicitly {@link cosmos.bank.v1beta1.QueryTotalSupplyResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.QueryTotalSupplyResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQueryTotalSupplyResponse} message QueryTotalSupplyResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryTotalSupplyResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.supply != null && message.supply.length)
+                            for (var i = 0; i < message.supply.length; ++i)
+                                $root.cosmos.base.v1beta1.Coin.encode(message.supply[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.pagination != null && Object.hasOwnProperty.call(message, "pagination"))
+                            $root.cosmos.base.query.v1beta1.PageResponse.encode(message.pagination, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified QueryTotalSupplyResponse message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QueryTotalSupplyResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QueryTotalSupplyResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQueryTotalSupplyResponse} message QueryTotalSupplyResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryTotalSupplyResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a QueryTotalSupplyResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.QueryTotalSupplyResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.QueryTotalSupplyResponse} QueryTotalSupplyResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryTotalSupplyResponse.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.QueryTotalSupplyResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                if (!(message.supply && message.supply.length))
+                                    message.supply = [];
+                                message.supply.push($root.cosmos.base.v1beta1.Coin.decode(reader, reader.uint32()));
+                                break;
+                            case 2:
+                                message.pagination = $root.cosmos.base.query.v1beta1.PageResponse.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a QueryTotalSupplyResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QueryTotalSupplyResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.QueryTotalSupplyResponse} QueryTotalSupplyResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryTotalSupplyResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a QueryTotalSupplyResponse message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.QueryTotalSupplyResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    QueryTotalSupplyResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.supply != null && message.hasOwnProperty("supply")) {
+                            if (!Array.isArray(message.supply))
+                                return "supply: array expected";
+                            for (var i = 0; i < message.supply.length; ++i) {
+                                var error = $root.cosmos.base.v1beta1.Coin.verify(message.supply[i]);
+                                if (error)
+                                    return "supply." + error;
+                            }
+                        }
+                        if (message.pagination != null && message.hasOwnProperty("pagination")) {
+                            var error = $root.cosmos.base.query.v1beta1.PageResponse.verify(message.pagination);
+                            if (error)
+                                return "pagination." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a QueryTotalSupplyResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.QueryTotalSupplyResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.QueryTotalSupplyResponse} QueryTotalSupplyResponse
+                     */
+                    QueryTotalSupplyResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.QueryTotalSupplyResponse)
+                            return object;
+                        var message = new $root.cosmos.bank.v1beta1.QueryTotalSupplyResponse();
+                        if (object.supply) {
+                            if (!Array.isArray(object.supply))
+                                throw TypeError(".cosmos.bank.v1beta1.QueryTotalSupplyResponse.supply: array expected");
+                            message.supply = [];
+                            for (var i = 0; i < object.supply.length; ++i) {
+                                if (typeof object.supply[i] !== "object")
+                                    throw TypeError(".cosmos.bank.v1beta1.QueryTotalSupplyResponse.supply: object expected");
+                                message.supply[i] = $root.cosmos.base.v1beta1.Coin.fromObject(object.supply[i]);
+                            }
+                        }
+                        if (object.pagination != null) {
+                            if (typeof object.pagination !== "object")
+                                throw TypeError(".cosmos.bank.v1beta1.QueryTotalSupplyResponse.pagination: object expected");
+                            message.pagination = $root.cosmos.base.query.v1beta1.PageResponse.fromObject(object.pagination);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a QueryTotalSupplyResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.QueryTotalSupplyResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.QueryTotalSupplyResponse} message QueryTotalSupplyResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    QueryTotalSupplyResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.supply = [];
+                        if (options.defaults)
+                            object.pagination = null;
+                        if (message.supply && message.supply.length) {
+                            object.supply = [];
+                            for (var j = 0; j < message.supply.length; ++j)
+                                object.supply[j] = $root.cosmos.base.v1beta1.Coin.toObject(message.supply[j], options);
+                        }
+                        if (message.pagination != null && message.hasOwnProperty("pagination"))
+                            object.pagination = $root.cosmos.base.query.v1beta1.PageResponse.toObject(message.pagination, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this QueryTotalSupplyResponse to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.QueryTotalSupplyResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    QueryTotalSupplyResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return QueryTotalSupplyResponse;
+                })();
+    
+                v1beta1.QuerySupplyOfRequest = (function() {
+    
+                    /**
+                     * Properties of a QuerySupplyOfRequest.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface IQuerySupplyOfRequest
+                     * @property {string|null} [denom] QuerySupplyOfRequest denom
+                     */
+    
+                    /**
+                     * Constructs a new QuerySupplyOfRequest.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a QuerySupplyOfRequest.
+                     * @implements IQuerySupplyOfRequest
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.IQuerySupplyOfRequest=} [properties] Properties to set
+                     */
+                    function QuerySupplyOfRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * QuerySupplyOfRequest denom.
+                     * @member {string} denom
+                     * @memberof cosmos.bank.v1beta1.QuerySupplyOfRequest
+                     * @instance
+                     */
+                    QuerySupplyOfRequest.prototype.denom = "";
+    
+                    /**
+                     * Encodes the specified QuerySupplyOfRequest message. Does not implicitly {@link cosmos.bank.v1beta1.QuerySupplyOfRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.QuerySupplyOfRequest
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQuerySupplyOfRequest} message QuerySupplyOfRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QuerySupplyOfRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.denom != null && Object.hasOwnProperty.call(message, "denom"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.denom);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified QuerySupplyOfRequest message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QuerySupplyOfRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QuerySupplyOfRequest
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQuerySupplyOfRequest} message QuerySupplyOfRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QuerySupplyOfRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a QuerySupplyOfRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.QuerySupplyOfRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.QuerySupplyOfRequest} QuerySupplyOfRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QuerySupplyOfRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.QuerySupplyOfRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.denom = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a QuerySupplyOfRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QuerySupplyOfRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.QuerySupplyOfRequest} QuerySupplyOfRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QuerySupplyOfRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a QuerySupplyOfRequest message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.QuerySupplyOfRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    QuerySupplyOfRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.denom != null && message.hasOwnProperty("denom"))
+                            if (!$util.isString(message.denom))
+                                return "denom: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a QuerySupplyOfRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.QuerySupplyOfRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.QuerySupplyOfRequest} QuerySupplyOfRequest
+                     */
+                    QuerySupplyOfRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.QuerySupplyOfRequest)
+                            return object;
+                        var message = new $root.cosmos.bank.v1beta1.QuerySupplyOfRequest();
+                        if (object.denom != null)
+                            message.denom = String(object.denom);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a QuerySupplyOfRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.QuerySupplyOfRequest
+                     * @static
+                     * @param {cosmos.bank.v1beta1.QuerySupplyOfRequest} message QuerySupplyOfRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    QuerySupplyOfRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.denom = "";
+                        if (message.denom != null && message.hasOwnProperty("denom"))
+                            object.denom = message.denom;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this QuerySupplyOfRequest to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.QuerySupplyOfRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    QuerySupplyOfRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return QuerySupplyOfRequest;
+                })();
+    
+                v1beta1.QuerySupplyOfResponse = (function() {
+    
+                    /**
+                     * Properties of a QuerySupplyOfResponse.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface IQuerySupplyOfResponse
+                     * @property {cosmos.base.v1beta1.ICoin|null} [amount] QuerySupplyOfResponse amount
+                     */
+    
+                    /**
+                     * Constructs a new QuerySupplyOfResponse.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a QuerySupplyOfResponse.
+                     * @implements IQuerySupplyOfResponse
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.IQuerySupplyOfResponse=} [properties] Properties to set
+                     */
+                    function QuerySupplyOfResponse(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * QuerySupplyOfResponse amount.
+                     * @member {cosmos.base.v1beta1.ICoin|null|undefined} amount
+                     * @memberof cosmos.bank.v1beta1.QuerySupplyOfResponse
+                     * @instance
+                     */
+                    QuerySupplyOfResponse.prototype.amount = null;
+    
+                    /**
+                     * Encodes the specified QuerySupplyOfResponse message. Does not implicitly {@link cosmos.bank.v1beta1.QuerySupplyOfResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.QuerySupplyOfResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQuerySupplyOfResponse} message QuerySupplyOfResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QuerySupplyOfResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.amount != null && Object.hasOwnProperty.call(message, "amount"))
+                            $root.cosmos.base.v1beta1.Coin.encode(message.amount, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified QuerySupplyOfResponse message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QuerySupplyOfResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QuerySupplyOfResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQuerySupplyOfResponse} message QuerySupplyOfResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QuerySupplyOfResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a QuerySupplyOfResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.QuerySupplyOfResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.QuerySupplyOfResponse} QuerySupplyOfResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QuerySupplyOfResponse.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.QuerySupplyOfResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.amount = $root.cosmos.base.v1beta1.Coin.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a QuerySupplyOfResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QuerySupplyOfResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.QuerySupplyOfResponse} QuerySupplyOfResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QuerySupplyOfResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a QuerySupplyOfResponse message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.QuerySupplyOfResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    QuerySupplyOfResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.amount != null && message.hasOwnProperty("amount")) {
+                            var error = $root.cosmos.base.v1beta1.Coin.verify(message.amount);
+                            if (error)
+                                return "amount." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a QuerySupplyOfResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.QuerySupplyOfResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.QuerySupplyOfResponse} QuerySupplyOfResponse
+                     */
+                    QuerySupplyOfResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.QuerySupplyOfResponse)
+                            return object;
+                        var message = new $root.cosmos.bank.v1beta1.QuerySupplyOfResponse();
+                        if (object.amount != null) {
+                            if (typeof object.amount !== "object")
+                                throw TypeError(".cosmos.bank.v1beta1.QuerySupplyOfResponse.amount: object expected");
+                            message.amount = $root.cosmos.base.v1beta1.Coin.fromObject(object.amount);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a QuerySupplyOfResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.QuerySupplyOfResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.QuerySupplyOfResponse} message QuerySupplyOfResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    QuerySupplyOfResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.amount = null;
+                        if (message.amount != null && message.hasOwnProperty("amount"))
+                            object.amount = $root.cosmos.base.v1beta1.Coin.toObject(message.amount, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this QuerySupplyOfResponse to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.QuerySupplyOfResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    QuerySupplyOfResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return QuerySupplyOfResponse;
+                })();
+    
+                v1beta1.QueryParamsRequest = (function() {
+    
+                    /**
+                     * Properties of a QueryParamsRequest.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface IQueryParamsRequest
+                     */
+    
+                    /**
+                     * Constructs a new QueryParamsRequest.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a QueryParamsRequest.
+                     * @implements IQueryParamsRequest
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.IQueryParamsRequest=} [properties] Properties to set
+                     */
+                    function QueryParamsRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Encodes the specified QueryParamsRequest message. Does not implicitly {@link cosmos.bank.v1beta1.QueryParamsRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.QueryParamsRequest
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQueryParamsRequest} message QueryParamsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryParamsRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified QueryParamsRequest message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QueryParamsRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QueryParamsRequest
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQueryParamsRequest} message QueryParamsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryParamsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a QueryParamsRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.QueryParamsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.QueryParamsRequest} QueryParamsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryParamsRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.QueryParamsRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a QueryParamsRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QueryParamsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.QueryParamsRequest} QueryParamsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryParamsRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a QueryParamsRequest message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.QueryParamsRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    QueryParamsRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a QueryParamsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.QueryParamsRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.QueryParamsRequest} QueryParamsRequest
+                     */
+                    QueryParamsRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.QueryParamsRequest)
+                            return object;
+                        return new $root.cosmos.bank.v1beta1.QueryParamsRequest();
+                    };
+    
+                    /**
+                     * Creates a plain object from a QueryParamsRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.QueryParamsRequest
+                     * @static
+                     * @param {cosmos.bank.v1beta1.QueryParamsRequest} message QueryParamsRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    QueryParamsRequest.toObject = function toObject() {
+                        return {};
+                    };
+    
+                    /**
+                     * Converts this QueryParamsRequest to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.QueryParamsRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    QueryParamsRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return QueryParamsRequest;
+                })();
+    
+                v1beta1.QueryParamsResponse = (function() {
+    
+                    /**
+                     * Properties of a QueryParamsResponse.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface IQueryParamsResponse
+                     * @property {cosmos.bank.v1beta1.IParams|null} [params] QueryParamsResponse params
+                     */
+    
+                    /**
+                     * Constructs a new QueryParamsResponse.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a QueryParamsResponse.
+                     * @implements IQueryParamsResponse
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.IQueryParamsResponse=} [properties] Properties to set
+                     */
+                    function QueryParamsResponse(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * QueryParamsResponse params.
+                     * @member {cosmos.bank.v1beta1.IParams|null|undefined} params
+                     * @memberof cosmos.bank.v1beta1.QueryParamsResponse
+                     * @instance
+                     */
+                    QueryParamsResponse.prototype.params = null;
+    
+                    /**
+                     * Encodes the specified QueryParamsResponse message. Does not implicitly {@link cosmos.bank.v1beta1.QueryParamsResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.QueryParamsResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQueryParamsResponse} message QueryParamsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryParamsResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.params != null && Object.hasOwnProperty.call(message, "params"))
+                            $root.cosmos.bank.v1beta1.Params.encode(message.params, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified QueryParamsResponse message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QueryParamsResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QueryParamsResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQueryParamsResponse} message QueryParamsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryParamsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a QueryParamsResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.QueryParamsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.QueryParamsResponse} QueryParamsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryParamsResponse.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.QueryParamsResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.params = $root.cosmos.bank.v1beta1.Params.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a QueryParamsResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QueryParamsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.QueryParamsResponse} QueryParamsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryParamsResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a QueryParamsResponse message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.QueryParamsResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    QueryParamsResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.params != null && message.hasOwnProperty("params")) {
+                            var error = $root.cosmos.bank.v1beta1.Params.verify(message.params);
+                            if (error)
+                                return "params." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a QueryParamsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.QueryParamsResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.QueryParamsResponse} QueryParamsResponse
+                     */
+                    QueryParamsResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.QueryParamsResponse)
+                            return object;
+                        var message = new $root.cosmos.bank.v1beta1.QueryParamsResponse();
+                        if (object.params != null) {
+                            if (typeof object.params !== "object")
+                                throw TypeError(".cosmos.bank.v1beta1.QueryParamsResponse.params: object expected");
+                            message.params = $root.cosmos.bank.v1beta1.Params.fromObject(object.params);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a QueryParamsResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.QueryParamsResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.QueryParamsResponse} message QueryParamsResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    QueryParamsResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.params = null;
+                        if (message.params != null && message.hasOwnProperty("params"))
+                            object.params = $root.cosmos.bank.v1beta1.Params.toObject(message.params, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this QueryParamsResponse to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.QueryParamsResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    QueryParamsResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return QueryParamsResponse;
+                })();
+    
+                v1beta1.QueryDenomsMetadataRequest = (function() {
+    
+                    /**
+                     * Properties of a QueryDenomsMetadataRequest.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface IQueryDenomsMetadataRequest
+                     * @property {cosmos.base.query.v1beta1.IPageRequest|null} [pagination] QueryDenomsMetadataRequest pagination
+                     */
+    
+                    /**
+                     * Constructs a new QueryDenomsMetadataRequest.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a QueryDenomsMetadataRequest.
+                     * @implements IQueryDenomsMetadataRequest
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.IQueryDenomsMetadataRequest=} [properties] Properties to set
+                     */
+                    function QueryDenomsMetadataRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * QueryDenomsMetadataRequest pagination.
+                     * @member {cosmos.base.query.v1beta1.IPageRequest|null|undefined} pagination
+                     * @memberof cosmos.bank.v1beta1.QueryDenomsMetadataRequest
+                     * @instance
+                     */
+                    QueryDenomsMetadataRequest.prototype.pagination = null;
+    
+                    /**
+                     * Encodes the specified QueryDenomsMetadataRequest message. Does not implicitly {@link cosmos.bank.v1beta1.QueryDenomsMetadataRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.QueryDenomsMetadataRequest
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQueryDenomsMetadataRequest} message QueryDenomsMetadataRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryDenomsMetadataRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.pagination != null && Object.hasOwnProperty.call(message, "pagination"))
+                            $root.cosmos.base.query.v1beta1.PageRequest.encode(message.pagination, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified QueryDenomsMetadataRequest message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QueryDenomsMetadataRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QueryDenomsMetadataRequest
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQueryDenomsMetadataRequest} message QueryDenomsMetadataRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryDenomsMetadataRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a QueryDenomsMetadataRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.QueryDenomsMetadataRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.QueryDenomsMetadataRequest} QueryDenomsMetadataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryDenomsMetadataRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.QueryDenomsMetadataRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.pagination = $root.cosmos.base.query.v1beta1.PageRequest.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a QueryDenomsMetadataRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QueryDenomsMetadataRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.QueryDenomsMetadataRequest} QueryDenomsMetadataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryDenomsMetadataRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a QueryDenomsMetadataRequest message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.QueryDenomsMetadataRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    QueryDenomsMetadataRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.pagination != null && message.hasOwnProperty("pagination")) {
+                            var error = $root.cosmos.base.query.v1beta1.PageRequest.verify(message.pagination);
+                            if (error)
+                                return "pagination." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a QueryDenomsMetadataRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.QueryDenomsMetadataRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.QueryDenomsMetadataRequest} QueryDenomsMetadataRequest
+                     */
+                    QueryDenomsMetadataRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.QueryDenomsMetadataRequest)
+                            return object;
+                        var message = new $root.cosmos.bank.v1beta1.QueryDenomsMetadataRequest();
+                        if (object.pagination != null) {
+                            if (typeof object.pagination !== "object")
+                                throw TypeError(".cosmos.bank.v1beta1.QueryDenomsMetadataRequest.pagination: object expected");
+                            message.pagination = $root.cosmos.base.query.v1beta1.PageRequest.fromObject(object.pagination);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a QueryDenomsMetadataRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.QueryDenomsMetadataRequest
+                     * @static
+                     * @param {cosmos.bank.v1beta1.QueryDenomsMetadataRequest} message QueryDenomsMetadataRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    QueryDenomsMetadataRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.pagination = null;
+                        if (message.pagination != null && message.hasOwnProperty("pagination"))
+                            object.pagination = $root.cosmos.base.query.v1beta1.PageRequest.toObject(message.pagination, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this QueryDenomsMetadataRequest to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.QueryDenomsMetadataRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    QueryDenomsMetadataRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return QueryDenomsMetadataRequest;
+                })();
+    
+                v1beta1.QueryDenomsMetadataResponse = (function() {
+    
+                    /**
+                     * Properties of a QueryDenomsMetadataResponse.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface IQueryDenomsMetadataResponse
+                     * @property {Array.<cosmos.bank.v1beta1.IMetadata>|null} [metadatas] QueryDenomsMetadataResponse metadatas
+                     * @property {cosmos.base.query.v1beta1.IPageResponse|null} [pagination] QueryDenomsMetadataResponse pagination
+                     */
+    
+                    /**
+                     * Constructs a new QueryDenomsMetadataResponse.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a QueryDenomsMetadataResponse.
+                     * @implements IQueryDenomsMetadataResponse
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.IQueryDenomsMetadataResponse=} [properties] Properties to set
+                     */
+                    function QueryDenomsMetadataResponse(properties) {
+                        this.metadatas = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * QueryDenomsMetadataResponse metadatas.
+                     * @member {Array.<cosmos.bank.v1beta1.IMetadata>} metadatas
+                     * @memberof cosmos.bank.v1beta1.QueryDenomsMetadataResponse
+                     * @instance
+                     */
+                    QueryDenomsMetadataResponse.prototype.metadatas = $util.emptyArray;
+    
+                    /**
+                     * QueryDenomsMetadataResponse pagination.
+                     * @member {cosmos.base.query.v1beta1.IPageResponse|null|undefined} pagination
+                     * @memberof cosmos.bank.v1beta1.QueryDenomsMetadataResponse
+                     * @instance
+                     */
+                    QueryDenomsMetadataResponse.prototype.pagination = null;
+    
+                    /**
+                     * Encodes the specified QueryDenomsMetadataResponse message. Does not implicitly {@link cosmos.bank.v1beta1.QueryDenomsMetadataResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.QueryDenomsMetadataResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQueryDenomsMetadataResponse} message QueryDenomsMetadataResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryDenomsMetadataResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.metadatas != null && message.metadatas.length)
+                            for (var i = 0; i < message.metadatas.length; ++i)
+                                $root.cosmos.bank.v1beta1.Metadata.encode(message.metadatas[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.pagination != null && Object.hasOwnProperty.call(message, "pagination"))
+                            $root.cosmos.base.query.v1beta1.PageResponse.encode(message.pagination, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified QueryDenomsMetadataResponse message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QueryDenomsMetadataResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QueryDenomsMetadataResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQueryDenomsMetadataResponse} message QueryDenomsMetadataResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryDenomsMetadataResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a QueryDenomsMetadataResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.QueryDenomsMetadataResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.QueryDenomsMetadataResponse} QueryDenomsMetadataResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryDenomsMetadataResponse.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.QueryDenomsMetadataResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                if (!(message.metadatas && message.metadatas.length))
+                                    message.metadatas = [];
+                                message.metadatas.push($root.cosmos.bank.v1beta1.Metadata.decode(reader, reader.uint32()));
+                                break;
+                            case 2:
+                                message.pagination = $root.cosmos.base.query.v1beta1.PageResponse.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a QueryDenomsMetadataResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QueryDenomsMetadataResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.QueryDenomsMetadataResponse} QueryDenomsMetadataResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryDenomsMetadataResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a QueryDenomsMetadataResponse message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.QueryDenomsMetadataResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    QueryDenomsMetadataResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.metadatas != null && message.hasOwnProperty("metadatas")) {
+                            if (!Array.isArray(message.metadatas))
+                                return "metadatas: array expected";
+                            for (var i = 0; i < message.metadatas.length; ++i) {
+                                var error = $root.cosmos.bank.v1beta1.Metadata.verify(message.metadatas[i]);
+                                if (error)
+                                    return "metadatas." + error;
+                            }
+                        }
+                        if (message.pagination != null && message.hasOwnProperty("pagination")) {
+                            var error = $root.cosmos.base.query.v1beta1.PageResponse.verify(message.pagination);
+                            if (error)
+                                return "pagination." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a QueryDenomsMetadataResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.QueryDenomsMetadataResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.QueryDenomsMetadataResponse} QueryDenomsMetadataResponse
+                     */
+                    QueryDenomsMetadataResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.QueryDenomsMetadataResponse)
+                            return object;
+                        var message = new $root.cosmos.bank.v1beta1.QueryDenomsMetadataResponse();
+                        if (object.metadatas) {
+                            if (!Array.isArray(object.metadatas))
+                                throw TypeError(".cosmos.bank.v1beta1.QueryDenomsMetadataResponse.metadatas: array expected");
+                            message.metadatas = [];
+                            for (var i = 0; i < object.metadatas.length; ++i) {
+                                if (typeof object.metadatas[i] !== "object")
+                                    throw TypeError(".cosmos.bank.v1beta1.QueryDenomsMetadataResponse.metadatas: object expected");
+                                message.metadatas[i] = $root.cosmos.bank.v1beta1.Metadata.fromObject(object.metadatas[i]);
+                            }
+                        }
+                        if (object.pagination != null) {
+                            if (typeof object.pagination !== "object")
+                                throw TypeError(".cosmos.bank.v1beta1.QueryDenomsMetadataResponse.pagination: object expected");
+                            message.pagination = $root.cosmos.base.query.v1beta1.PageResponse.fromObject(object.pagination);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a QueryDenomsMetadataResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.QueryDenomsMetadataResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.QueryDenomsMetadataResponse} message QueryDenomsMetadataResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    QueryDenomsMetadataResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.metadatas = [];
+                        if (options.defaults)
+                            object.pagination = null;
+                        if (message.metadatas && message.metadatas.length) {
+                            object.metadatas = [];
+                            for (var j = 0; j < message.metadatas.length; ++j)
+                                object.metadatas[j] = $root.cosmos.bank.v1beta1.Metadata.toObject(message.metadatas[j], options);
+                        }
+                        if (message.pagination != null && message.hasOwnProperty("pagination"))
+                            object.pagination = $root.cosmos.base.query.v1beta1.PageResponse.toObject(message.pagination, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this QueryDenomsMetadataResponse to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.QueryDenomsMetadataResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    QueryDenomsMetadataResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return QueryDenomsMetadataResponse;
+                })();
+    
+                v1beta1.QueryDenomMetadataRequest = (function() {
+    
+                    /**
+                     * Properties of a QueryDenomMetadataRequest.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface IQueryDenomMetadataRequest
+                     * @property {string|null} [denom] QueryDenomMetadataRequest denom
+                     */
+    
+                    /**
+                     * Constructs a new QueryDenomMetadataRequest.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a QueryDenomMetadataRequest.
+                     * @implements IQueryDenomMetadataRequest
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.IQueryDenomMetadataRequest=} [properties] Properties to set
+                     */
+                    function QueryDenomMetadataRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * QueryDenomMetadataRequest denom.
+                     * @member {string} denom
+                     * @memberof cosmos.bank.v1beta1.QueryDenomMetadataRequest
+                     * @instance
+                     */
+                    QueryDenomMetadataRequest.prototype.denom = "";
+    
+                    /**
+                     * Encodes the specified QueryDenomMetadataRequest message. Does not implicitly {@link cosmos.bank.v1beta1.QueryDenomMetadataRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.QueryDenomMetadataRequest
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQueryDenomMetadataRequest} message QueryDenomMetadataRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryDenomMetadataRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.denom != null && Object.hasOwnProperty.call(message, "denom"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.denom);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified QueryDenomMetadataRequest message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QueryDenomMetadataRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QueryDenomMetadataRequest
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQueryDenomMetadataRequest} message QueryDenomMetadataRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryDenomMetadataRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a QueryDenomMetadataRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.QueryDenomMetadataRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.QueryDenomMetadataRequest} QueryDenomMetadataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryDenomMetadataRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.QueryDenomMetadataRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.denom = reader.string();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a QueryDenomMetadataRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QueryDenomMetadataRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.QueryDenomMetadataRequest} QueryDenomMetadataRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryDenomMetadataRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a QueryDenomMetadataRequest message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.QueryDenomMetadataRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    QueryDenomMetadataRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.denom != null && message.hasOwnProperty("denom"))
+                            if (!$util.isString(message.denom))
+                                return "denom: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a QueryDenomMetadataRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.QueryDenomMetadataRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.QueryDenomMetadataRequest} QueryDenomMetadataRequest
+                     */
+                    QueryDenomMetadataRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.QueryDenomMetadataRequest)
+                            return object;
+                        var message = new $root.cosmos.bank.v1beta1.QueryDenomMetadataRequest();
+                        if (object.denom != null)
+                            message.denom = String(object.denom);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a QueryDenomMetadataRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.QueryDenomMetadataRequest
+                     * @static
+                     * @param {cosmos.bank.v1beta1.QueryDenomMetadataRequest} message QueryDenomMetadataRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    QueryDenomMetadataRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.denom = "";
+                        if (message.denom != null && message.hasOwnProperty("denom"))
+                            object.denom = message.denom;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this QueryDenomMetadataRequest to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.QueryDenomMetadataRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    QueryDenomMetadataRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return QueryDenomMetadataRequest;
+                })();
+    
+                v1beta1.QueryDenomMetadataResponse = (function() {
+    
+                    /**
+                     * Properties of a QueryDenomMetadataResponse.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface IQueryDenomMetadataResponse
+                     * @property {cosmos.bank.v1beta1.IMetadata|null} [metadata] QueryDenomMetadataResponse metadata
+                     */
+    
+                    /**
+                     * Constructs a new QueryDenomMetadataResponse.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a QueryDenomMetadataResponse.
+                     * @implements IQueryDenomMetadataResponse
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.IQueryDenomMetadataResponse=} [properties] Properties to set
+                     */
+                    function QueryDenomMetadataResponse(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * QueryDenomMetadataResponse metadata.
+                     * @member {cosmos.bank.v1beta1.IMetadata|null|undefined} metadata
+                     * @memberof cosmos.bank.v1beta1.QueryDenomMetadataResponse
+                     * @instance
+                     */
+                    QueryDenomMetadataResponse.prototype.metadata = null;
+    
+                    /**
+                     * Encodes the specified QueryDenomMetadataResponse message. Does not implicitly {@link cosmos.bank.v1beta1.QueryDenomMetadataResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.QueryDenomMetadataResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQueryDenomMetadataResponse} message QueryDenomMetadataResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryDenomMetadataResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.metadata != null && Object.hasOwnProperty.call(message, "metadata"))
+                            $root.cosmos.bank.v1beta1.Metadata.encode(message.metadata, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified QueryDenomMetadataResponse message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QueryDenomMetadataResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QueryDenomMetadataResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IQueryDenomMetadataResponse} message QueryDenomMetadataResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    QueryDenomMetadataResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a QueryDenomMetadataResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.QueryDenomMetadataResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.QueryDenomMetadataResponse} QueryDenomMetadataResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryDenomMetadataResponse.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.QueryDenomMetadataResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.metadata = $root.cosmos.bank.v1beta1.Metadata.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a QueryDenomMetadataResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.QueryDenomMetadataResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.QueryDenomMetadataResponse} QueryDenomMetadataResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    QueryDenomMetadataResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a QueryDenomMetadataResponse message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.QueryDenomMetadataResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    QueryDenomMetadataResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.metadata != null && message.hasOwnProperty("metadata")) {
+                            var error = $root.cosmos.bank.v1beta1.Metadata.verify(message.metadata);
+                            if (error)
+                                return "metadata." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a QueryDenomMetadataResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.QueryDenomMetadataResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.QueryDenomMetadataResponse} QueryDenomMetadataResponse
+                     */
+                    QueryDenomMetadataResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.QueryDenomMetadataResponse)
+                            return object;
+                        var message = new $root.cosmos.bank.v1beta1.QueryDenomMetadataResponse();
+                        if (object.metadata != null) {
+                            if (typeof object.metadata !== "object")
+                                throw TypeError(".cosmos.bank.v1beta1.QueryDenomMetadataResponse.metadata: object expected");
+                            message.metadata = $root.cosmos.bank.v1beta1.Metadata.fromObject(object.metadata);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a QueryDenomMetadataResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.QueryDenomMetadataResponse
+                     * @static
+                     * @param {cosmos.bank.v1beta1.QueryDenomMetadataResponse} message QueryDenomMetadataResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    QueryDenomMetadataResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.metadata = null;
+                        if (message.metadata != null && message.hasOwnProperty("metadata"))
+                            object.metadata = $root.cosmos.bank.v1beta1.Metadata.toObject(message.metadata, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this QueryDenomMetadataResponse to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.QueryDenomMetadataResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    QueryDenomMetadataResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return QueryDenomMetadataResponse;
+                })();
+    
+                v1beta1.GenesisState = (function() {
+    
+                    /**
+                     * Properties of a GenesisState.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface IGenesisState
+                     * @property {cosmos.bank.v1beta1.IParams|null} [params] GenesisState params
+                     * @property {Array.<cosmos.bank.v1beta1.IBalance>|null} [balances] GenesisState balances
+                     * @property {Array.<cosmos.base.v1beta1.ICoin>|null} [supply] GenesisState supply
+                     * @property {Array.<cosmos.bank.v1beta1.IMetadata>|null} [denom_metadata] GenesisState denom_metadata
+                     */
+    
+                    /**
+                     * Constructs a new GenesisState.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a GenesisState.
+                     * @implements IGenesisState
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.IGenesisState=} [properties] Properties to set
+                     */
+                    function GenesisState(properties) {
+                        this.balances = [];
+                        this.supply = [];
+                        this.denom_metadata = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GenesisState params.
+                     * @member {cosmos.bank.v1beta1.IParams|null|undefined} params
+                     * @memberof cosmos.bank.v1beta1.GenesisState
+                     * @instance
+                     */
+                    GenesisState.prototype.params = null;
+    
+                    /**
+                     * GenesisState balances.
+                     * @member {Array.<cosmos.bank.v1beta1.IBalance>} balances
+                     * @memberof cosmos.bank.v1beta1.GenesisState
+                     * @instance
+                     */
+                    GenesisState.prototype.balances = $util.emptyArray;
+    
+                    /**
+                     * GenesisState supply.
+                     * @member {Array.<cosmos.base.v1beta1.ICoin>} supply
+                     * @memberof cosmos.bank.v1beta1.GenesisState
+                     * @instance
+                     */
+                    GenesisState.prototype.supply = $util.emptyArray;
+    
+                    /**
+                     * GenesisState denom_metadata.
+                     * @member {Array.<cosmos.bank.v1beta1.IMetadata>} denom_metadata
+                     * @memberof cosmos.bank.v1beta1.GenesisState
+                     * @instance
+                     */
+                    GenesisState.prototype.denom_metadata = $util.emptyArray;
+    
+                    /**
+                     * Encodes the specified GenesisState message. Does not implicitly {@link cosmos.bank.v1beta1.GenesisState.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.GenesisState
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IGenesisState} message GenesisState message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GenesisState.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.params != null && Object.hasOwnProperty.call(message, "params"))
+                            $root.cosmos.bank.v1beta1.Params.encode(message.params, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.balances != null && message.balances.length)
+                            for (var i = 0; i < message.balances.length; ++i)
+                                $root.cosmos.bank.v1beta1.Balance.encode(message.balances[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.supply != null && message.supply.length)
+                            for (var i = 0; i < message.supply.length; ++i)
+                                $root.cosmos.base.v1beta1.Coin.encode(message.supply[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        if (message.denom_metadata != null && message.denom_metadata.length)
+                            for (var i = 0; i < message.denom_metadata.length; ++i)
+                                $root.cosmos.bank.v1beta1.Metadata.encode(message.denom_metadata[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GenesisState message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.GenesisState.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.GenesisState
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IGenesisState} message GenesisState message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GenesisState.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GenesisState message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.GenesisState
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.GenesisState} GenesisState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GenesisState.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.GenesisState();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.params = $root.cosmos.bank.v1beta1.Params.decode(reader, reader.uint32());
+                                break;
+                            case 2:
+                                if (!(message.balances && message.balances.length))
+                                    message.balances = [];
+                                message.balances.push($root.cosmos.bank.v1beta1.Balance.decode(reader, reader.uint32()));
+                                break;
+                            case 3:
+                                if (!(message.supply && message.supply.length))
+                                    message.supply = [];
+                                message.supply.push($root.cosmos.base.v1beta1.Coin.decode(reader, reader.uint32()));
+                                break;
+                            case 4:
+                                if (!(message.denom_metadata && message.denom_metadata.length))
+                                    message.denom_metadata = [];
+                                message.denom_metadata.push($root.cosmos.bank.v1beta1.Metadata.decode(reader, reader.uint32()));
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GenesisState message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.GenesisState
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.GenesisState} GenesisState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GenesisState.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GenesisState message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.GenesisState
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GenesisState.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.params != null && message.hasOwnProperty("params")) {
+                            var error = $root.cosmos.bank.v1beta1.Params.verify(message.params);
+                            if (error)
+                                return "params." + error;
+                        }
+                        if (message.balances != null && message.hasOwnProperty("balances")) {
+                            if (!Array.isArray(message.balances))
+                                return "balances: array expected";
+                            for (var i = 0; i < message.balances.length; ++i) {
+                                var error = $root.cosmos.bank.v1beta1.Balance.verify(message.balances[i]);
+                                if (error)
+                                    return "balances." + error;
+                            }
+                        }
+                        if (message.supply != null && message.hasOwnProperty("supply")) {
+                            if (!Array.isArray(message.supply))
+                                return "supply: array expected";
+                            for (var i = 0; i < message.supply.length; ++i) {
+                                var error = $root.cosmos.base.v1beta1.Coin.verify(message.supply[i]);
+                                if (error)
+                                    return "supply." + error;
+                            }
+                        }
+                        if (message.denom_metadata != null && message.hasOwnProperty("denom_metadata")) {
+                            if (!Array.isArray(message.denom_metadata))
+                                return "denom_metadata: array expected";
+                            for (var i = 0; i < message.denom_metadata.length; ++i) {
+                                var error = $root.cosmos.bank.v1beta1.Metadata.verify(message.denom_metadata[i]);
+                                if (error)
+                                    return "denom_metadata." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GenesisState message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.GenesisState
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.GenesisState} GenesisState
+                     */
+                    GenesisState.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.GenesisState)
+                            return object;
+                        var message = new $root.cosmos.bank.v1beta1.GenesisState();
+                        if (object.params != null) {
+                            if (typeof object.params !== "object")
+                                throw TypeError(".cosmos.bank.v1beta1.GenesisState.params: object expected");
+                            message.params = $root.cosmos.bank.v1beta1.Params.fromObject(object.params);
+                        }
+                        if (object.balances) {
+                            if (!Array.isArray(object.balances))
+                                throw TypeError(".cosmos.bank.v1beta1.GenesisState.balances: array expected");
+                            message.balances = [];
+                            for (var i = 0; i < object.balances.length; ++i) {
+                                if (typeof object.balances[i] !== "object")
+                                    throw TypeError(".cosmos.bank.v1beta1.GenesisState.balances: object expected");
+                                message.balances[i] = $root.cosmos.bank.v1beta1.Balance.fromObject(object.balances[i]);
+                            }
+                        }
+                        if (object.supply) {
+                            if (!Array.isArray(object.supply))
+                                throw TypeError(".cosmos.bank.v1beta1.GenesisState.supply: array expected");
+                            message.supply = [];
+                            for (var i = 0; i < object.supply.length; ++i) {
+                                if (typeof object.supply[i] !== "object")
+                                    throw TypeError(".cosmos.bank.v1beta1.GenesisState.supply: object expected");
+                                message.supply[i] = $root.cosmos.base.v1beta1.Coin.fromObject(object.supply[i]);
+                            }
+                        }
+                        if (object.denom_metadata) {
+                            if (!Array.isArray(object.denom_metadata))
+                                throw TypeError(".cosmos.bank.v1beta1.GenesisState.denom_metadata: array expected");
+                            message.denom_metadata = [];
+                            for (var i = 0; i < object.denom_metadata.length; ++i) {
+                                if (typeof object.denom_metadata[i] !== "object")
+                                    throw TypeError(".cosmos.bank.v1beta1.GenesisState.denom_metadata: object expected");
+                                message.denom_metadata[i] = $root.cosmos.bank.v1beta1.Metadata.fromObject(object.denom_metadata[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GenesisState message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.GenesisState
+                     * @static
+                     * @param {cosmos.bank.v1beta1.GenesisState} message GenesisState
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GenesisState.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults) {
+                            object.balances = [];
+                            object.supply = [];
+                            object.denom_metadata = [];
+                        }
+                        if (options.defaults)
+                            object.params = null;
+                        if (message.params != null && message.hasOwnProperty("params"))
+                            object.params = $root.cosmos.bank.v1beta1.Params.toObject(message.params, options);
+                        if (message.balances && message.balances.length) {
+                            object.balances = [];
+                            for (var j = 0; j < message.balances.length; ++j)
+                                object.balances[j] = $root.cosmos.bank.v1beta1.Balance.toObject(message.balances[j], options);
+                        }
+                        if (message.supply && message.supply.length) {
+                            object.supply = [];
+                            for (var j = 0; j < message.supply.length; ++j)
+                                object.supply[j] = $root.cosmos.base.v1beta1.Coin.toObject(message.supply[j], options);
+                        }
+                        if (message.denom_metadata && message.denom_metadata.length) {
+                            object.denom_metadata = [];
+                            for (var j = 0; j < message.denom_metadata.length; ++j)
+                                object.denom_metadata[j] = $root.cosmos.bank.v1beta1.Metadata.toObject(message.denom_metadata[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GenesisState to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.GenesisState
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GenesisState.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return GenesisState;
+                })();
+    
+                v1beta1.Balance = (function() {
+    
+                    /**
+                     * Properties of a Balance.
+                     * @memberof cosmos.bank.v1beta1
+                     * @interface IBalance
+                     * @property {string|null} [address] Balance address
+                     * @property {Array.<cosmos.base.v1beta1.ICoin>|null} [coins] Balance coins
+                     */
+    
+                    /**
+                     * Constructs a new Balance.
+                     * @memberof cosmos.bank.v1beta1
+                     * @classdesc Represents a Balance.
+                     * @implements IBalance
+                     * @constructor
+                     * @param {cosmos.bank.v1beta1.IBalance=} [properties] Properties to set
+                     */
+                    function Balance(properties) {
+                        this.coins = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Balance address.
+                     * @member {string} address
+                     * @memberof cosmos.bank.v1beta1.Balance
+                     * @instance
+                     */
+                    Balance.prototype.address = "";
+    
+                    /**
+                     * Balance coins.
+                     * @member {Array.<cosmos.base.v1beta1.ICoin>} coins
+                     * @memberof cosmos.bank.v1beta1.Balance
+                     * @instance
+                     */
+                    Balance.prototype.coins = $util.emptyArray;
+    
+                    /**
+                     * Encodes the specified Balance message. Does not implicitly {@link cosmos.bank.v1beta1.Balance.verify|verify} messages.
+                     * @function encode
+                     * @memberof cosmos.bank.v1beta1.Balance
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IBalance} message Balance message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Balance.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.address != null && Object.hasOwnProperty.call(message, "address"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.address);
+                        if (message.coins != null && message.coins.length)
+                            for (var i = 0; i < message.coins.length; ++i)
+                                $root.cosmos.base.v1beta1.Coin.encode(message.coins[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Balance message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.Balance.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof cosmos.bank.v1beta1.Balance
+                     * @static
+                     * @param {cosmos.bank.v1beta1.IBalance} message Balance message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Balance.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Balance message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof cosmos.bank.v1beta1.Balance
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {cosmos.bank.v1beta1.Balance} Balance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Balance.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.cosmos.bank.v1beta1.Balance();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.address = reader.string();
+                                break;
+                            case 2:
+                                if (!(message.coins && message.coins.length))
+                                    message.coins = [];
+                                message.coins.push($root.cosmos.base.v1beta1.Coin.decode(reader, reader.uint32()));
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Balance message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof cosmos.bank.v1beta1.Balance
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {cosmos.bank.v1beta1.Balance} Balance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Balance.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Balance message.
+                     * @function verify
+                     * @memberof cosmos.bank.v1beta1.Balance
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Balance.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.address != null && message.hasOwnProperty("address"))
+                            if (!$util.isString(message.address))
+                                return "address: string expected";
+                        if (message.coins != null && message.hasOwnProperty("coins")) {
+                            if (!Array.isArray(message.coins))
+                                return "coins: array expected";
+                            for (var i = 0; i < message.coins.length; ++i) {
+                                var error = $root.cosmos.base.v1beta1.Coin.verify(message.coins[i]);
+                                if (error)
+                                    return "coins." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Balance message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof cosmos.bank.v1beta1.Balance
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {cosmos.bank.v1beta1.Balance} Balance
+                     */
+                    Balance.fromObject = function fromObject(object) {
+                        if (object instanceof $root.cosmos.bank.v1beta1.Balance)
+                            return object;
+                        var message = new $root.cosmos.bank.v1beta1.Balance();
+                        if (object.address != null)
+                            message.address = String(object.address);
+                        if (object.coins) {
+                            if (!Array.isArray(object.coins))
+                                throw TypeError(".cosmos.bank.v1beta1.Balance.coins: array expected");
+                            message.coins = [];
+                            for (var i = 0; i < object.coins.length; ++i) {
+                                if (typeof object.coins[i] !== "object")
+                                    throw TypeError(".cosmos.bank.v1beta1.Balance.coins: object expected");
+                                message.coins[i] = $root.cosmos.base.v1beta1.Coin.fromObject(object.coins[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Balance message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof cosmos.bank.v1beta1.Balance
+                     * @static
+                     * @param {cosmos.bank.v1beta1.Balance} message Balance
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Balance.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.coins = [];
+                        if (options.defaults)
+                            object.address = "";
+                        if (message.address != null && message.hasOwnProperty("address"))
+                            object.address = message.address;
+                        if (message.coins && message.coins.length) {
+                            object.coins = [];
+                            for (var j = 0; j < message.coins.length; ++j)
+                                object.coins[j] = $root.cosmos.base.v1beta1.Coin.toObject(message.coins[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Balance to JSON.
+                     * @function toJSON
+                     * @memberof cosmos.bank.v1beta1.Balance
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Balance.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return Balance;
+                })();
+    
+                return v1beta1;
+            })();
+    
+            return bank;
+        })();
+    
         cosmos.base = (function() {
     
             /**

@@ -3227,6 +3227,2677 @@ export namespace gravity {
 /** Namespace cosmos. */
 export namespace cosmos {
 
+    /** Namespace bank. */
+    namespace bank {
+
+        /** Namespace v1beta1. */
+        namespace v1beta1 {
+
+            /** Properties of a Params. */
+            interface IParams {
+
+                /** Params send_enabled */
+                send_enabled?: (cosmos.bank.v1beta1.ISendEnabled[]|null);
+
+                /** Params default_send_enabled */
+                default_send_enabled?: (boolean|null);
+            }
+
+            /** Represents a Params. */
+            class Params implements IParams {
+
+                /**
+                 * Constructs a new Params.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.IParams);
+
+                /** Params send_enabled. */
+                public send_enabled: cosmos.bank.v1beta1.ISendEnabled[];
+
+                /** Params default_send_enabled. */
+                public default_send_enabled: boolean;
+
+                /**
+                 * Encodes the specified Params message. Does not implicitly {@link cosmos.bank.v1beta1.Params.verify|verify} messages.
+                 * @param message Params message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.IParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Params message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.Params.verify|verify} messages.
+                 * @param message Params message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.IParams, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Params message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Params
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.Params;
+
+                /**
+                 * Decodes a Params message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Params
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.Params;
+
+                /**
+                 * Verifies a Params message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Params message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Params
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.Params;
+
+                /**
+                 * Creates a plain object from a Params message. Also converts values to other types if specified.
+                 * @param message Params
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.Params, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Params to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a SendEnabled. */
+            interface ISendEnabled {
+
+                /** SendEnabled denom */
+                denom?: (string|null);
+
+                /** SendEnabled enabled */
+                enabled?: (boolean|null);
+            }
+
+            /** Represents a SendEnabled. */
+            class SendEnabled implements ISendEnabled {
+
+                /**
+                 * Constructs a new SendEnabled.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.ISendEnabled);
+
+                /** SendEnabled denom. */
+                public denom: string;
+
+                /** SendEnabled enabled. */
+                public enabled: boolean;
+
+                /**
+                 * Encodes the specified SendEnabled message. Does not implicitly {@link cosmos.bank.v1beta1.SendEnabled.verify|verify} messages.
+                 * @param message SendEnabled message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.ISendEnabled, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SendEnabled message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.SendEnabled.verify|verify} messages.
+                 * @param message SendEnabled message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.ISendEnabled, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SendEnabled message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SendEnabled
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.SendEnabled;
+
+                /**
+                 * Decodes a SendEnabled message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SendEnabled
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.SendEnabled;
+
+                /**
+                 * Verifies a SendEnabled message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SendEnabled message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SendEnabled
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.SendEnabled;
+
+                /**
+                 * Creates a plain object from a SendEnabled message. Also converts values to other types if specified.
+                 * @param message SendEnabled
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.SendEnabled, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SendEnabled to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of an Input. */
+            interface IInput {
+
+                /** Input address */
+                address?: (string|null);
+
+                /** Input coins */
+                coins?: (cosmos.base.v1beta1.ICoin[]|null);
+            }
+
+            /** Represents an Input. */
+            class Input implements IInput {
+
+                /**
+                 * Constructs a new Input.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.IInput);
+
+                /** Input address. */
+                public address: string;
+
+                /** Input coins. */
+                public coins: cosmos.base.v1beta1.ICoin[];
+
+                /**
+                 * Encodes the specified Input message. Does not implicitly {@link cosmos.bank.v1beta1.Input.verify|verify} messages.
+                 * @param message Input message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.IInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Input message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.Input.verify|verify} messages.
+                 * @param message Input message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.IInput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an Input message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Input
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.Input;
+
+                /**
+                 * Decodes an Input message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Input
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.Input;
+
+                /**
+                 * Verifies an Input message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an Input message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Input
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.Input;
+
+                /**
+                 * Creates a plain object from an Input message. Also converts values to other types if specified.
+                 * @param message Input
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.Input, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Input to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of an Output. */
+            interface IOutput {
+
+                /** Output address */
+                address?: (string|null);
+
+                /** Output coins */
+                coins?: (cosmos.base.v1beta1.ICoin[]|null);
+            }
+
+            /** Represents an Output. */
+            class Output implements IOutput {
+
+                /**
+                 * Constructs a new Output.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.IOutput);
+
+                /** Output address. */
+                public address: string;
+
+                /** Output coins. */
+                public coins: cosmos.base.v1beta1.ICoin[];
+
+                /**
+                 * Encodes the specified Output message. Does not implicitly {@link cosmos.bank.v1beta1.Output.verify|verify} messages.
+                 * @param message Output message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.IOutput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Output message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.Output.verify|verify} messages.
+                 * @param message Output message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.IOutput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an Output message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Output
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.Output;
+
+                /**
+                 * Decodes an Output message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Output
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.Output;
+
+                /**
+                 * Verifies an Output message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an Output message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Output
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.Output;
+
+                /**
+                 * Creates a plain object from an Output message. Also converts values to other types if specified.
+                 * @param message Output
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.Output, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Output to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a Supply. */
+            interface ISupply {
+
+                /** Supply total */
+                total?: (cosmos.base.v1beta1.ICoin[]|null);
+            }
+
+            /** Represents a Supply. */
+            class Supply implements ISupply {
+
+                /**
+                 * Constructs a new Supply.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.ISupply);
+
+                /** Supply total. */
+                public total: cosmos.base.v1beta1.ICoin[];
+
+                /**
+                 * Encodes the specified Supply message. Does not implicitly {@link cosmos.bank.v1beta1.Supply.verify|verify} messages.
+                 * @param message Supply message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.ISupply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Supply message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.Supply.verify|verify} messages.
+                 * @param message Supply message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.ISupply, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Supply message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Supply
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.Supply;
+
+                /**
+                 * Decodes a Supply message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Supply
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.Supply;
+
+                /**
+                 * Verifies a Supply message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Supply message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Supply
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.Supply;
+
+                /**
+                 * Creates a plain object from a Supply message. Also converts values to other types if specified.
+                 * @param message Supply
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.Supply, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Supply to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a DenomUnit. */
+            interface IDenomUnit {
+
+                /** DenomUnit denom */
+                denom?: (string|null);
+
+                /** DenomUnit exponent */
+                exponent?: (number|null);
+
+                /** DenomUnit aliases */
+                aliases?: (string[]|null);
+            }
+
+            /** Represents a DenomUnit. */
+            class DenomUnit implements IDenomUnit {
+
+                /**
+                 * Constructs a new DenomUnit.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.IDenomUnit);
+
+                /** DenomUnit denom. */
+                public denom: string;
+
+                /** DenomUnit exponent. */
+                public exponent: number;
+
+                /** DenomUnit aliases. */
+                public aliases: string[];
+
+                /**
+                 * Encodes the specified DenomUnit message. Does not implicitly {@link cosmos.bank.v1beta1.DenomUnit.verify|verify} messages.
+                 * @param message DenomUnit message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.IDenomUnit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified DenomUnit message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.DenomUnit.verify|verify} messages.
+                 * @param message DenomUnit message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.IDenomUnit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a DenomUnit message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns DenomUnit
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.DenomUnit;
+
+                /**
+                 * Decodes a DenomUnit message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns DenomUnit
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.DenomUnit;
+
+                /**
+                 * Verifies a DenomUnit message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a DenomUnit message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns DenomUnit
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.DenomUnit;
+
+                /**
+                 * Creates a plain object from a DenomUnit message. Also converts values to other types if specified.
+                 * @param message DenomUnit
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.DenomUnit, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this DenomUnit to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a Metadata. */
+            interface IMetadata {
+
+                /** Metadata description */
+                description?: (string|null);
+
+                /** Metadata denom_units */
+                denom_units?: (cosmos.bank.v1beta1.IDenomUnit[]|null);
+
+                /** Metadata base */
+                base?: (string|null);
+
+                /** Metadata display */
+                display?: (string|null);
+
+                /** Metadata name */
+                name?: (string|null);
+
+                /** Metadata symbol */
+                symbol?: (string|null);
+            }
+
+            /** Represents a Metadata. */
+            class Metadata implements IMetadata {
+
+                /**
+                 * Constructs a new Metadata.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.IMetadata);
+
+                /** Metadata description. */
+                public description: string;
+
+                /** Metadata denom_units. */
+                public denom_units: cosmos.bank.v1beta1.IDenomUnit[];
+
+                /** Metadata base. */
+                public base: string;
+
+                /** Metadata display. */
+                public display: string;
+
+                /** Metadata name. */
+                public name: string;
+
+                /** Metadata symbol. */
+                public symbol: string;
+
+                /**
+                 * Encodes the specified Metadata message. Does not implicitly {@link cosmos.bank.v1beta1.Metadata.verify|verify} messages.
+                 * @param message Metadata message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.IMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Metadata message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.Metadata.verify|verify} messages.
+                 * @param message Metadata message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.IMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Metadata message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Metadata
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.Metadata;
+
+                /**
+                 * Decodes a Metadata message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Metadata
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.Metadata;
+
+                /**
+                 * Verifies a Metadata message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Metadata message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Metadata
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.Metadata;
+
+                /**
+                 * Creates a plain object from a Metadata message. Also converts values to other types if specified.
+                 * @param message Metadata
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.Metadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Metadata to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a SendAuthorization. */
+            interface ISendAuthorization {
+
+                /** SendAuthorization spend_limit */
+                spend_limit?: (cosmos.base.v1beta1.ICoin[]|null);
+            }
+
+            /** Represents a SendAuthorization. */
+            class SendAuthorization implements ISendAuthorization {
+
+                /**
+                 * Constructs a new SendAuthorization.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.ISendAuthorization);
+
+                /** SendAuthorization spend_limit. */
+                public spend_limit: cosmos.base.v1beta1.ICoin[];
+
+                /**
+                 * Encodes the specified SendAuthorization message. Does not implicitly {@link cosmos.bank.v1beta1.SendAuthorization.verify|verify} messages.
+                 * @param message SendAuthorization message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.ISendAuthorization, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SendAuthorization message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.SendAuthorization.verify|verify} messages.
+                 * @param message SendAuthorization message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.ISendAuthorization, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SendAuthorization message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SendAuthorization
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.SendAuthorization;
+
+                /**
+                 * Decodes a SendAuthorization message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SendAuthorization
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.SendAuthorization;
+
+                /**
+                 * Verifies a SendAuthorization message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SendAuthorization message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SendAuthorization
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.SendAuthorization;
+
+                /**
+                 * Creates a plain object from a SendAuthorization message. Also converts values to other types if specified.
+                 * @param message SendAuthorization
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.SendAuthorization, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SendAuthorization to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Represents a Msg */
+            class Msg extends $protobuf.rpc.Service {
+
+                /**
+                 * Constructs a new Msg service.
+                 * @param rpcImpl RPC implementation
+                 * @param [requestDelimited=false] Whether requests are length-delimited
+                 * @param [responseDelimited=false] Whether responses are length-delimited
+                 */
+                constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                /**
+                 * Calls Send.
+                 * @param request MsgSend message or plain object
+                 * @param callback Node-style callback called with the error, if any, and MsgSendResponse
+                 */
+                public send(request: cosmos.bank.v1beta1.IMsgSend, callback: cosmos.bank.v1beta1.Msg.SendCallback): void;
+
+                /**
+                 * Calls Send.
+                 * @param request MsgSend message or plain object
+                 * @returns Promise
+                 */
+                public send(request: cosmos.bank.v1beta1.IMsgSend): Promise<cosmos.bank.v1beta1.MsgSendResponse>;
+
+                /**
+                 * Calls MultiSend.
+                 * @param request MsgMultiSend message or plain object
+                 * @param callback Node-style callback called with the error, if any, and MsgMultiSendResponse
+                 */
+                public multiSend(request: cosmos.bank.v1beta1.IMsgMultiSend, callback: cosmos.bank.v1beta1.Msg.MultiSendCallback): void;
+
+                /**
+                 * Calls MultiSend.
+                 * @param request MsgMultiSend message or plain object
+                 * @returns Promise
+                 */
+                public multiSend(request: cosmos.bank.v1beta1.IMsgMultiSend): Promise<cosmos.bank.v1beta1.MsgMultiSendResponse>;
+            }
+
+            namespace Msg {
+
+                /**
+                 * Callback as used by {@link cosmos.bank.v1beta1.Msg#send}.
+                 * @param error Error, if any
+                 * @param [response] MsgSendResponse
+                 */
+                type SendCallback = (error: (Error|null), response?: cosmos.bank.v1beta1.MsgSendResponse) => void;
+
+                /**
+                 * Callback as used by {@link cosmos.bank.v1beta1.Msg#multiSend}.
+                 * @param error Error, if any
+                 * @param [response] MsgMultiSendResponse
+                 */
+                type MultiSendCallback = (error: (Error|null), response?: cosmos.bank.v1beta1.MsgMultiSendResponse) => void;
+            }
+
+            /** Properties of a MsgSend. */
+            interface IMsgSend {
+
+                /** MsgSend from_address */
+                from_address?: (string|null);
+
+                /** MsgSend to_address */
+                to_address?: (string|null);
+
+                /** MsgSend amount */
+                amount?: (cosmos.base.v1beta1.ICoin[]|null);
+            }
+
+            /** Represents a MsgSend. */
+            class MsgSend implements IMsgSend {
+
+                /**
+                 * Constructs a new MsgSend.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.IMsgSend);
+
+                /** MsgSend from_address. */
+                public from_address: string;
+
+                /** MsgSend to_address. */
+                public to_address: string;
+
+                /** MsgSend amount. */
+                public amount: cosmos.base.v1beta1.ICoin[];
+
+                /**
+                 * Encodes the specified MsgSend message. Does not implicitly {@link cosmos.bank.v1beta1.MsgSend.verify|verify} messages.
+                 * @param message MsgSend message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.IMsgSend, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MsgSend message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.MsgSend.verify|verify} messages.
+                 * @param message MsgSend message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.IMsgSend, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MsgSend message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MsgSend
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.MsgSend;
+
+                /**
+                 * Decodes a MsgSend message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MsgSend
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.MsgSend;
+
+                /**
+                 * Verifies a MsgSend message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MsgSend message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MsgSend
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.MsgSend;
+
+                /**
+                 * Creates a plain object from a MsgSend message. Also converts values to other types if specified.
+                 * @param message MsgSend
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.MsgSend, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MsgSend to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a MsgSendResponse. */
+            interface IMsgSendResponse {
+            }
+
+            /** Represents a MsgSendResponse. */
+            class MsgSendResponse implements IMsgSendResponse {
+
+                /**
+                 * Constructs a new MsgSendResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.IMsgSendResponse);
+
+                /**
+                 * Encodes the specified MsgSendResponse message. Does not implicitly {@link cosmos.bank.v1beta1.MsgSendResponse.verify|verify} messages.
+                 * @param message MsgSendResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.IMsgSendResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MsgSendResponse message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.MsgSendResponse.verify|verify} messages.
+                 * @param message MsgSendResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.IMsgSendResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MsgSendResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MsgSendResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.MsgSendResponse;
+
+                /**
+                 * Decodes a MsgSendResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MsgSendResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.MsgSendResponse;
+
+                /**
+                 * Verifies a MsgSendResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MsgSendResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MsgSendResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.MsgSendResponse;
+
+                /**
+                 * Creates a plain object from a MsgSendResponse message. Also converts values to other types if specified.
+                 * @param message MsgSendResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.MsgSendResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MsgSendResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a MsgMultiSend. */
+            interface IMsgMultiSend {
+
+                /** MsgMultiSend inputs */
+                inputs?: (cosmos.bank.v1beta1.IInput[]|null);
+
+                /** MsgMultiSend outputs */
+                outputs?: (cosmos.bank.v1beta1.IOutput[]|null);
+            }
+
+            /** Represents a MsgMultiSend. */
+            class MsgMultiSend implements IMsgMultiSend {
+
+                /**
+                 * Constructs a new MsgMultiSend.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.IMsgMultiSend);
+
+                /** MsgMultiSend inputs. */
+                public inputs: cosmos.bank.v1beta1.IInput[];
+
+                /** MsgMultiSend outputs. */
+                public outputs: cosmos.bank.v1beta1.IOutput[];
+
+                /**
+                 * Encodes the specified MsgMultiSend message. Does not implicitly {@link cosmos.bank.v1beta1.MsgMultiSend.verify|verify} messages.
+                 * @param message MsgMultiSend message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.IMsgMultiSend, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MsgMultiSend message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.MsgMultiSend.verify|verify} messages.
+                 * @param message MsgMultiSend message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.IMsgMultiSend, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MsgMultiSend message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MsgMultiSend
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.MsgMultiSend;
+
+                /**
+                 * Decodes a MsgMultiSend message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MsgMultiSend
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.MsgMultiSend;
+
+                /**
+                 * Verifies a MsgMultiSend message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MsgMultiSend message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MsgMultiSend
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.MsgMultiSend;
+
+                /**
+                 * Creates a plain object from a MsgMultiSend message. Also converts values to other types if specified.
+                 * @param message MsgMultiSend
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.MsgMultiSend, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MsgMultiSend to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a MsgMultiSendResponse. */
+            interface IMsgMultiSendResponse {
+            }
+
+            /** Represents a MsgMultiSendResponse. */
+            class MsgMultiSendResponse implements IMsgMultiSendResponse {
+
+                /**
+                 * Constructs a new MsgMultiSendResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.IMsgMultiSendResponse);
+
+                /**
+                 * Encodes the specified MsgMultiSendResponse message. Does not implicitly {@link cosmos.bank.v1beta1.MsgMultiSendResponse.verify|verify} messages.
+                 * @param message MsgMultiSendResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.IMsgMultiSendResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MsgMultiSendResponse message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.MsgMultiSendResponse.verify|verify} messages.
+                 * @param message MsgMultiSendResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.IMsgMultiSendResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MsgMultiSendResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MsgMultiSendResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.MsgMultiSendResponse;
+
+                /**
+                 * Decodes a MsgMultiSendResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MsgMultiSendResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.MsgMultiSendResponse;
+
+                /**
+                 * Verifies a MsgMultiSendResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MsgMultiSendResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MsgMultiSendResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.MsgMultiSendResponse;
+
+                /**
+                 * Creates a plain object from a MsgMultiSendResponse message. Also converts values to other types if specified.
+                 * @param message MsgMultiSendResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.MsgMultiSendResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MsgMultiSendResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Represents a Query */
+            class Query extends $protobuf.rpc.Service {
+
+                /**
+                 * Constructs a new Query service.
+                 * @param rpcImpl RPC implementation
+                 * @param [requestDelimited=false] Whether requests are length-delimited
+                 * @param [responseDelimited=false] Whether responses are length-delimited
+                 */
+                constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                /**
+                 * Calls Balance.
+                 * @param request QueryBalanceRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and QueryBalanceResponse
+                 */
+                public balance(request: cosmos.bank.v1beta1.IQueryBalanceRequest, callback: cosmos.bank.v1beta1.Query.BalanceCallback): void;
+
+                /**
+                 * Calls Balance.
+                 * @param request QueryBalanceRequest message or plain object
+                 * @returns Promise
+                 */
+                public balance(request: cosmos.bank.v1beta1.IQueryBalanceRequest): Promise<cosmos.bank.v1beta1.QueryBalanceResponse>;
+
+                /**
+                 * Calls AllBalances.
+                 * @param request QueryAllBalancesRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and QueryAllBalancesResponse
+                 */
+                public allBalances(request: cosmos.bank.v1beta1.IQueryAllBalancesRequest, callback: cosmos.bank.v1beta1.Query.AllBalancesCallback): void;
+
+                /**
+                 * Calls AllBalances.
+                 * @param request QueryAllBalancesRequest message or plain object
+                 * @returns Promise
+                 */
+                public allBalances(request: cosmos.bank.v1beta1.IQueryAllBalancesRequest): Promise<cosmos.bank.v1beta1.QueryAllBalancesResponse>;
+
+                /**
+                 * Calls TotalSupply.
+                 * @param request QueryTotalSupplyRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and QueryTotalSupplyResponse
+                 */
+                public totalSupply(request: cosmos.bank.v1beta1.IQueryTotalSupplyRequest, callback: cosmos.bank.v1beta1.Query.TotalSupplyCallback): void;
+
+                /**
+                 * Calls TotalSupply.
+                 * @param request QueryTotalSupplyRequest message or plain object
+                 * @returns Promise
+                 */
+                public totalSupply(request: cosmos.bank.v1beta1.IQueryTotalSupplyRequest): Promise<cosmos.bank.v1beta1.QueryTotalSupplyResponse>;
+
+                /**
+                 * Calls SupplyOf.
+                 * @param request QuerySupplyOfRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and QuerySupplyOfResponse
+                 */
+                public supplyOf(request: cosmos.bank.v1beta1.IQuerySupplyOfRequest, callback: cosmos.bank.v1beta1.Query.SupplyOfCallback): void;
+
+                /**
+                 * Calls SupplyOf.
+                 * @param request QuerySupplyOfRequest message or plain object
+                 * @returns Promise
+                 */
+                public supplyOf(request: cosmos.bank.v1beta1.IQuerySupplyOfRequest): Promise<cosmos.bank.v1beta1.QuerySupplyOfResponse>;
+
+                /**
+                 * Calls Params.
+                 * @param request QueryParamsRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and QueryParamsResponse
+                 */
+                public params(request: cosmos.bank.v1beta1.IQueryParamsRequest, callback: cosmos.bank.v1beta1.Query.ParamsCallback): void;
+
+                /**
+                 * Calls Params.
+                 * @param request QueryParamsRequest message or plain object
+                 * @returns Promise
+                 */
+                public params(request: cosmos.bank.v1beta1.IQueryParamsRequest): Promise<cosmos.bank.v1beta1.QueryParamsResponse>;
+
+                /**
+                 * Calls DenomMetadata.
+                 * @param request QueryDenomMetadataRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and QueryDenomMetadataResponse
+                 */
+                public denomMetadata(request: cosmos.bank.v1beta1.IQueryDenomMetadataRequest, callback: cosmos.bank.v1beta1.Query.DenomMetadataCallback): void;
+
+                /**
+                 * Calls DenomMetadata.
+                 * @param request QueryDenomMetadataRequest message or plain object
+                 * @returns Promise
+                 */
+                public denomMetadata(request: cosmos.bank.v1beta1.IQueryDenomMetadataRequest): Promise<cosmos.bank.v1beta1.QueryDenomMetadataResponse>;
+
+                /**
+                 * Calls DenomsMetadata.
+                 * @param request QueryDenomsMetadataRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and QueryDenomsMetadataResponse
+                 */
+                public denomsMetadata(request: cosmos.bank.v1beta1.IQueryDenomsMetadataRequest, callback: cosmos.bank.v1beta1.Query.DenomsMetadataCallback): void;
+
+                /**
+                 * Calls DenomsMetadata.
+                 * @param request QueryDenomsMetadataRequest message or plain object
+                 * @returns Promise
+                 */
+                public denomsMetadata(request: cosmos.bank.v1beta1.IQueryDenomsMetadataRequest): Promise<cosmos.bank.v1beta1.QueryDenomsMetadataResponse>;
+            }
+
+            namespace Query {
+
+                /**
+                 * Callback as used by {@link cosmos.bank.v1beta1.Query#balance}.
+                 * @param error Error, if any
+                 * @param [response] QueryBalanceResponse
+                 */
+                type BalanceCallback = (error: (Error|null), response?: cosmos.bank.v1beta1.QueryBalanceResponse) => void;
+
+                /**
+                 * Callback as used by {@link cosmos.bank.v1beta1.Query#allBalances}.
+                 * @param error Error, if any
+                 * @param [response] QueryAllBalancesResponse
+                 */
+                type AllBalancesCallback = (error: (Error|null), response?: cosmos.bank.v1beta1.QueryAllBalancesResponse) => void;
+
+                /**
+                 * Callback as used by {@link cosmos.bank.v1beta1.Query#totalSupply}.
+                 * @param error Error, if any
+                 * @param [response] QueryTotalSupplyResponse
+                 */
+                type TotalSupplyCallback = (error: (Error|null), response?: cosmos.bank.v1beta1.QueryTotalSupplyResponse) => void;
+
+                /**
+                 * Callback as used by {@link cosmos.bank.v1beta1.Query#supplyOf}.
+                 * @param error Error, if any
+                 * @param [response] QuerySupplyOfResponse
+                 */
+                type SupplyOfCallback = (error: (Error|null), response?: cosmos.bank.v1beta1.QuerySupplyOfResponse) => void;
+
+                /**
+                 * Callback as used by {@link cosmos.bank.v1beta1.Query#params}.
+                 * @param error Error, if any
+                 * @param [response] QueryParamsResponse
+                 */
+                type ParamsCallback = (error: (Error|null), response?: cosmos.bank.v1beta1.QueryParamsResponse) => void;
+
+                /**
+                 * Callback as used by {@link cosmos.bank.v1beta1.Query#denomMetadata}.
+                 * @param error Error, if any
+                 * @param [response] QueryDenomMetadataResponse
+                 */
+                type DenomMetadataCallback = (error: (Error|null), response?: cosmos.bank.v1beta1.QueryDenomMetadataResponse) => void;
+
+                /**
+                 * Callback as used by {@link cosmos.bank.v1beta1.Query#denomsMetadata}.
+                 * @param error Error, if any
+                 * @param [response] QueryDenomsMetadataResponse
+                 */
+                type DenomsMetadataCallback = (error: (Error|null), response?: cosmos.bank.v1beta1.QueryDenomsMetadataResponse) => void;
+            }
+
+            /** Properties of a QueryBalanceRequest. */
+            interface IQueryBalanceRequest {
+
+                /** QueryBalanceRequest address */
+                address?: (string|null);
+
+                /** QueryBalanceRequest denom */
+                denom?: (string|null);
+            }
+
+            /** Represents a QueryBalanceRequest. */
+            class QueryBalanceRequest implements IQueryBalanceRequest {
+
+                /**
+                 * Constructs a new QueryBalanceRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.IQueryBalanceRequest);
+
+                /** QueryBalanceRequest address. */
+                public address: string;
+
+                /** QueryBalanceRequest denom. */
+                public denom: string;
+
+                /**
+                 * Encodes the specified QueryBalanceRequest message. Does not implicitly {@link cosmos.bank.v1beta1.QueryBalanceRequest.verify|verify} messages.
+                 * @param message QueryBalanceRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.IQueryBalanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryBalanceRequest message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QueryBalanceRequest.verify|verify} messages.
+                 * @param message QueryBalanceRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.IQueryBalanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryBalanceRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryBalanceRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.QueryBalanceRequest;
+
+                /**
+                 * Decodes a QueryBalanceRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryBalanceRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.QueryBalanceRequest;
+
+                /**
+                 * Verifies a QueryBalanceRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryBalanceRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryBalanceRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.QueryBalanceRequest;
+
+                /**
+                 * Creates a plain object from a QueryBalanceRequest message. Also converts values to other types if specified.
+                 * @param message QueryBalanceRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.QueryBalanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryBalanceRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryBalanceResponse. */
+            interface IQueryBalanceResponse {
+
+                /** QueryBalanceResponse balance */
+                balance?: (cosmos.base.v1beta1.ICoin|null);
+            }
+
+            /** Represents a QueryBalanceResponse. */
+            class QueryBalanceResponse implements IQueryBalanceResponse {
+
+                /**
+                 * Constructs a new QueryBalanceResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.IQueryBalanceResponse);
+
+                /** QueryBalanceResponse balance. */
+                public balance?: (cosmos.base.v1beta1.ICoin|null);
+
+                /**
+                 * Encodes the specified QueryBalanceResponse message. Does not implicitly {@link cosmos.bank.v1beta1.QueryBalanceResponse.verify|verify} messages.
+                 * @param message QueryBalanceResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.IQueryBalanceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryBalanceResponse message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QueryBalanceResponse.verify|verify} messages.
+                 * @param message QueryBalanceResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.IQueryBalanceResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryBalanceResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryBalanceResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.QueryBalanceResponse;
+
+                /**
+                 * Decodes a QueryBalanceResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryBalanceResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.QueryBalanceResponse;
+
+                /**
+                 * Verifies a QueryBalanceResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryBalanceResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryBalanceResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.QueryBalanceResponse;
+
+                /**
+                 * Creates a plain object from a QueryBalanceResponse message. Also converts values to other types if specified.
+                 * @param message QueryBalanceResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.QueryBalanceResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryBalanceResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryAllBalancesRequest. */
+            interface IQueryAllBalancesRequest {
+
+                /** QueryAllBalancesRequest address */
+                address?: (string|null);
+
+                /** QueryAllBalancesRequest pagination */
+                pagination?: (cosmos.base.query.v1beta1.IPageRequest|null);
+            }
+
+            /** Represents a QueryAllBalancesRequest. */
+            class QueryAllBalancesRequest implements IQueryAllBalancesRequest {
+
+                /**
+                 * Constructs a new QueryAllBalancesRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.IQueryAllBalancesRequest);
+
+                /** QueryAllBalancesRequest address. */
+                public address: string;
+
+                /** QueryAllBalancesRequest pagination. */
+                public pagination?: (cosmos.base.query.v1beta1.IPageRequest|null);
+
+                /**
+                 * Encodes the specified QueryAllBalancesRequest message. Does not implicitly {@link cosmos.bank.v1beta1.QueryAllBalancesRequest.verify|verify} messages.
+                 * @param message QueryAllBalancesRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.IQueryAllBalancesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryAllBalancesRequest message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QueryAllBalancesRequest.verify|verify} messages.
+                 * @param message QueryAllBalancesRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.IQueryAllBalancesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryAllBalancesRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryAllBalancesRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.QueryAllBalancesRequest;
+
+                /**
+                 * Decodes a QueryAllBalancesRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryAllBalancesRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.QueryAllBalancesRequest;
+
+                /**
+                 * Verifies a QueryAllBalancesRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryAllBalancesRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryAllBalancesRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.QueryAllBalancesRequest;
+
+                /**
+                 * Creates a plain object from a QueryAllBalancesRequest message. Also converts values to other types if specified.
+                 * @param message QueryAllBalancesRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.QueryAllBalancesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryAllBalancesRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryAllBalancesResponse. */
+            interface IQueryAllBalancesResponse {
+
+                /** QueryAllBalancesResponse balances */
+                balances?: (cosmos.base.v1beta1.ICoin[]|null);
+
+                /** QueryAllBalancesResponse pagination */
+                pagination?: (cosmos.base.query.v1beta1.IPageResponse|null);
+            }
+
+            /** Represents a QueryAllBalancesResponse. */
+            class QueryAllBalancesResponse implements IQueryAllBalancesResponse {
+
+                /**
+                 * Constructs a new QueryAllBalancesResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.IQueryAllBalancesResponse);
+
+                /** QueryAllBalancesResponse balances. */
+                public balances: cosmos.base.v1beta1.ICoin[];
+
+                /** QueryAllBalancesResponse pagination. */
+                public pagination?: (cosmos.base.query.v1beta1.IPageResponse|null);
+
+                /**
+                 * Encodes the specified QueryAllBalancesResponse message. Does not implicitly {@link cosmos.bank.v1beta1.QueryAllBalancesResponse.verify|verify} messages.
+                 * @param message QueryAllBalancesResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.IQueryAllBalancesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryAllBalancesResponse message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QueryAllBalancesResponse.verify|verify} messages.
+                 * @param message QueryAllBalancesResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.IQueryAllBalancesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryAllBalancesResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryAllBalancesResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.QueryAllBalancesResponse;
+
+                /**
+                 * Decodes a QueryAllBalancesResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryAllBalancesResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.QueryAllBalancesResponse;
+
+                /**
+                 * Verifies a QueryAllBalancesResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryAllBalancesResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryAllBalancesResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.QueryAllBalancesResponse;
+
+                /**
+                 * Creates a plain object from a QueryAllBalancesResponse message. Also converts values to other types if specified.
+                 * @param message QueryAllBalancesResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.QueryAllBalancesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryAllBalancesResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryTotalSupplyRequest. */
+            interface IQueryTotalSupplyRequest {
+
+                /** QueryTotalSupplyRequest pagination */
+                pagination?: (cosmos.base.query.v1beta1.IPageRequest|null);
+            }
+
+            /** Represents a QueryTotalSupplyRequest. */
+            class QueryTotalSupplyRequest implements IQueryTotalSupplyRequest {
+
+                /**
+                 * Constructs a new QueryTotalSupplyRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.IQueryTotalSupplyRequest);
+
+                /** QueryTotalSupplyRequest pagination. */
+                public pagination?: (cosmos.base.query.v1beta1.IPageRequest|null);
+
+                /**
+                 * Encodes the specified QueryTotalSupplyRequest message. Does not implicitly {@link cosmos.bank.v1beta1.QueryTotalSupplyRequest.verify|verify} messages.
+                 * @param message QueryTotalSupplyRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.IQueryTotalSupplyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryTotalSupplyRequest message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QueryTotalSupplyRequest.verify|verify} messages.
+                 * @param message QueryTotalSupplyRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.IQueryTotalSupplyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryTotalSupplyRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryTotalSupplyRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.QueryTotalSupplyRequest;
+
+                /**
+                 * Decodes a QueryTotalSupplyRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryTotalSupplyRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.QueryTotalSupplyRequest;
+
+                /**
+                 * Verifies a QueryTotalSupplyRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryTotalSupplyRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryTotalSupplyRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.QueryTotalSupplyRequest;
+
+                /**
+                 * Creates a plain object from a QueryTotalSupplyRequest message. Also converts values to other types if specified.
+                 * @param message QueryTotalSupplyRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.QueryTotalSupplyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryTotalSupplyRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryTotalSupplyResponse. */
+            interface IQueryTotalSupplyResponse {
+
+                /** QueryTotalSupplyResponse supply */
+                supply?: (cosmos.base.v1beta1.ICoin[]|null);
+
+                /** QueryTotalSupplyResponse pagination */
+                pagination?: (cosmos.base.query.v1beta1.IPageResponse|null);
+            }
+
+            /** Represents a QueryTotalSupplyResponse. */
+            class QueryTotalSupplyResponse implements IQueryTotalSupplyResponse {
+
+                /**
+                 * Constructs a new QueryTotalSupplyResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.IQueryTotalSupplyResponse);
+
+                /** QueryTotalSupplyResponse supply. */
+                public supply: cosmos.base.v1beta1.ICoin[];
+
+                /** QueryTotalSupplyResponse pagination. */
+                public pagination?: (cosmos.base.query.v1beta1.IPageResponse|null);
+
+                /**
+                 * Encodes the specified QueryTotalSupplyResponse message. Does not implicitly {@link cosmos.bank.v1beta1.QueryTotalSupplyResponse.verify|verify} messages.
+                 * @param message QueryTotalSupplyResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.IQueryTotalSupplyResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryTotalSupplyResponse message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QueryTotalSupplyResponse.verify|verify} messages.
+                 * @param message QueryTotalSupplyResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.IQueryTotalSupplyResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryTotalSupplyResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryTotalSupplyResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.QueryTotalSupplyResponse;
+
+                /**
+                 * Decodes a QueryTotalSupplyResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryTotalSupplyResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.QueryTotalSupplyResponse;
+
+                /**
+                 * Verifies a QueryTotalSupplyResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryTotalSupplyResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryTotalSupplyResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.QueryTotalSupplyResponse;
+
+                /**
+                 * Creates a plain object from a QueryTotalSupplyResponse message. Also converts values to other types if specified.
+                 * @param message QueryTotalSupplyResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.QueryTotalSupplyResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryTotalSupplyResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QuerySupplyOfRequest. */
+            interface IQuerySupplyOfRequest {
+
+                /** QuerySupplyOfRequest denom */
+                denom?: (string|null);
+            }
+
+            /** Represents a QuerySupplyOfRequest. */
+            class QuerySupplyOfRequest implements IQuerySupplyOfRequest {
+
+                /**
+                 * Constructs a new QuerySupplyOfRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.IQuerySupplyOfRequest);
+
+                /** QuerySupplyOfRequest denom. */
+                public denom: string;
+
+                /**
+                 * Encodes the specified QuerySupplyOfRequest message. Does not implicitly {@link cosmos.bank.v1beta1.QuerySupplyOfRequest.verify|verify} messages.
+                 * @param message QuerySupplyOfRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.IQuerySupplyOfRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QuerySupplyOfRequest message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QuerySupplyOfRequest.verify|verify} messages.
+                 * @param message QuerySupplyOfRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.IQuerySupplyOfRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QuerySupplyOfRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QuerySupplyOfRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.QuerySupplyOfRequest;
+
+                /**
+                 * Decodes a QuerySupplyOfRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QuerySupplyOfRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.QuerySupplyOfRequest;
+
+                /**
+                 * Verifies a QuerySupplyOfRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QuerySupplyOfRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QuerySupplyOfRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.QuerySupplyOfRequest;
+
+                /**
+                 * Creates a plain object from a QuerySupplyOfRequest message. Also converts values to other types if specified.
+                 * @param message QuerySupplyOfRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.QuerySupplyOfRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QuerySupplyOfRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QuerySupplyOfResponse. */
+            interface IQuerySupplyOfResponse {
+
+                /** QuerySupplyOfResponse amount */
+                amount?: (cosmos.base.v1beta1.ICoin|null);
+            }
+
+            /** Represents a QuerySupplyOfResponse. */
+            class QuerySupplyOfResponse implements IQuerySupplyOfResponse {
+
+                /**
+                 * Constructs a new QuerySupplyOfResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.IQuerySupplyOfResponse);
+
+                /** QuerySupplyOfResponse amount. */
+                public amount?: (cosmos.base.v1beta1.ICoin|null);
+
+                /**
+                 * Encodes the specified QuerySupplyOfResponse message. Does not implicitly {@link cosmos.bank.v1beta1.QuerySupplyOfResponse.verify|verify} messages.
+                 * @param message QuerySupplyOfResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.IQuerySupplyOfResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QuerySupplyOfResponse message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QuerySupplyOfResponse.verify|verify} messages.
+                 * @param message QuerySupplyOfResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.IQuerySupplyOfResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QuerySupplyOfResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QuerySupplyOfResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.QuerySupplyOfResponse;
+
+                /**
+                 * Decodes a QuerySupplyOfResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QuerySupplyOfResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.QuerySupplyOfResponse;
+
+                /**
+                 * Verifies a QuerySupplyOfResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QuerySupplyOfResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QuerySupplyOfResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.QuerySupplyOfResponse;
+
+                /**
+                 * Creates a plain object from a QuerySupplyOfResponse message. Also converts values to other types if specified.
+                 * @param message QuerySupplyOfResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.QuerySupplyOfResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QuerySupplyOfResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryParamsRequest. */
+            interface IQueryParamsRequest {
+            }
+
+            /** Represents a QueryParamsRequest. */
+            class QueryParamsRequest implements IQueryParamsRequest {
+
+                /**
+                 * Constructs a new QueryParamsRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.IQueryParamsRequest);
+
+                /**
+                 * Encodes the specified QueryParamsRequest message. Does not implicitly {@link cosmos.bank.v1beta1.QueryParamsRequest.verify|verify} messages.
+                 * @param message QueryParamsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.IQueryParamsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryParamsRequest message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QueryParamsRequest.verify|verify} messages.
+                 * @param message QueryParamsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.IQueryParamsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryParamsRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryParamsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.QueryParamsRequest;
+
+                /**
+                 * Decodes a QueryParamsRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryParamsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.QueryParamsRequest;
+
+                /**
+                 * Verifies a QueryParamsRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryParamsRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryParamsRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.QueryParamsRequest;
+
+                /**
+                 * Creates a plain object from a QueryParamsRequest message. Also converts values to other types if specified.
+                 * @param message QueryParamsRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.QueryParamsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryParamsRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryParamsResponse. */
+            interface IQueryParamsResponse {
+
+                /** QueryParamsResponse params */
+                params?: (cosmos.bank.v1beta1.IParams|null);
+            }
+
+            /** Represents a QueryParamsResponse. */
+            class QueryParamsResponse implements IQueryParamsResponse {
+
+                /**
+                 * Constructs a new QueryParamsResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.IQueryParamsResponse);
+
+                /** QueryParamsResponse params. */
+                public params?: (cosmos.bank.v1beta1.IParams|null);
+
+                /**
+                 * Encodes the specified QueryParamsResponse message. Does not implicitly {@link cosmos.bank.v1beta1.QueryParamsResponse.verify|verify} messages.
+                 * @param message QueryParamsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.IQueryParamsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryParamsResponse message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QueryParamsResponse.verify|verify} messages.
+                 * @param message QueryParamsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.IQueryParamsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryParamsResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryParamsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.QueryParamsResponse;
+
+                /**
+                 * Decodes a QueryParamsResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryParamsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.QueryParamsResponse;
+
+                /**
+                 * Verifies a QueryParamsResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryParamsResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryParamsResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.QueryParamsResponse;
+
+                /**
+                 * Creates a plain object from a QueryParamsResponse message. Also converts values to other types if specified.
+                 * @param message QueryParamsResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.QueryParamsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryParamsResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryDenomsMetadataRequest. */
+            interface IQueryDenomsMetadataRequest {
+
+                /** QueryDenomsMetadataRequest pagination */
+                pagination?: (cosmos.base.query.v1beta1.IPageRequest|null);
+            }
+
+            /** Represents a QueryDenomsMetadataRequest. */
+            class QueryDenomsMetadataRequest implements IQueryDenomsMetadataRequest {
+
+                /**
+                 * Constructs a new QueryDenomsMetadataRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.IQueryDenomsMetadataRequest);
+
+                /** QueryDenomsMetadataRequest pagination. */
+                public pagination?: (cosmos.base.query.v1beta1.IPageRequest|null);
+
+                /**
+                 * Encodes the specified QueryDenomsMetadataRequest message. Does not implicitly {@link cosmos.bank.v1beta1.QueryDenomsMetadataRequest.verify|verify} messages.
+                 * @param message QueryDenomsMetadataRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.IQueryDenomsMetadataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryDenomsMetadataRequest message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QueryDenomsMetadataRequest.verify|verify} messages.
+                 * @param message QueryDenomsMetadataRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.IQueryDenomsMetadataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryDenomsMetadataRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryDenomsMetadataRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.QueryDenomsMetadataRequest;
+
+                /**
+                 * Decodes a QueryDenomsMetadataRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryDenomsMetadataRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.QueryDenomsMetadataRequest;
+
+                /**
+                 * Verifies a QueryDenomsMetadataRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryDenomsMetadataRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryDenomsMetadataRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.QueryDenomsMetadataRequest;
+
+                /**
+                 * Creates a plain object from a QueryDenomsMetadataRequest message. Also converts values to other types if specified.
+                 * @param message QueryDenomsMetadataRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.QueryDenomsMetadataRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryDenomsMetadataRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryDenomsMetadataResponse. */
+            interface IQueryDenomsMetadataResponse {
+
+                /** QueryDenomsMetadataResponse metadatas */
+                metadatas?: (cosmos.bank.v1beta1.IMetadata[]|null);
+
+                /** QueryDenomsMetadataResponse pagination */
+                pagination?: (cosmos.base.query.v1beta1.IPageResponse|null);
+            }
+
+            /** Represents a QueryDenomsMetadataResponse. */
+            class QueryDenomsMetadataResponse implements IQueryDenomsMetadataResponse {
+
+                /**
+                 * Constructs a new QueryDenomsMetadataResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.IQueryDenomsMetadataResponse);
+
+                /** QueryDenomsMetadataResponse metadatas. */
+                public metadatas: cosmos.bank.v1beta1.IMetadata[];
+
+                /** QueryDenomsMetadataResponse pagination. */
+                public pagination?: (cosmos.base.query.v1beta1.IPageResponse|null);
+
+                /**
+                 * Encodes the specified QueryDenomsMetadataResponse message. Does not implicitly {@link cosmos.bank.v1beta1.QueryDenomsMetadataResponse.verify|verify} messages.
+                 * @param message QueryDenomsMetadataResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.IQueryDenomsMetadataResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryDenomsMetadataResponse message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QueryDenomsMetadataResponse.verify|verify} messages.
+                 * @param message QueryDenomsMetadataResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.IQueryDenomsMetadataResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryDenomsMetadataResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryDenomsMetadataResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.QueryDenomsMetadataResponse;
+
+                /**
+                 * Decodes a QueryDenomsMetadataResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryDenomsMetadataResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.QueryDenomsMetadataResponse;
+
+                /**
+                 * Verifies a QueryDenomsMetadataResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryDenomsMetadataResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryDenomsMetadataResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.QueryDenomsMetadataResponse;
+
+                /**
+                 * Creates a plain object from a QueryDenomsMetadataResponse message. Also converts values to other types if specified.
+                 * @param message QueryDenomsMetadataResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.QueryDenomsMetadataResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryDenomsMetadataResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryDenomMetadataRequest. */
+            interface IQueryDenomMetadataRequest {
+
+                /** QueryDenomMetadataRequest denom */
+                denom?: (string|null);
+            }
+
+            /** Represents a QueryDenomMetadataRequest. */
+            class QueryDenomMetadataRequest implements IQueryDenomMetadataRequest {
+
+                /**
+                 * Constructs a new QueryDenomMetadataRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.IQueryDenomMetadataRequest);
+
+                /** QueryDenomMetadataRequest denom. */
+                public denom: string;
+
+                /**
+                 * Encodes the specified QueryDenomMetadataRequest message. Does not implicitly {@link cosmos.bank.v1beta1.QueryDenomMetadataRequest.verify|verify} messages.
+                 * @param message QueryDenomMetadataRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.IQueryDenomMetadataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryDenomMetadataRequest message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QueryDenomMetadataRequest.verify|verify} messages.
+                 * @param message QueryDenomMetadataRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.IQueryDenomMetadataRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryDenomMetadataRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryDenomMetadataRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.QueryDenomMetadataRequest;
+
+                /**
+                 * Decodes a QueryDenomMetadataRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryDenomMetadataRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.QueryDenomMetadataRequest;
+
+                /**
+                 * Verifies a QueryDenomMetadataRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryDenomMetadataRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryDenomMetadataRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.QueryDenomMetadataRequest;
+
+                /**
+                 * Creates a plain object from a QueryDenomMetadataRequest message. Also converts values to other types if specified.
+                 * @param message QueryDenomMetadataRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.QueryDenomMetadataRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryDenomMetadataRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryDenomMetadataResponse. */
+            interface IQueryDenomMetadataResponse {
+
+                /** QueryDenomMetadataResponse metadata */
+                metadata?: (cosmos.bank.v1beta1.IMetadata|null);
+            }
+
+            /** Represents a QueryDenomMetadataResponse. */
+            class QueryDenomMetadataResponse implements IQueryDenomMetadataResponse {
+
+                /**
+                 * Constructs a new QueryDenomMetadataResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.IQueryDenomMetadataResponse);
+
+                /** QueryDenomMetadataResponse metadata. */
+                public metadata?: (cosmos.bank.v1beta1.IMetadata|null);
+
+                /**
+                 * Encodes the specified QueryDenomMetadataResponse message. Does not implicitly {@link cosmos.bank.v1beta1.QueryDenomMetadataResponse.verify|verify} messages.
+                 * @param message QueryDenomMetadataResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.IQueryDenomMetadataResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryDenomMetadataResponse message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.QueryDenomMetadataResponse.verify|verify} messages.
+                 * @param message QueryDenomMetadataResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.IQueryDenomMetadataResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryDenomMetadataResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryDenomMetadataResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.QueryDenomMetadataResponse;
+
+                /**
+                 * Decodes a QueryDenomMetadataResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryDenomMetadataResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.QueryDenomMetadataResponse;
+
+                /**
+                 * Verifies a QueryDenomMetadataResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryDenomMetadataResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryDenomMetadataResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.QueryDenomMetadataResponse;
+
+                /**
+                 * Creates a plain object from a QueryDenomMetadataResponse message. Also converts values to other types if specified.
+                 * @param message QueryDenomMetadataResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.QueryDenomMetadataResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryDenomMetadataResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a GenesisState. */
+            interface IGenesisState {
+
+                /** GenesisState params */
+                params?: (cosmos.bank.v1beta1.IParams|null);
+
+                /** GenesisState balances */
+                balances?: (cosmos.bank.v1beta1.IBalance[]|null);
+
+                /** GenesisState supply */
+                supply?: (cosmos.base.v1beta1.ICoin[]|null);
+
+                /** GenesisState denom_metadata */
+                denom_metadata?: (cosmos.bank.v1beta1.IMetadata[]|null);
+            }
+
+            /** Represents a GenesisState. */
+            class GenesisState implements IGenesisState {
+
+                /**
+                 * Constructs a new GenesisState.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.IGenesisState);
+
+                /** GenesisState params. */
+                public params?: (cosmos.bank.v1beta1.IParams|null);
+
+                /** GenesisState balances. */
+                public balances: cosmos.bank.v1beta1.IBalance[];
+
+                /** GenesisState supply. */
+                public supply: cosmos.base.v1beta1.ICoin[];
+
+                /** GenesisState denom_metadata. */
+                public denom_metadata: cosmos.bank.v1beta1.IMetadata[];
+
+                /**
+                 * Encodes the specified GenesisState message. Does not implicitly {@link cosmos.bank.v1beta1.GenesisState.verify|verify} messages.
+                 * @param message GenesisState message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.IGenesisState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified GenesisState message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.GenesisState.verify|verify} messages.
+                 * @param message GenesisState message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.IGenesisState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a GenesisState message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns GenesisState
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.GenesisState;
+
+                /**
+                 * Decodes a GenesisState message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns GenesisState
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.GenesisState;
+
+                /**
+                 * Verifies a GenesisState message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GenesisState message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GenesisState
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.GenesisState;
+
+                /**
+                 * Creates a plain object from a GenesisState message. Also converts values to other types if specified.
+                 * @param message GenesisState
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.GenesisState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GenesisState to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a Balance. */
+            interface IBalance {
+
+                /** Balance address */
+                address?: (string|null);
+
+                /** Balance coins */
+                coins?: (cosmos.base.v1beta1.ICoin[]|null);
+            }
+
+            /** Represents a Balance. */
+            class Balance implements IBalance {
+
+                /**
+                 * Constructs a new Balance.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cosmos.bank.v1beta1.IBalance);
+
+                /** Balance address. */
+                public address: string;
+
+                /** Balance coins. */
+                public coins: cosmos.base.v1beta1.ICoin[];
+
+                /**
+                 * Encodes the specified Balance message. Does not implicitly {@link cosmos.bank.v1beta1.Balance.verify|verify} messages.
+                 * @param message Balance message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cosmos.bank.v1beta1.IBalance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Balance message, length delimited. Does not implicitly {@link cosmos.bank.v1beta1.Balance.verify|verify} messages.
+                 * @param message Balance message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cosmos.bank.v1beta1.IBalance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Balance message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Balance
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cosmos.bank.v1beta1.Balance;
+
+                /**
+                 * Decodes a Balance message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Balance
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cosmos.bank.v1beta1.Balance;
+
+                /**
+                 * Verifies a Balance message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Balance message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Balance
+                 */
+                public static fromObject(object: { [k: string]: any }): cosmos.bank.v1beta1.Balance;
+
+                /**
+                 * Creates a plain object from a Balance message. Also converts values to other types if specified.
+                 * @param message Balance
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cosmos.bank.v1beta1.Balance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Balance to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+        }
+    }
+
     /** Namespace base. */
     namespace base {
 

@@ -25,10 +25,14 @@ const envVariables = [
     'MNEMONIC',
     'ERC20_CONTRACT_ADDRESS',
     'BRIDGE_CONTRACT_ADDRESS',
+    "GRAVITY_MODULE_ADDRESS",
     'BRIDGE_FEE',
     'ETH_NODE_URL',
+    'BATCH_CREATION_BLOCKS',
     'BRIDGE_FEE',
-    'ETH_PRIV_KEY'
+    'ETH_PRIV_KEY',
+    'NUMBER_OF_ADDRESSES',
+    'NUMBER_OF_TESTS',
 ];
 
 envVariables.forEach((envVariable) => {
@@ -45,6 +49,8 @@ export default {
         GAS_PER_MSG: process.env.GAS_PER_MSG,
         BRIDGE_FEE: process.env.BRIDGE_FEE,
         MNEMONIC: process.env.MNEMONIC,
+        GRAVITY_MODULE_ADDRESS: process.env.GRAVITY_MODULE_ADDRESS,
+        BATCH_CREATION_BLOCKS: process.env.BATCH_CREATION_BLOCKS,
     },
     ETHEREUM: {
         ERC20_CONTRACT_ADDRESS: process.env.ERC20_CONTRACT_ADDRESS,
@@ -52,4 +58,8 @@ export default {
         ETH_NODE_URL: process.env.ETH_NODE_URL,
         ETH_PRIV_KEY: process.env.ETH_PRIV_KEY,
     },
+    TEST: {
+        NUMBER_OF_TESTS: process.env.NUMBER_OF_TESTS,
+        NUMBER_OF_ADDRESSES: process.env.NUMBER_OF_ADDRESSES,
+    }
 };
