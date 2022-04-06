@@ -9,10 +9,10 @@ if [ "$1" = "create" ] || [ "$1" = "clean" ]; then
         exit 1;
     fi
 
-    if [ ! -d "$PARAM_SOURCE_DIR/CudosData" ]; then
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Folder $PARAM_SOURCE_DIR/CudosData does not exists";
-        exit 1;
-    fi
+    # if [ ! -d "$PARAM_SOURCE_DIR/CudosData" ]; then
+    #     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Folder $PARAM_SOURCE_DIR/CudosData does not exists";
+    #     exit 1;
+    # fi
 
     if [ ! -d "$PARAM_SOURCE_DIR/CudosNode" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Folder $PARAM_SOURCE_DIR/CudosNode does not exists";
@@ -38,10 +38,10 @@ if [ "$1" = "restore" ] || [ "$1" = "validate" ]; then
         exit 1;
     fi
 
-    if [ ! -d "$PARAM_SOURCE_DIR/CudosData-backup" ]; then
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Folder $PARAM_SOURCE_DIR/CudosData-backup does not exists";
-        exit 1;
-    fi
+    # if [ ! -d "$PARAM_SOURCE_DIR/CudosData-backup" ]; then
+    #     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Folder $PARAM_SOURCE_DIR/CudosData-backup does not exists";
+    #     exit 1;
+    # fi
 
     if [ ! -d "$PARAM_SOURCE_DIR/CudosNode-backup" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Folder $PARAM_SOURCE_DIR/CudosNode-backup does not exists";
