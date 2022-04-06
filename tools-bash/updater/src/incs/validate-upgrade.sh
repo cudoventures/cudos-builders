@@ -1,7 +1,7 @@
 #!/bin/bash -i
 
 if [ -f "$LOCK_UPGRADE_PATH" ]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There is unfinished upgrade. Please restore the source files from a backup using sudo ./src/backup.sh restore";
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There is unfinished upgrade. Please restore the source files from a backup using sudo ./src/backup.sh restore and re-run the upgrade";
     exit 1;
 fi
 
@@ -26,6 +26,8 @@ source "$WORKING_SRC_DIR/incs/validate-upgrade-params.sh"
 source "$WORKING_SRC_DIR/incs/validate-upgrade-network.sh"
 
 source "$WORKING_SRC_DIR/incs/validate-upgrade-version.sh"
+
+source "$WORKING_SRC_DIR/incs/validate-upgrade-chain-id.sh"
 
 echo "" # new line
 
