@@ -1,5 +1,12 @@
 #!/bin/bash -i
 
+if ([ $# != "1" ]) || ([ "$1" != "start" ] && [ "$1" != "validate" ]); then
+    echo -e "\033[1;31mError:\033[m Please follow the usage template below";
+    echo "Usage: sudo $0 [action]";
+    echo '[action] = start | validate';
+    exit 1
+fi
+
 if [ "$EUID" -ne 0 ]; then
     echo -e "\033[1;31mError:\033[m The script MUST be executed as root";
     exit 1
