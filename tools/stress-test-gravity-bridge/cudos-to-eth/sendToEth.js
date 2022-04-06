@@ -4,7 +4,7 @@ import Config from '../config/config.js';
 import message from "./cosmos/proto";
 import BigNumber from 'bignum';
 
-export default function sendToEth(senderMnemonic, destiantionAddresses, sendAmount){
+export default async function sendToEth(senderMnemonic, destiantionAddresses, sendAmount){
     const provider = new Cosmos(Config.CUDOS_NETWORK.REST, Config.CUDOS_NETWORK.CHAIN_ID);
     provider.setPath("m/44'/118'/0'/0/0");
     provider.bech32MainPrefix = 'cudos'
@@ -46,6 +46,6 @@ export default function sendToEth(senderMnemonic, destiantionAddresses, sendAmou
         const authInfo = new message.cosmos.tx.v1beta1.AuthInfo({ signer_infos: [signerInfo], fee: feeValue });
 
         const signedTxBytes = provider.sign(txBody, authInfo, data.account.account_number, privKey);
-        provider.broadcast(signedTxBytes).then(value => console.log(value));
+        return provider.broadcast(signedTxBytes);
     })
 }
