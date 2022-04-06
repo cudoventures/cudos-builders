@@ -8,6 +8,7 @@ NETWORK_MAINNET="false"
 NETWORK_DRESSREHEARSAL="false"
 NETWORK_TESTNET_PRIVATE="false"
 NETWORK_TESTNET_PUBLIC="false"
+NETWORK_NAME=""
 
 NODE_DOCKER_BUILDER_PATH=""
 NODE_ENV_PATH=""
@@ -301,8 +302,22 @@ if ([ "$NETWORK_MAINNET" = "false" ] && [ "$NETWORK_DRESSREHEARSAL" = "false" ] 
     exit 1;
 fi
 
+if [ "$NETWORK_MAINNET" = "true" ]; then
+    NETWORK_NAME="Mainnet"
+fi
+if [ "$NETWORK_DRESSREHEARSAL" = "true" ]; then
+    NETWORK_NAME="Dress rehearsal"
+fi
+if [ "$NETWORK_TESTNET_PRIVATE" = "true" ]; then
+    NETWORK_NAME="private testnet"
+fi
+if [ "$NETWORK_TESTNET_PUBLIC" = "true" ]; then
+    NETWORK_NAME="public testnet"
+fi
+
 args=$(cat "$NODE_ARG_PATH")
 VOLUME_NAME=$(readEnvFromString "$args" "VOLUME_NAME")
+VOLUME_PATH="$PARAM_SOURCE_DIR/CudosData/$VOLUME_NAME"
 START_CONTAINER_NAME=$(readEnvFromString "$args" "START_CONTAINER_NAME")
 unset args
 

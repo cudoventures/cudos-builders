@@ -7,6 +7,8 @@ if ([ $# != "1" ]) || ([ "$1" != "create" ] && [ "$1" != 'restore' ] && [ "$1" !
     exit 1
 fi
 
+action="$1"
+
 if [ "$EUID" -ne 0 ]; then
     echo -e "\033[1;31mError:\033[m The script MUST be executed as root";
     exit 1
@@ -22,14 +24,14 @@ source "./src/incs/var.sh"
 
 source "$WORKING_SRC_DIR/incs/validate-backup.sh"
 
-if [ "$1" = "create" ]; then
+if [ "$action" = "create" ]; then
     source "$WORKING_SRC_DIR/modules/backup-create.sh"
 fi
 
-if [ "$1" = "restore" ]; then
+if [ "$action" = "restore" ]; then
     source "$WORKING_SRC_DIR/modules/backup-restore.sh"
 fi
 
-if [ "$1" = "clean" ]; then
+if [ "$action" = "clean" ]; then
     source "$WORKING_SRC_DIR/modules/backup-clean.sh"
 fi
