@@ -1,6 +1,7 @@
 CudosData
 CudosUtils
-CudosExplorer/.meteor
+CudosExplorer/.meteor/local
+CudosConstruct
 Github-projects
 **/.github
 **/.git
@@ -8,3 +9,4 @@ Github-projects
 **/target
 .devcontainer
 **/.vscode
+!CudosNode/.git
