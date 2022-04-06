@@ -4,7 +4,7 @@ echo -ne "Validating backup...";
 
 if [ "$1" = "create" ] || [ "$1" = "clean" ]; then
 
-    if [ -f "$PARAM_SOURCE_DIR/.backup-restore-lock" ]; then
+    if [ -f "$PARAM_SOURCE_DIR/.backup-restore.lock" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The source files are imcomplete and you cannot create a backup from them";
         exit 1;
     fi
@@ -33,7 +33,7 @@ fi
 
 if [ "$1" = "restore" ] || [ "$1" = "validate" ]; then
 
-    if [ -f "$PARAM_SOURCE_DIR/.backup-create-lock" ]; then
+    if [ -f "$PARAM_SOURCE_DIR/.backup-create.lock" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The backup is incomplete and you cannot restore from it";
         exit 1;
     fi

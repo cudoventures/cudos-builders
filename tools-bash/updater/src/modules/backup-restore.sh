@@ -1,7 +1,7 @@
 #!/bin/bash -i
 
 echo -ne "Creating backup lock file...";
-echo "" > "$PARAM_SOURCE_DIR/.backup-restore-lock"
+echo "" > "$PARAM_SOURCE_DIR/.backup-restore.lock"
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Removing source files...";
@@ -19,6 +19,6 @@ echo -ne "Restoring...";
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Releasing backup lock file...";
-rm -f "$PARAM_SOURCE_DIR/.backup-restore-lock"
+rm -f "$PARAM_SOURCE_DIR/.backup-restore.lock"
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
