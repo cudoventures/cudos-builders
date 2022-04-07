@@ -31,7 +31,7 @@ if [ "$action" = "start" ]; then
 
     echo "" # new line
 
-    source "$WORKING_SRC_DIR/modules/exports.sh"
+    source "$WORKING_SRC_DIR/modules/emergency-backup.sh"
 fi
 
 # export
@@ -48,7 +48,7 @@ if [ "$action" = "start" ]; then
 
     echo "" # new line
 
-    echo -e "Emergency data stores to ${STYLE_BOLD}$WORKING_EXPORT_DIR${STYLE_DEFAULT}. It can safely be deleted if the node is producing blocks after the upgrade."
+    echo -e "Emergency data stores to ${STYLE_BOLD}$WORKING_EMERGENCY_BACKUP_DIR${STYLE_DEFAULT}. It can safely be deleted if the node is producing blocks after the upgrade."
 
     echo "" # new line
 
