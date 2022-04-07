@@ -32,6 +32,18 @@ if [ "$action" = "start" ]; then
     echo "" # new line
 
     source "$WORKING_SRC_DIR/modules/emergency-backup.sh"
+
+    if [ "$DO_HARD_FORK" = "true" ]; then
+        source "$WORKING_SRC_DIR/modules/genesis-export.sh"
+    fi
+
+    source "$WORKING_SRC_DIR/modules/update-repos.sh"
+
+    if [ "$DO_HARD_FORK" = "true" ]; then
+        source "$WORKING_SRC_DIR/modules/genesis-migrate.sh"
+    fi
+
+    source "$WORKING_SRC_DIR/modules/start.sh"
 fi
 
 # export

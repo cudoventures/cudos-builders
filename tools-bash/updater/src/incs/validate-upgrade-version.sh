@@ -52,5 +52,6 @@ if [ "$containerVersion" != "$sourceVersion" ]; then
 fi
 
 UPDATE_FROM_VERSION="$sourceVersion"
+DO_HARD_FORK="true"
 
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
