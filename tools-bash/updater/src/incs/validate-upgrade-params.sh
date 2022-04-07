@@ -29,6 +29,15 @@ if ([ "$PARAM_NODE_NAME" != "root-node" ] && [ "$PARAM_NODE_NAME" != "seed-node"
     exit 1;
 fi
 
+if [ "$PARAM_HAS_ORCHESTRATOR" != "true" ] && [ "$PARAM_HAS_ORCHESTRATOR" != "false" ]; then
+    PARAM_HAS_ORCHESTRATOR="false"
+fi
+
+if [ "$PARAM_NODE_NAME" = "root-node" ] && [ "$PARAM_HAS_ORCHESTRATOR" != "true" ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_HAS_ORCHESTRATOR is supposed to be TRUE for a root-node";
+    exit 1;
+fi
+
 # validating folders
 if [ ! -d "$PARAM_SOURCE_DIR/CudosData" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Data folder is missing - $WORKING_DIR/CudosData does not exists";

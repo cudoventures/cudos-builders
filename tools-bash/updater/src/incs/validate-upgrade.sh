@@ -5,12 +5,12 @@ if [ -f "$LOCK_UPGRADE_PATH" ]; then
     exit 1;
 fi
 
-if [ "$action" = "validate" ]; then
-    timestamp=$(date '+%s')
-    echo "$timestamp" > "$LOCK_VALIDATE_PATH"
-fi
-
 if [ "$action" = "start" ]; then
+    if [ ! -f "$LOCK_VALIDATE_PATH" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Run the ${STYLE_BOLD}validate${STYLE_DEFAULT} before the ${STYLE_BOLD}upgrade${STYLE_DEFAULT}";
+        exit 1;
+    fi
+
     timestamp=$(date '+%s')
     validateTimestamp=$(cat "$LOCK_VALIDATE_PATH")
 
@@ -40,4 +40,7 @@ echo -e "${STYLE_BOLD}Env path:${STYLE_DEFAULT} $NODE_ENV_PATH"
 if [ "$action" = "validate" ]; then
     echo "" # new line
     echo -e "${STYLE_BOLD}Do NOT run the upgrade if any of the above information is incorrect${STYLE_DEFAULT}"
+
+    timestamp=$(date '+%s')
+    echo "$timestamp" > "$LOCK_VALIDATE_PATH"
 fi

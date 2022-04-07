@@ -43,7 +43,7 @@ if [ "$action" = "start" ]; then
         source "$WORKING_SRC_DIR/modules/genesis-migrate.sh"
     fi
 
-    source "$WORKING_SRC_DIR/modules/start.sh"
+    source "$WORKING_SRC_DIR/modules/start-node.sh"
 fi
 
 # export

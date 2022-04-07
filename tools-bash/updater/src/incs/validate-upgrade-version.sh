@@ -37,8 +37,8 @@ if [ "$containerVersion" = "" ] && [ "$sourceVersion" = "" ]; then
         exit 1;
     fi
     if [ "$NETWORK_TESTNET_PRIVATE" = "true" ]; then
-        containerVersion="v0.3.0"
-        sourceVersion="v0.3.0"
+        containerVersion="v0.3.5" # no special tag
+        sourceVersion="v0.3.5" # no special tag
     fi
     if [ "$NETWORK_TESTNET_PUBLIC" = "true" ]; then
         containerVersion="v0.4.0"
