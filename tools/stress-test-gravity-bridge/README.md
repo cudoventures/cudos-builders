@@ -1,15 +1,4 @@
-# Basic Sample Hardhat Project
+# TEST
+To run the tests, fill `.env. file, make sure the wallets have enough funds and use `npm run balance`.
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts.
-
-Try running some of the following tasks:
-
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-node scripts/sample-script.js
-npx hardhat help
-```
+The tests are comprised of several runs of number of sends to both ETH and Cudos sides. After the sends the sum of the contract and module balances is evaluated. It should be the same ase before, otherwise there would be some burned or minted new coins, which is not expected.
