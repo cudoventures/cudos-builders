@@ -117,13 +117,15 @@ async function runTest() {
         console.log(GREEN, "Creating Gravity send txs");
 
         try {
-            await sendToCudos(ethFaucetPrivKey, fundedCudosAddresses, Math.floor(maxAcudosPerAddress.mul(Math.random())));
+            console.log(GREEN, "Sending to cudos...");
+            await sendToCudos(ethFaucetPrivKey, fundedCudosAddresses, maxAcudosPerAddress);
         } catch (e) {
             console.log(RED, e);
         }
 
         try {
-            await sendToEth(faucetMnemonic, fundedEthWallets.map(w => w.address), Math.floor(maxAcudosPerAddress.mul(Math.random())));
+            console.log(GREEN, "Sending to ETH...");
+            await sendToEth(faucetMnemonic, fundedEthWallets.map(w => w.address), maxAcudosPerAddress);
         } catch (e) {
             console.log(RED, e);
         }
@@ -154,8 +156,9 @@ async function runTest() {
 };
 
 function checkBalances(initModule, currentModule, initContract, currentContract){
-    const initBalance = initModule.add(initContract);
-    const currentBalance = currentModule.add(currentContract);
+
+    const initBalance = (new BigNumber(initModule.toString())).add(initContract.toString());
+    const currentBalance = (new BigNumber(currentModule.toString())).add(currentContract.toString());
 
     if(!initBalance.eq(currentBalance)){
         console.log(RED, `Gravity balance does not match the initial balance - innitial is ${initBalance.toString()}acudos, current is ${currentBalance.toString()}acudos`)
