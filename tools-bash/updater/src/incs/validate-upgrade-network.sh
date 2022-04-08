@@ -13,6 +13,8 @@ NETWORK_NAME=""
 NODE_DOCKER_BUILDER_PATH=""
 NODE_ENV_PATH=""
 NODE_ARG_PATH=""
+ORCHESTRATOR_ENV_PATH=""
+ORCHESTRATOR_ARG_PATH=""
 
 if [ "$PARAM_NODE_NAME" = "root-node" ]; then
     
@@ -33,6 +35,11 @@ if [ "$PARAM_NODE_NAME" = "root-node" ]; then
         fi
         unset args
         unset tokenContractAddress
+
+        if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.mainnet.env" ]; then
+            ORCHESTRATOR_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.mainnet.arg"
+            ORCHESTRATOR_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.mainnet.env"
+        fi
     fi
 
     if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/root-node/root-node.dressrehearsal.env" ]; then
@@ -41,6 +48,11 @@ if [ "$PARAM_NODE_NAME" = "root-node" ]; then
         NETWORK_DRESSREHEARSAL="true"
         source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
         networkIdentified="true"
+
+        if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.dressrehearsal.env" ]; then
+            ORCHESTRATOR_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.dressrehearsal.arg"
+            ORCHESTRATOR_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.dressrehearsal.env"
+        fi
     fi
 
     if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/root-node/root-node.testnet.private.env" ]; then
@@ -49,6 +61,11 @@ if [ "$PARAM_NODE_NAME" = "root-node" ]; then
         NETWORK_TESTNET_PRIVATE="true"
         source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
         networkIdentified="true"
+
+        if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.testnet.private.env" ]; then
+            ORCHESTRATOR_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.testnet.private.arg"
+            ORCHESTRATOR_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.testnet.private.env"
+        fi
     fi
 
     if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/root-node/root-node.testnet.public.zone01.env" ]; then
@@ -57,6 +74,11 @@ if [ "$PARAM_NODE_NAME" = "root-node" ]; then
         NETWORK_TESTNET_PUBLIC="true"
         source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
         networkIdentified="true"
+
+        if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.testnet.public.zone01.env" ]; then
+            ORCHESTRATOR_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.testnet.public.zone01.arg"
+            ORCHESTRATOR_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.testnet.public.zone01.env"
+        fi
     fi
 
 fi
@@ -245,6 +267,11 @@ if [ "$PARAM_NODE_NAME" = "full-node" ]; then
         NETWORK_TESTNET_PUBLIC="true"
         source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
         networkIdentified="true"
+
+        if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.testnet.public.zone02.env" ]; then
+            ORCHESTRATOR_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.testnet.public.zone02.arg"
+            ORCHESTRATOR_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.testnet.public.zone02.env"
+        fi
     fi
 
     if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.testnet.public.zone03.env" ]; then
@@ -253,6 +280,11 @@ if [ "$PARAM_NODE_NAME" = "full-node" ]; then
         NETWORK_TESTNET_PUBLIC="true"
         source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
         networkIdentified="true"
+
+        if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.testnet.public.zone03.env" ]; then
+            ORCHESTRATOR_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.testnet.public.zone03.arg"
+            ORCHESTRATOR_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.testnet.public.zone03.env"
+        fi
     fi
 
     if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.client.testnet.public01.env" ]; then
@@ -299,6 +331,16 @@ fi
 
 if ([ "$NETWORK_MAINNET" = "false" ] && [ "$NETWORK_DRESSREHEARSAL" = "false" ] && [ "$NETWORK_TESTNET_PRIVATE" = "false" ] && [ "$NETWORK_TESTNET_PUBLIC" = "false" ]); then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Could not identify a network"
+    exit 1;
+fi
+
+if ([ "$PARAM_HAS_ORCHESTRATOR" = "true" ] && ([ "$ORCHESTRATOR_ARG_PATH" = "" ] || [ "$ORCHESTRATOR_ENV_PATH" = "" ])); then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Unable to find the orchestrator .env files"
+    exit 1;
+fi
+
+if ([ "$PARAM_HAS_ORCHESTRATOR" = "false" ] && ([ "$ORCHESTRATOR_ARG_PATH" != "" ] || [ "$ORCHESTRATOR_ENV_PATH" != "" ])); then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Orchestrator .env files are located but PARAM_HAS_ORCHESTRATOR is set to FALSE"
     exit 1;
 fi
 
