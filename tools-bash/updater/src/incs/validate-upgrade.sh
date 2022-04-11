@@ -35,7 +35,10 @@ echo -e "${STYLE_BOLD}CURRENT NETWORK INFORMATION:${STYLE_DEFAULT}"
 echo -e "${STYLE_BOLD}Network:${STYLE_DEFAULT} $NETWORK_NAME"
 echo -e "${STYLE_BOLD}Version:${STYLE_DEFAULT} $UPDATE_FROM_VERSION"
 echo -e "${STYLE_BOLD}Node name:${STYLE_DEFAULT} $PARAM_NODE_NAME"
-echo -e "${STYLE_BOLD}Env path:${STYLE_DEFAULT} $NODE_ENV_PATH"
+echo -e "${STYLE_BOLD}Node's .env path:${STYLE_DEFAULT} $NODE_ENV_PATH"
+if [ "$ORCHESTRATOR_ENV_PATH" != "" ]; then
+    echo -e "${STYLE_BOLD}Orchestrator's .env path:${STYLE_DEFAULT} $ORCHESTRATOR_ENV_PATH"
+fi
 
 if [ "$action" = "validate" ]; then
     echo "" # new line

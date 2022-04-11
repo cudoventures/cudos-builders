@@ -30,6 +30,11 @@ echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Migrating genesis.json...";
 \cp "$WORKING_MIGRATE_DIR/genesis.exported.json" "$WORKING_MIGRATE_DIR/genesis.migrated.json"
+
+if [ "$UPDATE_FROM_VERSION" = "v0.3" ]; then
+    source "$WORKING_SRC_VERSIONS_DIR/0.3-0.6.sh"
+fi
+
 \cp "$WORKING_MIGRATE_DIR/genesis.migrated.json" "$VOLUME_PATH/config/genesis.json"
 
 user=$(ls -ld "$WORKING_MIGRATE_DIR/.." | awk '{print $3}')

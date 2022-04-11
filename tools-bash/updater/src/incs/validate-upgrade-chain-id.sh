@@ -9,7 +9,7 @@ if [ "$NETWORK_DRESSREHEARSAL" = "true" ]; then
     CURRENT_CHAIN_ID="cudos-1"
 fi
 if [ "$NETWORK_TESTNET_PRIVATE" = "true" ]; then
-    if [ "$UPDATE_FROM_VERSION" = "v0.3.0" ]; then
+    if [ "$UPDATE_FROM_VERSION" = "v0.3" ]; then
         CURRENT_CHAIN_ID="cudos-testnet-private"
     fi
 fi

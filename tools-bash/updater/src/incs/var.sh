@@ -4,6 +4,7 @@ echo -ne "Processing variables...";
 
 scriptDir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 WORKING_SRC_DIR=$(cd $scriptDir/..  && pwd)
+WORKING_SRC_VERSIONS_DIR=$(cd $scriptDir/../versions  && pwd)
 WORKING_DIR=$(cd $scriptDir/../..  && pwd)
 WORKING_EMERGENCY_BACKUP_DIR="$WORKING_DIR/emergency-backup"
 WORKING_MIGRATE_DIR="$WORKING_DIR/migrate"
