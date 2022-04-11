@@ -31,7 +31,11 @@ if [ "$action" = "start" ]; then
 
     echo "" # new line
 
+    source "$WORKING_SRC_DIR/modules/docker-ignore.sh"
+
     source "$WORKING_SRC_DIR/modules/emergency-backup.sh"
+
+    source "$WORKING_SRC_DIR/modules/stop-orchestrator.sh"
 
     if [ "$DO_HARD_FORK" = "true" ]; then
         source "$WORKING_SRC_DIR/modules/genesis-export.sh"
@@ -44,11 +48,9 @@ if [ "$action" = "start" ]; then
     fi
 
     source "$WORKING_SRC_DIR/modules/start-node.sh"
+
+    source "$WORKING_SRC_DIR/modules/start-orchestrator.sh"
 fi
-
-# export
-
-# migrate
 
 if [ "$action" = "validate" ]; then
     echo "" # new line
@@ -57,6 +59,7 @@ if [ "$action" = "validate" ]; then
 fi
 if [ "$action" = "start" ]; then
     rm -f "$LOCK_UPGRADE_PATH"
+    rm -f "$LOCK_VALIDATE_PATH"
 
     echo "" # new line
 

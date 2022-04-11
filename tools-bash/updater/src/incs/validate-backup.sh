@@ -4,7 +4,7 @@ echo -ne "Validating backup...";
 
 if [ "$1" = "create" ] || [ "$1" = "clean" ]; then
 
-    if [ -f "$LOCK_BACKUP_RESTORE" ]; then
+    if [ -f "$LOCK_BACKUP_RESTORE" ] || [ -f "$LOCK_UPGRADE_PATH" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The source files are imcomplete and you cannot create a backup from them";
         exit 1;
     fi

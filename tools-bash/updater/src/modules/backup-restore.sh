@@ -22,3 +22,10 @@ echo -ne "Releasing backup lock file...";
 rm -f "$LOCK_BACKUP_RESTORE"
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
+echo -ne "Releasing upgrade lock file...";
+rm -f "$LOCK_UPGRADE_PATH"
+echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+
+echo -ne "Releasing validate lock file...";
+rm -f "$LOCK_VALIDATE_PATH"
+echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";

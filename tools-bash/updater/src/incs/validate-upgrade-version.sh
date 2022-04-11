@@ -8,16 +8,21 @@ UPDATE_FROM_VERSION=""
 TO_VERSION="v0.5.0"
 
 if [ "$(docker container inspect -f '{{.State.Status}}' "$START_CONTAINER_NAME" 2> /dev/null)" = "running" ]; then
-    dockerResult=$(docker container exec "$START_CONTAINER_NAME" /bin/bash -c "cudos-noded version");
+    dockerResult=$(docker container exec "$START_CONTAINER_NAME" /bin/bash -c "cudos-noded version" 2>&1);
     if [ "$?" = "0" ]; then
         containerVersion=$(echo "$dockerResult" | cut -d '-' -f1)
     fi;
 fi
 
-result=$(cd "$PARAM_SOURCE_DIR/CudosNode" && git describe --tags)
+result=$(cd "$PARAM_SOURCE_DIR/CudosNode" && git describe --tags 2>&1)
+if [ "$?" != "0" ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} CudosNode folder is not a git repo";
+    exit 1;
+fi;
 if [ "$?" = "0" ]; then
     sourceVersion=$(echo "$result" | cut -d '-' -f1)
 fi;
+
 
 if [ "$containerVersion" != "" ] && [ "$sourceVersion" = "" ]; then
     sourceVersion="$containerVersion"
@@ -33,12 +38,12 @@ if [ "$containerVersion" = "" ] && [ "$sourceVersion" = "" ]; then
         exit 1;
     fi
     if [ "$NETWORK_DRESSREHEARSAL" = "true" ]; then
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Dress rehearsal is running the latest version";
-        exit 1;
+        containerVersion="v0.5.0"
+        sourceVersion="v0.5.0"
     fi
     if [ "$NETWORK_TESTNET_PRIVATE" = "true" ]; then
-        containerVersion="v0.3.5" # no special tag
-        sourceVersion="v0.3.5" # no special tag
+        containerVersion="v0.3" # no special tag
+        sourceVersion="v0.3" # no special tag
     fi
     if [ "$NETWORK_TESTNET_PUBLIC" = "true" ]; then
         containerVersion="v0.4.0"
