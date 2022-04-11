@@ -4,7 +4,7 @@ import Config from '../config/config.js';
 import message from "./cosmos/proto";
 import BigNumber from 'bignum';
 
-export default async function sendToEth(senderMnemonic, destiantionAddresses, sendAmount){
+export default async function sendToEth(senderMnemonic, destiantionAddresses, maxAmountToSend){
     const provider = new Cosmos(Config.CUDOS_NETWORK.REST, Config.CUDOS_NETWORK.CHAIN_ID);
     provider.setPath("m/44'/118'/0'/0/0");
     provider.bech32MainPrefix = 'cudos'
@@ -21,8 +21,9 @@ export default async function sendToEth(senderMnemonic, destiantionAddresses, se
         const msgsCount = destiantionAddresses.length;
 
         for (let i = 0; i < msgsCount; i++) {
+
             msgInfos.push({
-                amount: ""+sendAmount,
+                amount: ""+maxAmountToSend.div(1000).mul(Math.floor(Math.random()*1000)),
                 destiantionAddress: destiantionAddresses[i],
                 sender: address,
                 privKey: privKey,

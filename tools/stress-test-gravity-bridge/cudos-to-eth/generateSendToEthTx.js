@@ -18,8 +18,8 @@ function generateSendToEthTx(msgInfos) {
 }
 
 function generateSendToEthMsg(msgInfo) {
-    const stringifiedAmount = msgInfo.amount + "0".repeat(18);
-    const bridgeFeeToAcudos = Config.CUDOS_NETWORK.BRIDGE_FEE + "0".repeat(18);
+    const stringifiedAmount = msgInfo.amount;
+    const bridgeFeeToAcudos = Config.CUDOS_NETWORK.BRIDGE_FEE;
     const msgTypePath = '/gravity.v1.MsgSendToEth'
 
     const msgData = {
