@@ -17,6 +17,8 @@ ORCHESTRATOR_ENV_PATH=""
 ORCHESTRATOR_ARG_PATH=""
 
 if [ "$PARAM_NODE_NAME" = "root-node" ]; then
+
+    NODE_BUILDERS_DOCKER_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/root-node"
     
     if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/root-node/root-node.mainnet.env" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/root-node/root-node.mainnet.arg"
@@ -84,6 +86,8 @@ if [ "$PARAM_NODE_NAME" = "root-node" ]; then
 fi
 
 if [ "$PARAM_NODE_NAME" = "seed-node" ]; then
+
+    NODE_BUILDERS_DOCKER_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node"
 
     if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.testnet.private.env" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.testnet.private.arg"
@@ -169,6 +173,8 @@ fi
 
 if [ "$PARAM_NODE_NAME" = "sentry-node" ]; then
 
+    NODE_BUILDERS_DOCKER_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node"
+
     if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.testnet.private.env" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.testnet.private.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.testnet.private.env"
@@ -252,6 +258,8 @@ if [ "$PARAM_NODE_NAME" = "sentry-node" ]; then
 fi
 
 if [ "$PARAM_NODE_NAME" = "full-node" ]; then
+
+    NODE_BUILDERS_DOCKER_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node"
 
     if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.client.testnet.private01.env" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.client.testnet.private01.arg"
@@ -357,7 +365,14 @@ if [ "$NETWORK_TESTNET_PUBLIC" = "true" ]; then
     NETWORK_NAME="public testnet"
 fi
 
+NODE_ENV_BASENAME=$(basename "$NODE_ENV_PATH")
+if [ "$ORCHESTRATOR_ENV_PATH" != '' ]; then
+    ORCHESTRATOR_ENV_BASENAME=$(basename "$ORCHESTRATOR_ENV_PATH")
+fi
+
 args=$(cat "$NODE_ARG_PATH")
+START_DOCKERFILE="./start-$PARAM_NODE_NAME.dockerfile"
+START_YML="./start-$PARAM_NODE_NAME.yml "
 VOLUME_NAME=$(readEnvFromString "$args" "VOLUME_NAME")
 VOLUME_PATH="$PARAM_SOURCE_DIR/CudosData/$VOLUME_NAME"
 START_CONTAINER_NAME=$(readEnvFromString "$args" "START_CONTAINER_NAME")
