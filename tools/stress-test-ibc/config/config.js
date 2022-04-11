@@ -24,18 +24,18 @@ const envVariables = [
     'REST_2',
     'GAS_PRICE_1',
     'GAS_PRICE_2',
-    'GAS_PER_MSG_1',
-    'GAS_PER_MSG_2',
+    'GAS_PER_MSG',
     'MNEMONIC_1',
     'MNEMONIC_2',
-    'IBC_CONTRACT_ADDRESS_1',
-    'IBC_CONTRACT_ADDRESS_2',
+    'IBC_MODULE_ADDRESS_1',
+    'IBC_MODULE_ADDRESS_2',
     'PORT_1',
     'PORT_2',
     'CHANNEL_1',
     'CHANNEL_2',
     'NUMBER_OF_ADDRESSES',
     'NUMBER_OF_TESTS',
+    'MAX_ACUDOS_PER_ADDRESS',
 ];
 
 envVariables.forEach((envVariable) => {
@@ -49,7 +49,7 @@ export default {
         CHAIN_ID: process.env.CHAIN_ID_1,
         REST: process.env.REST_1,
         GAS_PRICE: process.env.GAS_PRICE_1,
-        GAS_PER_MSG: process.env.GAS_PER_MSG_1,
+        GAS_PER_MSG: process.env.GAS_PER_MSG,
         MNEMONIC: process.env.MNEMONIC_1,
         IBC_MODULE_ADDRESS: process.env.IBC_MODULE_ADDRESS_1,
         PORT: process.env.PORT_1,
@@ -59,7 +59,7 @@ export default {
         CHAIN_ID: process.env.CHAIN_ID_2,
         REST: process.env.REST_2,
         GAS_PRICE: process.env.GAS_PRICE_2,
-        GAS_PER_MSG: process.env.GAS_PER_MSG_2,
+        GAS_PER_MSG: process.env.GAS_PER_MSG,
         MNEMONIC: process.env.MNEMONIC_2,
         IBC_MODULE_ADDRESS: process.env.IBC_MODULE_ADDRESS_2,
         PORT: process.env.PORT_2,
@@ -68,5 +68,6 @@ export default {
     TEST: {
         NUMBER_OF_TESTS: process.env.NUMBER_OF_TESTS,
         NUMBER_OF_ADDRESSES: process.env.NUMBER_OF_ADDRESSES,
+        MAX_ACUDOS_PER_ADDRESS: process.env.MAX_ACUDOS_PER_ADDRESS,
     }
 };

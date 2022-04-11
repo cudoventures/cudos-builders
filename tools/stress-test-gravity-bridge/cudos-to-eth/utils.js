@@ -4,10 +4,10 @@ import fetch from 'node-fetch';
 import BigNumber from 'bignum';
 
 export async function getCudosAddressBalance(address) {
-    const res = await fetch(config.CUDOS_NETWORK.REST + "/cosmos/bank/v1beta1/balances/" + address + '/acudos');
+    const res = await fetch(config.CUDOS_NETWORK.REST + "/cosmos/bank/v1beta1/balances/" + address + '?by_denom=acudos');
 
     const data = await res.json();
-    const amount = data.amount.amount;
+    const amount = data.balances[0].amount;
     return new BigNumber(amount);
 }
 

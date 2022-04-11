@@ -7,7 +7,7 @@
     "private": true,
     "license": "ISC",
     "scripts": {
-        "balance": "node --es-module-specifier-resolution=node ./tests/testModuleAndContractBalances.js"
+        "balance": "node --es-module-specifier-resolution=node ./tests/testModuleAndMintedBalances.js"
     },
     "engines": {
         "node": ">=14"

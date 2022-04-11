@@ -30,6 +30,11 @@
         "deploy-utils-testnet-private": "node ./deployer-utils/Main.js --target=testnet-private --init=1",
         "deploy-gravity-bridge-ui-testnet-private": "node ./deployer-gravity-bridge-ui/Main.js --target=testnet-private",
         "deploy--ethereum-rinkeby": "node ./deployer-ethereum/Main.js --target=ethereum",
+        "deploy--init-ibc-relayer-testnet-public": "node ./deployer-ibc-relayer/Main.js --target public-testnet --init 1 --rebuild 1",
+        "deploy--start-ibc-relayer-testnet-public": "node ./deployer-ibc-relayer/Main.js --target public-testnet --init 0 --rebuild 0",
+        "deploy--init-ibc-relayer-testnet-private": "node ./deployer-ibc-relayer/Main.js --target private-testnet --init 1 --rebuild 1",
+        "deploy--start-ibc-relayer-testnet-private": "node ./deployer-ibc-relayer/Main.js --target private-testnet --init 0 --rebuild 0",
+        
         "network": "node ./deployer-network/src/Main.js"
     },
     "engines": {
