@@ -12,6 +12,7 @@ chain:
         - staking
         - pricefeed
         - distribution
+        - cosmwasm
 node:
     type: remote
     config:
