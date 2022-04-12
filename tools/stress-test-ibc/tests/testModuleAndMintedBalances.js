@@ -1,47 +1,48 @@
 import ibcTransfer from '../cudos-helpers/ibcTransfer.js';
 import config from '../config/config.js';
-import { getCudosAddressBalance, sendAcudos, getTotalDenomBalance } from '../cudos-to-eth/utils.js';
+import { getCudosAddressBalance, getTotalDenomBalance, getIbcDenom, wait, GREEN, RED } from '../cudos-helpers/utils.js';
 import { Cosmos } from "@cosmostation/cosmosjs";
 import BigNumber from 'bignum';
-import { getIbcDenom } from '../cudos-helpers/utils.js';
 
-const numberOfAddresses = config.TEST.NUMBER_OF_ADDRESSES;
-const numberOfTests = config.TEST.NUMBER_OF_TESTS;
-const maxAcudosPerAddress = new BigNumber('10000000000000000');
+const N_ADDRESSES = config.TEST.NUMBER_OF_ADDRESSES;
+const N_TESTS = config.TEST.NUMBER_OF_TESTS;
+const MAX_ACUDOS_PER_ADDRESS = new BigNumber(config.TEST.MAX_ACUDOS_PER_ADDRESS);
 
-const RED = "\x1b[31m";
-const GREEN = "\x1b[32m";
+const BLOCKS_TO_WAIT = 10;
+const BLOCK_TIME = 7; //in seconds
+const FAUCET_FUNDS = MAX_ACUDOS_PER_ADDRESS.mul(N_TESTS + 1).mul(N_ADDRESSES);
 
 async function runTest() {
     // setup
-    const cudosProvider_1 = new Cosmos(config.CUDOS_NETWORK_1.REST, config.CUDOS_NETWORK_1.CHAIN_ID);
+    const cudosProvider_1 = new Cosmos(config.NETWORK_1.REST, config.NETWORK_1.CHAIN_ID);
     cudosProvider_1.setPath("m/44'/118'/0'/0/0");
     cudosProvider_1.bech32MainPrefix = 'cudos'
-    const faucetMnemonic_1 = config.CUDOS_NETWORK_1.MNEMONIC.replaceAll("\"", '');
+    const faucetMnemonic_1 = config.NETWORK_1.MNEMONIC.replaceAll("\"", '');
     const cudosFaucetAddress_1 = cudosProvider_1.getAddress(faucetMnemonic_1);
 
-    const cudosFeePerMsg_1 = (new BigNumber(config.CUDOS_NETWORK_1.GAS_PER_MSG)).mul(config.CUDOS_NETWORK_1.GAS_PRICE);
-    const cudosBalancePerAddressNeeded_1 = cudosFeePerMsg_1.add(maxAcudosPerAddress);
+    const cudosFeePerMsg_1 = (new BigNumber(config.NETWORK_1.GAS_PER_MSG)).mul(config.NETWORK_1.GAS_PRICE);
+    const cudosBalancePerAddressNeeded_1 = cudosFeePerMsg_1.add(MAX_ACUDOS_PER_ADDRESS);
 
-    const cudosProvider_2 = new Cosmos(config.CUDOS_NETWORK_2.REST, config.CUDOS_NETWORK_2.CHAIN_ID);
+    const cudosProvider_2 = new Cosmos(config.NETWORK_2.REST, config.NETWORK_2.CHAIN_ID);
     cudosProvider_2.setPath("m/44'/118'/0'/0/0");
     cudosProvider_2.bech32MainPrefix = 'cudos'
-    const faucetMnemonic_2 = config.CUDOS_NETWORK_2.MNEMONIC.replaceAll("\"", '');
+
+    const faucetMnemonic_2 = config.NETWORK_2.MNEMONIC.replaceAll("\"", '');
     const cudosFaucetAddress_2 = cudosProvider_2.getAddress(faucetMnemonic_2);
 
-    const cudosFeePerMsg_2 = (new BigNumber(config.CUDOS_NETWORK_2.GAS_PER_MSG)).mul(config.CUDOS_NETWORK_2.GAS_PRICE);
-    const cudosBalancePerAddressNeeded_2 = cudosFeePerMsg_2.add(maxAcudosPerAddress);
+    const cudosFeePerMsg_2 = (new BigNumber(config.NETWORK_2.GAS_PER_MSG)).mul(config.NETWORK_2.GAS_PRICE);
+    const cudosBalancePerAddressNeeded_2 = cudosFeePerMsg_2.add(MAX_ACUDOS_PER_ADDRESS);
 
     // checks for enough faucet balances
     const cudosFaucetBalance_1 = await getCudosAddressBalance(cudosFaucetAddress_1, config.NETWORK_1.REST);
-    const cudosFaucetBalanceNeeded_1 = cudosBalancePerAddressNeeded_1.add(cudosFeePerMsg_1).mul(numberOfAddresses*numberOfTests);
+    const cudosFaucetBalanceNeeded_1 = cudosBalancePerAddressNeeded_1.add(cudosFeePerMsg_1).mul(N_ADDRESSES*N_TESTS).add(FAUCET_FUNDS);
     if (cudosFaucetBalance_1.lt(cudosFaucetBalanceNeeded_1)) {
         console.log(RED, `Not enough acudos balance in CUDOS faucet - needed ${cudosFaucetBalanceNeeded_1.toString()}acudos, got ${cudosFaucetBalance_1.toString()}acudos`);
         return;
     }
 
     const cudosFaucetBalance_2 = await getCudosAddressBalance(cudosFaucetAddress_2, config.NETWORK_2.REST);
-    const cudosFaucetBalanceNeeded_2 = cudosBalancePerAddressNeeded_2.add(cudosFeePerMsg_2).mul(numberOfAddresses*numberOfTests);
+    const cudosFaucetBalanceNeeded_2 = cudosBalancePerAddressNeeded_2.add(cudosFeePerMsg_2).mul(N_ADDRESSES*N_TESTS).add(FAUCET_FUNDS);
     if (cudosFaucetBalance_2.lt(cudosFaucetBalanceNeeded_2)) {
         console.log(RED, `Not enough acudos balance in CUDOS faucet - needed ${cudosFaucetBalanceNeeded_2.toString()}acudos, got ${cudosFaucetBalance_2.toString()}acudos`);
         return;
@@ -50,9 +51,9 @@ async function runTest() {
     // fund some cudos addresses
     const fundedCudosMnemonics = [];
     const fundedCudosAddresses = [];
-    for (let i = 0; i < numberOfAddresses; i++) {
-        const mnemonic = cudosProvider.getRandomMnemonic();
-        const address = cudosProvider.getAddress(mnemonic);
+    for (let i = 0; i < N_ADDRESSES; i++) {
+        const mnemonic = cudosProvider_1.getRandomMnemonic();
+        const address = cudosProvider_1.getAddress(mnemonic);
         fundedCudosMnemonics.push(mnemonic); 
         fundedCudosAddresses.push(address);
     }
@@ -64,79 +65,79 @@ async function runTest() {
     const ibcFaucet_2 = cudosProvider_2.getAddress(ibcFaucetMnemonic_2);
 
     //fund addressed to be used for ibc denom => acudos sends
-    await ibcTransfer(faucetMnemonic_1, [ibcFaucet_2], config.NETWORK_1.PORT, config.NETWORK_1.CHANNEL, 'acudos', '1000000000000000000000');
-    await ibcTransfer(faucetMnemonic_2, [ibcFaucet_1], config.NETWORK_2.PORT, config.NETWORK_2.CHANNEL, 'acudos', '1000000000000000000000');
+    console.log(GREEN, 'Funding ibcDenom faucets...')
 
-    const initIbcModuleBalance_1 = await getCudosAddressBalance(config.CUDOS_NETWORK_1.IBC_MODULE_ADDRESS);
-    const initIbcModuleBalance_2 = await getCudosAddressBalance(config.CUDOS_NETWORK_2.IBC_MODULE_ADDRESS);
+    let txHash = await ibcTransfer(config.NETWORK_1, faucetMnemonic_1, [ibcFaucet_2], 'acudos', new BigNumber(FAUCET_FUNDS));
+    console.log(GREEN, 'Faucet tx sent - ' + txHash);
+
+    txHash = await ibcTransfer(config.NETWORK_2, faucetMnemonic_2, [ibcFaucet_1], 'acudos', new BigNumber(FAUCET_FUNDS));
+    console.log(GREEN, 'Faucet tx sent - ' + txHash);
+
+    await wait(BLOCKS_TO_WAIT * BLOCK_TIME, 'Waiting ibcDenom funds to pass...');
 
     const ibcDenom_1 = await getIbcDenom(ibcFaucet_1, config.NETWORK_1.REST);
     const ibcDenom_2 = await getIbcDenom(ibcFaucet_2, config.NETWORK_2.REST);
 
-    const initTotalIbcDenomBalance_1 = await getTotalDenomBalance(ibcDenom_1, config.NETWORK_1.REST);
-    const initTotalIbcDenomBalance_2 = await getTotalDenomBalance(ibcDenom_2, config.NETWORK_2.REST);
 
-    console.log(GREEN, `Innitial network 1 IBC module balance: ${initIbcModuleBalance_1.toString()}acudos`);
-    console.log(GREEN, `Innitial network 2 IBC denom balance: ${initTotalIbcDenomBalance_2.toString()}${ibcDenom_2.toString()}`);
+    await checkBalances(ibcDenom_1, ibcDenom_2);
 
-    console.log(GREEN, `Innitial network 2 IBC module balance: ${initIbcModuleBalance_2.toString()}acudos`);
-    console.log(GREEN, `Innitial network 1 IBC denom balance: ${initTotalIbcDenomBalance_1.toString()}${ibcDenom_1.toString()}`);
+    for(let i = 0; i < N_TESTS; i++){
 
-
-
-
-    for(let i = 0; i < numberOfTests; i++){
-
-        console.log(GREEN, "Creating Gravity send txs");
+        console.log(GREEN, "Creating IBC Transfer txs");
 
         try {
-            console.log(GREEN, "Sending to cudos...");
-            await sendToCudos(ethFaucetPrivKey, fundedCudosAddresses, maxAcudosPerAddress);
+            console.log(GREEN, "Sending acudos to network 1...");
+            await ibcTransfer(config.NETWORK_2, faucetMnemonic_2, fundedCudosAddresses, 'acudos', MAX_ACUDOS_PER_ADDRESS);
+
+            console.log(GREEN, "Sending acudos to network 2...");
+            await ibcTransfer(config.NETWORK_1, faucetMnemonic_1, fundedCudosAddresses, 'acudos', MAX_ACUDOS_PER_ADDRESS);
+            console.log(GREEN, `Sending ${ibcDenom_1} to network 1...`);
+            await ibcTransfer(config.NETWORK_2, faucetMnemonic_2, fundedCudosAddresses, ibcDenom_2, MAX_ACUDOS_PER_ADDRESS);
+
+            console.log(GREEN, `Sending ${ibcDenom_2} to network 2...`);
+            await ibcTransfer(config.NETWORK_1, faucetMnemonic_1, fundedCudosAddresses, ibcDenom_1, MAX_ACUDOS_PER_ADDRESS);
         } catch (e) {
             console.log(RED, e);
         }
+        
+        await wait(BLOCKS_TO_WAIT * BLOCK_TIME, 'to be sure the txs pass...')
 
-        try {
-            console.log(GREEN, "Sending to ETH...");
-            await sendToEth(faucetMnemonic, fundedEthWallets.map(w => w.address), maxAcudosPerAddress);
-        } catch (e) {
-            console.log(RED, e);
-        }
-        await new Promise((resolve) => {
-            const waitTime = config.CUDOS_NETWORK.BATCH_CREATION_BLOCKS * 7000;
-            console.log(GREEN, `Waiting ${waitTime / 1000} seconds to be sure the batch was created...`);
-            setTimeout(resolve, waitTime);
-        });
-        const currentGravityModuleBalance = await getCudosAddressBalance(config.CUDOS_NETWORK.GRAVITY_MODULE_ADDRESS);
-        const currentGravityContractBalance = await erc20Cudos.balanceOf(config.ETHEREUM.BRIDGE_CONTRACT_ADDRESS);
-    
-        checkBalances(initGravityModuleBalance, currentGravityModuleBalance, initGravityContractBalance, currentGravityContractBalance);
+        await checkBalances(ibcDenom_1, ibcDenom_2);
     }
 
-    await new Promise((resolve) => {
-        const waitTime = config.CUDOS_NETWORK.BATCH_CREATION_BLOCKS * 7000;
-        console.log(GREEN, `Waiting ${waitTime / 1000} seconds to be sure the txs pass...`);
-        setTimeout(resolve, waitTime);
-    });
+    await wait(BLOCKS_TO_WAIT * BLOCK_TIME, 'to be sure the txs pass...')
 
-    const finalGravityModuleBalance = await getCudosAddressBalance(config.CUDOS_NETWORK.GRAVITY_MODULE_ADDRESS);
-    const finalGravityContractBalance = await erc20Cudos.balanceOf(config.ETHEREUM.BRIDGE_CONTRACT_ADDRESS);
-
-    console.log(GREEN, `Final Gravity module balance: ${finalGravityModuleBalance.toString()}acudos`);
-    console.log(GREEN, `Final Gravity contract balance: ${finalGravityContractBalance.toString()}acudos`);
-
-    checkBalances(initGravityModuleBalance, finalGravityModuleBalance, initGravityContractBalance, finalGravityContractBalance);
+    await checkBalances(ibcDenom_1, ibcDenom_2);
 };
 
-function checkBalances(initModule, currentModule, initContract, currentContract){
+async function checkBalances(ibcDenom_1, ibcDenom_2){
 
-    const initBalance = (new BigNumber(initModule.toString())).add(initContract.toString());
-    const currentBalance = (new BigNumber(currentModule.toString())).add(currentContract.toString());
+    const currentIbcModuleBalance_1 = await getCudosAddressBalance(config.NETWORK_1.IBC_MODULE_ADDRESS, config.NETWORK_1.REST);
+    const currentIbcModuleBalance_2 = await getCudosAddressBalance(config.NETWORK_2.IBC_MODULE_ADDRESS, config.NETWORK_2.REST);
 
-    if(!initBalance.eq(currentBalance)){
-        console.log(RED, `Gravity balance does not match the initial balance - innitial is ${initBalance.toString()}acudos, current is ${currentBalance.toString()}acudos`)
-    } else {
-        console.log(GREEN, "Gravity cotnract balances match");
+    const currentTotalIbcDenomBalance_1 = await getTotalDenomBalance(ibcDenom_1, config.NETWORK_1.REST);
+    const currentTotalIbcDenomBalance_2 = await getTotalDenomBalance(ibcDenom_2, config.NETWORK_2.REST);
+
+    console.log(GREEN, `Current network 1 IBC module balance: ${currentIbcModuleBalance_1.toString()}acudos`);
+    console.log(GREEN, `Current network 2 IBC denom balance: ${currentTotalIbcDenomBalance_2.toString()}${ibcDenom_2.toString()}`);
+
+    console.log(GREEN, `Current network 2 IBC module balance: ${currentIbcModuleBalance_2.toString()}acudos`);
+    console.log(GREEN, `Current network 1 IBC denom balance: ${currentTotalIbcDenomBalance_1.toString()}${ibcDenom_1.toString()}`);
+
+    let error = false;
+    if(currentIbcModuleBalance_1 === currentTotalIbcDenomBalance_2){
+        console.log(RED, `IBC module balance on chain 1 does not match  the IBC denom amount minted on chain 2: module has ${currentIbcModuleBalance_1} and chain 2 has ${currentTotalIbcDenomBalance_2}`)
+        error = true;
+    } 
+    
+    if(currentIbcModuleBalance_2 === currentTotalIbcDenomBalance_1){
+        console.log(RED, `IBC module balance on chain 2 does not match  the IBC denom amount minted on chain 1: module has ${currentIbcModuleBalance_2} and chain 1 has ${currentTotalIbcDenomBalance_1}`)
+        error = true;
+    }
+
+    if(!error){
+        console.log(GREEN, "Ibc balances match so far");
     }
 }
+
 runTest();

@@ -1,4 +1,5 @@
 import message from "./cosmos/proto";
+import {constants} from "./utils"
 
 function generateIbcTransferTx(msgInfos) {
     const transferMsgs = [];
@@ -17,8 +18,6 @@ function generateIbcTransferTx(msgInfos) {
 }
 
 function generateIbcTransferMsg(msgInfo) {
-    const msgTypePath = '/ibc.applications.transfer.v1.MsgTransfer'
-
     const msgData = {
             source_port: msgInfo.srcPort,
             source_channel: msgInfo.srcChannel,
@@ -26,16 +25,18 @@ function generateIbcTransferMsg(msgInfo) {
                 amount: msgInfo.amount,
                 denom: msgInfo.denom,
             },
-            semder: msgInfo.sender,
-            receiver: msgInfo.destiantionAddresses,
-            timeout_height: 0,
+            sender: msgInfo.sender,
+            receiver: msgInfo.receiver,
+            timeout_height: {
+                revision_height: 10000000000000,
+            },
             timeout_timestamp: 0,
     }
 
     const sendMsg = new message.ibc.applications.transfer.v1.MsgTransfer(msgData);
 
     return new message.google.protobuf.Any({
-		type_url: msgTypePath,
+		type_url: constants.MSG_TYPE_IBC_TRANSFER,
 		value: message.ibc.applications.transfer.v1.MsgTransfer.encode(sendMsg).finish()
 	});
     
