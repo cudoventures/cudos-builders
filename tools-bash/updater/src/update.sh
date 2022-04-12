@@ -47,6 +47,8 @@ if [ "$action" = "start" ]; then
         source "$WORKING_SRC_DIR/modules/genesis-migrate.sh"
     fi
 
+    source "$WORKING_SRC_DIR/modules/restore-envs.sh"
+
     source "$WORKING_SRC_DIR/modules/start-node.sh"
 
     source "$WORKING_SRC_DIR/modules/start-orchestrator.sh"

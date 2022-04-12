@@ -14,7 +14,7 @@ echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 
 \cp "$WORKING_MIGRATE_DIR/genesis.tmp.json" "$WORKING_MIGRATE_DIR/genesis.migrated.json"
 
-# env
+# node env
 if [ "$PARAM_NODE_NAME" = "root-node" ]; then
     sed -i "/CUDOS_HOME/d" "$NODE_ENV_PATH"
 
@@ -56,4 +56,9 @@ if [ "$PARAM_NODE_NAME" = "full-node" ]; then
     echo "MONITORING_ENABLED=\"false\"" >> "$NODE_ENV_PATH"
     echo "EXTERNAL_ADDRESS=\"\"" >> "$NODE_ENV_PATH"
     echo "ADDR_BOOK_STRICT=\"true\"" >> "$NODE_ENV_PATH"
+fi
+
+# orchestrator env
+if [ "$ORCHESTRATOR_ENV_PATH" != '' ]; then
+    sed -i "s/FEES=.*/FEES=\"5000000000000acudos\"/g" "$ORCHESTRATOR_ENV_PATH"
 fi
