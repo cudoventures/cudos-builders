@@ -1,6 +1,6 @@
 #!/bin/bash -i
 
-if [ "$ORCHESTRATOR_ENV_PATH" != "" ]; then
+if [ "$HAS_ORCHESTRATOR" = "true" ]; then
     echo -ne "Starting the orchestrator...";
 
     args=$(cat "$ORCHESTRATOR_ARG_PATH")
@@ -8,7 +8,7 @@ if [ "$ORCHESTRATOR_ENV_PATH" != "" ]; then
     unset args
 
     cd "$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator"
-    dockerResult=$(docker-compose --env-file $ORCHESTRATOR_ARG_PATH -f ./orchestrator.release.yml -p $orchestratorContainerName up --build -d 2> /dev/null);
+    dockerResult=$(docker-compose --env-file $ORCHESTRATOR_ARG_PATH -f ./orchestrator.release.yml -p $orchestratorContainerName up --build -d 2>&1);
     if [ "$?" != 0 ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error starting the orchestrator $?: ${dockerResult}";
         exit 1;
