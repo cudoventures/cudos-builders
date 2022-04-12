@@ -5,12 +5,12 @@ echo -ne "Exporting critical data for emergency cases...";
 rm -rf "$WORKING_EMERGENCY_BACKUP_DIR"
 mkdir "$WORKING_EMERGENCY_BACKUP_DIR"
 
-\cp "$NODE_ENV_PATH" "$WORKING_EMERGENCY_BACKUP_DIR"
+\cp -f "$NODE_ENV_PATH" "$WORKING_EMERGENCY_BACKUP_DIR"
 
 \cp -r "$VOLUME_PATH/config" "$WORKING_EMERGENCY_BACKUP_DIR"
 
 if [ "$HAS_ORCHESTRATOR" = "true" ]; then
-    \cp "$ORCHESTRATOR_ENV_PATH" "$WORKING_EMERGENCY_BACKUP_DIR"
+    \cp -f "$ORCHESTRATOR_ENV_PATH" "$WORKING_EMERGENCY_BACKUP_DIR"
 fi
 
 user=$(ls -ld "$WORKING_EMERGENCY_BACKUP_DIR/.." | awk '{print $3}')

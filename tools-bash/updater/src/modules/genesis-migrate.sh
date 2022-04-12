@@ -29,14 +29,14 @@ fi
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Migrating genesis.json...";
-\cp "$WORKING_MIGRATE_DIR/genesis.exported.json" "$WORKING_MIGRATE_DIR/genesis.migrated.json"
+\cp -f "$WORKING_MIGRATE_DIR/genesis.exported.json" "$WORKING_MIGRATE_DIR/genesis.migrated.json"
 
 if [ "$UPDATE_FROM_VERSION" = "v0.3" ] && [ "$UPDATE_TO_VERSION" = "v0.6.0" ]; then
     # no need to execute cudos-noded migrate because both version are running 0.44
     source "$WORKING_SRC_VERSIONS_DIR/genesis-0.3-0.6.sh"
 fi
 
-\cp "$WORKING_MIGRATE_DIR/genesis.migrated.json" "$VOLUME_PATH/config/genesis.json"
+\cp -f "$WORKING_MIGRATE_DIR/genesis.migrated.json" "$VOLUME_PATH/config/genesis.json"
 
 user=$(ls -ld "$WORKING_MIGRATE_DIR/.." | awk '{print $3}')
 group=$(ls -ld "$WORKING_MIGRATE_DIR/.." | awk '{print $4}')
