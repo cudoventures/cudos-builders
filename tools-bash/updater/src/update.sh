@@ -43,11 +43,11 @@ if [ "$action" = "start" ]; then
 
     source "$WORKING_SRC_DIR/modules/update-repos.sh"
 
+    source "$WORKING_SRC_DIR/modules/envs-migrate.sh"
+
     if [ "$DO_HARD_FORK" = "true" ]; then
         source "$WORKING_SRC_DIR/modules/genesis-migrate.sh"
     fi
-
-    source "$WORKING_SRC_DIR/modules/restore-envs.sh"
 
     source "$WORKING_SRC_DIR/modules/start-node.sh"
 

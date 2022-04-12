@@ -1,6 +1,6 @@
 #!/bin/bash -i
 
-if [ "$ORCHESTRATOR_ENV_PATH" != "" ]; then
+if [ "$HAS_ORCHESTRATOR" = "true" ]; then
     echo -ne "Stopping the orchestrator...";
 
     args=$(cat "$ORCHESTRATOR_ARG_PATH")
