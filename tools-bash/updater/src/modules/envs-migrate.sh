@@ -16,7 +16,7 @@ fi
 
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
-echo -ne "Copyng .env files...";
+echo -ne "Copying .env files...";
 \cp "$WORKING_MIGRATE_DIR/node.env" "$NODE_ENV_PATH"
 if [ "$HAS_ORCHESTRATOR" = "true" ]; then
     \cp "$WORKING_MIGRATE_DIR/orchestrator.env" "$ORCHESTRATOR_ENV_PATH"
