@@ -13,3 +13,18 @@ result=$(jq ".app_state.nft.collections[].nfts[].approvedAddresses = []" "$WORKI
 echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 
 \cp "$WORKING_MIGRATE_DIR/genesis.tmp.json" "$WORKING_MIGRATE_DIR/genesis.migrated.json"
+
+if [ "$NETWORK_TESTNET_PRIVATE" = "true" ]; then
+    result=$(jq ".chain_id = \"cudos-testnet-private-2\"" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
+    echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
+fi
+
+if [ "$NETWORK_TESTNET_PUBLIC" = "true" ]; then
+    result=$(jq ".chain_id = \"cudos-testnet-public-3\"" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
+    echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
+fi
+
+if [ "$NETWORK_DRESSREHEARSAL" = "true" ]; then
+    result=$(jq ".chain_id = \"cudos-2\"" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
+    echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
+fi
