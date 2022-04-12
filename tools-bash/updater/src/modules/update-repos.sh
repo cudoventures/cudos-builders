@@ -14,7 +14,7 @@ echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 echo -ne "Cloning repos...";
 branch="cudos-dev"
 cd "$PARAM_SOURCE_DIR"
-git clone -q --depth 1 --branch "$branch" https://github.com/CudoVentures/cudos-node.git CudosNode &> /dev/null
-git clone -q --depth 1 --branch "$branch" https://github.com/CudoVentures/cudos-builders.git CudosBuilders &> /dev/null
-git clone -q --depth 1 --branch "$branch" https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge &> /dev/null
+git clone -q --branch "$branch" https://github.com/CudoVentures/cudos-node.git CudosNode &> /dev/null
+git clone -q --branch "$branch" https://github.com/CudoVentures/cudos-builders.git CudosBuilders &> /dev/null
+git clone -q --branch "$branch" https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge &> /dev/null
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
