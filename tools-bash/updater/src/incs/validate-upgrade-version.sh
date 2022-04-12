@@ -17,7 +17,7 @@ fi
 
 result=$(cd "$PARAM_SOURCE_DIR/CudosNode" && git describe --tags 2>&1)
 if [ "$?" != "0" ]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} CudosNode folder is not a git repo";
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} CudosNode folder error: $result";
     exit 1;
 fi;
 if [ "$?" = "0" ]; then
