@@ -4,8 +4,8 @@ echo "" # new line
 
 echo -e "${STYLE_BOLD}Migrating the configs:${STYLE_DEFAULT}";
 
-MIGRATED_APP_TOML="$VOLUME_PATH/config/app.toml"
-MIGRATED_CONFIG_TOML="$VOLUME_PATH/config/config.toml"
+MIGRATED_APP_TOML="$WORKING_MIGRATE_DIR/app.toml"
+MIGRATED_CONFIG_TOML="$WORKING_MIGRATE_DIR/config.toml"
 
 echo -ne "Migrating config files...";
 \cp -f "$WORKING_EMERGENCY_BACKUP_DIR/config/app.toml" "$MIGRATED_APP_TOML"
