@@ -5,7 +5,7 @@ echo -ne "Validating version...";
 containerVersion=""
 sourceVersion=""
 UPDATE_FROM_VERSION=""
-TO_VERSION="v0.5.0"
+TO_VERSION="v0.6.0"
 
 if [ "$(docker container inspect -f '{{.State.Status}}' "$START_CONTAINER_NAME" 2> /dev/null)" = "running" ]; then
     dockerResult=$(docker container exec "$START_CONTAINER_NAME" /bin/bash -c "cudos-noded version" 2>&1);
