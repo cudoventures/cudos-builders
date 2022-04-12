@@ -33,6 +33,8 @@ const envVariables = [
     'PORT_2',
     'CHANNEL_1',
     'CHANNEL_2',
+    'IBC_DENOM_1',
+    'IBC_DENOM_2',
     'NUMBER_OF_ADDRESSES',
     'NUMBER_OF_TESTS',
     'MAX_ACUDOS_PER_ADDRESS',
@@ -54,6 +56,7 @@ export default {
         IBC_MODULE_ADDRESS: process.env.IBC_MODULE_ADDRESS_1,
         PORT: process.env.PORT_1,
         CHANNEL: process.env.CHANNEL_1,
+        IBC_DENOM: process.env.IBC_DENOM_1,
     },
     NETWORK_2: {
         CHAIN_ID: process.env.CHAIN_ID_2,
@@ -64,6 +67,7 @@ export default {
         IBC_MODULE_ADDRESS: process.env.IBC_MODULE_ADDRESS_2,
         PORT: process.env.PORT_2,
         CHANNEL: process.env.CHANNEL_2,
+        IBC_DENOM: process.env.IBC_DENOM_2,
     },
     TEST: {
         NUMBER_OF_TESTS: process.env.NUMBER_OF_TESTS,

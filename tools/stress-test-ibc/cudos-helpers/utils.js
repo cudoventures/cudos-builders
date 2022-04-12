@@ -11,7 +11,7 @@ export const constants = {
     
     PATH_Q_TX: '/cosmos/tx/v1beta1/txs/',
     PATH_Q_BALANCES: "/cosmos/bank/v1beta1/balances/",
-    PATH_Q_SUPPLY: "/cosmos/bank/v1beta1/supply/",
+    PATH_Q_SUPPLY: "/cosmos/bank/v1beta1/supply",
     MSG_TYPE_IBC_TRANSFER: '/ibc.applications.transfer.v1.MsgTransfer',
 }
 
@@ -61,14 +61,14 @@ export async function getIbcDenom(address, url) {
 }
 
 export async function getTotalDenomBalance(denom, url) {
-    const res = await fetch(url + constants.PATH_Q_SUPPLY + denom);
+    const res = await fetch(url + constants.PATH_Q_SUPPLY);
 
     if(res.status !== 200){
-        throw new Error(`no funds in address: ${address} => ${balances}`);
+        throw new Error(`Error fetching IBC denom balance for: ${denom}`);
     }
 
     const data = await res.json();
-    const amount = data.amount.amount;
+    const amount = data.supply.find((c) => c.denom === denom).amount;
     return new BigNumber(amount);
 }
 
