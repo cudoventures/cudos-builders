@@ -1,6 +1,6 @@
 import ibcTransfer from '../cudos-helpers/ibcTransfer.js';
 import config from '../config/config.js';
-import { getCudosAddressBalance, getTotalDenomBalance, getIbcDenom, wait, GREEN, RED } from '../cudos-helpers/utils.js';
+import { getCudosAddressBalance, getTotalDenomBalance, wait, GREEN, RED } from '../cudos-helpers/utils.js';
 import { Cosmos } from "@cosmostation/cosmosjs";
 import BigNumber from 'bignum';
 
@@ -8,7 +8,7 @@ const N_ADDRESSES = config.TEST.NUMBER_OF_ADDRESSES;
 const N_TESTS = config.TEST.NUMBER_OF_TESTS;
 const MAX_ACUDOS_PER_ADDRESS = new BigNumber(config.TEST.MAX_ACUDOS_PER_ADDRESS);
 
-const BLOCKS_TO_WAIT = 10;
+const BLOCKS_TO_WAIT = 5;
 const BLOCK_TIME = 7; //in seconds
 const FAUCET_FUNDS = MAX_ACUDOS_PER_ADDRESS.mul(N_TESTS + 1).mul(N_ADDRESSES);
 
@@ -58,25 +58,20 @@ async function runTest() {
         fundedCudosAddresses.push(address);
     }
 
-    const ibcFaucetMnemonic_1 = cudosProvider_1.getRandomMnemonic();
-    const ibcFaucet_1 = cudosProvider_1.getAddress(ibcFaucetMnemonic_1);
-
-    const ibcFaucetMnemonic_2 = cudosProvider_2.getRandomMnemonic();
-    const ibcFaucet_2 = cudosProvider_2.getAddress(ibcFaucetMnemonic_2);
-
     //fund addressed to be used for ibc denom => acudos sends
     console.log(GREEN, 'Funding ibcDenom faucets...')
+    console.log(GREEN, "Sending acudos to denom faucet on network 1...");
+    await ibcTransfer(config.NETWORK_1, faucetMnemonic_1, [cudosFaucetAddress_2], 'acudos', new BigNumber(FAUCET_FUNDS));
 
-    let txHash = await ibcTransfer(config.NETWORK_1, faucetMnemonic_1, [ibcFaucet_2], 'acudos', new BigNumber(FAUCET_FUNDS));
-    console.log(GREEN, 'Faucet tx sent - ' + txHash);
-
-    txHash = await ibcTransfer(config.NETWORK_2, faucetMnemonic_2, [ibcFaucet_1], 'acudos', new BigNumber(FAUCET_FUNDS));
-    console.log(GREEN, 'Faucet tx sent - ' + txHash);
+    console.log(GREEN, "Sending acudos to denom faucet on network 2...");
+    await ibcTransfer(config.NETWORK_2, faucetMnemonic_2, [cudosFaucetAddress_1], 'acudos', new BigNumber(FAUCET_FUNDS));
 
     await wait(BLOCKS_TO_WAIT * BLOCK_TIME, 'Waiting ibcDenom funds to pass...');
 
-    const ibcDenom_1 = await getIbcDenom(ibcFaucet_1, config.NETWORK_1.REST);
-    const ibcDenom_2 = await getIbcDenom(ibcFaucet_2, config.NETWORK_2.REST);
+    // const ibcDenom_1 = await getIbcDenom(ibcFaucet_1, config.NETWORK_1.REST);
+    // const ibcDenom_2 = await getIbcDenom(ibcFaucet_2, config.NETWORK_2.REST);
+    const ibcDenom_1 = config.NETWORK_1.IBC_DENOM;
+    const ibcDenom_2 = config.NETWORK_2.IBC_DENOM;
 
 
     await checkBalances(ibcDenom_1, ibcDenom_2);
@@ -91,6 +86,7 @@ async function runTest() {
 
             console.log(GREEN, "Sending acudos to network 2...");
             await ibcTransfer(config.NETWORK_1, faucetMnemonic_1, fundedCudosAddresses, 'acudos', MAX_ACUDOS_PER_ADDRESS);
+
             console.log(GREEN, `Sending ${ibcDenom_1} to network 1...`);
             await ibcTransfer(config.NETWORK_2, faucetMnemonic_2, fundedCudosAddresses, ibcDenom_2, MAX_ACUDOS_PER_ADDRESS);
 
@@ -99,13 +95,11 @@ async function runTest() {
         } catch (e) {
             console.log(RED, e);
         }
-        
-        await wait(BLOCKS_TO_WAIT * BLOCK_TIME, 'to be sure the txs pass...')
 
         await checkBalances(ibcDenom_1, ibcDenom_2);
     }
 
-    await wait(BLOCKS_TO_WAIT * BLOCK_TIME, 'to be sure the txs pass...')
+    await wait(BLOCKS_TO_WAIT * BLOCK_TIME, 'to be sure the txs pass...');
 
     await checkBalances(ibcDenom_1, ibcDenom_2);
 };
@@ -118,20 +112,23 @@ async function checkBalances(ibcDenom_1, ibcDenom_2){
     const currentTotalIbcDenomBalance_1 = await getTotalDenomBalance(ibcDenom_1, config.NETWORK_1.REST);
     const currentTotalIbcDenomBalance_2 = await getTotalDenomBalance(ibcDenom_2, config.NETWORK_2.REST);
 
-    console.log(GREEN, `Current network 1 IBC module balance: ${currentIbcModuleBalance_1.toString()}acudos`);
-    console.log(GREEN, `Current network 2 IBC denom balance: ${currentTotalIbcDenomBalance_2.toString()}${ibcDenom_2.toString()}`);
-
-    console.log(GREEN, `Current network 2 IBC module balance: ${currentIbcModuleBalance_2.toString()}acudos`);
-    console.log(GREEN, `Current network 1 IBC denom balance: ${currentTotalIbcDenomBalance_1.toString()}${ibcDenom_1.toString()}`);
+    console.log('--------------------------------------------------------------------');
+    console.log(GREEN, `Current network 1 IBC module balance: ${currentIbcModuleBalance_1.toString()} acudos`);
+    console.log(GREEN, `Current network 2 IBC denom balance: ${currentTotalIbcDenomBalance_2.toString()} ${ibcDenom_2.toString()}`);
+    console.log('--------------------------------------------------------------------');
+    console.log(GREEN, `Current network 2 IBC module balance: ${currentIbcModuleBalance_2.toString()} acudos`);
+    console.log(GREEN, `Current network 1 IBC denom balance: ${currentTotalIbcDenomBalance_1.toString()} ${ibcDenom_1.toString()}`);
+    console.log('--------------------------------------------------------------------');
 
     let error = false;
-    if(currentIbcModuleBalance_1 === currentTotalIbcDenomBalance_2){
-        console.log(RED, `IBC module balance on chain 1 does not match  the IBC denom amount minted on chain 2: module has ${currentIbcModuleBalance_1} and chain 2 has ${currentTotalIbcDenomBalance_2}`)
+
+    if(!currentIbcModuleBalance_1.eq(currentTotalIbcDenomBalance_2)){
+        console.log(RED, `ERROR: IBC module balance on chain 1 does not match  the IBC denom amount minted on chain 2: module has ${currentIbcModuleBalance_1} and chain 1 has ${currentTotalIbcDenomBalance_2}`)
         error = true;
     } 
     
-    if(currentIbcModuleBalance_2 === currentTotalIbcDenomBalance_1){
-        console.log(RED, `IBC module balance on chain 2 does not match  the IBC denom amount minted on chain 1: module has ${currentIbcModuleBalance_2} and chain 1 has ${currentTotalIbcDenomBalance_1}`)
+    if(!currentIbcModuleBalance_2.eq(currentTotalIbcDenomBalance_1)){
+        console.log(RED, `ERROR: module balance on chain 2 does not match  the IBC denom amount minted on chain 1: module has ${currentIbcModuleBalance_2} and chain 1 has ${currentTotalIbcDenomBalance_1}`)
         error = true;
     }
 

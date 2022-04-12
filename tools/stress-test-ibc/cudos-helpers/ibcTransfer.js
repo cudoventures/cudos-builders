@@ -2,7 +2,7 @@ import message from "./cosmos/proto";
 import generateIbcTransferTx from "./generateIbcTransferTx";
 import BigNumber from 'bignum';
 import { Cosmos } from "@cosmostation/cosmosjs";
-import { constants, wait } from './utils';
+import { constants, wait, GREEN } from './utils';
 
 import fetch from 'node-fetch';
 
@@ -54,13 +54,22 @@ export default async function ibcTransfer(config, senderMnemonic, dstAddrs, deno
     const authInfo = new message.cosmos.tx.v1beta1.AuthInfo({ signer_infos: [signerInfo], fee: feeValue });
 
     const signedTxBytes = provider.sign(txBody, authInfo, data.account.account_number, privKey);
-    const txHash = (await provider.broadcast(signedTxBytes)).tx_response.txhash;
+    const txBroardcastResp = (await provider.broadcast(signedTxBytes)).tx_response;
     
-    await wait(15, '');
+    if(txBroardcastResp.code != 0){
+        throw new Error(`code ${txBroardcastResp.code}: ${txBroardcastResp.raw_log}`);
+    }
+
+    const txHash = txBroardcastResp.txhash;
+
+    await wait(35, 'for the Tx to pass');
 
     const res = await (await fetch(config.REST + constants.PATH_Q_TX + txHash)).json();
     const txRes = res.tx_response;
 
+    if(!txRes){
+        throw new Error(`txRes is undefined`)
+    }
     if(txRes.code !== 0){
         throw new Error(` code ${txRes.code}: ${txRes.raw_log}`);
     }
