@@ -10,7 +10,8 @@ TO_VERSION="v0.5.0"
 if [ "$(docker container inspect -f '{{.State.Status}}' "$START_CONTAINER_NAME" 2> /dev/null)" = "running" ]; then
     dockerResult=$(docker container exec "$START_CONTAINER_NAME" /bin/bash -c "cudos-noded version" 2>&1);
     if [ "$?" = "0" ]; then
-        containerVersion=$(echo "$dockerResult" | cut -d '-' -f1)
+        containerVersion=$(echo "$dockerResult" | cut -d '-' -f1 | sed 's/^v//')
+        containerVersion="v$containerVersion"
     fi;
 fi
 
