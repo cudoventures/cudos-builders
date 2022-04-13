@@ -1,6 +1,6 @@
 #!/bin/bash -i
 
-if [ "$HAS_ORCHESTRATOR" = "true" ]; then
+if [ "$HAS_ORCHESTRATOR" = "true" ] && [ "$START_THE_ORCHESTRATOR_AFTER_UPDATE" = "true" ]; then
     echo -ne "Starting the orchestrator...";
 
     args=$(cat "$ORCHESTRATOR_ARG_PATH")

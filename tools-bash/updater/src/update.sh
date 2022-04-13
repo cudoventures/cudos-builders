@@ -20,9 +20,11 @@ if [ "$updaterPath" != "updater" ]; then
     exit 1
 fi
 
-source "./src/incs/var.sh"
+source "./src/incs/var.sh" "update"
 
 source "$WORKING_SRC_DIR/incs/utils.sh"
+
+source "$WORKING_SRC_DIR/incs/utils-genesis.sh"
 
 source "$WORKING_SRC_DIR/incs/validate-upgrade.sh"
 

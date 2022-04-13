@@ -24,6 +24,17 @@ fi
 
 source "$WORKING_DIR/config/.env"
 
+if [ "$1" = "gravity" ]; then
+
+    if [ ! -f "$WORKING_DIR/config/gravity.env" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The $WORKING_DIR/config/gravity.env file is missing";
+        exit 1
+    fi
+
+    source "$WORKING_DIR/config/gravity.env"
+
+fi
+
 LOCK_BACKUP_RESTORE="$PARAM_SOURCE_DIR/.backup-restore.lock"
 LOCK_BACKUP_CREATE="$PARAM_SOURCE_DIR/.backup-create.lock"
 LOCK_VALIDATE_PATH="$PARAM_SOURCE_DIR/.validate.lock"
