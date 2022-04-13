@@ -60,12 +60,21 @@ echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 result=$(jq ".app_state.nft.collections[].nfts[].approvedAddresses = []" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
 echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 
+result=$(jq ".app_state.auth.accounts = [.app_state.auth.accounts | map(select(.\"@type\" != \"/cosmos.vesting.v1beta1.PeriodicVestingAccount\"))]" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
+echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
+
+result=$(jq "del(.app_state.vesting)" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
+echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
+
 if [ "$NETWORK_TESTNET_PRIVATE" = "true" ]; then
     result=$(jq ".chain_id = \"cudos-testnet-private-2\"" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
     echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
+
+    setAccountBalanceInAcudosWithoutAuthAccount "$WORKING_MIGRATE_DIR/genesis.tmp.json" "cudos16n3lc7cywa68mg50qhp847034w88pntq8823tx" "1000000000000000000000000000"
+
+    setAccountBalanceInCudosAdmin "$WORKING_MIGRATE_DIR/genesis.tmp.json" "cudos17x2x0d42a8rvnacg2n7m6xsgua80ustt8sau97" "1"
 fi
 
-setAccountBalanceInCudosAdmin "$WORKING_MIGRATE_DIR/genesis.tmp.json" "cudos17x2x0d42a8rvnacg2n7m6xsgua80ustt8sau97" "1"
 
 \cp -f "$WORKING_MIGRATE_DIR/genesis.tmp.json" "$WORKING_MIGRATE_DIR/genesis.migrated.json"
 
