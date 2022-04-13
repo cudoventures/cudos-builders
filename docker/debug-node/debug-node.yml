@@ -25,7 +25,7 @@ services:
       - '../../../CudosGravityBridge:/usr/cudos/CudosGravityBridge'
       - '../../../cosmos-sdk:/usr/cudos/cosmos-sdk'
       - '../../../ibc-go:/usr/cudos/ibc-go'
-      - '../../../CudosData/debug-node:/usr/cudos/cudos-data'
+      - '../../../tendermint:/usr/cudos/tendermint'
 
     networks:
       - shared-cudos-network
