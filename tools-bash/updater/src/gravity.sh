@@ -1,6 +1,6 @@
 #!/bin/bash -i
 
-if ([ $# != "1" ]) || ([ "$1" != "start" ] && [ "$1" != "validate" ]); then
+if ([ $# != "1" ]) || ([ "$1" != "change-contract" ]); then
     echo -e "\033[1;31mError:\033[m Please follow the usage template below";
     echo "Usage: gravity $0 [action]";
     echo '[action] = change-contract';

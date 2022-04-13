@@ -60,13 +60,13 @@ echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 result=$(jq ".app_state.nft.collections[].nfts[].approvedAddresses = []" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
 echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 
-\cp -f "$WORKING_MIGRATE_DIR/genesis.tmp.json" "$WORKING_MIGRATE_DIR/genesis.migrated.json"
-
 if [ "$NETWORK_TESTNET_PRIVATE" = "true" ]; then
     result=$(jq ".chain_id = \"cudos-testnet-private-2\"" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
     echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 fi
 
 setAccountBalanceInCudosAdmin "$WORKING_MIGRATE_DIR/genesis.tmp.json" "cudos17x2x0d42a8rvnacg2n7m6xsgua80ustt8sau97" "1"
+
+\cp -f "$WORKING_MIGRATE_DIR/genesis.tmp.json" "$WORKING_MIGRATE_DIR/genesis.migrated.json"
 
 START_THE_ORCHESTRATOR_AFTER_UPDATE="false"
