@@ -17,7 +17,7 @@ if [[ "$dockerResult" =~ (Gravity deployed at Address[ ]*-[ ]*0x[0-9a-fA-F]+) ]]
     GRAVITY_CONTRACT_ADDRESS=${BASH_REMATCH[1]//Gravity deployed at Address[ ]*-/}
     GRAVITY_CONTRACT_ADDRESS=$(echo $GRAVITY_CONTRACT_ADDRESS | sed 's/ *$//g')
 else
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Cannot find gravity contract address: $result";
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Cannot find gravity contract address: $dockerResult";
     exit 1;
 fi
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";

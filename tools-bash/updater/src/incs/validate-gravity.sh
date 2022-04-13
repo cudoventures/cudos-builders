@@ -17,6 +17,8 @@ if [ "$PARAM_CHAIN_ENDPOINT_26657" = "" ]; then
     exit 1;
 fi
 
+echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+
 source "$WORKING_SRC_DIR/incs/validate-upgrade-params.sh"
 
 source "$WORKING_SRC_DIR/incs/validate-upgrade-network.sh"
@@ -26,4 +28,4 @@ if [ "$HAS_ORCHESTRATOR" != "true" ] || [ "$PARAM_NODE_NAME" != "root-node" ]; t
     exit 1;
 fi
 
-echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+
