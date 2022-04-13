@@ -93,6 +93,16 @@ if [ "$NETWORK_TESTNET_PRIVATE" = "true" ]; then
         }]" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
         echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
     fi
+
+    jq ".app_state.bank.balances | map(.coins) | flatten | map(select(.denom == \"stake\") | .amount)" "$WORKING_MIGRATE_DIR/genesis.tmp.json" > "$tmpGenesisPath"
+    totalSupply=$(sum $tmpGenesisPath)
+    if [ "$totalSupply" != "0" ]; then
+        result=$(jq ".app_state.bank.supply += [{
+            \"amount\": \"$totalSupply\",
+            \"denom\": \"stake\"
+        }]" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
+        echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
+    fi
 fi
 
 
