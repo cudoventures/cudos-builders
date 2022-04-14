@@ -76,33 +76,21 @@ if [ "$NETWORK_TESTNET_PRIVATE" = "true" ]; then
 
     setAccountBalanceInCudosAdmin "$WORKING_MIGRATE_DIR/genesis.tmp.json" "cudos17x2x0d42a8rvnacg2n7m6xsgua80ustt8sau97" "1"
 
-    jq ".app_state.bank.balances | map(.coins) | flatten | map(select(.denom == \"acudos\") | .amount)" "$WORKING_MIGRATE_DIR/genesis.tmp.json" > "$tmpGenesisPath"
-    totalSupply=$(sum $tmpGenesisPath)
-    result=$(jq ".app_state.bank.supply = [{
-        \"amount\": \"$totalSupply\",
-        \"denom\": \"acudos\"
-    }]" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
+    encodedDenoms=$(jq -r ".app_state.bank.supply[].denom | @base64" "$WORKING_MIGRATE_DIR/genesis.tmp.json");
+
+    result=$(jq ".app_state.bank.supply = []" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
     echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 
-    jq ".app_state.bank.balances | map(.coins) | flatten | map(select(.denom == \"cudosAdmin\") | .amount)" "$WORKING_MIGRATE_DIR/genesis.tmp.json" > "$tmpGenesisPath"
-    totalSupply=$(sum $tmpGenesisPath)
-    if [ "$totalSupply" != "0" ]; then
+    for encodedDenom in $encodedDenoms; do
+        decodedDenom=$(echo $encodedDenom | base64 --decode);
+        jq ".app_state.bank.balances | map(.coins) | flatten | map(select(.denom == \"$decodedDenom\") | .amount)" "$WORKING_MIGRATE_DIR/genesis.tmp.json" > "$tmpGenesisPath"
+        totalSupply=$(sum $tmpGenesisPath)
         result=$(jq ".app_state.bank.supply += [{
             \"amount\": \"$totalSupply\",
-            \"denom\": \"cudosAdmin\"
+            \"denom\": \"$decodedDenom\"
         }]" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
         echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
-    fi
-
-    jq ".app_state.bank.balances | map(.coins) | flatten | map(select(.denom == \"stake\") | .amount)" "$WORKING_MIGRATE_DIR/genesis.tmp.json" > "$tmpGenesisPath"
-    totalSupply=$(sum $tmpGenesisPath)
-    if [ "$totalSupply" != "0" ]; then
-        result=$(jq ".app_state.bank.supply += [{
-            \"amount\": \"$totalSupply\",
-            \"denom\": \"stake\"
-        }]" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
-        echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
-    fi
+    done
 fi
 
 

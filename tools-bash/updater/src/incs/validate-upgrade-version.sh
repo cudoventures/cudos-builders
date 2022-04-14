@@ -11,15 +11,13 @@ if [ "$(docker container inspect -f '{{.State.Status}}' "$START_CONTAINER_NAME" 
     dockerResult=$(docker container exec "$START_CONTAINER_NAME" /bin/bash -c "cudos-noded version" 2>&1);
     if [ "$?" = "0" ]; then
         containerVersion=$(echo "$dockerResult" | cut -d '-' -f1 | sed 's/^v//')
-        containerVersion="v$containerVersion"
+        if [ "$containerVersion" != "" ]; then
+            containerVersion="v$containerVersion"
+        fi
     fi;
 fi
 
 result=$(cd "$PARAM_SOURCE_DIR/CudosNode" && git describe --tags 2>&1)
-if [ "$?" != "0" ]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} CudosNode folder error: $result";
-    exit 1;
-fi;
 if [ "$?" = "0" ]; then
     sourceVersion=$(echo "$result" | cut -d '-' -f1)
 fi;

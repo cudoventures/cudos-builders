@@ -1,5 +1,9 @@
 #!/bin/bash -i
 
+echo -ne "Stopping the container...";
+docker stop "$START_CONTAINER_NAME" &> /dev/null
+echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+
 echo -ne "Creating backup lock file...";
 echo "" > "$LOCK_BACKUP_CREATE"
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";

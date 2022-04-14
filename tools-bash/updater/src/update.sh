@@ -29,9 +29,14 @@ source "$WORKING_SRC_DIR/incs/utils-genesis.sh"
 source "$WORKING_SRC_DIR/incs/validate-upgrade.sh"
 
 if [ "$action" = "start" ]; then
-    echo "" > "$LOCK_UPGRADE_PATH"
-
     echo "" # new line
+
+    echo -ne "Cleaning the docker...";
+    dockerResult=$(docker system prune -a -f 2> /dev/null)
+    dockerResult=$(docker container prune -f 2> /dev/null)
+    echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+
+    echo "" > "$LOCK_UPGRADE_PATH"
 
     source "$WORKING_SRC_DIR/modules/docker-ignore.sh"
 
