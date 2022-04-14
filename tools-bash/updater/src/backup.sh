@@ -22,6 +22,8 @@ fi
 
 source "./src/incs/var.sh"
 
+source "$WORKING_SRC_DIR/incs/utils.sh"
+
 source "$WORKING_SRC_DIR/incs/validate-backup.sh"
 
 if [ "$action" = "create" ]; then

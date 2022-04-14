@@ -21,11 +21,11 @@ if [ "$action" = "start" ]; then
     fi
 fi
 
-source "$WORKING_SRC_DIR/incs/validate-backup.sh" "validate"
-
 source "$WORKING_SRC_DIR/incs/validate-upgrade-params.sh"
 
 source "$WORKING_SRC_DIR/incs/validate-upgrade-network.sh"
+
+source "$WORKING_SRC_DIR/incs/validate-backup-folders.sh" "validate"
 
 source "$WORKING_SRC_DIR/incs/validate-upgrade-version.sh"
 
