@@ -1,6 +1,6 @@
 #!/bin/bash -i
 
-echo -ne "Validating gravity...";
+echo -ne "Validating gravity params...";
 
 if [ "$PARAM_ETH_RPC" = "" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_ETH_RPC must not be empty";

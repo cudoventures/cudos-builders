@@ -39,8 +39,8 @@ if [ "$PARAM_NODE_NAME" = "root-node" ] && [ "$PARAM_HAS_ORCHESTRATOR" != "true"
 fi
 
 # validating folders
-if [ ! -d "$PARAM_SOURCE_DIR/CudosData" ]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Data folder is missing - $WORKING_DIR/CudosData does not exists";
+if [ ! -d "$PARAM_SOURCE_DIR/CudosData/$VOLUME_NAME" ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Data folder is missing - $WORKING_DIR/CudosData/$VOLUME_NAME does not exists";
     exit 1;
 fi
 
