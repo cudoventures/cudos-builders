@@ -31,7 +31,3 @@ if [ "$?" != 0 ]; then
 fi
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
-echo -ne "Cleaning the docker...";
-dockerResult=$(docker system prune -a -f 2> /dev/null)
-dockerResult=$(docker container prune -f 2> /dev/null)
-echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";

@@ -1,5 +1,14 @@
 #!/bin/bash -i
 
+echo -ne "Cleaning the docker...";
+dockerResult=$(docker system prune -a -f 2> /dev/null)
+dockerResult=$(docker container prune -f 2> /dev/null)
+echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+
+echo -ne "Stopping the container...";
+docker stop "$START_CONTAINER_NAME" &> /dev/null
+echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+
 if [ "$HAS_ORCHESTRATOR" = "true" ]; then
     echo -ne "Stopping the orchestrator...";
 
