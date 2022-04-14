@@ -143,7 +143,7 @@ class NodesService {
         if (gravity === '1') {
             await validatorSshHelper.exec([
                 `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/root-node`,
-                `echo '\r\nsed -i "158s/enable = false/enable = true/" "\${CUDOS_HOME}/config/app.toml"\r\n' >> ./scripts/init-root.sh`,
+                `echo '\r\nsed -i "/\[grpc\]/,/\[/ s/enable = false/enable = true/" "\${CUDOS_HOME}/config/app.toml"\r\n' >> ./scripts/init-root.sh`,
                 `cat ./scripts/init-root.sh`
             ], true);
         }
