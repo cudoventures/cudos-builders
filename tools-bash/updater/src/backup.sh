@@ -22,9 +22,13 @@ fi
 
 source "./src/incs/var.sh"
 
+source "$WORKING_SRC_DIR/incs/utils.sh"
+
 source "$WORKING_SRC_DIR/incs/validate-backup.sh"
 
 if [ "$action" = "create" ]; then
+    source "$WORKING_SRC_DIR/modules/clean-docker.sh"
+
     source "$WORKING_SRC_DIR/modules/backup-create.sh"
 fi
 

@@ -4,10 +4,6 @@ echo "" # new line
 
 echo -e "${STYLE_BOLD}Exporting the genesis.json:${STYLE_DEFAULT}";
 
-echo -ne "Stopping the container...";
-docker stop "$START_CONTAINER_NAME" &> /dev/null
-echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
-
 echo -ne "Preparing the binary builder...";
 cd "$PARAM_SOURCE_DIR/CudosBuilders/docker/binary-builder"
 dockerResult=$(docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder build 2>&1)
