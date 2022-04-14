@@ -19,6 +19,7 @@ services:
     restart: unless-stopped
     environment:
       - CUDOS_HOME=$CUDOS_HOME
+    env_file: "$ENV_FILE"
     volumes:
       - '../../../CudosBuilders:/usr/cudos/CudosBuilders'
       - '../../../CudosNode:/usr/cudos/CudosNode'
