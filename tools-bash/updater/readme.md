@@ -70,7 +70,7 @@ There are 3 scripts - <em>update</em>, <em>backup</em> and <em>gravity</em>.
 
 ## Backup
 
-Backup script has for usages:
+Backup script has four usages:
 
 ### Create a backup
 The command below creates a backup of current source files and data files.
@@ -122,15 +122,15 @@ The command changes the network contract and starts an orchestrator
 sudo ./src/gravity.sh change-contract
 ```
 
-## Lanch sequence
+## Launch sequence
 
 1. Create a backup
     
-    <em>Note:</em> Creating of a backup could take a lot of time. It is very important to do it ONCE upgrade hight has been reached NOT before that. Make sure there is no any error messages in the console. If something went wrong you can always re-create the backup. Make sure that the backup is correct (You can check it using <em>Validate a backup</em>) before proceeding to the next step.
+    <em>Note:</em> Creating of a backup could take a lot of time. It is very important to do it ONCE upgrade hight has been reached NOT before that. Make sure there is no error messages in the console. If something went wrong you can always re-create the backup. Make sure that the backup is correct (You can check it using <em>Validate a backup</em>) before proceeding to the next step.
 
 2. Validate
 
-    <em>Note:</em> The validate command will print the information about current node. Read id carefully and proceed with the next step only if this information is valid. If it is not valid, please contact CUDOS and make the appropriate changes. If the changes involes any of the previously backup-ed files, you must re-create the backup.
+    <em>Note:</em> The validate command will print the information about current node. Read it carefully and proceed with the next step only if this information is valid. If it is not valid, please contact CUDOS and make the appropriate changes. If the changes invole any of the previously backup-ed files, you must re-create the backup.
 
 3. Upgrade
 
@@ -138,5 +138,5 @@ sudo ./src/gravity.sh change-contract
 
 4. Gravity (only for root-nodes and only if the operator of the root node has special instruction to do so!)
 
-    <em>Note: </em> This step MUST NOT be done in production. It deploys a new gravity contract and a new orchestrator. It MUST only be execute if explicitly stated. It MUST be executed when the network has started producing blocks after the upgrade, in other words - when 2/3 of genesis validator are online.
+    <em>Note: </em> This step MUST NOT be done in production. It deploys a new gravity contract and a new orchestrator. It MUST only be executed if explicitly stated. It MUST be executed when the network has started producing blocks after the upgrade, in other words - when 2/3 of genesis validator are online.
 
