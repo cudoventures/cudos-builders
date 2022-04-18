@@ -66,5 +66,3 @@ else
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Unsupported upgrade of $(getNetworkName) from $UPDATE_TO_VERSION to $UPDATE_TO_VERSION";
     exit 1;
 fi
-
-echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
