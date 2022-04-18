@@ -58,4 +58,13 @@ fi
 UPDATE_FROM_VERSION="$sourceVersion"
 DO_HARD_FORK="true"
 
+if [ "$NETWORK_TESTNET_PRIVATE" = "true" ] && [ "$UPDATE_FROM_VERSION" = "v0.3" ] && [ "$UPDATE_TO_VERSION" = "v0.6.0" ] && [ "$DO_HARD_FORK" = "true" ]; then
+    echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}"
+elif [ "$NETWORK_DRESSREHEARSAL" = "true" ] && [ "$UPDATE_FROM_VERSION" = "v0.5.0" ] && [ "$UPDATE_TO_VERSION" = "v0.6.0" ] && [ "$DO_HARD_FORK" = "true" ]; then
+    echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}"
+else
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Unsupported upgrade of $(getNetworkName) from $UPDATE_TO_VERSION to $UPDATE_TO_VERSION";
+    exit 1;
+fi
+
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
