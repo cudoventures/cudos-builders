@@ -21,8 +21,8 @@ ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/gravity-contract-deployer && sed -i \"s~ETH_NODE=.*~ETH_NODE=\\\"$PARAM_ETH_RPC\\\"~g\" ./gravity-contract-deployer.env"
 ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/gravity-contract-deployer && sed -i \"s/ETH_PRIV_KEY_HEX=.*/ETH_PRIV_KEY_HEX=\\\"$PARAM_CONTRACT_DEPLOYER_ETH_PRIV_KEY\\\"/g\" ./gravity-contract-deployer.env"
 
-result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/gravity-contract-deployer && sudo docker-compose --env-file ./gravity-contract-deployer.arg -f ./gravity-contract-deployer.yml -p cudos-gravity-contract-deployer down 2> /dev/null")
-result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/gravity-contract-deployer && sudo docker-compose --env-file ./gravity-contract-deployer.arg -f ./gravity-contract-deployer.yml -p cudos-gravity-contract-deployer up --build 2> /dev/null")
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/gravity-contract-deployer && sudo docker-compose --env-file ./gravity-contract-deployer.arg -f ./gravity-contract-deployer.yml -p cudos-gravity-contract-deployer down" 2>&1)
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/gravity-contract-deployer && sudo docker-compose --env-file ./gravity-contract-deployer.arg -f ./gravity-contract-deployer.yml -p cudos-gravity-contract-deployer up --build" 2>&1)
 if [ "$?" != 0 ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
     exit 1;
@@ -37,7 +37,7 @@ fi
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Clean-up after the deployment of the gravity smart contract...";
-result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/gravity-contract-deployer && sudo docker-compose --env-file ./gravity-contract-deployer.arg -f ./gravity-contract-deployer.yml -p cudos-gravity-contract-deployer down 2> /dev/null")
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/gravity-contract-deployer && sudo docker-compose --env-file ./gravity-contract-deployer.arg -f ./gravity-contract-deployer.yml -p cudos-gravity-contract-deployer down" 2>&1)
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Starting the orchestrator...";
@@ -51,7 +51,7 @@ arg=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComp
 orchestratorStartContainerName=$(readEnvFromString "$arg" "CONTAINER_NAME")
 unset arg
 
-result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator && sudo docker-compose --env-file ./orchestrator.mainnet.arg -f ./orchestrator.release.yml -p $orchestratorStartContainerName up --build -d 2> /dev/null")
+result=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator && sudo docker-compose --env-file ./orchestrator.mainnet.arg -f ./orchestrator.release.yml -p $orchestratorStartContainerName up --build -d" 2>&1)
 if [ "$?" != 0 ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
     exit 1;

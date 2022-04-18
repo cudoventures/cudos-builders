@@ -20,15 +20,15 @@ if [ "$validatorOperatorAddress" = "" ] || [ "$validatorOperatorAddress" = "null
     exit 1;
 fi
 
-dockerResult=$(docker container exec "$validatorStartContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys delete orchestrator -y --keyring-backend os 2> /dev/null");
-dockerResult=$(docker container exec "$validatorStartContainerName" /bin/bash -c "(echo \"$orchestratorMnemonic\"; echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys add orchestrator --recover --keyring-backend os 2> /dev/null");
+dockerResult=$(docker container exec "$validatorStartContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys delete orchestrator -y --keyring-backend os" 2>&1);
+dockerResult=$(docker container exec "$validatorStartContainerName" /bin/bash -c "(echo \"$orchestratorMnemonic\"; echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys add orchestrator --recover --keyring-backend os" 2>&1);
 if [ "$?" != 0 ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error importing your orchestrator account $?: ${dockerResult}";
     exit 1;
 fi;
 orchestratorAddress=$(docker container exec "$validatorStartContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys show orchestrator -a --keyring-backend os");
 
-dockerResult=$(docker container exec "$validatorStartContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded tx gravity set-orchestrator-address \"$validatorOperatorAddress\" \"$orchestratorAddress\" \"$PARAM_ORCH_ETH_ADDRESS\" --from validator --keyring-backend os --chain-id cudos-1 -y 2> /dev/null");
+dockerResult=$(docker container exec "$validatorStartContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded tx gravity set-orchestrator-address \"$validatorOperatorAddress\" \"$orchestratorAddress\" \"$PARAM_ORCH_ETH_ADDRESS\" --from validator --keyring-backend os --chain-id cudos-1 -y" 2>&1);
 transactionHeight=$(echo "$dockerResult" | jq '.height')
 transactionHeight=${transactionHeight//\"/}
 if [ "$?" != 0 ] || [ "$transactionHeight" = "0" ] || [[ "$dockerResult" =~ .*"failed".* ]]; then
@@ -46,7 +46,7 @@ arg=$(cat "./orchestrator.mainnet.arg")
 orchestratorStartContainerName=$(readEnvFromString "$arg" "CONTAINER_NAME")
 unset arg
 
-result=$(sudo docker-compose --env-file ./orchestrator.mainnet.arg -f ./orchestrator.release.yml -p $orchestratorStartContainerName up --build -d 2> /dev/null)
+result=$(sudo docker-compose --env-file ./orchestrator.mainnet.arg -f ./orchestrator.release.yml -p $orchestratorStartContainerName up --build -d 2>&1)
 if [ "$?" != 0 ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
     exit 1;
