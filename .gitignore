@@ -25,3 +25,4 @@ tools-bash/launcher/src/genesis.sh
 tools-bash/launcher/exports
 tools-bash/updater/emergency-backup
 tools-bash/updater/migrate
+tools/init-local-node-without-docker/cudos-data
