@@ -8,9 +8,8 @@ const N_ADDRESSES = config.TEST.NUMBER_OF_ADDRESSES;
 const N_TESTS = config.TEST.NUMBER_OF_TESTS;
 const MAX_ACUDOS_PER_ADDRESS = new BigNumber(config.TEST.MAX_ACUDOS_PER_ADDRESS);
 
-const BLOCKS_TO_WAIT = 5;
+const BLOCKS_TO_WAIT = 10;
 const BLOCK_TIME = 7; //in seconds
-const FAUCET_FUNDS = MAX_ACUDOS_PER_ADDRESS.mul(N_TESTS + 1).mul(N_ADDRESSES);
 
 async function runTest() {
     // setup
@@ -35,14 +34,17 @@ async function runTest() {
 
     // checks for enough faucet balances
     const cudosFaucetBalance_1 = await getCudosAddressBalance(cudosFaucetAddress_1, config.NETWORK_1.REST);
-    const cudosFaucetBalanceNeeded_1 = cudosBalancePerAddressNeeded_1.add(cudosFeePerMsg_1).mul(N_ADDRESSES*N_TESTS).add(FAUCET_FUNDS);
+    const cudosFaucetBalanceNeeded_1 = cudosBalancePerAddressNeeded_1.mul(N_ADDRESSES*N_TESTS).mul(4);
+    const FAUCET_FUNDS_1 = cudosFaucetBalanceNeeded_1.div(4);
     if (cudosFaucetBalance_1.lt(cudosFaucetBalanceNeeded_1)) {
         console.log(RED, `Not enough acudos balance in CUDOS faucet - needed ${cudosFaucetBalanceNeeded_1.toString()}acudos, got ${cudosFaucetBalance_1.toString()}acudos`);
         return;
     }
 
     const cudosFaucetBalance_2 = await getCudosAddressBalance(cudosFaucetAddress_2, config.NETWORK_2.REST);
-    const cudosFaucetBalanceNeeded_2 = cudosBalancePerAddressNeeded_2.add(cudosFeePerMsg_2).mul(N_ADDRESSES*N_TESTS).add(FAUCET_FUNDS);
+    const cudosFaucetBalanceNeeded_2 = cudosBalancePerAddressNeeded_2.mul(N_ADDRESSES*N_TESTS*4);
+    const FAUCET_FUNDS_2 = cudosFaucetBalanceNeeded_2.div(4);
+
     if (cudosFaucetBalance_2.lt(cudosFaucetBalanceNeeded_2)) {
         console.log(RED, `Not enough acudos balance in CUDOS faucet - needed ${cudosFaucetBalanceNeeded_2.toString()}acudos, got ${cudosFaucetBalance_2.toString()}acudos`);
         return;
@@ -61,10 +63,10 @@ async function runTest() {
     //fund addressed to be used for ibc denom => acudos sends
     console.log(GREEN, 'Funding ibcDenom faucets...')
     console.log(GREEN, "Sending acudos to denom faucet on network 1...");
-    await ibcTransfer(config.NETWORK_1, faucetMnemonic_1, [cudosFaucetAddress_2], 'acudos', new BigNumber(FAUCET_FUNDS));
+    await ibcTransfer(config.NETWORK_1, faucetMnemonic_1, [cudosFaucetAddress_2], 'acudos', new BigNumber(FAUCET_FUNDS_1));
 
     console.log(GREEN, "Sending acudos to denom faucet on network 2...");
-    await ibcTransfer(config.NETWORK_2, faucetMnemonic_2, [cudosFaucetAddress_1], 'acudos', new BigNumber(FAUCET_FUNDS));
+    await ibcTransfer(config.NETWORK_2, faucetMnemonic_2, [cudosFaucetAddress_1], 'acudos', new BigNumber(FAUCET_FUNDS_2));
 
     await wait(BLOCKS_TO_WAIT * BLOCK_TIME, 'Waiting ibcDenom funds to pass...');
 
