@@ -28,16 +28,16 @@ do
     arg=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && cat ./sentry-node.mainnet.arg")
     startContainerName=$(readEnvFromString "$arg" "START_CONTAINER_NAME")
     unset arg
-    result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sudo docker stop $startContainerName 2> /dev/null")
+    result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sudo docker stop $startContainerName" 2>&1)
     ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR && sudo rm -rf ./CudosData"
 
     echo -ne "Cleaning the docker...";
-    result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "sudo docker system prune -a -f 2> /dev/null")
-    result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "sudo docker container prune -f 2> /dev/null")
+    result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "sudo docker system prune -a -f" 2>&1)
+    result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "sudo docker container prune -f" 2>&1)
     echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
     echo -ne "Preparing sentry($i)'s binary builder...";
-    result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/binary-builder && sudo docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder build 2> /dev/null")
+    result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/binary-builder && sudo docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder build" 2>&1)
     if [ "$?" != 0 ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
         exit 1;
@@ -58,12 +58,12 @@ do
     echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
     echo -ne "Stopping previous instances of the sentry($i)...";
-    result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sudo docker-compose --env-file ./sentry-node.mainnet.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node down 2> /dev/null")
-    result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sudo docker-compose --env-file ./sentry-node.mainnet.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node down 2> /dev/null")
+    result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sudo docker-compose --env-file ./sentry-node.mainnet.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node down" 2>&1)
+    result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sudo docker-compose --env-file ./sentry-node.mainnet.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node down" 2>&1)
     echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
     echo -ne "Initializing sentry($i)...";
-    result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sudo docker-compose --env-file ./sentry-node.mainnet.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node up --build 2> /dev/null")
+    result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sudo docker-compose --env-file ./sentry-node.mainnet.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node up --build" 2>&1)
     if [ "$?" != 0 ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
         exit 1;
@@ -71,7 +71,7 @@ do
     echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
     echo -ne "Clean-up after the initialization of the sentry($i)...";
-    result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sudo docker-compose --env-file ./sentry-node.mainnet.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node down 2> /dev/null")
+    result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sudo docker-compose --env-file ./sentry-node.mainnet.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node down" 2>&1)
     if [ "$?" != 0 ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
         exit 1;
@@ -85,7 +85,7 @@ do
     if [ "$monitoringEnabled" = "false" ]; then
         ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sed -i \"/{PORT26660}:26660/d\" ./start-sentry-node.yml"
     fi
-    result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sudo docker-compose --env-file ./sentry-node.mainnet.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node up --build -d 2> /dev/null")
+    result=$(ssh -o "StrictHostKeyChecking no" ${sentryComputerUser}@${sentryComputerIp} -p ${sentryComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node && sudo docker-compose --env-file ./sentry-node.mainnet.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node up --build -d" 2>&1)
     if [ "$?" != 0 ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
         exit 1;
