@@ -62,6 +62,9 @@ echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 result=$(jq "del(.app_state.vesting)" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
 echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 
+result=$(jq "del(.app_state.bank.params.send_enabled)" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
+echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
+
 if [ "$NETWORK_DRESSREHEARSAL" = "true" ]; then
     result=$(jq ".chain_id = \"cudos-dressrehearsal-2\"" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
     echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
