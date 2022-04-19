@@ -19,12 +19,15 @@ WORKDIR /usr/cudos
 
 COPY ./CudosBuilders/docker/root-node/root-node.local.env ./init.sh
 
+COPY ./CudosBuilders/docker/debug-node/.env ./env-debug.sh
+
 COPY ./CudosBuilders/docker/root-node/scripts/init-root.sh ./init-root.sh
 
-COPY ./CudosBuilders/docker/root-node/scripts/debug-init.sh ./debug-init.sh
+COPY ./CudosBuilders/docker/debug-node/scripts/init-debug.sh ./init-debug.sh
 
-RUN echo "\n$(cat ./init-root.sh)" >> ./init.sh && \
-    echo "\n$(cat ./debug-init.sh)" >> ./init.sh && \
+RUN echo "\n$(cat ./env-debug.sh)" >> ./init.sh && \
+    echo "\n$(cat ./init-root.sh)" >> ./init.sh && \
+    echo "\n$(cat ./init-debug.sh)" >> ./init.sh && \
     rm -f ./init-root.sh && \
     chmod +x ./init.sh
 
@@ -32,7 +35,5 @@ RUN chown -R ${USER_NAME}:${GROUP_NAME} /usr/cudos
 
 USER ${USER_NAME}
 
-ENV ZERO_GAS_PRICE=${ZERO_GAS_PRICE}
-ENV OPEN_ALL_PORTS=${OPEN_ALL_PORTS}
 
 CMD ["sleep", "infinity"]
