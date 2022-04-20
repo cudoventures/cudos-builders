@@ -830,3 +830,17 @@ CREATE TABLE cosmwasm_clear_admin
 
 CREATE INDEX cosmwasm_clear_admin_sender_index ON cosmwasm_clear_admin (sender);
 CREATE INDEX cosmwasm_clear_admin_contract_index ON cosmwasm_clear_admin (contract);
+
+CREATE TABLE proposal_vote_weighted
+(
+    proposal_id   INTEGER NOT NULL REFERENCES proposal (id),
+    voter_address TEXT    NOT NULL REFERENCES account (address),
+    option        TEXT    NOT NULL,
+    weight        TEXT    NOT NULL,
+    height        BIGINT  NOT NULL,
+    CONSTRAINT unique_vote_weighted UNIQUE (proposal_id, voter_address, option)
+);
+
+CREATE INDEX proposal_vote_weighted_proposal_id_index ON proposal_vote_weighted (proposal_id);
+CREATE INDEX proposal_vote_weighted_voter_address_index ON proposal_vote_weighted (voter_address);
+CREATE INDEX proposal_vote_weighted_height_index ON proposal_vote_weighted (height);
