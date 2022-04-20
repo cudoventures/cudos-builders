@@ -180,7 +180,7 @@ if [ ! -x "$(command -v docker-compose)" ]; then
 fi
 
 freeSpaceInKiB=$(df -P "$PARAM_SOURCE_DIR" | tail -1 | awk '{print $4}')
-freeSpaceRequirementInKiB=500000000
+freeSpaceRequirementInKiB=5000000
 if (( freeSpaceInKiB < freeSpaceRequirementInKiB )); then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Free space is less than $freeSpaceRequirementInKiB KiB (Available = $freeSpaceInKiB KiB)";
     exit 1;
