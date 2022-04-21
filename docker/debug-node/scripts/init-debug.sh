@@ -21,3 +21,8 @@ if [ "$ZERO_GAS_PRICE" = "true" ]; then
     # gas price
     sed -i "s/minimum-gas-prices = \".*\"/minimum-gas-prices = \"0acudos\"/" "${CUDOS_HOME}/config/app.toml"
 fi;
+
+if [ "$VOTING_PERIOD" != "" ]; then
+    genesisJson=$(jq ".app_state.gov.voting_params.voting_period = \"$VOTING_PERIOD\"" "${CUDOS_HOME}/config/genesis.json")
+    echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
+fi
