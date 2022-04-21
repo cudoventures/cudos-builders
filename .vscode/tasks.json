@@ -8,6 +8,25 @@
             "type": "shell",
             "group": "build"
         },
+        //TENDERMINT load test
+        {
+            "label": "Run TENDERMINT LOAD TEST LOCAL in docker",
+            "command": "cd ./docker/tendermint-load-tester && docker-compose --env-file ./tendermint-load-tester.local.arg -f ./tendermint-load-tester.yml -p tendermint-load-tester up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Run TENDERMINT LOAD TEST PRIVATE in docker",
+            "command": "cd ./docker/tendermint-load-tester && docker-compose --env-file ./tendermint-load-tester.private.arg -f ./tendermint-load-tester.yml -p tendermint-load-tester up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Run TENDERMINT LOAD TEST PUBLIC in docker",
+            "command": "cd ./docker/tendermint-load-tester && docker-compose --env-file ./tendermint-load-tester.public.arg -f ./tendermint-load-tester.yml -p tendermint-load-tester up --build",
+            "type": "shell",
+            "group": "build"
+        },
         //hermes-ibc-relayer
         {
             "label": "Build HERMES-IBC-RELAYER BINARY BUILDER in docker",

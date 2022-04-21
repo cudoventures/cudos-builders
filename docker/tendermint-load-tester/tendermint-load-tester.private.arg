@@ -1,0 +1,2 @@
+TESTER_HOME=/usr/tendermint
+ENV_FILE=./tendermint-load-tester.private.env
