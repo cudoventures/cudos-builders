@@ -172,6 +172,30 @@ if [ "$PARAM_NODE_NAME" = "seed-node" ]; then
         fi
     fi
 
+    if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.mainnet.env" ]; then
+        NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.mainnet.arg"
+        NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.mainnet.env"
+        args=$(cat "$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.mainnet.arg")
+        volumeName=$(readEnvFromString "$args" "VOLUME_NAME")
+        if [ -f "$PARAM_SOURCE_DIR/CudosData/$volumeName/config/genesis.json" ]; then
+            tokenContractAddress=$(jq ".app_state.gravity.erc20_to_denoms[0].erc20" "$PARAM_SOURCE_DIR/CudosData/$volumeName/config/genesis.json")
+            tokenContractAddress=${tokenContractAddress//\"/}
+            if [ "$tokenContractAddress" = "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d" ] || [ "$tokenContractAddress" = "0x12d474723cb8c02bcbf46cd335a3bb4c75e9de44" ]; then
+                NETWORK_DRESSREHEARSAL="true"
+                source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+                networkIdentified="true"
+            fi
+            if [ "$tokenContractAddress" = "0x817bbDbC3e8A1204f3691d14bB44992841e3dB35" ]; then
+                NETWORK_MAINNET="true"
+                source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+                networkIdentified="true"
+            fi
+            unset args
+            unset volumeName
+            unset tokenContractAddress
+        fi
+    fi
+
 fi
 
 if [ "$PARAM_NODE_NAME" = "sentry-node" ]; then
@@ -258,6 +282,30 @@ if [ "$PARAM_NODE_NAME" = "sentry-node" ]; then
         fi
     fi
 
+    if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.mainnet.env" ]; then
+        NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.mainnet.arg"
+        NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.mainnet.env"
+        args=$(cat "$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.mainnet.arg")
+        volumeName=$(readEnvFromString "$args" "VOLUME_NAME")
+        if [ -f "$PARAM_SOURCE_DIR/CudosData/$volumeName/config/genesis.json" ]; then
+            tokenContractAddress=$(jq ".app_state.gravity.erc20_to_denoms[0].erc20" "$PARAM_SOURCE_DIR/CudosData/$volumeName/config/genesis.json")
+            tokenContractAddress=${tokenContractAddress//\"/}
+            if [ "$tokenContractAddress" = "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d" ] || [ "$tokenContractAddress" = "0x12d474723cb8c02bcbf46cd335a3bb4c75e9de44" ]; then
+                NETWORK_DRESSREHEARSAL="true"
+                source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+                networkIdentified="true"
+            fi
+            if [ "$tokenContractAddress" = "0x817bbDbC3e8A1204f3691d14bB44992841e3dB35" ]; then
+                NETWORK_MAINNET="true"
+                source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+                networkIdentified="true"
+            fi
+            unset args
+            unset volumeName
+            unset tokenContractAddress
+        fi
+    fi
+
 fi
 
 if [ "$PARAM_NODE_NAME" = "full-node" ]; then
@@ -318,6 +366,30 @@ if [ "$PARAM_NODE_NAME" = "full-node" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.client.mainnet.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.client.mainnet.env"
         args=$(cat "$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.client.mainnet.arg")
+        volumeName=$(readEnvFromString "$args" "VOLUME_NAME")
+        if [ -f "$PARAM_SOURCE_DIR/CudosData/$volumeName/config/genesis.json" ]; then
+            tokenContractAddress=$(jq ".app_state.gravity.erc20_to_denoms[0].erc20" "$PARAM_SOURCE_DIR/CudosData/$volumeName/config/genesis.json")
+            tokenContractAddress=${tokenContractAddress//\"/}
+            if [ "$tokenContractAddress" = "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d" ] || [ "$tokenContractAddress" = "0x12d474723cb8c02bcbf46cd335a3bb4c75e9de44" ]; then
+                NETWORK_DRESSREHEARSAL="true"
+                source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+                networkIdentified="true"
+            fi
+            if [ "$tokenContractAddress" = "0x817bbDbC3e8A1204f3691d14bB44992841e3dB35" ]; then
+                NETWORK_MAINNET="true"
+                source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+                networkIdentified="true"
+            fi
+            unset args
+            unset volumeName
+            unset tokenContractAddress
+        fi
+    fi
+
+    if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.mainnet.env" ]; then
+        NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.mainnet.arg"
+        NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.mainnet.env"
+        args=$(cat "$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.mainnet.arg")
         volumeName=$(readEnvFromString "$args" "VOLUME_NAME")
         if [ -f "$PARAM_SOURCE_DIR/CudosData/$volumeName/config/genesis.json" ]; then
             tokenContractAddress=$(jq ".app_state.gravity.erc20_to_denoms[0].erc20" "$PARAM_SOURCE_DIR/CudosData/$volumeName/config/genesis.json")
