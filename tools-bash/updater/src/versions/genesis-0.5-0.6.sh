@@ -69,6 +69,9 @@ if [ "$NETWORK_DRESSREHEARSAL" = "true" ]; then
     result=$(jq ".chain_id = \"cudos-dressrehearsal-2\"" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
     echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 
+    distributionAddress=$(getModuleAddress "$WORKING_MIGRATE_DIR/genesis.tmp.json" "distribution")
+    setAccountBalanceInAcudosWithoutAuthAccount "$WORKING_MIGRATE_DIR/genesis.tmp.json" "$distributionAddress" "18308656328740320386054741"
+
     setAccountBalanceInCudosAdmin "$WORKING_MIGRATE_DIR/genesis.tmp.json" "cudos19m4ez024zrquym4vsku7gj4z78mdhazera5q2s" "1"
 
     encodedDenoms=$(jq -r ".app_state.bank.supply[].denom | @base64" "$WORKING_MIGRATE_DIR/genesis.tmp.json");
