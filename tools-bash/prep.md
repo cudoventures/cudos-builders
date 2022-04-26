@@ -49,7 +49,7 @@ Clone the correct branches from the [CudosNode](https://github.com/CudoVentures/
 
 ```
 git clone --depth 1 --branch v0.6.0 https://github.com/CudoVentures/cudos-node.git CudosNode
-git clone --depth 1 --branch v0.6.3  https://github.com/CudoVentures/cudos-builders.git CudosBuilders
+git clone --depth 1 --branch v0.6.0  https://github.com/CudoVentures/cudos-builders.git CudosBuilders
 git clone --depth 1 --branch v0.6.0 https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge
 ```
 
