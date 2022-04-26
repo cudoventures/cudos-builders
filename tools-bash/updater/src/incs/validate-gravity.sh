@@ -17,6 +17,11 @@ if [ "$PARAM_CHAIN_ENDPOINT_26657" = "" ]; then
     exit 1;
 fi
 
+if [ "$PARAM_ETHERSCAN_API_KEY" = "" ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_ETHERSCAN_API_KEY must not be empty";
+    exit 1;
+fi
+
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 source "$WORKING_SRC_DIR/incs/validate-upgrade-params.sh"
@@ -30,7 +35,9 @@ fi
 
 if [ "$NETWORK_MAINNET" = "true" ]; then
     CUDOS_ACCESS_CONTROL_ADDRESS=""
+    GRAVITY_DEFAULT_NETWORK="mainnet"
 else
     CUDOS_ACCESS_CONTROL_ADDRESS="0xf50E29dB8bf318fB61Ac6688578dc0CD35EA8142"
+    GRAVITY_DEFAULT_NETWORK="rinkeby"
 fi
 
