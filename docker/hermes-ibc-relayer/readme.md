@@ -22,7 +22,7 @@ $ cudos-noded tx ibc-transfer transfer transfer channel-0 cudos15hkd2zzyug7v2cv3
 
 When channels are created, transaction fees are taken from both accounts that are registered with the relayer.
 
-When a token transaction is created, transaction fees are taken only from the relayer account on the netwrok FROM which the tokens are sent.
+When a token transaction is created, transaction fees are taken from both relayer accounts.
 
 ## Transfering tokens
 The most used feature of IBC is to send tokens from one blockchain to another. When sending a token to another blockchain, a token voucher is generated on the other (target) blockchain.

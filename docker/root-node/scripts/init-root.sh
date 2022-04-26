@@ -112,13 +112,13 @@ genesisJson=$(jq ".app_state.gov.tally_params.veto_threshold = \"0.4\"" "${CUDOS
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 
 # bank params
-genesisJson=$(jq ".app_state.bank.params.send_enabled = [
-  {
-    \"denom\": \"cudosAdmin\",
-    \"enabled\": false
-  }
-]" "${CUDOS_HOME}/config/genesis.json")
-echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
+# genesisJson=$(jq ".app_state.bank.params.send_enabled = [
+#   {
+#     \"denom\": \"cudosAdmin\",
+#     \"enabled\": false
+#   }
+# ]" "${CUDOS_HOME}/config/genesis.json")
+# echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 
 # distribution params
 genesisJson=$(jq ".app_state.distribution.params.community_tax = \"0.2\"" "${CUDOS_HOME}/config/genesis.json")

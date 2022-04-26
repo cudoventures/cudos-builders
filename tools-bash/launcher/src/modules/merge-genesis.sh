@@ -61,7 +61,7 @@ done
 result=$(jq ".initial_height = \"1\"" "$RESULT_GENESIS_PATH")
 echo $result > "$RESULT_GENESIS_PATH"
 
-result=$(jq ".app_state.cudoMint.minter.norm_time_passed = \"0.000\"" "$RESULT_GENESIS_PATH")
+result=$(jq ".app_state.cudoMint.minter.norm_time_passed = \"0.9678829209\"" "$RESULT_GENESIS_PATH")
 echo $result > "$RESULT_GENESIS_PATH"
 
 result=$(jq '.app_state.distribution.fee_pool.community_pool = []' "$RESULT_GENESIS_PATH")

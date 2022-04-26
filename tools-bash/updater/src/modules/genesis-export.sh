@@ -32,7 +32,11 @@ echo -ne "Exporting the data...";
 # docker container exec "$START_CONTAINER_NAME" /bin/bash -c "rm -rf \"\$CUDOS_HOME/backup\"" &> /dev/null;
 # docker container exec "$START_CONTAINER_NAME" /bin/bash -c "mkdir -p \"\$CUDOS_HOME/backup\""  &> /dev/null;
 # docker container exec "$START_CONTAINER_NAME" /bin/bash -c "cudos-noded export |& tee \"\$CUDOS_HOME/backup/genesis.exported.json\""  &> /dev/null;
-docker container exec "$START_CONTAINER_NAME" /bin/bash -c "cudos-noded export" |& tee "$WORKING_MIGRATE_DIR/genesis.exported.json" &> /dev/null;
+dockerResult=$(docker container exec "$START_CONTAINER_NAME" /bin/bash -c "cudos-noded export" |& tee "$WORKING_MIGRATE_DIR/genesis.exported.json" 2>&1)
+if [ "$?" != 0 ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} You synced your node using state_sync and thus you cannot export the data $?: ${dockerResult}";
+    exit 1;
+fi
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Stopping the container...";

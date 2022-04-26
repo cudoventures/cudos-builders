@@ -32,8 +32,11 @@ echo -ne "Migrating genesis.json...";
 \cp -f "$WORKING_MIGRATE_DIR/genesis.exported.json" "$WORKING_MIGRATE_DIR/genesis.migrated.json"
 
 if [ "$UPDATE_FROM_VERSION" = "v0.3" ] && [ "$UPDATE_TO_VERSION" = "v0.6.0" ]; then
-    # no need to execute cudos-noded migrate because both version are running 0.44
+    # no need to execute cudos-noded migrate because both version are running cosmos-sdk-0.44
     source "$WORKING_SRC_VERSIONS_DIR/genesis-0.3-0.6.sh"
+elif [ "$UPDATE_FROM_VERSION" = "v0.5.0" ] && [ "$UPDATE_TO_VERSION" = "v0.6.0" ]; then
+    # no need to execute cudos-noded migrate because both version are running cosmos-sdk-0.44
+    source "$WORKING_SRC_VERSIONS_DIR/genesis-0.5-0.6.sh"
 fi
 
 \cp -f "$WORKING_MIGRATE_DIR/genesis.migrated.json" "$VOLUME_PATH/config/genesis.json"

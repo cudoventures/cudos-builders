@@ -13,6 +13,8 @@ echo -ne "Migrating config files...";
 
 if [ "$UPDATE_FROM_VERSION" = "v0.3" ] && [ "$UPDATE_TO_VERSION" = "v0.6.0" ]; then
     source "$WORKING_SRC_VERSIONS_DIR/configs-0.3-0.6.sh"
+elif [ "$UPDATE_FROM_VERSION" = "v0.5.0" ] && [ "$UPDATE_TO_VERSION" = "v0.6.0" ]; then
+    source "$WORKING_SRC_VERSIONS_DIR/configs-0.5-0.6.sh"
 fi
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 

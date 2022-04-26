@@ -28,4 +28,9 @@ if [ "$HAS_ORCHESTRATOR" != "true" ] || [ "$PARAM_NODE_NAME" != "root-node" ]; t
     exit 1;
 fi
 
+if [ "$NETWORK_MAINNET" = "true" ]; then
+    CUDOS_ACCESS_CONTROL_ADDRESS=""
+else
+    CUDOS_ACCESS_CONTROL_ADDRESS="0xf50E29dB8bf318fB61Ac6688578dc0CD35EA8142"
+fi
 
