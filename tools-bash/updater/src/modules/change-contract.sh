@@ -7,6 +7,8 @@ sed -i "s~COSMOS_NODE=.*~COSMOS_NODE=\"$PARAM_CHAIN_ENDPOINT_26657\"~g" ./gravit
 sed -i "s~ETH_NODE=.*~ETH_NODE=\"$PARAM_ETH_RPC\"~g" ./gravity-contract-deployer.env
 sed -i "s/ETH_PRIV_KEY_HEX=.*/ETH_PRIV_KEY_HEX=\"$PARAM_CONTRACT_DEPLOYER_ETH_PRIV_KEY\"/g" ./gravity-contract-deployer.env
 sed -i "s/CUDOS_ACCESS_CONTROL_ADDRESS=.*/CUDOS_ACCESS_CONTROL_ADDRESS=\"$CUDOS_ACCESS_CONTROL_ADDRESS\"/g" ./gravity-contract-deployer.env
+sed -i "s/DEFAULT_NETWORK=.*/DEFAULT_NETWORK=\"$GRAVITY_DEFAULT_NETWORK\"/g" ./gravity-contract-deployer.env
+sed -i "s/ETHERSCAN_API_KEY=.*/ETHERSCAN_API_KEY=\"$PARAM_ETHERSCAN_API_KEY\"/g" ./gravity-contract-deployer.env
 
 dockerResult=$(docker-compose --env-file ./gravity-contract-deployer.arg -f ./gravity-contract-deployer.yml -p cudos-gravity-contract-deployer down 2>&1);
 dockerResult=$(docker-compose --env-file ./gravity-contract-deployer.arg -f ./gravity-contract-deployer.yml -p cudos-gravity-contract-deployer up --build 2>&1);
