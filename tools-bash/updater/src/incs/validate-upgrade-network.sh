@@ -448,7 +448,7 @@ fi
 
 args=$(cat "$NODE_ARG_PATH")
 START_DOCKERFILE="./start-$PARAM_NODE_NAME.dockerfile"
-START_YML="./start-$PARAM_NODE_NAME.yml "
+START_YML="./start-$PARAM_NODE_NAME.yml"
 VOLUME_NAME=$(readEnvFromString "$args" "VOLUME_NAME")
 VOLUME_PATH="$PARAM_SOURCE_DIR/CudosData/$VOLUME_NAME"
 START_CONTAINER_NAME=$(readEnvFromString "$args" "START_CONTAINER_NAME")
