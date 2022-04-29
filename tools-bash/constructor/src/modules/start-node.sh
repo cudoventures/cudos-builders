@@ -65,7 +65,7 @@ if [ "$IS_CLUSTERED_VALIDATOR" = "false" ]; then # clustered validator and any o
 fi
 
 if [ "$SHOULD_START_ORCHESTRATOR" = "true" ]; then
-    sed -i "158s/enable = false/enable = true/" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/app.toml"
+    sed -i "/\[grpc\]/,/\[/ s/enable = false/enable = true/" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/app.toml"
 fi
 
 if [ "$IS_VALIDATOR" = "true" ]; then
