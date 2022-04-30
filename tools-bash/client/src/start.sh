@@ -27,6 +27,8 @@ source "$WORKING_SRC_DIR/modules/configure-node.sh"
 
 source "$WORKING_SRC_DIR/modules/start-node.sh"
 
+source "$WORKING_SRC_DIR/modules/create-validator.sh"
+
 echo ""
 
 echo -e "${STYLE_GREEN}The node was start successful${STYLE_DEFAULT}";
