@@ -17,8 +17,8 @@ if ([ "$PARAM_MODE" != "seed-node" ] && [ "$PARAM_MODE" != "sentry-node" ] && [ 
     exit 1;
 fi
 
-if ([ "$PARAM_NETWORK" != "testnet-private" ] && [ "$PARAM_NETWORK" != "dressrehearsal" ] && [ "$PARAM_NETWORK" != "local" ]); then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_NETWORK must be one of the following ${STYLE_BOLD}testnet-private${STYLE_DEFAULT} | ${STYLE_BOLD}dressrehearsal${STYLE_DEFAULT} | ${STYLE_BOLD}local${STYLE_DEFAULT}";
+if ([ "$PARAM_NETWORK" != "testnet-public" ] && [ "$PARAM_NETWORK" != "testnet-private" ] && [ "$PARAM_NETWORK" != "dressrehearsal" ] && [ "$PARAM_NETWORK" != "local" ]); then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_NETWORK must be one of the following ${STYLE_BOLD}testnet-public${STYLE_DEFAULT} | ${STYLE_BOLD}testnet-private${STYLE_DEFAULT} | ${STYLE_BOLD}dressrehearsal${STYLE_DEFAULT} | ${STYLE_BOLD}local${STYLE_DEFAULT}";
     exit 1;
 fi
 
@@ -52,6 +52,9 @@ if [ "$PARAM_MODE" = "seed-node" ]; then
     if [ "$PARAM_NETWORK" = "testnet-private" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.client.testnet.private01.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.client.testnet.private01.env"
+    elif [ "$PARAM_NETWORK" = "testnet-public" ]; then
+        NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.client.testnet.public01.arg"
+        NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.client.testnet.public01.env"
     elif [ "$PARAM_NETWORK" = "dressrehearsal" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.client.dressrehearsal.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.client.dressrehearsal.env"
@@ -66,6 +69,9 @@ elif [ "$PARAM_MODE" = "sentry-node" ]; then
     if [ "$PARAM_NETWORK" = "testnet-private" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.client.testnet.private01.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.client.testnet.private01.env"
+    elif [ "$PARAM_NETWORK" = "testnet-public" ]; then
+        NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.client.testnet.public01.arg"
+        NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.client.testnet.public01.env"
     elif [ "$PARAM_NETWORK" = "dressrehearsal" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.client.dressrehearsal.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.client.dressrehearsal.env"
@@ -80,6 +86,9 @@ elif [ "$PARAM_MODE" = "validator-node" ]; then
     if [ "$PARAM_NETWORK" = "testnet-private" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.client.testnet.private01.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.client.testnet.private01.env"
+    elif [ "$PARAM_NETWORK" = "testnet-public" ]; then
+        NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.client.testnet.public01.arg"
+        NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.client.testnet.public01.env"
     elif [ "$PARAM_NETWORK" = "dressrehearsal" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.client.dressrehearsal.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.client.dressrehearsal.env"
