@@ -2,8 +2,23 @@
 
 echo -ne "Validating...";
 
+if [ ! -x "$(command -v docker)" ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} You must install docker";
+    exit 1;
+fi
+
+if [ ! -x "$(command -v docker-compose)" ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} You must install docker-compose";
+    exit 1;
+fi
+
+if [ ! -x "$(command -v jq)" ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} You must install jq";
+    exit 1;
+fi
+
 if [ ! -x "$(command -v git)" ]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The host does not have git installed";
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} You must install git";
     exit 1;
 fi
 

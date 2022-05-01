@@ -66,7 +66,7 @@ There are 3 scripts - <em>update</em>, <em>backup</em> and <em>gravity</em>.
 
 **Important**: All of the scripts below must be executed from ./updater folder.
 
-**Important**: Make sure that <em>./src/backup.sh</em>, <em>./src/update.sh</em> and <em>./src/gravity.sh</em> has execute permission. 
+**Important**: Make sure that <em>./src/backup.sh</em>, <em>./src/update.sh</em> and <em>./src/gravity.sh</em> have execute permission. 
 
 ## Backup
 
