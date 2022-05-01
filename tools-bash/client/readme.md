@@ -27,7 +27,7 @@ Git must be installed
 1. Connect to <em>target computer</em> using SSH
 1. Clone cudos-builders repo somewhere (usually in your home directory)
 ```
-git clone --branch v0.7.0 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
+git clone --branch cudos-master https://github.com/CudoVentures/cudos-builders.git CudosBuilders
 ```
 3. Create config files according to **Config** section below
 1. Execute the script according to **Usage** section below.
