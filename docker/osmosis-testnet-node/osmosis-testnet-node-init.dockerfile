@@ -17,6 +17,4 @@ COPY ./CudosBuilders/docker/osmosis-testnet-node/scripts/osmosis-testnet-node-ru
 
 ENV OSMOSIS_HOME=${OSMOSIS_HOME}
 
-CMD ["sleep", "infinity"]
-
-# CMD ["/bin/bash", "-c", "./osmosis-testnet-node-run.sh"]
+CMD ["/bin/bash", "-c", "./osmosis-testnet-node-run.sh"]

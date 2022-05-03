@@ -117,7 +117,7 @@ async function createArchive(deployFilePath, deployFilename) {
         archive.pipe(output);
 
         // append files from a sub-directory, putting its contents at the root of archive
-        archive.directory(path.resolve('../../docker'), '/CudosBuilders/docker');
+        archive.directory(path.resolve('../docker'), '/CudosBuilders/docker');
 
         archive.finalize();
     });
