@@ -52,7 +52,7 @@ Prepare the init.env based on init.env.example. It contains the following variab
 
 1. **PARAM_MONIKER:** The name of your node. Use only english lowercase letters and "-". <em>Example: PARAM_MONIKER="my-first-node"</em>
 1. **PARAM_MONITORING_ENABLED:** Indicates whether monitoring services will be connected to this node. <em>Example: PARAM_MONITORING_ENABLED="false"</em>
-1. **PARAM_EXTERNAL_ADDRESS:** Externally accessible address of your node. It must include a port 26656 as well. If port 26656 is redirected please specify the redirected port. <em>Example: PARAM_EXTERNAL_ADDRESS="1.2.3.4:26656"</em>
+1. **PARAM_EXTERNAL_ADDRESS:** **Optional** Externally accessible address of your node. It must include a port 26656 as well. If port 26656 is redirected please specify the redirected port. <em>Example: PARAM_EXTERNAL_ADDRESS="1.2.3.4:26656"</em>
 
 ## Start
 
