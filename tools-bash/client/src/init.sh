@@ -25,6 +25,8 @@ source "$WORKING_SRC_DIR/incs/node-params.sh"
 
 source "$WORKING_SRC_DIR/modules/process-env.sh"
 
+source "$WORKING_SRC_DIR/modules/clean-docker.sh"
+
 source "$WORKING_SRC_DIR/modules/binary-builder.sh"
 
 source "$WORKING_SRC_DIR/modules/init-node.sh"
