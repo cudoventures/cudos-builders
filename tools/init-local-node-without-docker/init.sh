@@ -31,10 +31,18 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     chmod a+x ./init-local-node.sh
     source ./init-local-node.sh
     rm ./init-root-copy.sh
+
+    # https://github.com/cosmos/cosmos-sdk/issues/10081
+    sed -i "" "/\[api\]/,/\[/ s/enable = false/enable = true/" "${CUDOS_HOME}/config/app.toml"
+    sed -i "" "/\[grpc\]/,/\[/ s/enable = false/enable = true/" "${CUDOS_HOME}/config/app.toml"
 else
     cp ../../docker/root-node/scripts/init-root.sh ./init-local-node.sh
     chmod a+x init-local-node.sh
     source ./init-local-node.sh
+
+    # https://github.com/cosmos/cosmos-sdk/issues/10081
+    sed -i "/\[api\]/,/\[/ s/enable = false/enable = true/" "${CUDOS_HOME}/config/app.toml"
+    sed -i "/\[grpc\]/,/\[/ s/enable = false/enable = true/" "${CUDOS_HOME}/config/app.toml"
 fi
 
 rm ./init-local-node.sh
