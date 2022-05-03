@@ -51,3 +51,11 @@ else
     sed -i "s/sleep infinity/cudos-noded start --state-sync.snapshot-interval 2000 --state-sync.snapshot-keep-recent 2/g" "./$START_DOCKERFILE";
 fi
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
+
+echo -ne "Checking the exported genesis...";
+jsonResult=$(jq "." "$WORKING_MIGRATE_DIR/genesis.exported.json" &> /dev/null)
+if [ "$?" != 0 ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The exported json is invalid: $(cat $WORKING_MIGRATE_DIR/genesis.exported.json)";
+    exit 1;
+fi
+echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
