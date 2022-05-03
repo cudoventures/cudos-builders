@@ -46,7 +46,7 @@ Prepare the .env based on .env.example. It contains the following variables:
 
 1. **PARAM_NODE_NAME:** the name of the node that is going to be updated. Possible values are: root-node, seed-node, sentry-node or full-node. <em>Example: PARAM_NODE_NAME="sentry-node"</em>
 1. **PARAM_SOURCE_DIR:** A dir where repos were initially cloned during initial setup of the node, usually we use something like "/usr/cudos" <em>Example: PARAM_SOURCE_DIR="/usr/cudos"</em>
-1. **PARAM_HAS_ORCHESTRATOR:** indicates whether this node has an orchestrator or not. This field does not exists in the .env.example file because it is its purpose is CUDOS-use only.<em>Example: PARAM_HAS_ORCHESTRATOR="false"</em>
+1. **PARAM_HAS_ORCHESTRATOR:** **Optional** indicates whether this node has an orchestrator or not. This field does not exists in the .env.example file because it is its purpose is CUDOS-use only.<em>Example: PARAM_HAS_ORCHESTRATOR="false"</em>
 
 ## Step 2 (only for nodes with an orchestrator)
 

@@ -71,6 +71,18 @@ echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 result=$(jq "del(.app_state.bank.params.send_enabled)" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
 echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 
+result=$(jq ".app_state.wasm.codes = []" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
+echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
+
+result=$(jq ".app_state.wasm.contracts = []" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
+echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
+
+result=$(jq ".app_state.wasm.sequences = []" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
+echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
+
+result=$(jq ".app_state.wasm.gen_msgs = []" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
+echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
+
 if [ "$NETWORK_TESTNET_PUBLIC" = "true" ]; then
     result=$(jq ".chain_id = \"cudos-testnet-public-3\"" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
     echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
