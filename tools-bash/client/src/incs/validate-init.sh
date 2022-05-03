@@ -13,9 +13,9 @@ if [ "$PARAM_MONITORING_ENABLED" = "" ]; then
 fi
 
 if [ -d "$PARAM_SOURCE_DIR/CudosData" ]; then
-    dataContent=$(ls -A $DIR)
+    dataContent=$(ls -A "$PARAM_SOURCE_DIR/CudosData")
     if [ "$dataContent" != "" ]; then
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} $PARAM_SOURCE_DIR/CudosData folder is not empty. It contains $dataContent";
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} $PARAM_SOURCE_DIR/CudosData folder is not empty. It contains -> $dataContent";
         exit 1;
     fi
 fi
