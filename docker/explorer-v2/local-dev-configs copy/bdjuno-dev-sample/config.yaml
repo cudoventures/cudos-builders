@@ -13,6 +13,7 @@ chain:
         - pricefeed
         - distribution
         - cosmwasm
+        - gravity
 node:
     type: remote
     config:
