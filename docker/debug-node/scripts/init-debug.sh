@@ -26,3 +26,19 @@ if [ "$VOTING_PERIOD" != "" ]; then
     genesisJson=$(jq ".app_state.gov.voting_params.voting_period = \"$VOTING_PERIOD\"" "${CUDOS_HOME}/config/genesis.json")
     echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 fi
+
+if [ "$MIN_BRIDGE_FEE" != "" ]; then
+    genesisJson=$(jq ".app_state.gravity.params.minimum_fee_transfer_to_eth = \"$MIN_BRIDGE_FEE\"" "${CUDOS_HOME}/config/genesis.json")
+    echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
+fi
+
+genesisJson=$(jq ".app_state.bank.balances += [{
+  \"address\": \"$FAUCET_ADDRESS\",
+  \"coins\": [
+    {
+      \"amount\": \"1\",
+      \"denom\": \"cudosAdmin\"
+    }
+  ]
+}]" "${CUDOS_HOME}/config/genesis.json")
+echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"

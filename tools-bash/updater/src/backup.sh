@@ -33,6 +33,8 @@ if [ "$action" = "create" ]; then
 fi
 
 if [ "$action" = "restore" ]; then
+    source "$WORKING_SRC_DIR/modules/clean-docker.sh"
+
     source "$WORKING_SRC_DIR/modules/backup-restore.sh"
 fi
 

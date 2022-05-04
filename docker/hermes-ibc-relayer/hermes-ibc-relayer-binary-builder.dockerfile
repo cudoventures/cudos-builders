@@ -1,4 +1,4 @@
-FROM rust:buster
+FROM rust:1.60-buster
 
 ARG USER_ID
 ARG USER_NAME
@@ -16,6 +16,6 @@ RUN apt-get update
 
 RUN apt-get install cargo -y
 
-RUN cargo install ibc-relayer-cli --version 0.13.0 --bin hermes --locked
+RUN cargo install ibc-relayer-cli --version 0.14.1 --bin hermes --locked
 
 CMD ["sleep", "infinity"]

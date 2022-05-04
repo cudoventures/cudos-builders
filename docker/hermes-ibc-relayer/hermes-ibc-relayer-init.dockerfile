@@ -20,6 +20,6 @@ COPY ./CudosBuilders/docker/hermes-ibc-relayer/scripts/hermes-ibc-relayer-init.s
 #     chown -R ${USER_NAME}:${GROUP_NAME} ./ && \
 #     sed -i 's/\r$//' ./hermes-ibc-relayer-run.sh
 
-USER ${USER_NAME}:${GROUP_NAME}
+USER ${USER_NAME}
 
 CMD ["/bin/bash", "-c", "./hermes-ibc-relayer-init.sh"]
