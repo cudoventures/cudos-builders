@@ -1,4 +1,4 @@
-FROM rust:buster
+FROM rust:1.60-buster
 
 ARG USER_ID
 ARG USER_NAME

@@ -30,7 +30,7 @@
         //hermes-ibc-relayer
         {
             "label": "Build HERMES-IBC-RELAYER BINARY BUILDER in docker",
-            "command": "cd ./docker/hermes-ibc-relayer && docker-compose --env-file ./hermes-ibc-relayer.local.arg -f ./hermes-ibc-relayer-binary-builder.yml -p hermes-ibc-relayer-binary-builder up --build",
+            "command": "cd ./docker/hermes-ibc-relayer && docker-compose --env-file ./hermes-ibc-relayer.local.arg -f ./hermes-ibc-relayer-binary-builder.yml -p hermes-ibc-relayer-binary-builder build",
             "type": "shell",
             "group": "build"
         },
