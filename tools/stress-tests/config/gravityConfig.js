@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import path from 'path';
+import BigNumber from 'bignum';
 
 export default function getGravityConfig () {
     const __dirname = path.resolve(path.dirname('')); 
@@ -19,7 +20,7 @@ export default function getGravityConfig () {
 
     // required environment variables
     const envVariables = [
-        'GAS_PER_MSG',
+        'FAUCET_MNEMONIC',
         'ERC20_CONTRACT_ADDRESS',
         'BRIDGE_CONTRACT_ADDRESS',
         "GRAVITY_MODULE_ADDRESS",
@@ -40,8 +41,8 @@ export default function getGravityConfig () {
 
     return {
         CUDOS_NETWORK: {
-            GAS_PER_MSG: process.env.GAS_PER_MSG,
-            BRIDGE_FEE: process.env.BRIDGE_FEE,
+            FAUCET_MNEMONIC: process.env.FAUCET_MNEMONIC,
+            BRIDGE_FEE: new BigNumber(process.env.BRIDGE_FEE),
             GRAVITY_MODULE_ADDRESS: process.env.GRAVITY_MODULE_ADDRESS,
             BATCH_CREATION_BLOCKS: process.env.BATCH_CREATION_BLOCKS,
         },
@@ -54,7 +55,7 @@ export default function getGravityConfig () {
         TEST: {
             NUMBER_OF_TESTS: process.env.NUMBER_OF_TESTS,
             NUMBER_OF_ADDRESSES: process.env.NUMBER_OF_ADDRESSES,
-            MAX_ACUDOS_PER_ADDRESS: process.env.MAX_ACUDOS_PER_ADDRESS,
+            MAX_ACUDOS_PER_ADDRESS: new BigNumber(process.env.MAX_ACUDOS_PER_ADDRESS),
         }
     };
 }

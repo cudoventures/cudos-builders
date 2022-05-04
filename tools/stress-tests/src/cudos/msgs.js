@@ -1,76 +1,73 @@
-import { constants } from "./cudosUtils"
-import message from "../../cosmos/proto";
+import { gravity, cosmos, ibc, google } from "../../cosmos/proto";
 
-export function generateSendToEthMsg(sender, receiver, amount, bridgeFee) {
-    const msgTypePath = '/gravity.v1.MsgSendToEth'
-
-    const msgData = {
-            sender: sender,
-            eth_dest: receiver,
+export function sendToEthMsg(args) {
+    const msg = new gravity.v1.MsgSendToEth({
+            sender: args.fromAddress,
+            eth_dest: args.toAddress,
             amount: {
-                amount: amount,
+                amount: args.amount.toString(),
                 denom: "acudos",
             },
             bridge_fee: {
-                amount: bridgeFee,
+                amount: args.bridgeFee.toString(),
                 denom: "acudos",
             },
-    }
+    })
 
-    const sendMsg = new message.gravity.v1.MsgSendToEth(msgData);
-
-    return new message.google.protobuf.Any({
-		type_url: msgTypePath,
-		value: message.gravity.v1.MsgSendToEth.encode(sendMsg).finish()
+    return new google.protobuf.Any({
+		type_url: '/gravity.v1.MsgSendToEth',
+		value: gravity.v1.MsgSendToEth.encode(msg).finish()
 	});
 }
 
-export function generateBankSendMsg(amount, denom, sender, receiver) {
-    const msgSend = new message.cosmos.bank.v1beta1.MsgSend({
-        from_address: sender,
-        to_address: receiver,
-        amount: [{ denom: denom, amount: amount.toString() }]
+export function bankSendMsg(args) {
+    const msg = new cosmos.bank.v1beta1.MsgSend({
+        from_address: args.fromAddress,
+        to_address: args.toAddress,
+        amount: [{ 
+            denom: args.denom, 
+            amount: args.amount.toString() 
+        }]
     });
 
-    return new message.google.protobuf.Any({
-        type_url: constants.MSG_TYPE_BANK_SEND,
-        value: message.cosmos.bank.v1beta1.MsgSend.encode(msgSend).finish()
+    return new google.protobuf.Any({
+        type_url: "/cosmos.bank.v1beta1.MsgSend",
+        value: cosmos.bank.v1beta1.MsgSend.encode(msg).finish()
     });
 }
 
-export function generateIbcTransferMsg(srcPort, srcChannel, amount, denom, sender, receiver, timeoutHeight) {
-    const msgData = {
-            source_port: srcPort,
-            source_channel: srcChannel,
-            token: {
-                amount: amount,
-                denom: denom,
-            },
-            sender: sender,
-            receiver: receiver,
-            timeout_height: {
-                revision_height: timeoutHeight,
-            },
-            timeout_timestamp: 0,
-    }
+export function ibcTransferMsg(args) {
+    const msg = new ibc.applications.transfer.v1.MsgTransfer({
+        source_port: args.sourcePort,
+        source_channel: args.sourceChannel,
+        token: {
+            amount: args.amount.toString(),
+            denom: args.denom,
+        },
+        sender: args.fromAddress,
+        receiver: args.toAddress,
+        //timeout_timestamp is in nanoseconds
+        timeout_timestamp: (Date.now() + 3600000) + '000000',
+    })
 
-    const sendMsg = new message.ibc.applications.transfer.v1.MsgTransfer(msgData);
-
-    return new message.google.protobuf.Any({
-		type_url: constants.MSG_TYPE_IBC_TRANSFER,
-		value: message.ibc.applications.transfer.v1.MsgTransfer.encode(sendMsg).finish()
+    return new google.protobuf.Any({
+		type_url: '/ibc.applications.transfer.v1.MsgTransfer',
+		value: ibc.applications.transfer.v1.MsgTransfer.encode(msg).finish()
 	});
 }
 
-export function generateDelegateMsg(amount, denom, delegator_address, validator_address) {
-    const msgSend = new message.cosmos.staking.v1beta1.MsgDelegate({
-        delegator_address,
-        validator_address,
-        amount: [{ denom: denom, amount: amount.toString() }]
-    });
-
-    return new message.google.protobuf.Any({
-        type_url: constants.MSG_TYPE_DELEGATE,
-        value: message.cosmos.staking.v1beta1.MsgDelegate.encode(msgSend).finish()
+export function delegateMsg(args) {
+    const msg = new cosmos.staking.v1beta1.MsgDelegate({
+        delegator_address: args.fromAddress,
+        validator_address: args.toAddress,
+        amount: {
+          denom: args.denom,
+          amount: args.amount.toString(),
+        },
+      });
+    
+    return new google.protobuf.Any({
+        type_url: "/cosmos.staking.v1beta1.MsgDelegate",
+        value: cosmos.staking.v1beta1.MsgDelegate.encode(msg).finish(),
     });
 }

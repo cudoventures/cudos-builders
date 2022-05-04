@@ -18,7 +18,6 @@ export default function getIbcConfig() {
         'CHAIN_ID_2',
         'REST_2',
         'GAS_PRICE_2',
-        'GAS_PER_MSG',
         'MNEMONIC_2',
         'IBC_MODULE_ADDRESS_1',
         'IBC_MODULE_ADDRESS_2',
@@ -42,7 +41,6 @@ export default function getIbcConfig() {
 
     return {
         NETWORK_1: {
-            GAS_PER_MSG: process.env.GAS_PER_MSG,
             IBC_MODULE_ADDRESS: process.env.IBC_MODULE_ADDRESS_1,
             PORT: process.env.PORT_1,
             CHANNEL: process.env.CHANNEL_1,
@@ -52,7 +50,6 @@ export default function getIbcConfig() {
             CHAIN_ID: process.env.CHAIN_ID_2,
             REST: process.env.REST_2,
             GAS_PRICE: process.env.GAS_PRICE_2,
-            GAS_PER_MSG: process.env.GAS_PER_MSG,
             MNEMONIC: process.env.MNEMONIC_2,
             IBC_MODULE_ADDRESS: process.env.IBC_MODULE_ADDRESS_2,
             PORT: process.env.PORT_2,

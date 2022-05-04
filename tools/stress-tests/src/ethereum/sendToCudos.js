@@ -1,13 +1,11 @@
 import ethers from "ethers";
-import GravityAbi from '../../abi/Gravity.sol/Gravity.json' assert {type: "json"};
-import ERC20Abi from '../../abi/TestERC20A.sol/TestERC20A.json' assert {type: "json"};
-import config from "../config/config.js";
+import GravityAbi from '../../abi/Gravity.sol/Gravity.json';
+import ERC20Abi from '../../abi/TestERC20A.sol/TestERC20A.json';
 import { fromBech32, toHex } from '@cosmjs/encoding';
+import { logGeneral } from "../utils/logger";
+import wait from "../utils/wait";
 
-const RED = "\x1b[31m";
-const GREEN = "\x1b[32m";
-
-export default async function sendToCudos(ethPrivKey, cudosAddresses, maxAmountPerAddress) {
+export default async function sendToCudos(config, ethPrivKey, cudosAddresses, maxAmountPerAddress) {
     const provider = new ethers.providers.JsonRpcProvider(config.ETHEREUM.ETH_NODE_URL);
     const wallet = new ethers.Wallet(ethPrivKey, provider);
 
@@ -17,17 +15,14 @@ export default async function sendToCudos(ethPrivKey, cudosAddresses, maxAmountP
     const sendCount = cudosAddresses.length;
 
     const res = await erc20Cudos.approve(gravity.address, maxAmountPerAddress.mul(sendCount).toString());
-    await new Promise((resolve) => {
-        console.log(GREEN, "Waiting 15 seconds to be sure the allowance tx passes...");
-        setTimeout(resolve, 15000);
-    });
 
-    console.log(GREEN, "Sending \"sendToCosmos\" transactions...")
+    wait(15, "to be sure the allowance tx passes...");
+    logGeneral("Sending \"sendToCosmos\" transactions...")
     for (let cudosAddress of cudosAddresses) {
         const addressByteArray = fromBech32(cudosAddress).data;
         const addressBytes32Array = new Uint8Array(32);
         addressByteArray.forEach((byte, i) => { addressBytes32Array[32 - addressByteArray.length + i] = byte });
-        const amountToSend = maxAmountPerAddress.div(1000).mul(Math.floor(Math.random()*1000));
+        const amountToSend = maxAmountPerAddress;
         
         await gravity.sendToCosmos(
             erc20Cudos.address,
