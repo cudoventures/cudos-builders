@@ -42,3 +42,12 @@ genesisJson=$(jq ".app_state.bank.balances += [{
   ]
 }]" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
+
+cat "${CUDOS_HOME}/faucet.wallet"
+for i in $(seq 1 $NUMBER_OF_ORCHESTRATORS); do
+    cat "${CUDOS_HOME}/orch-${i}.wallet"
+done
+
+for i in $(seq 1 $NIMBER_OF_VALIDATORS); do
+    cat "${CUDOS_HOME}/validator-${i}.wallet"
+done
