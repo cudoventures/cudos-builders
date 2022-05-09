@@ -94,7 +94,7 @@ cudos-noded q ibc client state 07-tendermint-0 --output json
 ````
 This will output the state in a JSON format, which now you can include in the proposal. To do this, edit the fields that you are going to change (i.e. UnbondingPeriod), zero out ````trusting_period``` and also change the block heights according to the proposal plan you are going to make. Frozen height ```revision_height``` needs to be set to 1 block previous to the freeze. So if you plan the upgrade on block 300, enter 299 for the frozen height ```revision_height```. As for the ```latest_height``` ```revision_height```, it needs to be set to 1 block after the upgrade. So from the previous example - to 301.
 
-After the state is set, save it on a node on the chain you are going to upgrade. then proposa a ibc-upgrade proposal with the following example command:
+After the state is set, save it on a node on the chain you are going to upgrade. then make an ibc-upgrade proposal with the following example command:
 ```
 cudos-noded tx gov submit-proposal ibc-upgrade <upgrade_name> 300 /usr/cudos/client_state.json --deposit 100000000acudos --title <proposal_title> --description <proposal_description> --from <wallet_for_transaction> --keyring-backend os --chain-id cudos-local-network -y
 ```
