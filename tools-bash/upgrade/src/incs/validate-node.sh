@@ -5,7 +5,7 @@ if [ -f "$LOCK_UPGRADE_PATH" ]; then
     exit 1;
 fi
 
-if [ "$action" = "start" ]; then
+if [ "$action" = "upgrade" ]; then
     if [ ! -f "$LOCK_VALIDATE_PATH" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Run the ${STYLE_BOLD}validate${STYLE_DEFAULT} before the ${STYLE_BOLD}upgrade${STYLE_DEFAULT}";
         exit 1;
@@ -21,15 +21,15 @@ if [ "$action" = "start" ]; then
     fi
 fi
 
-source "$WORKING_SRC_DIR/incs/validate-upgrade-params.sh"
+source "$WORKING_SRC_DIR/incs/validate-params.sh"
 
-source "$WORKING_SRC_DIR/incs/validate-upgrade-network.sh"
+source "$WORKING_SRC_DIR/incs/validate-network.sh"
 
-source "$WORKING_SRC_DIR/incs/validate-backup-folders.sh" "validate"
+source "$WORKING_SRC_DIR/incs/validate-folders.sh" "validate"
 
-source "$WORKING_SRC_DIR/incs/validate-upgrade-version.sh"
+source "$WORKING_SRC_DIR/incs/validate-version.sh"
 
-source "$WORKING_SRC_DIR/incs/validate-upgrade-chain-id.sh"
+source "$WORKING_SRC_DIR/incs/validate-chain-id.sh"
 
 echo "" # new line
 

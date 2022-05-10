@@ -30,12 +30,12 @@ if [ "$PARAM_NODE_NAME" = "root-node" ]; then
         tokenContractAddress=$(readEnvFromString "$args" "CUDOS_TOKEN_CONTRACT_ADDRESS")
         if [ "$tokenContractAddress" = "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d" ] || [ "$tokenContractAddress" = "0x12d474723cb8c02bcbf46cd335a3bb4c75e9de44" ]; then
             NETWORK_DRESSREHEARSAL="true"
-            source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+            source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
             networkIdentified="true"
         fi
         if [ "$tokenContractAddress" = "0x817bbDbC3e8A1204f3691d14bB44992841e3dB35" ]; then
             NETWORK_MAINNET="true"
-            source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+            source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
             networkIdentified="true"
         fi
         unset args
@@ -51,7 +51,7 @@ if [ "$PARAM_NODE_NAME" = "root-node" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/root-node/root-node.dressrehearsal.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/root-node/root-node.dressrehearsal.env"
         NETWORK_DRESSREHEARSAL="true"
-        source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+        source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
         networkIdentified="true"
 
         if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.dressrehearsal.env" ]; then
@@ -64,7 +64,7 @@ if [ "$PARAM_NODE_NAME" = "root-node" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/root-node/root-node.testnet.private.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/root-node/root-node.testnet.private.env"
         NETWORK_TESTNET_PRIVATE="true"
-        source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+        source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
         networkIdentified="true"
 
         if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.testnet.private.env" ]; then
@@ -77,7 +77,7 @@ if [ "$PARAM_NODE_NAME" = "root-node" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/root-node/root-node.testnet.public.zone01.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/root-node/root-node.testnet.public.zone01.env"
         NETWORK_TESTNET_PUBLIC="true"
-        source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+        source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
         networkIdentified="true"
 
         if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.testnet.public.zone01.env" ]; then
@@ -96,7 +96,7 @@ if [ "$PARAM_NODE_NAME" = "seed-node" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.testnet.private.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.testnet.private.env"
         NETWORK_TESTNET_PRIVATE="true"
-        source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+        source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
         networkIdentified="true"
     fi
 
@@ -104,7 +104,7 @@ if [ "$PARAM_NODE_NAME" = "seed-node" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.client.testnet.private01.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.client.testnet.private01.env"
         NETWORK_TESTNET_PRIVATE="true"
-        source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+        source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
         networkIdentified="true"
     fi
 
@@ -112,7 +112,7 @@ if [ "$PARAM_NODE_NAME" = "seed-node" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.testnet.public.zone01.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.testnet.public.zone01.env"
         NETWORK_TESTNET_PUBLIC="true"
-        source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+        source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
         networkIdentified="true"
     fi
 
@@ -120,7 +120,7 @@ if [ "$PARAM_NODE_NAME" = "seed-node" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.testnet.public.zone02.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.testnet.public.zone02.env"
         NETWORK_TESTNET_PUBLIC="true"
-        source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+        source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
         networkIdentified="true"
     fi
 
@@ -128,7 +128,7 @@ if [ "$PARAM_NODE_NAME" = "seed-node" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.testnet.public.zone03.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.testnet.public.zone03.env"
         NETWORK_TESTNET_PUBLIC="true"
-        source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+        source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
         networkIdentified="true"
     fi
 
@@ -136,7 +136,7 @@ if [ "$PARAM_NODE_NAME" = "seed-node" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.client.testnet.public01.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.client.testnet.public01.env"
         NETWORK_TESTNET_PUBLIC="true"
-        source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+        source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
         networkIdentified="true"
     fi
 
@@ -144,7 +144,7 @@ if [ "$PARAM_NODE_NAME" = "seed-node" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.client.dressrehearsal.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.client.dressrehearsal.env"
         NETWORK_DRESSREHEARSAL="true"
-        source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+        source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
         networkIdentified="true"
     fi
 
@@ -158,12 +158,12 @@ if [ "$PARAM_NODE_NAME" = "seed-node" ]; then
             tokenContractAddress=${tokenContractAddress//\"/}
             if [ "$tokenContractAddress" = "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d" ] || [ "$tokenContractAddress" = "0x12d474723cb8c02bcbf46cd335a3bb4c75e9de44" ]; then
                 NETWORK_DRESSREHEARSAL="true"
-                source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+                source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
                 networkIdentified="true"
             fi
             if [ "$tokenContractAddress" = "0x817bbDbC3e8A1204f3691d14bB44992841e3dB35" ]; then
                 NETWORK_MAINNET="true"
-                source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+                source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
                 networkIdentified="true"
             fi
             unset args
@@ -182,12 +182,12 @@ if [ "$PARAM_NODE_NAME" = "seed-node" ]; then
             tokenContractAddress=${tokenContractAddress//\"/}
             if [ "$tokenContractAddress" = "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d" ] || [ "$tokenContractAddress" = "0x12d474723cb8c02bcbf46cd335a3bb4c75e9de44" ]; then
                 NETWORK_DRESSREHEARSAL="true"
-                source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+                source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
                 networkIdentified="true"
             fi
             if [ "$tokenContractAddress" = "0x817bbDbC3e8A1204f3691d14bB44992841e3dB35" ]; then
                 NETWORK_MAINNET="true"
-                source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+                source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
                 networkIdentified="true"
             fi
             unset args
@@ -206,7 +206,7 @@ if [ "$PARAM_NODE_NAME" = "sentry-node" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.testnet.private.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.testnet.private.env"
         NETWORK_TESTNET_PRIVATE="true"
-        source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+        source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
         networkIdentified="true"
     fi
 
@@ -214,7 +214,7 @@ if [ "$PARAM_NODE_NAME" = "sentry-node" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.client.testnet.private01.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.client.testnet.private01.env"
         NETWORK_TESTNET_PRIVATE="true"
-        source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+        source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
         networkIdentified="true"
     fi
 
@@ -222,7 +222,7 @@ if [ "$PARAM_NODE_NAME" = "sentry-node" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.testnet.public.zone01.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.testnet.public.zone01.env"
         NETWORK_TESTNET_PUBLIC="true"
-        source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+        source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
         networkIdentified="true"
     fi
 
@@ -230,7 +230,7 @@ if [ "$PARAM_NODE_NAME" = "sentry-node" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.testnet.public.zone02.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.testnet.public.zone02.env"
         NETWORK_TESTNET_PUBLIC="true"
-        source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+        source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
         networkIdentified="true"
     fi
 
@@ -238,7 +238,7 @@ if [ "$PARAM_NODE_NAME" = "sentry-node" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.testnet.public.zone03.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.testnet.public.zone03.env"
         NETWORK_TESTNET_PUBLIC="true"
-        source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+        source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
         networkIdentified="true"
     fi
 
@@ -246,7 +246,7 @@ if [ "$PARAM_NODE_NAME" = "sentry-node" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.client.testnet.public01.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.client.testnet.public01.env"
         NETWORK_TESTNET_PUBLIC="true"
-        source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+        source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
         networkIdentified="true"
     fi
 
@@ -254,7 +254,7 @@ if [ "$PARAM_NODE_NAME" = "sentry-node" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.client.dressrehearsal.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.client.dressrehearsal.env"
         NETWORK_DRESSREHEARSAL="true"
-        source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+        source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
         networkIdentified="true"
     fi
 
@@ -268,12 +268,12 @@ if [ "$PARAM_NODE_NAME" = "sentry-node" ]; then
             tokenContractAddress=${tokenContractAddress//\"/}
             if [ "$tokenContractAddress" = "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d" ] || [ "$tokenContractAddress" = "0x12d474723cb8c02bcbf46cd335a3bb4c75e9de44" ]; then
                 NETWORK_DRESSREHEARSAL="true"
-                source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+                source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
                 networkIdentified="true"
             fi
             if [ "$tokenContractAddress" = "0x817bbDbC3e8A1204f3691d14bB44992841e3dB35" ]; then
                 NETWORK_MAINNET="true"
-                source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+                source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
                 networkIdentified="true"
             fi
             unset args
@@ -292,12 +292,12 @@ if [ "$PARAM_NODE_NAME" = "sentry-node" ]; then
             tokenContractAddress=${tokenContractAddress//\"/}
             if [ "$tokenContractAddress" = "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d" ] || [ "$tokenContractAddress" = "0x12d474723cb8c02bcbf46cd335a3bb4c75e9de44" ]; then
                 NETWORK_DRESSREHEARSAL="true"
-                source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+                source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
                 networkIdentified="true"
             fi
             if [ "$tokenContractAddress" = "0x817bbDbC3e8A1204f3691d14bB44992841e3dB35" ]; then
                 NETWORK_MAINNET="true"
-                source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+                source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
                 networkIdentified="true"
             fi
             unset args
@@ -316,7 +316,7 @@ if [ "$PARAM_NODE_NAME" = "full-node" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.client.testnet.private01.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.client.testnet.private01.env"
         NETWORK_TESTNET_PRIVATE="true"
-        source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+        source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
         networkIdentified="true"
     fi
 
@@ -324,7 +324,7 @@ if [ "$PARAM_NODE_NAME" = "full-node" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.testnet.public.zone02.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.testnet.public.zone02.env"
         NETWORK_TESTNET_PUBLIC="true"
-        source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+        source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
         networkIdentified="true"
 
         if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.testnet.public.zone02.env" ]; then
@@ -337,7 +337,7 @@ if [ "$PARAM_NODE_NAME" = "full-node" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.testnet.public.zone03.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.testnet.public.zone03.env"
         NETWORK_TESTNET_PUBLIC="true"
-        source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+        source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
         networkIdentified="true"
 
         if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.testnet.public.zone03.env" ]; then
@@ -350,7 +350,7 @@ if [ "$PARAM_NODE_NAME" = "full-node" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.client.testnet.public01.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.client.testnet.public01.env"
         NETWORK_TESTNET_PUBLIC="true"
-        source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+        source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
         networkIdentified="true"
     fi
 
@@ -358,7 +358,7 @@ if [ "$PARAM_NODE_NAME" = "full-node" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.client.dressrehearsal.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.client.dressrehearsal.env"
         NETWORK_DRESSREHEARSAL="true"
-        source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+        source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
         networkIdentified="true"
     fi
 
@@ -372,12 +372,12 @@ if [ "$PARAM_NODE_NAME" = "full-node" ]; then
             tokenContractAddress=${tokenContractAddress//\"/}
             if [ "$tokenContractAddress" = "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d" ] || [ "$tokenContractAddress" = "0x12d474723cb8c02bcbf46cd335a3bb4c75e9de44" ]; then
                 NETWORK_DRESSREHEARSAL="true"
-                source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+                source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
                 networkIdentified="true"
             fi
             if [ "$tokenContractAddress" = "0x817bbDbC3e8A1204f3691d14bB44992841e3dB35" ]; then
                 NETWORK_MAINNET="true"
-                source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+                source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
                 networkIdentified="true"
             fi
             unset args
@@ -396,12 +396,12 @@ if [ "$PARAM_NODE_NAME" = "full-node" ]; then
             tokenContractAddress=${tokenContractAddress//\"/}
             if [ "$tokenContractAddress" = "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d" ] || [ "$tokenContractAddress" = "0x12d474723cb8c02bcbf46cd335a3bb4c75e9de44" ]; then
                 NETWORK_DRESSREHEARSAL="true"
-                source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+                source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
                 networkIdentified="true"
             fi
             if [ "$tokenContractAddress" = "0x817bbDbC3e8A1204f3691d14bB44992841e3dB35" ]; then
                 NETWORK_MAINNET="true"
-                source "$WORKING_SRC_DIR/incs/validate-upgrade-verify-network.sh"
+                source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
                 networkIdentified="true"
             fi
             unset args

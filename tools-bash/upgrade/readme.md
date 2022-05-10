@@ -42,11 +42,11 @@ All of the config files are in ./upgrade/config folder.
 
 ## Step 1
 
-Prepare the .env based on .env.example. It contains the following variables:
+Prepare the node.env based on node.env.example. It contains the following variables:
 
 1. **PARAM_NODE_NAME:** the name of the node that is going to be upgraded. Possible values are: root-node, seed-node, sentry-node or full-node. <em>Example: PARAM_NODE_NAME="sentry-node"</em>
 1. **PARAM_SOURCE_DIR:** A dir where repos were initially cloned during initial setup of the node, usually we use something like "/usr/cudos" <em>Example: PARAM_SOURCE_DIR="/usr/cudos"</em>
-1. **PARAM_HAS_ORCHESTRATOR:** **Optional** indicates whether this node has an orchestrator or not. This field does not exists in the .env.example file because it is its purpose is CUDOS-use only.<em>Example: PARAM_HAS_ORCHESTRATOR="false"</em>
+1. **PARAM_HAS_ORCHESTRATOR:** **Optional** indicates whether this node has an orchestrator or not. This param is designed for CUDOS orchestrator operator. You can leave it empty if your not sure what this it is about.<em>Example: PARAM_HAS_ORCHESTRATOR="false"</em>
 
 ## Step 2 (only for nodes with an orchestrator)
 
@@ -60,7 +60,7 @@ Prepare the gravity.env based on gravity.env.example. It contains the following 
 
 There are 3 scripts - <em>node</em>, <em>backup</em> and <em>gravity</em>.
 
-**Important**: The side effect of executing any of these scripts will be a folder, defined in PARAM_SOURCE_DIR at .env on <em>target computer</em>
+**Important**: The side effect of executing any of these scripts will be a folder, defined in PARAM_SOURCE_DIR at node.env on <em>target computer</em>
 
 **Important**: Execute these scripts only when all config files are ready.
 

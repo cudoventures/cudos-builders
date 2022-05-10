@@ -3,7 +3,7 @@
 if ([ $# != "1" ]) || ([ "$1" != "start" ] && [ "$1" != "validate" ]); then
     echo -e "\033[1;31mError:\033[m Please follow the usage template below";
     echo "Usage: sudo $0 [action]";
-    echo '[action] = start | validate';
+    echo '[action] = upgrade | validate';
     exit 1
 fi
 
@@ -14,21 +14,21 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
-updaterPath=$(basename $(pwd))
-if [ "$updaterPath" != "updater" ]; then
-    echo -e "\033[1;31mError:\033[m The script MUST be executed from updater folder";
+upgradePath=$(basename $(pwd))
+if [ "$upgradePath" != "upgrade" ]; then
+    echo -e "\033[1;31mError:\033[m The script MUST be executed from upgrade folder";
     exit 1
 fi
 
-source "./src/incs/var.sh" "update"
+source "./src/incs/var.sh" "node"
 
-source "$WORKING_SRC_DIR/incs/utils.sh"
+source "$WORKING_SRC_DIR/incs/utils-common.sh"
 
 source "$WORKING_SRC_DIR/incs/utils-genesis.sh"
 
-source "$WORKING_SRC_DIR/incs/validate-upgrade.sh"
+source "$WORKING_SRC_DIR/incs/validate-node.sh"
 
-if [ "$action" = "start" ]; then
+if [ "$action" = "upgrade" ]; then
     echo "" # new line
 
     echo "" > "$LOCK_UPGRADE_PATH"
@@ -43,7 +43,7 @@ if [ "$action" = "start" ]; then
         source "$WORKING_SRC_DIR/modules/genesis-export.sh"
     fi
 
-    source "$WORKING_SRC_DIR/modules/update-repos.sh"
+    source "$WORKING_SRC_DIR/modules/repos.sh"
 
     source "$WORKING_SRC_DIR/modules/clean-docker.sh"
 
@@ -65,7 +65,7 @@ if [ "$action" = "validate" ]; then
 
     echo -ne "Validating...";
 fi
-if [ "$action" = "start" ]; then
+if [ "$action" = "upgrade" ]; then
     rm -f "$LOCK_UPGRADE_PATH"
     rm -f "$LOCK_VALIDATE_PATH"
 

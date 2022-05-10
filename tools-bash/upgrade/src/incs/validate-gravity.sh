@@ -24,9 +24,9 @@ fi
 
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
-source "$WORKING_SRC_DIR/incs/validate-upgrade-params.sh"
+source "$WORKING_SRC_DIR/incs/validate-params.sh"
 
-source "$WORKING_SRC_DIR/incs/validate-upgrade-network.sh"
+source "$WORKING_SRC_DIR/incs/validate-network.sh"
 
 if [ "$HAS_ORCHESTRATOR" != "true" ] || [ "$PARAM_NODE_NAME" != "root-node" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Only root-node with orchestrator could change the gravity smart contract";

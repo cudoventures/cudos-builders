@@ -14,9 +14,9 @@ if [ "$EUID" -ne 0 ]; then
     exit 1
 fi
 
-updaterPath=$(basename $(pwd))
-if [ "$updaterPath" != "updater" ]; then
-    echo -e "\033[1;31mError:\033[m The script MUST be executed from updater folder";
+upgradePath=$(basename $(pwd))
+if [ "$upgradePath" != "upgrade" ]; then
+    echo -e "\033[1;31mError:\033[m The script MUST be executed from upgrade folder";
     exit 1
 fi
 
@@ -28,7 +28,7 @@ echo -e "${STYLE_BOLD}THIS FEATURE COULD NOT USED IN PRODUCTION ENVIROMENT${STYL
 
 echo "" # new line
 
-source "$WORKING_SRC_DIR/incs/utils.sh"
+source "$WORKING_SRC_DIR/incs/utils-common.sh"
 
 source "$WORKING_SRC_DIR/incs/validate-gravity.sh"
 
