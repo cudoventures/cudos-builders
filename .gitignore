@@ -23,6 +23,6 @@ tools-bash/launcher/config/genesis.data.json
 tools-bash/launcher/config/genesis.root.json
 tools-bash/launcher/src/genesis.sh
 tools-bash/launcher/exports
-tools-bash/updater/emergency-backup
-tools-bash/updater/migrate
+tools-bash/upgrade/emergency-backup
+tools-bash/upgrade/migrate
 tools/init-local-node-without-docker/cudos-data
