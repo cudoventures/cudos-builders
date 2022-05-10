@@ -86,7 +86,7 @@ sudo docker-compose --env-file root-node.local.arg -f init-root-node.yml -p cudo
 **DO NOT START YOUR VALIDATOR NODE YET**
 
 If all steps are completed successfully, you should see a newly generated file: 
-`/var/lib/cudos/CudosData/cudos-data-full-node-client-testnet-public-01/tendermint.nodeid`
+`/var/lib/cudos/CudosData/cudos-data-root-node/tendermint.nodeid`
 that contains your **node ID**, consisting of a long string of random characters.
  
 ### 2. Initialise and start your Sentry and Seed nodes
@@ -101,13 +101,13 @@ sudo -i
 cd /var/lib/cudos/CudosBuilders/docker/sentry-node
 ```
 
-#### 2. Create a copy of `sentry-node.env.example`, naming the copy `sentry-node.client.testnet.public01.env`
+#### 2. Create a copy of `sentry-node.env.example`, naming the copy `sentry-node.client.local01.env`
 
 ```
-cp sentry-node.env.example sentry-node.client.testnet.public01.env
+cp sentry-node.env.example sentry-node.local01.env
 ```
 
-#### 3. Open the file, `sentry-node.client.testnet.public01.env`. 
+#### 3. Open the file, `sentry-node.client.local01.env`. 
 
 - Set the `MONIKER` (your node’s name on the blockchain) attribute to your desired name:
 
@@ -120,28 +120,25 @@ MONIKER=<your-sentry-node-moniker>
 SHOULD_USE_GLOBAL_PEERS=true
 ```
 
-- Configure the `PRIVATE_PEERS` list with the node ID of any validator nodes on your private network.
+- Configure the `PRIVATE_PEERS` list with the node ID of your root validator
 
 ```
-PRIVATE_PEERS=<validator1-id>,<validator2-id>
+PRIVATE_PEERS=<root-validator1-id>
 ```
 Save and Exit
  
 #### 4. Make sure that you are still in the correct directory `/var/lib/cudos/CudosBuilders/docker/sentry-node`, and *Initialize* the node by running this command:
 ```
-docker-compose --env-file sentry-node.client.testnet.public01.arg -f init-sentry-node.yml -p cudos-init-sentry-node-client-testnet-public-01 up --build
+ docker-compose --env-file ./sentry-node.client.local01.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node-client-local-01 up --build
 ```
 
 #### 5. *Start* your node
 ```
-docker-compose --env-file sentry-node.client.testnet.public01.arg -f start-sentry-node.yml -p cudos-start-sentry-node-client-testnet-public-01 up --build --detach
+docker-compose --env-file ./sentry-node.client.local01.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node-client-local-01 up --build --detach
 ```
 
 If all steps are completed successfully, you should see a newly generated file: `/var/lib/cudos/CudosData/cudos-data-sentry-node-client-testnet-public-01/tendermint.nodeid` that contains your **node ID**, consisting of a long string of random characters.
 
-::: tip
-Syncing may take several hours. Refer to [Checking sync status](/build/sync-troubleshooting.html#checking-sync-status) to verify your node is syncing. 
-::: 
 
 ### Seed
 
@@ -153,11 +150,11 @@ sudo -i
 cd /var/lib/cudos/CudosBuilders/docker/seed-node
 ```
 
-#### 2. Create a copy of seed-node.env.example, naming the copy seed-node.client.testnet.public01.env 
+#### 2. Create a copy of seed-node.env.example, naming the copy seed-node.client.local01.env 
 ```
-cp seed-node.env.example seed-node.client.testnet.public01.env
+cp seed-node.env.example seed-node.client.local01.env
 ```
-#### 3. Open the file `full-node.client.testnet.public01.env.` 
+#### 3. Open the file `seed-node.client.local01.env` 
 
 - Set the `"MONIKER"` attribute to your desired name:
 ```
@@ -167,58 +164,25 @@ MONIKER=<your-sentry-node-moniker>
 ```
 SHOULD_USE_GLOBAL_PEERS=true
 ```
-- Configure the `PRIVATE_PEERS` list with the node ID of any validator nodes on your private network.
+- Configure the `PRIVATE_PEERS` list with the node ID of your root validator
 ``` 
-PRIVATE_PEERS=<validator1-id>,<validator2-id>
+PRIVATE_PEERS=<root-validator-id>
 ```
 #### 4. Make sure that you are still in the correct directory `/var/lib/cudos/CudosBuilders/docker/seed-node`, and *Initialize* the node by running this command:
 ```
-sudo docker-compose --env-file seed-node.client.testnet.public01.arg -f init-seed-node.yml -p cudos-init-seed-node-client-testnet-public-01 up --build
+docker-compose --env-file ./seed-node.client.local01.arg -f ./init-seed-node.yml -p cudos-init-seed-node-client-local-01 up --build
 ```
 #### 5. *Start* your node
 ```
 sudo docker-compose --env-file seed-node.client.testnet.public01.arg -f start-seed-node.yml -p cudos-start-seed-node-client-testnet-public-01 up --build --detach
+
+docker-compose --env-file ./seed-node.client.local01.arg -f ./start-seed-node.yml -p cudos-start-seed-node-client-local-01 up --build --detach
+
 ```
 
 If all steps are completed successfully, you should see a newly generated file: 
 `/var/lib/cudos/CudosData/cudos-data-seed-node-client-testnet-public-01/tendermint.nodeid`
 that contains your **node ID**, consisting of a long string of random characters.
  
-::: tip
-Syncing may take several hours. Refer to [Checking sync status](/build/sync-troubleshooting.html#checking-sync-status) to verify your node is syncing. 
-::: 
- 
-### 3. Configure peer values on your Validator and Start it
 
-#### 1. On your Validator Node, open the file `/var/lib/cudos/CudosBuilders/docker/full-node/full-node.client.testnet.public01.env`
-- Add the node ID and IP address+port of any **Sentry** nodes on your private network to `PERSISTENT_PEERS`:
-```
-PERSISTENT_PEERS=<sentry-node1-id>@<sentry-node1-ip>:26656,<sentry-node2-id>@<sentry-node2-ip>:26656
-```
-- Add the node ID and IP address+port of any Seed nodes on your private network to `SEEDS`:
-```
-SEEDS=<seed-node1-id>@<seed-node1-ip>:26656,<seed-node2-id>@<seed-node2-ip>:26656
-```
-#### 2. Make sure that you are still in the correct directory `/var/lib/cudos/CudosBuilders/docker/full-node`, and *Configure* the peer values you have just defined on the validator:
-```
-sudo docker-compose --env-file full-node.client.testnet.public01.arg -f config-full-node.yml -p cudos-config-full-node-client-testnet-public-01 up --build
-```
 
-#### 3. *Start* your Validator
-Make sure that you are still in the correct directory `/var/lib/cudos/CudosBuilders/docker/full-node`, and **Start** the node by running this command:
-```
-sudo docker-compose --env-file full-node.client.testnet.public01.arg -f start-full-node.yml -p cudos-start-full-node-client-testnet-public-01 up --build --detach
-```
-
-::: tip
-Syncing may take several hours. Refer to [Checking sync status](/build/sync-troubleshooting.html#checking-sync-status) to verify your node is syncing. 
-::: 
-
-**Once your node has synced you can stake CUDOS on it, at which point your node will become operational as a validator**. 
-
-### Staking
-A full node becomes a validator when it has successfully staked CUDOS.
-
-Before staking, you must create and fund your wallet, and stash it on your node by following the process described in [Setting up your nodes wallet](/build/fundnodes.html#setting-up-your-nodes-wallet), making sure to use the Testnet `cudos-testnet-public-2` instead of mainnet.
-
-Once this is completed, you can go ahead and stake CUDOS, which will make your node a validator, as described in [Staking your Validator](/build/fundnodes.html#staking-your-validator), making sure to use the Testnet `cudos-testnet-public-2` instead of mainnet.
