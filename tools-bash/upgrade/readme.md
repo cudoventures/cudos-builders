@@ -29,14 +29,14 @@ Python3 must be installed
 1. Connect to <em>target computer</em> using SSH
 1. Clone cudos-builders repo somewhere (usually in your home directory)
 ```
-git clone --branch v0.6.0 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
+git clone --branch v0.7.0 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
 ```
 1. Create config files according to **Config** section below
 1. Execute the script according to **Usage** section below
 
 # Config
 
-All of the config files are in ./updater/config folder.
+All of the config files are in ./upgrade/config folder.
 
 **Important: Do not leave any comments in any .env file**
 
@@ -44,7 +44,7 @@ All of the config files are in ./updater/config folder.
 
 Prepare the .env based on .env.example. It contains the following variables:
 
-1. **PARAM_NODE_NAME:** the name of the node that is going to be updated. Possible values are: root-node, seed-node, sentry-node or full-node. <em>Example: PARAM_NODE_NAME="sentry-node"</em>
+1. **PARAM_NODE_NAME:** the name of the node that is going to be upgraded. Possible values are: root-node, seed-node, sentry-node or full-node. <em>Example: PARAM_NODE_NAME="sentry-node"</em>
 1. **PARAM_SOURCE_DIR:** A dir where repos were initially cloned during initial setup of the node, usually we use something like "/usr/cudos" <em>Example: PARAM_SOURCE_DIR="/usr/cudos"</em>
 1. **PARAM_HAS_ORCHESTRATOR:** **Optional** indicates whether this node has an orchestrator or not. This field does not exists in the .env.example file because it is its purpose is CUDOS-use only.<em>Example: PARAM_HAS_ORCHESTRATOR="false"</em>
 
@@ -58,15 +58,15 @@ Prepare the gravity.env based on gravity.env.example. It contains the following 
 
 # Usage
 
-There are 3 scripts - <em>update</em>, <em>backup</em> and <em>gravity</em>.
+There are 3 scripts - <em>node</em>, <em>backup</em> and <em>gravity</em>.
 
 **Important**: The side effect of executing any of these scripts will be a folder, defined in PARAM_SOURCE_DIR at .env on <em>target computer</em>
 
 **Important**: Execute these scripts only when all config files are ready.
 
-**Important**: All of the scripts below must be executed from ./updater folder.
+**Important**: All of the scripts below must be executed from ./upgrade folder.
 
-**Important**: Make sure that <em>./src/backup.sh</em>, <em>./src/update.sh</em> and <em>./src/gravity.sh</em> have execute permission. 
+**Important**: Make sure that <em>./src/backup.sh</em>, <em>./src/node.sh</em> and <em>./src/gravity.sh</em> have execute permission. 
 
 ## Backup
 
@@ -96,20 +96,20 @@ The command deletes previously created backup using <em>Create a backup</em>
 sudo ./src/backup.sh clean
 ```
 
-## Update
+## Node
 
-Update script has following usages:
+Node script has following usages:
 
 ### Validate the config/setup
 The command check for installed binaries, config files, repos, etc.
 ```
-sudo ./src/update.sh validate
+sudo ./src/node.sh validate
 ```
 
-### Perform an update
+### Perform an upgrade
 The command upgrades a node
 ```
-sudo ./src/update.sh start
+sudo ./src/node.sh upgrade
 ```
 
 ## Gravity
