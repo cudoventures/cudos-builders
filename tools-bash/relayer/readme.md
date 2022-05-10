@@ -1,12 +1,18 @@
-# DRAFT
-
 # Overview
 
-The goal of this project is to start the relayer between two IBC-enabled chains
+The goal of this project is to manage the relayer between two IBC-enabled chains.
 
-## Prerequirements 
+**This script MUST only be used if the network upgrade includes a <a href="https://docs.cosmos.network/master/ibc/upgrades/quick-guide.html">IBC-breaking change</a>. Otherwise the relayer must not be upgraded.**
 
-The script MUST be executed on the machine where the relayer will operarate.
+You must create an SSH connection from a machine (<em>host computer</em>) to the machine where the relayer is running (<em>target computer</em>).
+
+All the executions below MUST happen on <em>target computer</em>. Nothing is executed on the <em>host computer</em> itself.
+
+## Prerequirements on host computer
+
+SSH Connection to the machine where a CUDOS node is running
+
+## Prerequirements on target machine
 
 Docker must be installed
 
@@ -16,20 +22,53 @@ Git must be installed
 
 Curl must be installed
 
+## General usage
+
+1. Connect to <em>target computer</em> using SSH
+1. Attach shell to the relayer's docker instance.
+    
+    In order to attach a shell you must first get the container's id. You can do it by listing all running docker containers and then search for hermer container.
+    ```
+    sudo docker container ls
+    ```
+    Then you can attach a shell
+    ```
+    sudo docker container exec -it <id> /bin/bash
+    ```
+
+1. Create a <em>ibc-upgrade</em> proposal (not a <em>software upgrade</em> proposal).
+
+    The easiest way to make the proposal is by using the hermer relayer itself.
+    ```
+    hermes tx raw upgrade-chain -d acudos -c <new chain id> <current chain id of upgradable network> <current osmosis chain id> <client id of upgradable network on osmosis> <deposit amount without denom> <height>
+    ```
+1. Wait the network to reach the upgrade height. It will stop at that point. 
+
+1. Upgrade IBC client
+
+    The easiest way to upgrade the client is by using the hermes relayer itself.
+    ```
+    hermes upgrade client <current chain id of upgradable network> <client id of upgradable network on osmosis>
+    ```
+1. Now you can continue with the upgrading of your node(s) and gravity (if applicable).
+1. Clone cudos-builders repo somewhere (usually in your home directory)
+```
+git clone --branch v0.7.0 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
+```
+1. Create config files according to **Config** section below
+1. Execute the script according to **Usage** section below
+
 # Config
 
 All of the config files are in ./relayer/config folder.
 
 **Important: Do not leave any comments in any .env file**
 
-
 Prepare the .env based on .env.example. It contains the following variables:
 1. **PARAM_SOURCE_DIR:** this is the dir on which the nodes home dir will be, usually we use something like "/usr/cudos" <em>Example: PARAM_SOURCE_DIR="/usr/cudos"</em>
 
-
 Prepare the .relayer.env based on relayer.env.example. It contains the following variables:
 
-1. **CREATE_CHANNEL:** Defines whether the channel between the two chains must be created. Usually it must be created only once when the relayer is started for the first name. All subsequent starts/rebuild MUST not create a channel. <em>Example: CREATE_CHANNEL="true"</em>
 1. **REST_ENABLED:** Defines whether the relayer's REST API must be enabled. Currently it is not used but could be used in the future so settings it to true will be no harm. <em>Example: REST_ENABLED="true"</em>
 1. **REST_HOST:** Defines the bind address of relayer's REST API. <em>Example: REST_HOST="127.0.0.1"</em>
 1. **REST_PORT:** Defines the post of relayer's REST API. <em>Example: REST_PORT="3001"</em>
@@ -57,27 +96,48 @@ Prepare the .relayer.env based on relayer.env.example. It contains the following
 
 # Usage
 
-There are 2 scripts.
+There are 3 scripts - <em>start</em>, <em>validate</em> and <em>upgrade</em>.
 
-**Important**: The side effect of executing any of these scripts will be a folder, defined in PARAM_SOURCE_DIR at .env.
+**Important**: The side effect of executing any of these scripts will be a folder, defined in PARAM_SOURCE_DIR at .env on <em>target computer</em>
 
-**Launch sequence**: Execute these scripts only when all config files are ready. Follow the order below.
-- First execute <em>validate</em> to ensure that the connection to IBC-enabled chain is fine
-- Second execute <em>relayer</em> to start the relayer
+**Important**: Execute these scripts only when all config files are ready.
 
+**Important**: All of the scripts below must be executed from ./upgrade folder.
 
-**Validate**: It validates the connection from current machine to IBC-enabled chains and also checks for software requirements, params, etc.
+**Important**: Make sure that <em>./src/start.sh</em>, <em>./src/validate.sh</em> and <em>./src/upgrade.sh</em> have execute permission. 
 
-Ensure that it has execute permission and then start the script from ./relayer folder
+## Validate 
+
+It validates the connection from current machine to IBC-enabled chains and also checks for software requirements, params, etc.
 
 ```bash
 ./src/validate.sh
 ```
 
-**Launcher**: It starts the relayer
+## Start
 
-Ensure that it has execute permission and then start the script from ./relayer folder
+It starts the relayer
 
 ```bash
-sudo ./src/relayer.sh
+sudo ./src/start.sh
 ```
+
+## Upgrade
+
+It upgrades the relayer
+
+```bash
+sudo ./src/upgrade.sh
+```
+
+## Launch sequence
+
+1. Validate
+
+2. Start or Upgrade
+
+    <em>Notes:</em> 
+
+    - Execute start only if you are starting a relayer for the first time on a newly created network
+    - Execute upgrade only after CUDOS network, that the relayer is connected to, is halted due to **ibc-upgrade** proposal AND the IBC client has been upgraded (See Usage **General usage** section).
+

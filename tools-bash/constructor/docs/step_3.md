@@ -10,7 +10,7 @@ You need to have an up to date local copy of our build tools.
 
 ```
 cd $HOME
-git clone --branch v0.5.0 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
+git clone --branch v0.7.0 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
 cd CudosBuilders/tools-bash/constructor
 ```
 
@@ -100,7 +100,7 @@ You need to have a local copy of our build tools.Create your main Cudos director
 mkdir /usr/cudos
 
 cd $HOME
-git clone --branch v0.5.0 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
+git clone --branch v0.7.0 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
 cd CudosBuilders/tools-bash/constructor
 ```
 

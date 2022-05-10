@@ -13,22 +13,15 @@ fi
 
 source "./src/incs/var.sh"
 
-rm -rf "$WORKING_EXPORT_DIR"
-mkdir -p "$WORKING_EXPORT_DIR"
-
 source "$WORKING_SRC_DIR/incs/utils.sh"
 
 source "$WORKING_SRC_DIR/incs/validate.sh"
 
-source "$WORKING_SRC_DIR/modules/repos.sh"
+source "$WORKING_SRC_DIR/modules/repos.sh" "upgrade"
 
 source "$WORKING_SRC_DIR/modules/start-relayer.sh"
 
 echo "" # new line
 
-source "$WORKING_SRC_DIR/modules/exports.sh"
-
-echo "" # new line
-
-echo -ne "Starting...";
+echo -ne "Upgrading...";
 echo -e "${STYLE_GREEN}DONE${STYLE_DEFAULT}";

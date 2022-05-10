@@ -3,7 +3,7 @@
 function readEnvFromString {
     envAsString="$1"
     envName="$2"
-    tmpFilePath="/tmp/cudos-launcher-string.env"
+    tmpFilePath="/tmp/cudos-relayer-string.env"
 
     echo "$1" > "$tmpFilePath"
     eval $(source "$tmpFilePath"; echo tmpEnv="\"${!envName}\"")
