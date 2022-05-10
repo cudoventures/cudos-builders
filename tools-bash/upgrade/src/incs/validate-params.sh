@@ -18,6 +18,16 @@ if [ ! -x "$(command -v git)" ]; then
     exit 1;
 fi
 
+if [ ! -x "$(command -v docker)" ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} You must install docker";
+    exit 1;
+fi
+
+if [ ! -x "$(command -v docker-compose)" ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} You must install docker-compose";
+    exit 1;
+fi
+
 # validating params 
 if [ "$PARAM_SOURCE_DIR" = "" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_SOURCE_DIR must not be empty";

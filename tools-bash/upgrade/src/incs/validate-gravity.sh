@@ -1,5 +1,7 @@
 #!/bin/bash -i
 
+source "$WORKING_SRC_DIR/incs/validate-params.sh"
+
 echo -ne "Validating gravity params...";
 
 if [ "$PARAM_ETH_RPC" = "" ]; then
@@ -23,8 +25,6 @@ if [ "$PARAM_ETHERSCAN_API_KEY" = "" ]; then
 fi
 
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
-
-source "$WORKING_SRC_DIR/incs/validate-params.sh"
 
 source "$WORKING_SRC_DIR/incs/validate-network.sh"
 
