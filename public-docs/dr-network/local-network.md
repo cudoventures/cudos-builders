@@ -64,10 +64,24 @@ MONIKER=<your-root-node-moniker>
 ```
 SHOULD_USE_GLOBAL_PEERS=false
 ```
-
+- Populate these other variables as follow:
+```
+CHAIN_ID="cudos-local-network"
+ORCH_ETH_ADDRESS=0x41D0B5762341B0FCE6aDCCF69572c663481C7286
+MONITORING_ENABLED="true"
+ADDR_BOOK_STRICT="false"
+GRAVITY_MODULE_BALANCE="10000000000000000000000000000"
+CUDOS_TOKEN_CONTRACT_ADDRESS="0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d"
+NUMBER_OF_VALIDATORS="3"
+NUMBER_OF_ORCHESTRATORS="3"
+VALIDATOR_BALANCE="2000000000000000000000000"
+ORCHESTRATOR_BALANCE="1000000000000000000000000"
+FAUCET_BALANCE="20000000000000000000000000000"
+KEYRING_OS_PASS="123123123"
+```
 #### 4. Make sure that you are still in the correct directory `/var/lib/cudos/CudosBuilders/docker/root-node`, and *Initialize* the node by running this command:
 ```
-sudo docker-compose --env-file root-node.local.arg -f init-full-node.yml -p cudos-init-full-node-client-testnet-public-01 up --build
+sudo docker-compose --env-file root-node.local.arg -f init-root-node.yml -p cudos-init-root-node up --build"
 ```
 **DO NOT START YOUR VALIDATOR NODE YET**
 
