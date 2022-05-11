@@ -22,7 +22,7 @@ source "$WORKING_SRC_DIR/incs/validate.sh"
 
 source "$WORKING_SRC_DIR/modules/repos.sh" "start"
 
-source "$WORKING_SRC_DIR/modules/start-relayer.sh"
+source "$WORKING_SRC_DIR/modules/start-relayer.sh" "start"
 
 echo "" # new line
 

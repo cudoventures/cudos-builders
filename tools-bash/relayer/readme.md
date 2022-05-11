@@ -38,9 +38,24 @@ Curl must be installed
 
 1. Create a <em>ibc-upgrade</em> proposal (not a <em>software upgrade</em> proposal).
 
-    The easiest way to make the proposal is by using the hermer relayer itself.
+    - **[This step is executed on the osmosis node]**: Get client state from the osmosis-node using the script below. Set the correct **newChainId** and **upgradeHeight**.
     ```
-    hermes tx raw upgrade-chain -d acudos -c <new chain id> <current chain id of upgradable network> <current osmosis chain id> <client id of upgradable network on osmosis> <deposit amount without denom> <height>
+    newChainId="cudos-2"
+    upgradeHeight="550"
+    revisionNumber="${newChainId##*-}"
+    <daemon name> q ibc client state <client id> --output json | jq ".client_state" | jq ".latest_height.revision_number= \"$revisionNumber\"" | jq ".chain_id = \"$newChainId\"" | jq ".latest_height.revision_height= \"$upgradeHeight\""
+    ```
+
+    - **[This step is saving data from osmosis node to cudos node]**: Copy the result of the above script to a file on a machine where the node where you will make the ibc-upgrade proposal from is running. The docs below will assume that you've save the client state to the file /tmp/state.json but you can use any location you want.
+
+    - **[This step is executed on the cudos node]**: Create the proposal
+
+    ```
+    upgradeName="network-upgrade"
+    upgradeHeight="550"
+    pathToState="/tmp/state.json"
+    description="Upgrade the network"
+    cudos-noded tx gov submit-proposal ibc-upgrade "$upgradeName" $upgradeHeight "$pathToState" --deposit 50000000000000000000000acudos --title "$upgradeName" --description "$description" --from validator-1 --chain-id cudos-1 --gas-prices 5000000000000acudos -y
     ```
 1. Wait the network to reach the upgrade height. It will stop at that point. 
 
@@ -48,8 +63,9 @@ Curl must be installed
 
     The easiest way to upgrade the client is by using the hermes relayer itself.
     ```
-    hermes upgrade client <current chain id of upgradable network> <client id of upgradable network on osmosis>
+    hermes upgrade client <current osmosis chain id> <client id of upgradable network on osmosis>
     ```
+1. Stop the Hermes docker
 1. Now you can continue with the upgrading of your node(s) and gravity (if applicable).
 1. Clone cudos-builders repo somewhere (usually in your home directory)
 ```
