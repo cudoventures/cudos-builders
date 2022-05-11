@@ -1,7 +1,6 @@
 ---
 title: Local Network - Validator Cluster Build
 ---
-
 # Guide Overview
 ::: warning Note
 This guide is only intended for testing purposes on a local envrionment and should not be used for testnet/mainet envrionments.
@@ -12,29 +11,6 @@ The purpose of this guide is show how to setup a local network consisting of one
 
 The Validator Cluster is a cluster of Cudos nodes that can be configured as *Validator*, *Seed*, or *Sentry* nodes. Refer to the [Validator Cluster Nodes](/learn/validators.html#validator-cluster-nodes) section for an overview of the validator cluster roles.
  
-## Cluster Build summary
-::: warning Note
-In this build document, the terms _**Initialise**_ and _**Configure**_ refer to running specific scripts that apply the values in the .env settings file to your node.The _**Initialise**_ script should only be used the first time you start your node, as it will change your node ID. 
-:::
-
-The following section will take you through these steps in detail:
-
-**1. Initialize your Root Validator Node**
-
-- Apply basic values to the `.env` file, and **Initialise** BUT DO NOT START your Root Validator Node, taking a note of its Node ID. 
-
-**2. Initialise and Start your Sentry and Seed nodes**
-
-- Apply values to your nodes’ .env files, including adding the Root Validator’s ID as the `PRIVATE_PEERS` value.
-- **Initialise** and **Start** your Seed and Sentry Nodes, taking a note of their Node IDs
-
-**3. Apply peer values to your Root Validator and start it**
-
-Enter the Seed’s ID as the SEEDS value, and the Sentry’s ID as the `PERSISTENT PEER` value in your Validator node’s .env file.
-- **Configure** your node 
-- **Start** your validator Node
-
-
 ## Cluster Build procedure
 
 ### 1. Initialize your Validator Node
@@ -42,7 +18,7 @@ Enter the Seed’s ID as the SEEDS value, and the Sentry’s ID as the `PERSISTE
 **Please ensure you have completed everything in [Node Environment Preparation](/testnet/testnetenvprep.html) before you continue to create your node.**
 
 
-You will apply basic values to your root Validator’s .env file and initialise it, however you will not start your validator yet:
+You will apply basic values to your root Validator’s .env file, initialise  and start it
 
 #### 1. As root, navigate to the directory `/var/lib/cudos/CudosBuilders/docker/root-node`:
 ```
@@ -81,15 +57,38 @@ KEYRING_OS_PASS="123123123"
 ```
 #### 4. Make sure that you are still in the correct directory `/var/lib/cudos/CudosBuilders/docker/root-node`, and *Initialize* the node by running this command:
 ```
-sudo docker-compose --env-file root-node.local.arg -f init-root-node.yml -p cudos-init-root-node up --build"
+sudo docker-compose --env-file root-node.local.arg -f init-root-node.yml -p cudos-init-root-node up --build
 ```
-**DO NOT START YOUR VALIDATOR NODE YET**
 
 If all steps are completed successfully, you should see a newly generated file: 
 `/var/lib/cudos/CudosData/cudos-data-root-node/tendermint.nodeid`
 that contains your **node ID**, consisting of a long string of random characters.
+
+#### 5. Make sure that you are still in the correct directory `/var/lib/cudos/CudosBuilders/docker/root-node`, and *Start* the root validator node by running this command:
+```
+docker-compose --env-file ./root-node.local.arg -f ./start-root-node.yml -p cudos-start-root-node up --build --detach
+```
+
+If all steps are completed successfully you should have a running validator node
  
-### 2. Initialise and start your Sentry and Seed nodes
+ ### 2. Add config files and copy local genesis.json to config folder.
+ #### 1. As root, navigate to the directory `/var/lib/cudos/CudosBuilders/docker/config`:
+ ```
+    sudo -i
+    cd /var/lib/cudos/CudosBuilders/docker/config
+```
+#### 2. Create 3 new files as follows and leave them empty:
+```
+touch persistent-peers.local.config
+touch seeds.local.config
+touch state-sync-rpc-servers.local.config
+```
+#### 3. Copy the genesis from the root node to this folder:
+```
+cp /var/lib/cudos/CudosData/cudos-data-root-node/config/genesis.json /var/lib/cudos/CudosBuilders/docker/config/genesis.local.json
+```
+
+### 3. Initialise and start your Sentry and Seed nodes
 
 ### Sentry
 
@@ -114,10 +113,17 @@ cp sentry-node.env.example sentry-node.local01.env
 ```
 MONIKER=<your-sentry-node-moniker>
 ```
-- Set `SHOULD_USE_GLOBAL_PEERS` to `true` :
+- Set `SHOULD_USE_GLOBAL_PEERS` to `false` :
 
 ``` 
-SHOULD_USE_GLOBAL_PEERS=true
+SHOULD_USE_GLOBAL_PEERS=false
+```
+
+- Configure the `PERSISTANT_PEERS` list with the node ID of your root validator
+
+```
+PERSISTANT_PEERS=<root-validator1-id@ip:port>
+example: e4da73c45e1d31ecf92fb2152661ba58a3b548e1@cudos-start-root-node:26656
 ```
 
 - Configure the `PRIVATE_PEERS` list with the node ID of your root validator
@@ -131,13 +137,14 @@ Save and Exit
 ```
  docker-compose --env-file ./sentry-node.client.local01.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node-client-local-01 up --build
 ```
+If all steps are completed successfully, you should see a newly generated file: `/var/lib/cudos/CudosData/cudos-data-sentry-node-client-local-01/tendermint.nodeid` that contains your **node ID**, consisting of a long string of random characters.
 
 #### 5. *Start* your node
 ```
 docker-compose --env-file ./sentry-node.client.local01.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node-client-local-01 up --build --detach
 ```
 
-If all steps are completed successfully, you should see a newly generated file: `/var/lib/cudos/CudosData/cudos-data-sentry-node-client-testnet-public-01/tendermint.nodeid` that contains your **node ID**, consisting of a long string of random characters.
+If all steps are completed successfully, you should have a new container with a running sentry node infront of the root-validator node
 
 
 ### Seed
@@ -158,12 +165,20 @@ cp seed-node.env.example seed-node.client.local01.env
 
 - Set the `"MONIKER"` attribute to your desired name:
 ```
-MONIKER=<your-sentry-node-moniker>
+MONIKER=<your-seed-node-moniker>
 ```
-- Set the flag `"SHOULD_USE_GLOBAL_PEERS"` to `true` :
+- Set the flag `"SHOULD_USE_GLOBAL_PEERS"` to `false` :
 ```
-SHOULD_USE_GLOBAL_PEERS=true
+SHOULD_USE_GLOBAL_PEERS=false
 ```
+
+- Configure the `PERSISTANT_PEERS` list with the node ID of your root validator
+
+```
+PERSISTANT_PEERS=<root-validator1-id@ip:port>
+example: e4da73c45e1d31ecf92fb2152661ba58a3b548e1@cudos-start-root-node:26656
+```
+
 - Configure the `PRIVATE_PEERS` list with the node ID of your root validator
 ``` 
 PRIVATE_PEERS=<root-validator-id>
@@ -172,6 +187,9 @@ PRIVATE_PEERS=<root-validator-id>
 ```
 docker-compose --env-file ./seed-node.client.local01.arg -f ./init-seed-node.yml -p cudos-init-seed-node-client-local-01 up --build
 ```
+If all steps are completed successfully, you should see a newly generated file: 
+`/var/lib/cudos/CudosData/cudos-data-seed-node-client-local-01/tendermint.nodeid`
+that contains your **node ID**, consisting of a long string of random characters.
 #### 5. *Start* your node
 ```
 sudo docker-compose --env-file seed-node.client.testnet.public01.arg -f start-seed-node.yml -p cudos-start-seed-node-client-testnet-public-01 up --build --detach
@@ -180,9 +198,7 @@ docker-compose --env-file ./seed-node.client.local01.arg -f ./start-seed-node.ym
 
 ```
 
-If all steps are completed successfully, you should see a newly generated file: 
-`/var/lib/cudos/CudosData/cudos-data-seed-node-client-testnet-public-01/tendermint.nodeid`
-that contains your **node ID**, consisting of a long string of random characters.
- 
+ If all steps are completed successfully, you should have a running seed node for the root-validator-01
 
 
+### Congrats ! You now have your own validator cluster on a local blockchain network at your disposal
