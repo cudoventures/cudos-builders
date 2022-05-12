@@ -4,18 +4,82 @@ title: Local Network - Validator Cluster Build
 # Guide Overview
 ::: warning Note
 This guide is only intended for testing purposes on a local envrionment and should not be used for testnet/mainet envrionments.
+It has been tested on version 0.5.0 of CudosNode, GravityBridge and CudosBuiders
 :::
 The purpose of this guide is show how to setup a local network consisting of one root validator with one sentry and seed node
 
+# Node Environment Preparation
+
+
+This section will take you through preparing the environment on your nodes in preparation for running the Cudos software. You must complete the following two steps on every node that will take part in the Cudos network:
+
+- Install required packages
+- Build the node images
+
+ 
+## Install required packages
+You must ensure that you have the following installed:
+
+**Docker 20.10.6 or above (latest version recommended)**
+Refer to the [Docker installation and upgrade guide](https://docs.docker.com/engine/install/) for your OS.
+ 
+**Docker Compose 1.29.1 or above (latest version recommended)**
+Refer to the [Docker Compose Installation and Upgrade guide](https://docs.docker.com/compose/install/) for your OS.
+ 
+**Git**
+Refer to the [Git installation guide](https://github.com/git-guides/install-git) for your OS.
+ 
+**JQ**
+JQ is a command line JSON processor that you will use to extract data from JSON documents. Refer to the [JQ installation guide](https://stedolan.github.io/jq/download/) for your OS.
+
+## Build the node images
+After installing all prerequisites, you can build the Cudos node images. 
+
+::: tip
+This document describes installing the platform as root. It is also possible to install the platform as a non-root user using sudo.
+:::
+
+1. Change to root user and create a directory to use as your workspace (we will assume you call the directory `cudos`)
+
+```
+sudo -i
+mkdir /var/lib/cudos
+```
+ 
+2. Make sure that you are in the correct directory 
+```
+cd /var/lib/cudos
+```
+
+Clone the correct branches from the [CudosNode](https://github.com/CudoVentures/cudos-node) , [CudosBuilders](https://github.com/CudoVentures/cudos-builders), and [CudosGravityBridge](https://github.com/CudoVentures/cosmos-gravity-bridge) repositories, renaming the folders *CudosNode*, *CudosBuilders*, and *CudosGravityBridge*:
+
+```
+git clone --depth 1 --branch v0.5.0 https://github.com/CudoVentures/cudos-node.git CudosNode
+git clone --depth 1 --branch v0.5.0  https://github.com/CudoVentures/cudos-builders.git CudosBuilders
+git clone --depth 1 --branch v0.5.0 https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge
+```
+
+Navigate to the `CudosBuilders/docker/binary-builder` directory
+```
+cd CudosBuilders/docker/binary-builder 
+```
+
+Build the docker image of the binary by running the command:
+```
+docker-compose --env-file binary-builder.arg -f binary-builder.yml -p cudos-binary-builder up --build --detach
+```
+
+You have now prepared your node environment and can proceed building a local network.
+
+
+
 # Validator Cluster Build
 
-The Validator Cluster is a cluster of Cudos nodes that can be configured as *Validator*, *Seed*, or *Sentry* nodes. Refer to the [Validator Cluster Nodes](/learn/validators.html#validator-cluster-nodes) section for an overview of the validator cluster roles.
+The Validator Cluster is a cluster of Cudos nodes that can be configured as *Validator*, *Seed*, or *Sentry* nodes.
  
 ## Cluster Build procedure
 
 ### 1. Initialize your Validator Node
-
-**Please ensure you have completed everything in [Node Environment Preparation](/testnet/testnetenvprep.html) before you continue to create your node.**
 
 
 You will apply basic values to your root Validator’s .env file, initialise  and start it
@@ -92,7 +156,6 @@ cp /var/lib/cudos/CudosData/cudos-data-root-node/config/genesis.json /var/lib/cu
 
 ### Sentry
 
-**Please ensure you have completed everything in [Node Environment Preparation](/testnet/testnetenvprep.html) before you continue to create your node.**
 
 #### 1. As root, navigate to the directory `/var/lib/cudos/CudosBuilders/docker/sentry-node`
 ```
@@ -148,8 +211,6 @@ If all steps are completed successfully, you should have a new container with a 
 
 
 ### Seed
-
-**Please ensure you have completed everything in [Node Environment Preparation](/testnet/testnetenvprep.html) before you continue to create your node.**
 
 #### 1. As root, navigate to the directory `/var/lib/cudos/CudosBuilders/docker/seed-node`
 ```
