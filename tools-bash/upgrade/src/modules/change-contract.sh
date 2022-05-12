@@ -13,7 +13,7 @@ sed -i "s/ETHERSCAN_API_KEY=.*/ETHERSCAN_API_KEY=\"$PARAM_ETHERSCAN_API_KEY\"/g"
 dockerResult=$(docker-compose --env-file ./gravity-contract-deployer.arg -f ./gravity-contract-deployer.yml -p cudos-gravity-contract-deployer down 2>&1);
 dockerResult=$(docker-compose --env-file ./gravity-contract-deployer.arg -f ./gravity-contract-deployer.yml -p cudos-gravity-contract-deployer up --build 2>&1);
 if [ "$?" != 0 ]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error building the sleeping node for export $?: ${dockerResult}";
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error building gravity smart contract deployer$?: ${dockerResult}";
     exit 1;
 fi
 if [[ "$dockerResult" =~ (Gravity deployed at Address[ ]*-[ ]*0x[0-9a-fA-F]+) ]]; then
