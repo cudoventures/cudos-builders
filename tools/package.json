@@ -34,6 +34,8 @@
         "deploy--start-ibc-relayer-testnet-public": "node ./deployer-ibc-relayer/Main.js --target public-testnet --init 0 --rebuild 0",
         "deploy--init-ibc-relayer-testnet-private": "node ./deployer-ibc-relayer/Main.js --target private-testnet --init 1 --rebuild 1",
         "deploy--start-ibc-relayer-testnet-private": "node ./deployer-ibc-relayer/Main.js --target private-testnet --init 0 --rebuild 0",
+        "deploy--init-ibc-relayer-mainnet": "node ./deployer-ibc-relayer/Main.js --target mainnet --init 1 --rebuild 1",
+        "deploy--start-ibc-relayer-mainnet": "node ./deployer-ibc-relayer/Main.js --target mainnet --init 0 --rebuild 0",
         
         "network": "node ./deployer-network/src/Main.js"
     },
