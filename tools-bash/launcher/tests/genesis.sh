@@ -18,6 +18,10 @@ source "$WORKING_SRC_DIR/incs/validate-staking-json.sh"
 
 source "$WORKING_SRC_DIR/modules/merge-genesis.sh" "$WORKING_DIR/tests/config/genesis.root.json"
 
+source "$WORKING_DIR/tests/incs/var.sh"
+
+source "$WORKING_DIR/tests/incs/preprocess.sh"
+
 source "$WORKING_DIR/tests/modules/test-counts.sh"
 
 source "$WORKING_DIR/tests/modules/test-addresses.sh"

@@ -1,17 +1,11 @@
 echo "Checking if exported genesis counts match:";
 
-source "$WORKING_DIR/tests/incs/var.sh"
-
-EXPORTED_GENESIS="$WORKING_DIR/exports/genesis.json"
-BASE_GENESIS="$WORKING_DIR/tests/config/genesis.root.json"
-STAKING_JSON="$WORKING_DIR/tests/config/staking.json"
-
 ######################################
 # CHECK number of validators equals  #
 ######################################
 echo -ne "  -number of validators exported equals expected...";
 
-givenValCount=$(ls "$WORKING_DATA_GENESIS_DIR"/* | wc -l)
+givenValCount=$(ls "$WORKING_DATA_GENESIS_DIR" | wc -l)
 givenValCount=$(($givenValCount + 1))
 
 #staking.validatdrs count check
@@ -89,7 +83,7 @@ givenRootDelegations=$(($stakingRootDelegations+$rootGenRootDelegations))
 jq ".app_state.staking.delegations | map(select(.validator_address == \"$rootValOperAddress\"))" "$RESULT_GENESIS_PATH" > "$tmpGenesisPath"
 tempCount=$(jq length "$tmpGenesisPath")
 if [ "$tempCount" != "$givenRootDelegations" ]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} root validator delegations count don't match";
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} root validator delegations count don't match. Expected $givenRootDelegations actual $tempCount.";
     exit 1
 fi
 
@@ -104,6 +98,7 @@ fi
 
 totalClientDelegations=0
 # check for client validators delegations
+cd "$WORKING_DATA_GENESIS_DIR"
 for dataGenesisPath in ./*; do
     [ -e "$dataGenesisPath" ] || continue
 
@@ -244,6 +239,8 @@ exportedNonZeroAcudosBalances=$(jq length "$accountDataGenesisPath")
 jq ".app_state.bank.balances | map(select(.address as \$in | $moduleAddrArray | index(\$in)) | .coins) | flatten | map(select(.denom == \"acudos\" and .amount != \"0\") | .amount)" "$EXPORTED_GENESIS" > "$accountDataGenesisPath"
 exportedModuleBalances=$(jq length "$accountDataGenesisPath")
 
+# jq ".app_state.bank.balances | map(select(.address as \$in | $moduleAddrArray | index(\$in)) | .coins) | flatten | map(select(.denom == \"acudos\" and .amount != \"0\"))" "$EXPORTED_GENESIS"
+
 #get exported cudosAdmin nonzero balances
 jq ".app_state.bank.balances | map(.coins) | flatten | map(select(.denom == \"cudosAdmin\" and .amount != \"0\") | .amount)" "$EXPORTED_GENESIS"  > "$accountDataGenesisPath"
 exportedAdminBalances=$(jq length "$accountDataGenesisPath")
@@ -260,9 +257,9 @@ jq [.app_state.bank.balances[].address] "$EXPORTED_GENESIS" | jq -c ". - $module
 baseAccountArray=$(cat $tmpModuleAccountAddr)
 
 jq ".app_state.bank.balances | map(select(.address as \$in | $baseAccountArray | index(\$in)) | .coins) | flatten | map(select(.denom == \"acudos\" and .amount != \"0\") | .amount)" "$rootGenesisPath" > "$accountDataGenesisPath"
-rootBankBalances=$(jq length "$accountDataGenesisPath")
+rootBankBalancesCount=$(jq length "$accountDataGenesisPath")
 
-expectedBalances=$(("$stakingBalances"+"$rootBankBalances"))
+expectedBalances=$(("$stakingBalances"+"$rootBankBalancesCount"))
 if [ "$exportedNonZeroAcudosBalances" != "$expectedBalances" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} acudos nonzero balances count don't match - expected ${expectedBalances} but exported ${exportedNonZeroAcudosBalances}";
     exit 1 
@@ -291,6 +288,8 @@ moduleAddrArray=$(cat $tmpModuleAccountAddr)
 
 jq ".app_state.bank.balances | map(select(.address as \$in | $moduleAddrArray | index(\$in)) | .coins) | flatten | map(select(.denom == \"acudos\" and .amount != \"0\") | .amount)" "$rootGenesisPath" > "$accountDataGenesisPath"
 rootModuleBalances=$(jq length "$accountDataGenesisPath")
+
+# jq ".app_state.bank.balances | map(select(.address as \$in | $moduleAddrArray | index(\$in)) | .coins) | flatten | map(select(.denom == \"acudos\" and .amount != \"0\"))" "$rootGenesisPath"
 
 if [ "$exportedModuleBalances" != "$rootModuleBalances" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} module type account balances count don't match - expected ${rootModuleBalances} but exported ${exportedModuleBalances}";
