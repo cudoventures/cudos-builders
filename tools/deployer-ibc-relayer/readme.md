@@ -37,11 +37,11 @@ Please note the port of each endpoint. It can be used as indicator which endpoin
 # IBC-Relayer deployer
 ## Usage:
 1. Configure secrets.json in this deployer as described above.
-2. Copy `hermes-ibc-relayer.env.example` to:
-    - `gravity-bridge-ui.testnet.private.env` (for private testnet builds)
-    - `gravity-bridge-ui.testnet.public.env` (for public testnet builds)
-    - Fill the required fields as described in the "ENV files fields" section.
-3. Configure the ENV variables in parentDir/CudosBuilders/docker/hermes-ibc-relayer
+2. Copy and rename `hermes-ibc-relayer.env.example` in parentDir/CudosBuilders/docker/hermes-ibc-relayer to:
+    - `hermes-ibc-relayer.private.env` (for private testnet builds)
+    - `hermes-ibc-relayer.public.env` (for public testnet builds)
+    - `hermes-ibc-relayer.mainnet.env` (for public testnet builds)
+3. Fill the required fields as described in the "ENV files fields" section.
 4. Run `npm install`
 
 ## List of npm commands regarding this deployer:
@@ -50,3 +50,5 @@ Please note the port of each endpoint. It can be used as indicator which endpoin
 - `deploy--start-ibc-relayer-testnet-public` - deploys the starter container and starts the relayer itself.
 - `deploy--init-ibc-relayer-testnet-private` - similarly to the first, but for private testnet
 - `deploy--start-ibc-relayer-testnet-private` - similarly to the second, but for private testnet
+- `deploy--init-ibc-relayer-mainnet` - similarly to the first, but for private testnet
+- `deploy--start-ibc-relayer-mainnet` - similarly to the second, but for private testnet

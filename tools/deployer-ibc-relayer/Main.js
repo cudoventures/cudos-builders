@@ -9,6 +9,7 @@ const SSH2Client = require('ssh2').Client;
 
 const RELAYER_PUBLIC = 'public-testnet';
 const RELAYER_PRIVATE = 'private-testnet';
+const RELAYER_MAINNET = 'mainnet';
 
 const SecretsConfig = require('./secrets.json');
 
@@ -45,7 +46,8 @@ async function main() {
 function getArgParser() {
     const targets = [
         RELAYER_PUBLIC,
-        RELAYER_PRIVATE
+        RELAYER_PRIVATE,
+        RELAYER_MAINNET,
     ]
     const parser = new ArgumentParser({description: 'Hermes relayer deployer'});
     parser.add_argument('--target', { 'required': true, 'choices': targets });
@@ -170,6 +172,7 @@ async function executeCommands(args, secrets, deployFilePath, deployFilename) {
     const dockerComposeArgFile = [];
     dockerComposeArgFile[RELAYER_PUBLIC] = './hermes-ibc-relayer.public.arg';
     dockerComposeArgFile[RELAYER_PRIVATE] = './hermes-ibc-relayer.private.arg';
+    dockerComposeArgFile[RELAYER_MAINNET] = './hermes-ibc-relayer.mainnet.arg';
 
     command = [
         `cd ${secrets.serverPath}`,
