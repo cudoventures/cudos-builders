@@ -44,6 +44,8 @@ class TopologyHelper {
         helper.validators = jsonData.nodes.validators.map((validatorJson) => {
             const model = ValidatorNodeModel.fromJson(validatorJson);
             helper.addNodeModel(model);
+            model.orchEthAddress = '';
+            model.ethPrivKey = '';
             return model;
         });
         helper.seeds = jsonData.nodes.seeds.map((seedJson) => {
@@ -56,9 +58,9 @@ class TopologyHelper {
             helper.addNodeModel(model);
             return model;
         });
-        helper.gravityBridgeUiModel = GravityBridgeUiModel.fromJson(jsonData.nodes.gravityBridgeUi);
-        helper.utilsModel = UtilsModel.fromJson(jsonData.nodes.utils);
-        helper.monitoringModel = MonitoringModel.fromJson(jsonData.nodes.monitoring);
+        // helper.gravityBridgeUiModel = GravityBridgeUiModel.fromJson(jsonData.nodes.gravityBridgeUi);
+        // helper.utilsModel = UtilsModel.fromJson(jsonData.nodes.utils);
+        // helper.monitoringModel = MonitoringModel.fromJson(jsonData.nodes.monitoring);
         helper.params = ParamsModel.fromJson(jsonData.params);
 
         return helper;
@@ -138,18 +140,18 @@ class TopologyHelper {
         });
 
         if (gravity === '1') {
-            if (usedComputerIds.has(this.gravityBridgeUiModel.computerId) === true) {
-                throw new Error(`Computer with id (${this.gravityBridgeUiModel.computerId}) has been used by more than a single node`);
-            }
-            usedComputerIds.add(this.gravityBridgeUiModel.computerId);
+            // if (usedComputerIds.has(this.gravityBridgeUiModel.computerId) === true) {
+            //     throw new Error(`Computer with id (${this.gravityBridgeUiModel.computerId}) has been used by more than a single node`);
+            // }
+            // usedComputerIds.add(this.gravityBridgeUiModel.computerId);
 
-            if (this.getComputerModel(this.gravityBridgeUiModel.computerId) === undefined) {
-                throw new Error(`GravityBridgeUi does not have a computer instance`);
-            }
+            // if (this.getComputerModel(this.gravityBridgeUiModel.computerId) === undefined) {
+            //     throw new Error(`GravityBridgeUi does not have a computer instance`);
+            // }
 
-            if (this.gravityBridgeUiModel.ethTokenContract === '') {
-                throw new Error(`Gravity does not have a token coontract`);
-            }
+            // if (this.gravityBridgeUiModel.ethTokenContract === '') {
+            //     throw new Error(`Gravity does not have a token coontract`);
+            // }
 
             if (this.params.gravity.ethrpc === '') {
                 throw new Error(`Gravity does not have a ethereum full node`);
@@ -160,37 +162,37 @@ class TopologyHelper {
             }
         }
 
-        if (explorer === '1' ||  faucet === '1') {
-            if (usedComputerIds.has(this.utilsModel.computerId) === true) {
-                throw new Error(`Computer with id (${this.utilsModel.computerId}) has been used by more than a single node`);
-            }
-            usedComputerIds.add(this.utilsModel.computerId);
+        // if (explorer === '1' ||  faucet === '1') {
+        //     if (usedComputerIds.has(this.utilsModel.computerId) === true) {
+        //         throw new Error(`Computer with id (${this.utilsModel.computerId}) has been used by more than a single node`);
+        //     }
+        //     usedComputerIds.add(this.utilsModel.computerId);
 
-            if (this.getComputerModel(this.utilsModel.computerId) === undefined) {
-                throw new Error(`Utils does not have a computer instance`);
-            }
+        //     if (this.getComputerModel(this.utilsModel.computerId) === undefined) {
+        //         throw new Error(`Utils does not have a computer instance`);
+        //     }
 
-            if (faucet === '1') {
-                if (this.utilsModel.googleApiKey === '') {
-                    throw new Error(`Utils does not have a google api key`);
-                }
+        //     if (faucet === '1') {
+        //         if (this.utilsModel.googleApiKey === '') {
+        //             throw new Error(`Utils does not have a google api key`);
+        //         }
 
-                if (this.utilsModel.captchaSiteKey === '') {
-                    throw new Error(`Utils does not have a google captcha site key`);
-                }
+        //         if (this.utilsModel.captchaSiteKey === '') {
+        //             throw new Error(`Utils does not have a google captcha site key`);
+        //         }
 
-                if (this.utilsModel.googleProjectId === '') {
-                    throw new Error(`Utils does not have a google project id`);
-                }
-            }
-        }
+        //         if (this.utilsModel.googleProjectId === '') {
+        //             throw new Error(`Utils does not have a google project id`);
+        //         }
+        //     }
+        // }
 
-        if (monitoring === '1') {
-            if (usedComputerIds.has(this.monitoringModel.computerId) === true) {
-                throw new Error(`Computer with id (${this.monitoringModel.computerId}) has been used by more than a single node`);
-            }
-            usedComputerIds.add(this.monitoringModel.computerId);
-        }
+        // if (monitoring === '1') {
+        //     if (usedComputerIds.has(this.monitoringModel.computerId) === true) {
+        //         throw new Error(`Computer with id (${this.monitoringModel.computerId}) has been used by more than a single node`);
+        //     }
+        //     usedComputerIds.add(this.monitoringModel.computerId);
+        // }
 
     }
 

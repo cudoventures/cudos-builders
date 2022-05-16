@@ -38,9 +38,9 @@ function getArgParser() {
     const parser = new ArgumentParser({description: 'Cudos Network StartUp Script'});
     parser.add_argument('--topology', { 'required': false, 'default': './deployer-network/config/topology.json' });
     parser.add_argument('--gravity', { 'required': false, 'default': '1', 'choices': ['0', '1'] });
-    parser.add_argument('--faucet', { 'required': false, 'default': '1', 'choices': ['0', '1'] });
-    parser.add_argument('--explorer', { 'required': false, 'default': '1', 'choices': ['0', '1'] });
-    parser.add_argument('--monitoring', { 'required': false, 'default': '1', 'choices': ['0', '1'] });
+    // parser.add_argument('--faucet', { 'required': false, 'default': '1', 'choices': ['0', '1'] });
+    // parser.add_argument('--explorer', { 'required': false, 'default': '1', 'choices': ['0', '1'] });
+    // parser.add_argument('--monitoring', { 'required': false, 'default': '1', 'choices': ['0', '1'] });
     parser.add_argument('--docker-source', { 'required': false, 'default': 'remote', 'choices': ['remote', 'local'] });
     return parser.parse_args();
 }

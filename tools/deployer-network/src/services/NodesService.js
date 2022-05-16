@@ -56,43 +56,43 @@ class NodesService {
         if (gravity === '1') {
             await this.deployGravitySmartContract();
             await this.startOrchestrators();
-            await this.startGravityBridgeUi();
+            // await this.startGravityBridgeUi();
         }
-        if (faucet === '1') {
-            await this.startFaucet();
-        }
-        if (explorer === '1') {
-            await this.startExplorer();
-        }
-        if (monitoring === '1') {
-            await this.startMonitoring();
-        }
+        // if (faucet === '1') {
+        //     await this.startFaucet();
+        // }
+        // if (explorer === '1') {
+        //     await this.startExplorer();
+        // }
+        // if (monitoring === '1') {
+        //     await this.startMonitoring();
+        // }
     }
 
     async prepareVolumes(explorer, monitoring) {
         Log.main('Prepare volumes');
 
-        if (explorer === '1') {
-            const utilsModel = this.topologyHelper.utilsModel;
-            const utilsSshHelper = this.instancesService.getSshHelper(utilsModel.computerId);
+        // if (explorer === '1') {
+        //     const utilsModel = this.topologyHelper.utilsModel;
+        //     const utilsSshHelper = this.instancesService.getSshHelper(utilsModel.computerId);
 
-            await utilsSshHelper.exec([
-                `docker run -v "${PathHelper.WORKING_DIR}/CudosData/cudos-data-explorer-release-mongodb:/vol" debian rm -rf /vol`,
-            ], false);
-        }
+        //     await utilsSshHelper.exec([
+        //         `docker run -v "${PathHelper.WORKING_DIR}/CudosData/cudos-data-explorer-release-mongodb:/vol" debian rm -rf /vol`,
+        //     ], false);
+        // }
 
-        if (monitoring === '1') {
-            const monitoringModel = this.topologyHelper.monitoringModel;
-            const monitoringSshHelper = this.instancesService.getSshHelper(monitoringModel.computerId);
+        // if (monitoring === '1') {
+        //     const monitoringModel = this.topologyHelper.monitoringModel;
+        //     const monitoringSshHelper = this.instancesService.getSshHelper(monitoringModel.computerId);
 
-            await monitoringSshHelper.exec([
-                `docker run -v "${PathHelper.WORKING_DIR}/CudosData/grafana:/vol" debian rm -rf /vol`,
-            ], false);
+        //     await monitoringSshHelper.exec([
+        //         `docker run -v "${PathHelper.WORKING_DIR}/CudosData/grafana:/vol" debian rm -rf /vol`,
+        //     ], false);
 
-            await monitoringSshHelper.exec([
-                `docker run -v "${PathHelper.WORKING_DIR}/CudosData/prometheus:/vol" debian rm -rf /vol`,
-            ], false);
-        }
+        //     await monitoringSshHelper.exec([
+        //         `docker run -v "${PathHelper.WORKING_DIR}/CudosData/prometheus:/vol" debian rm -rf /vol`,
+        //     ], false);
+        // }
 
         // all node volumes are deleted during initialization
     }
@@ -107,10 +107,10 @@ class NodesService {
         const dockerContainerStartName = ValidatorNodeModel.getRootValidatorDockerContainerStartName();        
         
         let ethTokenContract = '0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d';
-        if (gravity === '1') {
-            const gravityBridgeUiModel = this.topologyHelper.gravityBridgeUiModel;
-            ethTokenContract = gravityBridgeUiModel.ethTokenContract;
-        }
+        // if (gravity === '1') {
+        //     const gravityBridgeUiModel = this.topologyHelper.gravityBridgeUiModel;
+        //     ethTokenContract = gravityBridgeUiModel.ethTokenContract;
+        // }
 
         validatorNodeModel.port26656 = validatorComputerModel.isLocalDocker === true ? ++this.genPorts : 26656;
         validatorNodeModel.port26660 = validatorComputerModel.isLocalDocker === true ? ++this.genPorts : 26660;
@@ -123,27 +123,28 @@ class NodesService {
             `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/root-node`,
             'cp ./root-node.env.example ./root-node.local.env',
             'sed -i "s/MONIKER=.*/MONIKER=\"deployer-network-root-validator\"/g" ./root-node.local.env',
-            `sed -i "s/CHAIN_ID=.*/CHAIN_ID=\"${CHAIN_ID}"/g" ./root-node.local.env`,
+            `sed -i "s/CHAIN_ID=.*/CHAIN_ID=\"${CHAIN_ID}\"/g" ./root-node.local.env`,
             `sed -i "s/ORCH_ETH_ADDRESS=.*/ORCH_ETH_ADDRESS=\"${validatorNodeModel.orchEthAddress}\"/g" ./root-node.local.env`,
             `sed -i "s/MONITORING_ENABLED=.*/MONITORING_ENABLED=\"true\"/g" ./root-node.local.env`,
+            `sed -i "s/ADDR_BOOK_STRICT=.*/ADDR_BOOK_STRICT=\"false\"/g" ./root-node.local.env`,
             `sed -i "s/GRAVITY_MODULE_BALANCE=.*/GRAVITY_MODULE_BALANCE=\"1000000000000000000000000000\"/g" ./root-node.local.env`,
             `sed -i "s/CUDOS_TOKEN_CONTRACT_ADDRESS=.*/CUDOS_TOKEN_CONTRACT_ADDRESS=\"${ethTokenContract}\"/g" ./root-node.local.env`,
-            `sed -i "s/NUMBER_OF_VALIDATORS=.*/NUMBER_OF_VALIDATORS=\"3\"/g" ./root-node.local.env`,
-            `sed -i "s/NUMBER_OF_ORCHESTRATORS=.*/NUMBER_OF_ORCHESTRATORS=\"3\"/g" ./root-node.local.env`,
+            `sed -i "s/NUMBER_OF_VALIDATORS=.*/NUMBER_OF_VALIDATORS=\"1\"/g" ./root-node.local.env`,
+            `sed -i "s/NUMBER_OF_ORCHESTRATORS=.*/NUMBER_OF_ORCHESTRATORS=\"1\"/g" ./root-node.local.env`,
             `sed -i "s/VALIDATOR_BALANCE=.*/VALIDATOR_BALANCE=\"2000000000000000000000000\"/g" ./root-node.local.env`,
             `sed -i "s/ORCHESTRATOR_BALANCE=.*/ORCHESTRATOR_BALANCE=\"2000000000000000000000000\"/g" ./root-node.local.env`,
             `sed -i "s/FAUCET_BALANCE=.*/FAUCET_BALANCE=\"20000000000000000000000000000000\"/g" ./root-node.local.env`,
             `sed -i "s/KEYRING_OS_PASS=.*/KEYRING_OS_PASS=\"123123123\"/g" ./root-node.local.env`,
             `sed -i "s/PORT26656=.*/PORT26656=\"${validatorNodeModel.port26656}\"/g" ./root-node.local.arg`,
             `sed -i "s/PORT26660=.*/PORT26660=\"${validatorNodeModel.port26660}\"/g" ./root-node.local.arg`,
-            `sed -i "s/START_CONTAINER_NAME=cudos-start-root-node/START_CONTAINER_NAME=${dockerContainerStartName}/g" ./root-node.local.arg`,
+            `sed -i "s/START_CONTAINER_NAME=.*/START_CONTAINER_NAME=\"${dockerContainerStartName}\"/g" ./root-node.local.arg`,
             ...NodesHelper.getDockerExtraHosts('start-root-node'),
         ]);
         
         if (gravity === '1') {
             await validatorSshHelper.exec([
                 `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/root-node`,
-                `echo '\r\nsed -i "/\[grpc\]/,/\[/ s/enable = false/enable = true/" "\${CUDOS_HOME}/config/app.toml"\r\n' >> ./scripts/init-root.sh`,
+                `echo '\r\nsed -i "/\\[grpc\\]/,/\\[/ s/enable = false/enable = true/" "$\{CUDOS_HOME\}/config/app.toml"\r\n' >> ./scripts/init-root.sh`,
                 `cat ./scripts/init-root.sh`
             ], true);
         }
@@ -210,6 +211,7 @@ class NodesService {
                 `sed -i "s/PRIVATE_PEERS=.*/PRIVATE_PEERS=\"${validatorTendermintId}\"/g" ./seed-node.local01.env`,
                 `sed -i "s/SHOULD_USE_GLOBAL_PEERS=.*/SHOULD_USE_GLOBAL_PEERS=\"false\"/g" ./seed-node.local01.env`,
                 `sed -i "s/MONITORING_ENABLED=.*/MONITORING_ENABLED=\"true\"/g" ./seed-node.local01.env`,
+                `sed -i "s/ADDR_BOOK_STRICT=.*/ADDR_BOOK_STRICT=\"false\"/g" ./seed-node.local01.env`,
                 `sed -i "s/INIT_CONTAINER_NAME=.*/INIT_CONTAINER_NAME=\"${dockerContainerInitName}\"/g" ./seed-node.local01.arg`,
                 `sed -i "s/START_CONTAINER_NAME=.*/START_CONTAINER_NAME=\"${dockerContainerStartName}\"/g" ./seed-node.local01.arg`,
                 `sed -i "s/VOLUME_NAME=.*/VOLUME_NAME=\"${volumeName}\"/g" ./seed-node.local01.arg`,
@@ -271,6 +273,7 @@ class NodesService {
                 `sed -i "s/PRIVATE_PEERS=.*/PRIVATE_PEERS=\"${validatorTendermintId}\"/g" ./sentry-node.local01.env`,
                 `sed -i "s/SHOULD_USE_GLOBAL_PEERS=.*/SHOULD_USE_GLOBAL_PEERS=\"false\"/g" ./sentry-node.local01.env`,
                 `sed -i "s/MONITORING_ENABLED=.*/MONITORING_ENABLED=\"true\"/g" ./sentry-node.local01.env`,
+                `sed -i "s/ADDR_BOOK_STRICT=.*/ADDR_BOOK_STRICT=\"false\"/g" ./sentry-node.local01.env`,
                 `sed -i "s/INIT_CONTAINER_NAME=.*/INIT_CONTAINER_NAME=\"${dockerContainerInitName}\"/g" ./sentry-node.local01.arg`,
                 `sed -i "s/START_CONTAINER_NAME=.*/START_CONTAINER_NAME=\"${dockerContainerStartName}\"/g" ./sentry-node.local01.arg`,
                 `sed -i "s/VOLUME_NAME=.*/VOLUME_NAME=\"${volumeName}\"/g" ./sentry-node.local01.arg`,
@@ -323,6 +326,7 @@ class NodesService {
                 'cp ./full-node.env.example ./full-node.client.local01.env',
                 `sed -i "s/MONIKER=.*/MONIKER=\"deployer-network-full-node-${validatorNodeModel.nodeId}\"/g" ./full-node.client.local01.env`,
                 `sed -i "s/MONITORING_ENABLED=.*/MONITORING_ENABLED=\"true\"/g" ./full-node.client.local01.env`,
+                `sed -i "s/ADDR_BOOK_STRICT=.*/ADDR_BOOK_STRICT=\"false\"/g" ./full-node.client.local01.env`,
                 `sed -i "s/INIT_CONTAINER_NAME=.*/INIT_CONTAINER_NAME=\"${dockerContainerInitName}\"/g" ./full-node.client.local01.arg`,
                 `sed -i "s/CONFIG_CONTAINER_NAME=.*/CONFIG_CONTAINER_NAME=\"${dockerContainerConfigName}\"/g" ./full-node.client.local01.arg`,
                 `sed -i "s/START_CONTAINER_NAME=.*/START_CONTAINER_NAME=\"${dockerContainerStartName}\"/g" ./full-node.client.local01.arg`,
@@ -382,6 +386,7 @@ class NodesService {
                     `sed -i "s/PRIVATE_PEERS=.*/PRIVATE_PEERS=\"${validatorTendermintId}\"/g" ./seed-node.local01.env`,
                     `sed -i "s/SHOULD_USE_GLOBAL_PEERS=.*/SHOULD_USE_GLOBAL_PEERS=\"false\"/g" ./seed-node.local01.env`,
                     `sed -i "s/MONITORING_ENABLED=.*/MONITORING_ENABLED=\"true\"/g" ./seed-node.local01.env`,
+                    `sed -i "s/ADDR_BOOK_STRICT=.*/ADDR_BOOK_STRICT=\"false\"/g" ./seed-node.local01.env`,
                     `sed -i "s/INIT_CONTAINER_NAME=.*/INIT_CONTAINER_NAME=\"${dockerContainerInitName}\"/g" ./seed-node.local01.arg`,
                     `sed -i "s/START_CONTAINER_NAME=.*/START_CONTAINER_NAME=\"${dockerContainerStartName}\"/g" ./seed-node.local01.arg`,
                     `sed -i "s/VOLUME_NAME=.*/VOLUME_NAME=\"${volumeName}\"/g" ./seed-node.local01.arg`,
@@ -444,6 +449,7 @@ class NodesService {
                     `sed -i "s/PRIVATE_PEERS=.*/PRIVATE_PEERS=\"${validatorTendermintId}\"/g" ./sentry-node.local01.env`,
                     `sed -i "s/SHOULD_USE_GLOBAL_PEERS=.*/SHOULD_USE_GLOBAL_PEERS=\"false\"/g" ./sentry-node.local01.env`,
                     `sed -i "s/MONITORING_ENABLED=.*/MONITORING_ENABLED=\"true\"/g" ./sentry-node.local01.env`,
+                    `sed -i "s/ADDR_BOOK_STRICT=.*/ADDR_BOOK_STRICT=\"false\"/g" ./sentry-node.local01.env`,
                     `sed -i "s/INIT_CONTAINER_NAME=.*/INIT_CONTAINER_NAME=\"${dockerContainerInitName}\"/g" ./sentry-node.local01.arg`,
                     `sed -i "s/START_CONTAINER_NAME=.*/START_CONTAINER_NAME=\"${dockerContainerStartName}\"/g" ./sentry-node.local01.arg`,
                     `sed -i "s/VOLUME_NAME=.*/VOLUME_NAME=\"${volumeName}\"/g" ./sentry-node.local01.arg`,
@@ -562,6 +568,9 @@ class NodesService {
             `sed -i "s~COSMOS_NODE=.*~COSMOS_NODE=\\"http://${sentryNodeModel.getDockerContainerStartName()}:26657\\"~g" ./gravity-contract-deployer.env`,
             `sed -i "s~ETH_NODE=.*~ETH_NODE=\\"${this.topologyHelper.params.gravity.ethrpc}\\"~g" ./gravity-contract-deployer.env`,
             `sed -i "s/ETH_PRIV_KEY_HEX=.*/ETH_PRIV_KEY_HEX=\\"${this.topologyHelper.params.gravity.contractDeploerEthPrivKey}\\"/g" ./gravity-contract-deployer.env`,
+            `sed -i "s/CUDOS_ACCESS_CONTROL_ADDRESS=.*/CUDOS_ACCESS_CONTROL_ADDRESS=\\"0xf50E29dB8bf318fB61Ac6688578dc0CD35EA8142\\"/g" ./gravity-contract-deployer.env`,
+            `sed -i "s/DEFAULT_NETWORK=.*/DEFAULT_NETWORK=\\"rinkeby\\"/g" ./gravity-contract-deployer.env`,
+            `sed -i "s/ETHERSCAN_API_KEY=.*/ETHERSCAN_API_KEY=\\"${this.topologyHelper.params.gravity.etherscanApiKey}\\"/g" ./gravity-contract-deployer.env`,
         ], false);
 
         const contractDeployerResult = await sentrySshHelper.exec([
@@ -656,110 +665,110 @@ class NodesService {
         ]);
     }
     
-    async startFaucet() {
-        Log.main('Start faucet');
+    // async startFaucet() {
+    //     Log.main('Start faucet');
         
-        const utilsModel = this.topologyHelper.utilsModel;
-        const utilsComputerModel = this.topologyHelper.getComputerModel(utilsModel.computerId);
-        const utilsSshHelper = this.instancesService.getSshHelper(utilsModel.computerId);
-        const sentryNodeModel = this.topologyHelper.getFirstSentry();
+    //     const utilsModel = this.topologyHelper.utilsModel;
+    //     const utilsComputerModel = this.topologyHelper.getComputerModel(utilsModel.computerId);
+    //     const utilsSshHelper = this.instancesService.getSshHelper(utilsModel.computerId);
+    //     const sentryNodeModel = this.topologyHelper.getFirstSentry();
         
-        if (utilsComputerModel.isLocalDocker === false) {
-            await utilsSshHelper.cloneRepos();
-        }
-        await utilsSshHelper.exec([
-            `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/faucet`,
-            'cp ./faucet.env.example ./faucet.local.env',
-            `sed -i "s/CREDIT_AMOUNT=.*/CREDIT_AMOUNT=\\"10000000000000000000\\"/g" ./faucet.local.env`,
-            `sed -i "s/MAX_CREDIT=.*/MAX_CREDIT=\\"10000000000000000000\\"/g" ./faucet.local.env`,
-            `sed -i "s~NODE=.*~NODE=\\"http://${this.getDockerInternalHostByNodeId(sentryNodeModel.nodeId)}:26657\\"~g" ./faucet.local.env`,
-            `sed -i "s/MNEMONIC=.*/MNEMONIC=\\"${this.faucetMnemonic}\\"/g" ./faucet.local.env`,
-            `sed -i "s/GOOGLE_API_KEY=.*/GOOGLE_API_KEY=\\"${utilsModel.googleApiKey}\\"/g" ./faucet.local.env`,
-            `sed -i "s/CAPTCHA_SITE_KEY=.*/CAPTCHA_SITE_KEY=\\"${utilsModel.captchaSiteKey}\\"/g" ./faucet.local.env`,
-            `sed -i "s/GOOGLE_PROJECT_ID=.*/GOOGLE_PROJECT_ID=\\"${utilsModel.googleProjectId}\\"/g" ./faucet.local.env`,
-            `sed -i "s/container_name:.*/container_name: ${FAUCET_CONTAINER_NAME}/g" ./faucet.yml`,
-            ...NodesHelper.getDockerExtraHosts('faucet'),
-            `docker-compose --env-file ./faucet.local.arg -f ./faucet.yml -p ${FAUCET_CONTAINER_NAME} up --build -d`
-        ]);
-    }
+    //     if (utilsComputerModel.isLocalDocker === false) {
+    //         await utilsSshHelper.cloneRepos();
+    //     }
+    //     await utilsSshHelper.exec([
+    //         `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/faucet`,
+    //         'cp ./faucet.env.example ./faucet.local.env',
+    //         `sed -i "s/CREDIT_AMOUNT=.*/CREDIT_AMOUNT=\\"10000000000000000000\\"/g" ./faucet.local.env`,
+    //         `sed -i "s/MAX_CREDIT=.*/MAX_CREDIT=\\"10000000000000000000\\"/g" ./faucet.local.env`,
+    //         `sed -i "s~NODE=.*~NODE=\\"http://${this.getDockerInternalHostByNodeId(sentryNodeModel.nodeId)}:26657\\"~g" ./faucet.local.env`,
+    //         `sed -i "s/MNEMONIC=.*/MNEMONIC=\\"${this.faucetMnemonic}\\"/g" ./faucet.local.env`,
+    //         `sed -i "s/GOOGLE_API_KEY=.*/GOOGLE_API_KEY=\\"${utilsModel.googleApiKey}\\"/g" ./faucet.local.env`,
+    //         `sed -i "s/CAPTCHA_SITE_KEY=.*/CAPTCHA_SITE_KEY=\\"${utilsModel.captchaSiteKey}\\"/g" ./faucet.local.env`,
+    //         `sed -i "s/GOOGLE_PROJECT_ID=.*/GOOGLE_PROJECT_ID=\\"${utilsModel.googleProjectId}\\"/g" ./faucet.local.env`,
+    //         `sed -i "s/container_name:.*/container_name: ${FAUCET_CONTAINER_NAME}/g" ./faucet.yml`,
+    //         ...NodesHelper.getDockerExtraHosts('faucet'),
+    //         `docker-compose --env-file ./faucet.local.arg -f ./faucet.yml -p ${FAUCET_CONTAINER_NAME} up --build -d`
+    //     ]);
+    // }
 
-    async startExplorer() {
-        Log.main('Start explorer');
+    // async startExplorer() {
+    //     Log.main('Start explorer');
 
-        const utilsModel = this.topologyHelper.utilsModel;
-        const utilsComputerModel = this.topologyHelper.getComputerModel(utilsModel.computerId);
-        const utilsSshHelper = this.instancesService.getSshHelper(utilsModel.computerId);
-        const sentryNodeModel = this.topologyHelper.getFirstSentry();
+    //     const utilsModel = this.topologyHelper.utilsModel;
+    //     const utilsComputerModel = this.topologyHelper.getComputerModel(utilsModel.computerId);
+    //     const utilsSshHelper = this.instancesService.getSshHelper(utilsModel.computerId);
+    //     const sentryNodeModel = this.topologyHelper.getFirstSentry();
 
-        const host = this.getExternalHostByComputerId(utilsModel.computerId);
+    //     const host = this.getExternalHostByComputerId(utilsModel.computerId);
 
-        if (utilsComputerModel.isLocalDocker === false) {
-            await utilsSshHelper.cloneRepos();
-        }
-        await utilsSshHelper.exec([
-            `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/explorer`,
-            'cp ./explorer.env.example ./explorer.local.env',
-            `sed -i "s~MONGO_URL=.*~MONGO_URL=mongodb://root:cudos-root-db-pass@cudos-explorer-mongodb:27017~g" ./explorer.local.env`,
-            `sed -i "s~ROOT_URL=.*~ROOT_URL=http://${host}~g" ./explorer.local.env`,
-            `sed -i "s~GENESIS_TIME=.*"~GENESIS_TIME=\\"${this.genesisTime}\\"~g" ./explorer.local.arg`,
-            `sed -i "s~FAUCET_URL=.*~FAUCET_URL=\\"http://${host}:5000\\"~g" ./explorer.local.arg`,
-            `sed -i "s~INTERNAL_RPC_URL=.*~INTERNAL_RPC_URL=\\"http://${this.getDockerInternalHostByNodeId(sentryNodeModel.nodeId)}:26657\\"~g" ./explorer.local.arg`,
-            `sed -i "s~INTERNAL_API_URL=.*~INTERNAL_API_URL=\\"http://${this.getDockerInternalHostByNodeId(sentryNodeModel.nodeId)}:1317\\"~g" ./explorer.local.arg`,
-            `sed -i "s~EXTERNAL_RPC_URL=.*~EXTERNAL_RPC_URL=\\"http://${this.getExternalHostByComputerId(sentryNodeModel.computerId)}:${sentryNodeModel.port26657}\\"~g" ./explorer.local.arg`,
-            `sed -i "s~EXTERNAL_API_URL=.*~EXTERNAL_API_URL=\\"http://${this.getExternalHostByComputerId(sentryNodeModel.computerId)}:${sentryNodeModel.port1317}\\"~g" ./explorer.local.arg`,
-            `sed -i "s~EXTERNAL_STAKING_URL=.*~EXTERNAL_STAKING_URL=\\"http://${host}:3000/validators\\"~g" ./explorer.local.arg`,
-            `sed -i "s/CHAIN_NAME=.*/CHAIN_NAME=\\"${CHAIN_NAME}\\"/g" ./explorer.local.arg`,
-            `sed -i "s/CHAIN_ID=.*/CHAIN_ID=\\"${CHAIN_ID}\\"/g" ./explorer.local.arg`,
-            `sed -i "s/container_name:.*/container_name: ${EXPLORER_MONGO_CONTAINER_NAME}/g" ./explorer.yml`,
-            `sed -i "s/container_name:.*/container_name: ${EXPLORER_CONTAINER_NAME}/g" ./explorer.yml`,
-            `sed -i "s/- cudos-explorer-mongodb/- cudos-explorer-mongodb\\r\\n    extra_hosts:\\r\\n      - \\"host.docker.internal:host-gateway\\"/g" ./explorer.yml`,
-            `docker-compose --env-file ./explorer.local.arg -f ./explorer.yml -p ${EXPLORER_CONTAINER_NAME} up --build -d`
-        ]);
-    }
+    //     if (utilsComputerModel.isLocalDocker === false) {
+    //         await utilsSshHelper.cloneRepos();
+    //     }
+    //     await utilsSshHelper.exec([
+    //         `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/explorer`,
+    //         'cp ./explorer.env.example ./explorer.local.env',
+    //         `sed -i "s~MONGO_URL=.*~MONGO_URL=mongodb://root:cudos-root-db-pass@cudos-explorer-mongodb:27017~g" ./explorer.local.env`,
+    //         `sed -i "s~ROOT_URL=.*~ROOT_URL=http://${host}~g" ./explorer.local.env`,
+    //         `sed -i "s~GENESIS_TIME=.*"~GENESIS_TIME=\\"${this.genesisTime}\\"~g" ./explorer.local.arg`,
+    //         `sed -i "s~FAUCET_URL=.*~FAUCET_URL=\\"http://${host}:5000\\"~g" ./explorer.local.arg`,
+    //         `sed -i "s~INTERNAL_RPC_URL=.*~INTERNAL_RPC_URL=\\"http://${this.getDockerInternalHostByNodeId(sentryNodeModel.nodeId)}:26657\\"~g" ./explorer.local.arg`,
+    //         `sed -i "s~INTERNAL_API_URL=.*~INTERNAL_API_URL=\\"http://${this.getDockerInternalHostByNodeId(sentryNodeModel.nodeId)}:1317\\"~g" ./explorer.local.arg`,
+    //         `sed -i "s~EXTERNAL_RPC_URL=.*~EXTERNAL_RPC_URL=\\"http://${this.getExternalHostByComputerId(sentryNodeModel.computerId)}:${sentryNodeModel.port26657}\\"~g" ./explorer.local.arg`,
+    //         `sed -i "s~EXTERNAL_API_URL=.*~EXTERNAL_API_URL=\\"http://${this.getExternalHostByComputerId(sentryNodeModel.computerId)}:${sentryNodeModel.port1317}\\"~g" ./explorer.local.arg`,
+    //         `sed -i "s~EXTERNAL_STAKING_URL=.*~EXTERNAL_STAKING_URL=\\"http://${host}:3000/validators\\"~g" ./explorer.local.arg`,
+    //         `sed -i "s/CHAIN_NAME=.*/CHAIN_NAME=\\"${CHAIN_NAME}\\"/g" ./explorer.local.arg`,
+    //         `sed -i "s/CHAIN_ID=.*/CHAIN_ID=\\"${CHAIN_ID}\\"/g" ./explorer.local.arg`,
+    //         `sed -i "s/container_name:.*/container_name: ${EXPLORER_MONGO_CONTAINER_NAME}/g" ./explorer.yml`,
+    //         `sed -i "s/container_name:.*/container_name: ${EXPLORER_CONTAINER_NAME}/g" ./explorer.yml`,
+    //         `sed -i "s/- cudos-explorer-mongodb/- cudos-explorer-mongodb\\r\\n    extra_hosts:\\r\\n      - \\"host.docker.internal:host-gateway\\"/g" ./explorer.yml`,
+    //         `docker-compose --env-file ./explorer.local.arg -f ./explorer.yml -p ${EXPLORER_CONTAINER_NAME} up --build -d`
+    //     ]);
+    // }
 
-    async startMonitoring() {
-        Log.main('Start monitoring');
+    // async startMonitoring() {
+    //     Log.main('Start monitoring');
 
-        const monitoringModel = this.topologyHelper.monitoringModel;
-        const monitoringComputerModel = this.topologyHelper.getComputerModel(monitoringModel.computerId);
-        const monitoringSshHelper = this.instancesService.getSshHelper(monitoringModel.computerId);
+    //     const monitoringModel = this.topologyHelper.monitoringModel;
+    //     const monitoringComputerModel = this.topologyHelper.getComputerModel(monitoringModel.computerId);
+    //     const monitoringSshHelper = this.instancesService.getSshHelper(monitoringModel.computerId);
 
-        const sentryNodeModel = this.topologyHelper.getFirstSentry();
+    //     const sentryNodeModel = this.topologyHelper.getFirstSentry();
 
-        const nodeModelsEchos = [];
-        this.topologyHelper.nodesMap.forEach((nodeModel) => {
-            const host = this.getDockerInternalHostByNodeId(nodeModel.nodeId);
-            nodeModelsEchos.push(`echo "      - targets: ['${host}:26660']" >> ./config/prometheus.local.yml`);
-            nodeModelsEchos.push(`echo "        labels:" >> ./config/prometheus.local.yml`);
-            nodeModelsEchos.push(`echo "          instance: ${host}" >> ./config/prometheus.local.yml`);
-        });
+    //     const nodeModelsEchos = [];
+    //     this.topologyHelper.nodesMap.forEach((nodeModel) => {
+    //         const host = this.getDockerInternalHostByNodeId(nodeModel.nodeId);
+    //         nodeModelsEchos.push(`echo "      - targets: ['${host}:26660']" >> ./config/prometheus.local.yml`);
+    //         nodeModelsEchos.push(`echo "        labels:" >> ./config/prometheus.local.yml`);
+    //         nodeModelsEchos.push(`echo "          instance: ${host}" >> ./config/prometheus.local.yml`);
+    //     });
 
-        if (monitoringComputerModel.isLocalDocker === false) {
-            await monitoringSshHelper.cloneRepos();
-        }
-        await monitoringSshHelper.exec([
-            ...NodesHelper.getUserEnv(),
-            `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/monitoring`,
-            'cp ./monitoring.env.example ./monitoring.local.env',
-            `sed -i "s~NODE_ADDR=.*~NODE_ADDR=${this.getDockerInternalHostByNodeId(sentryNodeModel.nodeId)}:9090~g" ./monitoring.local.env`,
-            `sed -i "s~TENDERMINT_ADDR=.*~TENDERMINT_ADDR=http://${this.getDockerInternalHostByNodeId(sentryNodeModel.nodeId)}:26657~g" ./monitoring.local.env`,
-            `echo "global:" > ./config/prometheus.local.yml`,
-            `echo "  scrape_interval: 15s" >> ./config/prometheus.local.yml`,
-            `echo "  evaluation_interval: 30s" >> ./config/prometheus.local.yml`,
-            `echo "" >> ./config/prometheus.local.yml`,
-            `echo "scrape_configs:" >> ./config/prometheus.local.yml`,
-            `echo "  - job_name: cudosnetwork" >> ./config/prometheus.local.yml`,
-            `echo "    static_configs:" >> ./config/prometheus.local.yml`,
-            ...nodeModelsEchos,
-            `echo "  - job_name: validators" >> ./config/prometheus.local.yml`,
-            `echo "    scrape_interval: 15s" >> ./config/prometheus.local.yml`,
-            `echo "    metrics_path: /metrics/validators" >> ./config/prometheus.local.yml`,
-            `echo "    static_configs:" >> ./config/prometheus.local.yml`,
-            `echo "      - targets:" >> ./config/prometheus.local.yml`,
-            `echo "        - cudos-monitoring-exporter:9300" >> ./config/prometheus.local.yml`,
-            `docker-compose --env-file ./monitoring.local.arg -f ./monitoring.yml -p cudos-monitoring-local up --build -d`
-        ]);
-    }
+    //     if (monitoringComputerModel.isLocalDocker === false) {
+    //         await monitoringSshHelper.cloneRepos();
+    //     }
+    //     await monitoringSshHelper.exec([
+    //         ...NodesHelper.getUserEnv(),
+    //         `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/monitoring`,
+    //         'cp ./monitoring.env.example ./monitoring.local.env',
+    //         `sed -i "s~NODE_ADDR=.*~NODE_ADDR=${this.getDockerInternalHostByNodeId(sentryNodeModel.nodeId)}:9090~g" ./monitoring.local.env`,
+    //         `sed -i "s~TENDERMINT_ADDR=.*~TENDERMINT_ADDR=http://${this.getDockerInternalHostByNodeId(sentryNodeModel.nodeId)}:26657~g" ./monitoring.local.env`,
+    //         `echo "global:" > ./config/prometheus.local.yml`,
+    //         `echo "  scrape_interval: 15s" >> ./config/prometheus.local.yml`,
+    //         `echo "  evaluation_interval: 30s" >> ./config/prometheus.local.yml`,
+    //         `echo "" >> ./config/prometheus.local.yml`,
+    //         `echo "scrape_configs:" >> ./config/prometheus.local.yml`,
+    //         `echo "  - job_name: cudosnetwork" >> ./config/prometheus.local.yml`,
+    //         `echo "    static_configs:" >> ./config/prometheus.local.yml`,
+    //         ...nodeModelsEchos,
+    //         `echo "  - job_name: validators" >> ./config/prometheus.local.yml`,
+    //         `echo "    scrape_interval: 15s" >> ./config/prometheus.local.yml`,
+    //         `echo "    metrics_path: /metrics/validators" >> ./config/prometheus.local.yml`,
+    //         `echo "    static_configs:" >> ./config/prometheus.local.yml`,
+    //         `echo "      - targets:" >> ./config/prometheus.local.yml`,
+    //         `echo "        - cudos-monitoring-exporter:9300" >> ./config/prometheus.local.yml`,
+    //         `docker-compose --env-file ./monitoring.local.arg -f ./monitoring.yml -p cudos-monitoring-local up --build -d`
+    //     ]);
+    // }
 
     getSeedsByValidatorId(validatorId) {
         const seedNodeModels = this.topologyHelper.getSeeds(validatorId);
@@ -801,17 +810,17 @@ class NodesService {
         await this.stopNodesInstances();
         if (this.gravity === '1') {
             await this.stopOrchestratorInstances();
-            await this.stopGravityBridgeUiInstance();
+            // await this.stopGravityBridgeUiInstance();
         }
-        if (this.faucet === '1') {
-            await this.stopFaucetInstance();
-        }
-        if (this.explorer === '1') {
-            await this.stopExplorerInstances();
-        }
-        if (this.monitoring === '1') {
-            await this.stopMonitoring();
-        }
+        // if (this.faucet === '1') {
+        //     await this.stopFaucetInstance();
+        // }
+        // if (this.explorer === '1') {
+        //     await this.stopExplorerInstances();
+        // }
+        // if (this.monitoring === '1') {
+        //     await this.stopMonitoring();
+        // }
     }
 
     async stopNodesInstances() {
@@ -864,71 +873,71 @@ class NodesService {
         await Promise.all(tasks);
     }
 
-    async stopGravityBridgeUiInstance() {
-        Log.main('Stop gravity bridge ui\'s instance');
+    // async stopGravityBridgeUiInstance() {
+    //     Log.main('Stop gravity bridge ui\'s instance');
 
-        const tasks = [];
+    //     const tasks = [];
 
-        const gravityBridgeUiModel = this.topologyHelper.gravityBridgeUiModel;
-        const gravityBridgeUiSshHelper = this.instancesService.getSshHelper(gravityBridgeUiModel.computerId);
-        tasks.push(gravityBridgeUiSshHelper.exec([
-            `docker stop ${GRAVITY_BRIDGE_UI_CONTAINER_NAME}`,
-            `docker container rm ${GRAVITY_BRIDGE_UI_CONTAINER_NAME}`
-        ], false));
+    //     const gravityBridgeUiModel = this.topologyHelper.gravityBridgeUiModel;
+    //     const gravityBridgeUiSshHelper = this.instancesService.getSshHelper(gravityBridgeUiModel.computerId);
+    //     tasks.push(gravityBridgeUiSshHelper.exec([
+    //         `docker stop ${GRAVITY_BRIDGE_UI_CONTAINER_NAME}`,
+    //         `docker container rm ${GRAVITY_BRIDGE_UI_CONTAINER_NAME}`
+    //     ], false));
 
-        await Promise.all(tasks);
-    }
+    //     await Promise.all(tasks);
+    // }
 
-    async stopFaucetInstance() {
-        Log.main('Stop faucet instances');
+    // async stopFaucetInstance() {
+    //     Log.main('Stop faucet instances');
 
-        const tasks = [];
+    //     const tasks = [];
 
-        const gravityBridgeUiModel = this.topologyHelper.gravityBridgeUiModel;
-        const gravityBridgeUiSshHelper = this.instancesService.getSshHelper(gravityBridgeUiModel.computerId);
-        tasks.push(gravityBridgeUiSshHelper.exec([
-            `docker stop ${FAUCET_CONTAINER_NAME}`,
-            `docker container rm ${FAUCET_CONTAINER_NAME}`,
-        ], false));
+    //     const gravityBridgeUiModel = this.topologyHelper.gravityBridgeUiModel;
+    //     const gravityBridgeUiSshHelper = this.instancesService.getSshHelper(gravityBridgeUiModel.computerId);
+    //     tasks.push(gravityBridgeUiSshHelper.exec([
+    //         `docker stop ${FAUCET_CONTAINER_NAME}`,
+    //         `docker container rm ${FAUCET_CONTAINER_NAME}`,
+    //     ], false));
 
-        await Promise.all(tasks);
-    }
+    //     await Promise.all(tasks);
+    // }
 
-    async stopExplorerInstances() {
-        Log.main('Stop explorer instances');
+    // async stopExplorerInstances() {
+    //     Log.main('Stop explorer instances');
 
-        const tasks = [];
+    //     const tasks = [];
 
-        const gravityBridgeUiModel = this.topologyHelper.gravityBridgeUiModel;
-        const gravityBridgeUiSshHelper = this.instancesService.getSshHelper(gravityBridgeUiModel.computerId);
-        tasks.push(gravityBridgeUiSshHelper.exec([
-            `docker stop ${EXPLORER_CONTAINER_NAME}`,
-            `docker container rm ${EXPLORER_CONTAINER_NAME}`,
-            `docker stop ${EXPLORER_MONGO_CONTAINER_NAME}`,
-            `docker container rm ${EXPLORER_MONGO_CONTAINER_NAME}`
-        ], false));
+    //     const gravityBridgeUiModel = this.topologyHelper.gravityBridgeUiModel;
+    //     const gravityBridgeUiSshHelper = this.instancesService.getSshHelper(gravityBridgeUiModel.computerId);
+    //     tasks.push(gravityBridgeUiSshHelper.exec([
+    //         `docker stop ${EXPLORER_CONTAINER_NAME}`,
+    //         `docker container rm ${EXPLORER_CONTAINER_NAME}`,
+    //         `docker stop ${EXPLORER_MONGO_CONTAINER_NAME}`,
+    //         `docker container rm ${EXPLORER_MONGO_CONTAINER_NAME}`
+    //     ], false));
 
-        await Promise.all(tasks);
-    }
+    //     await Promise.all(tasks);
+    // }
 
-    async stopMonitoring() {
-        Log.main('Stop monitoring instances');
+    // async stopMonitoring() {
+    //     Log.main('Stop monitoring instances');
 
-        const tasks = [];
+    //     const tasks = [];
 
-        const monitoringModel = this.topologyHelper.monitoringModel;
-        const monitoringSshHelper = this.instancesService.getSshHelper(monitoringModel.computerId);
-        tasks.push(monitoringSshHelper.exec([
-            `docker stop cudos-monitoring-prometeus`,
-            `docker container rm cudos-monitoring-prometeus`,
-            `docker stop cudos-monitoring-graphana`,
-            `docker container rm cudos-monitoring-graphana`,
-            `docker stop cudos-monitoring-exporter`,
-            `docker container rm cudos-monitoring-exporter`,
-        ], false));
+    //     const monitoringModel = this.topologyHelper.monitoringModel;
+    //     const monitoringSshHelper = this.instancesService.getSshHelper(monitoringModel.computerId);
+    //     tasks.push(monitoringSshHelper.exec([
+    //         `docker stop cudos-monitoring-prometeus`,
+    //         `docker container rm cudos-monitoring-prometeus`,
+    //         `docker stop cudos-monitoring-graphana`,
+    //         `docker container rm cudos-monitoring-graphana`,
+    //         `docker stop cudos-monitoring-exporter`,
+    //         `docker container rm cudos-monitoring-exporter`,
+    //     ], false));
 
-        await Promise.all(tasks);
-    }
+    //     await Promise.all(tasks);
+    // }
 
 }
 
