@@ -37,5 +37,4 @@ CMD npx ts-node \
     --eth-privkey="${ETH_PRIV_KEY_HEX}" \
     --contract=artifacts/contracts/Gravity.sol/Gravity.json \
     --test-mode=false \
-    --cudos-access-control="${CUDOS_ACCESS_CONTROL_ADDRESS}" \
-    --cudos-token-address="${CUDOS_TOKEN_ADDRESS}"
+    --cudos-access-control="${CUDOS_ACCESS_CONTROL_ADDRESS}"
