@@ -208,7 +208,7 @@ for i in $(seq 1 $NUMBER_OF_ORCHESTRATORS); do
 done
 
 # add faucet account
-if [ "$FAUCET_BALANCE" != "0" ]; then
+if [ "$FAUCET_BALANCE" != "" ] && [ "$FAUCET_BALANCE" != "0" ]; then
     ((echo $KEYRING_OS_PASS; echo $KEYRING_OS_PASS) | cudos-noded keys add faucet --keyring-backend os) |& tee "${CUDOS_HOME}/faucet.wallet"
     chmod 600 "${CUDOS_HOME}/faucet.wallet"
     FAUCET_ADDRESS=$(echo $KEYRING_OS_PASS | cudos-noded keys show faucet -a --keyring-backend os)
@@ -232,20 +232,18 @@ genesisJson=$(jq ".app_state.auth.accounts += [{
 }]" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 
-if [ "$GRAVITY_MODULE_BALANCE" = "" ]; then
-  GRAVITY_MODULE_BALANCE="0"
+if [ "$GRAVITY_MODULE_BALANCE" != "" ] && [ "$GRAVITY_MODULE_BALANCE" != "0" ]; then
+  genesisJson=$(jq ".app_state.bank.balances += [{
+    \"address\": \"cudos16n3lc7cywa68mg50qhp847034w88pntq8823tx\",
+    \"coins\": [
+      {
+        \"amount\": \"$GRAVITY_MODULE_BALANCE\",
+        \"denom\": \"acudos\"
+      }
+    ]
+  }]" "${CUDOS_HOME}/config/genesis.json")
+  echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 fi
-
-genesisJson=$(jq ".app_state.bank.balances += [{
-  \"address\": \"cudos16n3lc7cywa68mg50qhp847034w88pntq8823tx\",
-  \"coins\": [
-    {
-      \"amount\": \"$GRAVITY_MODULE_BALANCE\",
-      \"denom\": \"acudos\"
-    }
-  ]
-}]" "${CUDOS_HOME}/config/genesis.json")
-echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 
 (echo $KEYRING_OS_PASS; echo $KEYRING_OS_PASS) | cudos-noded gentx validator-1 "${VALIDATOR_BALANCE}${BOND_DENOM}" ${ORCH_ETH_ADDRESS} ${ORCH_01_ADDRESS} --min-self-delegation 2000000000000000000000000 --chain-id $CHAIN_ID --keyring-backend os
 

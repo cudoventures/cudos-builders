@@ -226,3 +226,20 @@ function addDelegatorsAccountsAndBalances {
         setAccountBalanceInAcudos "$RESULT_GENESIS_PATH" "$delegatorAddress" "$delegatorReward"
     done;
 }
+
+function hasGenesisInStaking {
+    validatorsSize=$(jq .app_state.auth.accounts "$1" | jq "map(select(.\"@type\" == \"/cosmos.auth.v1beta1.BaseAccount\") | .)" | jq length)
+    if [ "$validatorsSize" != "1" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There are several accounts in $1";
+        exit 1;
+    fi
+    validatorAddress=$(jq .app_state.auth.accounts "$1" | jq "map(select(.\"@type\" == \"/cosmos.auth.v1beta1.BaseAccount\") | .)" | jq .[0].address)
+    validatorAddress=${validatorAddress//\"/}
+
+    stakingSize=$(jq ".stake | map(select(.address == \"$validatorAddress\") | .)" "$STAKING_JSON" | jq length)
+    if [ "$stakingSize" != "0" ]; then
+        echo "1"
+    else
+        echo "0"
+    fi
+}

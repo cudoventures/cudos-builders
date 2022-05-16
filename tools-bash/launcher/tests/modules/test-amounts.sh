@@ -38,7 +38,7 @@ function checkIfInExportedDelegation(){
 ##################
 # SETUP          #
 ##################
-source "$WORKING_DIR/tests/incs/var.sh"
+# source "$WORKING_DIR/tests/incs/var.sh"
 
 addrStakeAcudosPath="/tmp/addrStakeAcudosPath.json"
 addrRootAcudosBalancesPath="/tmp/addrRootAcudosBalancesPath.json"
@@ -153,11 +153,10 @@ for addr in $(echo "${rootStakeDelAddrArray}" | jq -r '.[]'); do
     rootDelTokensArray=$(echo "$rootStakeDelArray" | jq "map(select(.delegatorAddress == \"${addr}\")) | map(select(.delegation != null) | .delegation)")
     rootDelTokens=$(echo "$rootDelTokensArray" | jq .[0])
     rootDelTokens=${rootDelTokens//\"/}
-    rootDelPow="[${rootDelTokens::-18}]"
     rootDelShares="\"${rootDelTokens}.000000000000000000\""
     checkIfInExportedDelegation "$addr" "$rootDelShares" "$rootValidatorsOperAddr"
 
-    echo "$rootDelPow" > "$tmpDelegationCoinsPath"
+    echo "[\"$rootDelTokens\"]" > "$tmpDelegationCoinsPath"
     jq -s ". = .[0] + .[1]" "$rootDelTokensTotalPath" "$tmpDelegationCoinsPath" > "$tmpTempAddrs"
     cat "$tmpTempAddrs" > "$rootDelTokensTotalPath"
 done
@@ -171,7 +170,8 @@ fi
 valPowerAllArrayPath="/tmp/valPowerAllArrayPath.json"
 echo "[]" > "$valPowerAllArrayPath"
 
-for dataGenesisPath in $WORKING_DATA_GENESIS_DIR/*; do
+cd "$WORKING_DATA_GENESIS_DIR"
+for dataGenesisPath in ./*; do
     [ -e "$dataGenesisPath" ] || continue
 
     setAllValAddrFromGen "$dataGenesisPath"
@@ -223,7 +223,7 @@ for dataGenesisPath in $WORKING_DATA_GENESIS_DIR/*; do
     valExportedShares=${valExportedShares//\"/}
 
     if [ "$valExportedShares" != "$valShares" ]; then 
-        echo -e "\n${STYLE_RED}Error:${STYLE_DEFAULT} Expected $rootDelTokensTotalPath delegator_shares but exported ${valExportedShares} delegator_shares for validator: ${tempValOperAddr}";
+        echo -e "\n${STYLE_RED}Error:${STYLE_DEFAULT} Expected $valShares delegator_shares but exported ${valExportedShares} delegator_shares for validator: ${tempValOperAddr}";
         exit 1 
     fi
 
@@ -265,15 +265,15 @@ tempRootValConsPubKey=${tempRootValConsPubKey//\"/}
 #TEST ROOT VALIDATOR last_validator_powers
 valExportedLastPowerArray=$(jq ".app_state.staking.last_validator_powers | map(select(.address == \"${rootValidatorsOperAddr}\") | .power) | .[0]" "$EXPORTED_GENESIS")
 valExportedLastPower=${valExportedLastPowerArray//\"/}
-jq ".validators | map(select(.pub_key.value == \"$tempRootValConsPubKey\") | .power)" "$rootGenesisPath" > "$tmpDelegationCoinsPath"
+jq ".app_state.staking.validators | map(select(.operator_address == \"$rootValidatorsOperAddr\") | .tokens)" "$rootGenesisPath" > "$tmpDelegationCoinsPath"
 jq -s ". = .[0] + .[1]" "$tmpDelegationCoinsPath" "$rootDelTokensTotalPath"> "$tmpTempAddrs"
 cat "$tmpTempAddrs" > "$rootDelTokensTotalPath"
 
 valExportedPower=$(jq ".validators | map(select(.pub_key.value == \"${tempRootValConsPubKey}\") | .power) | .[0]" "$EXPORTED_GENESIS")
 valExportedPower=${valExportedPower//\"/}
 
-
 totalRootValPower=$(sum "$rootDelTokensTotalPath")
+totalRootValPower="${totalRootValPower::-18}"
 
 if [ "$totalRootValPower" != "$valExportedPower" ]; then
     echo -e "\n${STYLE_RED}Error:${STYLE_DEFAULT} Expected ${totalRootValPower} but exported ${valExportedPower} root validator power";
@@ -285,10 +285,11 @@ if [ "$totalRootValPower" != "$valExportedLastPower" ]; then
     exit 1   
 fi
 
-jq -s ". = .[0] + .[1] + .[2]" "$valPowerAllArrayPath" "$rootDelTokensTotalPath"> "$tmpTempAddrs"
-cat "$tmpTempAddrs" > "$valPowerAllArrayPath"
-
 #TEST staking total power
+echo "[\"$totalRootValPower\"]" > "$tmpTempAddrs"
+result=$(jq -s ". = .[0] + .[1]" "$valPowerAllArrayPath" "$tmpTempAddrs")
+echo "$result" > "$valPowerAllArrayPath"
+
 totalPower=$(sum "$valPowerAllArrayPath")
 
 exportedTotalPower=$(jq ".app_state.staking.last_total_power" "$EXPORTED_GENESIS")

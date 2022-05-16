@@ -1,16 +1,6 @@
 
 echo "Checking if provided addresses exist in exported:";
 
-EXPORTED_GENESIS="$WORKING_DIR/exports/genesis.json"
-BASE_GENESIS="$WORKING_DIR/tests/config/genesis.root.json"
-STAKING_JSON="$WORKING_DIR/tests/config/staking.json"
-tmpExportedAddressespath="/tmp/tmpExportedAddresses.json"
-
-##################
-# SETUP          #
-##################
-source "$WORKING_DIR/tests/incs/var.sh"
-
 ######################################################
 # TEST auth.accounts all addresses exist in exported #
 ######################################################

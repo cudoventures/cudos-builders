@@ -32,18 +32,21 @@ if [ "$MIN_BRIDGE_FEE" != "" ]; then
     echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 fi
 
-genesisJson=$(jq ".app_state.bank.balances += [{
-  \"address\": \"$FAUCET_ADDRESS\",
-  \"coins\": [
-    {
-      \"amount\": \"1\",
-      \"denom\": \"cudosAdmin\"
-    }
-  ]
-}]" "${CUDOS_HOME}/config/genesis.json")
-echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
+if [ "$FAUCET_ADDRESS" != "" ]; then
+  genesisJson=$(jq ".app_state.bank.balances += [{
+    \"address\": \"$FAUCET_ADDRESS\",
+    \"coins\": [
+      {
+        \"amount\": \"1\",
+        \"denom\": \"cudosAdmin\"
+      }
+    ]
+  }]" "${CUDOS_HOME}/config/genesis.json")
+  echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 
-cat "${CUDOS_HOME}/faucet.wallet"
+  cat "${CUDOS_HOME}/faucet.wallet"
+fi
+
 for i in $(seq 1 $NUMBER_OF_ORCHESTRATORS); do
     cat "${CUDOS_HOME}/orch-${i}.wallet"
 done
