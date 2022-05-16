@@ -3,7 +3,7 @@
 cd $PARAM_SOURCE_DIR
 
 echo -ne "Cloning the repos...";
-branch="cudos-dev"
+branch="v0.7.0"
 git clone -q --branch $branch https://github.com/CudoVentures/cudos-node.git CudosNode
 git clone -q --branch $branch https://github.com/CudoVentures/cudos-builders.git CudosBuilders
 git clone -q --branch $branch https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge
