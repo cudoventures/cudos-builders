@@ -7,7 +7,6 @@ genesis.local.json
 persistent-peers.local.config
 seeds.local.config
 state-sync-rpc-servers.local.config
-/tools/deployer-utils/temp
 .DS_Store
 docker/snapshot-test/data
 topology.json
@@ -18,7 +17,9 @@ docker/monitoring/config/prometheus.tesnet.public.yml
 bdjuno
 .env-bdjuno
 .env-big-dipper-2
-/tools-bash/constructor/exports
+tools-nodejs/deployer-utils/temp
+tools-nodejs/init-local-node-without-docker/cudos-data
+tools-bash/constructor/exports
 tools-bash/launcher/config/genesis.data.json
 tools-bash/launcher/config/genesis.root.json
 tools-bash/launcher/src/genesis.sh
@@ -26,4 +27,3 @@ tools-bash/launcher/exports
 tools-bash/launcher/tokenomics
 tools-bash/upgrade/emergency-backup
 tools-bash/upgrade/migrate
-tools/init-local-node-without-docker/cudos-data
