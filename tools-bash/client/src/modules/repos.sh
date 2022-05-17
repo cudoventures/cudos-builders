@@ -8,7 +8,7 @@ if [ "$?" != 0 ]; then
     exit 1;
 fi
 if [ "$PARAM_NETWORK" = "testnet-private" ] && [ "$REPO_BRANCH" = "v0.6.0" ]; then
-    git checkout -q 9d24f1e7408e194ab31fcfadbd29b16a4bcef0c6 &> /dev/null
+    cd CudosNode && git checkout -q 9d24f1e7408e194ab31fcfadbd29b16a4bcef0c6 &> /dev/null && cd "$PARAM_SOURCE_DIR"
     if [ "$?" != 0 ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error cloning the repo cudos-builders. Please try in a while";
         exit 1;
