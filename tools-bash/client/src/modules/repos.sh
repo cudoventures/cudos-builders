@@ -17,7 +17,7 @@ if [ "$?" != 0 ]; then
         fi
     fi
 
-    if [ "$PARAM_NETWORK" = "dressrehearsal" ]; then
+    if [ "$PARAM_NETWORK" = "testnet-private" ]; then
         git checkout -q 9d24f1e7408e194ab31fcfadbd29b16a4bcef0c6 &> /dev/null
         if [ "$?" != 0 ]; then
             echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error cloning the repo cudos-builders. Please try in a while";
