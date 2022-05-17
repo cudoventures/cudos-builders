@@ -11,10 +11,18 @@ git clone -q --branch "$REPO_BRANCH" https://github.com/CudoVentures/cudos-build
 if [ "$?" != 0 ]; then
     if [ "$REPO_BRANCH" = "v0.4.0" ]; then
         git clone -q --branch v0.3.3 https://github.com/CudoVentures/cudos-builders.git CudosBuilders &> /dev/null
+        if [ "$?" != 0 ]; then
+            echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error cloning the repo cudos-builders. Please try in a while";
+            exit 1;
+        fi
     fi
-    if [ "$?" != 0 ]; then
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error cloning the repo cudos-builders. Please try in a while";
-        exit 1;
+
+    if [ "$PARAM_NETWORK" = "dressrehearsal" ]; then
+        git checkout -q 9d24f1e7408e194ab31fcfadbd29b16a4bcef0c6 &> /dev/null
+        if [ "$?" != 0 ]; then
+            echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error cloning the repo cudos-builders. Please try in a while";
+            exit 1;
+        fi
     fi
 fi
 git clone -q --branch "$REPO_BRANCH" https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge &> /dev/null
