@@ -91,7 +91,7 @@ Each **computer** defined in the <code>topology.json</code> is accessed by a use
 - Each **validator** must have at least one **seed** and one **sentry**.
 - You must either use only local docker instances (with "ip": "auto") or only remote machines (with "ip": "<some ip address>")
 
-### List of npm commands regarding this deployer:
+# List of npm commands
 
 **<code>network</code>** - starts the network using the topology defined in <code>parentDir/CudosBuilders/tools/deployer-network/config/topology.json</code>. It has 4 parameters:
 
