@@ -7,6 +7,14 @@ if [ "$?" != 0 ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error cloning the repo cudos-node. Please try in a while";
     exit 1;
 fi
+if [ "$PARAM_NETWORK" = "testnet-private" ] && [ "$REPO_BRANCH" = "v0.6.0" ]; then
+    git checkout -q 9d24f1e7408e194ab31fcfadbd29b16a4bcef0c6 &> /dev/null
+    if [ "$?" != 0 ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error cloning the repo cudos-builders. Please try in a while";
+        exit 1;
+    fi
+fi
+
 git clone -q --branch "$REPO_BRANCH" https://github.com/CudoVentures/cudos-builders.git CudosBuilders &> /dev/null
 if [ "$?" != 0 ]; then
     if [ "$REPO_BRANCH" = "v0.4.0" ]; then
@@ -16,15 +24,8 @@ if [ "$?" != 0 ]; then
             exit 1;
         fi
     fi
-
-    if [ "$PARAM_NETWORK" = "testnet-private" ]; then
-        git checkout -q 9d24f1e7408e194ab31fcfadbd29b16a4bcef0c6 &> /dev/null
-        if [ "$?" != 0 ]; then
-            echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error cloning the repo cudos-builders. Please try in a while";
-            exit 1;
-        fi
-    fi
 fi
+
 git clone -q --branch "$REPO_BRANCH" https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge &> /dev/null
 if [ "$?" != 0 ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error cloning the repo cudos-gravity-bridge. Please try in a while";
