@@ -59,6 +59,11 @@ fi
 #     sourceVersion="v0.4.0"
 # fi
 
+# do not remove forever
+if [ "$NETWORK_TESTNET_PRIVATE" = "true" ] && [ "$sourceVersion" = "v0.5.0" ]; then
+    sourceVersion="v0.6.0"
+fi
+
 if [ "$containerVersion" != "$sourceVersion" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The source code's version ($sourceVersion) is different from current running docker's version ($containerVersion)";
     exit 1;
