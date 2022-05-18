@@ -75,6 +75,9 @@ echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 if [ "$NETWORK_TESTNET_PRIVATE" = "true" ]; then
     result=$(jq ".chain_id = \"cudos-testnet-private-3\"" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
     echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
+
+    distributionAddress=$(getModuleAddress "$WORKING_MIGRATE_DIR/genesis.tmp.json" "distribution")
+    setAccountBalanceInAcudosWithoutAuthAccount "$WORKING_MIGRATE_DIR/genesis.tmp.json" "$distributionAddress" "255659558937535318690895660"
 fi
 
 
