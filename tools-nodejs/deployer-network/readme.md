@@ -4,7 +4,7 @@ This deployer is capable is starting an entire blockchain. To do so you must spe
 
 # Topology and roles
 
-The best way to define the topology and the roles is to duplicate the <code>parentDir/CudosBuilders/tools/deployer-network/config/topology.json.example</code> and rename it to <code>topology.json</code>.
+The best way to define the topology and the roles is to duplicate the <code>parentDir/CudosBuilders/tools-nodejs/deployer-network/config/topology.json.example</code> and rename it to <code>topology.json</code>.
 
 **<code>topology.json</code> is a json file has the following structure:**
 
@@ -93,7 +93,7 @@ Each **computer** defined in the <code>topology.json</code> is accessed by a use
 
 # List of npm commands
 
-**<code>network</code>** - starts the network using the topology defined in <code>parentDir/CudosBuilders/tools/deployer-network/config/topology.json</code>. It has 4 parameters:
+**<code>network</code>** - starts the network using the topology defined in <code>parentDir/CudosBuilders/tools-nodejs/deployer-network/config/topology.json</code>. It has 4 parameters:
 
 - topology: A relative path to topology.json based on **tools** folder.
 - gravity: 0 (disables the module) or 1 (enabled the module)

@@ -1,4 +1,4 @@
-To run the tests from  `/tools/stress-tests` run `npm i`.
+To run the tests from  `/tools-nodejs/stress-tests` run `npm i`.
 Then copy, rename (without example) and fill the env files and then `npm run test`
 
 # IBC tests
