@@ -16,10 +16,6 @@ All of the NPM commands below are available once you navigate to <code>parentDir
 
 [Go to docs](./tools-nodejs/deployer-ethereum/readme.md)
 
-## gravity bridge ui deployer
-
-[Go to docs](./tools-nodejs/deployer-gravity-bridge-ui/readme.md)
-
 ## network deployer
 
 [Go to docs](./tools-nodejs/deployer-network/readme.md)
