@@ -32,10 +32,6 @@ All of the NPM commands below are available once you navigate to <code>parentDir
 
 The deployer contains only a [readme](./tools-nodejs/deployer-tls/readme.md) file that explains how the server should be configured in order to support the Domain and TSL of sentry nodes. Currently this has already been done for public testnet sentry nodes.
 
-## utils deployer
-
-[Go to docs](./tools-nodejs/deployer-utils/readme.md)
-
 ## monitoring deployer
 
 [Go to docs](./tools-nodejs/deployer-monitoring/readme.md)
