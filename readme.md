@@ -1,12 +1,9 @@
 # Overview
 
-This project contains a set of building scripts for CudosNetwork. It depends on 6 other projects which should be downloaded manually. Here is the list:
+This project contains a set of building scripts for CudosNetwork. It depends on 3 other projects which should be downloaded manually. Here is the list:
 1. CudosNode (https://github.com/CudoVentures/cudos-node)
 1. CudosGravityBridge (https://github.com/CudoVentures/cosmos-gravity-bridge)
 1. CudosGravityBridgeUI (https://github.com/CudoVentures/cudos-gravity-bridge-ui)
-1. CudosExplorer (https://github.com/CudoVentures/big-dipper)
-1. CudosFaucet (https://github.com/CudoVentures/faucet)
-1. CudosExporter (https://github.com/CudoVentures/cosmos-exporter)
 
 The following directory structure is required in order everything to work correctly otherwise the scripts will not be able to find their dependancies.
 Let denote the parent directory of all projects <code>parentDir</code>. Its name could be arbitrary.
