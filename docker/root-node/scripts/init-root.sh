@@ -169,7 +169,7 @@ genesisJson=$(jq ".app_state.bank.denom_metadata[0].denom_units = [
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 
 # gravity params
-gravityId=$(echo $RANDOM | sha1sum | head -c 32)
+gravityId=$(echo $RANDOM | sha1sum | head -c 31)
 genesisJson=$(jq ".app_state.gravity.params.gravity_id = \"$gravityId\"" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 genesisJson=$(jq ".app_state.gravity.erc20_to_denoms[0] |= .+ {
