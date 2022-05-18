@@ -60,7 +60,7 @@ fi
 # fi
 
 # do not remove forever
-if [ "$NETWORK_TESTNET_PRIVATE" = "true" ] && [ "$sourceVersion" = "v0.5.0" ] && [ "$containerVersion" = "v0.5.0"]; then
+if [ "$NETWORK_TESTNET_PRIVATE" = "true" ] && [ "$sourceVersion" = "v0.5.0" ] && [ "$containerVersion" = "v0.5.0" ]; then
     sourceVersion="v0.6.0"
     containerVersion="v0.6.0"
 fi
