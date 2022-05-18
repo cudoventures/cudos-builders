@@ -431,13 +431,13 @@ if [ "$NETWORK_MAINNET" = "true" ]; then
     NETWORK_NAME="Mainnet"
 fi
 if [ "$NETWORK_DRESSREHEARSAL" = "true" ]; then
-    NETWORK_NAME="Dress rehearsal"
+    NETWORK_NAME="Dress Rehearsal"
 fi
 if [ "$NETWORK_TESTNET_PRIVATE" = "true" ]; then
-    NETWORK_NAME="private testnet"
+    NETWORK_NAME="Private Testnet"
 fi
 if [ "$NETWORK_TESTNET_PUBLIC" = "true" ]; then
-    NETWORK_NAME="public testnet"
+    NETWORK_NAME="Public Testnet"
 fi
 
 NODE_ENV_BASENAME=$(basename "$NODE_ENV_PATH")

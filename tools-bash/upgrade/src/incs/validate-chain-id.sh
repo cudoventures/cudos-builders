@@ -12,6 +12,9 @@ if [ "$NETWORK_TESTNET_PRIVATE" = "true" ]; then
     if [ "$UPDATE_FROM_VERSION" = "v0.3" ]; then
         CURRENT_CHAIN_ID="cudos-testnet-private"
     fi
+    if [ "$UPDATE_FROM_VERSION" = "v0.6.0" ]; then
+        CURRENT_CHAIN_ID="cudos-testnet-private-2"
+    fi
 fi
 if [ "$NETWORK_TESTNET_PUBLIC" = "true" ]; then
     if [ "$UPDATE_FROM_VERSION" = "v0.4.0" ]; then
