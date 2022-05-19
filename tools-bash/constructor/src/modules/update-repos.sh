@@ -51,8 +51,9 @@ if [ ! -r "$genesisPath" ]; then
     exit 1;
 fi
 
-jq "." "$genesisPath" &> /dev/null
-if [ "$?" != 0 ]; then
+
+genesisChainId=$(jq ".chain_id" "$genesisPath" 2> /dev/null)
+if [ "$?" != 0 ] || [ "$genesisChainId" != "cudos-1" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The $genesisPath is invalid";
     exit 1;
 fi
