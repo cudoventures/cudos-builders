@@ -238,18 +238,19 @@ NOTE: There may be an error for the Resetting the seed-node step.
 
 ## Get the genesis
 
-Once the Cudos team has setup their nodes and you've got the green light to continue with this step you need to make sure you have the correct genesis file. It should be located in the cudos-builders config folder. 
+Once the Cudos team has setup their nodes and you've got the green light to continue with this step.
+<!-- you need to make sure you have the correct genesis file. It should be located in the cudos-builders config folder. 
 
 ```
 cd $HOME/CudosBuilders
 git pull
 ```
 
-All the nodes listed bellow need to have the same genesis. Otherwise they won't be connected to the root validator. This step should be executed for every node in the cluster.
+All the nodes listed bellow need to have the same genesis. Otherwise they won't be connected to the root validator. This step should be executed for every node in the cluster. -->
 
-### Manual setup of genesis
+<!-- ### Manual setup of genesis
 
-If you want to manualy provide a genesis file for your nodes you need to place it in the <code>$HOME/CudosBuilders/tools-bash/config/genesis.mainnet.json </code>. This step should be executed for every node in the cluster.
+If you want to manualy provide a genesis file for your nodes you need to place it in the <code>$HOME/CudosBuilders/tools-bash/config/genesis.mainnet.json </code>. This step should be executed for every node in the cluster. -->
 
 ## Start the node
 To start the validator first setup it's environement. Copy the start.env.example and rename it to start.env. 

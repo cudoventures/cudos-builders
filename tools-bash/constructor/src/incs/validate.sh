@@ -40,15 +40,15 @@ fi
 
 if [ "$STARTING" = "true" ]; then
 
-    if [ ! -f "$WORKING_DIR/config/genesis.mainnet.json" ]; then
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The $WORKING_DIR/config/genesis.mainnet.json file is missing";
-        exit 1;
-    fi
+    # if [ ! -f "$WORKING_DIR/config/genesis.mainnet.json" ]; then
+    #     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The $WORKING_DIR/config/genesis.mainnet.json file is missing";
+    #     exit 1;
+    # fi
 
-    if [ ! -r "$WORKING_DIR/config/genesis.mainnet.json" ]; then
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Permission denied $WORKING_DIR/config/genesis.mainnet.json";
-        exit 1;
-    fi
+    # if [ ! -r "$WORKING_DIR/config/genesis.mainnet.json" ]; then
+    #     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Permission denied $WORKING_DIR/config/genesis.mainnet.json";
+    #     exit 1;
+    # fi
     
     if [ "$IS_CLUSTERED_VALIDATOR" = "true" ]; then
         
@@ -110,19 +110,17 @@ if [ "$STARTING" = "true" ]; then
 fi
 
 if [ "$IS_VALIDATOR" = "true" ]; then
-    
 
+    if [ "$PARAM_VALIDATOR_MNEMONIC" = "" ]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_MNEMONIC must not be empty";
+        exit 1;
+    fi
 
-        if [ "$PARAM_VALIDATOR_MNEMONIC" = "" ]; then
-            echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_MNEMONIC must not be empty";
-            exit 1;
-        fi
-
-        numberOfWords=$(echo "$PARAM_VALIDATOR_MNEMONIC" | wc -w)
-        if ([ "$numberOfWords" != "12" ] && [ "$numberOfWords" != "24" ]); then
-            echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_MNEMONIC must be 12 or 24 words phrase";
-            exit 1;
-        fi;
+    numberOfWords=$(echo "$PARAM_VALIDATOR_MNEMONIC" | wc -w)
+    if ([ "$numberOfWords" != "12" ] && [ "$numberOfWords" != "24" ]); then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_VALIDATOR_MNEMONIC must be 12 or 24 words phrase";
+        exit 1;
+    fi;
     
     if [ "$PARAM_KEYRING_OS_PASS" = "" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_KEYRING_OS_PASS must not be empty";

@@ -29,7 +29,8 @@ fi
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Configurating the $NODE_NAME...";
-\cp -f "$WORKING_DIR/config/genesis.mainnet.json" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/genesis.json"
+# \cp -f "$WORKING_DIR/config/genesis.mainnet.json" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/genesis.json"
+\cp -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/config/genesis.mainnet.json" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/genesis.json"
 sed -i "s/private_peer_ids = \".*\"/private_peer_ids = \"$PARAM_PRIVATE_PEER_IDS\"/g" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
 if [ "$IS_CLUSTERED_VALIDATOR" = "true" ]; then
     sed -i "s/seeds = \".*\"/seeds = \"\"/g" "$PARAM_SOURCE_DIR/CudosData/cudos-data-$NODE_NAME-client-mainnet/config/config.toml"
