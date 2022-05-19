@@ -46,7 +46,7 @@ if [ ! -f "$genesisPath" ]; then
     exit 1;
 fi
 
-if [ ! -r "$WORKING_DIR/config/genesis.mainnet.json" ]; then
+if [ ! -r "$genesisPath" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Permission denied $genesisPath";
     exit 1;
 fi
