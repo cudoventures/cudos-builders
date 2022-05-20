@@ -1,5 +1,7 @@
 #!/bin/bash -i
 
+echo "" # new line
+
 echo -ne "Preparing the binary builder...";
 cd "$PARAM_SOURCE_DIR/CudosBuilders/docker/binary-builder"
 dockerResult=$(docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder build 2>&1)
