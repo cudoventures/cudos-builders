@@ -429,15 +429,19 @@ fi
 
 if [ "$NETWORK_MAINNET" = "true" ]; then
     NETWORK_NAME="Mainnet"
+    BUILDERS_GENESIS_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/config/genesis.mainnet.json"
 fi
 if [ "$NETWORK_DRESSREHEARSAL" = "true" ]; then
     NETWORK_NAME="Dress Rehearsal"
+    BUILDERS_GENESIS_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/config/genesis.dressrehearsal.json"
 fi
 if [ "$NETWORK_TESTNET_PRIVATE" = "true" ]; then
     NETWORK_NAME="Private Testnet"
+    BUILDERS_GENESIS_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/config/genesis.testnet.private.json"
 fi
 if [ "$NETWORK_TESTNET_PUBLIC" = "true" ]; then
     NETWORK_NAME="Public Testnet"
+    BUILDERS_GENESIS_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/config/genesis.testnet.public.json"
 fi
 
 NODE_ENV_BASENAME=$(basename "$NODE_ENV_PATH")

@@ -66,7 +66,7 @@ result=$(jq "del(.app_state.bank.params.send_enabled)" "$WORKING_MIGRATE_DIR/gen
 echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 
 if [ "$NETWORK_DRESSREHEARSAL" = "true" ]; then
-    result=$(jq ".chain_id = \"cudos-dressrehearsal-2\"" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
+    result=$(jq ".chain_id = \"$TARGET_CHAIN_ID\"" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
     echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 
     distributionAddress=$(getModuleAddress "$WORKING_MIGRATE_DIR/genesis.tmp.json" "distribution")

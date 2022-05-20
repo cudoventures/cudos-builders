@@ -3,7 +3,7 @@
 # node env
 if [ "$PARAM_NODE_NAME" = "root-node" ]; then
     sed -i "/CUDOS_HOME/d" "$MIGRATED_NODE_ENV"
-    sed -i "s/CHAIN_ID=.*/CHAIN_ID=\"cudos-testnet-public-3\"/g" "$MIGRATED_NODE_ENV"
+    sed -i "s/CHAIN_ID=.*/CHAIN_ID=\"$TARGET_CHAIN_ID\"/g" "$MIGRATED_NODE_ENV"
 
     echo "" >> "$MIGRATED_NODE_ENV"
     echo "MONITORING_ENABLED=\"false\"" >> "$MIGRATED_NODE_ENV"
