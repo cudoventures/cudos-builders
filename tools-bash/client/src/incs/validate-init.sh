@@ -36,7 +36,7 @@ if [ -d "$PARAM_SOURCE_DIR/CudosBuilders" ]; then
 fi
 
 if [ "$PARAM_NETWORK" = "testnet-private" ]; then
-    REPO_BRANCH="v0.6.0"
+    REPO_BRANCH="v0.8.0"
 elif [ "$PARAM_NETWORK" = "testnet-public" ]; then
     REPO_BRANCH="v0.4.0"
 elif [ "$PARAM_NETWORK" = "dressrehearsal" ]; then
