@@ -32,7 +32,11 @@ source "$WORKING_SRC_DIR/incs/utils-common.sh"
 
 source "$WORKING_SRC_DIR/incs/validate-gravity.sh"
 
+source "$WORKING_SRC_DIR/modules/clean-docker.sh"
+
 source "$WORKING_SRC_DIR/modules/change-contract.sh"
+
+source "$WORKING_SRC_DIR/modules/clean-docker.sh"
 
 source "$WORKING_SRC_DIR/modules/start-orchestrator.sh"
 
