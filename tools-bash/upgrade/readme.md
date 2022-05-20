@@ -112,6 +112,13 @@ The command upgrades a node
 sudo ./src/node.sh upgrade
 ```
 
+### Perform an upgrade bypassing the exporting and migrating of the genesis
+The command upgrades a node by using an external genesis. This option cannot be used unless the upgraded network has started producing blocks
+```
+sudo ./src/node.sh upgrade-with-predefined-genesis
+```
+
+
 ## Gravity
 
 Gravity script has following usage:
