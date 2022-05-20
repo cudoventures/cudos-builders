@@ -24,7 +24,7 @@ source "./src/incs/var.sh" "gravity"
 
 echo "" # new line
 
-echo -e "${STYLE_BOLD}THIS FEATURE COULD NOT USED IN PRODUCTION ENVIROMENT${STYLE_DEFAULT}";
+echo -e "${STYLE_BOLD}THIS FEATURE MUST NOT BE USED IN PRODUCTION ENVIROMENT${STYLE_DEFAULT}";
 
 echo "" # new line
 
