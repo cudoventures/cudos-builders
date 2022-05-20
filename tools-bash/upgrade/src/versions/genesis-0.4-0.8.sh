@@ -87,7 +87,7 @@ result=$(jq ".app_state.wasm.gen_msgs = []" "$WORKING_MIGRATE_DIR/genesis.tmp.js
 echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 
 if [ "$NETWORK_TESTNET_PUBLIC" = "true" ]; then
-    result=$(jq ".chain_id = \"cudos-testnet-public-3\"" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
+    result=$(jq ".chain_id = \"$TARGET_CHAIN_ID\"" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
     echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 
     # distributionAddress=$(getModuleAddress "$WORKING_MIGRATE_DIR/genesis.tmp.json" "distribution")

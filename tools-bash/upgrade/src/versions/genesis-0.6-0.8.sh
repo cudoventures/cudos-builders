@@ -73,11 +73,11 @@ result=$(jq ".app_state.wasm.gen_msgs = []" "$WORKING_MIGRATE_DIR/genesis.tmp.js
 echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 
 if [ "$NETWORK_TESTNET_PRIVATE" = "true" ]; then
-    result=$(jq ".chain_id = \"cudos-testnet-private-3\"" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
+    result=$(jq ".chain_id = \"$TARGET_CHAIN_ID\"" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
     echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 
     distributionAddress=$(getModuleAddress "$WORKING_MIGRATE_DIR/genesis.tmp.json" "distribution")
-    setAccountBalanceInAcudosWithoutAuthAccount "$WORKING_MIGRATE_DIR/genesis.tmp.json" "$distributionAddress" "255659558937535318690895660"
+    setAccountBalanceInAcudosWithoutAuthAccount "$WORKING_MIGRATE_DIR/genesis.tmp.json" "$distributionAddress" "257708621488175119214878138"
 
     result=$(jq ".app_state.gov.voting_params.voting_period = \"21600s\"" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
     echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
