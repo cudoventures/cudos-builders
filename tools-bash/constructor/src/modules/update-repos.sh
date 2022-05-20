@@ -2,7 +2,7 @@
 
 echo -ne "Updating the repos...";
 
-branch="cudos-dev"
+branch="v0.8.0"
 
 cd "$PARAM_SOURCE_DIR/CudosNode"
 git pull origin $branch &> /dev/null
