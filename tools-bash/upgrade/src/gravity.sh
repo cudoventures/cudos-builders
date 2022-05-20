@@ -32,11 +32,17 @@ source "$WORKING_SRC_DIR/incs/utils-common.sh"
 
 source "$WORKING_SRC_DIR/incs/validate-gravity.sh"
 
-source "$WORKING_SRC_DIR/modules/clean-docker.sh"
+echo -ne "Cleaning the docker...";
+dockerResult=$(docker system prune -a -f 2>&1)
+dockerResult=$(docker container prune -f 2>&1)
+echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 source "$WORKING_SRC_DIR/modules/change-contract.sh"
 
-source "$WORKING_SRC_DIR/modules/clean-docker.sh"
+echo -ne "Cleaning the docker...";
+dockerResult=$(docker system prune -a -f 2>&1)
+dockerResult=$(docker container prune -f 2>&1)
+echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 source "$WORKING_SRC_DIR/modules/start-orchestrator.sh"
 
