@@ -562,6 +562,12 @@ class NodesService {
         const sentryNodeModel = this.topologyHelper.getFirstSentry();
         const sentrySshHelper = this.instancesService.getSshHelper(sentryNodeModel.computerId);
 
+        let ethTokenContract = '0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d';
+        // if (gravity === '1') {
+        //     const gravityBridgeUiModel = this.topologyHelper.gravityBridgeUiModel;
+        //     ethTokenContract = gravityBridgeUiModel.ethTokenContract;
+        // }
+
         await sentrySshHelper.exec([
             `cd ${PathHelper.WORKING_DIR}/CudosBuilders/docker/gravity-contract-deployer`,
             'cp ./gravity-contract-deployer.env.example ./gravity-contract-deployer.env',
@@ -571,6 +577,7 @@ class NodesService {
             `sed -i "s/CUDOS_ACCESS_CONTROL_ADDRESS=.*/CUDOS_ACCESS_CONTROL_ADDRESS=\\"0xf50E29dB8bf318fB61Ac6688578dc0CD35EA8142\\"/g" ./gravity-contract-deployer.env`,
             `sed -i "s/DEFAULT_NETWORK=.*/DEFAULT_NETWORK=\\"rinkeby\\"/g" ./gravity-contract-deployer.env`,
             `sed -i "s/ETHERSCAN_API_KEY=.*/ETHERSCAN_API_KEY=\\"${this.topologyHelper.params.gravity.etherscanApiKey}\\"/g" ./gravity-contract-deployer.env`,
+            `sed -i "s/CUDOS_TOKEN_ADDRESS=.*/CUDOS_TOKEN_ADDRESS=\\"${ethTokenContract}\\"/g" ./gravity-contract-deployer.env`,
         ], false);
 
         const contractDeployerResult = await sentrySshHelper.exec([

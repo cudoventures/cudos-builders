@@ -456,6 +456,8 @@ START_YML="./start-$PARAM_NODE_NAME.yml"
 VOLUME_NAME=$(readEnvFromString "$args" "VOLUME_NAME")
 VOLUME_PATH="$PARAM_SOURCE_DIR/CudosData/$VOLUME_NAME"
 START_CONTAINER_NAME=$(readEnvFromString "$args" "START_CONTAINER_NAME")
+TOKEN_CONTRACT_ADDRESS=$(jq ".app_state.gravity.erc20_to_denoms[0].erc20" "$VOLUME_PATH/config/genesis.json")
+TOKEN_CONTRACT_ADDRESS=${TOKEN_CONTRACT_ADDRESS//\"/}
 unset args
 
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
