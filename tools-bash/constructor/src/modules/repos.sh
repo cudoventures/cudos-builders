@@ -3,10 +3,9 @@
 cd $PARAM_SOURCE_DIR
 
 echo -ne "Cloning the repos...";
-branch="cudos-dev"
-git clone -q --branch $branch https://github.com/CudoVentures/cudos-node.git CudosNode
-git clone -q --branch $branch https://github.com/CudoVentures/cudos-builders.git CudosBuilders
-git clone -q --branch $branch https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge
+git clone -q --branch $REPO_BRANCH https://github.com/CudoVentures/cudos-node.git CudosNode
+git clone -q --branch $REPO_BRANCH https://github.com/CudoVentures/cudos-builders.git CudosBuilders
+git clone -q --branch $REPO_BRANCH https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Copying the .env files...";

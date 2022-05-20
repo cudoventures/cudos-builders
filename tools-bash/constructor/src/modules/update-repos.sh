@@ -2,10 +2,8 @@
 
 echo -ne "Updating the repos...";
 
-branch="cudos-dev"
-
 cd "$PARAM_SOURCE_DIR/CudosNode"
-git pull origin $branch &> /dev/null
+git pull origin $REPO_BRANCH &> /dev/null
 if [ "$?" != 0 ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error updating the cudos-node repo. Please try in a while";
     exit 1;
@@ -17,7 +15,7 @@ if [ "$?" != 0 ]; then
 fi
 
 cd "$PARAM_SOURCE_DIR/CudosBuilders"
-git pull origin $branch &> /dev/null
+git pull origin $REPO_BRANCH &> /dev/null
 if [ "$?" != 0 ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error updating the cudos-builders repo. Please try in a while";
     exit 1;
@@ -29,7 +27,7 @@ if [ "$?" != 0 ]; then
 fi
 
 cd "$PARAM_SOURCE_DIR/CudosGravityBridge"
-git pull origin $branch &> /dev/null
+git pull origin $REPO_BRANCH &> /dev/null
 if [ "$?" != 0 ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error updating the cudos-gravity-bridge repo. Please try in a while";
     exit 1;
