@@ -1,5 +1,5 @@
 import ethers from "ethers";
-import ERC20Abi from '../../abi/TestERC20A.sol/TestERC20A.json' assert { type: 'json' };
+import ERC20Abi from '../../abi/TestERC20A.sol/TestERC20A.json';
 import { logError, logGeneral } from "../utils/logger";
 
 export async function sendAcudos(config, amount) {

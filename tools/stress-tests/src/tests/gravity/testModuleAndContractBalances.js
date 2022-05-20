@@ -2,7 +2,7 @@ import sendTx from '../../cudos/txs';
 import sendToCudos from '../../ethereum/sendToCudos.js';
 import { constants, getAddressBalance, getRandomWallets, getSigner } from '../../cudos/cudosUtils.js';
 import ethers from 'ethers';
-import ERC20Abi from '../../../abi/TestERC20A.sol/TestERC20A.json' assert { type: 'json' };
+import ERC20Abi from '../../../abi/TestERC20A.sol/TestERC20A.json';
 import BigNumber from 'bignum';
 import wait from '../../utils/wait.js';
 import {logError, logGeneral, logSuccess} from '../../utils/logger.js';

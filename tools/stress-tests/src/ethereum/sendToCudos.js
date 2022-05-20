@@ -1,6 +1,6 @@
 import ethers from "ethers";
-import GravityAbi from '../../abi/Gravity.sol/Gravity.json' assert { type: 'json' };
-import ERC20Abi from '../../abi/TestERC20A.sol/TestERC20A.json' assert { type: 'json' };
+import GravityAbi from '../../abi/Gravity.sol/Gravity.json';
+import ERC20Abi from '../../abi/TestERC20A.sol/TestERC20A.json';
 import { fromBech32, toHex } from '@cosmjs/encoding';
 import { logGeneral } from "../utils/logger";
 import wait from "../utils/wait";
