@@ -53,10 +53,6 @@ echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 result=$(jq ".app_state.gravity.unbatched_transfers = []" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
 echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 
-gravityId=$(echo $RANDOM | sha1sum | head -c 31)
-result=$(jq ".app_state.gravity.params.gravity_id = \"$gravityId\"" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
-echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
-
 result=$(jq "del(.app_state.bank.params.send_enabled)" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
 echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 
@@ -86,6 +82,9 @@ if [ "$NETWORK_TESTNET_PRIVATE" = "true" ]; then
     echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 
     result=$(jq ".app_state.staking.params.unbonding_time = \"28800s\"" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
+    echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
+
+    result=$(jq ".app_state.gravity.params.gravity_id = \"e729d49846165eb5428c968e4398eb0\"" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
     echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 fi
 
