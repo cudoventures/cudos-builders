@@ -2,8 +2,6 @@
 
 The goal of this project is to manage the relayer between two IBC-enabled chains.
 
-**This script MUST only be used if the network upgrade includes a <a href="https://docs.cosmos.network/master/ibc/upgrades/quick-guide.html">IBC-breaking change</a>. Otherwise the relayer must not be upgraded.**
-
 You must create an SSH connection from a machine (<em>host computer</em>) to the machine where the relayer is running (<em>target computer</em>).
 
 All the executions below MUST happen on <em>target computer</em>. Nothing is executed on the <em>host computer</em> itself.
@@ -23,6 +21,19 @@ Git must be installed
 Curl must be installed
 
 ## General usage
+
+### Start
+
+1. Clone cudos-builders repo somewhere (usually in your home directory)
+```
+git clone --branch v0.8.0 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
+```
+2. Create config files according to **Config** section below
+2. Execute the script according to **Usage** section below
+
+### Upgrade
+
+**This script MUST only be used if the network upgrade includes a <a href="https://docs.cosmos.network/master/ibc/upgrades/quick-guide.html">IBC-breaking change</a>. Otherwise the relayer must not be upgraded.**
 
 1. Connect to <em>target computer</em> using SSH
 1. Attach shell to the relayer's docker instance.
@@ -69,7 +80,7 @@ Curl must be installed
 1. Now you can continue with the upgrading of your node(s) and gravity (if applicable).
 1. Clone cudos-builders repo somewhere (usually in your home directory)
 ```
-git clone --branch v0.7.0 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
+git clone --branch v0.8.0 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
 ```
 1. Create config files according to **Config** section below
 1. Execute the script according to **Usage** section below
