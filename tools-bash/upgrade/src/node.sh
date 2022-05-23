@@ -3,7 +3,7 @@
 if ([ $# != "1" ]) || ([ "$1" != "upgrade" ] && [ "$1" != "upgrade-with-predefined-genesis" ] && [ "$1" != "validate" ]); then
     echo -e "\033[1;31mError:\033[m Please follow the usage template below";
     echo "Usage: sudo $0 [action]";
-    echo '[action] = upgrade | validate';
+    echo '[action] = upgrade | upgrade-with-predefined-genesis | validate';
     exit 1
 fi
 
