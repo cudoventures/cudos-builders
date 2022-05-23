@@ -62,8 +62,8 @@ for i in ${!endpointNames[@]}; do
     paramName=${endpointNames[i]}
     param=$(readEnvFromString "$envFile" "$paramName")
     param=${param//\\/}
-    curlResult=$(curl "$param" 2>&1)
-    if [[ "$curlResult" =~ .*"Failed".* ]]; then
+    curlResult=$(curl "$param" 2>&1 | tr -d '\0')
+    if [[ "$curlResult" =~ .*"Failed".* ]] || [[ "$curlResult" =~ .*"failure".* ]]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Unable to connect to $param";
         exit 1;
     fi
