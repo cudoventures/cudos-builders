@@ -55,3 +55,6 @@ pricefeed:
               price_id: cudos
 distribution:
     rewards_frequency: 1000
+workers:
+    - name: fix_blocks_worker
+      interval: 60m
