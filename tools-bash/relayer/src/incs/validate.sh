@@ -17,8 +17,8 @@ if [ ! -x "$(command -v docker-compose)" ]; then
     exit 1;
 fi
 
-if [ ! -x "$(command -v curl)" ]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} You must install curl";
+if [ ! -x "$(command -v netcat)" ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} You must install netcat";
     exit 1;
 fi
 
@@ -62,8 +62,11 @@ for i in ${!endpointNames[@]}; do
     paramName=${endpointNames[i]}
     param=$(readEnvFromString "$envFile" "$paramName")
     param=${param//\\/}
-    curlResult=$(curl "$param" 2>&1 | tr -d '\0')
-    if [[ "$curlResult" =~ .*"Failed".* ]] || [[ "$curlResult" =~ .*"failure".* ]]; then
+    param=$(echo "$param" | sed "s~.*://~~")
+    ip=$(echo "$param" | sed "s~:.*~~")
+    port=$(echo "$param" | sed "s~.*:~~")
+    netcat -z -w 3 $ip $port
+    if [ "$?" != "0" ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Unable to connect to $param";
         exit 1;
     fi
