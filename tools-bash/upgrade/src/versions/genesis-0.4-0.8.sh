@@ -90,26 +90,8 @@ if [ "$NETWORK_TESTNET_PUBLIC" = "true" ]; then
     result=$(jq ".chain_id = \"$TARGET_CHAIN_ID\"" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
     echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 
-    # distributionAddress=$(getModuleAddress "$WORKING_MIGRATE_DIR/genesis.tmp.json" "distribution")
-    # setAccountBalanceInAcudosWithoutAuthAccount "$WORKING_MIGRATE_DIR/genesis.tmp.json" "$distributionAddress" "18308656328740320386054741"
-
-    # setAccountBalanceInCudosAdmin "$WORKING_MIGRATE_DIR/genesis.tmp.json" "cudos19m4ez024zrquym4vsku7gj4z78mdhazera5q2s" "1"
-
-    # encodedDenoms=$(jq -r ".app_state.bank.supply[].denom | @base64" "$WORKING_MIGRATE_DIR/genesis.tmp.json");
-
-    # result=$(jq ".app_state.bank.supply = []" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
-    # echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
-
-    # for encodedDenom in $encodedDenoms; do
-    #     decodedDenom=$(echo $encodedDenom | base64 --decode);
-    #     jq ".app_state.bank.balances | map(.coins) | flatten | map(select(.denom == \"$decodedDenom\") | .amount)" "$WORKING_MIGRATE_DIR/genesis.tmp.json" > "$tmpGenesisPath"
-    #     totalSupply=$(sum $tmpGenesisPath)
-    #     result=$(jq ".app_state.bank.supply += [{
-    #         \"amount\": \"$totalSupply\",
-    #         \"denom\": \"$decodedDenom\"
-    #     }]" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
-    #     echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
-    # done
+    result=$(jq ".app_state.gravity.params.gravity_id = \"1ebcf508b1866c004c36e93a87fdcde\"" "$WORKING_MIGRATE_DIR/genesis.tmp.json")
+    echo $result > "$WORKING_MIGRATE_DIR/genesis.tmp.json"
 fi
 
 
