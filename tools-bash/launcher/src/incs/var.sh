@@ -14,7 +14,7 @@ STYLE_RED='\033[1;31m'
 STYLE_GREEN='\033[1;32m'
 STYLE_DEFAULT='\033[0m'
 
-REPO_BRANCH="v0.8.0"
+REPO_BRANCH="v0.9.0"
 
 if [ ! -f "$WORKING_DIR/config/.env" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The $WORKING_DIR/config/.env file is missing";
