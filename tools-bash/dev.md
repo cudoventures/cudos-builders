@@ -8,3 +8,8 @@ Update required free space from 5GB to 500GB
 sudo rm -rf ../../../CudosConstruct/* && (sudo rm -rf ../../../CudosConstruct/.* || true) && sudo ./src/init.sh standalone-validator-node
 
 sudo rm -rf ../../../CudosConstruct/* && (sudo rm -rf ../../../CudosConstruct/.* || true) && sudo ./src/relayer.sh
+
+# Launcher
+
+Upgrade NormTimePassed
+Upgrade total minted moins in gravity module's balance calculation

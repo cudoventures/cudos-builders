@@ -44,10 +44,14 @@ hermes keys restore ${CHAIN_ID_1} -m "${MNEMONIC_1}"
 if [ "$CREATE_CHANNEL" = true ] ; then
     echo "Creating channel"
     hermes create connection ${CHAIN_ID_0} ${CHAIN_ID_1} | tee /root/.hermes/create-channel-data.txt
-    CONNECTION_ID_A=$(cat /root/.hermes/create-channel-data.txt | grep "Success: Connection" -A 100 | grep \"connection -m 1) 
+    ERR=$(cat /root/.hermes/create-channel-data.txt | grep "error")
 
-    CONNECTION_ID_A=${CONNECTION_ID_A//\"/}
-    CONNECTION_ID_A=${CONNECTION_ID_A//\,/}
+    if [ "$ERR" == "" ]; then 
+        CONNECTION_ID_A=$(cat /root/.hermes/create-channel-data.txt | grep "Success: Connection" -A 100 | grep \"connection -m 1) 
 
-    hermes create channel --port-a transfer --port-b transfer ${CHAIN_ID_0} ${CONNECTION_ID_A} | tee /root/.hermes/create-channel-data.txt 
+        CONNECTION_ID_A=${CONNECTION_ID_A//\"/}
+        CONNECTION_ID_A=${CONNECTION_ID_A//\,/}
+
+        hermes create channel --port-a transfer --port-b transfer ${CHAIN_ID_0} ${CONNECTION_ID_A} | tee -a /root/.hermes/create-channel-data.txt 
+    fi
 fi

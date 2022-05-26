@@ -6,7 +6,7 @@ You can run your node in different operating systems such as Debian 10, Ubuntu, 
 The first step is to ensure that you have set up all requirements and prerequisites as the following:
 
 - Install [Docker](https://docs.docker.com/engine/install/) 20.10.6 or above
-- Install [Docker Compose](https://docs.docker.com/compose/install/) 1.29.1 or above
+- Install [Docker Compose](https://www.devopsroles.com/how-to-install-docker-compose-on-ubuntu/) 1.29.x using step 3 and step 4 from the linked article
 - Install [Git](https://github.com/git-guides/install-git)
 - Install a code editor such as Nano, Atom, etc.
 - Install JQ to extract data from JSON documents:
