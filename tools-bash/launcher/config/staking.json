@@ -2588,5 +2588,9 @@
     }, {
         "address": "cudos12djehdktnaamdxf00u54cufj7j06jy4s8tzk02",
         "balance": "5000000000000000000000000"
-    }]
+    }],
+    "root": {
+        "address": "cudos9",
+        "delegation": []
+    }
 }
