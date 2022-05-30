@@ -31,7 +31,8 @@ Enter the newly copied file with the command below:
 ```
 nano ./tools-bash/constructor/config/init.env
 ```
-Then enter the following:
+Fill the parameters as described bellow. Please look at the description for each parameter and fill it based on your needs.
+<p>This is an example content of the file.</p>
 
 ```
 PARAM_SOURCE_DIR="/usr/cudos" 
