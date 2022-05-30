@@ -28,7 +28,7 @@ if [ "$?" != 0 ]; then
 fi;
 orchestratorAddress=$(docker container exec "$validatorStartContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys show orchestrator -a --keyring-backend os");
 
-dockerResult=$(docker container exec "$validatorStartContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded tx gravity set-orchestrator-address \"$validatorOperatorAddress\" \"$orchestratorAddress\" \"$PARAM_ORCH_ETH_ADDRESS\" --from validator --keyring-backend os --chain-id cudos-1 -y" 2>&1);
+dockerResult=$(docker container exec "$validatorStartContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded tx gravity set-orchestrator-address \"$validatorOperatorAddress\" \"$orchestratorAddress\" \"$PARAM_ORCH_ETH_ADDRESS\" --from validator --keyring-backend os --chain-id cudos-1 --gas-prices 5000000000000acudos -y" 2>&1);
 transactionHeight=$(echo "$dockerResult" | jq '.height')
 transactionHeight=${transactionHeight//\"/}
 if [ "$?" != 0 ] || [ "$transactionHeight" = "0" ] || [[ "$dockerResult" =~ .*"failed".* ]]; then

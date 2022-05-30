@@ -9,9 +9,9 @@ validatorComputerPort=$(getComputerPort $validatorComputerIndex)
 validatorComputerUser=$(getComputerUser $validatorComputerIndex)
 
 echo -ne "Preparing root-validator's repos...";
-ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR && sudo rm -rf ./CudosNode && git clone -q --branch $REPO_BRANCH https://github.com/CudoVentures/cudos-node.git CudosNode"
-ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR && sudo rm -rf ./CudosBuilders && git clone -q --branch $REPO_BRANCH https://github.com/CudoVentures/cudos-builders.git CudosBuilders"
-ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR && sudo rm -rf ./CudosGravityBridge && git clone -q --branch $REPO_BRANCH https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge"
+ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR && sudo rm -rf ./CudosNode && git clone -q --branch $REPO_BRANCH https://github.com/CudoVentures/cudos-node.git CudosNode &> /dev/null"
+ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR && sudo rm -rf ./CudosBuilders && git clone -q --branch $REPO_BRANCH https://github.com/CudoVentures/cudos-builders.git CudosBuilders &> /dev/null"
+ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR && sudo rm -rf ./CudosGravityBridge && git clone -q --branch $REPO_BRANCH https://github.com/CudoVentures/cosmos-gravity-bridge.git CudosGravityBridge &> /dev/null"
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 arg=$(ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosBuilders/docker/root-node && cat ./root-node.mainnet.arg")
@@ -53,7 +53,7 @@ if [ "$?" != 0 ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error $?: ${result}";
     exit 1;
 fi
-ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosData/$validatorVolumeName/config && sudo sed -i \"158s/enable = false/enable = true/\" ./app.toml"
+ssh -o "StrictHostKeyChecking no" ${validatorComputerUser}@${validatorComputerIp} -p ${validatorComputerPort} "cd $PARAM_SOURCE_DIR/CudosData/$validatorVolumeName/config && sudo sed -i \"/\\[grpc\\]/,/\\[/ s/enable = false/enable = true/\" ./app.toml"
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Clean-up after the initialization of the root-validator...";

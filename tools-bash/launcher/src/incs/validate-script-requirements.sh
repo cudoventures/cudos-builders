@@ -38,6 +38,20 @@ if [ "$PARAM_CONTRACT_DEPLOYER_ETH_ADDRESS" = "" ]; then
     exit 1
 fi
 
+if [ "$PARAM_GRAVITY_DEFAULT_NETWORK" = "rinkeby" ]; then
+    CUDOS_ACCESS_CONTROL_ADDRESS="0xf50E29dB8bf318fB61Ac6688578dc0CD35EA8142"
+elif [ "$PARAM_GRAVITY_DEFAULT_NETWORK" = "mainnet" ]; then
+    CUDOS_ACCESS_CONTROL_ADDRESS=""
+else
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_GRAVITY_DEFAULT_NETWORK must not be empty. It MUST be ${STYLE_BOLD}rinkeby${STYLE_DEFAULT} | ${STYLE_BOLD}mainnet${STYLE_DEFAULT}";
+    exit 1
+fi
+
+if [ "$PARAM_ETHERSCAN_API_KEY" = "" ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_ETHERSCAN_API_KEY must not be empty";
+    exit 1
+fi
+
 walletBalanceJson=$(curl -X POST http://34.136.167.17:8545 -H "Content-Type: application/json" --data "{\"jsonrpc\": \"2.0\", \"method\": \"eth_getBalance\", \"params\": [\"$PARAM_CONTRACT_DEPLOYER_ETH_ADDRESS\", \"latest\"], \"id\": 1}" 2> /dev/null)
 walletBalanceHex=$(echo "$walletBalanceJson" | jq .result)
 walletBalanceHex=${walletBalanceHex//\"/}

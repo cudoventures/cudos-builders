@@ -6,7 +6,6 @@ accountDataGenesisPath="/tmp/genesis.accounts.json"
 delegatorsDataGenesisPath="/tmp/genesis.delegators.json"
 predefinedBalancesDataGenesisPath="/tmp/genesis.balances.json"
 adminDataGenesisPath="/tmp/genesis.admin.json"
-RESULT_GENESIS_PATH="$WORKING_EXPORT_DIR/genesis.json"
 
 # copy to result genesis location
 cp "$rootGenesisPath" "$RESULT_GENESIS_PATH"
