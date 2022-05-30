@@ -13,7 +13,7 @@ STYLE_RED='\033[1;31m'
 STYLE_GREEN='\033[1;32m'
 STYLE_DEFAULT='\033[0m'
 
-REPO_BRANCH="v0.9.0"
+REPO_BRANCH="cudos-dev"
 
 if [ "$1" = "init" ]; then
     INITIALIZING="true";
