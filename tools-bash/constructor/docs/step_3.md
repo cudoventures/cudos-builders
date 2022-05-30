@@ -30,20 +30,20 @@ cp ./config/node.env.example ./config/node.env
 ```
 The content of the node.env should be:
 ```bash
-MONIKER=<TYPE DOWN NODE NAME>
-PRIVATE_PEERS=<validator node tendermint id>
+MONIKER="<TYPE DOWN NODE NAME>"
+PRIVATE_PEERS="<validator node tendermint id>"
 
-SHOULD_USE_GLOBAL_PEERS=false
-SHOULD_USE_STATE_SYNC=false
+SHOULD_USE_GLOBAL_PEERS="false"
+SHOULD_USE_STATE_SYNC="false"
 
-TLS_ENABLED=false
+TLS_ENABLED="false"
 TLS_DOMAIN=""
 TLS_DOCKER_PATH=""
 
-MONITORING_ENABLED=false
+MONITORING_ENABLED="false"
 
-EXTERNAL_ADDRESS=
-ADDR_BOOK_STRICT=true
+EXTERNAL_ADDRESS=""
+ADDR_BOOK_STRICT="true"
 ```
 For now we can leave the information about the peers empty. 
 
@@ -54,11 +54,11 @@ For now we can leave the information about the peers empty.
 **SHOULD_USE_GLOBAL_PEERS** if the node should try to connect to global peers or not. Should be set to true.
 **SHOULD_USE_STATE_SYNC** if set to true the node will try to sync from a state sync point.
 
-**TLS_ENABLED** enables TLS. Default false
+**TLS_ENABLED** this value must be "false"
 
-**TLS_DOMAIN** required if TLS_ENABLED=true
+**TLS_DOMAIN** this value must be empty
 
-**TLS_DOCKER_PATH** required if TLS_ENABLED=true
+**TLS_DOCKER_PATH** this value must be empty
 
 **MONITORING_ENABLED** defines if the port for monitoring should be open or not.
 
@@ -120,16 +120,16 @@ cp ./config/node.env.example ./config/node.env
 ```
 The content of the node.env should be:
 ```shell
-MONIKER=<name of the node>
-PRIVATE_PEERS=
+MONIKER="<name of the node>"
+PRIVATE_PEERS=""
 
-SHOULD_USE_GLOBAL_PEERS=false
-SHOULD_USE_STATE_SYNC=false
+SHOULD_USE_GLOBAL_PEERS="false"
+SHOULD_USE_STATE_SYNC="false"
 
-MONITORING_ENABLED=false
+MONITORING_ENABLED="false"
 
-EXTERNAL_ADDRESS=
-ADDR_BOOK_STRICT=true
+EXTERNAL_ADDRESS=""
+ADDR_BOOK_STRICT="true"
 ```
 
 **MONIKER** is the name of the node. It MUST contains only lowercase english letters and/or a dash.

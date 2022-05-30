@@ -69,6 +69,16 @@ Then enter the following:
 
 ```
 MONIKER="<name of the node, it MUST contains only lowercase english letters and/or a dash>"
+PERSISTENT_PEERS=""
+SEEDS=""
+
+SHOULD_USE_GLOBAL_PEERS="false"
+SHOULD_USE_STATE_SYNC="false"
+
+MONITORING_ENABLED="false"
+
+EXTERNAL_ADDRESS=""
+ADDR_BOOK_STRICT="true"
 ```
 
 
