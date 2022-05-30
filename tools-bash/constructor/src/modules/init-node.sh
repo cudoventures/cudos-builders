@@ -74,7 +74,7 @@ if [ $IS_VALIDATOR = "true" ]; then
     validatorAddress=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys show validator -a --keyring-backend os");
 
     dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "cudos-noded add-genesis-account $validatorAddress ${VALIDATOR_BALANCE}acudos");
-    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\"; echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded gentx validator \"${VALIDATOR_BALANCE}acudos\" 0x364af07E1bb08288a1F3D9a578317baa9ED4fb2d $emptyAddress --chain-id $chainId --keyring-backend os --commission-rate=\"$PARAM_COMMISSION_RATE\" \
+    dockerResult=$(docker container exec "$startContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\"; echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded gentx validator \"${VALIDATOR_BALANCE}acudos\" 0x364af07E1bb08288a1F3D9a578317baa9ED4fb2d $emptyAddress --min-self-delegation 2000000000000000000000000 --chain-id $chainId --keyring-backend os --commission-rate=\"$PARAM_COMMISSION_RATE\" \
     --commission-max-rate=\"$PARAM_COMMISSION_MAX_RATE\" \
     --commission-max-change-rate=\"$PARAM_COMMISSION_MAX_CHANGE_RATE\"" 2>&1);
 
