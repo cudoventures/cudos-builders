@@ -119,10 +119,6 @@ md5sum ${HOME}/CudosBuilders/tools-bash/constructor/exports/genesis*.json
 
 Please then send the **json** file as an attachment, with the output of the md5sum command in the body, of a mail to the Cudos team at [services@cudoventures.com](mailto:services@cudoventures.com).
 
-# Things to keep in mind
-1. The folder you use for a node needs to be created and empty. You will get errors otherwise.
-2. If you are running more than one node on the same server, you might not be able to create the docker because they will try to open the same ports.
-
 <!--
 # Troubleshooting
 -->
