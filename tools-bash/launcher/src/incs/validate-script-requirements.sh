@@ -17,12 +17,6 @@ if [ ! -x "$(command -v git)" ]; then
     exit 1;
 fi
 
-gitStatus=$(git branch --contains 7684715d335a699459770e7db7b12ab7f718daf5 2>&1)
-if [[ "$gitStatus" == *"error:"* ]]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} You must pull the latest changes";
-    exit 1;
-fi 
-
 if [ "$PARAM_ETH_RPC" = "" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_ETH_RPC must not be empty";
     exit 1
@@ -78,6 +72,11 @@ fi
 
 if [ ! -r "$STAKING_JSON" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Permission denied $STAKING_JSON";
+    exit 1
+fi
+
+if [ ! -d "$WORKING_DATA_GENESIS_DIR" ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The $WORKING_DATA_GENESIS_DIR directory is missing";
     exit 1
 fi
 

@@ -2,7 +2,7 @@
 
 launcherPath=$(basename $(pwd))
 if [ "$launcherPath" != "launcher" ]; then
-    echo -e "\033[1;31mError:\033[m The script MUST be executed from laucher folder";
+    echo -e "\033[1;31mError:\033[m The script MUST be executed from launcher folder";
     exit 1
 fi
 

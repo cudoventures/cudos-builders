@@ -94,7 +94,7 @@ ADDR_BOOK_STRICT="true"
 
 ```
 cd ${HOME}/CudosBuilders/tools-bash/constructor
-./src/init.sh clustered-validator-node
+sudo ./src/init.sh clustered-validator-node
 ```
 
 The command will use the configuration you have setup in the previous step and build the needed binaries. Successful run should print something like:
