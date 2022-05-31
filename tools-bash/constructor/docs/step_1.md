@@ -106,7 +106,9 @@ Please enclose the following:
 - The result of the md5sum command below
 - The json file in its original state with its original name
 
+```bash
 md5sum ${HOME}/CudosBuilders/tools-bash/constructor/exports/genesis*.json
+```
 
 Please then send the **json** file as an attachment, with the output of the md5sum command in the body, of a mail to the Cudos team at [services@cudoventures.com](mailto:services@cudoventures.com).
 
