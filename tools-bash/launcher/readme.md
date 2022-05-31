@@ -18,7 +18,9 @@ Docker-compose must be installed
 
 # Config
 
-All of the config files are in ./laucher/config folder.
+**Place all of the validators' genesises, obtained by successful execution of the constructor script, in ./launcher/genesises folder.**
+
+All of the config files are in ./launcher/config folder.
 
 **Important: Do not leave any comments in any .env file**
 
@@ -188,7 +190,7 @@ Ensure that it has execute permission and then start the script from ./launcher 
 Ensure that it has execute permission and then start the script from ./launcher folder
 
 ```bash
-./src/launcher.sh
+./src/launch.sh
 ```
 
 **Gravity**: It starts the gravity.

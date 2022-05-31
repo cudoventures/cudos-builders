@@ -17,12 +17,6 @@ if [ ! -x "$(command -v git)" ]; then
     exit 1;
 fi
 
-gitStatus=$(git branch --contains 7684715d335a699459770e7db7b12ab7f718daf5 2>&1)
-if [[ "$gitStatus" == *"error:"* ]]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} You must pull the latest changes";
-    exit 1;
-fi 
-
 if [ "$PARAM_SOURCE_DIR" = "" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_SOURCE_DIR must not be empty";
     exit 1;
@@ -178,10 +172,10 @@ if [ ! -x "$(command -v docker-compose)" ]; then
 fi
 
 freeSpaceInKiB=$(df -P "$PARAM_SOURCE_DIR" | tail -1 | awk '{print $4}')
-freeSpaceRequirementInKiB=5000000
+freeSpaceRequirementInKiB=500000000
 if (( freeSpaceInKiB < freeSpaceRequirementInKiB )); then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Free space is less than $freeSpaceRequirementInKiB KiB (Available = $freeSpaceInKiB KiB)";
-    exit 1;
+    echo -e "${STYLE_ORANGE}Warning:${STYLE_DEFAULT} Free space is less than $freeSpaceRequirementInKiB KiB (Available = $freeSpaceInKiB KiB)...";
+    # exit 1;
 fi
 
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
