@@ -54,7 +54,7 @@ PARAM_COMMISSION_MAX_CHANGE_RATE="0.01"
 
 **PARAM_VALIDATOR_MNEMONIC** is the private key of the account you want to use for your validator.
 
-**PARAM_KEYRING_OS_PASS** is the password of your keyring that you create.
+**PARAM_KEYRING_OS_PASS** is the password that *you must create* that you will use to lock your keystore.
 
 **PARAM_COMMISSION_RATE** is commission rate of the validator. Must be between 0 and the validator's PARAM_COMMISSION_MAX_RATE. The value is in percentage, where 0.10 means 10%.
 
