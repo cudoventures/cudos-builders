@@ -7,7 +7,7 @@ Please note that this process must be run as the root user.
 ## Prerequisites
 Check all the needed prerequisites [here](./prerequisites.md).
 ### Setup the environment
-The Cudos build tools must be cloned into /usr/cudos, which needs to be empty but present.
+The constructor script will clone copies of the Cudos repositories into /usr/cudos, so this directory must be empty but present before the script is run.
 Please be aware that the following commands will remove and then recreate the /usr/cudos directory.
 
 ```bash
