@@ -1,4 +1,4 @@
-# Phase 4 instructions Step 1
+# Constructor Instructions Step 1
 
 This section describes the first steps needed for validator setup as part of the Phase 4 testnet launch.
 
@@ -99,14 +99,16 @@ If you see any additional messages or error please refer to the troubleshooting 
 
 ## Genesis submission
 
-Once your validator is running you should get it's genesis. It is located under ./tools-bash/constructor/exports on your machine. To get the file of the you can use
+Once your validator has been successfully initialised, the genesis gentx file must be sent to Cudo for inclusion in the final genesis.
 
-```
-GENESIS=$(ls $HOME/CudosBuilders/tools-bash/constructor/exports)
-cd ${HOME}/CudosBuilders/tools-bash/constructor/exports
-cat $GENESIS
-```
-Once you get the file contents send them as a **json** file to the Cudos team via email to [services@cudoventures.com](mailto:services@cudoventures.com).
+Please enclose the following:
+
+- The result of the md5sum command below
+- The json file in its original state with its original name
+
+md5sum ${HOME}/CudosBuilders/tools-bash/constructor/exports/genesis*.json
+
+Please then send the **json** file as an attachment, with the output of the md5sum command in the body, of a mail to the Cudos team at [services@cudoventures.com](mailto:services@cudoventures.com).
 
 # Things to keep in mind
 1. The folder you use for a node needs to be created and empty. You will get errors otherwise.
