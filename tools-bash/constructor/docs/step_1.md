@@ -1,17 +1,24 @@
 # Constructor Instructions Step 1
 
-This section describes the first steps needed for validator setup as part of the Phase 4 testnet launch.
+This section describes the first steps needed for validator setup as part of the genesis of the Cudos network.
+
+Please note that this process must be run as the root user.
 
 ## Prerequisites
 Check all the needed prerequisites [here](./prerequisites.md).
 ### Setup the environment
-You need to have a local copy of our build tools.Create your main Cudos directory. On the first row you can define where all Cudos data will be stored.
+The Cudos build tools must be cloned into /usr/cudos, which needs to be empty but present.
+Please be aware that the following commands will remove and then recreate the /usr/cudos directory.
 
+```bash
+  rm -rf /usr/cudos
+  mkdir /usr/cudos
 ```
-mkdir /usr/cudos
 
-cd $HOME
-git clone --branch v0.9.0 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
+Clone the CudosBuilders repository into the root home directory
+```bash
+  cd $HOME
+  git clone --branch v0.9.0 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
 ```
 
 ## Nodes initialization
