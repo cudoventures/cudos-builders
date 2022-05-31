@@ -16,15 +16,15 @@ for i in $(seq 0 $(($computersSize-1)))
 do
     sshKeyPath=$(getComputerSshKeyPath $i)
     pass=$(getComputerPass $i)
-    echo "echo '$pass'" > /tmp/laucher-ask-pass.sh
-    chmod +x /tmp/laucher-ask-pass.sh
-    result=$(DISPLAY=:0 SSH_ASKPASS="/tmp/laucher-ask-pass.sh" ssh-add $sshKeyPath < /dev/null &> /dev/null)
+    echo "echo '$pass'" > /tmp/launcher-ask-pass.sh
+    chmod +x /tmp/launcher-ask-pass.sh
+    result=$(DISPLAY=:0 SSH_ASKPASS="/tmp/launcher-ask-pass.sh" ssh-add $sshKeyPath < /dev/null &> /dev/null)
     if [ "$?" != 0 ]; then
         echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error adding SSH key $?: ${result}";
         exit $?;
     fi;
 done
 
-rm -rf /tmp/laucher-ask-pass.sh
+rm -rf /tmp/launcher-ask-pass.sh
 
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
