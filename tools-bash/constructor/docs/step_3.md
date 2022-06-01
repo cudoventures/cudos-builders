@@ -1,36 +1,49 @@
-# Phase 4 Step 3 instructions
+# Constructor Step 3 instructions
 
-If you executed Step 1 instructions and got the green light from the Cudos team you can proceed with setup of your seed and sentry nodes. After that you'll start all nodes and connect to the network.
+If you executed Step 1 instructions and got the green light from the Cudos team you can proceed with step 3
+which will:
+- Setup your seed
+- Setup your sentry
+- Startup the nodes and connect them to the validator
+
 ## Prerequisites
 Check all the needed prerequisites [here](./prerequisites.md).
+
+
 ## Setup of the sentry node
-
 ### Setup the environment
-You need to have an up to date local copy of our build tools.
+The constructor script will clone copies of the Cudos repositories into /usr/cudos, so this directory must be empty but present before the script is run.
+Please be aware that the following commands will remove and then recreate the /usr/cudos directory.
 
-```
-cd $HOME
-git clone --branch v0.9.0 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
-cd CudosBuilders/tools-bash/constructor
+```bash
+  rm -rf /usr/cudos
+  mkdir /usr/cudos
 ```
 
+Clone the CudosBuilders repository into the root home directory
+```bash
+  cd $HOME
+  git clone --branch v0.9.0 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
+```
+
+### Nodes Initialisation
 You should copy the example configuration and setup all needed params
-```
-cp ./config/init-peers.env.example ./config/init.env
+```bash
+  cd CudosBuilders/tools-bash/constructor
+  cp ./config/init-peers.env.example ./config/init.env
 ```
 The content of the init.env should be as follows:
 ```bash
 PARAM_SOURCE_DIR="/usr/cudos" 
 ```
-The directory you create here should exist.
 
 Time to fill the information for the node configuration. First copy the node.env.example and fill it in the next step.
-```
+```bash
 cp ./config/node.env.example ./config/node.env
 ```
 The content of the node.env should be:
 ```bash
-MONIKER="<TYPE DOWN NODE NAME>"
+MONIKER="<name of the node, it MUST contains only lowercase english letters and/or a dash>"
 PRIVATE_PEERS="<validator node tendermint id>"
 
 SHOULD_USE_GLOBAL_PEERS="true"
