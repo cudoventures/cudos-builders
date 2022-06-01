@@ -1,5 +1,5 @@
 # Introduction
- This section describes how you can fully setup your nodes for the Public and Phase 4 tests. Please follow the steps as described in the docs folder.
+ This section describes how you can fully setup your nodes for the genesis of the Cudos network. Please follow the steps as described in the docs folder.
 
  1. [Validator setup and genesis submission](./docs/step_1.md)
  2. [Network setup, launch and final genesis](../launcher/readme.md) - This step is only executed by Cudos team

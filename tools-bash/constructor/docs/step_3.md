@@ -33,7 +33,7 @@ The content of the node.env should be:
 MONIKER="<TYPE DOWN NODE NAME>"
 PRIVATE_PEERS="<validator node tendermint id>"
 
-SHOULD_USE_GLOBAL_PEERS="false"
+SHOULD_USE_GLOBAL_PEERS="true"
 SHOULD_USE_STATE_SYNC="false"
 
 TLS_ENABLED="false"
@@ -52,7 +52,8 @@ For now we can leave the information about the peers empty.
 **PRIVATE_PEERS** list with the node ID of any Validator nodes on your private network with format: <_tendermint_id_>.
 
 **SHOULD_USE_GLOBAL_PEERS** if the node should try to connect to global peers or not. Should be set to true.
-**SHOULD_USE_STATE_SYNC** if set to true the node will try to sync from a state sync point.
+
+**SHOULD_USE_STATE_SYNC** if set to true the node will try to sync from a state sync point. Should be set to false.
 
 **TLS_ENABLED** this value must be "false"
 
@@ -64,7 +65,7 @@ For now we can leave the information about the peers empty.
 
 **EXTERNAL_ADDRESS** This variable defines the address to advertise to peers for them to dial. It must be the public address of the node plus the 26656 (or any other external number that could be redirected to internal port 26656) port.
 
-**ADDR_BOOK_STRICT** connect only to peers in the address book.
+**ADDR_BOOK_STRICT** stores only public IP address in the book. If set to true then all addresses like 192.168.1.1 will be discarded.
 
 
 ```
@@ -123,7 +124,7 @@ The content of the node.env should be:
 MONIKER="<name of the node>"
 PRIVATE_PEERS=""
 
-SHOULD_USE_GLOBAL_PEERS="false"
+SHOULD_USE_GLOBAL_PEERS="true"
 SHOULD_USE_STATE_SYNC="false"
 
 MONITORING_ENABLED="false"
@@ -137,7 +138,8 @@ ADDR_BOOK_STRICT="true"
 **PRIVATE_PEERS** list with the node ID of any Validator nodes on your private network with format: <_tendermint_id_>.
 
 **SHOULD_USE_GLOBAL_PEERS** if the node should try to connect to global peers or not. Should be set to true.
-**SHOULD_USE_STATE_SYNC** if set to true the node will try to sync from a state sync point.
+
+**SHOULD_USE_STATE_SYNC** if set to true the node will try to sync from a state sync point. Should be set to false.
 
 **TLS_ENABLED** enables TLS. Default false
 
@@ -149,7 +151,7 @@ ADDR_BOOK_STRICT="true"
 
 **EXTERNAL_ADDRESS** This variable defines the address to advertise to peers for them to dial. It must be the public address of the node plus the 26656 (or any other external number that could be redirected to internal port 26656) port.
 
-**ADDR_BOOK_STRICT** connect only to peers in the address book.
+**ADDR_BOOK_STRICT** stores only public IP address in the book. If set to true then all addresses like 192.168.1.1 will be discarded.
 
 For now we can leave the information about the peers empty
 
@@ -261,27 +263,49 @@ Enter the newly copied file with the command below:
 ```
 nano ./tools-bash/constructor/config/start.env
 ```
-Then enter the following:
+Then enter the following based on your case:
 
-It should contain the following. Leave the **PARAMS_SEED** and **PARAM_PERSISTENT_PEERS**. They represent the Cudos peers - you'll need them to connect to the network. Then only change is the following:
-```
-PARAM_PRIVATE_PEER_IDS="<validator_tendermint_id>"
-PARAM_EXPOSE_IP="0.0.0.0"
-```
+- ### **If you are running a validator with sentries (clustered validator):**
 
-**PARAM_PERSISTENT_PEERS** Add the node ID and IP address+port of ALL Sentry nodes on your private network, eg node 3 sentry must connect to Node1 Sentry and Node 2 Sentry
+    It should contain the following:
+    ```
+    PARAM_SEED=""
+    PARAM_PERSISTENT_PEERS="<your sentries>"
+    PARAM_PRIVATE_PEER_IDS="<validator_tendermint_id>"
+    PARAM_EXPOSE_IP="0.0.0.0"
+    ```
 
-**PARAM_SEED** node ID and IP address+port of ALL Seed nodes on your private network, eg Node 3 Seed must connect to node 1 Seed and Node 2 Seed.
+    **PARAM_PERSISTENT_PEERS** Add the node ID and IP address+port of ALL Sentry nodes on your private network, eg node 3 sentry must connect to Node1 Sentry and Node 2 Sentry
 
-**PARAM_EXPOSE_IP** the IP that would be exposed. Default is 0.0.0.0
+    **PARAM_PRIVATE_PEER_IDS** contains the validator tendermint node ID. <em>Example: PARAM_PRIVATE_PEER_IDS="2faaf03451abe212561affffbee119835a4a94ae"</em>
 
-If your validator is running an orchestrator also add:
-```
-PARAM_ORCHESTRATOR_ENV_PATH=""
-PARAM_ORCH_ETH_ADDRESS=""
-```
+    **PARAM_SEED** leave that value EMPTY
 
-You can see the gravity instructions [here](./gravity.md).
+    **PARAM_EXPOSE_IP** the IP that would be exposed. Default is 0.0.0.0
+
+- ### **If you are running a validator without sentries (standalone validator):**
+
+    It should contain the following. Leave the **PARAMS_SEED** and **PARAM_PERSISTENT_PEERS**. They represent the Cudos peers - you'll need them to connect to the network. Then only change is the following:
+    ```
+    PARAM_PRIVATE_PEER_IDS="<validator_tendermint_id>"
+    PARAM_EXPOSE_IP="0.0.0.0"
+    ```
+
+    **PARAM_PRIVATE_PEER_IDS** contains the validator tendermint node ID. <em>Example: PARAM_PRIVATE_PEER_IDS="2faaf03451abe212561affffbee119835a4a94ae"</em>
+
+    **PARAM_EXPOSE_IP** the IP that would be exposed. Default is 0.0.0.0
+
+- ### **If your validator is running an orchestrator also add:**
+    ```
+    PARAM_ORCHESTRATOR_ENV_PATH=""
+    PARAM_ORCH_ETH_ADDRESS=""
+    ```
+
+    **PARAM_ORCHESTRATOR_ENV_PATH** path to the orchestrator's env that will be created according to the gravity instructions below. <em>Example: PARAM_ORCHESTRATOR_ENV_PATH="/home/user/CudosBuilders/tools-back/constructor/config/orchestrator.mainnet.env"</em>
+
+    **PARAM_ORCH_ETH_ADDRESS** eth address whom privatekey is defined in the orchestrator's env (ETH_PRIV_KEY_HEX variable) according to the gravity instructions below. <em>Example: PARAM_ORCH_ETH_ADDRESS="0x2faaf03451abe212561affffbee119835a4a94ae"</em>
+
+    You can see the gravity instructions [here](./gravity.md).
 
 Now you can run
 ```
