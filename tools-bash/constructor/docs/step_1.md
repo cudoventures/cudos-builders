@@ -1,17 +1,24 @@
-# Phase 4 instructions Step 1
+# Constructor Instructions Step 1
 
-This section describes the first steps needed for validator setup as part of the Phase 4 testnet launch.
+This section describes the first steps needed for validator setup as part of the genesis of the Cudos network.
+
+Please note that this process must be run as the root user.
 
 ## Prerequisites
 Check all the needed prerequisites [here](./prerequisites.md).
 ### Setup the environment
-You need to have a local copy of our build tools.Create your main Cudos directory. On the first row you can define where all Cudos data will be stored.
+The constructor script will clone copies of the Cudos repositories into /usr/cudos, so this directory must be empty but present before the script is run.
+Please be aware that the following commands will remove and then recreate the /usr/cudos directory.
 
+```bash
+  rm -rf /usr/cudos
+  mkdir /usr/cudos
 ```
-mkdir /usr/cudos
 
-cd $HOME
-git clone --branch v0.9.0 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
+Clone the CudosBuilders repository into the root home directory
+```bash
+  cd $HOME
+  git clone --branch v0.9.0 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
 ```
 
 ## Nodes initialization
@@ -31,7 +38,8 @@ Enter the newly copied file with the command below:
 ```
 nano ./tools-bash/constructor/config/init.env
 ```
-Then enter the following:
+Fill the parameters as described bellow. Please look at the description for each parameter and fill it based on your needs.
+<p>This is an example content of the file.</p>
 
 ```
 PARAM_SOURCE_DIR="/usr/cudos" 
@@ -42,11 +50,11 @@ PARAM_COMMISSION_MAX_RATE="0.20"
 PARAM_COMMISSION_MAX_CHANGE_RATE="0.01" 
 ```
 
-**PARAM_SOURCE_DIR** is where the repos will be cloned and the binary compiled. It should be an existing and empty folder. 
+**PARAM_SOURCE_DIR** is where the repos will be cloned and the binary compiled. It should be an existing and empty folder. (Please leave set to `/usr/cudos`) 
 
 **PARAM_VALIDATOR_MNEMONIC** is the private key of the account you want to use for your validator.
 
-**PARAM_KEYRING_OS_PASS** is the password of your keyring that you create.
+**PARAM_KEYRING_OS_PASS** is the password that *you must create* that you will use to lock your keystore.
 
 **PARAM_COMMISSION_RATE** is commission rate of the validator. Must be between 0 and the validator's PARAM_COMMISSION_MAX_RATE. The value is in percentage, where 0.10 means 10%.
 
@@ -98,18 +106,18 @@ If you see any additional messages or error please refer to the troubleshooting 
 
 ## Genesis submission
 
-Once your validator is running you should get it's genesis. It is located under ./tools-bash/constructor/exports on your machine. To get the file of the you can use
+Once your validator has been successfully initialised, the genesis gentx file must be sent to Cudo for inclusion in the final genesis.
 
-```
-GENESIS=$(ls $HOME/CudosBuilders/tools-bash/constructor/exports)
-cd ${HOME}/CudosBuilders/tools-bash/constructor/exports
-cat $GENESIS
-```
-Once you get the file contents send them as a **json** file to the Cudos team via email to [services@cudoventures.com](mailto:services@cudoventures.com).
+Please enclose the following:
 
-# Things to keep in mind
-1. The folder you use for a node needs to be created and empty. You will get errors otherwise.
-2. If you are running more than one node on the same server, you might not be able to create the docker because they will try to open the same ports.
+- The result of the md5sum command below
+- The json file in its original state with its original name
+
+```bash
+md5sum ${HOME}/CudosBuilders/tools-bash/constructor/exports/genesis*.json
+```
+
+Please then send the **json** file as an attachment (without changing its name), with the output of the md5sum command in the body, of a mail to the Cudos team at [services@cudoventures.com](mailto:services@cudoventures.com).
 
 <!--
 # Troubleshooting
