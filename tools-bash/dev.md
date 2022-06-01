@@ -1,7 +1,6 @@
 # Merging to cudos-master
 
 Update branch variable in from "cudos-dev" to "v0.9.0".
-Update required free space from 5GB to 500GB
 
 # Debug command
 
