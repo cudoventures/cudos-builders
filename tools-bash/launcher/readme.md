@@ -51,6 +51,7 @@ Clone <em>validator.env.example</em> to <em>validator.mainnet.env</em> (The actu
 1. **ADDR_BOOK_STRICT:** This defines the behaviour of the internal address book. DO NOT MODIFY THIS VALUE. Leave it "true" as it is in the example.
 1. **GRAVITY_MODULE_BALANCE:** DO NOT MODIFY THIS VALUE. Leave it "0" as it is in the example.
 1. **CUDOS_TOKEN_CONTRACT_ADDRESS:** The address of the CUDOS token contract. <em>Example: CUDOS_TOKEN_CONTRACT_ADDRESS="0x12d474723cb8c02bcbf46cd335a3bb4c75e9de44"</em>
+1. **ROOT_VALIDATOR_MNEMONIC:** The address of the CUDOS token contract. <em>Example: ROOT_VALIDATOR_MNEMONIC="word1...word24"</em>
 1. **NUMBER_OF_VALIDATORS:** The number of validator accounts that will be initialized with the primary-validator. DO NOT MODIFY THIS VALUE. Leave it "1" as it is in the example.
 1. **NUMBER_OF_ORCHESTRATORS:** The number of orchestrator accounts that will initialized with the primary-validator. The default value is 3 <em>Example: NUMBER_OF_ORCHESTRATORS="3"</em>
 1. **VALIDATOR_BALANCE:** The amount of staked tokens that each genesis validator will have. <em>Example: VALIDATOR_BALANCE="2000000000000000000000000"</em>
