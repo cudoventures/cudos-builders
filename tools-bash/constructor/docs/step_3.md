@@ -13,7 +13,7 @@ Check all the needed prerequisites [here](./prerequisites.md).
 
 ## Setup of the sentry node
 Log into your sentry node as root.
-### Setup the environment
+### Edit the sentry node configuration files
 The constructor script will clone copies of the Cudos repositories into /usr/cudos, so this directory must be empty but present before the script is run.
 Please be aware that the following commands will remove and then recreate the /usr/cudos directory.
 
@@ -28,7 +28,6 @@ Clone the CudosBuilders repository into the root home directory
   git clone --branch v0.9.0 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
 ```
 
-### Nodes Initialisation
 You should copy the example configuration and setup all needed params
 ```bash
   cd ~/CudosBuilders/tools-bash/constructor
@@ -82,7 +81,7 @@ For now we can leave the information about the peers empty.
 
 **ADDR_BOOK_STRICT** stores only public IP address in the book. If set to true then all addresses like 192.168.1.1 will be discarded.
 
-## Initialise Sentry
+### Initialise Sentry
 
 ```
 ./src/init.sh sentry-node
@@ -111,7 +110,7 @@ Note your node ID. You are going to need it for the next steps of the configurat
 
 ## Setting up seed node
 Log into your seed node as root.
-### Setup the environment
+### Edit the seed node configuration files
 The constructor script will clone copies of the Cudos repositories into /usr/cudos, so this directory must be empty but present before the script is run.
 Please be aware that the following commands will remove and then recreate the /usr/cudos directory.
 
@@ -125,7 +124,6 @@ Clone the CudosBuilders repository into the root home directory
   cd $HOME
   git clone --branch v0.9.0 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
 ```
-### Nodes Initialisation
 You should copy the example configuration and setup all needed params
 
 ```bash
@@ -176,7 +174,7 @@ ADDR_BOOK_STRICT="true"
 
 **ADDR_BOOK_STRICT** stores only public IP address in the book. If set to true then all addresses like 192.168.1.1 will be discarded.
 
-## Initialise Seed
+### Initialise Seed
 
 For now we can leave the information about the peers empty
 
@@ -207,8 +205,6 @@ Initialiazing...DONE
 Note your node ID. You are going to need it for the next steps of the configuration.
 
 ****
-
-## Validator setup
 
 ## Start the sentry, seed, and validator nodes
 
