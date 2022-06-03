@@ -1,4 +1,4 @@
-# Constructor Step 3 instructions
+# Constructor Instructions Step 3
 
 If you executed Step 1 instructions and got the green light from the Cudos team you can proceed with step 3
 which will:
