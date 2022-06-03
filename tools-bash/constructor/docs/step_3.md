@@ -31,7 +31,7 @@ Clone the CudosBuilders repository into the root home directory
 ### Nodes Initialisation
 You should copy the example configuration and setup all needed params
 ```bash
-  cd CudosBuilders/tools-bash/constructor
+  cd ~/CudosBuilders/tools-bash/constructor
   cp ./config/init-peers.env.example ./config/init.env
 ```
 The content of the init.env should be as follows:
@@ -129,7 +129,7 @@ Clone the CudosBuilders repository into the root home directory
 You should copy the example configuration and setup all needed params
 
 ```bash
-cd CudosBuilders/tools-bash/constructor
+cd ~/CudosBuilders/tools-bash/constructor
 cp ./config/init-peers.env.example ./config/init.env
 ```
 The content of the init.env should be as follows:
@@ -181,7 +181,7 @@ ADDR_BOOK_STRICT="true"
 For now we can leave the information about the peers empty
 
 ```
-sudo ./src/init.sh seed-node
+./src/init.sh seed-node
 ```
 
 If you executed this step correctly you should see the following log:
@@ -210,18 +210,19 @@ Note your node ID. You are going to need it for the next steps of the configurat
 
 ## Validator setup
 
-If you successfully submitted your genesis in the previous step of the constructor process your validator node is already initialized and setup. If you deleted your configuration contact Cudos team for support.
-## Start the sentry and seed nodes
+## Start the sentry, seed, and validator nodes
 
 ### Sentry node
+Log into your sentry node as root.
 
 Copy the start-peers.env.example and rename it to start.env. 
-```
-cp ./tools-bash/constructor/config/start-peers.env.example ./tools-bash/constructor/config/start.env
+```bash
+  cd ~/CudosBuilders/tools-bash/constructor
+  cp ./config/start-peers.env.example ./config/start.env
 ```
 Enter the newly copied file with the command below:
 ```
-nano ./tools-bash/constructor/config/start.env
+nano ./config/start.env
 ```
 Leave the **PARAMS_SEED** and **PARAM_PERSISTENT_PEERS**. They represent the Cudos peers - you'll need them to connect to the network. Then only change is the following:
 
@@ -233,18 +234,19 @@ PARAM_EXPOSE_IP="0.0.0.0"
 **PARAM_PRIVATE_PEER_IDS** contains the validator tendermint node ID. <em>Example: PARAM_PRIVATE_PEER_IDS="2faaf03451abe212561affffbee119835a4a94ae"</em>
 
 ```
-sudo ./src/start.sh sentry-node
+./src/start.sh sentry-node
 ```
-NOTE: There may be an error for the Resetting the sentry-node step.
 ### Seed node
+Log into your seed node as root.
 
 Copy the start-peers.env.example and rename it to start.env. 
 ```
-cp ./tools-bash/constructor/config/start-peers.env.example ./tools-bash/constructor/config/start.env
+  cd ~/CudosBuilders/tools-bash/constructor
+  cp ./config/start-peers.env.example ./config/start.env
 ```
 Enter the newly copied file with the command below:
 ```
-nano ./tools-bash/constructor/config/start.env
+nano ./config/start.env
 ```
 Leave the **PARAMS_SEED** and **PARAM_PERSISTENT_PEERS**. They represent the Cudos peers - you'll need them to connect to the network. Then only change is the following:
 
@@ -255,17 +257,13 @@ PARAM_EXPOSE_IP="0.0.0.0"
 
 **PARAM_PRIVATE_PEER_IDS** contains the validator tendermint node ID. <em>Example: PARAM_PRIVATE_PEER_IDS="2faaf03451abe212561affffbee119835a4a94ae"</em>
 
+```bash
+./src/start.sh seed-node
 ```
-sudo ./src/start.sh seed-node
-```
-NOTE: There may be an error for the Resetting the seed-node step.
 
-****
-## Start the validator node
+### Validator node
+Log into your validator node as root.
 
-## Get the genesis
-
-Once the Cudos team has setup their nodes and you've got the green light to continue with this step.
 <!-- you need to make sure you have the correct genesis file. It should be located in the cudos-builders config folder. 
 
 ```
@@ -279,16 +277,18 @@ All the nodes listed bellow need to have the same genesis. Otherwise they won't 
 
 If you want to manualy provide a genesis file for your nodes you need to place it in the <code>$HOME/CudosBuilders/tools-bash/config/genesis.mainnet.json </code>. This step should be executed for every node in the cluster. -->
 
-## Start the node
 To start the validator first setup it's environement. Copy the start.env.example and rename it to start.env. 
+```bash
+  cd ~/CudosBuilders/tools-bash/constructor
+  cp ./config/start-peers.env.example ./config/start.env
 ```
-cp ./tools-bash/constructor/config/start-peers.env.example ./tools-bash/constructor/config/start.env
-```
+
 Enter the newly copied file with the command below:
+```bash
+  nano ./config/start.env
 ```
-nano ./tools-bash/constructor/config/start.env
-```
-Then enter the following based on your case:
+
+*There are now two cases based on your setup, follow the correct instructions depending on if you are running a clustered validator or a standalone validator:*
 
 - ### **If you are running a validator with sentries (clustered validator):**
 
@@ -320,21 +320,24 @@ Then enter the following based on your case:
 
     **PARAM_EXPOSE_IP** the IP that would be exposed. Default is 0.0.0.0
 
-- ### **If your validator is running an orchestrator also add:**
-    ```
-    PARAM_ORCHESTRATOR_ENV_PATH=""
-    PARAM_ORCH_ETH_ADDRESS=""
-    ```
-
-    **PARAM_ORCHESTRATOR_ENV_PATH** path to the orchestrator's env that will be created according to the gravity instructions below. <em>Example: PARAM_ORCHESTRATOR_ENV_PATH="/home/user/CudosBuilders/tools-back/constructor/config/orchestrator.mainnet.env"</em>
-
-    **PARAM_ORCH_ETH_ADDRESS** eth address whom privatekey is defined in the orchestrator's env (ETH_PRIV_KEY_HEX variable) according to the gravity instructions below. <em>Example: PARAM_ORCH_ETH_ADDRESS="0x2faaf03451abe212561affffbee119835a4a94ae"</em>
-
-    You can see the gravity instructions [here](./gravity.md).
-
-Now you can run
+****
+### **FOR CUDO INTERNAL USE: If your validator is running an orchestrator also add:**
 ```
-sudo ./src/start.sh clustered-validator-node
+  PARAM_ORCHESTRATOR_ENV_PATH=""
+  PARAM_ORCH_ETH_ADDRESS=""
+```
+
+**PARAM_ORCHESTRATOR_ENV_PATH** path to the orchestrator's env that will be created according to the gravity instructions below. <em>Example: PARAM_ORCHESTRATOR_ENV_PATH="/home/user/CudosBuilders/tools-back/constructor/config/orchestrator.mainnet.env"</em>
+
+**PARAM_ORCH_ETH_ADDRESS** eth address whom privatekey is defined in the orchestrator's env (ETH_PRIV_KEY_HEX variable) according to the gravity instructions below. <em>Example: PARAM_ORCH_ETH_ADDRESS="0x2faaf03451abe212561affffbee119835a4a94ae"</em>
+
+You can see the gravity instructions [here](./gravity.md).
+****
+
+## Start your validator
+```bash
+cd ~/CudosBuilders/tools-bash/constructor
+./src/start.sh clustered-validator-node
 ```
 
 # Successful run of your nodes
@@ -349,3 +352,5 @@ INF commit synced commit=436F6D6D697449447B5B31313620323139203133382038382032323
 INF committed state app_hash=74DB8A58E1759AEFC24CAEAF58960ABBBBEED91CE88D5ABC9E2A3BFC7F55FF51 height=1 module=state num_txs=0
 INF indexed block height=1 module=txindex
 ```
+
+# Congratulations, you now have a working validator cluster!
