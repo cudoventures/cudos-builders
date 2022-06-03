@@ -196,7 +196,7 @@ for i in $(seq 1 $NUMBER_OF_VALIDATORS); do
     if [ "$i" = "1" ] && [ "$ROOT_VALIDATOR_MNEMONIC" != "" ]; then
         (echo $ROOT_VALIDATOR_MNEMONIC; echo $KEYRING_OS_PASS) | cudos-noded keys add "validator-$i" --recover --keyring-backend os
     else
-        (echo $KEYRING_OS_PASS; echo $KEYRING_OS_PASS) | cudos-noded keys add "validator-$i" --keyring-backend os
+        (echo $KEYRING_OS_PASS; echo $KEYRING_OS_PASS) | cudos-noded keys add "validator-$i" --keyring-backend os |& tee "${CUDOS_HOME}/validator-$i.wallet"
         chmod 600 "${CUDOS_HOME}/validator-$i.wallet"
     fi
     validatorAddress=$(echo $KEYRING_OS_PASS | cudos-noded keys show validator-$i -a --keyring-backend os)
