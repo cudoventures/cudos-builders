@@ -9,7 +9,6 @@ which will:
 ## Prerequisites
 Check all the needed prerequisites [here](./prerequisites.md).
 
-
 ## Setup of the sentry node
 ### Setup the environment
 The constructor script will clone copies of the Cudos repositories into /usr/cudos, so this directory must be empty but present before the script is run.
