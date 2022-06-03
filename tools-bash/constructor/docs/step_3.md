@@ -6,10 +6,13 @@ which will:
 - Setup your sentry
 - Startup the nodes and connect them to the validator
 
+*Please note that this process must be run as the root user on the node being configured.*
+
 ## Prerequisites
 Check all the needed prerequisites [here](./prerequisites.md).
 
 ## Setup of the sentry node
+Log into your sentry node as root.
 ### Setup the environment
 The constructor script will clone copies of the Cudos repositories into /usr/cudos, so this directory must be empty but present before the script is run.
 Please be aware that the following commands will remove and then recreate the /usr/cudos directory.
@@ -79,9 +82,10 @@ For now we can leave the information about the peers empty.
 
 **ADDR_BOOK_STRICT** stores only public IP address in the book. If set to true then all addresses like 192.168.1.1 will be discarded.
 
+## Initialise Sentry
 
 ```
-sudo ./src/init.sh sentry-node
+./src/init.sh sentry-node
 ```
 
 If you executed this step correctly you should see the following log:
@@ -106,19 +110,26 @@ Initialiazing...DONE
 Note your node ID. You are going to need it for the next steps of the configuration.
 
 ## Setting up seed node
+Log into your seed node as root.
 ### Setup the environment
-You need to have a local copy of our build tools.Create your main Cudos directory. On the first row you can define where all Cudos data will be stored.
+The constructor script will clone copies of the Cudos repositories into /usr/cudos, so this directory must be empty but present before the script is run.
+Please be aware that the following commands will remove and then recreate the /usr/cudos directory.
 
-```
-mkdir /usr/cudos
-
-cd $HOME
-git clone --branch v0.9.0 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
-cd CudosBuilders/tools-bash/constructor
+```bash
+  rm -rf /usr/cudos
+  mkdir /usr/cudos
 ```
 
+Clone the CudosBuilders repository into the root home directory
+```bash
+  cd $HOME
+  git clone --branch v0.9.0 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
+```
+### Nodes Initialisation
 You should copy the example configuration and setup all needed params
-```
+
+```bash
+cd CudosBuilders/tools-bash/constructor
 cp ./config/init-peers.env.example ./config/init.env
 ```
 The content of the init.env should be as follows:
@@ -128,7 +139,7 @@ PARAM_SOURCE_DIR="/usr/cudos"
 The directory you create here should exist.
 
 Time to fill the information for the node configuration:
-```
+```bash
 cp ./config/node.env.example ./config/node.env
 ```
 The content of the node.env should be:
@@ -165,6 +176,8 @@ ADDR_BOOK_STRICT="true"
 
 **ADDR_BOOK_STRICT** stores only public IP address in the book. If set to true then all addresses like 192.168.1.1 will be discarded.
 
+## Initialise Seed
+
 For now we can leave the information about the peers empty
 
 ```
@@ -197,7 +210,7 @@ Note your node ID. You are going to need it for the next steps of the configurat
 
 ## Validator setup
 
-If you successfully submitted your genesis in the previous step of Phase 4 your validator node is already initialized and setup. If you deleted your configuration contact Cudos team for support.
+If you successfully submitted your genesis in the previous step of the constructor process your validator node is already initialized and setup. If you deleted your configuration contact Cudos team for support.
 ## Start the sentry and seed nodes
 
 ### Sentry node
