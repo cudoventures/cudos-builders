@@ -111,7 +111,8 @@ totalSupply=$(sum $tmpGenesisPath)
 
 # gravity module balance
 gravityAddress=$(getModuleAddress "$RESULT_GENESIS_PATH" "gravity")
-gravityTotalSupply=$(calculateGravityModuleBalance $totalSupply $bondedTokens)
+initialGravityBalance=$(getAccountBalanceInAcudos "$gravityAddress")
+gravityTotalSupply=$(calculateGravityModuleBalance $totalSupply $initialGravityBalance)
 setAccountBalanceInAcudosWithoutAuthAccount "$RESULT_GENESIS_PATH" "$gravityAddress" "$gravityTotalSupply"
 echo $result > "$RESULT_GENESIS_PATH"
 
