@@ -44,7 +44,7 @@ Prepare the .env based on .env.example. It contains the following variables:
 
 1. **PARAM_SOURCE_DIR:** A dir where repos were initially cloned during initial setup of the node, usually we use something like "/usr/cudos" <em>Example: PARAM_SOURCE_DIR="/usr/cudos"</em>
 1. **PARAM_MODE:** the name of the node that is going to be started. Possible values are: seed-node, sentry-node or validator-node. <em>Example: PARAM_MODE="sentry-node"</em>
-1. **PARAM_NETWORK:** The name of the network that node will be part of. Possible values are: testnet-public, testnet-private, dressrehearsal, local. The later is used only for dev purposes. <em>Example: PARAM_NETWORK="testnet-public"</em>
+1. **PARAM_NETWORK:** The name of the network that node will be part of. Possible values are: testnet-public, testnet-private, mainnet, local. The later is used only for dev purposes. <em>Example: PARAM_NETWORK="testnet-public"</em>
 
 ## Init
 
