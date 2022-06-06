@@ -5,7 +5,7 @@ function sum {
 }
 
 function calculateGravityModuleBalance {
-    python3 -c "import json, sys; print(10000000000000000000000000000 - 134949630643200000000000000 - $1 - $2)"
+    python3 -c "import json, sys; print(10000000000000000000000000000 - 134949630643200000000000000 - $1 + $2)"
 }
 
 function getModuleAddress {
