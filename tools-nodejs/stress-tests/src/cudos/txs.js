@@ -42,12 +42,11 @@ export default async function sendTx(signer, msgType, args, gasLimit) {
     // -------------------------------- sign --------------------------------
 
     const signedTxBytes = signer.provider.sign(txBody, authInfo, signer.account.account_number, signer.privKey);
-    const txRes = (await signer.provider.broadcast(signedTxBytes)).tx_response;
+    const txRes = signer.provider.broadcast(signedTxBytes);
 
-
-    if(txRes.code != 0){
-        throw new Error(`code ${txRes.code}: ${txRes.raw_log}`);
-    }
+    // if(txRes.code != 0){
+    //     throw new Error(`code ${txRes.code}: ${txRes.raw_log}`);
+    // }
 
     return txRes;
 }

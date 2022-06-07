@@ -9,36 +9,44 @@ import { logGeneral, logSuccess } from './utils/logger';
 import { constants, getSigner, getRandomWallets, checkTx } from './cudos/cudosUtils.js';
 import wait from './utils/wait.js';
 
-const provider = new Cosmos(config.REST, config.CHAIN_ID);
-provider.setPath("m/44'/118'/0'/0/0");
-provider.bech32MainPrefix = 'cudos';
-provider.gasPrice = config.GAS_PRICE;
-let signer = await getSigner(provider, config.FAUCET_MNEMONIC);
+const providers = [];
+
+for (let endpoint of config.REST_ENDPOINTS) {
+    const provider = new Cosmos(endpoint, config.CHAIN_ID);
+    provider.setPath("m/44'/118'/0'/0/0");
+    provider.bech32MainPrefix = 'cudos';
+    provider.gasPrice = config.GAS_PRICE;
+
+    providers.push(provider);
+}
+
 
 const baseConfig = {
-    provider,
+    providers,
     faucetMnemonic: config.FAUCET_MNEMONIC,
     blockTime: config.BLOCK_TIME,
     gasPrice: config.GAS_PRICE,
-    rest: config.REST,
+    rest_endpoints: config.REST_ENDPOINTS,
 }
 
-logGeneral("Funding wallets from faucet...");
-const testWallets = await getRandomWallets(provider, 3);
-const fundRes = await sendTx(
-    signer, 
-    bankSendMsg, 
-    {
-        destinationAddresses: testWallets.map(w => w.address), 
-        denom: 'acudos', 
-        amount: '1000000000000000000000000000'
-    },
-    constants.GAS_LIMITS.BANK_SEND
-);
 
-await wait(35, '');
-checkTx(provider.url, fundRes);
-logSuccess('Wallets funded!');
+// let signer = await getSigner(providers[0], config.FAUCET_MNEMONIC);
+// logGeneral("Funding wallets from faucet...");
+// const testWallets = await getRandomWallets(provider, 3);
+// const fundRes = await sendTx(
+//     signer, 
+//     bankSendMsg, 
+//     {
+//         destinationAddresses: testWallets.map(w => w.address), 
+//         denom: 'acudos', 
+//         amount: '1000000000000000000000000000'
+//     },
+//     constants.GAS_LIMITS.BANK_SEND
+// );
+
+// await wait(35, '');
+// checkTx(provider.url, fundRes);
+// logSuccess('Wallets funded!');
 
 if(config.GRAVITY_TESTING) {
     baseConfig.faucetMnemonic = testWallets[0].mnemonic;
@@ -51,6 +59,6 @@ if(config.IBC_TESTING) {
 }
 
 if(config.GENERAL_TESTING) {
-    baseConfig.faucetMnemonic = testWallets[2].mnemonic;
+    // baseConfig.faucetMnemonic = testWallets[2].mnemonic;
     loadTest(baseConfig, config.GENERAL);
 }
