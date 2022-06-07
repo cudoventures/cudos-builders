@@ -29,12 +29,15 @@ fi;
 orchestratorAddress=$(docker container exec "$validatorStartContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded keys show orchestrator -a --keyring-backend os");
 
 dockerResult=$(docker container exec "$validatorStartContainerName" /bin/bash -c "(echo \"$PARAM_KEYRING_OS_PASS\") | cudos-noded tx gravity set-orchestrator-address \"$validatorOperatorAddress\" \"$orchestratorAddress\" \"$PARAM_ORCH_ETH_ADDRESS\" --from validator --keyring-backend os --chain-id cudos-1 --gas-prices 5000000000000acudos -y" 2>&1);
-transactionHeight=$(echo "$dockerResult" | jq '.height')
-transactionHeight=${transactionHeight//\"/}
-if [ "$?" != 0 ] || [ "$transactionHeight" = "0" ] || [[ "$dockerResult" =~ .*"failed".* ]]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error setting the orchestrator address $?: ${dockerResult}";
-    exit 1;
-fi;
+if [[ "$dockerResult" != *"can not set orchestrator addresses more than once"* ]]; then
+    transactionHeight=$(echo "$dockerResult" | jq -e '.height' 2>&1)
+    errorCode="$?"
+    transactionHeight=${transactionHeight//\"/}
+    if [ "$errorCode" != 0 ] || [ "$transactionHeight" = "0" ] || [[ "$dockerResult" =~ .*"failed".* ]]; then
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There was an error setting the orchestrator address $errorCode: ${dockerResult}";
+        exit 1;
+    fi;
+fi
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 echo -ne "Starting the orchestrator...";
