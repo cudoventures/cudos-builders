@@ -27,7 +27,7 @@ const envVariables = [
     'CHAIN_ID',
     'BLOCK_TIME',
     'GAS_PRICE',
-    'REST',
+    'REST_ENDPOINTS',
     'FAUCET_MNEMONIC',
 ];
 
@@ -46,6 +46,7 @@ const IBC = IBC_TESTING ? getIbcConfig() : null;
 const GRAVITY = GRAVITY_TESTING ? getGravityConfig() : null;
 const GENERAL = GENERAL_TESTING ? getGeneralTestingConfig() : null;
 const FAUCET_MNEMONIC = process.env.FAUCET_MNEMONIC.replaceAll("\"", '');
+const REST_ENDPOINTS = process.env.REST_ENDPOINTS.split(',');
 
 export default {
     IBC_TESTING,
@@ -54,7 +55,7 @@ export default {
     CHAIN_ID: process.env.CHAIN_ID,
     BLOCK_TIME: process.env.BLOCK_TIME,
     GAS_PRICE: process.env.GAS_PRICE,
-    REST: process.env.REST,
+    REST_ENDPOINTS,
     FAUCET_MNEMONIC,
     IBC,
     GRAVITY,

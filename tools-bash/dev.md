@@ -1,6 +1,6 @@
 # Merging to cudos-master
 
-Update branch variable in from "cudos-dev" to "v0.9.0".
+Update branch variable in from "cudos-dev" to "v1.0.0".
 
 # Debug command
 
@@ -10,7 +10,7 @@ sudo rm -rf ../../../CudosConstruct/* && (sudo rm -rf ../../../CudosConstruct/.*
 
 # Launcher
 
-Upgrade NormTimePassed
-Upgrade total minted moins in gravity module's balance calculation
-CudosAccessControl address for mainnet
-Version to 1.0.0
+Upgrade NormTimePassed (done)
+Upgrade total minted moins in gravity module's balance calculation (done)
+CudosAccessControl address for mainnet (done)
+Version to 1.0.0 (done)
