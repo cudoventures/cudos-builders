@@ -1,6 +1,6 @@
 # Merging to cudos-master
 
-Update branch variable in from "cudos-dev" to "v0.9.0".
+Update branch variable in from "cudos-dev" to "v1.0.0".
 
 # Debug command
 

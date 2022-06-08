@@ -183,7 +183,7 @@ genesisJson=$(jq ".app_state.gravity.params.minimum_fee_transfer_to_eth = \"1200
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 
 # mint params
-genesisJson=$(jq ".app_state.cudoMint.minter.norm_time_passed = \"0.9678829209\"" "${CUDOS_HOME}/config/genesis.json")
+genesisJson=$(jq ".app_state.cudoMint.minter.norm_time_passed = \"0.53172694105988\"" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 
 # create zero account
