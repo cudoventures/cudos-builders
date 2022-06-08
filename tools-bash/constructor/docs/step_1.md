@@ -18,7 +18,7 @@ Please be aware that the following commands will remove and then recreate the /u
 Clone the CudosBuilders repository into the root home directory
 ```bash
   cd $HOME
-  git clone --branch v0.9.0 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
+  git clone --branch v1.0.0 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
 ```
 
 ## Nodes initialization
