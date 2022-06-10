@@ -38,7 +38,7 @@ do
     freeSpaceInKiB=$(ssh -o "StrictHostKeyChecking no" ${user}@${ip} -p ${port} "df -P \"$PARAM_SOURCE_DIR\" | tail -1 | awk '{print \$4}'")
     freeSpaceRequirementInKiB=500000000
     if (( freeSpaceInKiB < freeSpaceRequirementInKiB )); then
-        echo -e "${STYLE_ORANGE}Warning:${STYLE_DEFAULT} The instance $ip:$port has less than $freeSpaceRequirementInKiB KiB free space available (Available = $freeSpaceInKiB KiB)...";
+        echo -ne "${STYLE_ORANGE}Warning:${STYLE_DEFAULT} The instance $ip:$port has less than $freeSpaceRequirementInKiB KiB free space available (Available = $freeSpaceInKiB KiB)...";
         # exit 1;
     fi
 done
