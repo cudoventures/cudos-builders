@@ -10,6 +10,10 @@ adminDataGenesisPath="/tmp/genesis.admin.json"
 # copy to result genesis location
 cp "$rootGenesisPath" "$RESULT_GENESIS_PATH"
 
+# get address of 0th account
+zeroAccountAddress=$(jq ".app_state.auth.accounts | map(select(.account_number == \"0\") | .address) | .[0]" "$RESULT_GENESIS_PATH")
+zeroAccountAddress=${zeroAccountAddress//\"/}
+
 source "$WORKING_SRC_DIR/modules/merge-root-genesis.sh"
 
 source "$WORKING_SRC_DIR/modules/merge-client-genesises.sh"
@@ -74,14 +78,16 @@ if [ "$PARAM_STATIC_VAL_COSMOS_ADDRS" != "" ]; then
     echo $result > "$RESULT_GENESIS_PATH"
 fi
 
-result=$(jq ".app_state.auth.accounts = [.app_state.auth.accounts[] | if (.\"@type\" == \"/cosmos.auth.v1beta1.ModuleAccount\") then (.base_account.account_number = \"0\") else . end]" "$RESULT_GENESIS_PATH")
+result=$(jq ".app_state.auth.accounts = [.app_state.auth.accounts[] | if (.\"@type\" == \"/cosmos.auth.v1beta1.ModuleAccount\") then (.base_account.account_number = \"1\") else . end]" "$RESULT_GENESIS_PATH")
 echo $result > "$RESULT_GENESIS_PATH"
 result=$(jq ".app_state.auth.accounts = [.app_state.auth.accounts[] | if (.\"@type\" == \"/cosmos.auth.v1beta1.ModuleAccount\") then (.base_account.sequence = \"0\") else . end]" "$RESULT_GENESIS_PATH")
 echo $result > "$RESULT_GENESIS_PATH"
 result=$(jq ".app_state.auth.accounts = [.app_state.auth.accounts[] | if (.\"@type\" == \"/cosmos.auth.v1beta1.ModuleAccount\") then (.base_account.pub_key = null) else . end]" "$RESULT_GENESIS_PATH")
 echo $result > "$RESULT_GENESIS_PATH"
 
-result=$(jq ".app_state.auth.accounts = [.app_state.auth.accounts[] | if (.\"@type\" == \"/cosmos.auth.v1beta1.BaseAccount\") then (.account_number = \"0\") else . end]" "$RESULT_GENESIS_PATH")
+result=$(jq ".app_state.auth.accounts = [.app_state.auth.accounts[] | if (.\"@type\" == \"/cosmos.auth.v1beta1.BaseAccount\") then (.account_number = \"1\") else . end]" "$RESULT_GENESIS_PATH")
+echo $result > "$RESULT_GENESIS_PATH"
+result=$(jq ".app_state.auth.accounts = [.app_state.auth.accounts[] | if (.\"address\" == \"$zeroAccountAddress\") then (.account_number = \"0\") else . end]" "$RESULT_GENESIS_PATH")
 echo $result > "$RESULT_GENESIS_PATH"
 # result=$(jq ".app_state.auth.accounts = [.app_state.auth.accounts[] | if (.\"@type\" == \"/cosmos.auth.v1beta1.BaseAccount\") then (.sequence = \"0\") else . end]" "$RESULT_GENESIS_PATH")
 # echo $result > "$RESULT_GENESIS_PATH"
