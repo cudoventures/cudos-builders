@@ -46,7 +46,7 @@ if [ "$PARAM_ETHERSCAN_API_KEY" = "" ]; then
     exit 1
 fi
 
-walletBalanceJson=$(curl -X POST http://34.136.167.17:8545 -H "Content-Type: application/json" --data "{\"jsonrpc\": \"2.0\", \"method\": \"eth_getBalance\", \"params\": [\"$PARAM_CONTRACT_DEPLOYER_ETH_ADDRESS\", \"latest\"], \"id\": 1}" 2> /dev/null)
+walletBalanceJson=$(curl -X POST "$PARAM_ETH_RPC" -H "Content-Type: application/json" --data "{\"jsonrpc\": \"2.0\", \"method\": \"eth_getBalance\", \"params\": [\"$PARAM_CONTRACT_DEPLOYER_ETH_ADDRESS\", \"latest\"], \"id\": 1}" 2> /dev/null)
 walletBalanceHex=$(echo "$walletBalanceJson" | jq .result)
 walletBalanceHex=${walletBalanceHex//\"/}
 if [ "$walletBalanceHex" = "" ] || (($walletBalanceHex < 50000000000000000)); then
