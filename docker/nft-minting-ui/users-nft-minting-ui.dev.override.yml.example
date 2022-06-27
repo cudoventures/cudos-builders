@@ -1,7 +1,7 @@
 version: '3.1'
 
 services:
-  cudos-nft-minting-dev:
+  cudos-nft-minting-ui-dev:
     build:
       args:
         USER_ID: '0'

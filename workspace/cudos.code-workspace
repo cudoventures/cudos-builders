@@ -16,7 +16,7 @@
 			"path": "./CudosGravityBridgeUI"
 		},
 		{
-			"path": "./CudosNftMinting"
+			"path": "./CudosNftMintingUI"
 		},
 		{
 			"path": "./CudosExplorer"

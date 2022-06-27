@@ -5,11 +5,11 @@ networks:
     name: shared-cudos-network
 
 services:
-  cudos-nft-minting-dev:
-    image: cudos-nft-minting-dev
-    container_name: cudos-nft-minting-dev
+  cudos-nft-minting-ui-dev:
+    image: cudos-nft-minting-ui-dev
+    container_name: cudos-nft-minting-ui-dev
     build:
-      dockerfile: CudosBuilders/docker/nft-minting/nft-minting.dev.dockerfile
+      dockerfile: CudosBuilders/docker/nft-minting-ui/nft-minting-ui.dev.dockerfile
       context: ../../../
       args:
         args:
@@ -20,7 +20,7 @@ services:
         ENV_FILE: "$ENV_FILE"
     restart: unless-stopped
     volumes:
-      - '../../../CudosNftMinting:/usr/src/nft-minting'
+      - '../../../CudosNftMintingUI:/usr/src/nft-minting-ui'
       - '/usr/src/nft-minting/node_modules'
     ports:
       - "4001:4001"

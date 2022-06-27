@@ -14,15 +14,13 @@ RUN if [ $USER_NAME != 'root' ]; then \
         useradd --no-log-init --create-home --shell /bin/bash --uid ${USER_ID} --gid ${GROUP_ID} ${USER_NAME}; \
     fi
 
-COPY ./CudosBuilders/docker/nft-minting/$ENV_FILE /tmp/.env
-
-# RUN apk add --update alpine-sdk
+COPY ./CudosBuilders/docker/nft-minting-ui/$ENV_FILE /tmp/.env
 
 RUN chown ${USER_NAME}:${GROUP_NAME} /tmp/.env && \
-    mkdir -p /usr/src/nft-minting/node_modules && \
-    chown -R ${USER_NAME}:${GROUP_NAME} /usr/src/nft-minting/node_modules
+    mkdir -p /usr/src/nft-minting-ui/node_modules && \
+    chown -R ${USER_NAME}:${GROUP_NAME} /usr/src/nft-minting-ui/node_modules
 
-WORKDIR /usr/src/nft-minting
+WORKDIR /usr/src/nft-minting-ui
 
 USER ${USER_NAME}
 

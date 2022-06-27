@@ -5,11 +5,11 @@ networks:
     name: shared-cudos-network
 
 services:
-  cudos-nft-minting-release:
-    image: cudos-nft-minting-release
-    container_name: cudos-nft-minting-release
+  cudos-nft-minting-ui-release:
+    image: cudos-nft-minting-ui-release
+    container_name: cudos-nft-minting-ui-release
     build:
-      dockerfile: CudosBuilders/docker/nft-minting/nft-minting.release.dockerfile
+      dockerfile: CudosBuilders/docker/nft-minting-ui/nft-minting-ui.release.dockerfile
       context: ../../../
       args:
         ENV_FILE: "$ENV_FILE"

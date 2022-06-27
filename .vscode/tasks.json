@@ -920,79 +920,79 @@
 
 
 
-        // Nft Minting dev
+        // Nft Minting UI dev
         {
-            "label": "Start NFT MINTING DEV in docker",
-            "command": "cd ./docker/nft-minting&& docker-compose --env-file ./nft-minting.dev.arg -f ./nft-minting.dev.yml -f ./users-nft-minting.dev.override.yml -p cudos-nft-minting-dev up",
+            "label": "Start NFT MINTING UI DEV in docker",
+            "command": "cd ./docker/nft-minting-ui&& docker-compose --env-file ./nft-minting-ui.dev.arg -f ./nft-minting-ui.dev.yml -f ./users-nft-minting-ui.dev.override.yml -p cudos-nft-minting-ui-dev up",
             "type": "shell",
             "group": "build"
         },
         {
-            "label": "Build NFT MINTING DEV in docker",
-            "command": "cd ./docker/nft-minting&& docker-compose --env-file ./nft-minting.dev.arg -f ./nft-minting.dev.yml -f ./users-nft-minting.dev.override.yml -p cudos-nft-minting-dev up --build",
+            "label": "Build NFT MINTING UI DEV in docker",
+            "command": "cd ./docker/nft-minting-ui&& docker-compose --env-file ./nft-minting-ui.dev.arg -f ./nft-minting-ui.dev.yml -f ./users-nft-minting-ui.dev.override.yml -p cudos-nft-minting-ui-dev up --build",
             "type": "shell",
             "group": "build"
         },
         {
-            "label": "Destroy NFT MINTING DEV in docker",
-            "command": "cd ./docker/nft-minting&& docker-compose --env-file ./nft-minting.dev.arg -f ./nft-minting.dev.yml -f ./users-nft-minting.dev.override.yml -p cudos-nft-minting-dev down",
+            "label": "Destroy NFT MINTING UI DEV in docker",
+            "command": "cd ./docker/nft-minting-ui&& docker-compose --env-file ./nft-minting-ui.dev.arg -f ./nft-minting-ui.dev.yml -f ./users-nft-minting-ui.dev.override.yml -p cudos-nft-minting-ui-dev down",
             "type": "shell",
             "group": "build"
         },
-        // Nft Minting testnet private
+        // Nft Minting UI testnet private
         {
-            "label": "Start NFT MINTING TESTNET PRIVATE in docker",
-            "command": "cd ./docker/nft-minting&& docker-compose --env-file ./nft-minting.testnet.private.arg -f ./nft-minting.release.yml -p cudos-nft-minting-testnet-private up",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Build NFT MINTING TESTNET PRIVATE in docker",
-            "command": "cd ./docker/nft-minting&& docker-compose --env-file ./nft-minting.testnet.private.arg -f ./nft-minting.release.yml -p cudos-nft-minting-testnet-private up --build",
+            "label": "Start NFT MINTING TESTNET UI PRIVATE in docker",
+            "command": "cd ./docker/nft-minting-ui&& docker-compose --env-file ./nft-minting-ui.testnet.private.arg -f ./nft-minting-ui.release.yml -p cudos-nft-minting-ui-testnet-private up",
             "type": "shell",
             "group": "build"
         },
         {
-            "label": "Destroy NFT MINTING TESTNET PRIVATE in docker",
-            "command": "cd ./docker/nft-minting&& docker-compose --env-file ./nft-minting.testnet.private.arg -f ./nft-minting.release.yml -p cudos-nft-minting-testnet-private down",
-            "type": "shell",
-            "group": "build"
-        },
-        // Nft Minting testnet public
-        {
-            "label": "Start NFT MINTING TESTNET PUBLIC in docker",
-            "command": "cd ./docker/nft-minting&& docker-compose --env-file ./nft-minting.testnet.public.arg -f ./nft-minting.release.yml -p cudos-nft-minting-testnet-public up",
+            "label": "Build NFT MINTING TESTNET UI PRIVATE in docker",
+            "command": "cd ./docker/nft-minting-ui&& docker-compose --env-file ./nft-minting-ui.testnet.private.arg -f ./nft-minting-ui.release.yml -p cudos-nft-minting-ui-testnet-private up --build",
             "type": "shell",
             "group": "build"
         },
         {
-            "label": "Build NFT MINTING TESTNET PUBLIC in docker",
-            "command": "cd ./docker/nft-minting&& docker-compose --env-file ./nft-minting.testnet.public.arg -f ./nft-minting.release.yml -p cudos-nft-minting-testnet-public up --build",
+            "label": "Destroy NFT MINTING TESTNET UI PRIVATE in docker",
+            "command": "cd ./docker/nft-minting-ui&& docker-compose --env-file ./nft-minting-ui.testnet.private.arg -f ./nft-minting-ui.release.yml -p cudos-nft-minting-ui-testnet-private down",
+            "type": "shell",
+            "group": "build"
+        },
+        // Nft Minting UI testnet public
+        {
+            "label": "Start NFT MINTING TESTNET UI PUBLIC in docker",
+            "command": "cd ./docker/nft-minting-ui&& docker-compose --env-file ./nft-minting-ui.testnet.public.arg -f ./nft-minting-ui.release.yml -p cudos-nft-minting-ui-testnet-public up",
             "type": "shell",
             "group": "build"
         },
         {
-            "label": "Destroy NFT MINTING TESTNET PUBLIC in docker",
-            "command": "cd ./docker/nft-minting&& docker-compose --env-file ./nft-minting.testnet.public.arg -f ./nft-minting.release.yml -p cudos-nft-minting-testnet-public down",
-            "type": "shell",
-            "group": "build"
-        },
-        // Nft Minting mainnet
-        {
-            "label": "Start NFT MINTING MAINNET in docker",
-            "command": "cd ./docker/nft-minting&& docker-compose --env-file ./nft-minting.mainnet.arg -f ./nft-minting.release.yml -p cudos-nft-minting-mainnet up",
+            "label": "Build NFT MINTING TESTNET UI PUBLIC in docker",
+            "command": "cd ./docker/nft-minting-ui&& docker-compose --env-file ./nft-minting-ui.testnet.public.arg -f ./nft-minting-ui.release.yml -p cudos-nft-minting-ui-testnet-public up --build",
             "type": "shell",
             "group": "build"
         },
         {
-            "label": "Build NFT MINTING MAINNET in docker",
-            "command": "cd ./docker/nft-minting&& docker-compose --env-file ./nft-minting.mainnet.arg -f ./nft-minting.release.yml -p cudos-nft-minting-mainnet up --build",
+            "label": "Destroy NFT MINTING TESTNET UI PUBLIC in docker",
+            "command": "cd ./docker/nft-minting-ui&& docker-compose --env-file ./nft-minting-ui.testnet.public.arg -f ./nft-minting-ui.release.yml -p cudos-nft-minting-ui-testnet-public down",
+            "type": "shell",
+            "group": "build"
+        },
+        // Nft Minting UI mainnet
+        {
+            "label": "Start NFT MINTING UI MAINNET in docker",
+            "command": "cd ./docker/nft-minting-ui&& docker-compose --env-file ./nft-minting-ui.mainnet.arg -f ./nft-minting-ui.release.yml -p cudos-nft-minting-ui-mainnet up",
             "type": "shell",
             "group": "build"
         },
         {
-            "label": "Destroy NFT MINTING MAINNET in docker",
-            "command": "cd ./docker/nft-minting&& docker-compose --env-file ./nft-minting.mainnet.arg -f ./nft-minting.release.yml -p cudos-nft-minting-mainnet down",
+            "label": "Build NFT MINTING UI MAINNET in docker",
+            "command": "cd ./docker/nft-minting-ui&& docker-compose --env-file ./nft-minting-ui.mainnet.arg -f ./nft-minting-ui.release.yml -p cudos-nft-minting-ui-mainnet up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Destroy NFT MINTING UI MAINNET in docker",
+            "command": "cd ./docker/nft-minting-ui&& docker-compose --env-file ./nft-minting-ui.mainnet.arg -f ./nft-minting-ui.release.yml -p cudos-nft-minting-ui-mainnet down",
             "type": "shell",
             "group": "build"
         },
