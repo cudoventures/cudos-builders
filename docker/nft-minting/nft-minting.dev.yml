@@ -1,0 +1,33 @@
+version: '3.1'
+
+networks:
+  shared-cudos-network:
+    name: shared-cudos-network
+
+services:
+  cudos-nft-minting-dev:
+    image: cudos-nft-minting-dev
+    container_name: cudos-nft-minting-dev
+    build:
+      dockerfile: CudosBuilders/docker/nft-minting/nft-minting.dev.dockerfile
+      context: ../../../
+      args:
+        args:
+        USER_ID: "0"
+        USER_NAME: "root"
+        GROUP_ID: "0"
+        GROUP_NAME: "root"
+        ENV_FILE: "$ENV_FILE"
+    restart: unless-stopped
+    volumes:
+      - '../../../CudosNftMinting:/usr/src/nft-minting'
+      - '/usr/src/nft-minting/node_modules'
+    ports:
+      - "4001:4001"
+    networks:
+      - shared-cudos-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "128m"
+        max-file: "1"
