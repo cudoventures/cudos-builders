@@ -13,6 +13,7 @@ chain:
         - distribution
         - cosmwasm
         - gravity
+        - cudomint
 node:
     type: remote
     config:
@@ -57,3 +58,12 @@ distribution:
 workers:
     - name: fix_blocks_worker
       interval: 60m
+cudomint:
+    eth_node: https://rpc.ankr.com/eth
+    token_address: 0x817bbDbC3e8A1204f3691d14bB44992841e3dB35
+    eth_accounts:
+        - 0xe4422BCDc20E93014F67b73d4120b878c4246804
+        - 0x03638Df94502181386a9A8b0382652D6Ab3E5B08
+        - 0x5F321d2ED6772B64d33Fce6942504cdCAB1Ca1da
+        - 0x924A59d9EBE85E37Ef9Fd56714F00094395EABa3
+        - 0xb3ccb8FB2533E51893915908CEb85763CeaeA97b
