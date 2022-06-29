@@ -21,7 +21,6 @@ services:
     restart: unless-stopped
     volumes:
       - '../../../CudosNftMintingUI:/usr/src/nft-minting-ui'
-      - '/usr/src/nft-minting/node_modules'
     ports:
       - "4001:4001"
     networks:
