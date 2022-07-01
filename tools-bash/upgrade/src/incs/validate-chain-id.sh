@@ -19,6 +19,8 @@ fi
 if [ "$NETWORK_TESTNET_PUBLIC" = "true" ]; then
     if [ "$UPDATE_FROM_VERSION" = "v0.4.0" ]; then
         CURRENT_CHAIN_ID="cudos-testnet-public-2"
+    elif [ "$UPDATE_FROM_VERSION" = "v0.8.0" ]; then
+        CURRENT_CHAIN_ID="cudos-testnet-public-3"
     fi
 fi
 

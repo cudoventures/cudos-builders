@@ -35,6 +35,8 @@ if [ "$USE_PREDEFINED_GENESIS" = "false" ]; then
     elif [ "$UPDATE_FROM_VERSION" = "v0.6.0" ] && [ "$UPDATE_TO_VERSION" = "v0.8.0" ]; then
         # no need to execute cudos-noded migrate because there is not need for it from v0.44 to v0.45
         source "$WORKING_SRC_VERSIONS_DIR/genesis-0.6-0.8.sh"
+    elif [ "$UPDATE_FROM_VERSION" = "v0.8.0" ] && [ "$UPDATE_TO_VERSION" = "v1.1.0" ]; then
+        source "$WORKING_SRC_VERSIONS_DIR/genesis-0.8-1.1.sh"
     fi
 
     \cp -f "$WORKING_MIGRATE_DIR/genesis.migrated.json" "$VOLUME_PATH/config/genesis.json"
