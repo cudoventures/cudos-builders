@@ -13,6 +13,7 @@ Let denote the parent directory of all projects <code>parentDir</code>. Its name
     - /parentDir/CudosNode
     - /parentDir/CudosGravityBridge
     - /parentDir/CudosGravityBridgeUI
+    - /parentDir/CudosNftMinting
     - /parentDir/CudosExplorer
     - /parentDir/CudosFaucet
     - /parentDir/CudosData

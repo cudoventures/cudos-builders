@@ -1,0 +1,25 @@
+version: '3.1'
+
+networks:
+  shared-cudos-network:
+    name: shared-cudos-network
+
+services:
+  cudos-nft-minting-ui-release:
+    image: cudos-nft-minting-ui-release
+    container_name: cudos-nft-minting-ui-release
+    build:
+      dockerfile: CudosBuilders/docker/nft-minting-ui/nft-minting-ui.release.dockerfile
+      context: ../../../
+      args:
+        ENV_FILE: "$ENV_FILE"
+    restart: unless-stopped
+    ports:
+      - "4001:4001"
+    networks:
+      - shared-cudos-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "128m"
+        max-file: "1"

@@ -40,7 +40,7 @@ if [ "$PARAM_NETWORK" = "testnet-private" ]; then
 elif [ "$PARAM_NETWORK" = "testnet-public" ]; then
     REPO_BRANCH="v0.9.0"
 elif [ "$PARAM_NETWORK" = "mainnet" ]; then
-    REPO_BRANCH="v0.9.0"
+    REPO_BRANCH="v1.0.0"
 elif [ "$PARAM_NETWORK" = "local" ]; then
     REPO_BRANCH="cudos-dev"
 fi

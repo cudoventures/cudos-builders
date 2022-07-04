@@ -5,9 +5,6 @@ if [ "$networkIdentified" = "true" ]; then
     if [ "$NETWORK_MAINNET" = "true" ]; then
         echo -ne "${STYLE_BOLD} MAINNET ${STYLE_DEFAULT}"
     fi
-    if [ "$NETWORK_DRESSREHEARSAL" = "true" ]; then
-        echo -ne "${STYLE_BOLD} DRESSREHEARSAL ${STYLE_DEFAULT}"
-    fi
     if [ "$NETWORK_TESTNET_PRIVATE" = "true" ]; then
         echo -ne "${STYLE_BOLD} TESTNET PRIVATE ${STYLE_DEFAULT}"
     fi
