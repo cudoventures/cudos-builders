@@ -3,7 +3,7 @@
 cd ${OSMOSIS_HOME}
 rm ${OSMOSIS_HOME}/config/genesis.json
 
-osmosisd init cudos-test-node --chain-id=osmo-test-4 --home $OSMOSIS_HOME
+osmosisd init osmosis-test-node --chain-id=osmo-test-4 --home $OSMOSIS_HOME
 
 echo "Setting up config.toml"
 sed -i "s/seeds = \".*\"/seeds = \"$SEEDS\"/g" "${OSMOSIS_HOME}/config/config.toml"

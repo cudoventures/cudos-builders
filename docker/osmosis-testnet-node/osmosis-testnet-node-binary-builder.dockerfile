@@ -19,7 +19,7 @@ WORKDIR ${OSMOSIS_HOME}
 
 RUN git clone https://github.com/osmosis-labs/osmosis && \
     cd osmosis && \
-    git checkout V10.0.0-testnet && \
+    git checkout v10.0.0-testnet && \
     make install
 
 CMD ["sleep", "infinity"]
