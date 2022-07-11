@@ -59,6 +59,8 @@ distribution:
 workers:
     - name: fix_blocks_worker
       interval: 60m
+    - name: migrate_nfts_worker
+      interval: 1m
 cudomint:
     eth_node: https://rpc.ankr.com/eth
     token_address: 0x817bbDbC3e8A1204f3691d14bB44992841e3dB35
