@@ -7,8 +7,8 @@ ARG GROUP_NAME
 ARG OSMOSIS_HOME
 
 RUN if [ $USER_NAME != 'root' ]; then \
-        addgroup -gid ${GROUP_ID} $GROUP_NAME; \
-        adduser --disabled-password -gecos "" -uid ${USER_ID} -gid ${GROUP_ID} ${USER_NAME}; \
+    addgroup -gid ${GROUP_ID} $GROUP_NAME; \
+    adduser --disabled-password -gecos "" -uid ${USER_ID} -gid ${GROUP_ID} ${USER_NAME}; \
     fi
 
 RUN apt-get update
@@ -19,7 +19,7 @@ WORKDIR ${OSMOSIS_HOME}
 
 RUN git clone https://github.com/osmosis-labs/osmosis && \
     cd osmosis && \
-    git checkout v7.0.3 && \
+    git checkout v10.0.0-testnet && \
     make install
 
 CMD ["sleep", "infinity"]
