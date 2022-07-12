@@ -11,6 +11,7 @@ chain:
         - staking
         - distribution
         - pricefeed
+        - history
         - cosmwasm
         - gravity
         - cudomint
