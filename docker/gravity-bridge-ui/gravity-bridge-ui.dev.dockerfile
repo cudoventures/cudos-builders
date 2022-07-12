@@ -1,5 +1,4 @@
-
-FROM node:15.14-buster
+FROM node:16-buster
 
 ARG USER_ID
 ARG USER_NAME
@@ -26,4 +25,4 @@ WORKDIR /usr/src/gravity-bridge-ui
 
 USER ${USER_NAME}
 
-CMD ["/bin/bash", "-c", "mv /tmp/.env ./config/.env && npm i && npm run dev"] 
+CMD ["/bin/bash", "-c", "cp /tmp/.env ./config/.env && npm i && npm run dev"] 
