@@ -25,6 +25,8 @@ services:
       - "4001:4001"
     networks:
       - shared-cudos-network
+    extra_hosts:
+    - "host.docker.internal:host-gateway"
     logging:
       driver: "json-file"
       options:
