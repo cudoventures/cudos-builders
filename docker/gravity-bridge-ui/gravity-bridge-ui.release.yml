@@ -5,9 +5,9 @@ networks:
     name: shared-cudos-network
 
 services:
-  cudos-gravity-bridge-ui-testnet-private:
-    image: cudos-gravity-bridge-ui-testnet-private
-    container_name: cudos-gravity-bridge-ui-testnet-private
+  cudos-gravity-bridge-ui:
+    image: cudos-gravity-bridge-ui
+    container_name: cudos-gravity-bridge-ui
     build:
       dockerfile: CudosBuilders/docker/gravity-bridge-ui/gravity-bridge-ui.release.dockerfile
       context: ../../../
