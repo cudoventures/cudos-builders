@@ -10,8 +10,8 @@ if [ "$OPEN_ALL_PORTS" = "true" ]; then
 
     # port 26657
     # enable
-    sed -i "/\[rpc\]/,/\[/ s/laddr = \".*\"/laddr = \"tcp:\/\/0.0.0.0:26657\"/" "${CUDOS_HOME}/config/config.toml"
-    sed -i "/\[rpc\]/,/\[/ s/cors_allowed_origins = \".*\"/cors_allowed_origins = \[\"\*\"\]/" "${CUDOS_HOME}/config/config.toml"
+    sed -i "/\[rpc\]/,// s/laddr = \".*\"/laddr = \"tcp:\/\/0.0.0.0:26657\"/" "${CUDOS_HOME}/config/config.toml"
+    sed -i "/\[rpc\]/,// s/cors_allowed_origins = .*/cors_allowed_origins = \[\"\*\"\]/" "${CUDOS_HOME}/config/config.toml"
 
     # port 26660
     sed -i "s/prometheus = \".*\"/prometheus = true/g" "${CUDOS_HOME}/config/config.toml"
