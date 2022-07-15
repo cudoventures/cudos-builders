@@ -6,8 +6,8 @@ networks:
 
 services:
   cudos-nft-minting-ui-release:
-    image: cudos-nft-minting-ui-release
-    container_name: cudos-nft-minting-ui-release
+    image: cudos-nft-minting-ui-$CONTAINER_NAME_ADDON
+    container_name: cudos-nft-minting-ui-$CONTAINER_NAME_ADDON
     build:
       dockerfile: CudosBuilders/docker/nft-minting-ui/nft-minting-ui.release.dockerfile
       context: ../../../
