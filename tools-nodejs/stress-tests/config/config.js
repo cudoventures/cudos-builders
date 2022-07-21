@@ -4,7 +4,7 @@ import getIbcConfig from './ibcConfig.js';
 import getGravityConfig from './gravityConfig.js';
 import getGeneralTestingConfig from './generalTestingConfig.js';
 
-const __dirname = path.resolve(path.dirname('')); 
+const __dirname = path.resolve(path.dirname(''));
 
 let envPath = path.join(__dirname, '/config/.env');
 
@@ -24,6 +24,7 @@ const envVariables = [
     'IBC_TESTING',
     'GRAVITY_TESTING',
     'GENERAL_TESTING',
+    'NFT_TESTING',
     'CHAIN_ID',
     'BLOCK_TIME',
     'GAS_PRICE',
@@ -41,6 +42,7 @@ envVariables.forEach((envVariable) => {
 const IBC_TESTING = process.env.IBC_TESTING.toLowerCase() === 'true';
 const GRAVITY_TESTING = process.env.GRAVITY_TESTING.toLowerCase() === 'true';
 const GENERAL_TESTING = process.env.GENERAL_TESTING.toLowerCase() === 'true';
+const NFT_TESTING = process.env.NFT_TESTING.toLowerCase() === 'true';
 
 const IBC = IBC_TESTING ? getIbcConfig() : null;
 const GRAVITY = GRAVITY_TESTING ? getGravityConfig() : null;
@@ -52,6 +54,7 @@ export default {
     IBC_TESTING,
     GRAVITY_TESTING,
     GENERAL_TESTING,
+    NFT_TESTING,
     CHAIN_ID: process.env.CHAIN_ID,
     BLOCK_TIME: process.env.BLOCK_TIME,
     GAS_PRICE: process.env.GAS_PRICE,

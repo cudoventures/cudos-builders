@@ -7915,6 +7915,4494 @@ export namespace ibc {
     }
 }
 
+/** Namespace cudosnode. */
+export namespace cudosnode {
+
+    /** Namespace cudosnode. */
+    namespace cudosnode {
+
+        /** Namespace nft. */
+        namespace nft {
+
+            /** Represents a Msg */
+            class Msg extends $protobuf.rpc.Service {
+
+                /**
+                 * Constructs a new Msg service.
+                 * @param rpcImpl RPC implementation
+                 * @param [requestDelimited=false] Whether requests are length-delimited
+                 * @param [responseDelimited=false] Whether responses are length-delimited
+                 */
+                constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                /**
+                 * Calls IssueDenom.
+                 * @param request MsgIssueDenom message or plain object
+                 * @param callback Node-style callback called with the error, if any, and MsgIssueDenomResponse
+                 */
+                public issueDenom(request: cudosnode.cudosnode.nft.IMsgIssueDenom, callback: cudosnode.cudosnode.nft.Msg.IssueDenomCallback): void;
+
+                /**
+                 * Calls IssueDenom.
+                 * @param request MsgIssueDenom message or plain object
+                 * @returns Promise
+                 */
+                public issueDenom(request: cudosnode.cudosnode.nft.IMsgIssueDenom): Promise<cudosnode.cudosnode.nft.MsgIssueDenomResponse>;
+
+                /**
+                 * Calls MintNFT.
+                 * @param request MsgMintNFT message or plain object
+                 * @param callback Node-style callback called with the error, if any, and MsgMintNFTResponse
+                 */
+                public mintNFT(request: cudosnode.cudosnode.nft.IMsgMintNFT, callback: cudosnode.cudosnode.nft.Msg.MintNFTCallback): void;
+
+                /**
+                 * Calls MintNFT.
+                 * @param request MsgMintNFT message or plain object
+                 * @returns Promise
+                 */
+                public mintNFT(request: cudosnode.cudosnode.nft.IMsgMintNFT): Promise<cudosnode.cudosnode.nft.MsgMintNFTResponse>;
+
+                /**
+                 * Calls EditNFT.
+                 * @param request MsgEditNFT message or plain object
+                 * @param callback Node-style callback called with the error, if any, and MsgEditNFTResponse
+                 */
+                public editNFT(request: cudosnode.cudosnode.nft.IMsgEditNFT, callback: cudosnode.cudosnode.nft.Msg.EditNFTCallback): void;
+
+                /**
+                 * Calls EditNFT.
+                 * @param request MsgEditNFT message or plain object
+                 * @returns Promise
+                 */
+                public editNFT(request: cudosnode.cudosnode.nft.IMsgEditNFT): Promise<cudosnode.cudosnode.nft.MsgEditNFTResponse>;
+
+                /**
+                 * Calls TransferNft.
+                 * @param request MsgTransferNft message or plain object
+                 * @param callback Node-style callback called with the error, if any, and MsgTransferNftResponse
+                 */
+                public transferNft(request: cudosnode.cudosnode.nft.IMsgTransferNft, callback: cudosnode.cudosnode.nft.Msg.TransferNftCallback): void;
+
+                /**
+                 * Calls TransferNft.
+                 * @param request MsgTransferNft message or plain object
+                 * @returns Promise
+                 */
+                public transferNft(request: cudosnode.cudosnode.nft.IMsgTransferNft): Promise<cudosnode.cudosnode.nft.MsgTransferNftResponse>;
+
+                /**
+                 * Calls ApproveNft.
+                 * @param request MsgApproveNft message or plain object
+                 * @param callback Node-style callback called with the error, if any, and MsgApproveNftResponse
+                 */
+                public approveNft(request: cudosnode.cudosnode.nft.IMsgApproveNft, callback: cudosnode.cudosnode.nft.Msg.ApproveNftCallback): void;
+
+                /**
+                 * Calls ApproveNft.
+                 * @param request MsgApproveNft message or plain object
+                 * @returns Promise
+                 */
+                public approveNft(request: cudosnode.cudosnode.nft.IMsgApproveNft): Promise<cudosnode.cudosnode.nft.MsgApproveNftResponse>;
+
+                /**
+                 * Calls ApproveAllNft.
+                 * @param request MsgApproveAllNft message or plain object
+                 * @param callback Node-style callback called with the error, if any, and MsgApproveAllNftResponse
+                 */
+                public approveAllNft(request: cudosnode.cudosnode.nft.IMsgApproveAllNft, callback: cudosnode.cudosnode.nft.Msg.ApproveAllNftCallback): void;
+
+                /**
+                 * Calls ApproveAllNft.
+                 * @param request MsgApproveAllNft message or plain object
+                 * @returns Promise
+                 */
+                public approveAllNft(request: cudosnode.cudosnode.nft.IMsgApproveAllNft): Promise<cudosnode.cudosnode.nft.MsgApproveAllNftResponse>;
+
+                /**
+                 * Calls RevokeNft.
+                 * @param request MsgRevokeNft message or plain object
+                 * @param callback Node-style callback called with the error, if any, and MsgRevokeNftResponse
+                 */
+                public revokeNft(request: cudosnode.cudosnode.nft.IMsgRevokeNft, callback: cudosnode.cudosnode.nft.Msg.RevokeNftCallback): void;
+
+                /**
+                 * Calls RevokeNft.
+                 * @param request MsgRevokeNft message or plain object
+                 * @returns Promise
+                 */
+                public revokeNft(request: cudosnode.cudosnode.nft.IMsgRevokeNft): Promise<cudosnode.cudosnode.nft.MsgRevokeNftResponse>;
+
+                /**
+                 * Calls BurnNFT.
+                 * @param request MsgBurnNFT message or plain object
+                 * @param callback Node-style callback called with the error, if any, and MsgBurnNFTResponse
+                 */
+                public burnNFT(request: cudosnode.cudosnode.nft.IMsgBurnNFT, callback: cudosnode.cudosnode.nft.Msg.BurnNFTCallback): void;
+
+                /**
+                 * Calls BurnNFT.
+                 * @param request MsgBurnNFT message or plain object
+                 * @returns Promise
+                 */
+                public burnNFT(request: cudosnode.cudosnode.nft.IMsgBurnNFT): Promise<cudosnode.cudosnode.nft.MsgBurnNFTResponse>;
+
+                /**
+                 * Calls TransferDenom.
+                 * @param request MsgTransferDenom message or plain object
+                 * @param callback Node-style callback called with the error, if any, and MsgTransferDenomResponse
+                 */
+                public transferDenom(request: cudosnode.cudosnode.nft.IMsgTransferDenom, callback: cudosnode.cudosnode.nft.Msg.TransferDenomCallback): void;
+
+                /**
+                 * Calls TransferDenom.
+                 * @param request MsgTransferDenom message or plain object
+                 * @returns Promise
+                 */
+                public transferDenom(request: cudosnode.cudosnode.nft.IMsgTransferDenom): Promise<cudosnode.cudosnode.nft.MsgTransferDenomResponse>;
+            }
+
+            namespace Msg {
+
+                /**
+                 * Callback as used by {@link cudosnode.cudosnode.nft.Msg#issueDenom}.
+                 * @param error Error, if any
+                 * @param [response] MsgIssueDenomResponse
+                 */
+                type IssueDenomCallback = (error: (Error|null), response?: cudosnode.cudosnode.nft.MsgIssueDenomResponse) => void;
+
+                /**
+                 * Callback as used by {@link cudosnode.cudosnode.nft.Msg#mintNFT}.
+                 * @param error Error, if any
+                 * @param [response] MsgMintNFTResponse
+                 */
+                type MintNFTCallback = (error: (Error|null), response?: cudosnode.cudosnode.nft.MsgMintNFTResponse) => void;
+
+                /**
+                 * Callback as used by {@link cudosnode.cudosnode.nft.Msg#editNFT}.
+                 * @param error Error, if any
+                 * @param [response] MsgEditNFTResponse
+                 */
+                type EditNFTCallback = (error: (Error|null), response?: cudosnode.cudosnode.nft.MsgEditNFTResponse) => void;
+
+                /**
+                 * Callback as used by {@link cudosnode.cudosnode.nft.Msg#transferNft}.
+                 * @param error Error, if any
+                 * @param [response] MsgTransferNftResponse
+                 */
+                type TransferNftCallback = (error: (Error|null), response?: cudosnode.cudosnode.nft.MsgTransferNftResponse) => void;
+
+                /**
+                 * Callback as used by {@link cudosnode.cudosnode.nft.Msg#approveNft}.
+                 * @param error Error, if any
+                 * @param [response] MsgApproveNftResponse
+                 */
+                type ApproveNftCallback = (error: (Error|null), response?: cudosnode.cudosnode.nft.MsgApproveNftResponse) => void;
+
+                /**
+                 * Callback as used by {@link cudosnode.cudosnode.nft.Msg#approveAllNft}.
+                 * @param error Error, if any
+                 * @param [response] MsgApproveAllNftResponse
+                 */
+                type ApproveAllNftCallback = (error: (Error|null), response?: cudosnode.cudosnode.nft.MsgApproveAllNftResponse) => void;
+
+                /**
+                 * Callback as used by {@link cudosnode.cudosnode.nft.Msg#revokeNft}.
+                 * @param error Error, if any
+                 * @param [response] MsgRevokeNftResponse
+                 */
+                type RevokeNftCallback = (error: (Error|null), response?: cudosnode.cudosnode.nft.MsgRevokeNftResponse) => void;
+
+                /**
+                 * Callback as used by {@link cudosnode.cudosnode.nft.Msg#burnNFT}.
+                 * @param error Error, if any
+                 * @param [response] MsgBurnNFTResponse
+                 */
+                type BurnNFTCallback = (error: (Error|null), response?: cudosnode.cudosnode.nft.MsgBurnNFTResponse) => void;
+
+                /**
+                 * Callback as used by {@link cudosnode.cudosnode.nft.Msg#transferDenom}.
+                 * @param error Error, if any
+                 * @param [response] MsgTransferDenomResponse
+                 */
+                type TransferDenomCallback = (error: (Error|null), response?: cudosnode.cudosnode.nft.MsgTransferDenomResponse) => void;
+            }
+
+            /** Properties of a MsgIssueDenom. */
+            interface IMsgIssueDenom {
+
+                /** MsgIssueDenom id */
+                id?: (string|null);
+
+                /** MsgIssueDenom name */
+                name?: (string|null);
+
+                /** MsgIssueDenom schema */
+                schema?: (string|null);
+
+                /** MsgIssueDenom sender */
+                sender?: (string|null);
+
+                /** MsgIssueDenom contractAddressSigner */
+                contractAddressSigner?: (string|null);
+
+                /** MsgIssueDenom symbol */
+                symbol?: (string|null);
+            }
+
+            /** Represents a MsgIssueDenom. */
+            class MsgIssueDenom implements IMsgIssueDenom {
+
+                /**
+                 * Constructs a new MsgIssueDenom.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IMsgIssueDenom);
+
+                /** MsgIssueDenom id. */
+                public id: string;
+
+                /** MsgIssueDenom name. */
+                public name: string;
+
+                /** MsgIssueDenom schema. */
+                public schema: string;
+
+                /** MsgIssueDenom sender. */
+                public sender: string;
+
+                /** MsgIssueDenom contractAddressSigner. */
+                public contractAddressSigner: string;
+
+                /** MsgIssueDenom symbol. */
+                public symbol: string;
+
+                /**
+                 * Encodes the specified MsgIssueDenom message. Does not implicitly {@link cudosnode.cudosnode.nft.MsgIssueDenom.verify|verify} messages.
+                 * @param message MsgIssueDenom message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IMsgIssueDenom, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MsgIssueDenom message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.MsgIssueDenom.verify|verify} messages.
+                 * @param message MsgIssueDenom message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IMsgIssueDenom, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MsgIssueDenom message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MsgIssueDenom
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.MsgIssueDenom;
+
+                /**
+                 * Decodes a MsgIssueDenom message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MsgIssueDenom
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.MsgIssueDenom;
+
+                /**
+                 * Verifies a MsgIssueDenom message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MsgIssueDenom message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MsgIssueDenom
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.MsgIssueDenom;
+
+                /**
+                 * Creates a plain object from a MsgIssueDenom message. Also converts values to other types if specified.
+                 * @param message MsgIssueDenom
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.MsgIssueDenom, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MsgIssueDenom to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a MsgIssueDenomResponse. */
+            interface IMsgIssueDenomResponse {
+            }
+
+            /** Represents a MsgIssueDenomResponse. */
+            class MsgIssueDenomResponse implements IMsgIssueDenomResponse {
+
+                /**
+                 * Constructs a new MsgIssueDenomResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IMsgIssueDenomResponse);
+
+                /**
+                 * Encodes the specified MsgIssueDenomResponse message. Does not implicitly {@link cudosnode.cudosnode.nft.MsgIssueDenomResponse.verify|verify} messages.
+                 * @param message MsgIssueDenomResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IMsgIssueDenomResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MsgIssueDenomResponse message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.MsgIssueDenomResponse.verify|verify} messages.
+                 * @param message MsgIssueDenomResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IMsgIssueDenomResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MsgIssueDenomResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MsgIssueDenomResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.MsgIssueDenomResponse;
+
+                /**
+                 * Decodes a MsgIssueDenomResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MsgIssueDenomResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.MsgIssueDenomResponse;
+
+                /**
+                 * Verifies a MsgIssueDenomResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MsgIssueDenomResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MsgIssueDenomResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.MsgIssueDenomResponse;
+
+                /**
+                 * Creates a plain object from a MsgIssueDenomResponse message. Also converts values to other types if specified.
+                 * @param message MsgIssueDenomResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.MsgIssueDenomResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MsgIssueDenomResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a MsgTransferNft. */
+            interface IMsgTransferNft {
+
+                /** MsgTransferNft denom_id */
+                denom_id?: (string|null);
+
+                /** MsgTransferNft token_id */
+                token_id?: (string|null);
+
+                /** MsgTransferNft from */
+                from?: (string|null);
+
+                /** MsgTransferNft to */
+                to?: (string|null);
+
+                /** MsgTransferNft sender */
+                sender?: (string|null);
+
+                /** MsgTransferNft contractAddressSigner */
+                contractAddressSigner?: (string|null);
+            }
+
+            /** Represents a MsgTransferNft. */
+            class MsgTransferNft implements IMsgTransferNft {
+
+                /**
+                 * Constructs a new MsgTransferNft.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IMsgTransferNft);
+
+                /** MsgTransferNft denom_id. */
+                public denom_id: string;
+
+                /** MsgTransferNft token_id. */
+                public token_id: string;
+
+                /** MsgTransferNft from. */
+                public from: string;
+
+                /** MsgTransferNft to. */
+                public to: string;
+
+                /** MsgTransferNft sender. */
+                public sender: string;
+
+                /** MsgTransferNft contractAddressSigner. */
+                public contractAddressSigner: string;
+
+                /**
+                 * Encodes the specified MsgTransferNft message. Does not implicitly {@link cudosnode.cudosnode.nft.MsgTransferNft.verify|verify} messages.
+                 * @param message MsgTransferNft message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IMsgTransferNft, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MsgTransferNft message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.MsgTransferNft.verify|verify} messages.
+                 * @param message MsgTransferNft message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IMsgTransferNft, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MsgTransferNft message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MsgTransferNft
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.MsgTransferNft;
+
+                /**
+                 * Decodes a MsgTransferNft message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MsgTransferNft
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.MsgTransferNft;
+
+                /**
+                 * Verifies a MsgTransferNft message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MsgTransferNft message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MsgTransferNft
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.MsgTransferNft;
+
+                /**
+                 * Creates a plain object from a MsgTransferNft message. Also converts values to other types if specified.
+                 * @param message MsgTransferNft
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.MsgTransferNft, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MsgTransferNft to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a MsgTransferNftResponse. */
+            interface IMsgTransferNftResponse {
+            }
+
+            /** Represents a MsgTransferNftResponse. */
+            class MsgTransferNftResponse implements IMsgTransferNftResponse {
+
+                /**
+                 * Constructs a new MsgTransferNftResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IMsgTransferNftResponse);
+
+                /**
+                 * Encodes the specified MsgTransferNftResponse message. Does not implicitly {@link cudosnode.cudosnode.nft.MsgTransferNftResponse.verify|verify} messages.
+                 * @param message MsgTransferNftResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IMsgTransferNftResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MsgTransferNftResponse message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.MsgTransferNftResponse.verify|verify} messages.
+                 * @param message MsgTransferNftResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IMsgTransferNftResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MsgTransferNftResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MsgTransferNftResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.MsgTransferNftResponse;
+
+                /**
+                 * Decodes a MsgTransferNftResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MsgTransferNftResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.MsgTransferNftResponse;
+
+                /**
+                 * Verifies a MsgTransferNftResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MsgTransferNftResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MsgTransferNftResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.MsgTransferNftResponse;
+
+                /**
+                 * Creates a plain object from a MsgTransferNftResponse message. Also converts values to other types if specified.
+                 * @param message MsgTransferNftResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.MsgTransferNftResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MsgTransferNftResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a MsgApproveNft. */
+            interface IMsgApproveNft {
+
+                /** MsgApproveNft id */
+                id?: (string|null);
+
+                /** MsgApproveNft denom_id */
+                denom_id?: (string|null);
+
+                /** MsgApproveNft sender */
+                sender?: (string|null);
+
+                /** MsgApproveNft approvedAddress */
+                approvedAddress?: (string|null);
+
+                /** MsgApproveNft contractAddressSigner */
+                contractAddressSigner?: (string|null);
+            }
+
+            /** Represents a MsgApproveNft. */
+            class MsgApproveNft implements IMsgApproveNft {
+
+                /**
+                 * Constructs a new MsgApproveNft.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IMsgApproveNft);
+
+                /** MsgApproveNft id. */
+                public id: string;
+
+                /** MsgApproveNft denom_id. */
+                public denom_id: string;
+
+                /** MsgApproveNft sender. */
+                public sender: string;
+
+                /** MsgApproveNft approvedAddress. */
+                public approvedAddress: string;
+
+                /** MsgApproveNft contractAddressSigner. */
+                public contractAddressSigner: string;
+
+                /**
+                 * Encodes the specified MsgApproveNft message. Does not implicitly {@link cudosnode.cudosnode.nft.MsgApproveNft.verify|verify} messages.
+                 * @param message MsgApproveNft message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IMsgApproveNft, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MsgApproveNft message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.MsgApproveNft.verify|verify} messages.
+                 * @param message MsgApproveNft message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IMsgApproveNft, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MsgApproveNft message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MsgApproveNft
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.MsgApproveNft;
+
+                /**
+                 * Decodes a MsgApproveNft message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MsgApproveNft
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.MsgApproveNft;
+
+                /**
+                 * Verifies a MsgApproveNft message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MsgApproveNft message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MsgApproveNft
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.MsgApproveNft;
+
+                /**
+                 * Creates a plain object from a MsgApproveNft message. Also converts values to other types if specified.
+                 * @param message MsgApproveNft
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.MsgApproveNft, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MsgApproveNft to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a MsgApproveNftResponse. */
+            interface IMsgApproveNftResponse {
+            }
+
+            /** Represents a MsgApproveNftResponse. */
+            class MsgApproveNftResponse implements IMsgApproveNftResponse {
+
+                /**
+                 * Constructs a new MsgApproveNftResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IMsgApproveNftResponse);
+
+                /**
+                 * Encodes the specified MsgApproveNftResponse message. Does not implicitly {@link cudosnode.cudosnode.nft.MsgApproveNftResponse.verify|verify} messages.
+                 * @param message MsgApproveNftResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IMsgApproveNftResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MsgApproveNftResponse message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.MsgApproveNftResponse.verify|verify} messages.
+                 * @param message MsgApproveNftResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IMsgApproveNftResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MsgApproveNftResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MsgApproveNftResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.MsgApproveNftResponse;
+
+                /**
+                 * Decodes a MsgApproveNftResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MsgApproveNftResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.MsgApproveNftResponse;
+
+                /**
+                 * Verifies a MsgApproveNftResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MsgApproveNftResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MsgApproveNftResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.MsgApproveNftResponse;
+
+                /**
+                 * Creates a plain object from a MsgApproveNftResponse message. Also converts values to other types if specified.
+                 * @param message MsgApproveNftResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.MsgApproveNftResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MsgApproveNftResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a MsgApproveAllNft. */
+            interface IMsgApproveAllNft {
+
+                /** MsgApproveAllNft operator */
+                operator?: (string|null);
+
+                /** MsgApproveAllNft sender */
+                sender?: (string|null);
+
+                /** MsgApproveAllNft approved */
+                approved?: (boolean|null);
+
+                /** MsgApproveAllNft contractAddressSigner */
+                contractAddressSigner?: (string|null);
+            }
+
+            /** Represents a MsgApproveAllNft. */
+            class MsgApproveAllNft implements IMsgApproveAllNft {
+
+                /**
+                 * Constructs a new MsgApproveAllNft.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IMsgApproveAllNft);
+
+                /** MsgApproveAllNft operator. */
+                public operator: string;
+
+                /** MsgApproveAllNft sender. */
+                public sender: string;
+
+                /** MsgApproveAllNft approved. */
+                public approved: boolean;
+
+                /** MsgApproveAllNft contractAddressSigner. */
+                public contractAddressSigner: string;
+
+                /**
+                 * Encodes the specified MsgApproveAllNft message. Does not implicitly {@link cudosnode.cudosnode.nft.MsgApproveAllNft.verify|verify} messages.
+                 * @param message MsgApproveAllNft message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IMsgApproveAllNft, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MsgApproveAllNft message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.MsgApproveAllNft.verify|verify} messages.
+                 * @param message MsgApproveAllNft message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IMsgApproveAllNft, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MsgApproveAllNft message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MsgApproveAllNft
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.MsgApproveAllNft;
+
+                /**
+                 * Decodes a MsgApproveAllNft message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MsgApproveAllNft
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.MsgApproveAllNft;
+
+                /**
+                 * Verifies a MsgApproveAllNft message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MsgApproveAllNft message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MsgApproveAllNft
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.MsgApproveAllNft;
+
+                /**
+                 * Creates a plain object from a MsgApproveAllNft message. Also converts values to other types if specified.
+                 * @param message MsgApproveAllNft
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.MsgApproveAllNft, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MsgApproveAllNft to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a MsgApproveAllNftResponse. */
+            interface IMsgApproveAllNftResponse {
+            }
+
+            /** Represents a MsgApproveAllNftResponse. */
+            class MsgApproveAllNftResponse implements IMsgApproveAllNftResponse {
+
+                /**
+                 * Constructs a new MsgApproveAllNftResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IMsgApproveAllNftResponse);
+
+                /**
+                 * Encodes the specified MsgApproveAllNftResponse message. Does not implicitly {@link cudosnode.cudosnode.nft.MsgApproveAllNftResponse.verify|verify} messages.
+                 * @param message MsgApproveAllNftResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IMsgApproveAllNftResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MsgApproveAllNftResponse message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.MsgApproveAllNftResponse.verify|verify} messages.
+                 * @param message MsgApproveAllNftResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IMsgApproveAllNftResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MsgApproveAllNftResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MsgApproveAllNftResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.MsgApproveAllNftResponse;
+
+                /**
+                 * Decodes a MsgApproveAllNftResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MsgApproveAllNftResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.MsgApproveAllNftResponse;
+
+                /**
+                 * Verifies a MsgApproveAllNftResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MsgApproveAllNftResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MsgApproveAllNftResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.MsgApproveAllNftResponse;
+
+                /**
+                 * Creates a plain object from a MsgApproveAllNftResponse message. Also converts values to other types if specified.
+                 * @param message MsgApproveAllNftResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.MsgApproveAllNftResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MsgApproveAllNftResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a MsgRevokeNft. */
+            interface IMsgRevokeNft {
+
+                /** MsgRevokeNft addressToRevoke */
+                addressToRevoke?: (string|null);
+
+                /** MsgRevokeNft denom_id */
+                denom_id?: (string|null);
+
+                /** MsgRevokeNft token_id */
+                token_id?: (string|null);
+
+                /** MsgRevokeNft sender */
+                sender?: (string|null);
+
+                /** MsgRevokeNft contractAddressSigner */
+                contractAddressSigner?: (string|null);
+            }
+
+            /** Represents a MsgRevokeNft. */
+            class MsgRevokeNft implements IMsgRevokeNft {
+
+                /**
+                 * Constructs a new MsgRevokeNft.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IMsgRevokeNft);
+
+                /** MsgRevokeNft addressToRevoke. */
+                public addressToRevoke: string;
+
+                /** MsgRevokeNft denom_id. */
+                public denom_id: string;
+
+                /** MsgRevokeNft token_id. */
+                public token_id: string;
+
+                /** MsgRevokeNft sender. */
+                public sender: string;
+
+                /** MsgRevokeNft contractAddressSigner. */
+                public contractAddressSigner: string;
+
+                /**
+                 * Encodes the specified MsgRevokeNft message. Does not implicitly {@link cudosnode.cudosnode.nft.MsgRevokeNft.verify|verify} messages.
+                 * @param message MsgRevokeNft message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IMsgRevokeNft, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MsgRevokeNft message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.MsgRevokeNft.verify|verify} messages.
+                 * @param message MsgRevokeNft message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IMsgRevokeNft, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MsgRevokeNft message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MsgRevokeNft
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.MsgRevokeNft;
+
+                /**
+                 * Decodes a MsgRevokeNft message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MsgRevokeNft
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.MsgRevokeNft;
+
+                /**
+                 * Verifies a MsgRevokeNft message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MsgRevokeNft message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MsgRevokeNft
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.MsgRevokeNft;
+
+                /**
+                 * Creates a plain object from a MsgRevokeNft message. Also converts values to other types if specified.
+                 * @param message MsgRevokeNft
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.MsgRevokeNft, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MsgRevokeNft to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a MsgRevokeNftResponse. */
+            interface IMsgRevokeNftResponse {
+            }
+
+            /** Represents a MsgRevokeNftResponse. */
+            class MsgRevokeNftResponse implements IMsgRevokeNftResponse {
+
+                /**
+                 * Constructs a new MsgRevokeNftResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IMsgRevokeNftResponse);
+
+                /**
+                 * Encodes the specified MsgRevokeNftResponse message. Does not implicitly {@link cudosnode.cudosnode.nft.MsgRevokeNftResponse.verify|verify} messages.
+                 * @param message MsgRevokeNftResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IMsgRevokeNftResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MsgRevokeNftResponse message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.MsgRevokeNftResponse.verify|verify} messages.
+                 * @param message MsgRevokeNftResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IMsgRevokeNftResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MsgRevokeNftResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MsgRevokeNftResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.MsgRevokeNftResponse;
+
+                /**
+                 * Decodes a MsgRevokeNftResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MsgRevokeNftResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.MsgRevokeNftResponse;
+
+                /**
+                 * Verifies a MsgRevokeNftResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MsgRevokeNftResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MsgRevokeNftResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.MsgRevokeNftResponse;
+
+                /**
+                 * Creates a plain object from a MsgRevokeNftResponse message. Also converts values to other types if specified.
+                 * @param message MsgRevokeNftResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.MsgRevokeNftResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MsgRevokeNftResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a MsgEditNFT. */
+            interface IMsgEditNFT {
+
+                /** MsgEditNFT id */
+                id?: (string|null);
+
+                /** MsgEditNFT denom_id */
+                denom_id?: (string|null);
+
+                /** MsgEditNFT name */
+                name?: (string|null);
+
+                /** MsgEditNFT uri */
+                uri?: (string|null);
+
+                /** MsgEditNFT data */
+                data?: (string|null);
+
+                /** MsgEditNFT sender */
+                sender?: (string|null);
+
+                /** MsgEditNFT contractAddressSigner */
+                contractAddressSigner?: (string|null);
+            }
+
+            /** Represents a MsgEditNFT. */
+            class MsgEditNFT implements IMsgEditNFT {
+
+                /**
+                 * Constructs a new MsgEditNFT.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IMsgEditNFT);
+
+                /** MsgEditNFT id. */
+                public id: string;
+
+                /** MsgEditNFT denom_id. */
+                public denom_id: string;
+
+                /** MsgEditNFT name. */
+                public name: string;
+
+                /** MsgEditNFT uri. */
+                public uri: string;
+
+                /** MsgEditNFT data. */
+                public data: string;
+
+                /** MsgEditNFT sender. */
+                public sender: string;
+
+                /** MsgEditNFT contractAddressSigner. */
+                public contractAddressSigner: string;
+
+                /**
+                 * Encodes the specified MsgEditNFT message. Does not implicitly {@link cudosnode.cudosnode.nft.MsgEditNFT.verify|verify} messages.
+                 * @param message MsgEditNFT message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IMsgEditNFT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MsgEditNFT message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.MsgEditNFT.verify|verify} messages.
+                 * @param message MsgEditNFT message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IMsgEditNFT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MsgEditNFT message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MsgEditNFT
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.MsgEditNFT;
+
+                /**
+                 * Decodes a MsgEditNFT message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MsgEditNFT
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.MsgEditNFT;
+
+                /**
+                 * Verifies a MsgEditNFT message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MsgEditNFT message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MsgEditNFT
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.MsgEditNFT;
+
+                /**
+                 * Creates a plain object from a MsgEditNFT message. Also converts values to other types if specified.
+                 * @param message MsgEditNFT
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.MsgEditNFT, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MsgEditNFT to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a MsgEditNFTResponse. */
+            interface IMsgEditNFTResponse {
+            }
+
+            /** Represents a MsgEditNFTResponse. */
+            class MsgEditNFTResponse implements IMsgEditNFTResponse {
+
+                /**
+                 * Constructs a new MsgEditNFTResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IMsgEditNFTResponse);
+
+                /**
+                 * Encodes the specified MsgEditNFTResponse message. Does not implicitly {@link cudosnode.cudosnode.nft.MsgEditNFTResponse.verify|verify} messages.
+                 * @param message MsgEditNFTResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IMsgEditNFTResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MsgEditNFTResponse message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.MsgEditNFTResponse.verify|verify} messages.
+                 * @param message MsgEditNFTResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IMsgEditNFTResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MsgEditNFTResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MsgEditNFTResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.MsgEditNFTResponse;
+
+                /**
+                 * Decodes a MsgEditNFTResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MsgEditNFTResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.MsgEditNFTResponse;
+
+                /**
+                 * Verifies a MsgEditNFTResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MsgEditNFTResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MsgEditNFTResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.MsgEditNFTResponse;
+
+                /**
+                 * Creates a plain object from a MsgEditNFTResponse message. Also converts values to other types if specified.
+                 * @param message MsgEditNFTResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.MsgEditNFTResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MsgEditNFTResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a MsgMintNFT. */
+            interface IMsgMintNFT {
+
+                /** MsgMintNFT denom_id */
+                denom_id?: (string|null);
+
+                /** MsgMintNFT name */
+                name?: (string|null);
+
+                /** MsgMintNFT uri */
+                uri?: (string|null);
+
+                /** MsgMintNFT data */
+                data?: (string|null);
+
+                /** MsgMintNFT sender */
+                sender?: (string|null);
+
+                /** MsgMintNFT recipient */
+                recipient?: (string|null);
+
+                /** MsgMintNFT contractAddressSigner */
+                contractAddressSigner?: (string|null);
+            }
+
+            /** Represents a MsgMintNFT. */
+            class MsgMintNFT implements IMsgMintNFT {
+
+                /**
+                 * Constructs a new MsgMintNFT.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IMsgMintNFT);
+
+                /** MsgMintNFT denom_id. */
+                public denom_id: string;
+
+                /** MsgMintNFT name. */
+                public name: string;
+
+                /** MsgMintNFT uri. */
+                public uri: string;
+
+                /** MsgMintNFT data. */
+                public data: string;
+
+                /** MsgMintNFT sender. */
+                public sender: string;
+
+                /** MsgMintNFT recipient. */
+                public recipient: string;
+
+                /** MsgMintNFT contractAddressSigner. */
+                public contractAddressSigner: string;
+
+                /**
+                 * Encodes the specified MsgMintNFT message. Does not implicitly {@link cudosnode.cudosnode.nft.MsgMintNFT.verify|verify} messages.
+                 * @param message MsgMintNFT message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IMsgMintNFT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MsgMintNFT message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.MsgMintNFT.verify|verify} messages.
+                 * @param message MsgMintNFT message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IMsgMintNFT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MsgMintNFT message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MsgMintNFT
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.MsgMintNFT;
+
+                /**
+                 * Decodes a MsgMintNFT message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MsgMintNFT
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.MsgMintNFT;
+
+                /**
+                 * Verifies a MsgMintNFT message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MsgMintNFT message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MsgMintNFT
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.MsgMintNFT;
+
+                /**
+                 * Creates a plain object from a MsgMintNFT message. Also converts values to other types if specified.
+                 * @param message MsgMintNFT
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.MsgMintNFT, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MsgMintNFT to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a MsgMintNFTResponse. */
+            interface IMsgMintNFTResponse {
+            }
+
+            /** Represents a MsgMintNFTResponse. */
+            class MsgMintNFTResponse implements IMsgMintNFTResponse {
+
+                /**
+                 * Constructs a new MsgMintNFTResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IMsgMintNFTResponse);
+
+                /**
+                 * Encodes the specified MsgMintNFTResponse message. Does not implicitly {@link cudosnode.cudosnode.nft.MsgMintNFTResponse.verify|verify} messages.
+                 * @param message MsgMintNFTResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IMsgMintNFTResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MsgMintNFTResponse message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.MsgMintNFTResponse.verify|verify} messages.
+                 * @param message MsgMintNFTResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IMsgMintNFTResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MsgMintNFTResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MsgMintNFTResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.MsgMintNFTResponse;
+
+                /**
+                 * Decodes a MsgMintNFTResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MsgMintNFTResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.MsgMintNFTResponse;
+
+                /**
+                 * Verifies a MsgMintNFTResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MsgMintNFTResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MsgMintNFTResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.MsgMintNFTResponse;
+
+                /**
+                 * Creates a plain object from a MsgMintNFTResponse message. Also converts values to other types if specified.
+                 * @param message MsgMintNFTResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.MsgMintNFTResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MsgMintNFTResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a MsgBurnNFT. */
+            interface IMsgBurnNFT {
+
+                /** MsgBurnNFT id */
+                id?: (string|null);
+
+                /** MsgBurnNFT denom_id */
+                denom_id?: (string|null);
+
+                /** MsgBurnNFT sender */
+                sender?: (string|null);
+
+                /** MsgBurnNFT contractAddressSigner */
+                contractAddressSigner?: (string|null);
+            }
+
+            /** Represents a MsgBurnNFT. */
+            class MsgBurnNFT implements IMsgBurnNFT {
+
+                /**
+                 * Constructs a new MsgBurnNFT.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IMsgBurnNFT);
+
+                /** MsgBurnNFT id. */
+                public id: string;
+
+                /** MsgBurnNFT denom_id. */
+                public denom_id: string;
+
+                /** MsgBurnNFT sender. */
+                public sender: string;
+
+                /** MsgBurnNFT contractAddressSigner. */
+                public contractAddressSigner: string;
+
+                /**
+                 * Encodes the specified MsgBurnNFT message. Does not implicitly {@link cudosnode.cudosnode.nft.MsgBurnNFT.verify|verify} messages.
+                 * @param message MsgBurnNFT message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IMsgBurnNFT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MsgBurnNFT message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.MsgBurnNFT.verify|verify} messages.
+                 * @param message MsgBurnNFT message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IMsgBurnNFT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MsgBurnNFT message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MsgBurnNFT
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.MsgBurnNFT;
+
+                /**
+                 * Decodes a MsgBurnNFT message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MsgBurnNFT
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.MsgBurnNFT;
+
+                /**
+                 * Verifies a MsgBurnNFT message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MsgBurnNFT message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MsgBurnNFT
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.MsgBurnNFT;
+
+                /**
+                 * Creates a plain object from a MsgBurnNFT message. Also converts values to other types if specified.
+                 * @param message MsgBurnNFT
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.MsgBurnNFT, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MsgBurnNFT to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a MsgBurnNFTResponse. */
+            interface IMsgBurnNFTResponse {
+            }
+
+            /** Represents a MsgBurnNFTResponse. */
+            class MsgBurnNFTResponse implements IMsgBurnNFTResponse {
+
+                /**
+                 * Constructs a new MsgBurnNFTResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IMsgBurnNFTResponse);
+
+                /**
+                 * Encodes the specified MsgBurnNFTResponse message. Does not implicitly {@link cudosnode.cudosnode.nft.MsgBurnNFTResponse.verify|verify} messages.
+                 * @param message MsgBurnNFTResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IMsgBurnNFTResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MsgBurnNFTResponse message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.MsgBurnNFTResponse.verify|verify} messages.
+                 * @param message MsgBurnNFTResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IMsgBurnNFTResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MsgBurnNFTResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MsgBurnNFTResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.MsgBurnNFTResponse;
+
+                /**
+                 * Decodes a MsgBurnNFTResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MsgBurnNFTResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.MsgBurnNFTResponse;
+
+                /**
+                 * Verifies a MsgBurnNFTResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MsgBurnNFTResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MsgBurnNFTResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.MsgBurnNFTResponse;
+
+                /**
+                 * Creates a plain object from a MsgBurnNFTResponse message. Also converts values to other types if specified.
+                 * @param message MsgBurnNFTResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.MsgBurnNFTResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MsgBurnNFTResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a MsgTransferDenom. */
+            interface IMsgTransferDenom {
+
+                /** MsgTransferDenom id */
+                id?: (string|null);
+
+                /** MsgTransferDenom sender */
+                sender?: (string|null);
+
+                /** MsgTransferDenom recipient */
+                recipient?: (string|null);
+
+                /** MsgTransferDenom contractAddressSigner */
+                contractAddressSigner?: (string|null);
+            }
+
+            /** Represents a MsgTransferDenom. */
+            class MsgTransferDenom implements IMsgTransferDenom {
+
+                /**
+                 * Constructs a new MsgTransferDenom.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IMsgTransferDenom);
+
+                /** MsgTransferDenom id. */
+                public id: string;
+
+                /** MsgTransferDenom sender. */
+                public sender: string;
+
+                /** MsgTransferDenom recipient. */
+                public recipient: string;
+
+                /** MsgTransferDenom contractAddressSigner. */
+                public contractAddressSigner: string;
+
+                /**
+                 * Encodes the specified MsgTransferDenom message. Does not implicitly {@link cudosnode.cudosnode.nft.MsgTransferDenom.verify|verify} messages.
+                 * @param message MsgTransferDenom message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IMsgTransferDenom, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MsgTransferDenom message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.MsgTransferDenom.verify|verify} messages.
+                 * @param message MsgTransferDenom message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IMsgTransferDenom, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MsgTransferDenom message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MsgTransferDenom
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.MsgTransferDenom;
+
+                /**
+                 * Decodes a MsgTransferDenom message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MsgTransferDenom
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.MsgTransferDenom;
+
+                /**
+                 * Verifies a MsgTransferDenom message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MsgTransferDenom message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MsgTransferDenom
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.MsgTransferDenom;
+
+                /**
+                 * Creates a plain object from a MsgTransferDenom message. Also converts values to other types if specified.
+                 * @param message MsgTransferDenom
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.MsgTransferDenom, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MsgTransferDenom to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a MsgTransferDenomResponse. */
+            interface IMsgTransferDenomResponse {
+            }
+
+            /** Represents a MsgTransferDenomResponse. */
+            class MsgTransferDenomResponse implements IMsgTransferDenomResponse {
+
+                /**
+                 * Constructs a new MsgTransferDenomResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IMsgTransferDenomResponse);
+
+                /**
+                 * Encodes the specified MsgTransferDenomResponse message. Does not implicitly {@link cudosnode.cudosnode.nft.MsgTransferDenomResponse.verify|verify} messages.
+                 * @param message MsgTransferDenomResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IMsgTransferDenomResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified MsgTransferDenomResponse message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.MsgTransferDenomResponse.verify|verify} messages.
+                 * @param message MsgTransferDenomResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IMsgTransferDenomResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a MsgTransferDenomResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns MsgTransferDenomResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.MsgTransferDenomResponse;
+
+                /**
+                 * Decodes a MsgTransferDenomResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns MsgTransferDenomResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.MsgTransferDenomResponse;
+
+                /**
+                 * Verifies a MsgTransferDenomResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a MsgTransferDenomResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns MsgTransferDenomResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.MsgTransferDenomResponse;
+
+                /**
+                 * Creates a plain object from a MsgTransferDenomResponse message. Also converts values to other types if specified.
+                 * @param message MsgTransferDenomResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.MsgTransferDenomResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this MsgTransferDenomResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a BaseNFT. */
+            interface IBaseNFT {
+
+                /** BaseNFT id */
+                id?: (string|null);
+
+                /** BaseNFT name */
+                name?: (string|null);
+
+                /** BaseNFT uri */
+                uri?: (string|null);
+
+                /** BaseNFT data */
+                data?: (string|null);
+
+                /** BaseNFT owner */
+                owner?: (string|null);
+
+                /** BaseNFT approvedAddresses */
+                approvedAddresses?: (string[]|null);
+            }
+
+            /** Represents a BaseNFT. */
+            class BaseNFT implements IBaseNFT {
+
+                /**
+                 * Constructs a new BaseNFT.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IBaseNFT);
+
+                /** BaseNFT id. */
+                public id: string;
+
+                /** BaseNFT name. */
+                public name: string;
+
+                /** BaseNFT uri. */
+                public uri: string;
+
+                /** BaseNFT data. */
+                public data: string;
+
+                /** BaseNFT owner. */
+                public owner: string;
+
+                /** BaseNFT approvedAddresses. */
+                public approvedAddresses: string[];
+
+                /**
+                 * Encodes the specified BaseNFT message. Does not implicitly {@link cudosnode.cudosnode.nft.BaseNFT.verify|verify} messages.
+                 * @param message BaseNFT message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IBaseNFT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified BaseNFT message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.BaseNFT.verify|verify} messages.
+                 * @param message BaseNFT message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IBaseNFT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a BaseNFT message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns BaseNFT
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.BaseNFT;
+
+                /**
+                 * Decodes a BaseNFT message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns BaseNFT
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.BaseNFT;
+
+                /**
+                 * Verifies a BaseNFT message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a BaseNFT message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns BaseNFT
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.BaseNFT;
+
+                /**
+                 * Creates a plain object from a BaseNFT message. Also converts values to other types if specified.
+                 * @param message BaseNFT
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.BaseNFT, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this BaseNFT to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a Denom. */
+            interface IDenom {
+
+                /** Denom id */
+                id?: (string|null);
+
+                /** Denom name */
+                name?: (string|null);
+
+                /** Denom schema */
+                schema?: (string|null);
+
+                /** Denom creator */
+                creator?: (string|null);
+
+                /** Denom symbol */
+                symbol?: (string|null);
+            }
+
+            /** Represents a Denom. */
+            class Denom implements IDenom {
+
+                /**
+                 * Constructs a new Denom.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IDenom);
+
+                /** Denom id. */
+                public id: string;
+
+                /** Denom name. */
+                public name: string;
+
+                /** Denom schema. */
+                public schema: string;
+
+                /** Denom creator. */
+                public creator: string;
+
+                /** Denom symbol. */
+                public symbol: string;
+
+                /**
+                 * Encodes the specified Denom message. Does not implicitly {@link cudosnode.cudosnode.nft.Denom.verify|verify} messages.
+                 * @param message Denom message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IDenom, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Denom message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.Denom.verify|verify} messages.
+                 * @param message Denom message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IDenom, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Denom message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Denom
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.Denom;
+
+                /**
+                 * Decodes a Denom message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Denom
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.Denom;
+
+                /**
+                 * Verifies a Denom message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Denom message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Denom
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.Denom;
+
+                /**
+                 * Creates a plain object from a Denom message. Also converts values to other types if specified.
+                 * @param message Denom
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.Denom, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Denom to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a IDCollection. */
+            interface IIDCollection {
+
+                /** IDCollection denom_id */
+                denom_id?: (string|null);
+
+                /** IDCollection token_ids */
+                token_ids?: (string[]|null);
+            }
+
+            /** Represents a IDCollection. */
+            class IDCollection implements IIDCollection {
+
+                /**
+                 * Constructs a new IDCollection.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IIDCollection);
+
+                /** IDCollection denom_id. */
+                public denom_id: string;
+
+                /** IDCollection token_ids. */
+                public token_ids: string[];
+
+                /**
+                 * Encodes the specified IDCollection message. Does not implicitly {@link cudosnode.cudosnode.nft.IDCollection.verify|verify} messages.
+                 * @param message IDCollection message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IIDCollection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified IDCollection message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.IDCollection.verify|verify} messages.
+                 * @param message IDCollection message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IIDCollection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a IDCollection message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns IDCollection
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.IDCollection;
+
+                /**
+                 * Decodes a IDCollection message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns IDCollection
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.IDCollection;
+
+                /**
+                 * Verifies a IDCollection message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a IDCollection message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns IDCollection
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.IDCollection;
+
+                /**
+                 * Creates a plain object from a IDCollection message. Also converts values to other types if specified.
+                 * @param message IDCollection
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.IDCollection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this IDCollection to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of an Owner. */
+            interface IOwner {
+
+                /** Owner address */
+                address?: (string|null);
+
+                /** Owner id_collections */
+                id_collections?: (cudosnode.cudosnode.nft.IIDCollection[]|null);
+            }
+
+            /** Represents an Owner. */
+            class Owner implements IOwner {
+
+                /**
+                 * Constructs a new Owner.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IOwner);
+
+                /** Owner address. */
+                public address: string;
+
+                /** Owner id_collections. */
+                public id_collections: cudosnode.cudosnode.nft.IIDCollection[];
+
+                /**
+                 * Encodes the specified Owner message. Does not implicitly {@link cudosnode.cudosnode.nft.Owner.verify|verify} messages.
+                 * @param message Owner message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IOwner, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Owner message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.Owner.verify|verify} messages.
+                 * @param message Owner message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IOwner, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an Owner message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Owner
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.Owner;
+
+                /**
+                 * Decodes an Owner message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Owner
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.Owner;
+
+                /**
+                 * Verifies an Owner message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an Owner message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Owner
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.Owner;
+
+                /**
+                 * Creates a plain object from an Owner message. Also converts values to other types if specified.
+                 * @param message Owner
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.Owner, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Owner to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a Collection. */
+            interface ICollection {
+
+                /** Collection denom */
+                denom?: (cudosnode.cudosnode.nft.IDenom|null);
+
+                /** Collection nfts */
+                nfts?: (cudosnode.cudosnode.nft.IBaseNFT[]|null);
+            }
+
+            /** Represents a Collection. */
+            class Collection implements ICollection {
+
+                /**
+                 * Constructs a new Collection.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.ICollection);
+
+                /** Collection denom. */
+                public denom?: (cudosnode.cudosnode.nft.IDenom|null);
+
+                /** Collection nfts. */
+                public nfts: cudosnode.cudosnode.nft.IBaseNFT[];
+
+                /**
+                 * Encodes the specified Collection message. Does not implicitly {@link cudosnode.cudosnode.nft.Collection.verify|verify} messages.
+                 * @param message Collection message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.ICollection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Collection message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.Collection.verify|verify} messages.
+                 * @param message Collection message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.ICollection, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Collection message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Collection
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.Collection;
+
+                /**
+                 * Decodes a Collection message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Collection
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.Collection;
+
+                /**
+                 * Verifies a Collection message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Collection message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Collection
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.Collection;
+
+                /**
+                 * Creates a plain object from a Collection message. Also converts values to other types if specified.
+                 * @param message Collection
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.Collection, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Collection to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of an ApprovedAddresses. */
+            interface IApprovedAddresses {
+
+                /** ApprovedAddresses approvedAddresses */
+                approvedAddresses?: ({ [k: string]: cudosnode.cudosnode.nft.IApprovedAddressesData }|null);
+            }
+
+            /** Represents an ApprovedAddresses. */
+            class ApprovedAddresses implements IApprovedAddresses {
+
+                /**
+                 * Constructs a new ApprovedAddresses.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IApprovedAddresses);
+
+                /** ApprovedAddresses approvedAddresses. */
+                public approvedAddresses: { [k: string]: cudosnode.cudosnode.nft.IApprovedAddressesData };
+
+                /**
+                 * Encodes the specified ApprovedAddresses message. Does not implicitly {@link cudosnode.cudosnode.nft.ApprovedAddresses.verify|verify} messages.
+                 * @param message ApprovedAddresses message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IApprovedAddresses, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ApprovedAddresses message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.ApprovedAddresses.verify|verify} messages.
+                 * @param message ApprovedAddresses message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IApprovedAddresses, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ApprovedAddresses message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ApprovedAddresses
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.ApprovedAddresses;
+
+                /**
+                 * Decodes an ApprovedAddresses message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ApprovedAddresses
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.ApprovedAddresses;
+
+                /**
+                 * Verifies an ApprovedAddresses message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ApprovedAddresses message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ApprovedAddresses
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.ApprovedAddresses;
+
+                /**
+                 * Creates a plain object from an ApprovedAddresses message. Also converts values to other types if specified.
+                 * @param message ApprovedAddresses
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.ApprovedAddresses, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ApprovedAddresses to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of an ApprovedAddressesData. */
+            interface IApprovedAddressesData {
+
+                /** ApprovedAddressesData approvedAddressesData */
+                approvedAddressesData?: ({ [k: string]: boolean }|null);
+            }
+
+            /** Represents an ApprovedAddressesData. */
+            class ApprovedAddressesData implements IApprovedAddressesData {
+
+                /**
+                 * Constructs a new ApprovedAddressesData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IApprovedAddressesData);
+
+                /** ApprovedAddressesData approvedAddressesData. */
+                public approvedAddressesData: { [k: string]: boolean };
+
+                /**
+                 * Encodes the specified ApprovedAddressesData message. Does not implicitly {@link cudosnode.cudosnode.nft.ApprovedAddressesData.verify|verify} messages.
+                 * @param message ApprovedAddressesData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IApprovedAddressesData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ApprovedAddressesData message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.ApprovedAddressesData.verify|verify} messages.
+                 * @param message ApprovedAddressesData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IApprovedAddressesData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ApprovedAddressesData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ApprovedAddressesData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.ApprovedAddressesData;
+
+                /**
+                 * Decodes an ApprovedAddressesData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ApprovedAddressesData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.ApprovedAddressesData;
+
+                /**
+                 * Verifies an ApprovedAddressesData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ApprovedAddressesData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ApprovedAddressesData
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.ApprovedAddressesData;
+
+                /**
+                 * Creates a plain object from an ApprovedAddressesData message. Also converts values to other types if specified.
+                 * @param message ApprovedAddressesData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.ApprovedAddressesData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ApprovedAddressesData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Represents a Query */
+            class Query extends $protobuf.rpc.Service {
+
+                /**
+                 * Constructs a new Query service.
+                 * @param rpcImpl RPC implementation
+                 * @param [requestDelimited=false] Whether requests are length-delimited
+                 * @param [responseDelimited=false] Whether responses are length-delimited
+                 */
+                constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                /**
+                 * Calls Supply.
+                 * @param request QuerySupplyRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and QuerySupplyResponse
+                 */
+                public supply(request: cudosnode.cudosnode.nft.IQuerySupplyRequest, callback: cudosnode.cudosnode.nft.Query.SupplyCallback): void;
+
+                /**
+                 * Calls Supply.
+                 * @param request QuerySupplyRequest message or plain object
+                 * @returns Promise
+                 */
+                public supply(request: cudosnode.cudosnode.nft.IQuerySupplyRequest): Promise<cudosnode.cudosnode.nft.QuerySupplyResponse>;
+
+                /**
+                 * Calls Owner.
+                 * @param request QueryOwnerRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and QueryOwnerResponse
+                 */
+                public owner(request: cudosnode.cudosnode.nft.IQueryOwnerRequest, callback: cudosnode.cudosnode.nft.Query.OwnerCallback): void;
+
+                /**
+                 * Calls Owner.
+                 * @param request QueryOwnerRequest message or plain object
+                 * @returns Promise
+                 */
+                public owner(request: cudosnode.cudosnode.nft.IQueryOwnerRequest): Promise<cudosnode.cudosnode.nft.QueryOwnerResponse>;
+
+                /**
+                 * Calls Collection.
+                 * @param request QueryCollectionRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and QueryCollectionResponse
+                 */
+                public collection(request: cudosnode.cudosnode.nft.IQueryCollectionRequest, callback: cudosnode.cudosnode.nft.Query.CollectionCallback): void;
+
+                /**
+                 * Calls Collection.
+                 * @param request QueryCollectionRequest message or plain object
+                 * @returns Promise
+                 */
+                public collection(request: cudosnode.cudosnode.nft.IQueryCollectionRequest): Promise<cudosnode.cudosnode.nft.QueryCollectionResponse>;
+
+                /**
+                 * Calls Denom.
+                 * @param request QueryDenomRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and QueryDenomResponse
+                 */
+                public denom(request: cudosnode.cudosnode.nft.IQueryDenomRequest, callback: cudosnode.cudosnode.nft.Query.DenomCallback): void;
+
+                /**
+                 * Calls Denom.
+                 * @param request QueryDenomRequest message or plain object
+                 * @returns Promise
+                 */
+                public denom(request: cudosnode.cudosnode.nft.IQueryDenomRequest): Promise<cudosnode.cudosnode.nft.QueryDenomResponse>;
+
+                /**
+                 * Calls DenomByName.
+                 * @param request QueryDenomByNameRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and QueryDenomByNameResponse
+                 */
+                public denomByName(request: cudosnode.cudosnode.nft.IQueryDenomByNameRequest, callback: cudosnode.cudosnode.nft.Query.DenomByNameCallback): void;
+
+                /**
+                 * Calls DenomByName.
+                 * @param request QueryDenomByNameRequest message or plain object
+                 * @returns Promise
+                 */
+                public denomByName(request: cudosnode.cudosnode.nft.IQueryDenomByNameRequest): Promise<cudosnode.cudosnode.nft.QueryDenomByNameResponse>;
+
+                /**
+                 * Calls DenomBySymbol.
+                 * @param request QueryDenomBySymbolRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and QueryDenomBySymbolResponse
+                 */
+                public denomBySymbol(request: cudosnode.cudosnode.nft.IQueryDenomBySymbolRequest, callback: cudosnode.cudosnode.nft.Query.DenomBySymbolCallback): void;
+
+                /**
+                 * Calls DenomBySymbol.
+                 * @param request QueryDenomBySymbolRequest message or plain object
+                 * @returns Promise
+                 */
+                public denomBySymbol(request: cudosnode.cudosnode.nft.IQueryDenomBySymbolRequest): Promise<cudosnode.cudosnode.nft.QueryDenomBySymbolResponse>;
+
+                /**
+                 * Calls Denoms.
+                 * @param request QueryDenomsRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and QueryDenomsResponse
+                 */
+                public denoms(request: cudosnode.cudosnode.nft.IQueryDenomsRequest, callback: cudosnode.cudosnode.nft.Query.DenomsCallback): void;
+
+                /**
+                 * Calls Denoms.
+                 * @param request QueryDenomsRequest message or plain object
+                 * @returns Promise
+                 */
+                public denoms(request: cudosnode.cudosnode.nft.IQueryDenomsRequest): Promise<cudosnode.cudosnode.nft.QueryDenomsResponse>;
+
+                /**
+                 * Calls NFT.
+                 * @param request QueryNFTRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and QueryNFTResponse
+                 */
+                public nFT(request: cudosnode.cudosnode.nft.IQueryNFTRequest, callback: cudosnode.cudosnode.nft.Query.NFTCallback): void;
+
+                /**
+                 * Calls NFT.
+                 * @param request QueryNFTRequest message or plain object
+                 * @returns Promise
+                 */
+                public nFT(request: cudosnode.cudosnode.nft.IQueryNFTRequest): Promise<cudosnode.cudosnode.nft.QueryNFTResponse>;
+
+                /**
+                 * Calls GetApprovalsNFT.
+                 * @param request QueryApprovalsNFTRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and QueryApprovalsNFTResponse
+                 */
+                public getApprovalsNFT(request: cudosnode.cudosnode.nft.IQueryApprovalsNFTRequest, callback: cudosnode.cudosnode.nft.Query.GetApprovalsNFTCallback): void;
+
+                /**
+                 * Calls GetApprovalsNFT.
+                 * @param request QueryApprovalsNFTRequest message or plain object
+                 * @returns Promise
+                 */
+                public getApprovalsNFT(request: cudosnode.cudosnode.nft.IQueryApprovalsNFTRequest): Promise<cudosnode.cudosnode.nft.QueryApprovalsNFTResponse>;
+
+                /**
+                 * Calls QueryApprovalsIsApprovedForAll.
+                 * @param request QueryApprovalsIsApprovedForAllRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and QueryApprovalsIsApprovedForAllResponse
+                 */
+                public queryApprovalsIsApprovedForAll(request: cudosnode.cudosnode.nft.IQueryApprovalsIsApprovedForAllRequest, callback: cudosnode.cudosnode.nft.Query.QueryApprovalsIsApprovedForAllCallback): void;
+
+                /**
+                 * Calls QueryApprovalsIsApprovedForAll.
+                 * @param request QueryApprovalsIsApprovedForAllRequest message or plain object
+                 * @returns Promise
+                 */
+                public queryApprovalsIsApprovedForAll(request: cudosnode.cudosnode.nft.IQueryApprovalsIsApprovedForAllRequest): Promise<cudosnode.cudosnode.nft.QueryApprovalsIsApprovedForAllResponse>;
+            }
+
+            namespace Query {
+
+                /**
+                 * Callback as used by {@link cudosnode.cudosnode.nft.Query#supply}.
+                 * @param error Error, if any
+                 * @param [response] QuerySupplyResponse
+                 */
+                type SupplyCallback = (error: (Error|null), response?: cudosnode.cudosnode.nft.QuerySupplyResponse) => void;
+
+                /**
+                 * Callback as used by {@link cudosnode.cudosnode.nft.Query#owner}.
+                 * @param error Error, if any
+                 * @param [response] QueryOwnerResponse
+                 */
+                type OwnerCallback = (error: (Error|null), response?: cudosnode.cudosnode.nft.QueryOwnerResponse) => void;
+
+                /**
+                 * Callback as used by {@link cudosnode.cudosnode.nft.Query#collection}.
+                 * @param error Error, if any
+                 * @param [response] QueryCollectionResponse
+                 */
+                type CollectionCallback = (error: (Error|null), response?: cudosnode.cudosnode.nft.QueryCollectionResponse) => void;
+
+                /**
+                 * Callback as used by {@link cudosnode.cudosnode.nft.Query#denom}.
+                 * @param error Error, if any
+                 * @param [response] QueryDenomResponse
+                 */
+                type DenomCallback = (error: (Error|null), response?: cudosnode.cudosnode.nft.QueryDenomResponse) => void;
+
+                /**
+                 * Callback as used by {@link cudosnode.cudosnode.nft.Query#denomByName}.
+                 * @param error Error, if any
+                 * @param [response] QueryDenomByNameResponse
+                 */
+                type DenomByNameCallback = (error: (Error|null), response?: cudosnode.cudosnode.nft.QueryDenomByNameResponse) => void;
+
+                /**
+                 * Callback as used by {@link cudosnode.cudosnode.nft.Query#denomBySymbol}.
+                 * @param error Error, if any
+                 * @param [response] QueryDenomBySymbolResponse
+                 */
+                type DenomBySymbolCallback = (error: (Error|null), response?: cudosnode.cudosnode.nft.QueryDenomBySymbolResponse) => void;
+
+                /**
+                 * Callback as used by {@link cudosnode.cudosnode.nft.Query#denoms}.
+                 * @param error Error, if any
+                 * @param [response] QueryDenomsResponse
+                 */
+                type DenomsCallback = (error: (Error|null), response?: cudosnode.cudosnode.nft.QueryDenomsResponse) => void;
+
+                /**
+                 * Callback as used by {@link cudosnode.cudosnode.nft.Query#nFT}.
+                 * @param error Error, if any
+                 * @param [response] QueryNFTResponse
+                 */
+                type NFTCallback = (error: (Error|null), response?: cudosnode.cudosnode.nft.QueryNFTResponse) => void;
+
+                /**
+                 * Callback as used by {@link cudosnode.cudosnode.nft.Query#getApprovalsNFT}.
+                 * @param error Error, if any
+                 * @param [response] QueryApprovalsNFTResponse
+                 */
+                type GetApprovalsNFTCallback = (error: (Error|null), response?: cudosnode.cudosnode.nft.QueryApprovalsNFTResponse) => void;
+
+                /**
+                 * Callback as used by {@link cudosnode.cudosnode.nft.Query#queryApprovalsIsApprovedForAll}.
+                 * @param error Error, if any
+                 * @param [response] QueryApprovalsIsApprovedForAllResponse
+                 */
+                type QueryApprovalsIsApprovedForAllCallback = (error: (Error|null), response?: cudosnode.cudosnode.nft.QueryApprovalsIsApprovedForAllResponse) => void;
+            }
+
+            /** Properties of a QuerySupplyRequest. */
+            interface IQuerySupplyRequest {
+
+                /** QuerySupplyRequest denom_id */
+                denom_id?: (string|null);
+
+                /** QuerySupplyRequest owner */
+                owner?: (string|null);
+            }
+
+            /** Represents a QuerySupplyRequest. */
+            class QuerySupplyRequest implements IQuerySupplyRequest {
+
+                /**
+                 * Constructs a new QuerySupplyRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IQuerySupplyRequest);
+
+                /** QuerySupplyRequest denom_id. */
+                public denom_id: string;
+
+                /** QuerySupplyRequest owner. */
+                public owner: string;
+
+                /**
+                 * Encodes the specified QuerySupplyRequest message. Does not implicitly {@link cudosnode.cudosnode.nft.QuerySupplyRequest.verify|verify} messages.
+                 * @param message QuerySupplyRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IQuerySupplyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QuerySupplyRequest message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.QuerySupplyRequest.verify|verify} messages.
+                 * @param message QuerySupplyRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IQuerySupplyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QuerySupplyRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QuerySupplyRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.QuerySupplyRequest;
+
+                /**
+                 * Decodes a QuerySupplyRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QuerySupplyRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.QuerySupplyRequest;
+
+                /**
+                 * Verifies a QuerySupplyRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QuerySupplyRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QuerySupplyRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.QuerySupplyRequest;
+
+                /**
+                 * Creates a plain object from a QuerySupplyRequest message. Also converts values to other types if specified.
+                 * @param message QuerySupplyRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.QuerySupplyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QuerySupplyRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QuerySupplyResponse. */
+            interface IQuerySupplyResponse {
+
+                /** QuerySupplyResponse amount */
+                amount?: (Long|null);
+            }
+
+            /** Represents a QuerySupplyResponse. */
+            class QuerySupplyResponse implements IQuerySupplyResponse {
+
+                /**
+                 * Constructs a new QuerySupplyResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IQuerySupplyResponse);
+
+                /** QuerySupplyResponse amount. */
+                public amount: Long;
+
+                /**
+                 * Encodes the specified QuerySupplyResponse message. Does not implicitly {@link cudosnode.cudosnode.nft.QuerySupplyResponse.verify|verify} messages.
+                 * @param message QuerySupplyResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IQuerySupplyResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QuerySupplyResponse message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.QuerySupplyResponse.verify|verify} messages.
+                 * @param message QuerySupplyResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IQuerySupplyResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QuerySupplyResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QuerySupplyResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.QuerySupplyResponse;
+
+                /**
+                 * Decodes a QuerySupplyResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QuerySupplyResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.QuerySupplyResponse;
+
+                /**
+                 * Verifies a QuerySupplyResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QuerySupplyResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QuerySupplyResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.QuerySupplyResponse;
+
+                /**
+                 * Creates a plain object from a QuerySupplyResponse message. Also converts values to other types if specified.
+                 * @param message QuerySupplyResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.QuerySupplyResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QuerySupplyResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryOwnerRequest. */
+            interface IQueryOwnerRequest {
+
+                /** QueryOwnerRequest denom_id */
+                denom_id?: (string|null);
+
+                /** QueryOwnerRequest owner */
+                owner?: (string|null);
+
+                /** QueryOwnerRequest pagination */
+                pagination?: (cosmos.base.query.v1beta1.IPageRequest|null);
+            }
+
+            /** Represents a QueryOwnerRequest. */
+            class QueryOwnerRequest implements IQueryOwnerRequest {
+
+                /**
+                 * Constructs a new QueryOwnerRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IQueryOwnerRequest);
+
+                /** QueryOwnerRequest denom_id. */
+                public denom_id: string;
+
+                /** QueryOwnerRequest owner. */
+                public owner: string;
+
+                /** QueryOwnerRequest pagination. */
+                public pagination?: (cosmos.base.query.v1beta1.IPageRequest|null);
+
+                /**
+                 * Encodes the specified QueryOwnerRequest message. Does not implicitly {@link cudosnode.cudosnode.nft.QueryOwnerRequest.verify|verify} messages.
+                 * @param message QueryOwnerRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IQueryOwnerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryOwnerRequest message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.QueryOwnerRequest.verify|verify} messages.
+                 * @param message QueryOwnerRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IQueryOwnerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryOwnerRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryOwnerRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.QueryOwnerRequest;
+
+                /**
+                 * Decodes a QueryOwnerRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryOwnerRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.QueryOwnerRequest;
+
+                /**
+                 * Verifies a QueryOwnerRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryOwnerRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryOwnerRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.QueryOwnerRequest;
+
+                /**
+                 * Creates a plain object from a QueryOwnerRequest message. Also converts values to other types if specified.
+                 * @param message QueryOwnerRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.QueryOwnerRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryOwnerRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryOwnerResponse. */
+            interface IQueryOwnerResponse {
+
+                /** QueryOwnerResponse owner */
+                owner?: (cudosnode.cudosnode.nft.IOwner|null);
+
+                /** QueryOwnerResponse pagination */
+                pagination?: (cosmos.base.query.v1beta1.IPageResponse|null);
+            }
+
+            /** Represents a QueryOwnerResponse. */
+            class QueryOwnerResponse implements IQueryOwnerResponse {
+
+                /**
+                 * Constructs a new QueryOwnerResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IQueryOwnerResponse);
+
+                /** QueryOwnerResponse owner. */
+                public owner?: (cudosnode.cudosnode.nft.IOwner|null);
+
+                /** QueryOwnerResponse pagination. */
+                public pagination?: (cosmos.base.query.v1beta1.IPageResponse|null);
+
+                /**
+                 * Encodes the specified QueryOwnerResponse message. Does not implicitly {@link cudosnode.cudosnode.nft.QueryOwnerResponse.verify|verify} messages.
+                 * @param message QueryOwnerResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IQueryOwnerResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryOwnerResponse message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.QueryOwnerResponse.verify|verify} messages.
+                 * @param message QueryOwnerResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IQueryOwnerResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryOwnerResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryOwnerResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.QueryOwnerResponse;
+
+                /**
+                 * Decodes a QueryOwnerResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryOwnerResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.QueryOwnerResponse;
+
+                /**
+                 * Verifies a QueryOwnerResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryOwnerResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryOwnerResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.QueryOwnerResponse;
+
+                /**
+                 * Creates a plain object from a QueryOwnerResponse message. Also converts values to other types if specified.
+                 * @param message QueryOwnerResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.QueryOwnerResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryOwnerResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryCollectionRequest. */
+            interface IQueryCollectionRequest {
+
+                /** QueryCollectionRequest denom_id */
+                denom_id?: (string|null);
+
+                /** QueryCollectionRequest pagination */
+                pagination?: (cosmos.base.query.v1beta1.IPageRequest|null);
+            }
+
+            /** Represents a QueryCollectionRequest. */
+            class QueryCollectionRequest implements IQueryCollectionRequest {
+
+                /**
+                 * Constructs a new QueryCollectionRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IQueryCollectionRequest);
+
+                /** QueryCollectionRequest denom_id. */
+                public denom_id: string;
+
+                /** QueryCollectionRequest pagination. */
+                public pagination?: (cosmos.base.query.v1beta1.IPageRequest|null);
+
+                /**
+                 * Encodes the specified QueryCollectionRequest message. Does not implicitly {@link cudosnode.cudosnode.nft.QueryCollectionRequest.verify|verify} messages.
+                 * @param message QueryCollectionRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IQueryCollectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryCollectionRequest message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.QueryCollectionRequest.verify|verify} messages.
+                 * @param message QueryCollectionRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IQueryCollectionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryCollectionRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryCollectionRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.QueryCollectionRequest;
+
+                /**
+                 * Decodes a QueryCollectionRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryCollectionRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.QueryCollectionRequest;
+
+                /**
+                 * Verifies a QueryCollectionRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryCollectionRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryCollectionRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.QueryCollectionRequest;
+
+                /**
+                 * Creates a plain object from a QueryCollectionRequest message. Also converts values to other types if specified.
+                 * @param message QueryCollectionRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.QueryCollectionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryCollectionRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryCollectionResponse. */
+            interface IQueryCollectionResponse {
+
+                /** QueryCollectionResponse collection */
+                collection?: (cudosnode.cudosnode.nft.ICollection|null);
+
+                /** QueryCollectionResponse pagination */
+                pagination?: (cosmos.base.query.v1beta1.IPageResponse|null);
+            }
+
+            /** Represents a QueryCollectionResponse. */
+            class QueryCollectionResponse implements IQueryCollectionResponse {
+
+                /**
+                 * Constructs a new QueryCollectionResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IQueryCollectionResponse);
+
+                /** QueryCollectionResponse collection. */
+                public collection?: (cudosnode.cudosnode.nft.ICollection|null);
+
+                /** QueryCollectionResponse pagination. */
+                public pagination?: (cosmos.base.query.v1beta1.IPageResponse|null);
+
+                /**
+                 * Encodes the specified QueryCollectionResponse message. Does not implicitly {@link cudosnode.cudosnode.nft.QueryCollectionResponse.verify|verify} messages.
+                 * @param message QueryCollectionResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IQueryCollectionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryCollectionResponse message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.QueryCollectionResponse.verify|verify} messages.
+                 * @param message QueryCollectionResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IQueryCollectionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryCollectionResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryCollectionResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.QueryCollectionResponse;
+
+                /**
+                 * Decodes a QueryCollectionResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryCollectionResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.QueryCollectionResponse;
+
+                /**
+                 * Verifies a QueryCollectionResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryCollectionResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryCollectionResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.QueryCollectionResponse;
+
+                /**
+                 * Creates a plain object from a QueryCollectionResponse message. Also converts values to other types if specified.
+                 * @param message QueryCollectionResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.QueryCollectionResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryCollectionResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryDenomRequest. */
+            interface IQueryDenomRequest {
+
+                /** QueryDenomRequest denom_id */
+                denom_id?: (string|null);
+            }
+
+            /** Represents a QueryDenomRequest. */
+            class QueryDenomRequest implements IQueryDenomRequest {
+
+                /**
+                 * Constructs a new QueryDenomRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IQueryDenomRequest);
+
+                /** QueryDenomRequest denom_id. */
+                public denom_id: string;
+
+                /**
+                 * Encodes the specified QueryDenomRequest message. Does not implicitly {@link cudosnode.cudosnode.nft.QueryDenomRequest.verify|verify} messages.
+                 * @param message QueryDenomRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IQueryDenomRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryDenomRequest message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.QueryDenomRequest.verify|verify} messages.
+                 * @param message QueryDenomRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IQueryDenomRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryDenomRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryDenomRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.QueryDenomRequest;
+
+                /**
+                 * Decodes a QueryDenomRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryDenomRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.QueryDenomRequest;
+
+                /**
+                 * Verifies a QueryDenomRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryDenomRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryDenomRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.QueryDenomRequest;
+
+                /**
+                 * Creates a plain object from a QueryDenomRequest message. Also converts values to other types if specified.
+                 * @param message QueryDenomRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.QueryDenomRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryDenomRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryDenomResponse. */
+            interface IQueryDenomResponse {
+
+                /** QueryDenomResponse denom */
+                denom?: (cudosnode.cudosnode.nft.IDenom|null);
+            }
+
+            /** Represents a QueryDenomResponse. */
+            class QueryDenomResponse implements IQueryDenomResponse {
+
+                /**
+                 * Constructs a new QueryDenomResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IQueryDenomResponse);
+
+                /** QueryDenomResponse denom. */
+                public denom?: (cudosnode.cudosnode.nft.IDenom|null);
+
+                /**
+                 * Encodes the specified QueryDenomResponse message. Does not implicitly {@link cudosnode.cudosnode.nft.QueryDenomResponse.verify|verify} messages.
+                 * @param message QueryDenomResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IQueryDenomResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryDenomResponse message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.QueryDenomResponse.verify|verify} messages.
+                 * @param message QueryDenomResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IQueryDenomResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryDenomResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryDenomResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.QueryDenomResponse;
+
+                /**
+                 * Decodes a QueryDenomResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryDenomResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.QueryDenomResponse;
+
+                /**
+                 * Verifies a QueryDenomResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryDenomResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryDenomResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.QueryDenomResponse;
+
+                /**
+                 * Creates a plain object from a QueryDenomResponse message. Also converts values to other types if specified.
+                 * @param message QueryDenomResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.QueryDenomResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryDenomResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryDenomByNameRequest. */
+            interface IQueryDenomByNameRequest {
+
+                /** QueryDenomByNameRequest denom_name */
+                denom_name?: (string|null);
+            }
+
+            /** Represents a QueryDenomByNameRequest. */
+            class QueryDenomByNameRequest implements IQueryDenomByNameRequest {
+
+                /**
+                 * Constructs a new QueryDenomByNameRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IQueryDenomByNameRequest);
+
+                /** QueryDenomByNameRequest denom_name. */
+                public denom_name: string;
+
+                /**
+                 * Encodes the specified QueryDenomByNameRequest message. Does not implicitly {@link cudosnode.cudosnode.nft.QueryDenomByNameRequest.verify|verify} messages.
+                 * @param message QueryDenomByNameRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IQueryDenomByNameRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryDenomByNameRequest message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.QueryDenomByNameRequest.verify|verify} messages.
+                 * @param message QueryDenomByNameRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IQueryDenomByNameRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryDenomByNameRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryDenomByNameRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.QueryDenomByNameRequest;
+
+                /**
+                 * Decodes a QueryDenomByNameRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryDenomByNameRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.QueryDenomByNameRequest;
+
+                /**
+                 * Verifies a QueryDenomByNameRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryDenomByNameRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryDenomByNameRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.QueryDenomByNameRequest;
+
+                /**
+                 * Creates a plain object from a QueryDenomByNameRequest message. Also converts values to other types if specified.
+                 * @param message QueryDenomByNameRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.QueryDenomByNameRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryDenomByNameRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryDenomBySymbolRequest. */
+            interface IQueryDenomBySymbolRequest {
+
+                /** QueryDenomBySymbolRequest symbol */
+                symbol?: (string|null);
+            }
+
+            /** Represents a QueryDenomBySymbolRequest. */
+            class QueryDenomBySymbolRequest implements IQueryDenomBySymbolRequest {
+
+                /**
+                 * Constructs a new QueryDenomBySymbolRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IQueryDenomBySymbolRequest);
+
+                /** QueryDenomBySymbolRequest symbol. */
+                public symbol: string;
+
+                /**
+                 * Encodes the specified QueryDenomBySymbolRequest message. Does not implicitly {@link cudosnode.cudosnode.nft.QueryDenomBySymbolRequest.verify|verify} messages.
+                 * @param message QueryDenomBySymbolRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IQueryDenomBySymbolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryDenomBySymbolRequest message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.QueryDenomBySymbolRequest.verify|verify} messages.
+                 * @param message QueryDenomBySymbolRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IQueryDenomBySymbolRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryDenomBySymbolRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryDenomBySymbolRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.QueryDenomBySymbolRequest;
+
+                /**
+                 * Decodes a QueryDenomBySymbolRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryDenomBySymbolRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.QueryDenomBySymbolRequest;
+
+                /**
+                 * Verifies a QueryDenomBySymbolRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryDenomBySymbolRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryDenomBySymbolRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.QueryDenomBySymbolRequest;
+
+                /**
+                 * Creates a plain object from a QueryDenomBySymbolRequest message. Also converts values to other types if specified.
+                 * @param message QueryDenomBySymbolRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.QueryDenomBySymbolRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryDenomBySymbolRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryDenomByNameResponse. */
+            interface IQueryDenomByNameResponse {
+
+                /** QueryDenomByNameResponse denom */
+                denom?: (cudosnode.cudosnode.nft.IDenom|null);
+            }
+
+            /** Represents a QueryDenomByNameResponse. */
+            class QueryDenomByNameResponse implements IQueryDenomByNameResponse {
+
+                /**
+                 * Constructs a new QueryDenomByNameResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IQueryDenomByNameResponse);
+
+                /** QueryDenomByNameResponse denom. */
+                public denom?: (cudosnode.cudosnode.nft.IDenom|null);
+
+                /**
+                 * Encodes the specified QueryDenomByNameResponse message. Does not implicitly {@link cudosnode.cudosnode.nft.QueryDenomByNameResponse.verify|verify} messages.
+                 * @param message QueryDenomByNameResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IQueryDenomByNameResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryDenomByNameResponse message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.QueryDenomByNameResponse.verify|verify} messages.
+                 * @param message QueryDenomByNameResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IQueryDenomByNameResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryDenomByNameResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryDenomByNameResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.QueryDenomByNameResponse;
+
+                /**
+                 * Decodes a QueryDenomByNameResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryDenomByNameResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.QueryDenomByNameResponse;
+
+                /**
+                 * Verifies a QueryDenomByNameResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryDenomByNameResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryDenomByNameResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.QueryDenomByNameResponse;
+
+                /**
+                 * Creates a plain object from a QueryDenomByNameResponse message. Also converts values to other types if specified.
+                 * @param message QueryDenomByNameResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.QueryDenomByNameResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryDenomByNameResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryDenomBySymbolResponse. */
+            interface IQueryDenomBySymbolResponse {
+
+                /** QueryDenomBySymbolResponse denom */
+                denom?: (cudosnode.cudosnode.nft.IDenom|null);
+            }
+
+            /** Represents a QueryDenomBySymbolResponse. */
+            class QueryDenomBySymbolResponse implements IQueryDenomBySymbolResponse {
+
+                /**
+                 * Constructs a new QueryDenomBySymbolResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IQueryDenomBySymbolResponse);
+
+                /** QueryDenomBySymbolResponse denom. */
+                public denom?: (cudosnode.cudosnode.nft.IDenom|null);
+
+                /**
+                 * Encodes the specified QueryDenomBySymbolResponse message. Does not implicitly {@link cudosnode.cudosnode.nft.QueryDenomBySymbolResponse.verify|verify} messages.
+                 * @param message QueryDenomBySymbolResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IQueryDenomBySymbolResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryDenomBySymbolResponse message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.QueryDenomBySymbolResponse.verify|verify} messages.
+                 * @param message QueryDenomBySymbolResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IQueryDenomBySymbolResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryDenomBySymbolResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryDenomBySymbolResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.QueryDenomBySymbolResponse;
+
+                /**
+                 * Decodes a QueryDenomBySymbolResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryDenomBySymbolResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.QueryDenomBySymbolResponse;
+
+                /**
+                 * Verifies a QueryDenomBySymbolResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryDenomBySymbolResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryDenomBySymbolResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.QueryDenomBySymbolResponse;
+
+                /**
+                 * Creates a plain object from a QueryDenomBySymbolResponse message. Also converts values to other types if specified.
+                 * @param message QueryDenomBySymbolResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.QueryDenomBySymbolResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryDenomBySymbolResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryDenomsRequest. */
+            interface IQueryDenomsRequest {
+
+                /** QueryDenomsRequest pagination */
+                pagination?: (cosmos.base.query.v1beta1.IPageRequest|null);
+            }
+
+            /** Represents a QueryDenomsRequest. */
+            class QueryDenomsRequest implements IQueryDenomsRequest {
+
+                /**
+                 * Constructs a new QueryDenomsRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IQueryDenomsRequest);
+
+                /** QueryDenomsRequest pagination. */
+                public pagination?: (cosmos.base.query.v1beta1.IPageRequest|null);
+
+                /**
+                 * Encodes the specified QueryDenomsRequest message. Does not implicitly {@link cudosnode.cudosnode.nft.QueryDenomsRequest.verify|verify} messages.
+                 * @param message QueryDenomsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IQueryDenomsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryDenomsRequest message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.QueryDenomsRequest.verify|verify} messages.
+                 * @param message QueryDenomsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IQueryDenomsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryDenomsRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryDenomsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.QueryDenomsRequest;
+
+                /**
+                 * Decodes a QueryDenomsRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryDenomsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.QueryDenomsRequest;
+
+                /**
+                 * Verifies a QueryDenomsRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryDenomsRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryDenomsRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.QueryDenomsRequest;
+
+                /**
+                 * Creates a plain object from a QueryDenomsRequest message. Also converts values to other types if specified.
+                 * @param message QueryDenomsRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.QueryDenomsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryDenomsRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryDenomsResponse. */
+            interface IQueryDenomsResponse {
+
+                /** QueryDenomsResponse denoms */
+                denoms?: (cudosnode.cudosnode.nft.IDenom[]|null);
+
+                /** QueryDenomsResponse pagination */
+                pagination?: (cosmos.base.query.v1beta1.IPageResponse|null);
+            }
+
+            /** Represents a QueryDenomsResponse. */
+            class QueryDenomsResponse implements IQueryDenomsResponse {
+
+                /**
+                 * Constructs a new QueryDenomsResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IQueryDenomsResponse);
+
+                /** QueryDenomsResponse denoms. */
+                public denoms: cudosnode.cudosnode.nft.IDenom[];
+
+                /** QueryDenomsResponse pagination. */
+                public pagination?: (cosmos.base.query.v1beta1.IPageResponse|null);
+
+                /**
+                 * Encodes the specified QueryDenomsResponse message. Does not implicitly {@link cudosnode.cudosnode.nft.QueryDenomsResponse.verify|verify} messages.
+                 * @param message QueryDenomsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IQueryDenomsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryDenomsResponse message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.QueryDenomsResponse.verify|verify} messages.
+                 * @param message QueryDenomsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IQueryDenomsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryDenomsResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryDenomsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.QueryDenomsResponse;
+
+                /**
+                 * Decodes a QueryDenomsResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryDenomsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.QueryDenomsResponse;
+
+                /**
+                 * Verifies a QueryDenomsResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryDenomsResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryDenomsResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.QueryDenomsResponse;
+
+                /**
+                 * Creates a plain object from a QueryDenomsResponse message. Also converts values to other types if specified.
+                 * @param message QueryDenomsResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.QueryDenomsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryDenomsResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryNFTRequest. */
+            interface IQueryNFTRequest {
+
+                /** QueryNFTRequest denom_id */
+                denom_id?: (string|null);
+
+                /** QueryNFTRequest token_id */
+                token_id?: (string|null);
+            }
+
+            /** Represents a QueryNFTRequest. */
+            class QueryNFTRequest implements IQueryNFTRequest {
+
+                /**
+                 * Constructs a new QueryNFTRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IQueryNFTRequest);
+
+                /** QueryNFTRequest denom_id. */
+                public denom_id: string;
+
+                /** QueryNFTRequest token_id. */
+                public token_id: string;
+
+                /**
+                 * Encodes the specified QueryNFTRequest message. Does not implicitly {@link cudosnode.cudosnode.nft.QueryNFTRequest.verify|verify} messages.
+                 * @param message QueryNFTRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IQueryNFTRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryNFTRequest message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.QueryNFTRequest.verify|verify} messages.
+                 * @param message QueryNFTRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IQueryNFTRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryNFTRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryNFTRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.QueryNFTRequest;
+
+                /**
+                 * Decodes a QueryNFTRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryNFTRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.QueryNFTRequest;
+
+                /**
+                 * Verifies a QueryNFTRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryNFTRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryNFTRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.QueryNFTRequest;
+
+                /**
+                 * Creates a plain object from a QueryNFTRequest message. Also converts values to other types if specified.
+                 * @param message QueryNFTRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.QueryNFTRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryNFTRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryNFTResponse. */
+            interface IQueryNFTResponse {
+
+                /** QueryNFTResponse nft */
+                nft?: (cudosnode.cudosnode.nft.IBaseNFT|null);
+            }
+
+            /** Represents a QueryNFTResponse. */
+            class QueryNFTResponse implements IQueryNFTResponse {
+
+                /**
+                 * Constructs a new QueryNFTResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IQueryNFTResponse);
+
+                /** QueryNFTResponse nft. */
+                public nft?: (cudosnode.cudosnode.nft.IBaseNFT|null);
+
+                /**
+                 * Encodes the specified QueryNFTResponse message. Does not implicitly {@link cudosnode.cudosnode.nft.QueryNFTResponse.verify|verify} messages.
+                 * @param message QueryNFTResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IQueryNFTResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryNFTResponse message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.QueryNFTResponse.verify|verify} messages.
+                 * @param message QueryNFTResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IQueryNFTResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryNFTResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryNFTResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.QueryNFTResponse;
+
+                /**
+                 * Decodes a QueryNFTResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryNFTResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.QueryNFTResponse;
+
+                /**
+                 * Verifies a QueryNFTResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryNFTResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryNFTResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.QueryNFTResponse;
+
+                /**
+                 * Creates a plain object from a QueryNFTResponse message. Also converts values to other types if specified.
+                 * @param message QueryNFTResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.QueryNFTResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryNFTResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryApprovalsNFTRequest. */
+            interface IQueryApprovalsNFTRequest {
+
+                /** QueryApprovalsNFTRequest denom_id */
+                denom_id?: (string|null);
+
+                /** QueryApprovalsNFTRequest token_id */
+                token_id?: (string|null);
+            }
+
+            /** Represents a QueryApprovalsNFTRequest. */
+            class QueryApprovalsNFTRequest implements IQueryApprovalsNFTRequest {
+
+                /**
+                 * Constructs a new QueryApprovalsNFTRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IQueryApprovalsNFTRequest);
+
+                /** QueryApprovalsNFTRequest denom_id. */
+                public denom_id: string;
+
+                /** QueryApprovalsNFTRequest token_id. */
+                public token_id: string;
+
+                /**
+                 * Encodes the specified QueryApprovalsNFTRequest message. Does not implicitly {@link cudosnode.cudosnode.nft.QueryApprovalsNFTRequest.verify|verify} messages.
+                 * @param message QueryApprovalsNFTRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IQueryApprovalsNFTRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryApprovalsNFTRequest message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.QueryApprovalsNFTRequest.verify|verify} messages.
+                 * @param message QueryApprovalsNFTRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IQueryApprovalsNFTRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryApprovalsNFTRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryApprovalsNFTRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.QueryApprovalsNFTRequest;
+
+                /**
+                 * Decodes a QueryApprovalsNFTRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryApprovalsNFTRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.QueryApprovalsNFTRequest;
+
+                /**
+                 * Verifies a QueryApprovalsNFTRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryApprovalsNFTRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryApprovalsNFTRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.QueryApprovalsNFTRequest;
+
+                /**
+                 * Creates a plain object from a QueryApprovalsNFTRequest message. Also converts values to other types if specified.
+                 * @param message QueryApprovalsNFTRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.QueryApprovalsNFTRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryApprovalsNFTRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryApprovalsNFTResponse. */
+            interface IQueryApprovalsNFTResponse {
+
+                /** QueryApprovalsNFTResponse ApprovedAddresses */
+                ApprovedAddresses?: (string[]|null);
+            }
+
+            /** Represents a QueryApprovalsNFTResponse. */
+            class QueryApprovalsNFTResponse implements IQueryApprovalsNFTResponse {
+
+                /**
+                 * Constructs a new QueryApprovalsNFTResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IQueryApprovalsNFTResponse);
+
+                /** QueryApprovalsNFTResponse ApprovedAddresses. */
+                public ApprovedAddresses: string[];
+
+                /**
+                 * Encodes the specified QueryApprovalsNFTResponse message. Does not implicitly {@link cudosnode.cudosnode.nft.QueryApprovalsNFTResponse.verify|verify} messages.
+                 * @param message QueryApprovalsNFTResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IQueryApprovalsNFTResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryApprovalsNFTResponse message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.QueryApprovalsNFTResponse.verify|verify} messages.
+                 * @param message QueryApprovalsNFTResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IQueryApprovalsNFTResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryApprovalsNFTResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryApprovalsNFTResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.QueryApprovalsNFTResponse;
+
+                /**
+                 * Decodes a QueryApprovalsNFTResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryApprovalsNFTResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.QueryApprovalsNFTResponse;
+
+                /**
+                 * Verifies a QueryApprovalsNFTResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryApprovalsNFTResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryApprovalsNFTResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.QueryApprovalsNFTResponse;
+
+                /**
+                 * Creates a plain object from a QueryApprovalsNFTResponse message. Also converts values to other types if specified.
+                 * @param message QueryApprovalsNFTResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.QueryApprovalsNFTResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryApprovalsNFTResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryApprovalsIsApprovedForAllRequest. */
+            interface IQueryApprovalsIsApprovedForAllRequest {
+
+                /** QueryApprovalsIsApprovedForAllRequest owner */
+                owner?: (string|null);
+
+                /** QueryApprovalsIsApprovedForAllRequest operator */
+                operator?: (string|null);
+            }
+
+            /** Represents a QueryApprovalsIsApprovedForAllRequest. */
+            class QueryApprovalsIsApprovedForAllRequest implements IQueryApprovalsIsApprovedForAllRequest {
+
+                /**
+                 * Constructs a new QueryApprovalsIsApprovedForAllRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IQueryApprovalsIsApprovedForAllRequest);
+
+                /** QueryApprovalsIsApprovedForAllRequest owner. */
+                public owner: string;
+
+                /** QueryApprovalsIsApprovedForAllRequest operator. */
+                public operator: string;
+
+                /**
+                 * Encodes the specified QueryApprovalsIsApprovedForAllRequest message. Does not implicitly {@link cudosnode.cudosnode.nft.QueryApprovalsIsApprovedForAllRequest.verify|verify} messages.
+                 * @param message QueryApprovalsIsApprovedForAllRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IQueryApprovalsIsApprovedForAllRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryApprovalsIsApprovedForAllRequest message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.QueryApprovalsIsApprovedForAllRequest.verify|verify} messages.
+                 * @param message QueryApprovalsIsApprovedForAllRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IQueryApprovalsIsApprovedForAllRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryApprovalsIsApprovedForAllRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryApprovalsIsApprovedForAllRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.QueryApprovalsIsApprovedForAllRequest;
+
+                /**
+                 * Decodes a QueryApprovalsIsApprovedForAllRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryApprovalsIsApprovedForAllRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.QueryApprovalsIsApprovedForAllRequest;
+
+                /**
+                 * Verifies a QueryApprovalsIsApprovedForAllRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryApprovalsIsApprovedForAllRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryApprovalsIsApprovedForAllRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.QueryApprovalsIsApprovedForAllRequest;
+
+                /**
+                 * Creates a plain object from a QueryApprovalsIsApprovedForAllRequest message. Also converts values to other types if specified.
+                 * @param message QueryApprovalsIsApprovedForAllRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.QueryApprovalsIsApprovedForAllRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryApprovalsIsApprovedForAllRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a QueryApprovalsIsApprovedForAllResponse. */
+            interface IQueryApprovalsIsApprovedForAllResponse {
+
+                /** QueryApprovalsIsApprovedForAllResponse isApproved */
+                isApproved?: (boolean|null);
+            }
+
+            /** Represents a QueryApprovalsIsApprovedForAllResponse. */
+            class QueryApprovalsIsApprovedForAllResponse implements IQueryApprovalsIsApprovedForAllResponse {
+
+                /**
+                 * Constructs a new QueryApprovalsIsApprovedForAllResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: cudosnode.cudosnode.nft.IQueryApprovalsIsApprovedForAllResponse);
+
+                /** QueryApprovalsIsApprovedForAllResponse isApproved. */
+                public isApproved: boolean;
+
+                /**
+                 * Encodes the specified QueryApprovalsIsApprovedForAllResponse message. Does not implicitly {@link cudosnode.cudosnode.nft.QueryApprovalsIsApprovedForAllResponse.verify|verify} messages.
+                 * @param message QueryApprovalsIsApprovedForAllResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: cudosnode.cudosnode.nft.IQueryApprovalsIsApprovedForAllResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified QueryApprovalsIsApprovedForAllResponse message, length delimited. Does not implicitly {@link cudosnode.cudosnode.nft.QueryApprovalsIsApprovedForAllResponse.verify|verify} messages.
+                 * @param message QueryApprovalsIsApprovedForAllResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: cudosnode.cudosnode.nft.IQueryApprovalsIsApprovedForAllResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a QueryApprovalsIsApprovedForAllResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns QueryApprovalsIsApprovedForAllResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): cudosnode.cudosnode.nft.QueryApprovalsIsApprovedForAllResponse;
+
+                /**
+                 * Decodes a QueryApprovalsIsApprovedForAllResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns QueryApprovalsIsApprovedForAllResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): cudosnode.cudosnode.nft.QueryApprovalsIsApprovedForAllResponse;
+
+                /**
+                 * Verifies a QueryApprovalsIsApprovedForAllResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a QueryApprovalsIsApprovedForAllResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns QueryApprovalsIsApprovedForAllResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): cudosnode.cudosnode.nft.QueryApprovalsIsApprovedForAllResponse;
+
+                /**
+                 * Creates a plain object from a QueryApprovalsIsApprovedForAllResponse message. Also converts values to other types if specified.
+                 * @param message QueryApprovalsIsApprovedForAllResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: cudosnode.cudosnode.nft.QueryApprovalsIsApprovedForAllResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this QueryApprovalsIsApprovedForAllResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+        }
+    }
+}
+
 /** Namespace cosmos. */
 export namespace cosmos {
 
