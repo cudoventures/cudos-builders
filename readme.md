@@ -4,6 +4,7 @@ This project contains a set of building scripts for CudosNetwork. It depends on 
 1. CudosNode (https://github.com/CudoVentures/cudos-node)
 1. CudosGravityBridge (https://github.com/CudoVentures/cosmos-gravity-bridge)
 1. CudosGravityBridgeUI (https://github.com/CudoVentures/cudos-gravity-bridge-ui)
+1. CudosNftMintingUI (https://github.com/CudoVentures/cudos-nft-minting-ui)
 
 The following directory structure is required in order everything to work correctly otherwise the scripts will not be able to find their dependancies.
 Let denote the parent directory of all projects <code>parentDir</code>. Its name could be arbitrary.
@@ -13,7 +14,7 @@ Let denote the parent directory of all projects <code>parentDir</code>. Its name
     - /parentDir/CudosNode
     - /parentDir/CudosGravityBridge
     - /parentDir/CudosGravityBridgeUI
-    - /parentDir/CudosNftMinting
+    - /parentDir/CudosNftMintingUI
     - /parentDir/CudosExplorer
     - /parentDir/CudosFaucet
     - /parentDir/CudosData
