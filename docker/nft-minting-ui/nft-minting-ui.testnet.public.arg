@@ -1,0 +1,2 @@
+ENV_FILE=nft-minting-ui.testnet.public.env
+CONTAINER_NAME_ADDON=testnet-public

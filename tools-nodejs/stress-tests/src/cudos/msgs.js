@@ -1,4 +1,4 @@
-import { gravity, cosmos, ibc, google } from "../../cosmos/proto";
+import { gravity, cosmos, ibc, google, cudosnode } from "../../cosmos/proto";
 
 export function sendToEthMsg(args) {
     const msg = new gravity.v1.MsgSendToEth({
@@ -24,9 +24,9 @@ export function bankSendMsg(args) {
     const msg = new cosmos.bank.v1beta1.MsgSend({
         from_address: args.fromAddress,
         to_address: args.toAddress,
-        amount: [{ 
-            denom: args.denom, 
-            amount: args.amount.toString() 
+        amount: [{
+            denom: args.denom,
+            amount: args.amount.toString()
         }]
     });
 
@@ -65,9 +65,26 @@ export function delegateMsg(args) {
           amount: args.amount.toString(),
         },
       });
-    
+
     return new google.protobuf.Any({
         type_url: "/cosmos.staking.v1beta1.MsgDelegate",
         value: cosmos.staking.v1beta1.MsgDelegate.encode(msg).finish(),
+    });
+}
+
+export function mintNftMsg(args) {
+    const msg = new cudosnode.cudosnode.nft.MsgMintNFT({
+        denom_id: args.denomId,
+        name: args.name,
+        uri: args.uri,
+        data: args.data,
+        sender: args.sender,
+        recipient: args.recipient,
+        contractAddressSigner: ''
+      });
+
+    return new google.protobuf.Any({
+        type_url: "/cudosnode.cudosnode.nft.MsgMintNFT",
+        value: cudosnode.cudosnode.nft.MsgMintNFT.encode(msg).finish(),
     });
 }

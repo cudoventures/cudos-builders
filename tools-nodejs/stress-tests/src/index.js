@@ -2,6 +2,7 @@ import gravityBalanceTest from './tests/gravity/testModuleAndContractBalances.js
 import ibcBalanceTest from './tests/ibc/testModuleAndMintedBalances.js';
 import { bankSendMsg } from './cudos/msgs';
 import loadTest from './tests/general/loadTest.js';
+import nftMassMint from './tests/nft/massMintNfts';
 import config from '../config/config.js';
 import { Cosmos } from "@cosmostation/cosmosjs";
 import sendTx from './cudos/txs.js';
@@ -34,11 +35,11 @@ const baseConfig = {
 // logGeneral("Funding wallets from faucet...");
 // const testWallets = await getRandomWallets(provider, 3);
 // const fundRes = await sendTx(
-//     signer, 
-//     bankSendMsg, 
+//     signer,
+//     bankSendMsg,
 //     {
-//         destinationAddresses: testWallets.map(w => w.address), 
-//         denom: 'acudos', 
+//         destinationAddresses: testWallets.map(w => w.address),
+//         denom: 'acudos',
 //         amount: '1000000000000000000000000000'
 //     },
 //     constants.GAS_LIMITS.BANK_SEND
@@ -61,4 +62,9 @@ if(config.IBC_TESTING) {
 if(config.GENERAL_TESTING) {
     // baseConfig.faucetMnemonic = testWallets[2].mnemonic;
     loadTest(baseConfig, config.GENERAL);
+}
+
+if(config.NFT_TESTING) {
+    // baseConfig.faucetMnemonic = testWallets[2].mnemonic;
+    nftMassMint(baseConfig);
 }

@@ -20,6 +20,8 @@ The folder has following build-targets:
 
 <em>**gravity-bridge-ui**</em> - Gravity Bridge UI used to transfer funds between the Cosmos <-> Ethereum chains.
 
+<em>**cudos-nft-minting-ui**</em> - Cudos NFT Minting UI is used as GUI of the NFT features of the CUDOS network/
+
 <em>**gravity-contract-deployer**</em> - Standalone build-target that has a sole purpose of deployment a new Gravity contract.
 
 <em>**orchestartor**</em> - Orchestrator binary that must run along with the validator

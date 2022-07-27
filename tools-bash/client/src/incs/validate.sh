@@ -28,7 +28,7 @@ if [ "$PARAM_SOURCE_DIR" = "" ]; then
 fi
 
 if ([ "$PARAM_MODE" != "seed-node" ] && [ "$PARAM_MODE" != "sentry-node" ] && [ "$PARAM_MODE" != "validator-node" ]); then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_NODE_NAME must be one of the following ${STYLE_BOLD}root-node${STYLE_DEFAULT} | ${STYLE_BOLD}seed-node${STYLE_DEFAULT} | ${STYLE_BOLD}sentry-node${STYLE_DEFAULT} | ${STYLE_BOLD}validator-node${STYLE_DEFAULT}";
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_MODE must be one of the following ${STYLE_BOLD}root-node${STYLE_DEFAULT} | ${STYLE_BOLD}seed-node${STYLE_DEFAULT} | ${STYLE_BOLD}sentry-node${STYLE_DEFAULT} | ${STYLE_BOLD}validator-node${STYLE_DEFAULT}";
     exit 1;
 fi
 

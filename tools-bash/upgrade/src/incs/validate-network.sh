@@ -5,7 +5,6 @@ echo -ne "Validating network...";
 # validating .envs
 networkIdentified="false"
 NETWORK_MAINNET="false"
-NETWORK_DRESSREHEARSAL="false"
 NETWORK_TESTNET_PRIVATE="false"
 NETWORK_TESTNET_PUBLIC="false"
 NETWORK_NAME=""
@@ -28,11 +27,6 @@ if [ "$PARAM_NODE_NAME" = "root-node" ]; then
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/root-node/root-node.mainnet.env"
         args=$(cat "$NODE_ENV_PATH")
         tokenContractAddress=$(readEnvFromString "$args" "CUDOS_TOKEN_CONTRACT_ADDRESS")
-        if [ "$tokenContractAddress" = "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d" ] || [ "$tokenContractAddress" = "0x12d474723cb8c02bcbf46cd335a3bb4c75e9de44" ]; then
-            NETWORK_DRESSREHEARSAL="true"
-            source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
-            networkIdentified="true"
-        fi
         if [ "$tokenContractAddress" = "0x817bbDbC3e8A1204f3691d14bB44992841e3dB35" ]; then
             NETWORK_MAINNET="true"
             source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
@@ -44,19 +38,6 @@ if [ "$PARAM_NODE_NAME" = "root-node" ]; then
         if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.mainnet.env" ]; then
             ORCHESTRATOR_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.mainnet.arg"
             ORCHESTRATOR_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.mainnet.env"
-        fi
-    fi
-
-    if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/root-node/root-node.dressrehearsal.env" ]; then
-        NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/root-node/root-node.dressrehearsal.arg"
-        NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/root-node/root-node.dressrehearsal.env"
-        NETWORK_DRESSREHEARSAL="true"
-        source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
-        networkIdentified="true"
-
-        if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.dressrehearsal.env" ]; then
-            ORCHESTRATOR_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.dressrehearsal.arg"
-            ORCHESTRATOR_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/orchestrator/orchestrator.dressrehearsal.env"
         fi
     fi
 
@@ -140,14 +121,6 @@ if [ "$PARAM_NODE_NAME" = "seed-node" ]; then
         networkIdentified="true"
     fi
 
-    if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.client.dressrehearsal.env" ]; then
-        NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.client.dressrehearsal.arg"
-        NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.client.dressrehearsal.env"
-        NETWORK_DRESSREHEARSAL="true"
-        source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
-        networkIdentified="true"
-    fi
-
     if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.client.mainnet.env" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.client.mainnet.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/seed-node/seed-node.client.mainnet.env"
@@ -156,11 +129,6 @@ if [ "$PARAM_NODE_NAME" = "seed-node" ]; then
         if [ -f "$PARAM_SOURCE_DIR/CudosData/$volumeName/config/genesis.json" ]; then
             tokenContractAddress=$(jq ".app_state.gravity.erc20_to_denoms[0].erc20" "$PARAM_SOURCE_DIR/CudosData/$volumeName/config/genesis.json")
             tokenContractAddress=${tokenContractAddress//\"/}
-            if [ "$tokenContractAddress" = "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d" ] || [ "$tokenContractAddress" = "0x12d474723cb8c02bcbf46cd335a3bb4c75e9de44" ]; then
-                NETWORK_DRESSREHEARSAL="true"
-                source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
-                networkIdentified="true"
-            fi
             if [ "$tokenContractAddress" = "0x817bbDbC3e8A1204f3691d14bB44992841e3dB35" ]; then
                 NETWORK_MAINNET="true"
                 source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
@@ -180,11 +148,6 @@ if [ "$PARAM_NODE_NAME" = "seed-node" ]; then
         if [ -f "$PARAM_SOURCE_DIR/CudosData/$volumeName/config/genesis.json" ]; then
             tokenContractAddress=$(jq ".app_state.gravity.erc20_to_denoms[0].erc20" "$PARAM_SOURCE_DIR/CudosData/$volumeName/config/genesis.json")
             tokenContractAddress=${tokenContractAddress//\"/}
-            if [ "$tokenContractAddress" = "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d" ] || [ "$tokenContractAddress" = "0x12d474723cb8c02bcbf46cd335a3bb4c75e9de44" ]; then
-                NETWORK_DRESSREHEARSAL="true"
-                source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
-                networkIdentified="true"
-            fi
             if [ "$tokenContractAddress" = "0x817bbDbC3e8A1204f3691d14bB44992841e3dB35" ]; then
                 NETWORK_MAINNET="true"
                 source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
@@ -250,14 +213,6 @@ if [ "$PARAM_NODE_NAME" = "sentry-node" ]; then
         networkIdentified="true"
     fi
 
-    if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.client.dressrehearsal.env" ]; then
-        NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.client.dressrehearsal.arg"
-        NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.client.dressrehearsal.env"
-        NETWORK_DRESSREHEARSAL="true"
-        source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
-        networkIdentified="true"
-    fi
-
     if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.client.mainnet.env" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.client.mainnet.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/sentry-node/sentry-node.client.mainnet.env"
@@ -266,11 +221,6 @@ if [ "$PARAM_NODE_NAME" = "sentry-node" ]; then
         if [ -f "$PARAM_SOURCE_DIR/CudosData/$volumeName/config/genesis.json" ]; then
             tokenContractAddress=$(jq ".app_state.gravity.erc20_to_denoms[0].erc20" "$PARAM_SOURCE_DIR/CudosData/$volumeName/config/genesis.json")
             tokenContractAddress=${tokenContractAddress//\"/}
-            if [ "$tokenContractAddress" = "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d" ] || [ "$tokenContractAddress" = "0x12d474723cb8c02bcbf46cd335a3bb4c75e9de44" ]; then
-                NETWORK_DRESSREHEARSAL="true"
-                source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
-                networkIdentified="true"
-            fi
             if [ "$tokenContractAddress" = "0x817bbDbC3e8A1204f3691d14bB44992841e3dB35" ]; then
                 NETWORK_MAINNET="true"
                 source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
@@ -290,11 +240,6 @@ if [ "$PARAM_NODE_NAME" = "sentry-node" ]; then
         if [ -f "$PARAM_SOURCE_DIR/CudosData/$volumeName/config/genesis.json" ]; then
             tokenContractAddress=$(jq ".app_state.gravity.erc20_to_denoms[0].erc20" "$PARAM_SOURCE_DIR/CudosData/$volumeName/config/genesis.json")
             tokenContractAddress=${tokenContractAddress//\"/}
-            if [ "$tokenContractAddress" = "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d" ] || [ "$tokenContractAddress" = "0x12d474723cb8c02bcbf46cd335a3bb4c75e9de44" ]; then
-                NETWORK_DRESSREHEARSAL="true"
-                source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
-                networkIdentified="true"
-            fi
             if [ "$tokenContractAddress" = "0x817bbDbC3e8A1204f3691d14bB44992841e3dB35" ]; then
                 NETWORK_MAINNET="true"
                 source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
@@ -354,14 +299,6 @@ if [ "$PARAM_NODE_NAME" = "full-node" ]; then
         networkIdentified="true"
     fi
 
-    if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.client.dressrehearsal.env" ]; then
-        NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.client.dressrehearsal.arg"
-        NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.client.dressrehearsal.env"
-        NETWORK_DRESSREHEARSAL="true"
-        source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
-        networkIdentified="true"
-    fi
-
     if [ -f "$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.client.mainnet.env" ]; then
         NODE_ARG_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.client.mainnet.arg"
         NODE_ENV_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/full-node/full-node.client.mainnet.env"
@@ -370,11 +307,6 @@ if [ "$PARAM_NODE_NAME" = "full-node" ]; then
         if [ -f "$PARAM_SOURCE_DIR/CudosData/$volumeName/config/genesis.json" ]; then
             tokenContractAddress=$(jq ".app_state.gravity.erc20_to_denoms[0].erc20" "$PARAM_SOURCE_DIR/CudosData/$volumeName/config/genesis.json")
             tokenContractAddress=${tokenContractAddress//\"/}
-            if [ "$tokenContractAddress" = "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d" ] || [ "$tokenContractAddress" = "0x12d474723cb8c02bcbf46cd335a3bb4c75e9de44" ]; then
-                NETWORK_DRESSREHEARSAL="true"
-                source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
-                networkIdentified="true"
-            fi
             if [ "$tokenContractAddress" = "0x817bbDbC3e8A1204f3691d14bB44992841e3dB35" ]; then
                 NETWORK_MAINNET="true"
                 source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
@@ -394,11 +326,6 @@ if [ "$PARAM_NODE_NAME" = "full-node" ]; then
         if [ -f "$PARAM_SOURCE_DIR/CudosData/$volumeName/config/genesis.json" ]; then
             tokenContractAddress=$(jq ".app_state.gravity.erc20_to_denoms[0].erc20" "$PARAM_SOURCE_DIR/CudosData/$volumeName/config/genesis.json")
             tokenContractAddress=${tokenContractAddress//\"/}
-            if [ "$tokenContractAddress" = "0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d" ] || [ "$tokenContractAddress" = "0x12d474723cb8c02bcbf46cd335a3bb4c75e9de44" ]; then
-                NETWORK_DRESSREHEARSAL="true"
-                source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
-                networkIdentified="true"
-            fi
             if [ "$tokenContractAddress" = "0x817bbDbC3e8A1204f3691d14bB44992841e3dB35" ]; then
                 NETWORK_MAINNET="true"
                 source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
@@ -412,7 +339,7 @@ if [ "$PARAM_NODE_NAME" = "full-node" ]; then
 
 fi
 
-if ([ "$NETWORK_MAINNET" = "false" ] && [ "$NETWORK_DRESSREHEARSAL" = "false" ] && [ "$NETWORK_TESTNET_PRIVATE" = "false" ] && [ "$NETWORK_TESTNET_PUBLIC" = "false" ]); then
+if ([ "$NETWORK_MAINNET" = "false" ] && [ "$NETWORK_TESTNET_PRIVATE" = "false" ] && [ "$NETWORK_TESTNET_PUBLIC" = "false" ]); then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Could not identify a network"
     exit 1;
 fi
@@ -430,10 +357,6 @@ fi
 if [ "$NETWORK_MAINNET" = "true" ]; then
     NETWORK_NAME="Mainnet"
     BUILDERS_GENESIS_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/config/genesis.mainnet.json"
-fi
-if [ "$NETWORK_DRESSREHEARSAL" = "true" ]; then
-    NETWORK_NAME="Dress Rehearsal"
-    BUILDERS_GENESIS_PATH="$PARAM_SOURCE_DIR/CudosBuilders/docker/config/genesis.dressrehearsal.json"
 fi
 if [ "$NETWORK_TESTNET_PRIVATE" = "true" ]; then
     NETWORK_NAME="Private Testnet"
