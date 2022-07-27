@@ -15,7 +15,7 @@ echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 
 
 echo -ne "Cloning repos...";
-branch="v1.0.0"
+branch="cudos-dev"
 cd "$PARAM_SOURCE_DIR"
 git clone -q --branch "$branch" https://github.com/CudoVentures/cudos-node.git CudosNode &> /dev/null
 if [ "$?" != 0 ]; then
