@@ -16,7 +16,7 @@ Docker must be installed
 
 Docker-compose must be installed
 
-It is recommended to increase the max number of open file descriptors of the OS. There is a known bug in Tendermint, where a logger opens many files. Rarely it reaches the open files limit of the OS and crashes the node. The limit increase can be done by changing the `nofile` flag in `/etc/sevurity/limits.conf` in case of linux OS. We recommend a value of 4,096.
+It is recommended to increase the max number of open file descriptors of the OS. There is a known bug in Tendermint, where a logger opens many files. Rarely it reaches the open files limit of the OS and crashes the node. The limit increase can be done by changing the `nofile` flag in `/etc/security/limits.conf` in case of linux OS. We recommend a value of 4,096.
 
 # Config
 
