@@ -16,6 +16,6 @@ RUN apt-get update
 
 RUN apt-get install cargo -y
 
-RUN cargo install ibc-relayer-cli --version 0.14.0 --bin hermes --locked
+RUN cargo install ibc-relayer-cli --version 1.0.0-rc.2 --bin hermes --locked
 
 CMD ["sleep", "infinity"]
