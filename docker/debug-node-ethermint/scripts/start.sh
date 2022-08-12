@@ -1,6 +1,5 @@
 # Start the node (remove the --pruning=nothing flag if historical queries are not needed)
 ethermintd start \
---pruning=nothing \
 --evm.tracer=json \
 --trace \
 --log_level info \

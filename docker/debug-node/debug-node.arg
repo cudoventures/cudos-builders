@@ -1,6 +1,8 @@
 CUDOS_HOME=/usr/cudos/cudos-data
 ENV_FILE=./.env
 
+VOLUME_NAME=cudos-data-debug-node
+
 PORT26656=36656
 PORT26657=36657
 PORT1317=3317

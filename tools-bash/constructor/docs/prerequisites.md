@@ -21,6 +21,9 @@ Missing any of the prerequisites above can lead to errors and being unable to ru
 sudo docker -v
 sudo docker-compose -v
 ```
+
+It is recommended to increase the max number of open file descriptors of the OS. There is a known bug in Tendermint, where a logger opens many files. Rarely it reaches the open files limit of the OS and crashes the node. The limit increase can be done by changing the `nofile` flag in `/etc/security/limits.conf` in case of linux OS. We recommend a value of 4,096.
+
 ## Notes for installing docker for the first time
 
 <em>Follow the docker install procedure for your OS</em>
