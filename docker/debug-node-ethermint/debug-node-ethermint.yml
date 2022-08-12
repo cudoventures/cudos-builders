@@ -5,11 +5,11 @@ networks:
     name: shared-cudos-network
 
 services:
-  debug-node:
-    image: debug-node
-    container_name: debug-node
+  debug-node-ethermint:
+    image: debug-node-ethermint
+    container_name: debug-node-ethermint
     build:
-      dockerfile: CudosBuilders/docker/debug-node/debug-node.dockerfile
+      dockerfile: CudosBuilders/docker/debug-node-ethermint/debug-node-ethermint.dockerfile
       context: ../../../
       args:
         USER_ID: "0"
@@ -21,9 +21,7 @@ services:
       - CUDOS_HOME=$CUDOS_HOME
     env_file: "$ENV_FILE"
     volumes:
-      - '../../../CudosData/$VOLUME_NAME:$CUDOS_HOME'
       - '../../../CudosBuilders:/usr/cudos/CudosBuilders'
-      - '../../../CudosNode:/usr/cudos/CudosNode'
       - '../../../CudosGravityBridge:/usr/cudos/CudosGravityBridge'
       - '../../../cosmos-sdk:/usr/cudos/cosmos-sdk'
       - '../../../ibc-go:/usr/cudos/ibc-go'
@@ -38,6 +36,7 @@ services:
       - "${EXPOSE_IP}:${PORT1317}:1317"
       - "${EXPOSE_IP}:${PORT9090}:9090"
       - "${EXPOSE_IP}:${PORT26660}:26660"
+      - "${EXPOSE_IP}:${PORT8545}:8545"
     logging:
       driver: "json-file"
       options:

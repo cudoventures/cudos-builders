@@ -23,17 +23,3 @@ services:
       options:
         max-size: "128m"
         max-file: "1"
-
-  cudos-nft-minting-ipfs:
-    image: ipfs/go-ipfs
-    container_name: cudos-nft-minting-ipfs
-    restart: unless-stopped
-    networks:
-      - shared-cudos-network
-    extra_hosts:
-    - "host.docker.internal:host-gateway"
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "128m"
-        max-file: "1"
