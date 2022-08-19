@@ -90,7 +90,7 @@ mountedDirVolume=$(df -P -- "$mountedDir" | awk 'NR==2 {print $1}');
 newDirVolume=$(df -P -- "$dataDir" | awk 'NR==2 {print $1}');
 
 #if we are going to copy the data, check for enough space before stopping the container
-if [ "$mountedDirVolume" == "$newDirVolume" ]; then
+if [ "$mountedDirVolume" != "$newDirVolume" ]; then
     printf "$($timestamp): Checking if space is enough to copy data from container to new dir...\n"
 
     freeSpaceInKiB=$(df -P "$dataDir" | tail -1 | awk '{print $4}');
