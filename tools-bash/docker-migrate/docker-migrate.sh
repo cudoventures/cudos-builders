@@ -126,7 +126,7 @@ mkdir -p $dataDir;
 #MOVE or COPY data folder
 if [ "$mountedDirVolume" = "$newDirVolume" ]; then
     printf "$($timestamp): Mounted data dir and new data dir are on the same volume. Moving...\n"
-    rsync -a $mountedDir/* $dataDir/
+    rsync -ra $mountedDir/* $dataDir/
 else
     printf "$($timestamp): Mounted data dir and new data dir are NOT on the same volume. Copying...\n"
     \cp -rf $mountedDir/* $dataDir/
