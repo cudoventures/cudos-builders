@@ -26,14 +26,10 @@ if [ ! -x "$(command -v jq)" ]; then
 fi
 
 if ! id "cudos" &>/dev/null; then
-    echo -e "${RED}Error:${NC} You must install jq";
+    echo -e '${RED}Error:${NC} user "cudos" must exist';
     exit 1;
 fi
 
-if [ ! -x "$(command -v jq)" ]; then
-    echo -e "${RED}Error:${NC} You must install jq";
-    exit 1;
-fi
 #------------------------------------------------------------------------------
 IFS=',' read -r -a containerNamesArray <<< "$containerNames"
 
