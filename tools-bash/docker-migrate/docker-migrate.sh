@@ -2,9 +2,9 @@
 
 #------------------------------------------------------------------------------
 #VARIABLES
-NC='\033[0m'              # Text Reset
-RED='\033[0;31m'          # Red
-GREEN='\033[0;32m'        # Green
+NC='\033[0m'             # Text Reset
+RED='\033[0;31m'         # Red
+GREEN='\033[0;32m'       # Green
 
 timestamp=('date +"%Y-%m-%d**%H:%M:%S"')
 
@@ -17,7 +17,7 @@ containerNames="cudos-start-full-node-client-local-01,cudos-start-full-node-clie
 #CHECKS
 if [ "$EUID" -ne 0 ]; then
     echo -e "\033[1;31mError:\033[m The script MUST be executed as root";
-    exit 1
+    exit 1;
 fi
 
 if [ ! -x "$(command -v jq)" ]; then
@@ -31,7 +31,7 @@ if ! id "cudos" &>/dev/null; then
 fi
 
 #------------------------------------------------------------------------------
-IFS=',' read -r -a containerNamesArray <<< "$containerNames"
+IFS=',' read -r -a containerNamesArray <<< "$containerNames";
 
 #get list of active containers
 dockerContainerList=$(docker container list)
@@ -41,27 +41,27 @@ foundContainers=()
 for containerName in "${containerNamesArray[@]}"
 do
     #if container name found in list, check if it produces new blocks
-    foundContainer=$(echo -e "$dockerContainerList" | grep $containerName)
+    foundContainer=$(echo -e "$dockerContainerList" | grep $containerName);
     if [ ! -z "$foundContainer" ]; then 
-        printf "$($timestamp): Checking container ${GREEN}${containerName}${NC} for activeness...\n"
+        printf "$($timestamp): Checking container ${GREEN}${containerName}${NC} for activeness...\n";
 
-        firstBlockCheckHeight=$(docker container exec -t ${containerName} cudos-noded status | tr -d '\r' | jq ".SyncInfo.latest_block_height") 
+        firstBlockCheckHeight=$(docker container exec -t ${containerName} cudos-noded status | tr -d '\r' | jq ".SyncInfo.latest_block_height") ;
         if [ ! -z "$firstBlockCheckHeight" ]; then
-            printf "$($timestamp): ${GREEN}${containerName}${NC}: First block check height: ${GREEN}${firstBlockCheckHeight}${NC} \n"
+            printf "$($timestamp): ${GREEN}${containerName}${NC}: First block check height: ${GREEN}${firstBlockCheckHeight}${NC} \n";
 
-            sleep ${waitTime}
+            sleep ${waitTime};
 
-            secondBlockCheckHeight=$(docker container exec -t ${containerName} cudos-noded status | tr -d '\r' | jq ".SyncInfo.latest_block_height")
-            printf "$($timestamp): ${GREEN}${containerName}${NC}: Second block check height: ${GREEN}${secondBlockCheckHeight}${NC} \n"
+            secondBlockCheckHeight=$(docker container exec -t ${containerName} cudos-noded status | tr -d '\r' | jq ".SyncInfo.latest_block_height");
+            printf "$($timestamp): ${GREEN}${containerName}${NC}: Second block check height: ${GREEN}${secondBlockCheckHeight}${NC} \n";
 
             if [ "$firstBlockCheckHeight" != "$secondBlockCheckHeight" ]; then
-                foundContainers+=("$containerName")
-                printf "$($timestamp): Found active container that produces blocks: ${GREEN}${containerName}${NC}\n\n"
+                foundContainers+=("$containerName");
+                printf "$($timestamp): Found active container that produces blocks: ${GREEN}${containerName}${NC}\n\n";
             else
-                printf "$($timestamp): Container ${RED}${containerName}${NC} didn't produce a new block in ${waitTime} seconds.\n\n"
+                printf "$($timestamp): Container ${RED}${containerName}${NC} didn't produce a new block in ${waitTime} seconds.\n\n";
             fi
         else 
-            printf "$($timestamp): ${RED}Block height not found${NC}. Container probably not producing blocks.\n\n"
+            printf "$($timestamp): ${RED}Block height not found${NC}. Container probably not producing blocks.\n\n";
         fi
     fi
 done
@@ -69,41 +69,54 @@ done
 # check how many containers found and continue only if ONLY 1 is found
 foundContainersCount=${#foundContainers[@]}
 if [[ $foundContainersCount -eq 0 ]]; then
-    printf "$($timestamp): ${RED}ERROR: No active containers producing blocks found${NC}\n\n"
-    exit
+    printf "$($timestamp): ${RED}ERROR: No active containers producing blocks found${NC}\n\n";
+    exit 1;
 elif [[ $foundContainersCount -gt 1 ]]; then
-    printf "$($timestamp): ${RED}ERROR: More than 1 active containers producing blocks found${NC}\n\n"
-    exit
+    printf "$($timestamp): ${RED}ERROR: More than 1 active containers producing blocks found${NC}\n\n";
+    exit 1;
 else
-    printf "$($timestamp): Found active container producing blocks: ${GREEN}${foundContainers[0]}${NC}\n\n"
+    printf "$($timestamp): Found active container producing blocks: ${GREEN}${foundContainers[0]}${NC}\n\n";
 fi
 
 containerName=${foundContainers[0]}
 
 #find mounted dir for cudos-data
-printf "$($timestamp): Finding mounted dir for cudos-data...\n"
-mountedDir=$(docker container inspect ${containerName} | jq -c '.[0].Mounts | map(select( .Destination | contains("/usr/cudos/cudos-data"))) | .[0].Source')
-mountedDir="${mountedDir//\"}"
+printf "$($timestamp): Finding mounted dir for cudos-data...\n";
+mountedDir=$(docker container inspect ${containerName} | jq -c '.[0].Mounts | map(select( .Destination | contains("/usr/cudos/cudos-data"))) | .[0].Source');
+mountedDir="${mountedDir//\"}";
+
+#check if old and new data dir are on the same volume
+mountedDirVolume=$(df -P -- "$mountedDir" | awk 'NR==2 {print $1}');
+newDirVolume=$(df -P -- "$dataDir" | awk 'NR==2 {print $1}');
+
+#if we are going to copy the data, check for enough space before stopping the container
+if [ "$mountedDirVolume" == "$newDirVolume" ]; then
+    printf "$($timestamp): Checking if space is enough to copy data from container to new dir...\n"
+
+    freeSpaceInKiB=$(df -P "$dataDir" | tail -1 | awk '{print $4}');
+    freeSpaceRequirementInKiB=$(sudo du -s /var/lib/cudos/cudos-data | cut -f1);
+
+    if (( freeSpaceInKiB < freeSpaceRequirementInKiB )); then
+        printf "${RED}ERROR:${NC} Free space is less than $freeSpaceRequirementInKiB KiB (Available = $freeSpaceInKiB KiB)...\n";
+        exit 1;
+    fi
+fi
 
 #stop container
-printf "$($timestamp): Stopping container: ${GREEN}${containerName}${NC}...\n"
-docker container stop ${containerName}
+printf "$($timestamp): Stopping container: ${GREEN}${containerName}${NC}...\n";
+docker container stop ${containerName};
 
 #if there are no more containers stop docker service as well
-runningContainerCount=$(docker ps -q | wc -l)
+runningContainerCount=$(docker ps -q | wc -l);
 if [ $runningContainerCount -eq 0 ]; then
-    printf "$($timestamp): Stopping container: ${GREEN}${containerName}${NC}...\n"
+    printf "$($timestamp): Stopping container: ${GREEN}${containerName}${NC}...\n";
     systemctl stop docker.service
 fi
 
 
 #create dir for cudos-data
-printf "$($timestamp): Creating data dir if missing...\n"
-mkdir -p $dataDir
-
-#check if old and new data dir are on the same volume
-mountedDirVolume=$(df -P -- "$mountedDir" | awk 'NR==2 {print $1}')
-newDirVolume=$(df -P -- "$dataDir" | awk 'NR==2 {print $1}')
+printf "$($timestamp): Creating data dir if missing...\n";
+mkdir -p $dataDir;
 
 #MOVE or COPY data folder
 if [ "$mountedDirVolume" = "$newDirVolume" ]; then
