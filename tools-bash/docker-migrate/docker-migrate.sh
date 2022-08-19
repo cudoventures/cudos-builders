@@ -25,6 +25,11 @@ if [ ! -x "$(command -v jq)" ]; then
     exit 1;
 fi
 
+if [ ! -x "$(command -v rsync)" ]; then
+    echo -e "${RED}Error:${NC} You must install rsync";
+    exit 1;
+fi
+
 if ! id "cudos" &>/dev/null; then
     echo -e "${RED}Error:${NC} user \"cudos\" must exist";
     exit 1;
@@ -121,7 +126,7 @@ mkdir -p $dataDir;
 #MOVE or COPY data folder
 if [ "$mountedDirVolume" = "$newDirVolume" ]; then
     printf "$($timestamp): Mounted data dir and new data dir are on the same volume. Moving...\n"
-    mv -f $mountedDir/* $dataDir/
+    rsync -a $mountedDir/* $dataDir/
 else
     printf "$($timestamp): Mounted data dir and new data dir are NOT on the same volume. Copying...\n"
     \cp -rf $mountedDir/* $dataDir/
