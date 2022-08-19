@@ -26,7 +26,7 @@ if [ ! -x "$(command -v jq)" ]; then
 fi
 
 if ! id "cudos" &>/dev/null; then
-    echo -e '${RED}Error:${NC} user "cudos" must exist';
+    echo -e "${RED}Error:${NC} user \"cudos\" must exist";
     exit 1;
 fi
 
