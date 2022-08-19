@@ -114,7 +114,7 @@ docker container stop ${containerName};
 #if there are no more containers stop docker service as well
 runningContainerCount=$(docker ps -q | wc -l);
 if [ $runningContainerCount -eq 0 ]; then
-    printf "$($timestamp): Stopping container: ${GREEN}${containerName}${NC}...\n";
+    printf "$($timestamp): Stopping docker service...\n";
     systemctl stop docker.service
 fi
 
