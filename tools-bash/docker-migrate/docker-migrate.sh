@@ -1,15 +1,5 @@
 #!/bin/bash
 
-if [ "$EUID" -ne 0 ]; then
-    echo -e "\033[1;31mError:\033[m The script MUST be executed as root";
-    exit 1
-fi
-
-if [ ! -x "$(command -v jq)" ]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} You must install jq";
-    exit 1;
-fi
-
 #------------------------------------------------------------------------------
 #VARIABLES
 NC='\033[0m'              # Text Reset
@@ -23,6 +13,27 @@ waitTime=10
 
 #hardcoded names of expected docker container names to search for
 containerNames="cudos-start-full-node-client-local-01,cudos-start-full-node-client-mainnet,cudos-start-full-node-client-testnet-private-01,cudos-start-full-node-client-testnet-public-01,cudos-start-full-node-testnet-public-zone02,cudos-start-full-node-testnet-public-zone03,cudos-start-root-node-02,cudos-start-root-node,cudos-start-seed-node-client-local-01,cudos-start-seed-node-client-mainnet,cudos-start-seed-node-client-testnet-private-01,cudos-start-seed-node-client-testnet-public-01,cudos-start-seed-node-01,cudos-start-seed-node-mainnet,cudos-start-seed-node-testnet-private,cudos-start-seed-node-testnet-public-zone01,cudos-start-seed-node-testnet-public-zone02,cudos-start-seed-node-testnet-public-zone03,cudos-start-sentry-node-client-local-01,cudos-start-sentry-node-client-mainnet,cudos-start-sentry-node-client-testnet-private-01,cudos-start-sentry-node-client-testnet-public-01,cudos-start-sentry-node-01,cudos-start-sentry-node-mainnet,cudos-start-sentry-node-testnet-private,cudos-start-sentry-node-testnet-public-zone01,cudos-start-sentry-node-testnet-public-zone02,cudos-start-sentry-node-testnet-public-zone03,cudos-standalone-node"
+#------------------------------------------------------------------------------
+#CHECKS
+if [ "$EUID" -ne 0 ]; then
+    echo -e "\033[1;31mError:\033[m The script MUST be executed as root";
+    exit 1
+fi
+
+if [ ! -x "$(command -v jq)" ]; then
+    echo -e "${RED}Error:${NC} You must install jq";
+    exit 1;
+fi
+
+if ! id "cudos" &>/dev/null; then
+    echo -e "${RED}Error:${NC} You must install jq";
+    exit 1;
+fi
+
+if [ ! -x "$(command -v jq)" ]; then
+    echo -e "${RED}Error:${NC} You must install jq";
+    exit 1;
+fi
 #------------------------------------------------------------------------------
 IFS=',' read -r -a containerNamesArray <<< "$containerNames"
 
@@ -101,10 +112,10 @@ newDirVolume=$(df -P -- "$dataDir" | awk 'NR==2 {print $1}')
 #MOVE or COPY data folder
 if [ "$mountedDirVolume" = "$newDirVolume" ]; then
     printf "$($timestamp): Mounted data dir and new data dir are on the same volume. Moving...\n"
-    mv $mountedDir/* $dataDir/
+    mv -f $mountedDir/* $dataDir/
 else
     printf "$($timestamp): Mounted data dir and new data dir are NOT on the same volume. Copying...\n"
-    cp -r $mountedDir/* $dataDir/
+    \cp -rf $mountedDir/* $dataDir/
 fi
 
 printf "$($timestamp): Changing ownership of data dir to ${GREEN}cudos${NC}...\n\n"
