@@ -1,5 +1,15 @@
 #!/bin/bash
 
+if [ "$EUID" -ne 0 ]; then
+    echo -e "\033[1;31mError:\033[m The script MUST be executed as root";
+    exit 1
+fi
+
+if [ ! -x "$(command -v jq)" ]; then
+    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} You must install jq";
+    exit 1;
+fi
+
 #------------------------------------------------------------------------------
 #VARIABLES
 NC='\033[0m'              # Text Reset
