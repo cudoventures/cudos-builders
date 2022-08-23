@@ -18,7 +18,7 @@ if [ ! -x "$(command -v jq)" ]; then
 fi
 
 if [ ! id "cudos" &>/dev/null ]; then
-    echo -e "Error: You must install jq";
+    echo -e "Error: user \"cudos\" must exist. Have you installed the Top Level package?";
     exit 1;
 fi
 
@@ -42,11 +42,11 @@ do
     if [ ! -z "$foundContainer" ]; then 
         printf "$(date +"%Y-%m-%d**%H:%M:%S"): Checking container ${containerName} for activeness...\n"
 
-        firstBlockCheckHeight=$(docker container exec -t ${containerName} cudos-noded status | tr -d '\r' | jq ".SyncInfo.latest_block_height") 
+        firstBlockCheckHeight=$(docker container exec -t ${containerName} cudos-noded status | tr -d '\r' | jq ".SyncInfo.latest_block_height") ;
         if [ ! -z "$firstBlockCheckHeight" ]; then
             printf "$(date +"%Y-%m-%d**%H:%M:%S"): ${containerName}: First block check height: ${firstBlockCheckHeight} \n"
 
-            sleep ${waitTime}
+            sleep ${waitTime};
 
             secondBlockCheckHeight=$(docker container exec -t ${containerName} cudos-noded status | tr -d '\r' | jq ".SyncInfo.latest_block_height")
             printf "$(date +"%Y-%m-%d**%H:%M:%S"): ${containerName}: Second block check height: ${secondBlockCheckHeight} \n"
@@ -97,11 +97,11 @@ if [ "$mountedDirVolume" != "$newDirVolume" ]; then
 fi
 
 # stop container
-printf "$(date +"%Y-%m-%d**%H:%M:%S"): Stopping container: ${containerName}...\n"
-docker container stop ${containerName}
+printf "$(date +"%Y-%m-%d**%H:%M:%S"): Stopping container: ${containerName}...\n";
+docker container stop ${containerName};
 
 # if there are no more containers stop docker service as well
-runningContainerCount=$(docker ps -q | wc -l)
+runningContainerCount=$(docker ps -q | wc -l);
 if [ $runningContainerCount -eq 0 ]; then
     printf "$(date +"%Y-%m-%d**%H:%M:%S"): Stopping container: ${containerName}...\n"
     systemctl stop docker.service
@@ -113,7 +113,11 @@ if [ "$mountedDirVolume" = "$newDirVolume" ]; then
     mv -f "$mountedDir/*" "$dataDir/"
 else
     printf "$(date +"%Y-%m-%d**%H:%M:%S"): Mounted data dir and new data dir are NOT on the same volume. Copying...\n"
-    \cp -rf "$mountedDir/*" "$dataDir/"
+    if [ ! -x "$(command -v rsync)" ]; then
+        \cp -rf "$mountedDir/*" "$dataDir/"
+    else
+        rsync -ra "$mountedDir/*" "$dataDir/"
+    fi
 fi
 
 printf "$(date +"%Y-%m-%d**%H:%M:%S"): Changing ownership of data dir to cudos...\n\n"
