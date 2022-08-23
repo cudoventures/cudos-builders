@@ -110,7 +110,7 @@ fi
 # MOVE or COPY data folder
 if [ "$mountedDirVolume" = "$newDirVolume" ]; then
     printf "$(date +"%Y-%m-%d**%H:%M:%S"): Mounted data dir and new data dir are on the same volume. Moving...\n"
-    mv -f "$mountedDir/*" "$dataDir/"
+    mv -f "$mountedDir"/* "$dataDir"/
 else
     printf "$(date +"%Y-%m-%d**%H:%M:%S"): Mounted data dir and new data dir are NOT on the same volume. Copying...\n"
     if [ ! -x "$(command -v rsync)" ]; then
