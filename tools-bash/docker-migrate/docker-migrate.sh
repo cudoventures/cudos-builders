@@ -114,14 +114,14 @@ if [ "$mountedDirVolume" = "$newDirVolume" ]; then
 else
     printf "$(date +"%Y-%m-%d**%H:%M:%S"): Mounted data dir and new data dir are NOT on the same volume. Copying...\n"
     if [ ! -x "$(command -v rsync)" ]; then
-        \cp -rf "$mountedDir/*" "$dataDir/"
+        \cp -rf "$mountedDir"/* "$dataDir"/
     else
-        rsync -ra "$mountedDir/*" "$dataDir/"
+        rsync -ra "$mountedDir"/* "$dataDir"/
     fi
 fi
 
 printf "$(date +"%Y-%m-%d**%H:%M:%S"): Changing ownership of data dir to cudos...\n\n"
-chown -R cudos "$dataDir"
+chown -R cudos:cudos "$dataDir"
 
 #start cosmovisor
 printf "$(date +"%Y-%m-%d**%H:%M:%S"): Starting cosmovisor service...\n"
