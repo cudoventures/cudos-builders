@@ -1,71 +1,64 @@
 #!/bin/bash
 
-#------------------------------------------------------------------------------
-#VARIABLES
-NC='\033[0m'              # Text Reset
-RED='\033[0;31m'          # Red
-GREEN='\033[0;32m'        # Green
-
-timestamp=('date +"%Y-%m-%d**%H:%M:%S"')
-
 dataDir="/var/lib/cudos/cudos-data"
 waitTime=10
 
-#hardcoded names of expected docker container names to search for
+# hardcoded names of expected docker container names to search for
 containerNames="cudos-start-full-node-client-local-01,cudos-start-full-node-client-mainnet,cudos-start-full-node-client-testnet-private-01,cudos-start-full-node-client-testnet-public-01,cudos-start-full-node-testnet-public-zone02,cudos-start-full-node-testnet-public-zone03,cudos-start-root-node-02,cudos-start-root-node,cudos-start-seed-node-client-local-01,cudos-start-seed-node-client-mainnet,cudos-start-seed-node-client-testnet-private-01,cudos-start-seed-node-client-testnet-public-01,cudos-start-seed-node-01,cudos-start-seed-node-mainnet,cudos-start-seed-node-testnet-private,cudos-start-seed-node-testnet-public-zone01,cudos-start-seed-node-testnet-public-zone02,cudos-start-seed-node-testnet-public-zone03,cudos-start-sentry-node-client-local-01,cudos-start-sentry-node-client-mainnet,cudos-start-sentry-node-client-testnet-private-01,cudos-start-sentry-node-client-testnet-public-01,cudos-start-sentry-node-01,cudos-start-sentry-node-mainnet,cudos-start-sentry-node-testnet-private,cudos-start-sentry-node-testnet-public-zone01,cudos-start-sentry-node-testnet-public-zone02,cudos-start-sentry-node-testnet-public-zone03,cudos-standalone-node"
-#------------------------------------------------------------------------------
-#CHECKS
+
+# checks ------------------------------------------------------------------------------
 if [ "$EUID" -ne 0 ]; then
-    echo -e "\033[1;31mError:\033[m The script MUST be executed as root";
+    echo -e "Error: The script MUST be executed as root";
     exit 1
 fi
 
 if [ ! -x "$(command -v jq)" ]; then
-    echo -e "${RED}Error:${NC} You must install jq";
+    echo -e "Error: You must install jq";
     exit 1;
 fi
 
-if ! id "cudos" &>/dev/null; then
-    echo -e "${RED}Error:${NC} You must install jq";
+if [ ! id "cudos" &>/dev/null ]; then
+    echo -e "Error: You must install jq";
     exit 1;
 fi
 
-if [ ! -x "$(command -v jq)" ]; then
-    echo -e "${RED}Error:${NC} You must install jq";
+if [ ! -d "$dataDir" ]; then
+    echo -e "Error: Data dir is missing. Have you installed the Top Level package?";
     exit 1;
 fi
-#------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
 IFS=',' read -r -a containerNamesArray <<< "$containerNames"
 
-#get list of active containers
+# get list of active containers
 dockerContainerList=$(docker container list)
 
-#search for container name in active containers list
+# search for container name in active containers list
 foundContainers=()
 for containerName in "${containerNamesArray[@]}"
 do
-    #if container name found in list, check if it produces new blocks
+    # if container name found in list, check if it produces new blocks
     foundContainer=$(echo -e "$dockerContainerList" | grep $containerName)
     if [ ! -z "$foundContainer" ]; then 
-        printf "$($timestamp): Checking container ${GREEN}${containerName}${NC} for activeness...\n"
+        printf "$(date +"%Y-%m-%d**%H:%M:%S"): Checking container ${containerName} for activeness...\n"
 
         firstBlockCheckHeight=$(docker container exec -t ${containerName} cudos-noded status | tr -d '\r' | jq ".SyncInfo.latest_block_height") 
         if [ ! -z "$firstBlockCheckHeight" ]; then
-            printf "$($timestamp): ${GREEN}${containerName}${NC}: First block check height: ${GREEN}${firstBlockCheckHeight}${NC} \n"
+            printf "$(date +"%Y-%m-%d**%H:%M:%S"): ${containerName}: First block check height: ${firstBlockCheckHeight} \n"
 
             sleep ${waitTime}
 
             secondBlockCheckHeight=$(docker container exec -t ${containerName} cudos-noded status | tr -d '\r' | jq ".SyncInfo.latest_block_height")
-            printf "$($timestamp): ${GREEN}${containerName}${NC}: Second block check height: ${GREEN}${secondBlockCheckHeight}${NC} \n"
+            printf "$(date +"%Y-%m-%d**%H:%M:%S"): ${containerName}: Second block check height: ${secondBlockCheckHeight} \n"
 
             if [ "$firstBlockCheckHeight" != "$secondBlockCheckHeight" ]; then
                 foundContainers+=("$containerName")
-                printf "$($timestamp): Found active container that produces blocks: ${GREEN}${containerName}${NC}\n\n"
+                printf "$(date +"%Y-%m-%d**%H:%M:%S"): Found active container that produces blocks: ${containerName}\n\n"
             else
-                printf "$($timestamp): Container ${RED}${containerName}${NC} didn't produce a new block in ${waitTime} seconds.\n\n"
+                printf "$(date +"%Y-%m-%d**%H:%M:%S"): Container ${containerName} didn't produce a new block in ${waitTime} seconds.\n\n"
             fi
         else 
-            printf "$($timestamp): ${RED}Block height not found${NC}. Container probably not producing blocks.\n\n"
+            printf "$(date +"%Y-%m-%d**%H:%M:%S"): Block height not found. Container probably not producing blocks.\n\n"
         fi
     fi
 done
@@ -73,54 +66,59 @@ done
 # check how many containers found and continue only if ONLY 1 is found
 foundContainersCount=${#foundContainers[@]}
 if [[ $foundContainersCount -eq 0 ]]; then
-    printf "$($timestamp): ${RED}ERROR: No active containers producing blocks found${NC}\n\n"
-    exit
+    printf "$(date +"%Y-%m-%d**%H:%M:%S"): ERROR: No active containers producing blocks found\n\n"
+    exit 0
 elif [[ $foundContainersCount -gt 1 ]]; then
-    printf "$($timestamp): ${RED}ERROR: More than 1 active containers producing blocks found${NC}\n\n"
-    exit
+    printf "$(date +"%Y-%m-%d**%H:%M:%S"): ERROR: More than 1 active containers producing blocks found\n\n"
+    exit 0
 else
-    printf "$($timestamp): Found active container producing blocks: ${GREEN}${foundContainers[0]}${NC}\n\n"
+    printf "$(date +"%Y-%m-%d**%H:%M:%S"): Selected active container that is producing blocks: ${foundContainers[0]}\n\n"
 fi
 
 containerName=${foundContainers[0]}
 
-#find mounted dir for cudos-data
-printf "$($timestamp): Finding mounted dir for cudos-data...\n"
-mountedDir=$(docker container inspect ${containerName} | jq -c '.[0].Mounts | map(select( .Destination | contains("/usr/cudos/cudos-data"))) | .[0].Source')
+# find mounted dir for cudos-data
+printf "$(date +"%Y-%m-%d**%H:%M:%S"): Finding mounted dir for cudos-data...\n"
+mountedDir=$(docker container inspect ${containerName} | jq -c '.[0].Mounts | map(select(.Source | contains("CudosData/"))) | .[0].Source')
 mountedDir="${mountedDir//\"}"
 
-#stop container
-printf "$($timestamp): Stopping container: ${GREEN}${containerName}${NC}...\n"
-docker container stop ${containerName}
-
-#if there are no more containers stop docker service as well
-runningContainerCount=$(docker ps -q | wc -l)
-if [ $runningContainerCount -eq 0 ]; then
-    printf "$($timestamp): Stopping container: ${GREEN}${containerName}${NC}...\n"
-    systemctl stop docker.service
-fi
-
-
-#create dir for cudos-data
-printf "$($timestamp): Creating data dir if missing...\n"
-mkdir -p $dataDir
-
-#check if old and new data dir are on the same volume
+# check if old and new data dir are on the same volume
 mountedDirVolume=$(df -P -- "$mountedDir" | awk 'NR==2 {print $1}')
 newDirVolume=$(df -P -- "$dataDir" | awk 'NR==2 {print $1}')
 
-#MOVE or COPY data folder
-if [ "$mountedDirVolume" = "$newDirVolume" ]; then
-    printf "$($timestamp): Mounted data dir and new data dir are on the same volume. Moving...\n"
-    mv -f $mountedDir/* $dataDir/
-else
-    printf "$($timestamp): Mounted data dir and new data dir are NOT on the same volume. Copying...\n"
-    \cp -rf $mountedDir/* $dataDir/
+if [ "$mountedDirVolume" != "$newDirVolume" ]; then
+    dataBuffer="10000000"
+    mountedDirSizeInKiB=$(du -s "$mountedDir" | awk '{print $1}')
+    mountedDirSizeInKiB=$(($mountedDirSizeInKiB + $dataBuffer))
+    newDirVolumefreeSpaceInKiB=$(df -P "$dataDir" | tail -1 | awk '{print $4}')
+    if (($mountedDirSizeInKiB > $newDirVolumefreeSpaceInKiB)); then
+        printf "$(date +"%Y-%m-%d**%H:%M:%S"): There is not enough space on the target volume. Current data dir size is ${mountedDirSizeInKiB} kB. The target volume's free space is ${newDirVolumefreeSpaceInKiB} kB  \n"
+    fi
 fi
 
-printf "$($timestamp): Changing ownership of data dir to ${GREEN}cudos${NC}...\n\n"
-chown -R cudos $dataDir
+# stop container
+printf "$(date +"%Y-%m-%d**%H:%M:%S"): Stopping container: ${containerName}...\n"
+docker container stop ${containerName}
+
+# if there are no more containers stop docker service as well
+runningContainerCount=$(docker ps -q | wc -l)
+if [ $runningContainerCount -eq 0 ]; then
+    printf "$(date +"%Y-%m-%d**%H:%M:%S"): Stopping container: ${containerName}...\n"
+    systemctl stop docker.service
+fi
+
+# MOVE or COPY data folder
+if [ "$mountedDirVolume" = "$newDirVolume" ]; then
+    printf "$(date +"%Y-%m-%d**%H:%M:%S"): Mounted data dir and new data dir are on the same volume. Moving...\n"
+    mv -f "$mountedDir/*" "$dataDir/"
+else
+    printf "$(date +"%Y-%m-%d**%H:%M:%S"): Mounted data dir and new data dir are NOT on the same volume. Copying...\n"
+    \cp -rf "$mountedDir/*" "$dataDir/"
+fi
+
+printf "$(date +"%Y-%m-%d**%H:%M:%S"): Changing ownership of data dir to cudos...\n\n"
+chown -R cudos "$dataDir"
 
 #start cosmovisor
-printf "$($timestamp): Starting cosmovisor service...\n"
-systemctl enable cosmovisor.service
+printf "$(date +"%Y-%m-%d**%H:%M:%S"): Starting cosmovisor service...\n"
+systemctl enable --now cosmovisor@cudos

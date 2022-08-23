@@ -12,6 +12,7 @@ elif [ "$NODE_NAME" = "full-node" ]; then
     \cp ./full-node.env.example "$NODE_ENV_PATH"
 fi
 
+sed -i "s~SHOULD_USE_STATE_SYNC=.*~SHOULD_USE_STATE_SYNC=\"true\"~g" "$NODE_ENV_PATH"
 sed -i "s~SHOULD_USE_GLOBAL_PEERS=.*~SHOULD_USE_GLOBAL_PEERS=\"true\"~g" "$NODE_ENV_PATH"
 sed -i "s~MONIKER=.*~MONIKER=\"$PARAM_MONIKER\"~g" "$NODE_ENV_PATH"
 sed -i "s~MONITORING_ENABLED=.*~MONITORING_ENABLED=\"$PARAM_MONITORING_ENABLED\"~g" "$NODE_ENV_PATH"
