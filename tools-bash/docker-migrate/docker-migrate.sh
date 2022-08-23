@@ -110,6 +110,11 @@ fi
 # MOVE or COPY data folder
 if [ "$mountedDirVolume" = "$newDirVolume" ]; then
     printf "$(date +"%Y-%m-%d**%H:%M:%S"): Mounted data dir and new data dir are on the same volume. Moving...\n"
+    cd "$dataDir"
+    for dataSubfolder in ./*; do
+        [[ "$dataSubfolder" =~ .*"cosmovisor".* ]] && continue;
+        rm -rf "$dataSubfolder"
+    done
     mv -f "$mountedDir"/* "$dataDir"/
 else
     printf "$(date +"%Y-%m-%d**%H:%M:%S"): Mounted data dir and new data dir are NOT on the same volume. Copying...\n"
