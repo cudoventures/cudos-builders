@@ -110,10 +110,10 @@ docker container stop ${containerName};
 runningContainerCount=$(docker ps -q | wc -l);
 if [ $runningContainerCount -eq 0 ]; then
     printf "$(date +"%Y-%m-%d**%H:%M:%S"): Stopping container: ${containerName}...\n"
-    systemctl disable docker.service
     systemctl disable docker.socket
-    systemctl stop docker.service
+    systemctl disable docker.service
     systemctl stop docker.socket
+    systemctl stop docker.service
 fi
 
 # MOVE or COPY data folder
