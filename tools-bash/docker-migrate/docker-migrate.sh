@@ -140,4 +140,5 @@ chown -R cudos:cudos "$dataDir"
 
 #start cosmovisor
 printf "$(date +"%Y-%m-%d**%H:%M:%S"): Starting cosmovisor service...\n"
-systemctl enable --now cosmovisor@cudos
+systemctl enable cosmovisor@cudos
+systemctl start cosmovisor@cudos
