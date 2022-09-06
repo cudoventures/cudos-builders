@@ -32,7 +32,6 @@ if [ "$?" != "0" ]; then
     echo -e "Error: cudos-noded binary is missing. Have you installed the Top Level package?";
     exit 1;
 fi
-exit 0;
 
 # ------------------------------------------------------------------------------
 IFS=',' read -r -a containerNamesArray <<< "$containerNames"
