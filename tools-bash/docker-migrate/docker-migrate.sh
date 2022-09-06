@@ -38,8 +38,8 @@ foundContainers=()
 for containerName in "${containerNamesArray[@]}"
 do
     # if container name found in list, check if it produces new blocks
-    foundContainer=$(echo -e "$dockerContainerList" | grep $containerName)
-    if [ ! -z "$foundContainer" ]; then 
+    validContainer=$(docker container inspect -f '{{.State.Running}}' "$containerName" 2>/dev/null)
+    if [ "$?" = "0" ] && [ "$validContainer" = "true" ]; then # the container exists and it is running
         printf "$(date +"%Y-%m-%d**%H:%M:%S"): Checking container ${containerName} for activeness...\n"
 
         firstBlockCheckHeight=$(docker container exec -t ${containerName} cudos-noded status | tr -d '\r' | jq ".SyncInfo.latest_block_height") ;
