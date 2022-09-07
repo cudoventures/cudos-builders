@@ -1,4 +1,4 @@
-FROM golang:buster as builder
+FROM golang:1.18.6-buster as builder
 
 RUN apt update
 
@@ -12,7 +12,7 @@ RUN cd ./CudosNode && make
 
 RUN FOLDER=$(ls /go/pkg/mod/github.com/\!cosm\!wasm/ | grep wasmvm@v) && ln -s /go/pkg/mod/github.com/\!cosm\!wasm/${FOLDER} /go/pkg/mod/github.com/\!cosm\!wasm/wasmvm
 
-FROM golang:buster
+FROM golang:1.18.6-buster
 
 RUN apt update
 
