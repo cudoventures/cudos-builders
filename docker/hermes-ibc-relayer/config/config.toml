@@ -150,10 +150,16 @@ max_gas = 10000000
 # the denomination of the fee. Required
 gas_price = { price = , denom = '' }
 
-# Specify the ratio by which to increase the gas estimate used to compute the fee,
-# to account for potential estimation error. Default: 0.1, ie. 10%.
-# Valid range: 0.0 to 1.0 (inclusive)
-gas_adjustment = 1.0
+# Multiply this amount with the gas estimate, used to compute the fee
+# and account for potential estimation error.
+#
+# Example: With this setting set to 1.1, then if the estimated gas
+# is 80_000, then gas used to compute the fee will be adjusted to
+# 80_000 * 1.1 = 88_000.
+#
+# Default: 1.1, ie. the gas is increased by 10%
+# Minimum value: 1.0
+gas_multiplier = 1.1
 
 # Specify how many IBC messages at most to include in a single transaction.
 # Default: 30
@@ -224,7 +230,7 @@ store_prefix = 'ibc'
 default_gas = 300000
 max_gas = 10000000
 gas_price = { price = , denom = '' }
-gas_adjustment = 0.1
+gas_multiplier = 1.1
 max_msg_num = 10
 max_tx_size = 2097152
 clock_drift = '15s'
