@@ -16,6 +16,7 @@ chain:
         - gravity
         - cudomint
         - nft
+        - marketplace
 node:
     type: remote
     config:
