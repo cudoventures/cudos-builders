@@ -22,7 +22,7 @@ fi
 
 workdir=$PWD
 echo $workdir
-git clone -b $branch $https://github.com/CudoVentures/cudos-bdjuno.git $workdir/CudosBDJuno
+git clone -b $branch https://github.com/CudoVentures/cudos-bdjuno.git $workdir/CudosBDJuno
 cp -R $workdir/bdjuno $workdir/CudosBDJuno/
 cp $workdir/.env-bdjuno $workdir/CudosBDJuno/.env
 
