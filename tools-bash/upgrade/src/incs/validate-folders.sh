@@ -38,25 +38,25 @@ if [ "$1" = "restore" ] || [ "$1" = "validate" ]; then
         exit 1;
     fi
 
-    if [ ! -d "$PARAM_SOURCE_DIR/CudosData/$VOLUME_NAME-backup" ]; then
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Folder $PARAM_SOURCE_DIR/CudosData/$VOLUME_NAME-backup does not exists";
-        exit 1;
-    fi
+    # if [ ! -d "$PARAM_SOURCE_DIR/CudosData/$VOLUME_NAME-backup" ]; then
+    #     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Folder $PARAM_SOURCE_DIR/CudosData/$VOLUME_NAME-backup does not exists";
+    #     exit 1;
+    # fi
 
-    if [ ! -d "$PARAM_SOURCE_DIR/CudosNode-backup" ]; then
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Folder $PARAM_SOURCE_DIR/CudosNode-backup does not exists";
-        exit 1;
-    fi
+    # if [ ! -d "$PARAM_SOURCE_DIR/CudosNode-backup" ]; then
+    #     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Folder $PARAM_SOURCE_DIR/CudosNode-backup does not exists";
+    #     exit 1;
+    # fi
 
-    if [ ! -d "$PARAM_SOURCE_DIR/CudosGravityBridge-backup" ]; then
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Folder $PARAM_SOURCE_DIR/CudosGravityBridge-backup does not exists";
-        exit 1;
-    fi
+    # if [ ! -d "$PARAM_SOURCE_DIR/CudosGravityBridge-backup" ]; then
+    #     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Folder $PARAM_SOURCE_DIR/CudosGravityBridge-backup does not exists";
+    #     exit 1;
+    # fi
 
-    if [ ! -d "$PARAM_SOURCE_DIR/CudosBuilders-backup" ]; then
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Folder $PARAM_SOURCE_DIR/CudosBuilders-backup does not exists";
-        exit 1;
-    fi
+    # if [ ! -d "$PARAM_SOURCE_DIR/CudosBuilders-backup" ]; then
+    #     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Folder $PARAM_SOURCE_DIR/CudosBuilders-backup does not exists";
+    #     exit 1;
+    # fi
 
 fi
 
