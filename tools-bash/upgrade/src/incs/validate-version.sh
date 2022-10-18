@@ -5,7 +5,7 @@ echo -ne "Validating version...";
 containerVersion=""
 sourceVersion=""
 UPDATE_FROM_VERSION=""
-UPDATE_TO_VERSION="v0.9.0"
+UPDATE_TO_VERSION="v1.0.1"
 
 if [ "$(docker container inspect -f '{{.State.Status}}' "$START_CONTAINER_NAME" 2>&1)" = "running" ]; then
     dockerResult=$(docker container exec "$START_CONTAINER_NAME" /bin/bash -c "cudos-noded version" 2>&1);
@@ -32,7 +32,7 @@ fi
 
 if [ "$containerVersion" = "" ] && [ "$sourceVersion" = "" ]; then
     if [ "$NETWORK_MAINNET" = "true" ]; then
-        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} There is currently no mainnet";
+        echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Mainnet entries should have been read successfully";
         exit 1;
     fi
     if [ "$NETWORK_DRESSREHEARSAL" = "true" ]; then
@@ -71,7 +71,7 @@ if [ "$containerVersion" != "$sourceVersion" ]; then
 fi
 
 UPDATE_FROM_VERSION="$sourceVersion"
-DO_HARD_FORK="true"
+DO_HARD_FORK="false"
 
 if [ "$NETWORK_TESTNET_PRIVATE" = "true" ] && [ "$UPDATE_FROM_VERSION" = "v0.3" ] && [ "$UPDATE_TO_VERSION" = "v0.6.0" ] && [ "$DO_HARD_FORK" = "true" ]; then
     TARGET_CHAIN_ID="cudos-testnet-private-2"
@@ -84,6 +84,8 @@ elif [ "$NETWORK_TESTNET_PUBLIC" = "true" ] && [ "$UPDATE_FROM_VERSION" = "v0.4.
     echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}"
 elif [ "$NETWORK_TESTNET_PRIVATE" = "true" ] && [ "$UPDATE_FROM_VERSION" = "v0.6.0" ] && [ "$UPDATE_TO_VERSION" = "v0.8.0" ] && [ "$DO_HARD_FORK" = "true" ]; then
     TARGET_CHAIN_ID="cudos-testnet-private-3"
+    echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}"
+elif [ "$NETWORK_MAINNET" = "true" ] && [ "$UPDATE_FROM_VERSION" = "v1.0.0" ] && [ "$UPDATE_TO_VERSION" = "v1.0.1" ] && [ "$DO_HARD_FORK" = "false" ]; then
     echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}"
 else
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} Unsupported upgrade of $(getNetworkName) from $UPDATE_FROM_VERSION to $UPDATE_TO_VERSION";

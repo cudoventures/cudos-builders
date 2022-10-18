@@ -19,6 +19,8 @@ elif [ "$UPDATE_FROM_VERSION" = "v0.4.0" ] && [ "$UPDATE_TO_VERSION" = "v0.9.0" 
     source "$WORKING_SRC_VERSIONS_DIR/configs-0.4-0.9.sh"
 elif [ "$UPDATE_FROM_VERSION" = "v0.6.0" ] && [ "$UPDATE_TO_VERSION" = "v0.8.0" ]; then
     source "$WORKING_SRC_VERSIONS_DIR/configs-0.6-0.8.sh"
+elif [ "$UPDATE_FROM_VERSION" = "v1.0.0" ] && [ "$UPDATE_TO_VERSION" = "v1.0.1" ]; then
+    source "$WORKING_SRC_VERSIONS_DIR/configs-1.0.0-1.0.1.sh"
 fi
 echo -e "${STYLE_GREEN}OK${STYLE_DEFAULT}";
 

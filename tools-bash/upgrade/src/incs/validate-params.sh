@@ -2,6 +2,9 @@
 
 echo -ne "Validating params...";
 
+# for version 1.0.1 forcing not to upgrade the orchestrator in any case
+PARAM_HAS_ORCHESTRATOR="false"
+
 # validating binaries
 if [ ! -x "$(command -v jq)" ]; then
     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The host does not have jq installed";
@@ -43,10 +46,10 @@ if [ "$PARAM_HAS_ORCHESTRATOR" != "true" ] && [ "$PARAM_HAS_ORCHESTRATOR" != "fa
     PARAM_HAS_ORCHESTRATOR="false"
 fi
 
-if [ "$PARAM_NODE_NAME" = "root-node" ] && [ "$PARAM_HAS_ORCHESTRATOR" != "true" ]; then
-    echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_HAS_ORCHESTRATOR is supposed to be TRUE for a root-node";
-    exit 1;
-fi
+# if [ "$PARAM_NODE_NAME" = "root-node" ] && [ "$PARAM_HAS_ORCHESTRATOR" != "true" ]; then
+#     echo -e "${STYLE_RED}Error:${STYLE_DEFAULT} The param PARAM_HAS_ORCHESTRATOR is supposed to be TRUE for a root-node";
+#     exit 1;
+# fi
 
 # validating folders
 if [ ! -d "$PARAM_SOURCE_DIR/CudosData/$VOLUME_NAME" ]; then
