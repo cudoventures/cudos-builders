@@ -271,7 +271,7 @@ if [ "$PARAM_NODE_NAME" = "sentry-node" ]; then
                 source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
                 networkIdentified="true"
             fi
-            if [ "$tokenContractAddress" = "0x817bbDbC3e8A1204f3691d14bB44992841e3dB35" ]; then
+            if [ "$tokenContractAddress" = "0x817bbDbC3e8A1204f3691d14bB44992841e3dB35" ] || [ "$tokenContractAddress" = "0x817bbdbc3e8a1204f3691d14bb44992841e3db35" ]; then
                 NETWORK_MAINNET="true"
                 source "$WORKING_SRC_DIR/incs/fn-verify-network.sh"
                 networkIdentified="true"
