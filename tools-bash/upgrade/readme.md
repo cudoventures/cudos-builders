@@ -29,7 +29,7 @@ Python3 must be installed
 1. Connect to <em>target computer</em> using SSH
 1. Clone cudos-builders repo somewhere (usually in your home directory)
 ```
-git clone --branch v1.0.0 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
+git clone --branch v1.0.1 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
 ```
 1. Create config files according to **Config** section below
 1. Execute the script according to **Usage** section below
@@ -133,7 +133,11 @@ sudo ./src/gravity.sh change-contract
 
 1. Create a backup
     
-    <em>Note:</em> Creating of a backup could take a lot of time. It is very important to do it ONCE upgrade hight has been reached NOT before that. Make sure there is no error messages in the console. If something went wrong you can always re-create the backup. Make sure that the backup is correct (You can check it using <em>Validate a backup</em>) before proceeding to the next step.
+    <em>Note:</em> Creating of a backup could take a lot of time. It is very important to do it ONCE your node has been stopped NOT before that. You can stop your docker containers with:
+    ```
+    sudo docker stop <container_name>
+    ```
+     Make sure there is no error messages in the console. If something went wrong you can always re-create the backup. Make sure that the backup is correct (You can check it using <em>Validate a backup</em>) before proceeding to the next step.
 
 2. Validate
 
