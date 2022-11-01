@@ -27,7 +27,7 @@ Python3 must be installed
 ## Genesal usage
 
 1. Connect to <em>target computer</em> using SSH
-1. Clone cudos-builders repo somewhere (usually in your home directory)
+1. Clone cudos-builders repo somewhere (usually in your home directory) 
 ```
 git clone --branch v1.0.1 https://github.com/CudoVentures/cudos-builders.git CudosBuilders
 ```
@@ -42,7 +42,23 @@ All of the config files are in ./upgrade/config folder.
 
 ## Step 1
 
-Prepare the node.env based on node.env.example. It contains the following variables:
+Go to the `upgrade` folder 
+```
+cd CudosBuilders/tools-bash/upgrade
+cp ./config/node.env.example ./config/node.env 
+```
+
+Edit the ./config/node.env file. You can use
+```
+nano ./config/node.env 
+```
+
+or
+```
+vim ./config/node.env 
+```
+
+ Prepare the `node.env` based on `node.env.example`. It contains the following variables:
 
 1. **PARAM_NODE_NAME:** the name of the node that is going to be upgraded. Possible values are: root-node, seed-node, sentry-node or full-node. <em>Example: PARAM_NODE_NAME="sentry-node"</em>
 1. **PARAM_SOURCE_DIR:** A dir where repos were initially cloned during initial setup of the node, usually we use something like "/usr/cudos" <em>Example: PARAM_SOURCE_DIR="/usr/cudos"</em>
@@ -50,7 +66,7 @@ Prepare the node.env based on node.env.example. It contains the following variab
 
 # Usage
 
-There are 2 main scripts - <em>node</em> and <em>backup</em>.
+There is 1 main script - <em>node</em>. It can validate the current version and execute an upgrade.
 
 **Important**: The side effect of executing any of these scripts will be a folder, defined in PARAM_SOURCE_DIR at node.env on <em>target computer</em>
 
@@ -58,7 +74,7 @@ There are 2 main scripts - <em>node</em> and <em>backup</em>.
 
 **Important**: All of the scripts below must be executed from ./upgrade folder.
 
-**Important**: Make sure that <em>./src/backup.sh</em> and <em>./src/node.sh</em> have execute permission. 
+**Important**: Make sure that <em>./src/node.sh</em> have execute permission. 
 
 ## Node
 
