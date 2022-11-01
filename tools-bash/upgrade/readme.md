@@ -66,15 +66,33 @@ vim ./config/node.env
 
 # Usage
 
-There is 1 main script - <em>node</em>. It can validate the current version and execute an upgrade.
-
+There are 2 main scripts - <em>node</em> and <em>backup</em>.
 **Important**: The side effect of executing any of these scripts will be a folder, defined in PARAM_SOURCE_DIR at node.env on <em>target computer</em>
-
 **Important**: Execute these scripts only when all config files are ready.
-
 **Important**: All of the scripts below must be executed from ./upgrade folder.
-
-**Important**: Make sure that <em>./src/node.sh</em> have execute permission. 
+**Important**: Make sure that <em>./src/backup.sh</em> and <em>./src/node.sh</em> have execute permission. 
+## Backup
+Backup script has four usages:
+### Create a backup
+The command below creates a backup of current source files and data files.
+```
+sudo ./src/backup.sh create
+```
+### Restore a backup
+The command restores a backup that has been created using <em>Create a backup</em>
+```
+sudo ./src/backup.sh restore
+```
+### Validate a backup
+The command validates whether a created backup using <em>Create a backup</em> is valid
+```
+sudo ./src/backup.sh validate
+```
+### Clean a backup
+The command deletes previously created backup using <em>Create a backup</em>
+```
+sudo ./src/backup.sh clean
+```
 
 ## Node
 
@@ -94,10 +112,10 @@ sudo ./src/node.sh upgrade
 
 ## Launch sequence
 
-1. Validate
-
+1. Create a backup
+    
+    <em>Note:</em> Creating of a backup could take a lot of time. It is very important to do it ONCE upgrade hight has been reached NOT before that. Make sure there is no error messages in the console. If something went wrong you can always re-create the backup. Make sure that the backup is correct (You can check it using <em>Validate a backup</em>) before proceeding to the next step.
+2. Validate
     <em>Note:</em> The validate command will print the information about current node. Read it carefully and proceed with the next step only if this information is valid. If it is not valid, please contact CUDOS and make the appropriate changes. If the changes invole any of the previously backup-ed files, you must re-create the backup.
-
-2. Upgrade
-
+3. Upgrade
     <em>Note: </em> The upgrade could take up to 20min. If there is any error message during the upgrade you must restore a backup (using <em>Restore a backup</em>) and start over.
