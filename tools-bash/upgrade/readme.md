@@ -1,6 +1,6 @@
 # Overview
 
-The goal of this project is to upgrade a running blockchain node which has stopped because of an accepted software upgrade proposal.
+The goal of this project is to upgrade a running blockchain node.
 
 You must create an SSH connection from a machine (<em>host computer</em>) to the machine where the node is running (<em>target computer</em>).
 
