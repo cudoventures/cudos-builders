@@ -2,7 +2,7 @@ if [ "$OPEN_ALL_PORTS" = "true" ]; then
     # port 1317
     # enable
     sed -i "/\[api\]/,/\[/ s/enable = .*/enable = true/" "${CUDOS_HOME}/config/app.toml"
-    sed -i "s/enabled-unsafe-cors = \".*\"/enabled-unsafe-cors = true/" "${CUDOS_HOME}/config/app.toml"
+    sed -i "s/enabled-unsafe-cors = false/enabled-unsafe-cors = true/" "${CUDOS_HOME}/config/app.toml"
 
     # port 9090
     # enable
