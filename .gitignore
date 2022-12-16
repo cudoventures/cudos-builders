@@ -27,3 +27,4 @@ tools-bash/launcher/exports
 tools-bash/launcher/tokenomics
 tools-bash/upgrade/emergency-backup
 tools-bash/upgrade/migrate
+**/explorer-v2/bdjuno_local_deploy
