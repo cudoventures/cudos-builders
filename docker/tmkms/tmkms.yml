@@ -1,0 +1,23 @@
+version: '3.1'
+
+networks:
+  shared-cudos-network:
+    name: shared-cudos-network
+
+services:
+  cudos-tmkms:
+    image: cudos-tmkms
+    container_name: "$CONTAINER_NAME"
+    build:
+      dockerfile: CudosBuilders/docker/tmkms/tmkms.dockerfile
+      context: ../../../
+      args:
+        USER_ID: "0"
+        USER_NAME: "root"
+        GROUP_ID: "0"
+        GROUP_NAME: "root"
+    env_file: "$ENV_FILE"
+    volumes:
+      - '../../../CudosGravityBridge/orchestrator:/usr/src/orchestrator'
+    networks:
+      - shared-cudos-network

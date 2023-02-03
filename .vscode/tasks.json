@@ -11,7 +11,7 @@
         //TENDERMINT load test
         {
             "label": "Run TENDERMINT LOAD TEST LOCAL in docker",
-            "command": "cd ./docker/tendermint-load-tester && docker-compose --env-file ./tendermint-load-tester.local.arg -f ./tendermint-load-tester.yml -p tendermint-load-tester up --build",
+            "command": "cd ./docker/tmkms && docker-compose --env-file ./tendermint-load-tester.local.arg -f ./tendermint-load-tester.yml -p tendermint-load-tester up --build",
             "type": "shell",
             "group": "build"
         },
@@ -24,6 +24,13 @@
         {
             "label": "Run TENDERMINT LOAD TEST PUBLIC in docker",
             "command": "cd ./docker/tendermint-load-tester && docker-compose --env-file ./tendermint-load-tester.public.arg -f ./tendermint-load-tester.yml -p tendermint-load-tester up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        //TENDERMINT KEY MANAGEMENT SYSTEM
+        {
+            "label": "Run TMKMS in docker",
+            "command": "cd ./docker/tmkms && docker-compose --env-file ./tmkms.arg -f ./tmkms.yml -p tmkms up --build",
             "type": "shell",
             "group": "build"
         },

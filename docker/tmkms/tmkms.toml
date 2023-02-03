@@ -1,0 +1,46 @@
+# Tendermint KMS configuration file
+
+## Chain Configuration
+
+### Cosmos Hub Network
+
+[[chain]]
+id = "$CHAIN_ID"
+key_format = { type = "bech32", account_key_prefix = "cudospub", consensus_key_prefix = "cudosvalconspub" }
+state_file = "/usr/cudos/tmkms/state/cudos-consensus.json"
+
+## Signing Provider Configuration
+
+### Software-based Signer Configuration
+
+[[providers.softsign]]
+chain_ids = ["$CHAIN_ID"]
+key_type = "consensus"
+path = "/usr/cudos/tmkms/secrets/cudos-consensus.key"
+
+[[providers.softsign]]
+chain_ids = ["$CHAIN_ID"]
+key_type = "account"
+path = "/usr/cudos/tmkms/secrets/cudos-account.key"
+
+## Validator Configuration
+
+# [[validator]]
+# chain_id = "$CHAIN_ID"
+# addr = "tcp://deadbeefdeadbeefdeadbeefdeadbeefdeadbeef@example1.example.com:26658"
+# secret_key = "/usr/cudos/tmkms/secrets/kms-identity.key"
+# protocol_version = "legacy"
+# reconnect = true
+
+## Transaction Signer Configuration
+
+#[[tx_signer]]
+#chain_id = "$CHAIN_ID"
+#schema = "cosmos-sdk.toml"
+#account_number = 123456 # CHANGE ME!
+#account_address = "cosmos1..." # CHANGE ME!
+#acl = { msg_type = ["sdk/Tx"] } # CHANGE ME!
+#poll_interval = { blocks = 5 }
+#source = { protocol = "jsonrpc", uri = "http://127.0.0.1:23456/" } # CHANGE ME!
+#rpc = { addr =  "tcp://127.0.0.1:26657" } # CHANGE ME!
+#seq_file = "/usr/cudos/tmkms/state/cosmoshub-3-account-seq.json"

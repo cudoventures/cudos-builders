@@ -1,0 +1,2 @@
+ENV_FILE=./.env
+CONTAINER_NAME=tendermint-key-management
