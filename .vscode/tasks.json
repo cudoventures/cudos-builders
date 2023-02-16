@@ -218,6 +218,30 @@
             "group": "build"
         },
         {
+            "label": "Build START DEBUG NODE 2 in docker",
+            "command": "cd ./docker/debug-node-2 && docker-compose --env-file ./debug-node.arg -f ./debug-node.yml -f ./users-debug-node.override.yml -p cudos-start-debug-node up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Destroy START DEBUG NODE 2 in docker",
+            "command": "cd ./docker/debug-node-2 && docker-compose --env-file ./debug-node.arg -f ./debug-node.yml -f ./users-debug-node.override.yml -p cudos-start-debug-node up --build down",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Build START DEBUG NODE 3 in docker",
+            "command": "cd ./docker/debug-node-3 && docker-compose --env-file ./debug-node.arg -f ./debug-node.yml -f ./users-debug-node.override.yml -p cudos-start-debug-node up --build",
+            "type": "shell",
+            "group": "build"
+        },
+        {
+            "label": "Destroy START DEBUG NODE 3 in docker",
+            "command": "cd ./docker/debug-node-3 && docker-compose --env-file ./debug-node.arg -f ./debug-node.yml -f ./users-debug-node.override.yml -p cudos-start-debug-node up --build down",
+            "type": "shell",
+            "group": "build"
+        },
+        {
             "label": "Build START DEBUG ETHERMINT NODE in docker",
             "command": "cd ./docker/debug-node-ethermint && docker-compose --env-file ./debug-node-ethermint.arg -f ./debug-node-ethermint.yml -f ./users-debug-node-ethermint.override.yml -p cudos-start-debug-node-ethermint up --build",
             "type": "shell",

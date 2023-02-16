@@ -25,11 +25,11 @@ WORKDIR /tmp
 RUN apt-get update && apt-get -y install sudo netcat
 
 # install go
-RUN wget https://golang.org/dl/go1.17.linux-amd64.tar.gz && \
+RUN wget https://golang.org/dl/go1.19.linux-amd64.tar.gz && \
     rm -rf /usr/local/go && \
-    tar -C /usr/local -xzf go1.17.linux-amd64.tar.gz && \
+    tar -C /usr/local -xzf go1.19.linux-amd64.tar.gz && \
     echo "export PATH=\$PATH:/usr/local/go/bin" > /etc/profile.d/user-custom.sh && \
-    /usr/local/go/bin/go get -v golang.org/x/tools/gopls && \
+    # /usr/local/go/bin/go get -v golang.org/x/tools/gopls && \
     if [ "$USER_NAME" = 'root' ]; then \
         echo "export PATH=\$PATH:/root/go/bin" >> /etc/profile.d/user-custom.sh; \
     fi && \
