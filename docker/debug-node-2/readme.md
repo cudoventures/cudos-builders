@@ -26,7 +26,7 @@ The purpose of the debug-node is to start a debug-friendly environment.
     ```
     docker-compose --env-file ./debug-node.arg -f ./debug-node.yml -f ./users-debug-node.override.yml -p cudos-start-debug-node up --build
     ```
-    or by using the VS-code command **Build START DEBUG NODE in docker**
+    or by using the VS-code command **Build START DEBUG NODE 2 in docker**
 
 1. Attach shell to the debug-node's container
 
