@@ -1,4 +1,4 @@
-FROM golang:1.18.6-buster
+FROM golang:1.19.10-buster
 
 ARG USER_ID
 ARG USER_NAME
