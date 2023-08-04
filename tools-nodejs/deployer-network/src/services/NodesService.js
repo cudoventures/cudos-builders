@@ -106,7 +106,7 @@ class NodesService {
         
         const dockerContainerStartName = ValidatorNodeModel.getRootValidatorDockerContainerStartName();        
         
-        let ethTokenContract = '0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d';
+        let ethTokenContract = '0xE92f6A5b005B8f98F30313463Ada5cb35500a919';
         // if (gravity === '1') {
         //     const gravityBridgeUiModel = this.topologyHelper.gravityBridgeUiModel;
         //     ethTokenContract = gravityBridgeUiModel.ethTokenContract;
@@ -562,7 +562,7 @@ class NodesService {
         const sentryNodeModel = this.topologyHelper.getFirstSentry();
         const sentrySshHelper = this.instancesService.getSshHelper(sentryNodeModel.computerId);
 
-        let ethTokenContract = '0x28ea52f3ee46CaC5a72f72e8B3A387C0291d586d';
+        let ethTokenContract = '0xE92f6A5b005B8f98F30313463Ada5cb35500a919';
         // if (gravity === '1') {
         //     const gravityBridgeUiModel = this.topologyHelper.gravityBridgeUiModel;
         //     ethTokenContract = gravityBridgeUiModel.ethTokenContract;

@@ -20,6 +20,7 @@ sed -i "s/minimum-gas-prices = \"\"/minimum-gas-prices = \"5000000000000${BOND_D
 # for port 1317
 # eanble
 sed -i "/\[api\]/,/\[/ s/enable = false/enable = true/" "${CUDOS_HOME}/config/app.toml"
+sed -i "/\[api\]/,/\[/ s/address = \"tcp:\/\/localhost:1317\"/address = \"tcp:\/\/0.0.0.0:1317\"/" "${CUDOS_HOME}/config/app.toml"
 sed -i "s/enabled-unsafe-cors = false/enabled-unsafe-cors = true/" "${CUDOS_HOME}/config/app.toml"
 # disable
 # sed -i "/\[api\]/,/\[/ s/enable = true/enable = false/" "${CUDOS_HOME}/config/app.toml"
@@ -27,6 +28,7 @@ sed -i "s/enabled-unsafe-cors = false/enabled-unsafe-cors = true/" "${CUDOS_HOME
 # port 9090
 # enable
 sed -i "/\[grpc\]/,/\[/ s/enable = false/enable = true/" "${CUDOS_HOME}/config/app.toml"
+sed -i "/\[grpc\]/,/\[/ s/address = \"localhost:9090\"/address = \"0.0.0.0:9090\"/" "${CUDOS_HOME}/config/app.toml"
 # disable
 # sed -i "/\[grpc\]/,/\[/ s/enable = true/enable = false/" "${CUDOS_HOME}/config/app.toml"
 

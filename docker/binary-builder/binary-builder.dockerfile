@@ -1,4 +1,4 @@
-FROM golang:1.18.6-buster as builder
+FROM golang:1.19.10-buster as builder
 
 RUN apt update
 
@@ -12,7 +12,7 @@ RUN cd ./CudosNode && make
 
 RUN FOLDER=$(ls /go/pkg/mod/github.com/\!cosm\!wasm/ | grep wasmvm@v) && ln -s /go/pkg/mod/github.com/\!cosm\!wasm/${FOLDER} /go/pkg/mod/github.com/\!cosm\!wasm/wasmvm
 
-FROM golang:1.18.6-buster
+FROM golang:1.19.10-buster
 
 RUN apt update
 
@@ -20,7 +20,7 @@ RUN apt install -y jq
 
 WORKDIR /usr/cudos
 
-COPY --from=builder /go/pkg/mod/github.com/!cosm!wasm/wasmvm/api/libwasmvm.so /usr/lib
+COPY --from=builder /go/pkg/mod/github.com/!cosm!wasm/wasmvm/internal/api/libwasmvm.x86_64.so /usr/lib
 
 COPY --from=builder /go/bin/cudos-noded /go/bin/cudos-noded
 
