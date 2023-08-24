@@ -98,19 +98,19 @@ genesisJson=$(jq ".app_state.crisis.constant_fee.denom = \"$BOND_DENOM\"" "${CUD
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 
 # government proposal params
-genesisJson=$(jq ".app_state.gov.deposit_params.min_deposit[0].amount = \"50000000000000000000000\"" "${CUDOS_HOME}/config/genesis.json")
+genesisJson=$(jq ".app_state.gov.params.min_deposit[0].amount = \"50000000000000000000000\"" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
-genesisJson=$(jq ".app_state.gov.deposit_params.min_deposit[0].denom = \"$BOND_DENOM\"" "${CUDOS_HOME}/config/genesis.json")
+genesisJson=$(jq ".app_state.gov.params.min_deposit[0].denom = \"$BOND_DENOM\"" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
-genesisJson=$(jq ".app_state.gov.deposit_params.max_deposit_period = \"$PARAM_MAX_DEPOSIT_PERIOD\"" "${CUDOS_HOME}/config/genesis.json")
+genesisJson=$(jq ".app_state.gov.params.max_deposit_period = \"$PARAM_MAX_DEPOSIT_PERIOD\"" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
-genesisJson=$(jq ".app_state.gov.voting_params.voting_period = \"$PARAM_VOTING_PERIOD\"" "${CUDOS_HOME}/config/genesis.json")
+genesisJson=$(jq ".app_state.gov.params.voting_period = \"$PARAM_VOTING_PERIOD\"" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
-genesisJson=$(jq ".app_state.gov.tally_params.quorum = \"0.5\"" "${CUDOS_HOME}/config/genesis.json")
+genesisJson=$(jq ".app_state.gov.params.quorum = \"0.5\"" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
-genesisJson=$(jq ".app_state.gov.tally_params.threshold = \"0.5\"" "${CUDOS_HOME}/config/genesis.json")
+genesisJson=$(jq ".app_state.gov.params.threshold = \"0.5\"" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
-genesisJson=$(jq ".app_state.gov.tally_params.veto_threshold = \"0.4\"" "${CUDOS_HOME}/config/genesis.json")
+genesisJson=$(jq ".app_state.gov.params.veto_threshold = \"0.4\"" "${CUDOS_HOME}/config/genesis.json")
 echo $genesisJson > "${CUDOS_HOME}/config/genesis.json"
 
 # bank params
