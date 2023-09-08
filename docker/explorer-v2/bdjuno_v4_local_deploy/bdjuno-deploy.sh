@@ -24,9 +24,7 @@ workdir=$PWD
 echo $workdir
 git clone -b $branch https://github.com/CudoVentures/cudos-bdjuno.git $workdir/CudosBDJuno-v4
 cp -R $workdir/bdjuno $workdir/CudosBDJuno-v4/
-cp -R $workdir/hasura $workdir/CudosBDJuno-v4/
 cp $workdir/.env-bdjuno $workdir/CudosBDJuno-v4/.env
-cp $workdir/docker-compose-dev.yml $workdir/CudosBDJuno-v4/docker-compose-dev.yml
 
 cd $workdir/CudosBDJuno-v4
 echo "Starting BDJuno docker-compose"
@@ -40,6 +38,8 @@ else
 fi
 
 cd $workdir/CudosBDJuno-v4/hasura
+sed -i "s|endpoint:.*|endpoint: $hasura_endpoint|g" ./config.yaml
+cat ./config.yaml
 curl -L https://github.com/hasura/graphql-engine/raw/stable/cli/get.sh | bash
 hasura metadata apply --endpoint $hasura_endpoint --admin-secret $admin_secret
 
