@@ -1,4 +1,4 @@
-FROM golang:buster
+FROM golang:1.19.10-buster
 
 ARG USER_ID
 ARG USER_NAME
@@ -17,16 +17,19 @@ RUN if [ $USER_NAME != 'root' ]; then \
 
 WORKDIR /usr/cudos
 
-COPY ./CudosBuilders/docker/debug-node-ethermint/.env ./env-debug.sh
+COPY ./CudosBuilders/docker/root-node/root-node.local.env ./init.sh
 
-COPY ./CudosBuilders/docker/debug-node-ethermint/scripts/init.sh ./init-debug.sh
-COPY ./CudosBuilders/docker/debug-node-ethermint/scripts/start.sh ./start.sh
+COPY ./CudosBuilders/docker/debug-nodes/.env ./env-debug.sh
+
+COPY ./CudosBuilders/docker/root-node/scripts/init-root.sh ./init-root.sh
+
+COPY ./CudosBuilders/docker/debug-nodes/scripts/init-debug.sh ./init-debug.sh
 
 RUN echo "\n$(cat ./env-debug.sh)" >> ./init.sh && \
+    echo "\n$(cat ./init-root.sh)" >> ./init.sh && \
     echo "\n$(cat ./init-debug.sh)" >> ./init.sh && \
-    rm -f ./init-debug.sh && \
-    chmod +x ./init.sh && \
-    chmod +x ./start.sh
+    rm -f ./init-root.sh && \
+    chmod +x ./init.sh
 
 RUN chown -R ${USER_NAME}:${GROUP_NAME} /usr/cudos
 

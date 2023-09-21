@@ -8,32 +8,6 @@
             "type": "shell",
             "group": "build"
         },
-        //TENDERMINT load test
-        {
-            "label": "Run TENDERMINT LOAD TEST LOCAL in docker",
-            "command": "cd ./docker/tmkms && docker-compose --env-file ./tendermint-load-tester.local.arg -f ./tendermint-load-tester.yml -p tendermint-load-tester up --build",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Run TENDERMINT LOAD TEST PRIVATE in docker",
-            "command": "cd ./docker/tendermint-load-tester && docker-compose --env-file ./tendermint-load-tester.private.arg -f ./tendermint-load-tester.yml -p tendermint-load-tester up --build",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Run TENDERMINT LOAD TEST PUBLIC in docker",
-            "command": "cd ./docker/tendermint-load-tester && docker-compose --env-file ./tendermint-load-tester.public.arg -f ./tendermint-load-tester.yml -p tendermint-load-tester up --build",
-            "type": "shell",
-            "group": "build"
-        },
-        //TENDERMINT KEY MANAGEMENT SYSTEM
-        {
-            "label": "Run TMKMS in docker",
-            "command": "cd ./docker/tmkms && docker-compose --env-file ./tmkms.arg -f ./tmkms.yml -p tmkms up --build",
-            "type": "shell",
-            "group": "build"
-        },
         //hermes-ibc-relayer
         {
             "label": "Build HERMES-IBC-RELAYER BINARY BUILDER in docker",
@@ -53,22 +27,10 @@
             "type": "shell",
             "group": "build"
         },
-        {
-            "label": "Destroy HERMES-IBC-RELAYER LOCAL INIT in docker",
-            "command": "cd ./docker/hermes-ibc-relayer && docker-compose --env-file ./hermes-ibc-relayer.local.arg -f ./hermes-ibc-relayer-init.yml -p hermes-ibc-relayer-init down",
-            "type": "shell",
-            "group": "build"
-        },
         //osmosis-testnet-node
         {
             "label": "Build OSMOSIS TESTNET NODE in docker",
             "command": "cd ./docker/osmosis-testnet-node && sudo docker-compose --env-file ./osmosis-testnet-node.local.arg -f ./osmosis-testnet-node.yml -p osmosis-testnet-node up --build",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Destroy OSMOSIS TESTNET NODE in docker",
-            "command": "cd ./docker/osmosis-testnet-node && docker-compose --env-file ./osmosis-testnet-node.local.arg -f ./osmosis-testnet-node.yml -p osmosis-testnet-node down",
             "type": "shell",
             "group": "build"
         },
@@ -87,12 +49,6 @@
             "group": "build"
         },
         {
-            "label": "Destroy INIT ROOT NODE in docker",
-            "command": "cd ./docker/root-node && docker-compose --env-file ./root-node.local.arg -f ./init-root-node.yml -p cudos-init-root-node down",
-            "type": "shell",
-            "group": "build"
-        },
-        {
             "label": "Start START ROOT NODE in docker",
             "command": "cd ./docker/root-node && docker-compose --env-file ./root-node.local.arg -f ./start-root-node.yml -p cudos-start-root-node up",
             "type": "shell",
@@ -104,54 +60,10 @@
             "type": "shell",
             "group": "build"
         },
-        {
-            "label": "Destroy START ROOT NODE in docker",
-            "command": "cd ./docker/root-node && docker-compose --env-file ./root-node.local.arg -f ./start-root-node.yml -p cudos-start-root-node down",
-            "type": "shell",
-            "group": "build"
-        },
-
-        // root node 2
-        {
-            "label": "Build INIT ROOT NODE SECOND NETWORK in docker",
-            "command": "cd ./docker/root-node && docker-compose --env-file ./root-node.local02.arg -f ./init-root-node.yml -p cudos-init-root-node-2 up --build",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Destroy INIT ROOT NODE SECOND NETWORK in docker",
-            "command": "cd ./docker/root-node && docker-compose --env-file ./root-node.local02.arg -f ./init-root-node.yml -p cudos-init-root-node-2 down",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Start START ROOT NODE SECOND NETWORK in docker",
-            "command": "cd ./docker/root-node && docker-compose --env-file ./root-node.local02.arg -f ./start-root-node.yml -p cudos-start-root-node-2 up",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Build START ROOT NODE SECOND NETWORK in docker",
-            "command": "cd ./docker/root-node && docker-compose --env-file ./root-node.local02.arg -f ./start-root-node.yml -p cudos-start-root-node-2 up --build",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Destroy START ROOT SECOND NETWORK NODE in docker",
-            "command": "cd ./docker/root-node && docker-compose --env-file ./root-node.local02.arg -f ./start-root-node.yml -p cudos-start-root-node-2 down",
-            "type": "shell",
-            "group": "build"
-        },
         // seed node
         {
             "label": "Build INIT SEED NODE in docker",
             "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -p cudos-init-seed-node-01 up --build",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Destroy INIT SEED NODE in docker",
-            "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.local01.arg -f ./init-seed-node.yml -p cudos-init-seed-node-01 down",
             "type": "shell",
             "group": "build"
         },
@@ -167,22 +79,10 @@
             "type": "shell",
             "group": "build"
         },
-        {
-            "label": "Destroy START SEED NODE in docker",
-            "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.local01.arg -f ./start-seed-node.yml -p cudos-start-seed-node-01 down",
-            "type": "shell",
-            "group": "build"
-        },
         // sentry node
         {
             "label": "Build INIT SENTRY NODE in docker",
             "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node-01 up --build",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Destroy INIT SENTRY NODE in docker",
-            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.local01.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node-01 down",
             "type": "shell",
             "group": "build"
         },
@@ -198,58 +98,28 @@
             "type": "shell",
             "group": "build"
         },
-        {
-            "label": "Destroy START SENTRY NODE in docker",
-            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.local01.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node-01 down",
-            "type": "shell",
-            "group": "build"
-        },
         // debug nodes
         {
-            "label": "Build START DEBUG NODE in docker",
-            "command": "cd ./docker/debug-node && docker-compose --env-file ./debug-node.arg -f ./debug-node.yml -f ./users-debug-node.override.yml -p cudos-start-debug-node up --build",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Destroy START DEBUG NODE in docker",
-            "command": "cd ./docker/debug-node && docker-compose --env-file ./debug-node.arg -f ./debug-node.yml -f ./users-debug-node.override.yml -p cudos-start-debug-node up --build down",
+            "label": "Build START DEBUG NODE 1 in docker",
+            "command": "cd ./docker/debug-nodes && docker-compose --env-file ./debug-node-1.arg -f ./debug-node.yml -f ./users-debug-node.override.yml -p cudos-start-debug-node-1 up --build",
             "type": "shell",
             "group": "build"
         },
         {
             "label": "Build START DEBUG NODE 2 in docker",
-            "command": "cd ./docker/debug-node-2 && docker-compose --env-file ./debug-node.arg -f ./debug-node.yml -f ./users-debug-node.override.yml -p cudos-start-debug-node up --build",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Destroy START DEBUG NODE 2 in docker",
-            "command": "cd ./docker/debug-node-2 && docker-compose --env-file ./debug-node.arg -f ./debug-node.yml -f ./users-debug-node.override.yml -p cudos-start-debug-node up --build down",
+            "command": "cd ./docker/debug-nodes && docker-compose --env-file ./debug-node-2.arg -f ./debug-node.yml -f ./users-debug-node.override.yml -p cudos-start-debug-node-2 up --build",
             "type": "shell",
             "group": "build"
         },
         {
             "label": "Build START DEBUG NODE 3 in docker",
-            "command": "cd ./docker/debug-node-3 && docker-compose --env-file ./debug-node.arg -f ./debug-node.yml -f ./users-debug-node.override.yml -p cudos-start-debug-node up --build",
+            "command": "cd ./docker/debug-nodes && docker-compose --env-file ./debug-node-3.arg -f ./debug-node.yml -f ./users-debug-node.override.yml -p cudos-start-debug-node-3 up --build",
             "type": "shell",
             "group": "build"
         },
         {
-            "label": "Destroy START DEBUG NODE 3 in docker",
-            "command": "cd ./docker/debug-node-3 && docker-compose --env-file ./debug-node.arg -f ./debug-node.yml -f ./users-debug-node.override.yml -p cudos-start-debug-node up --build down",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Build START DEBUG ETHERMINT NODE in docker",
-            "command": "cd ./docker/debug-node-ethermint && docker-compose --env-file ./debug-node-ethermint.arg -f ./debug-node-ethermint.yml -f ./users-debug-node-ethermint.override.yml -p cudos-start-debug-node-ethermint up --build",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Destroy START DEBUG ETHERMINT NODE in docker",
-            "command": "cd ./docker/debug-node-ethermint && docker-compose --env-file ./debug-node-ethermint.arg -f ./debug-node-ethermint.yml -f ./users-debug-node-ethermint.override.yml -p cudos-start-debug-node-ethermint up --build down",
+            "label": "Build START DEBUG NODE 4 in docker",
+            "command": "cd ./docker/debug-nodes && docker-compose --env-file ./debug-node-4.arg -f ./debug-node.yml -f ./users-debug-node.override.yml -p cudos-start-debug-node-4 up --build",
             "type": "shell",
             "group": "build"
         },
@@ -263,12 +133,6 @@
         {
             "label": "Build FAUCET in docker",
             "command": "cd ./docker/faucet&& docker-compose --env-file ./faucet.local.arg -f ./faucet.yml -p cudos-faucet up --build",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Destroy FAUCET in docker",
-            "command": "cd ./docker/faucet&& docker-compose --env-file ./faucet.local.arg -f ./faucet.yml -p cudos-faucet down",
             "type": "shell",
             "group": "build"
         },
@@ -291,22 +155,10 @@
             "type": "shell",
             "group": "build"
         },
-        {
-            "label": "Destroy EXPLORER in docker",
-            "command": "cd ./docker/explorer&& docker-compose --env-file ./explorer.local.arg -f ./explorer.yml -p cudos-explorer down",
-            "type": "shell",
-            "group": "build"
-        },
         // seed node client local
         {
             "label": "Build INIT SEED NODE CLIENT LOCAL in docker",
             "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.client.local01.arg -f ./init-seed-node.yml -p cudos-init-seed-node-client-local-01 up --build",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Destroy INIT SEED NODE CLIENT LOCAL in docker",
-            "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.client.local01.arg -f ./init-seed-node.yml -p cudos-init-seed-node-client-local-01 down",
             "type": "shell",
             "group": "build"
         },
@@ -322,12 +174,6 @@
             "type": "shell",
             "group": "build"
         },
-        {
-            "label": "Destroy START SEED NODE CLIENT LOCAL in docker",
-            "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.client.local01.arg -f ./start-seed-node.yml -p cudos-start-seed-node-client-local-01 down",
-            "type": "shell",
-            "group": "build"
-        },
         // seed node client testnet private
         {
             "label": "Build INIT SEED NODE CLIENT TESTNET PRIVATE in docker",
@@ -335,12 +181,6 @@
             "type": "shell",
             "group": "build",
             "problemMatcher": []
-        },
-        {
-            "label": "Destroy INIT SEED NODE CLIENT TESTNET PRIVATE in docker",
-            "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.client.testnet.private01.arg -f ./init-seed-node.yml -p cudos-init-seed-node-client-testnet-private-01 down",
-            "type": "shell",
-            "group": "build"
         },
         {
             "label": "Start START SEED NODE CLIENT TESTNET PRIVATE in docker",
@@ -354,12 +194,6 @@
             "type": "shell",
             "group": "build"
         },
-        {
-            "label": "Destroy START SEED NODE CLIENT TESTNET PRIVATE in docker",
-            "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.client.testnet.private01.arg -f ./start-seed-node.yml -p cudos-start-seed-node-client-testnet-private-01 down",
-            "type": "shell",
-            "group": "build"
-        },
         // seed node client testnet public
         {
             "label": "Build INIT SEED NODE CLIENT TESTNET PUBLIC in docker",
@@ -367,12 +201,6 @@
             "type": "shell",
             "group": "build",
             "problemMatcher": []
-        },
-        {
-            "label": "Destroy INIT SEED NODE CLIENT TESTNET PUBLIC in docker",
-            "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.client.testnet.public01.arg -f ./init-seed-node.yml -p cudos-init-seed-node-client-testnet-public-01 down",
-            "type": "shell",
-            "group": "build"
         },
         {
             "label": "Start START SEED NODE CLIENT TESTNET PUBLIC in docker",
@@ -386,12 +214,6 @@
             "type": "shell",
             "group": "build"
         },
-        {
-            "label": "Destroy START SEED NODE CLIENT TESTNET PUBLIC in docker",
-            "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.client.testnet.public01.arg -f ./start-seed-node.yml -p cudos-start-seed-node-client-testnet-public-01 down",
-            "type": "shell",
-            "group": "build"
-        },
         // seed node client mainnet
         {
             "label": "Build INIT SEED NODE CLIENT MAINNET in docker",
@@ -399,12 +221,6 @@
             "type": "shell",
             "group": "build",
             "problemMatcher": []
-        },
-        {
-            "label": "Destroy INIT SEED NODE CLIENT MAINNET in docker",
-            "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.client.mainnet.arg -f ./init-seed-node.yml -p cudos-init-seed-node-client-mainnet-01 down",
-            "type": "shell",
-            "group": "build"
         },
         {
             "label": "Start START SEED NODE CLIENT MAINNET in docker",
@@ -418,22 +234,10 @@
             "type": "shell",
             "group": "build"
         },
-        {
-            "label": "Destroy START SEED NODE CLIENT MAINNET in docker",
-            "command": "cd ./docker/seed-node && docker-compose --env-file ./seed-node.client.mainnet.arg -f ./start-seed-node.yml -p cudos-start-seed-node-client-mainnet-01 down",
-            "type": "shell",
-            "group": "build"
-        },
         // sentry node client local
         {
             "label": "Build INIT SENTRY NODE CLIENT LOCAL in docker",
             "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.local01.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node-client-local-01 up --build",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Destroy INIT SENTRY NODE CLIENT LOCAL in docker",
-            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.local01.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node-client-local-01 down",
             "type": "shell",
             "group": "build"
         },
@@ -449,12 +253,6 @@
             "type": "shell",
             "group": "build"
         },
-        {
-            "label": "Destroy START SENTRY NODE CLIENT LOCAL in docker",
-            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.local01.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node-client-local-01 down",
-            "type": "shell",
-            "group": "build"
-        },
         // sentry node client testnet private
         {
             "label": "Build INIT SENTRY NODE CLIENT TESTNET PRIVATE in docker",
@@ -462,12 +260,6 @@
             "type": "shell",
             "group": "build",
             "problemMatcher": []
-        },
-        {
-            "label": "Destroy INIT SENTRY NODE CLIENT TESTNET PRIVATE in docker",
-            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.testnet.private01.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node-client-testnet-private-01 down",
-            "type": "shell",
-            "group": "build"
         },
         {
             "label": "Start START SENTRY NODE CLIENT TESTNET PRIVATE in docker",
@@ -481,12 +273,6 @@
             "type": "shell",
             "group": "build"
         },
-        {
-            "label": "Destroy START SENTRY NODE CLIENT TESTNET PRIVATE in docker",
-            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.testnet.private01.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node-client-testnet-private-01 down",
-            "type": "shell",
-            "group": "build"
-        },
         // sentry node client testnet public
         {
             "label": "Build INIT SENTRY NODE CLIENT TESTNET PUBLIC in docker",
@@ -494,12 +280,6 @@
             "type": "shell",
             "group": "build",
             "problemMatcher": []
-        },
-        {
-            "label": "Destroy INIT SENTRY NODE CLIENT TESTNET PUBLIC in docker",
-            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.testnet.public01.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node-client-testnet-public-01 down",
-            "type": "shell",
-            "group": "build"
         },
         {
             "label": "Start START SENTRY NODE CLIENT TESTNET PUBLIC in docker",
@@ -513,12 +293,6 @@
             "type": "shell",
             "group": "build"
         },
-        {
-            "label": "Destroy START SENTRY NODE CLIENT TESTNET PUBLIC in docker",
-            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.testnet.public01.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node-client-testnet-public-01 down",
-            "type": "shell",
-            "group": "build"
-        },
         // sentry node client mainnet
         {
             "label": "Build INIT SENTRY NODE CLIENT MAINNET in docker",
@@ -526,12 +300,6 @@
             "type": "shell",
             "group": "build",
             "problemMatcher": []
-        },
-        {
-            "label": "Destroy INIT SENTRY NODE CLIENT MAINNET in docker",
-            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.mainnet.arg -f ./init-sentry-node.yml -p cudos-init-sentry-node-client-mainnet-01 down",
-            "type": "shell",
-            "group": "build"
         },
         {
             "label": "Start START SENTRY NODE CLIENT MAINNET in docker",
@@ -545,12 +313,6 @@
             "type": "shell",
             "group": "build"
         },
-        {
-            "label": "Destroy START SENTRY NODE CLIENT MAINNET in docker",
-            "command": "cd ./docker/sentry-node && docker-compose --env-file ./sentry-node.client.mainnet.arg -f ./start-sentry-node.yml -p cudos-start-sentry-node-client-mainnet-01 down",
-            "type": "shell",
-            "group": "build"
-        },
         // full node client local
         {
             "label": "Build INIT FULL NODE CLIENT LOCAL in docker",
@@ -559,20 +321,8 @@
             "group": "build"
         },
         {
-            "label": "Destroy INIT FULL NODE CLIENT LOCAL in docker",
-            "command": "cd ./docker/full-node && docker-compose --env-file ./full-node.client.local01.arg -f ./init-full-node.yml -p cudos-init-full-node-client-local-01 down",
-            "type": "shell",
-            "group": "build"
-        },
-        {
             "label": "Build CONFIG FULL NODE CLIENT LOCAL in docker",
             "command": "cd ./docker/full-node && docker-compose --env-file ./full-node.client.local01.arg -f ./config-full-node.yml -p cudos-config-full-node-client-local-01 up --build",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Destroy CONFIG FULL NODE CLIENT LOCAL in docker",
-            "command": "cd ./docker/full-node && docker-compose --env-file ./full-node.client.local01.arg -f ./config-full-node.yml -p cudos-config-full-node-client-local-01 down",
             "type": "shell",
             "group": "build"
         },
@@ -588,12 +338,6 @@
             "type": "shell",
             "group": "build"
         },
-        {
-            "label": "Destroy START FULL NODE CLIENT LOCAL in docker",
-            "command": "cd ./docker/full-node && docker-compose --env-file ./full-node.client.local01.arg -f ./start-full-node.yml -p cudos-start-full-node-client-local-01 down",
-            "type": "shell",
-            "group": "build"
-        },
         
         // full node client testnet public
         {
@@ -604,20 +348,8 @@
             "problemMatcher": []
         },
         {
-            "label": "Destroy INIT FULL NODE CLIENT TESTNET PUBLIC in docker",
-            "command": "cd ./docker/full-node && docker-compose --env-file ./full-node.client.testnet.public01.arg -f ./init-full-node.yml -p cudos-init-full-node-client-testnet-public-01 down",
-            "type": "shell",
-            "group": "build"
-        },
-        {
             "label": "Build CONFIG FULL NODE CLIENT TESTNET PUBLIC in docker",
             "command": "cd ./docker/full-node && docker-compose --env-file ./full-node.client.testnet.public01.arg -f ./config-full-node.yml -p cudos-config-full-node-client-testnet-public-01 up --build",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Destroy CONFIG FULL NODE CLIENT TESTNET PUBLIC in docker",
-            "command": "cd ./docker/full-node && docker-compose --env-file ./full-node.client.testnet.public01.arg -f ./config-full-node.yml -p cudos-config-full-node-client-testnet-public-01 down",
             "type": "shell",
             "group": "build"
         },
@@ -633,12 +365,6 @@
             "type": "shell",
             "group": "build"
         },
-        {
-            "label": "Destroy START FULL NODE CLIENT TESTNET PUBLIC in docker",
-            "command": "cd ./docker/full-node && docker-compose --env-file ./full-node.client.testnet.public01.arg -f ./start-full-node.yml -p cudos-start-full-node-client-testnet-public-01 down",
-            "type": "shell",
-            "group": "build"
-        },
 
         // full node client testnet private
         {
@@ -648,20 +374,8 @@
             "group": "build"
         },
         {
-            "label": "Destroy INIT FULL NODE CLIENT TESTNET PRIVATE in docker",
-            "command": "cd ./docker/full-node && docker-compose --env-file ./full-node.client.testnet.private01.arg -f ./init-full-node.yml -p cudos-init-full-node-client-testnet-private-01 down",
-            "type": "shell",
-            "group": "build"
-        },
-        {
             "label": "Build CONFIG FULL NODE CLIENT TESTNET PRIVATE in docker",
             "command": "cd ./docker/full-node && docker-compose --env-file ./full-node.client.testnet.private01.arg -f ./config-full-node.yml -p cudos-config-full-node-client-testnet-private-01 up --build",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Destroy CONFIG FULL NODE CLIENT TESTNET PRIVATE in docker",
-            "command": "cd ./docker/full-node && docker-compose --env-file ./full-node.client.testnet.private01.arg -f ./config-full-node.yml -p cudos-config-full-node-client-testnet-private-01 down",
             "type": "shell",
             "group": "build"
         },
@@ -677,12 +391,6 @@
             "type": "shell",
             "group": "build"
         },
-        {
-            "label": "Destroy START FULL NODE CLIENT TESTNET PRIVATE in docker",
-            "command": "cd ./docker/full-node && docker-compose --env-file ./full-node.client.testnet.private01.arg -f ./start-full-node.yml -p cudos-start-full-node-client-testnet-private-01 down",
-            "type": "shell",
-            "group": "build"
-        },
 
         // full node client mainnet
         {
@@ -693,20 +401,8 @@
             "problemMatcher": []
         },
         {
-            "label": "Destroy INIT FULL NODE CLIENT MAINNET in docker",
-            "command": "cd ./docker/full-node && docker-compose --env-file ./full-node.client.mainnet.arg -f ./init-full-node.yml -p cudos-init-full-node-client-mainnet-01 down",
-            "type": "shell",
-            "group": "build"
-        },
-        {
             "label": "Build CONFIG FULL NODE CLIENT MAINNET in docker",
             "command": "cd ./docker/full-node && docker-compose --env-file ./full-node.client.mainnet.arg -f ./config-full-node.yml -p cudos-config-full-node-client-mainnet-01 up --build",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Destroy CONFIG FULL NODE CLIENT MAINNET in docker",
-            "command": "cd ./docker/full-node && docker-compose --env-file ./full-node.client.mainnet.arg -f ./config-full-node.yml -p cudos-config-full-node-client-mainnet-01 down",
             "type": "shell",
             "group": "build"
         },
@@ -719,12 +415,6 @@
         {
             "label": "Build START FULL NODE CLIENT MAINNET in docker",
             "command": "cd ./docker/full-node && docker-compose --env-file ./full-node.client.mainnet.arg -f ./start-full-node.yml -p cudos-start-full-node-client-mainnet-01 up --build",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Destroy START FULL NODE CLIENT MAINNET in docker",
-            "command": "cd ./docker/full-node && docker-compose --env-file ./full-node.client.mainnet.arg -f ./start-full-node.yml -p cudos-start-full-node-client-mainnet-01 down",
             "type": "shell",
             "group": "build"
         },
@@ -748,32 +438,6 @@
             "type": "shell",
             "group": "build"
         },
-        {
-            "label": "Destroy BINARY BUILDER in docker",
-            "command": "cd ./docker/binary-builder&& docker-compose --env-file ./binary-builder.arg -f ./binary-builder.yml -p cudos-binary-builder down",
-            "type": "shell",
-            "group": "build"
-        },
-        // standalone noe
-        {
-            "label": "Start STANDALONE NODE in docker",
-            "command": "cd ./docker/standalone-node && docker-compose -f ./standalone-node.yml -p cudos-standalone-node up",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Build STANDALONE NODE in docker",
-            "command": "cd ./docker/standalone-node && docker-compose -f ./standalone-node.yml -p cudos-standalone-node up --build",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Destroy STANDALONE NODE in docker",
-            "command": "cd ./docker/standalone-node && docker-compose -f ./standalone-node.yml -p cudos-standalone-node down",
-            "type": "shell",
-            "group": "build"
-        },
-
         // Orchestrator - local 01 debug
         {
             "label": "Start ORCHESTRATOR LOCAL 01 DEBUG in docker",
@@ -783,11 +447,6 @@
         }, {
             "label": "Build ORCHESTRATOR LOCAL 01 DEBUG in docker",
             "command": "cd ./docker/orchestrator&& docker-compose --env-file ./orchestrator.local01.arg -f ./orchestrator.debug.yml -f ./users-orchestrator.debug.override.yml -p cudos-orchestrator-local-01-debug up --build",
-            "type": "shell",
-            "group": "build"
-        }, {
-            "label": "Destroy ORCHESTRATOR LOCAL 01 DEBUG in docker",
-            "command": "cd ./docker/orchestrator&& docker-compose --env-file ./orchestrator.local01.arg -f ./orchestrator.debug.yml -f ./users-orchestrator.debug.override.yml -p cudos-orchestrator-local-01-debug down",
             "type": "shell",
             "group": "build"
         },
@@ -803,11 +462,6 @@
             "command": "cd ./docker/orchestrator&& docker-compose --env-file ./orchestrator.local01.arg -f ./orchestrator.release.yml -p cudos-orchestrator-local-01-release up --build",
             "type": "shell",
             "group": "build"
-        }, {
-            "label": "Destroy ORCHESTRATOR LOCAL 01 RELEASE in docker",
-            "command": "cd ./docker/orchestrator&& docker-compose --env-file ./orchestrator.local01.arg -f ./orchestrator.release.yml -p cudos-orchestrator-local-01-release down",
-            "type": "shell",
-            "group": "build"
         },
 
         // Orchestrator - local 02 release
@@ -819,11 +473,6 @@
         }, {
             "label": "Build ORCHESTRATOR LOCAL 02 RELEASE in docker",
             "command": "cd ./docker/orchestrator&& docker-compose --env-file ./orchestrator.local02.arg -f ./orchestrator.release.yml -p cudos-orchestrator-local-02-release up --build",
-            "type": "shell",
-            "group": "build"
-        }, {
-            "label": "Destroy ORCHESTRATOR LOCAL 02 RELEASE in docker",
-            "command": "cd ./docker/orchestrator&& docker-compose --env-file ./orchestrator.local02.arg -f ./orchestrator.release.yml -p cudos-orchestrator-local-02-release down",
             "type": "shell",
             "group": "build"
         },
@@ -839,11 +488,6 @@
             "command": "cd ./docker/orchestrator&& docker-compose --env-file ./orchestrator.local03.arg -f ./orchestrator.release.yml -p cudos-orchestrator-local-03-release up --build",
             "type": "shell",
             "group": "build"
-        }, {
-            "label": "Destroy ORCHESTRATOR LOCAL 03 RELEASE in docker",
-            "command": "cd ./docker/orchestrator&& docker-compose --env-file ./orchestrator.local03.arg -f ./orchestrator.release.yml -p cudos-orchestrator-local-03-release down",
-            "type": "shell",
-            "group": "build"
         },
 
         // Orchestrator - client testnet private
@@ -857,11 +501,6 @@
             "command": "cd ./docker/orchestrator&& docker-compose --env-file ./orchestrator.client.testnet.private01.arg -f ./orchestrator.release.yml -p cudos-orchestrator-client-testnet-private-01-release up --build",
             "type": "shell",
             "group": "build"
-        }, {
-            "label": "Destroy ORCHESTRATOR CLIENT TESTNET PRIVATE RELEASE in docker",
-            "command": "cd ./docker/orchestrator&& docker-compose --env-file ./orchestrator.client.testnet.private01.arg -f ./orchestrator.release.yml -p cudos-orchestrator-client-testnet-private-01-release down",
-            "type": "shell",
-            "group": "build"
         },
         // contract deployer
         {
@@ -873,50 +512,6 @@
         {
             "label": "Build CONTRACT DEPLOYER in docker",
             "command": "cd ./docker/gravity-contract-deployer&& docker-compose --env-file ./gravity-contract-deployer.arg -f ./gravity-contract-deployer.yml -p cudos-gravity-contract-deployer up --build",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Destroy CONTRACT DEPLOYER in docker",
-            "command": "cd ./docker/gravity-contract-deployer&& docker-compose --env-file ./gravity-contract-deployer.arg -f ./gravity-contract-deployer.yml -p cudos-gravity-contract-deployer down",
-            "type": "shell",
-            "group": "build"
-        },
-
-        // Ethereum
-        {
-            "label": "Build ETHEREUM LIGHT NODE in docker",
-            "command": "cd ./docker/ethereum&& docker-compose -f ./ethereum-light.yml -p ethereum-light up --build",
-            "type": "shell",
-            "group": "build",
-        },
-        {
-            "label": "Destroy ETHEREUM LIGHT NODE in docker",
-            "command": "cd ./docker/ethereum&& docker-compose -f ./ethereum-light.yml -p ethereum-light down",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Build ETHEREUM FULL NODE in docker",
-            "command": "cd ./docker/ethereum&& docker-compose -f ./ethereum-full.yml -p ethereum-full up --build",
-            "type": "shell",
-            "group": "build",
-        },
-        {
-            "label": "Destroy ETHEREUM FULL NODE in docker",
-            "command": "cd ./docker/ethereum&& docker-compose -f ./ethereum-full.yml -p ethereum-full down",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Build ETHEREUM MAINNET FULL NODE in docker",
-            "command": "cd ./docker/ethereum&& docker-compose -f ./ethereum-mainnet.yml -p ethereum-mainnet up --build",
-            "type": "shell",
-            "group": "build",
-        },
-        {
-            "label": "Destroy ETHEREUM MAINNET FULL NODE in docker",
-            "command": "cd ./docker/ethereum&& docker-compose -f ./ethereum-mainnet.yml -p ethereum-mainnet down",
             "type": "shell",
             "group": "build"
         },
@@ -934,12 +529,6 @@
             "type": "shell",
             "group": "build"
         },
-        {
-            "label": "Destroy GRAVITY BRIDGE UI DEV in docker",
-            "command": "cd ./docker/gravity-bridge-ui&& docker-compose --env-file ./gravity-bridge-ui.dev.arg -f ./gravity-bridge-ui.dev.yml -f ./users-gravity-bridge-ui.dev.override.yml -p cudos-gravity-bridge-ui-dev down",
-            "type": "shell",
-            "group": "build"
-        },
 
         // Bridge UI testnet private
         {
@@ -951,12 +540,6 @@
         {
             "label": "Build GRAVITY BRIDGE UI TESTNET PRIVATE in docker",
             "command": "cd ./docker/gravity-bridge-ui&& docker-compose --env-file ./gravity-bridge-ui.testnet.private.arg -f ./gravity-bridge-ui.release.yml -p cudos-gravity-bridge-ui-testnet-private up --build",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Destroy GRAVITY BRIDGE UI TESTNET PRIVATE in docker",
-            "command": "cd ./docker/gravity-bridge-ui&& docker-compose --env-file ./gravity-bridge-ui.testnet.private.arg -f ./gravity-bridge-ui.release.yml -p cudos-gravity-bridge-ui-testnet-private down",
             "type": "shell",
             "group": "build"
         },
@@ -976,12 +559,6 @@
             "type": "shell",
             "group": "build"
         },
-        {
-            "label": "Destroy NFT MINTING UI DEV in docker",
-            "command": "cd ./docker/nft-minting-ui&& docker-compose --env-file ./nft-minting-ui.dev.arg -f ./nft-minting-ui.dev.yml -f ./users-nft-minting-ui.dev.override.yml -p cudos-nft-minting-ui-dev down",
-            "type": "shell",
-            "group": "build"
-        },
         // Nft Minting UI testnet private
         {
             "label": "Start NFT MINTING TESTNET UI PRIVATE in docker",
@@ -992,12 +569,6 @@
         {
             "label": "Build NFT MINTING TESTNET UI PRIVATE in docker",
             "command": "cd ./docker/nft-minting-ui&& docker-compose --env-file ./nft-minting-ui.testnet.private.arg -f ./nft-minting-ui.release.yml -p cudos-nft-minting-ui-testnet-private up --build",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Destroy NFT MINTING TESTNET UI PRIVATE in docker",
-            "command": "cd ./docker/nft-minting-ui&& docker-compose --env-file ./nft-minting-ui.testnet.private.arg -f ./nft-minting-ui.release.yml -p cudos-nft-minting-ui-testnet-private down",
             "type": "shell",
             "group": "build"
         },
@@ -1014,12 +585,6 @@
             "type": "shell",
             "group": "build"
         },
-        {
-            "label": "Destroy NFT MINTING TESTNET UI PUBLIC in docker",
-            "command": "cd ./docker/nft-minting-ui&& docker-compose --env-file ./nft-minting-ui.testnet.public.arg -f ./nft-minting-ui.release.yml -p cudos-nft-minting-ui-testnet-public down",
-            "type": "shell",
-            "group": "build"
-        },
         // Nft Minting UI mainnet
         {
             "label": "Start NFT MINTING UI MAINNET in docker",
@@ -1030,12 +595,6 @@
         {
             "label": "Build NFT MINTING UI MAINNET in docker",
             "command": "cd ./docker/nft-minting-ui&& docker-compose --env-file ./nft-minting-ui.mainnet.arg -f ./nft-minting-ui.release.yml -p cudos-nft-minting-ui-mainnet up --build",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Destroy NFT MINTING UI MAINNET in docker",
-            "command": "cd ./docker/nft-minting-ui&& docker-compose --env-file ./nft-minting-ui.mainnet.arg -f ./nft-minting-ui.release.yml -p cudos-nft-minting-ui-mainnet down",
             "type": "shell",
             "group": "build"
         },
@@ -1052,12 +611,6 @@
         {
             "label": "Build MONITORING LOCAL in docker",
             "command": "cd ./docker/monitoring&& docker-compose --env-file ./monitoring.local.arg -f ./monitoring.yml -p cudos-monitoring-local up --build",
-            "type": "shell",
-            "group": "build"
-        },
-        {
-            "label": "Destroy MONITORING LOCAL in docker",
-            "command": "cd ./docker/monitoring&& docker-compose --env-file ./monitoring.local.arg -f ./monitoring.yml -p cudos-monitoring-local down",
             "type": "shell",
             "group": "build"
         }

@@ -1,0 +1,13 @@
+CUDOS_HOME=/usr/cudos/cudos-data
+ENV_FILE=./.env
+DOCKERFILE=debug-node-go19.dockerfile
+
+VOLUME_NAME=cudos-data-debug-node-3
+NAME=debug-node-3
+
+PORT26656=36656
+PORT26657=36657
+PORT1317=3317
+PORT9090=3090
+PORT26660=36660
+EXPOSE_IP=0.0.0.0
