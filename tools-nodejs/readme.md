@@ -12,26 +12,6 @@ All of the NPM commands below are available once you navigate to <code>parentDir
 
 # Scripts
 
-## ethereum deployer
-
-[Go to docs](./tools-nodejs/deployer-ethereum/readme.md)
-
 ## network deployer
 
 [Go to docs](./tools-nodejs/deployer-network/readme.md)
-
-## nodes deployer
-
-[Go to docs](./tools-nodejs/deployer-nodes/readme.md)
-
-## orchestrator deployer
-
-[Go to docs](./tools-nodejs/deployer-orchestrator/readme.md)
-
-## tsl deployer
-
-The deployer contains only a [readme](./tools-nodejs/deployer-tls/readme.md) file that explains how the server should be configured in order to support the Domain and TSL of sentry nodes. Currently this has already been done for public testnet sentry nodes.
-
-## monitoring deployer
-
-[Go to docs](./tools-nodejs/deployer-monitoring/readme.md)
