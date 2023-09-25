@@ -1,4 +1,4 @@
-FROM hermes-ibc-relayer-binary-builder
+FROM rust:1.60-buster
 
 ARG USER_ID
 ARG USER_NAME
@@ -10,7 +10,10 @@ RUN if [ $USER_NAME != 'root' ]; then \
         adduser --disabled-password -gecos "" -uid ${USER_ID} -gid ${GROUP_ID} ${USER_NAME}; \
     fi
 
-USER ${USER_NAME}
+WORKDIR /usr/local/hermes
 
-# CMD ["sleep", "infinity"]
-CMD ["/bin/bash", "-c", "hermes start"]
+RUN apt-get update
+
+RUN cargo install ibc-relayer-cli --version 1.0.0-rc.2 --bin hermes --locked
+
+CMD ["sleep", "infinity"]

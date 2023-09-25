@@ -1,2 +1,0 @@
-HERMES_HOME=/usr/hermes/hermes-data
-ENV_FILE=./hermes-ibc-relayer.mainnet.env
