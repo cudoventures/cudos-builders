@@ -6,38 +6,8 @@
     "private": true,
     "license": "ISC",
     "scripts": {
-        "deploy--init--start_root-node-testnet-public-zone01": "node ./deployer-nodes/Main.js --target=root-node-testnet-public-zone01 --init=1 --config=0 --start=1",
-        "deploy--init--start_seed-node-testnet-public-zone01": "node ./deployer-nodes/Main.js --target=seed-node-testnet-public-zone01 --init=1 --config=0 --start=1",
-        "deploy--init--start_sentry-node-testnet-public-zone01": "node ./deployer-nodes/Main.js --target=sentry-node-testnet-public-zone01 --init=1 --config=0 --start=1  --https=1",
-        "deploy--init_validator-node-testnet-public-zone02": "node ./deployer-nodes/Main.js --target=validator-node-testnet-public-zone02 --init=1 --config=0 --start=0",
-        "deploy--config--start_validator-node-testnet-public-zone02": "node ./deployer-nodes/Main.js --target=validator-node-testnet-public-zone02 --init=0 --config=1 --start=1",
-        "deploy--init--start_seed-node-testnet-public-zone02": "node ./deployer-nodes/Main.js --target=seed-node-testnet-public-zone02 --init=1 --config=0 --start=1",
-        "deploy--init--start_sentry-node-testnet-public-zone02": "node ./deployer-nodes/Main.js --target=sentry-node-testnet-public-zone02 --init=1 --config=0 --start=1  --https=1",
-        "deploy--init_validator-node-testnet-public-zone03": "node ./deployer-nodes/Main.js --target=validator-node-testnet-public-zone03 --init=1 --config=0 --start=0",
-        "deploy--config--start_validator-node-testnet-public-zone03": "node ./deployer-nodes/Main.js --target=validator-node-testnet-public-zone03 --init=0 --config=1 --start=1",
-        "deploy--init--start_seed-node-testnet-public-zone03": "node ./deployer-nodes/Main.js --target=seed-node-testnet-public-zone03 --init=1 --config=0 --start=1",
-        "deploy--init--start_sentry-node-testnet-public-zone03": "node ./deployer-nodes/Main.js --target=sentry-node-testnet-public-zone03 --init=1 --config=0 --start=1  --https=1",
-        "deploy--orchestrator-testnet-public-zone01": "node ./deployer-orchestrator/Main.js --target=root-node-testnet-public-zone01",
-        "deploy--orchestrator-testnet-public-zone02": "node ./deployer-orchestrator/Main.js --target=validator-node-testnet-public-zone02",
-        "deploy--orchestrator-testnet-public-zone03": "node ./deployer-orchestrator/Main.js --target=validator-node-testnet-public-zone03",
-        "deploy-utils-testnet-public": "node ./deployer-utils/Main.js --target=testnet-public --init=1",
-        "deploy-gravity-bridge-ui-testnet-public": "node ./deployer-gravity-bridge-ui/Main.js --target=testnet-public",
-        "deploy--monitoring-testnet-public": "node ./deployer-monitoring/Main.js --target=monitoring",
-        "deploy--init--start_root-node-testnet-private": "node ./deployer-nodes/Main.js --target=root-node-testnet-private --init=1 --config=0 --start=1",
-        "deploy--init--start_seed-node-testnet-private": "node ./deployer-nodes/Main.js --target=seed-node-testnet-private --init=1 --config=0 --start=1",
-        "deploy--init--start_sentry-node-testnet-private": "node ./deployer-nodes/Main.js --target=sentry-node-testnet-private --init=1 --config=0 --start=1",
-        "deploy--orchestrator-testnet-private": "node ./deployer-orchestrator/Main.js --target=root-node-testnet-private",
-        "deploy-utils-testnet-private": "node ./deployer-utils/Main.js --target=testnet-private --init=1",
-        "deploy-gravity-bridge-ui-testnet-private": "node ./deployer-gravity-bridge-ui/Main.js --target=testnet-private",
-        "deploy--ethereum-rinkeby": "node ./deployer-ethereum/Main.js --target=ethereum",
-        "deploy--init-ibc-relayer-testnet-public": "node ./deployer-ibc-relayer/Main.js --target public-testnet --init 1 --rebuild 1",
-        "deploy--start-ibc-relayer-testnet-public": "node ./deployer-ibc-relayer/Main.js --target public-testnet --init 0 --rebuild 0",
-        "deploy--init-ibc-relayer-testnet-private": "node ./deployer-ibc-relayer/Main.js --target private-testnet --init 1 --rebuild 1",
-        "deploy--start-ibc-relayer-testnet-private": "node ./deployer-ibc-relayer/Main.js --target private-testnet --init 0 --rebuild 0",
-        "deploy--init-ibc-relayer-mainnet": "node ./deployer-ibc-relayer/Main.js --target mainnet --init 1 --rebuild 1",
-        "deploy--start-ibc-relayer-mainnet": "node ./deployer-ibc-relayer/Main.js --target mainnet --init 0 --rebuild 0",
-        
-        "network": "node ./deployer-network/src/Main.js"
+        "network": "node ./deployer-network/src/Main.js",
+        "messages-observer": "node ./messages-observer/src/Main.js --trpc host.docker.internal:26657 --start-height 20"
     },
     "engines": {
         "node": ">=12"
@@ -52,6 +22,7 @@
         "fs-extra": "^10.0.0",
         "node-ssh": "^12.0.0",
         "scp2": "^0.5.0",
-        "ssh2": "^1.4.0"
+        "ssh2": "^1.4.0",
+        "cudosjs": "2.0.0"
     }
 }
