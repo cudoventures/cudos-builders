@@ -18,7 +18,8 @@ services:
         GROUP_NAME: "root"
     env_file: "$ENV_FILE"
     volumes:
-      - './config:/usr/local/hermes/config'
-      - './scripts:/usr/local/hermes/scripts'
+      - './:/usr/local/hermes'
     networks:
       - shared-cudos-network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

@@ -16,9 +16,11 @@ services:
         USER_NAME: "root"
         GROUP_ID: "0"
         GROUP_NAME: "root"
+        CHAIN_ID: "$CHAIN_ID"
     restart: unless-stopped
     environment:
       - CUDOS_HOME=$CUDOS_HOME
+      - CHAIN_ID=$CHAIN_ID
     env_file: "$ENV_FILE"
     volumes:
       - '../../../CudosData/$VOLUME_NAME:$CUDOS_HOME'
@@ -34,6 +36,8 @@ services:
 
     networks:
       - shared-cudos-network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
       - "${EXPOSE_IP}:${PORT26656}:26656"
       - "${EXPOSE_IP}:${PORT26657}:26657"

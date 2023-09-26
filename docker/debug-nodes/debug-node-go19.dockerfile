@@ -4,6 +4,7 @@ ARG USER_ID
 ARG USER_NAME
 ARG GROUP_ID
 ARG GROUP_NAME
+ARG CHAIN_ID
 
 RUN apt update
 
@@ -25,7 +26,8 @@ COPY ./CudosBuilders/docker/root-node/scripts/init-root.sh ./init-root.sh
 
 COPY ./CudosBuilders/docker/debug-nodes/scripts/init-debug.sh ./init-debug.sh
 
-RUN echo "\n$(cat ./env-debug.sh)" >> ./init.sh && \
+RUN echo "\nCHAIN_ID=\"${CHAIN_ID}\"" >> ./init.sh && \
+    echo "\n$(cat ./env-debug.sh)" >> ./init.sh && \
     echo "\n$(cat ./init-root.sh)" >> ./init.sh && \
     echo "\n$(cat ./init-debug.sh)" >> ./init.sh && \
     rm -f ./init-root.sh && \

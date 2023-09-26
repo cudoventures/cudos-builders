@@ -1,4 +1,5 @@
 CUDOS_HOME=/usr/cudos/cudos-data
+CHAIN_ID=cudos-debug-network
 ENV_FILE=./.env
 DOCKERFILE=debug-node-go18.dockerfile
 
