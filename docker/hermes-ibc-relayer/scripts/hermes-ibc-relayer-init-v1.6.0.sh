@@ -5,7 +5,7 @@ CONFIG_FILE="${HERMES_HOME}/config.toml"
 
 echo "Setting up config.toml"
 mkdir -p ${HERMES_HOME}
-cp "/usr/local/hermes/config/config.toml" "${CONFIG_FILE}"
+cp "/usr/local/hermes/config/config-v1.6.0.toml" "${CONFIG_FILE}"
 
 # relayer REST settings
 sed -zi "s|\nenabled = [^\n]*\n|\nenabled = ${REST_ENABLED}\n|1" "${CONFIG_FILE}"

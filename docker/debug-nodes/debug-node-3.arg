@@ -1,5 +1,5 @@
 CUDOS_HOME=/var/lib/cudos-data
-CHAIN_ID=ibc-host-network
+CHAIN_ID=ibc-host-network-1
 ENV_FILE=./.env
 DOCKERFILE=debug-node-go19.dockerfile
 

@@ -1,4 +1,4 @@
-FROM rust:1.60-buster
+FROM rust:1.70-buster
 
 ARG USER_ID
 ARG USER_NAME
@@ -14,6 +14,6 @@ WORKDIR /usr/local/hermes
 
 RUN apt-get update
 
-RUN cargo install ibc-relayer-cli --version 1.0.0-rc.2 --bin hermes --locked
+RUN cargo install ibc-relayer-cli --version 1.6.0 --bin hermes --locked
 
 CMD ["sleep", "infinity"]
