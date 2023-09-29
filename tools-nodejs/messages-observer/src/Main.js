@@ -27,6 +27,7 @@ async function main() {
             result.forEach((iTx) => {
                 const output = {
                     height: iTx.height,
+                    hash: iTx.hash,
                     msgType: '',
                     params: {},
                 }

@@ -33,7 +33,7 @@ enabled = false
 [mode.channels]
 
 # Whether or not to enable the channel workers for handshake completion. [Required]
-enabled = false
+enabled = true
 
 # Specify the packets mode.
 [mode.packets]
@@ -212,23 +212,55 @@ trust_threshold = { numerator = '1', denominator = '3' }
 memo_prefix = ''
 
 # This section specifies the filters for policy based relaying.
-# Default: no policy/ filters
-# The section is ignored if the global 'filter' option is set to 'false'.
-# If the global 'filter' option is set to 'true' and this section is missing then no filtering is performed for this chain.
+#
+# Default: no policy / filters, allow all packets on all channels.
+#
 # Only packet filtering based on channel identifier can be specified.
 # A channel filter has two fields:
 # 1. `policy` - one of two types are supported:
 #       - 'allow': permit relaying _only on_ the port/channel id in the list below,
 #       - 'deny': permit relaying on any channel _except for_ the list below.
 # 2. `list` - the list of channels specified by the port and channel identifiers.
+#             Optionally, each element may also contains wildcards, for eg. 'ica*'
+#             to match all identifiers starting with 'ica' or '*' to match all identifiers.
 #
-# Example configuration of a channel filter, denying packet relaying on channel with port ID 'transfer' and channel ID 'channel-0':
+# Example configuration of a channel filter, only allowing packet relaying on
+# channel with port ID 'transfer' and channel ID 'channel-0', as well as on
+# all ICA channels.
 #
 # [chains.packet_filter]
-# policy = 'deny'
+# policy = 'allow'
 # list = [
+#   ['ica*', '*'],
 #   ['transfer', 'channel-0'],
 # ]
+
+# This section specifies the filters for incentivized packet relaying.
+# Default: no filters, will relay all packets even if they
+# are not incentivized.
+#
+# It is possible to specify the channel or use wildcards for the
+# channels.
+# The only fee which can be parametrized is the `recv_fee`.
+#
+# Example configuration of a filter which will only relay incentivized
+# packets, with no regards for channel and amount.
+#
+# [chains.packet_filter.min_fees.'*']
+# recv = [ { amount = 0 } ]
+#
+# Example configuration of a filter which will only relay packets if they are
+# from the channel 'channel-0', and they have a `recv_fee` of at least 20 stake
+# or 10 uatom.
+#
+# [chains.packet_filter.min_fees.'channel-0']
+# recv = [ { amount = 20, denom = 'stake' }, { amount = 10, denom = 'uatom' } ]
+
+# Specify that the transaction fees should be payed from this fee granter's account.
+# Optional. If unspecified (the default behavior), then no fee granter is used, and
+# the account specified in `key_name` will pay the tx fees for all transactions
+# submitted to this chain.
+# fee_granter = ''
 
 
 [[chains]]

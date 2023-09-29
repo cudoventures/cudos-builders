@@ -7,6 +7,10 @@ echo "Setting up config.toml"
 mkdir -p ${HERMES_HOME}
 cp "/usr/local/hermes/config/config-v1.6.0.toml" "${CONFIG_FILE}"
 
+# pretty format config file
+sed -i "/^$/N;/\n#/D" "${CONFIG_FILE}"
+sed -i "/^#/d" "${CONFIG_FILE}"
+
 # relayer REST settings
 sed -zi "s|\nenabled = [^\n]*\n|\nenabled = ${REST_ENABLED}\n|1" "${CONFIG_FILE}"
 sed -zi "s|\nhost = '[^']*'|\nhost = '${REST_HOST}'|1" "${CONFIG_FILE}"
@@ -42,10 +46,6 @@ sed -zi "s|\ngas_multiplier = [^\n]*|\ngas_multiplier = 1.5|2" "${CONFIG_FILE}"
 sed -zi "s|{ price = [^,]*|{ price = ${GAS_PRICE_1}|2" "${CONFIG_FILE}"
 sed -zi "s|denom = '[^']*'|denom = '${GAS_DENOM_1}'|2" "${CONFIG_FILE}"
 sed -zi "s|trusting_period = '[^']*'|trusting_period = '${TRUSTING_PERIOD_1}'|2" "${CONFIG_FILE}"
-
-# pretty format config file
-sed -i "/^$/N;/\n#/D" "${CONFIG_FILE}"
-sed -i "/^#/d" "${CONFIG_FILE}"
 
 MNEMONIC_FILE_0="${HERMES_HOME}/mnemonic_0"
 MNEMONIC_FILE_1="${HERMES_HOME}/mnemonic_1"

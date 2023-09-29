@@ -28,11 +28,7 @@ services:
       - '../../../CudosNode:/usr/cudos/CudosNode'
       - '../../../CudosHack:/usr/cudos/CudosHack'
       - '../../../CudosGravityBridge:/usr/cudos/CudosGravityBridge'
-      - '../../../CudosUtils:/usr/cudos/CudosUtils'
-      - '../../../cosmos-sdk:/usr/cudos/cosmos-sdk'
-      - '../../../ibc-go:/usr/cudos/ibc-go'
-      - '../../../tendermint:/usr/cudos/tendermint'
-      - '../../../ethermint:/usr/cudos/ethermint'
+      - '../../../Github-projects:/usr/local/src/Github-projects'
 
     networks:
       - shared-cudos-network
