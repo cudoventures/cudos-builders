@@ -7,6 +7,5 @@ services:
     build:
       dockerfile: hermes-ibc-relayer.prod.dockerfile
       context: ./
-    env_file: "$ENV_FILE"
     extra_hosts:
       - "host.docker.internal:host-gateway"
