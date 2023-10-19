@@ -1,0 +1,12 @@
+version: '3.9'
+
+services:
+  cudos-hermes-ibc-relayer:
+    image: hermes-ibc-relayer
+    container_name: hermes-ibc-relayer
+    build:
+      dockerfile: hermes-ibc-relayer.prod.dockerfile
+      context: ./
+    env_file: "$ENV_FILE"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

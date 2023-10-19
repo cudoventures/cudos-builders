@@ -1,11 +1,11 @@
 #!/bin/bash
-HERMES_HOME="/var/lib/hermes"
+HERMES_HOME="/usr/local/etc/hermes"
 CONFIG_FILE="${HERMES_HOME}/config.toml"
 
 
 echo "Setting up config.toml"
 mkdir -p ${HERMES_HOME}
-cp "/usr/local/hermes/config/config-v1.6.0.toml" "${CONFIG_FILE}"
+cp "/usr/local/src/hermes/hermes-ibc-relayer-config.toml" "${CONFIG_FILE}"
 
 # pretty format config file
 sed -i "/^$/N;/\n#/D" "${CONFIG_FILE}"
@@ -25,7 +25,7 @@ sed -zi "s|\nport = [^\n]*\n|\nport = ${TELEMETRY_PORT}\n|2" "${CONFIG_FILE}"
 sed -zi "s|\nid = '[^']*'|\nid = '${CHAIN_ID_0}'|1" "${CONFIG_FILE}"
 sed -zi "s|\nrpc_addr = '[^']*'|\nrpc_addr = '${RPC_ADDR_0}'|1" "${CONFIG_FILE}"
 sed -zi "s|\ngrpc_addr = '[^']*'|\ngrpc_addr = '${GRPC_ADDR_0}'|1" "${CONFIG_FILE}"
-sed -zi "s|\nevent_source = [^\n]*|\nevent_source = { mode = 'push', url = '${WEBSOCKET_ADDR_0}', batch_delay = '500ms' }|1" "${CONFIG_FILE}"
+sed -zi "s|\nevent_source = [^\n]*|\nevent_source = { mode = 'pull', url = '${WEBSOCKET_ADDR_0}', batch_delay = '500ms' }|1" "${CONFIG_FILE}"
 sed -zi "s|\naccount_prefix = '[^']*'|\naccount_prefix = '${ACCOUNT_PREFIX_0}'|1" "${CONFIG_FILE}"
 sed -zi "s|\nkey_name = '[^']*'|\nkey_name = '${CHAIN_ID_0}_key'|1" "${CONFIG_FILE}"
 sed -zi "s|\ndefault_gas = [^\n]*|\ndefault_gas = 200000|1" "${CONFIG_FILE}"
@@ -38,7 +38,7 @@ sed -zi "s|trusting_period = '[^']*'|trusting_period = '${TRUSTING_PERIOD_0}'|1"
 sed -zi "s|\nid = '[^']*'|\nid = '${CHAIN_ID_1}'|2" "${CONFIG_FILE}"
 sed -zi "s|\nrpc_addr = '[^']*'|\nrpc_addr = '${RPC_ADDR_1}'|2" "${CONFIG_FILE}"
 sed -zi "s|\ngrpc_addr = '[^']*'|\ngrpc_addr = '${GRPC_ADDR_1}'|2" "${CONFIG_FILE}"
-sed -zi "s|\nevent_source = [^\n]*|\nevent_source = { mode = 'push', url = '${WEBSOCKET_ADDR_1}', batch_delay = '500ms' }|2" "${CONFIG_FILE}"
+sed -zi "s|\nevent_source = [^\n]*|\nevent_source = { mode = 'pull', url = '${WEBSOCKET_ADDR_1}', batch_delay = '500ms' }|2" "${CONFIG_FILE}"
 sed -zi "s|\naccount_prefix = '[^']*'|\naccount_prefix = '${ACCOUNT_PREFIX_1}'|2" "${CONFIG_FILE}"
 sed -zi "s|\nkey_name = '[^']*'|\nkey_name = '${CHAIN_ID_1}_key'|2" "${CONFIG_FILE}"
 sed -zi "s|\ndefault_gas = [^\n]*|\ndefault_gas = 200000|2" "${CONFIG_FILE}"

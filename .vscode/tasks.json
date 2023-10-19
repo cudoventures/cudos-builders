@@ -11,7 +11,7 @@
         //hermes-ibc-relayer
         {
             "label": "Build HERMES-IBC-RELAYER in docker",
-            "command": "cd ./docker/hermes-ibc-relayer && docker-compose --env-file ./hermes-ibc-relayer.arg -f ./hermes-ibc-relayer.yml -f ./users-hermes-ibc-relayer.override.yml -p hermes-ibc-relayer up --build",
+            "command": "cd ./docker/hermes-ibc-relayer && docker-compose --env-file ./hermes-ibc-relayer.arg -f ./hermes-ibc-relayer.dev.yml -f ./users-hermes-ibc-relayer.override.yml -p hermes-ibc-relayer up --build",
             "type": "shell",
             "group": "build"
         },
