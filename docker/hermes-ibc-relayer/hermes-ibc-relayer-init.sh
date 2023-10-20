@@ -1,4 +1,6 @@
 #!/bin/bash
+. ./hermes-ibc-relayer.env
+
 HERMES_HOME="/usr/local/etc/hermes"
 CONFIG_FILE="${HERMES_HOME}/config.toml"
 
