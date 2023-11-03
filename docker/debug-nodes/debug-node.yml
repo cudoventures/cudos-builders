@@ -26,7 +26,6 @@ services:
       - '../../../CudosData/$VOLUME_NAME:$CUDOS_HOME'
       - '../../../CudosBuilders:/usr/cudos/CudosBuilders'
       - '../../../CudosNode:/usr/cudos/CudosNode'
-      - '../../../CudosHack:/usr/cudos/CudosHack'
       - '../../../CudosGravityBridge:/usr/cudos/CudosGravityBridge'
       - '../../../Github-projects:/usr/local/src/Github-projects'
 
