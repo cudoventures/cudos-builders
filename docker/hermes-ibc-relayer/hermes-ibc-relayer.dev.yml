@@ -17,6 +17,7 @@ services:
         GROUP_ID: "0"
         GROUP_NAME: "root"
     env_file: "$ENV_FILE"
+    restart: unless-stopped
     volumes:
       - './:/usr/local/src/hermes'
     networks:
