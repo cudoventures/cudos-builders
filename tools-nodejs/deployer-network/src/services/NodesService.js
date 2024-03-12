@@ -574,7 +574,7 @@ class NodesService {
             `sed -i "s~COSMOS_NODE=.*~COSMOS_NODE=\\"http://${sentryNodeModel.getDockerContainerStartName()}:26657\\"~g" ./gravity-contract-deployer.env`,
             `sed -i "s~ETH_NODE=.*~ETH_NODE=\\"${this.topologyHelper.params.gravity.ethrpc}\\"~g" ./gravity-contract-deployer.env`,
             `sed -i "s/ETH_PRIV_KEY_HEX=.*/ETH_PRIV_KEY_HEX=\\"${this.topologyHelper.params.gravity.contractDeploerEthPrivKey}\\"/g" ./gravity-contract-deployer.env`,
-            `sed -i "s/CUDOS_ACCESS_CONTROL_ADDRESS=.*/CUDOS_ACCESS_CONTROL_ADDRESS=\\"0xf50E29dB8bf318fB61Ac6688578dc0CD35EA8142\\"/g" ./gravity-contract-deployer.env`,
+            `sed -i "s/CUDOS_ACCESS_CONTROL_ADDRESS=.*/CUDOS_ACCESS_CONTROL_ADDRESS=\\"0x25D16867E01197D048C1433e4335edefF43Cd75b\\"/g" ./gravity-contract-deployer.env`,
             `sed -i "s/DEFAULT_NETWORK=.*/DEFAULT_NETWORK=\\"rinkeby\\"/g" ./gravity-contract-deployer.env`,
             `sed -i "s/ETHERSCAN_API_KEY=.*/ETHERSCAN_API_KEY=\\"${this.topologyHelper.params.gravity.etherscanApiKey}\\"/g" ./gravity-contract-deployer.env`,
             `sed -i "s/CUDOS_TOKEN_ADDRESS=.*/CUDOS_TOKEN_ADDRESS=\\"${ethTokenContract}\\"/g" ./gravity-contract-deployer.env`,
