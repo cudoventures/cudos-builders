@@ -1,3 +1,4 @@
+# NOT A JSON FILE BUT NEEDS TO BE NAMED THIS WAY
 # download new genesis and move to correct location
 cd /tmp
 wget https://storage.googleapis.com/private-testnet-genesis/pubtestnetkmd.json
